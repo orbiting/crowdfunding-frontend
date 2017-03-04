@@ -1,14 +1,12 @@
-# A CMS Prototype
+# CF GUI Prototype
 
-A CMS powered by GitHub GraphQL API, Next.js and Draft.js.
+powered by GraphQL, Next.js
 
 ## Development
 
 You we'll need following environment variables:
 ```
-SESSION_SECRET
-GITHUB_CLIENT_ID
-GITHUB_CLIENT_SECRET
+TODO
 ```
 
 You can use a `.env` file in development.
