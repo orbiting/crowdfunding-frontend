@@ -10,7 +10,7 @@ function createClient (headers) {
     networkInterface: createNetworkInterface({
       uri: GRAPHQL_URI,
       opts: {
-        credentials: 'same-origin',
+        //credentials: 'same-origin',
         headers
       }
     })
