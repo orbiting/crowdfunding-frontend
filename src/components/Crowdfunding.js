@@ -64,7 +64,7 @@ class Crowdfunding extends Component {
   submitPledge() {
     const {total, pledgeOptions} = this.state
 
-    this.props.mutate({ variables: { total, packageOptions: pledgeOptions } })
+    this.props.mutate({ variables: { total, options: pledgeOptions } })
       .then(({ data }) => {
         console.log('got data', data)
       }).catch((error) => {
@@ -118,13 +118,13 @@ Crowdfunding.propTypes = {
 };
 
 const submitPledge = gql`
-  mutation submitPledge($total: Int!, $packageOptions: [PackageOptionInput!]!) {
-    submitPledge(pledge: {total: $total, packageOptions: $packageOptions} ) {
+  mutation submitPledge($total: Int!, $options: [PackageOptionInput!]!) {
+    submitPledge(pledge: {total: $total, options: $options} ) {
       id
       total
       status
       packageId
-      packageOptions {
+      options {
         amount
         price
         templateId
