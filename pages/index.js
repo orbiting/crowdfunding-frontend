@@ -13,7 +13,7 @@ const Index = ({loading}) => {
 	}
 	return (
 		<div>
-      <h1><Crowdfunding /></h1>
+      <Crowdfunding />
 		</div>
 	)
 }
