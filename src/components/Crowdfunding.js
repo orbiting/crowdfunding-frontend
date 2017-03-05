@@ -85,7 +85,7 @@ class Crowdfunding extends Component {
         <h2>{crowdfunding.name}</h2>
 
         <h3>Cart</h3>
-        <strong>Total: {total}</strong>
+        <strong>Total: {total/100.0}</strong>
         {pledgeOptions.map( (option, ii) => (
           <p key={1000+ii}>
             {option.templateId} - {option.amount}
