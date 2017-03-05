@@ -87,7 +87,7 @@ class Crowdfunding extends Component {
         <h3>Cart</h3>
         <strong>Total: {total/100.0}</strong>
         {pledgeOptions.map( (option, ii) => (
-          <p key={1000+ii}>
+          <p key={option.templateId}>
             {option.templateId} - {option.amount}
           </p>
         ))}
@@ -96,10 +96,10 @@ class Crowdfunding extends Component {
         <h3>Offers</h3>
         <ul>
           {crowdfunding.packages.map( (package_, i) => (
-            <li key={i} >
+            <li key={package_.id} >
               <h3>{package_.name}</h3>
               {package_.options.map( (option, ii) => (
-                <p key={i*10+ii} onClick={() => this.chooseOption(option)}>
+                <p key={package_.id+option.id} onClick={() => this.chooseOption(option)}>
                   <strong>{option.reward.name}</strong> CHF {option.price/100.0}<br/>
                   option.id: {option.id}<br/>
                   reward.id: {option.reward.id}<br/>
