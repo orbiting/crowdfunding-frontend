@@ -9,6 +9,7 @@ query {pledges {
   id
   total
   createdAt
+  status
   options {
     id
     price
@@ -40,7 +41,10 @@ class Pledges extends Component {
         <ul>
           {pledges.map( (pledge, i) => (
             <li key={pledge.id} >
-              <h4>Pledge: {pledge.id} - CHF {pledge.total/100.0} - {pledge.createdAt}</h4>
+              <h4>Pledge: {pledge.id}</h4>
+              CHF {pledge.total/100.0}<br/>
+              createdAt: {pledge.createdAt}<br/>
+              status: {pledge.status}<br/>
               {pledge.options.map( (option, ii) => (
                 <p key={option.id}>
                   <strong>{option.reward.name}</strong> CHF {option.price/100.0}<br/>
