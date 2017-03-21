@@ -1,19 +1,23 @@
-# CF GUI Prototype
+# Crowdfunding
 
-powered by GraphQL, Next.js
+Based on [Next.js with Apollo](https://github.com/zeit/next.js/tree/master/examples/with-apollo).
 
 ## Development
 
-You we'll need following environment variables:
-```
-TODO
-```
+### Environment
 
-You can use a `.env` file in development.
-
-### Start the development server
+You can use a git-excluded `.env` file in development:
 
 ```
+API_BASE_URL
+API_AUTHORIZATION_HEADER
+```
+
+`API_BASE_URL` default to `https://api.project-r.space`. You can generate a basic authorization header with ``Basic ${(new Buffer('user:password')).toString('base64')}`` in Node.js.
+
+### Install and Run
+
+```bash
 npm install
 npm run dev
 ```

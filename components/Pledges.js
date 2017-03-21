@@ -1,10 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 
-import gql from 'graphql-tag'
-import {graphql} from 'react-apollo'
-import {Link} from '../../routes'
-
-import PayButtons from './PayButtons'
+import {gql, graphql} from 'react-apollo'
 
 const query = gql`
 query {pledges {
@@ -47,7 +43,6 @@ class Pledges extends Component {
               CHF {pledge.total/100.0}<br/>
               createdAt: {pledge.createdAt}<br/>
               status: {pledge.status}<br/>
-              <PayButtons pledge={pledge} />
               {pledge.options.map( (option, ii) => (
                 <p key={option.id}>
                   <strong>{option.reward.name}</strong> CHF {option.price/100.0}<br/>

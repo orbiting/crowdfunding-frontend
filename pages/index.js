@@ -1,29 +1,20 @@
-import React, {Component} from 'react'
+import App from '../components/App'
+import withData from '../lib/withData'
 
-import App from '../src/components/App'
-import Center from '../src/components/Center'
-import Crowdfunding from '../src/components/Crowdfunding'
-import Pledges from '../src/components/Pledges'
-import withData from '../src/apollo/withData'
-import {Router} from '../routes'
-
-
-const Index = ({loading}) => {
-	if (loading) {
-		return <span>...</span>
-	}
-	return (
-		<div>
-      <Crowdfunding />
-      <Pledges />
-		</div>
-	)
-}
+import {Button} from '@project-r/styleguide'
+import Crowdfunding from '../components/Crowdfunding'
+import Pledges from '../components/Pledges'
 
 export default withData((props) => (
   <App>
-    <Center>
-      <Index/>
-    </Center>
+    <h1>Republik</h1>
+    <section>
+      <p>«Es ist Zeit, dass sich die Journalisten unabhängig machen und der Journalismus unabhängig von den Grossverlagen existieren kann. Und ein Modell dafür schafft man nur gemeinsam, oder gar nicht.»</p>
+      <Button>Mitmachen</Button>
+    </section>
+    <section>
+      <Crowdfunding />
+      <Pledges />
+    </section>
   </App>
 ))

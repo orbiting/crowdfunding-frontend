@@ -1,50 +1,23 @@
 {
-  "name": "cms-draft",
+  "name": "crowdfunding",
   "version": "0.0.1",
-  "description": "A CMS powered by GitHub GraphQL API, Next.js and Draft.js.",
-  "main": "index.js",
   "scripts": {
-    "dev": "nodemon -w index.js index.js",
+    "dev": "cross-env NODE_ENV=development nodemon -w index.js -w constants.js index.js",
     "build": "next build",
-    "start": "node index.js",
-    "standardize": "standard --fix 'src/**/*.js' 'pages/**/*.js'"
+    "start": "next start"
   },
   "dependencies": {
-    "apollo-client": "^0.10.1",
-    "babel-polyfill": "^6.23.0",
-    "blueimp-md5": "^2.7.0",
-    "body-parser": "^1.16.1",
-    "d3-time-format": "^2.0.3",
-    "dotenv": "^4.0.0",
-    "express": "^4.14.1",
-    "express-session": "^1.15.1",
-    "graphql-tag": "^1.2.3",
-    "isomorphic-fetch": "^2.2.1",
-    "js-base64": "^2.1.9",
-    "js-yaml": "^3.8.1",
+    "@project-r/styleguide": "^0.1.1",
+    "express": "^4.15.2",
+    "glamor": "^2.20.24",
+    "graphql": "^0.9.1",
     "next": "^2.0.0-beta",
-    "next-routes": "^1.0.16",
-    "query-string": "^4.3.2",
     "react": "^15.4.2",
-    "react-apollo": "^0.13.2",
-    "react-dom": "^15.4.2",
-    "react-redux": "^5.0.2",
-    "redux": "^3.6.0",
-    "redux-thunk": "^2.1.0",
-    "slugify": "^1.1.0"
+    "react-apollo": "^1.0.0-rc.2",
+    "redux": "^3.6.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/tpreusse/cms.git"
-  },
-  "author": "Thomas Preusse <t@preus.se> (https://t.preus.se/)",
-  "license": "BSD-3-Clause",
-  "bugs": {
-    "url": "https://github.com/tpreusse/cms/issues"
-  },
-  "homepage": "https://github.com/tpreusse/cms#readme",
   "devDependencies": {
-    "nodemon": "^1.11.0",
-    "standard": "^9.0.0"
+    "dotenv": "^4.0.0",
+    "nodemon": "^1.11.0"
   }
 }

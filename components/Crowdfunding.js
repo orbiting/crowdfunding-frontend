@@ -1,8 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 
-import gql from 'graphql-tag'
-import {graphql} from 'react-apollo'
-import {Link} from '../../routes'
+import {gql, graphql} from 'react-apollo'
 
 const query = gql`
 query {crowdfundings {
