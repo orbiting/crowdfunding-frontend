@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@project-r/styleguide": "^0.1.1",
+    "cross-env": "^3.2.4",
     "express": "^4.15.2",
     "glamor": "^2.20.24",
     "graphql": "^0.9.1",
