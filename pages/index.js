@@ -5,7 +5,11 @@ import {Button} from '@project-r/styleguide'
 import Crowdfunding from '../components/Crowdfunding'
 import Pledges from '../components/Pledges'
 
-export default withData((props) => (
+import withSession from '../components/auth/with-session'
+import Link from 'next/prefetch'
+import LogoutButton from '../components/auth/logout-button'
+
+export default withSession(withData(({session, isLoggedIn}) => (
   <App>
     <h1>Republik</h1>
     <section>
@@ -13,8 +17,15 @@ export default withData((props) => (
       <Button>Mitmachen</Button>
     </section>
     <section>
+      {!isLoggedIn && <p><Link href='/auth/signin'><a>Login</a></Link></p>}
+      {isLoggedIn && (
+        <div>
+          <p>Welcome back {session.user.email}</p>
+          <LogoutButton session={session}>Log out</LogoutButton>
+        </div>
+      )}
       <Crowdfunding />
       <Pledges />
     </section>
   </App>
-))
+)))

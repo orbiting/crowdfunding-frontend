@@ -23,7 +23,17 @@
     "next": "^2.0.0-beta",
     "react": "^15.4.2",
     "react-apollo": "^1.0.0-rc.2",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "body-parser": "^1.15.2",
+    "connect-pg-simple": "^3.1.2",
+    "express-session": "^1.14.2",
+    "lusca": "^1.4.1",
+    "next": "^2.0.0-beta.23",
+    "passport": "^0.3.2",
+    "pogi": "^2.2.1",
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.3",
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "dotenv": "^4.0.0",
