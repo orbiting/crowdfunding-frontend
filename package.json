@@ -4,7 +4,15 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon -w index.js -w constants.js index.js",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "precommit": "lint-staged",
+    "standardize": "standard --fix 'components/**/*.js' 'lib/**/*.js' 'pages/**/*.js'"
+  },
+  "lint-staged": {
+    "*.js": [
+      "standard --fix",
+      "git add"
+    ]
   },
   "dependencies": {
     "@project-r/styleguide": "^0.1.1",
@@ -18,6 +26,9 @@
   },
   "devDependencies": {
     "dotenv": "^4.0.0",
-    "nodemon": "^1.11.0"
+    "husky": "^0.13.2",
+    "lint-staged": "^3.4.0",
+    "nodemon": "^1.11.0",
+    "standard": "^9.0.2"
   }
 }

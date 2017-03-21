@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 
-import {gql, graphql} from 'react-apollo'
+import { gql, graphql } from 'react-apollo'
 
 const query = gql`
 query {crowdfundings {
@@ -36,12 +36,14 @@ class Crowdfunding extends Component {
     }
   }
 
-  chooseOption(option, event) {
+  chooseOption (option, event) {
     const { pledgeOptions } = this.state
 
-		// upsert pledgeOption
-    let pledgeOption = pledgeOptions.find( (po) => { return po.templateId == option.id })
-    if(pledgeOption) {
+    // upsert pledgeOption
+    let pledgeOption = pledgeOptions.find(po => {
+      return po.templateId === option.id
+    })
+    if (pledgeOption) {
       pledgeOption.amount += 1
     } else {
       pledgeOption = {
@@ -52,27 +54,31 @@ class Crowdfunding extends Component {
       pledgeOptions.push(pledgeOption)
     }
 
-		// calc total
+    // calc total
     let total = 0
-    pledgeOptions.forEach( (po) => { total += (po.price*po.amount) } )
+    pledgeOptions.forEach(po => {
+      total += po.price * po.amount
+    })
 
-    this.setState( {total, pledgeOptions} )
+    this.setState({ total, pledgeOptions })
   }
 
-  submitPledge() {
-    const {total, pledgeOptions} = this.state
+  submitPledge () {
+    const { total, pledgeOptions } = this.state
 
-    this.props.mutate({ variables: { total, options: pledgeOptions } })
+    this.props
+      .mutate({ variables: { total, options: pledgeOptions } })
       .then(({ data }) => {
         console.log('got data', data)
-      }).catch((error) => {
+      })
+      .catch(error => {
         console.log('there was an error sending the query', error)
       })
   }
 
-  render() {
-    const {crowdfunding, loading } = this.props
-    const {total, pledgeOptions} = this.state
+  render () {
+    const { crowdfunding, loading } = this.props
+    const { total, pledgeOptions } = this.state
 
     if (loading) {
       return <span>...</span>
@@ -83,8 +89,8 @@ class Crowdfunding extends Component {
         <h2>{crowdfunding.name}</h2>
 
         <h3>Cart</h3>
-        <strong>Total: {total/100.0}</strong>
-        {pledgeOptions.map( (option, ii) => (
+        <strong>Total: {total / 100.0}</strong>
+        {pledgeOptions.map((option, ii) => (
           <p key={option.templateId}>
             {option.templateId} - {option.amount}
           </p>
@@ -93,14 +99,22 @@ class Crowdfunding extends Component {
 
         <h3>Offers</h3>
         <ul>
-          {crowdfunding.packages.map( (package_, i) => (
-            <li key={package_.id} >
+          {crowdfunding.packages.map((package_, i) => (
+            <li key={package_.id}>
               <h3>{package_.name}</h3>
-              {package_.options.map( (option, ii) => (
-                <p key={package_.id+option.id} onClick={() => this.chooseOption(option)}>
-                  <strong>{option.reward.name}</strong> CHF {option.price/100.0}<br/>
-                  option.id: {option.id}<br/>
-                  reward.id: {option.reward.id}<br/>
+              {package_.options.map((option, ii) => (
+                <p
+                  key={package_.id + option.id}
+                  onClick={() => this.chooseOption(option)}
+                >
+                  <strong>{option.reward.name}</strong>
+                  {' '}
+                  CHF
+                  {' '}
+                  {option.price / 100.0}
+                  <br />
+                  option.id: {option.id}<br />
+                  reward.id: {option.reward.id}<br />
                 </p>
               ))}
             </li>
@@ -112,8 +126,8 @@ class Crowdfunding extends Component {
 }
 
 Crowdfunding.propTypes = {
-  mutate: PropTypes.func.isRequired,
-};
+  mutate: PropTypes.func.isRequired
+}
 
 const submitPledge = gql`
   mutation submitPledge($total: Int!, $options: [PackageOptionInput!]!) {
@@ -132,10 +146,8 @@ const submitPledge = gql`
 `
 
 const CrowdfundingWithQuery = graphql(query, {
-  props: ({data}) => {
-    const crowdfunding = data.crowdfundings
-      ? data.crowdfundings[0]
-      : {}
+  props: ({ data }) => {
+    const crowdfunding = data.crowdfundings ? data.crowdfundings[0] : {}
 
     return {
       loading: data.loading,
@@ -145,7 +157,6 @@ const CrowdfundingWithQuery = graphql(query, {
   }
 })(Crowdfunding)
 
-const CrowdfundingWithMutation = graphql(submitPledge)(CrowdfundingWithQuery);
-
+const CrowdfundingWithMutation = graphql(submitPledge)(CrowdfundingWithQuery)
 
 export default CrowdfundingWithMutation

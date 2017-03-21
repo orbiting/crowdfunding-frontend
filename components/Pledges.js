@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component } from 'react'
 
-import {gql, graphql} from 'react-apollo'
+import { gql, graphql } from 'react-apollo'
 
 const query = gql`
 query {pledges {
@@ -22,12 +22,11 @@ query {pledges {
 class Pledges extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-    }
+    this.state = {}
   }
 
-  render() {
-    const {pledges, loading } = this.props
+  render () {
+    const { pledges, loading } = this.props
 
     if (loading) {
       return <span>...</span>
@@ -37,16 +36,21 @@ class Pledges extends Component {
       <div>
         <h2>Your pledges</h2>
         <ul>
-          {pledges.map( (pledge, i) => (
-            <li key={pledge.id} >
+          {pledges.map((pledge, i) => (
+            <li key={pledge.id}>
               <h4>Pledge: {pledge.id}</h4>
-              CHF {pledge.total/100.0}<br/>
-              createdAt: {pledge.createdAt}<br/>
-              status: {pledge.status}<br/>
-              {pledge.options.map( (option, ii) => (
+              CHF {pledge.total / 100.0}<br />
+              createdAt: {pledge.createdAt}<br />
+              status: {pledge.status}<br />
+              {pledge.options.map((option, ii) => (
                 <p key={option.id}>
-                  <strong>{option.reward.name}</strong> CHF {option.price/100.0}<br/>
-                  option.id: {option.id}<br/>
+                  <strong>{option.reward.name}</strong>
+                  {' '}
+                  CHF
+                  {' '}
+                  {option.price / 100.0}
+                  <br />
+                  option.id: {option.id}<br />
                 </p>
               ))}
             </li>
@@ -58,10 +62,8 @@ class Pledges extends Component {
 }
 
 const PledgesWithQuery = graphql(query, {
-  props: ({data}) => {
-    const pledges = data.pledges
-      ? data.pledges
-      : []
+  props: ({ data }) => {
+    const pledges = data.pledges ? data.pledges : []
 
     return {
       loading: data.loading,
