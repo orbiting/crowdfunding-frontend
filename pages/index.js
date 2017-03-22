@@ -1,9 +1,8 @@
 import App from '../components/App'
 import withData from '../lib/withData'
+import withSession from '../lib/auth/with-session'
 
 import {Button} from '@project-r/styleguide'
-
-import withSession from '../components/auth/with-session'
 
 export default withSession(withData(() => (
   <App>

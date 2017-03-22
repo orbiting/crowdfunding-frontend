@@ -1,12 +1,11 @@
+import Link from 'next/prefetch'
 import App from '../components/App'
 import withData from '../lib/withData'
+import withSession from '../lib/auth/with-session'
 
 import Crowdfunding from '../components/Crowdfunding'
 import Pledges from '../components/Pledges'
-
-import Link from 'next/prefetch'
 import LogoutButton from '../components/auth/logout-button'
-import withSession from '../components/auth/with-session'
 
 export default withSession(withData(({session, isLoggedIn}) => (
   <App>

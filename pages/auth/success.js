@@ -1,6 +1,6 @@
 import Link from 'next/prefetch'
 import React from 'react'
-import Session from '../../components/auth/session'
+import Session from '../../lib/auth/session'
 
 export default class extends React.Component {
   async componentDidMount () {

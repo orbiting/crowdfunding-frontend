@@ -1,5 +1,5 @@
 import Link from 'next/prefetch'
-import withSession from './with-session'
+import withSession from '../../lib/auth/with-session'
 
 const Unauthorized = () => (
   <div>

@@ -1,6 +1,6 @@
 import React from 'react'
-import withSession from '../../components/auth/with-session'
-import Session from '../../components/auth/session'
+import withSession from '../../lib/auth/with-session'
+import Session from '../../lib/auth/session'
 
 class SignIn extends React.Component {
   constructor (props) {
