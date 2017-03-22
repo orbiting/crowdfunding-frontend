@@ -22,7 +22,7 @@ if (unsetEnv.length > 0) {
 }
 
 const {PORT} = require('./constants')
-const auth = require('./src/auth')
+const auth = require('./server/auth')
 
 const app = next({dir: '.', dev: DEV})
 const handle = app.getRequestHandler()

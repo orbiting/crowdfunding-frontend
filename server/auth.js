@@ -69,8 +69,9 @@ exports.configure = ({
   server.use((req, res, next) => {
     // exclude nextjs requests
     if (!req.path.match(/^\/_next\//)) {
-      csrf(req, res, next)
+      return csrf(req, res, next)
     }
+    return next()
   })
 
   // With sessions connfigured (& before routes) we need to configure Passport
