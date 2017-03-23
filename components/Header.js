@@ -8,13 +8,13 @@ import {
 
 const styles = {
   bar: css({
-    padding: 20
-  }),
-  barSticky: css({
     position: 'fixed',
     top: 0,
     left: 0,
     right: 0,
+    padding: 20
+  }),
+  barSticky: css({
     backgroundColor: '#fff',
     height: 60
   }),
