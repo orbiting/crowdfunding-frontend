@@ -13,7 +13,6 @@ before_script:
 build-and-release:
   stage: build-and-release
   script:
-    - echo $NPM_TOKEN
-    - docker build -t $CONTAINER_TEST_IMAGE .
+    - docker build --build-arg NPM_TOKEN=$NPM_TOKEN -t $CONTAINER_TEST_IMAGE .
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
     - docker push $CONTAINER_RELEASE_IMAGE

@@ -1,5 +1,7 @@
 FROM node:latest
 
+ARG NPM_TOKEN
+
 # Create app directory
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
