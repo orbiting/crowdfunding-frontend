@@ -1,9 +1,10 @@
 import App from '../components/App'
 import withData from '../lib/withData'
+import withSession from '../lib/auth/with-session'
 
 import {Button} from '@project-r/styleguide'
 
-export default withData((props) => (
+export default withSession(withData(() => (
   <App>
     <h1>Republik</h1>
     <section>
@@ -11,4 +12,4 @@ export default withData((props) => (
       <Button>Mitmachen</Button>
     </section>
   </App>
-))
+)))
