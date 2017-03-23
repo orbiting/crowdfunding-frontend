@@ -9,6 +9,9 @@ import {
 const styles = {
   bar: css({
     position: 'fixed',
+    '@media print': {
+      position: 'absolute'
+    },
     top: 0,
     left: 0,
     right: 0,
