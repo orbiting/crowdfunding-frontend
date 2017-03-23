@@ -34,7 +34,7 @@ exports.configure = ({
   // sign in links in emails. Autodetects to hostname if null.
   publicUrl = null,
   // is the server running in development
-  dev = process.env.NODE_ENV !== 'production'
+  dev = false
 } = {}) => {
   if (app === null) {
     throw new Error('app option must be a next server instance')

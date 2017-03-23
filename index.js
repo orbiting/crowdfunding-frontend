@@ -39,7 +39,8 @@ app.prepare()
     server: server,
     users: pgdb['public']['users'],
     secret: process.env.SESSION_SECRET,
-    publicUrl: process.env.PUBLIC_URL
+    publicUrl: process.env.PUBLIC_URL,
+    dev: DEV
   })
 
   server.get('*', (req, res) => {
