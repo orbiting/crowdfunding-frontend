@@ -13,6 +13,7 @@ before_script:
 build-and-release:
   stage: build-and-release
   script:
+    - npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
     - docker build -t $CONTAINER_TEST_IMAGE .
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
     - docker push $CONTAINER_RELEASE_IMAGE
