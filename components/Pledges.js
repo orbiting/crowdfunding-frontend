@@ -32,6 +32,10 @@ class Pledges extends Component {
       return <span>...</span>
     }
 
+    if (!pledges || pledges.length === 0) {
+      return null
+    }
+
     return (
       <div>
         <h2>Your pledges</h2>
