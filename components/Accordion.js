@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {css} from 'glamor'
+import Router from 'next/router'
 
 import {
   Button, Field,
@@ -216,7 +217,10 @@ class Accordion extends Component {
                           fields.forEach(field => {
                             params[field.name] = this.state[field.name]
                           })
-                          this.setState({isRegistering: true, registerParams: params})
+                          Router.push({
+                            pathname: '/pledge',
+                            query: params
+                          }).then(() => window.scrollTo(0, 0))
                         }}>
                         Weiter
                       </Button>
