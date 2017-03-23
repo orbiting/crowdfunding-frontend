@@ -6,6 +6,7 @@ WORKDIR /usr/src/app
 
 # Install app dependencies
 COPY package.json /usr/src/app/
+RUN echo $NPM_TOKEN
 RUN npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
 RUN npm install
 
