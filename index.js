@@ -1,6 +1,7 @@
 const express = require('express')
 const next = require('next')
 const { PgDb } = require('pogi')
+const basicAuth = require('express-basic-auth')
 
 const DEV = process.env.NODE_ENV && process.env.NODE_ENV !== 'production'
 if (DEV) {
@@ -32,6 +33,14 @@ app.prepare()
   return PgDb.connect({ connectionString: process.env.DATABASE_URL })
 }).then(pgdb => {
   const server = express()
+
+  if (process.env.BASIC_AUTH_PASS) {
+    server.use(basicAuth({
+      users: { [process.env.BASIC_AUTH_USER]: process.env.BASIC_AUTH_PASS },
+      challenge: true,
+      realm: process.env.BASIC_AUTH_REALM
+    }))
+  }
 
   // Once DB is available, setup sessions and routes for authentication
   auth.configure({
