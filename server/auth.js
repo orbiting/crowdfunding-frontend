@@ -64,6 +64,11 @@ exports.configure = ({
     }
   }))
 
+  // trust first proxy
+  if (!dev) {
+    server.set('trust proxy', 1)
+  }
+
   // Add CSRF to all POST requests
   // except /_next/ queries
   server.use((req, res, next) => {

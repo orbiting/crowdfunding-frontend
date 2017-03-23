@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:7.7
 
 ARG NPM_TOKEN
 
