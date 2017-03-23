@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon -w index.js -w constants.js -w server index.js",
     "build": "next build",
-    "start": "next start",
+    "start": "node index.js",
     "precommit": "lint-staged",
     "standardize": "standard --fix 'components/**/*.js' 'lib/**/*.js' 'pages/**/*.js'"
   },
