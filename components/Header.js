@@ -61,6 +61,11 @@ class LoadingBar extends Component {
       this.setState({loading: false})
     }
   }
+  componentWillUnmount () {
+    Router.onRouteChangeStart = null
+    Router.onRouteChangeComplete = null
+    Router.onRouteChangeError = null
+  }
   componentDidUpdate () {
     if (this.state.loading) {
       this.timeout = setTimeout(
