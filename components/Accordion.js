@@ -1,6 +1,5 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import {css} from 'glamor'
-import Router from 'next/router'
 
 import {
   Button, Field,
@@ -148,8 +147,25 @@ class Accordion extends Component {
       selectedIndex
     } = this.state
 
+    const select = pkg => {
+      const params = {
+        amount: pkg.defaultAmount || pkg.minAmount,
+        package: pkg.title
+      }
+
+      if (pkg.fields) {
+        pkg.fields.forEach(field => {
+          params[field.name] = this.state[field.name]
+        })
+      }
+
+      this.props.onSelect(
+        params
+      )
+    }
+
     return (
-      <div className='ui styled fluid accordion'>
+      <div>
         {
           Packages.map((pkg, i) => {
             const isSelected = selectedIndex === i
@@ -162,9 +178,13 @@ class Accordion extends Component {
                 }}
                 onMouseOver={() => this.setState({activeIndex: i})}
                 onClick={() => {
+                  if (!pkg.fields) {
+                    return select(pkg)
+                  }
                   if (isSelected) {
                     return
                   }
+
                   const nextState = {
                     selectedIndex: i,
                     minAmount: pkg.minAmount,
@@ -183,49 +203,37 @@ class Accordion extends Component {
                 <div {...styles.packageContent}
                   style={{display: isActive ? 'block' : 'none'}}>
                   {pkg.content}
-                  {isSelected && (
-                    <div style={{marginTop: 20}}>
-                      {fields.map((field, i) => (
-                        <P key={i}>
-                          <Field
-                            label={field.label}
-                            type={field.type}
-                            value={this.state[field.name]}
-                            onChange={(event) => {
-                              const value = event.target.value
-                              const nextState = field.onChange
-                                ? field.onChange(value, this.state)
-                                : {[field.name]: value}
-                              this.setState(nextState)
-                            }}
-                            />
-                        </P>
-                      ))}
-                      <P>
+                  <div style={{marginTop: 20}}>
+                    {fields.map((field, i) => (
+                      <P key={i}>
                         <Field
-                          label='Betrag'
-                          type='number'
-                          value={this.state.amount}
+                          label={field.label}
+                          type={field.type}
+                          value={this.state[field.name]}
                           onChange={(event) => {
-                            this.setState({amount: event.target.value})
-                          }} />
+                            const value = event.target.value
+                            const nextState = field.onChange
+                              ? field.onChange(value, this.state)
+                              : {[field.name]: value}
+                            this.setState(nextState)
+                          }}
+                          />
                       </P>
-                      <Button
-                        onClick={() => {
-                          const params = {amount: this.state.amount, package: pkg.title}
-
-                          fields.forEach(field => {
-                            params[field.name] = this.state[field.name]
-                          })
-                          Router.push({
-                            pathname: '/pledge',
-                            query: params
-                          }).then(() => window.scrollTo(0, 0))
-                        }}>
-                        Weiter
-                      </Button>
-                    </div>
-                  )}
+                    ))}
+                    {!!pkg.fields && <P>
+                      <Field
+                        label='Betrag'
+                        type='number'
+                        value={this.state.amount}
+                        onChange={(event) => {
+                          this.setState({amount: event.target.value})
+                        }} />
+                    </P>}
+                    <Button
+                      onClick={() => select(pkg)}>
+                      Weiter
+                    </Button>
+                  </div>
                 </div>
               </div>
             )
@@ -234,6 +242,10 @@ class Accordion extends Component {
       </div>
     )
   }
+}
+
+Accordion.propTypes = {
+  onSelect: PropTypes.func.isRequired
 }
 
 export default Accordion
