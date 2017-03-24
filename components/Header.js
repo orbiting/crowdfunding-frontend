@@ -6,6 +6,8 @@ import {
   Logo, A
 } from '@project-r/styleguide'
 
+export const HEADER_HEIGHT = 60
+
 const styles = {
   bar: css({
     position: 'fixed',
@@ -19,7 +21,7 @@ const styles = {
   }),
   barSticky: css({
     backgroundColor: '#fff',
-    height: 60
+    height: HEADER_HEIGHT
   }),
   menu: css({
     float: 'right'
@@ -31,7 +33,7 @@ class Header extends Component {
     super(props)
 
     this.state = {
-      fixed: !this.props.cover
+      sticky: !this.props.cover
     }
 
     this.onScroll = () => {
