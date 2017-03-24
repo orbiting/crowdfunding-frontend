@@ -203,7 +203,7 @@ class Accordion extends Component {
                 <div {...styles.packageContent}
                   style={{display: isActive ? 'block' : 'none'}}>
                   {pkg.content}
-                  <div style={{marginTop: 20}}>
+                  {!!pkg.fields && <div style={{marginTop: 20}}>
                     {fields.map((field, i) => (
                       <P key={i}>
                         <Field
@@ -220,7 +220,7 @@ class Accordion extends Component {
                           />
                       </P>
                     ))}
-                    {!!pkg.fields && <P>
+                    <P>
                       <Field
                         label='Betrag'
                         type='number'
@@ -228,12 +228,12 @@ class Accordion extends Component {
                         onChange={(event) => {
                           this.setState({amount: event.target.value})
                         }} />
-                    </P>}
+                    </P>
                     <Button
                       onClick={() => select(pkg)}>
                       Weiter
                     </Button>
-                  </div>
+                  </div>}
                 </div>
               </div>
             )
