@@ -14,6 +14,15 @@ class Pledge extends Component {
   constructor (props) {
     super(props)
     this.state = {}
+
+    this.amountRefSetter = (ref) => {
+      this.amountRef = ref
+    }
+  }
+  componentDidMount () {
+    if (this.amountRef && this.amountRef.input) {
+      this.amountRef.input.focus()
+    }
   }
   render () {
     const {name, email} = this.state
@@ -43,6 +52,7 @@ class Pledge extends Component {
               ändern
             </A>
             <Field label='Betrag'
+              ref={this.amountRefSetter}
               value={query.amount}
               onChange={event => {
                 const url = {
@@ -62,6 +72,12 @@ class Pledge extends Component {
               query: params
             }
             Router.replace(url, url, {shallow: true})
+              .then(() => {
+                window.scrollTo(0, 0)
+                if (this.amountRef && this.amountRef.input) {
+                  this.amountRef.input.focus()
+                }
+              })
           }} />
         )}
 

@@ -21,7 +21,7 @@
     ]
   },
   "dependencies": {
-    "@project-r/styleguide": "^0.1.4",
+    "@project-r/styleguide": "^0.1.6",
     "body-parser": "^1.15.2",
     "connect-pg-simple": "^3.1.2",
     "cross-env": "^3.2.4",

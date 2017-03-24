@@ -12,6 +12,7 @@ export const HEADER_HEIGHT = 60
 
 const styles = {
   bar: css({
+    zIndex: 10,
     position: 'fixed',
     '@media print': {
       position: 'absolute'
