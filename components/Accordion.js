@@ -1,9 +1,10 @@
 import React, {Component, PropTypes} from 'react'
 import {css} from 'glamor'
+import {gql, graphql} from 'react-apollo'
 
 import {
   Button, Field,
-  Grid, Span,
+  Grid, Span, P,
   colors
 } from '@project-r/styleguide'
 
@@ -11,11 +12,13 @@ const styles = {
   packageHeader: css({
   }),
   packageTitle: css({
-    color: colors.primary,
-    marginTop: 5
+    fontSize: 22,
+    lineHeight: '28px'
   }),
   packagePrice: css({
-    fontSize: 20
+    color: colors.primary,
+    lineHeight: '28px',
+    fontSize: 22
   }),
   package: css({
     fontFamily: 'sans-serif',
@@ -31,85 +34,51 @@ const styles = {
   })
 }
 
-const Packages = [
-  {
-    minAmount: 1,
-    defaultAmount: 10,
-    price: 'ab 10.-',
-    title: 'Einfach Spenden',
-    content: (
-      <div>
-        <p>Sie wollen werder Mitglied werden, noch Mitgliedschaften verschenken, noch sonst irgendwas? Auch keines unserer wunderschönen Plakate? Aber Sie wollen uns trotzdem unterstützen, das ist grossartig! Wir freuen uns sehr!</p>
-      </div>
-    )
-  },
-  {
-    minAmount: 70,
-    price: '70.-',
-    title: 'Spende und du erhältst ein Manifest-Poster',
-    content: (
-      <div>
-        <p>Na, haben wir dich Sie überzeugt Mitglied zu werden? Dann ist dieses paket genau richtig für Sie!</p>
-      </div>
-    )
-  },
-  {
-    minAmount: 240,
-    price: '240.-',
-    title: 'Mitgliedschaft für ein Jahr',
-    content: (
-      <div>
-        <p>Na, haben wir Sie überzeugt Mitglied zu werden? Dann ist dieses paket genau richtig für Sie!</p>
-      </div>
-    )
-  },
-  {
-    minAmount: 240,
-    price: 'ab 240.-',
-    title: 'Mitgliedschaft zum Verschenken',
-    content: (
-      <div>
-        <p>Sehr grosszügig. Sie können so viele Mitgliedschaften verschenken wie Sie wollen. Wir senden pro Mitgliedschaft eine Postkarte mit einem Gutschein an die Adressen Ihrer Wahl! Auch werden Sie eine Mail mir diesen Gutschein-Codes erhalten, die Sie Ihren Liebsten so schicken können, wie Sie wollen.</p>
-        <p>Wenn Sie etwas haptisch dazu verschenken wollen, können Sie unsere sehr tollen Moleskin dazu erwerben!</p>
-      </div>
-    ),
-    fields: [
-      {
-        label: 'Mitgliedschaften',
-        name: 'memberships',
-        type: 'number',
-        default: 1,
-        onChange: (value, state) => {
-          if (value < 1) {
-            return
+const MESSAGES = {
+  'package/DONATE/title': 'Spenden – sonst nichts',
+  'package/DONATE/description': 'Sie wollen hervorragenden Journalismus unterstützen, ohne ihn zu lesen. Aber mit Geld. Denn Sie wissen: ohne Geld läuft nichts, nicht einmal die Ratten in den Lagerschuppen.',
+  'package/POSTER/title': 'Das Manifest',
+  'package/POSTER/description': 'Sie sind vorsichtig und entscheiden sich statt dem Produkt für den Bauplan des Produkts. Diesen erhalten Sie prächtig in A3, ein Schmuck für jede Wand. Aber Achtung: Das Magazin erhalten Sie dafür noch nicht.',
+  'package/ABO/title': 'Abonnement für ein Jahr',
+  'package/ABO/description': 'Willkommen an Bord! Sie erhalten für ein Jahr unser Magazin. Und werden zu einem kleinen Teil Mitbesitzerin.',
+  'package/ABO_GIVE/title': 'Abonnements verschenken',
+  'package/ABO_GIVE/description': 'Sie wollen Ihren Freunden oder Feinden das heisseste Magazin für ein Jahr schenken. Und haben die Gelegenheit, diesen zusätzlich für X Franken ein Notizbuch dazu zu schenken – damit diese nicht nur Cleveres lesen, sondern auch schreiben können.',
+  'package/BENEFACTOR/title': 'Gönner Abonnement',
+  'package/BENEFACTOR/description': 'Sie wollen nicht nur ein unabhängiges Magazin lesen, sondern Sie wollen sich auch nachhaltig dafür ein setzten, dass dieses existiert. Und fördern ein neues Modell für Journalismus mit dem nachdrücklichsten Argument, das möglich ist: mit Geld.',
+  'option/ABO/label': 'Mitgliedschaften',
+  'option/NOTEBOOK/label': 'Notizbuch'
+}
+
+const query = gql`
+{
+  crowdfunding(name: "REPUBLIK") {
+    id
+    name
+    packages {
+      id
+      name
+      options {
+        id
+        price
+        userPrice
+        minAmount
+        maxAmount
+        defaultAmount
+        reward {
+          ... on MembershipType {
+            id
+            name
           }
-          const minAmount = (+value) * 240
-          const prevMinAmount = (+state.memberships + 1) * 240
-          return {
-            minAmount,
-            amount: (
-              state.amount === prevMinAmount
-                ? minAmount
-                : Math.max(minAmount, state.amount)
-            ),
-            memberships: value
+          ... on Goodie {
+            id
+            name
           }
         }
       }
-    ]
-  },
-  {
-    minAmount: 1000,
-    price: 'ab 1000.-',
-    title: 'Gönnermitgliedschaft',
-    content: (
-      <div>
-        <p>Na, haben wir Sie überzeugt Mitglied zu werden? Und Sie haben viel Geld? Dann ist dieses paket genau richtig für Sie!</p>
-        <p>Unser super cooles Goodie für Sie: Sie dürfen ein Wort Ihrer Wahl ngeben und unsere Autor*innen müssen dieses Wort in einem von Republik publiziertem Text verwenden - machen Sie es uns nicht zu leicht!</p>
-      </div>
-    )
+    }
   }
-]
+}
+`
 
 class Accordion extends Component {
   constructor (props) {
@@ -120,6 +89,13 @@ class Accordion extends Component {
     }
   }
   render () {
+    if (this.props.loading) {
+      return <P>…</P>
+    }
+    if (this.props.error) {
+      return <P>{this.props.error}</P>
+    }
+
     const {
       activeIndex,
       selectedIndex
@@ -127,13 +103,19 @@ class Accordion extends Component {
 
     const select = pkg => {
       const params = {
-        amount: pkg.defaultAmount || pkg.minAmount,
-        package: pkg.title
+        amount: this.state.amount || pkg.options.reduce(
+          (amount, option) => amount + option.price * option.minAmount,
+          0
+        ),
+        package: pkg.name
       }
 
-      if (pkg.fields) {
-        pkg.fields.forEach(field => {
-          params[field.name] = this.state[field.name]
+      const configurableOptions = pkg.options.filter(option => (
+        option.minAmount !== option.maxAmount
+      ))
+      if (configurableOptions.length) {
+        configurableOptions.forEach(option => {
+          params[option.id] = this.state[option.id]
         })
       }
 
@@ -142,13 +124,24 @@ class Accordion extends Component {
       )
     }
 
+    const {crowdfunding: {packages}} = this.props
+
     return (
       <div>
         {
-          Packages.map((pkg, i) => {
+          packages.map((pkg, i) => {
             const isSelected = selectedIndex === i
             const isActive = isSelected || activeIndex === i
-            const fields = pkg.fields || []
+            const configurableOptions = pkg.options.filter(option => (
+              option.minAmount !== option.maxAmount
+            ))
+            const hasOptions = !!configurableOptions.length
+
+            const price = pkg.options.reduce(
+              (amount, option) => amount + option.price * option.minAmount,
+              0
+            )
+
             return (
               <div key={i} {...styles.package}
                 style={{
@@ -158,7 +151,7 @@ class Accordion extends Component {
                   activeIndex: i
                 })}
                 onClick={() => {
-                  if (!pkg.fields) {
+                  if (!hasOptions) {
                     return select(pkg)
                   }
                   if (isSelected) {
@@ -167,37 +160,47 @@ class Accordion extends Component {
 
                   const nextState = {
                     selectedIndex: i,
-                    minAmount: pkg.minAmount,
-                    amount: pkg.defaultAmount || pkg.minAmount
+                    minAmount: Math.max(pkg.options.reduce(
+                      (amount, option) => amount + option.userPrice
+                        ? (option.price * option.minAmount)
+                        : 0,
+                      0
+                    ), 1),
+                    amount: pkg.options.reduce(
+                      (amount, option) => amount + option.price * option.defaultAmount,
+                      0
+                    )
                   }
 
-                  fields.forEach(field => {
-                    nextState[field.name] = field.default
+                  configurableOptions.forEach(option => {
+                    nextState[option.id] = option.defaultAmount
                   })
                   this.setState(nextState)
                 }}>
                 <div {...styles.packageHeader}>
-                  <div {...styles.packagePrice}>{pkg.price}</div>
-                  <div {...styles.packageTitle}>{pkg.title}</div>
+                  <div {...styles.packageTitle}>{MESSAGES[`package/${pkg.name}/title`]}</div>
+                  <div {...styles.packagePrice}>
+                    {price ? `CHF ${price / 100}` : ''}
+                  </div>
                 </div>
                 <div {...styles.packageContent}
                   style={{
                     display: isActive ? 'block' : 'none'
                   }}>
-                  {pkg.content}
-                  {!!pkg.fields && <div style={{marginTop: 20}}>
+                  <p>{MESSAGES[`package/${pkg.name}/description`]}</p>
+                  {hasOptions && <div style={{marginTop: 20}}>
                     <Grid>
-                      {fields.map((field, i) => (
+                      {configurableOptions.map((option, i) => (
                         <Span s='1/2' m='3/6' key={i}>
                           <Field
-                            label={field.label}
-                            type={field.type}
-                            value={this.state[field.name]}
+                            label={MESSAGES[`option/${option.reward.name}/label`] || option.reward.name}
+                            type='number'
+                            value={this.state[option.id]}
                             onChange={(event) => {
                               const value = event.target.value
-                              const nextState = field.onChange
-                                ? field.onChange(value, this.state)
-                                : {[field.name]: value}
+                              const nextState = {
+                                [option.id]: value
+                              }
                               this.setState(nextState)
                             }}
                             />
@@ -209,7 +212,10 @@ class Accordion extends Component {
                           type='number'
                           value={this.state.amount}
                           onChange={(event) => {
-                            this.setState({amount: event.target.value})
+                            this.setState({
+                              amount: event.target.value,
+                              amountCustom: true
+                            })
                           }} />
                       </Span>
                     </Grid>
@@ -234,4 +240,14 @@ Accordion.propTypes = {
   onSelect: PropTypes.func.isRequired
 }
 
-export default Accordion
+const AccordionWithQuery = graphql(query, {
+  props: ({ data }) => {
+    return {
+      loading: data.loading,
+      error: data.error,
+      crowdfunding: data.crowdfunding
+    }
+  }
+})(Accordion)
+
+export default AccordionWithQuery
