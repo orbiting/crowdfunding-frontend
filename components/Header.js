@@ -71,6 +71,7 @@ class LoadingBar extends Component {
     }
   }
   componentWillUnmount () {
+    clearTimeout(this.timeout)
     Router.onRouteChangeStart = null
     Router.onRouteChangeComplete = null
     Router.onRouteChangeError = null
