@@ -80,6 +80,16 @@ const query = gql`
 }
 `
 
+const calculateMinAmount = (pkg, state) => {
+  return Math.max(pkg.options.reduce(
+    (amount, option) => amount + (option.userPrice
+      ? 0
+      : (option.price * (state[option.id] !== undefined ? state[option.id] : option.minAmount))
+    ),
+    0
+  ), 100)
+}
+
 class Accordion extends Component {
   constructor (props) {
     super(props)
@@ -160,12 +170,6 @@ class Accordion extends Component {
 
                   const nextState = {
                     selectedIndex: i,
-                    minAmount: Math.max(pkg.options.reduce(
-                      (amount, option) => amount + option.userPrice
-                        ? (option.price * option.minAmount)
-                        : 0,
-                      0
-                    ), 1),
                     amount: pkg.options.reduce(
                       (amount, option) => amount + option.price * option.defaultAmount,
                       0
@@ -198,10 +202,23 @@ class Accordion extends Component {
                             value={this.state[option.id]}
                             onChange={(event) => {
                               const value = event.target.value
-                              const nextState = {
-                                [option.id]: value
+                              if (value > option.maxAmount || value < option.minAmount) {
+                                return
                               }
-                              this.setState(nextState)
+                              this.setState((state) => {
+                                const nextState = {
+                                  [option.id]: value
+                                }
+                                const minAmount = calculateMinAmount(pkg, {
+                                  ...state,
+                                  ...nextState
+                                })
+                                if (!state.amountCustom || minAmount > state.amount) {
+                                  nextState.amount = minAmount
+                                  nextState.amountCustom = false
+                                }
+                                return nextState
+                              })
                             }}
                             />
                         </Span>
@@ -210,10 +227,10 @@ class Accordion extends Component {
                         <Field
                           label='Betrag'
                           type='number'
-                          value={this.state.amount}
+                          value={this.state.amount / 100}
                           onChange={(event) => {
                             this.setState({
-                              amount: event.target.value,
+                              amount: event.target.value * 100,
                               amountCustom: true
                             })
                           }} />
