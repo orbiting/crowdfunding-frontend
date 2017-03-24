@@ -68,6 +68,7 @@ class LoadingBar extends Component {
   }
   componentDidUpdate () {
     if (this.state.loading) {
+      clearTimeout(this.timeout)
       this.timeout = setTimeout(
         () => {
           this.setState(({progress}) => {
