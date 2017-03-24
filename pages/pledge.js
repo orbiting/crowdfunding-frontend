@@ -124,10 +124,7 @@ class Pledge extends Component {
           </label><br />
         </P>
 
-        <span style={{float: 'right'}}>
-          <Button>Weiter</Button>
-        </span>
-        <br style={{clear: 'both'}} />
+        <Button disabled>Weiter</Button>
       </div>
     )
   }
