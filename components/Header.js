@@ -19,10 +19,18 @@ const styles = {
     top: 0,
     left: 0,
     right: 0,
-    padding: 20
+    padding: '0 20px'
   }),
   barSticky: css({
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
+  }),
+  barCenter: css({
+    maxWidth: 1200,
+    margin: '0 auto',
+    padding: '20px 0'
+  }),
+  barCenterSticky: css({
+    borderBottom: `1px solid ${colors.disabled}`,
     height: HEADER_HEIGHT
   }),
   menu: css({
@@ -137,28 +145,33 @@ class Header extends Component {
     const barStyle = sticky
       ? merge(styles.bar, styles.barSticky)
       : styles.bar
+    const barCenterStyle = sticky
+      ? merge(styles.barCenter, styles.barCenterSticky)
+      : styles.barCenter
     return (
       <div>
         <div {...barStyle}>
-          <Link href='/'>
-            <a><Logo width={sticky ? 180 : 300} /></a>
-          </Link>
-          <div {...styles.menu}>
-            <Link href='/updates'>
-              <A href='#'>Updates</A>
+          <div {...barCenterStyle}>
+            <Link href='/'>
+              <a><Logo width={sticky ? 180 : 300} /></a>
             </Link>
-            {' '}&nbsp;{' '}
-            <Link href='/community'>
-              <A href='#'>Community</A>
-            </Link>
-            {' '}&nbsp;{' '}
-            <Link href='/events'>
-              <A href='#'>Veranstaltungen</A>
-            </Link>
-            {' '}&nbsp;{' '}
-            <Link href='/faq'>
-              <A href='#'>FAQ</A>
-            </Link>
+            <div {...styles.menu}>
+              <Link href='/updates'>
+                <A href='#'>Updates</A>
+              </Link>
+              {' '}&nbsp;{' '}
+              <Link href='/community'>
+                <A href='#'>Community</A>
+              </Link>
+              {' '}&nbsp;{' '}
+              <Link href='/events'>
+                <A href='#'>Veranstaltungen</A>
+              </Link>
+              {' '}&nbsp;{' '}
+              <Link href='/faq'>
+                <A href='#'>FAQ</A>
+              </Link>
+            </div>
           </div>
         </div>
         <LoadingBar />

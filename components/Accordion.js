@@ -3,7 +3,7 @@ import {css} from 'glamor'
 
 import {
   Button, Field,
-  P,
+  Grid, Span,
   colors
 } from '@project-r/styleguide'
 
@@ -21,7 +21,7 @@ const styles = {
     fontFamily: 'sans-serif',
     paddingTop: 10,
     paddingBottom: 10,
-    borderBottom: `1px solid ${colors.primary}`
+    borderBottom: `1px solid ${colors.disabled}`
   }),
   packageContent: css({
     '& p': {
@@ -75,7 +75,7 @@ const Packages = [
     ),
     fields: [
       {
-        label: 'Anzahl Mitgliedschaften',
+        label: 'Mitgliedschaften',
         name: 'memberships',
         type: 'number',
         default: 1,
@@ -84,28 +84,6 @@ const Packages = [
             return
           }
           const minAmount = (+value) * 240
-          const prevMinAmount = (+state.memberships + 1) * 240
-          return {
-            minAmount,
-            amount: (
-              state.amount === prevMinAmount
-                ? minAmount
-                : Math.max(minAmount, state.amount)
-            ),
-            memberships: value
-          }
-        }
-      },
-      {
-        label: 'Anzahl Moleskins',
-        name: 'memberships',
-        type: 'number',
-        default: 1,
-        onChange: (value, state) => {
-          if (value < 1) {
-            return
-          }
-          const minAmount = (+value + 1) * 240
           const prevMinAmount = (+state.memberships + 1) * 240
           return {
             minAmount,
@@ -176,7 +154,9 @@ class Accordion extends Component {
                 style={{
                   cursor: isSelected ? 'default' : 'pointer'
                 }}
-                onMouseOver={() => this.setState({activeIndex: i})}
+                onMouseOver={() => this.setState({
+                  activeIndex: i
+                })}
                 onClick={() => {
                   if (!pkg.fields) {
                     return select(pkg)
@@ -201,35 +181,41 @@ class Accordion extends Component {
                   <div {...styles.packageTitle}>{pkg.title}</div>
                 </div>
                 <div {...styles.packageContent}
-                  style={{display: isActive ? 'block' : 'none'}}>
+                  style={{
+                    display: isActive ? 'block' : 'none'
+                  }}>
                   {pkg.content}
                   {!!pkg.fields && <div style={{marginTop: 20}}>
-                    {fields.map((field, i) => (
-                      <P key={i}>
+                    <Grid>
+                      {fields.map((field, i) => (
+                        <Span s='1/2' m='3/6' key={i}>
+                          <Field
+                            label={field.label}
+                            type={field.type}
+                            value={this.state[field.name]}
+                            onChange={(event) => {
+                              const value = event.target.value
+                              const nextState = field.onChange
+                                ? field.onChange(value, this.state)
+                                : {[field.name]: value}
+                              this.setState(nextState)
+                            }}
+                            />
+                        </Span>
+                      ))}
+                      <Span s='1/2' m='3/6'>
                         <Field
-                          label={field.label}
-                          type={field.type}
-                          value={this.state[field.name]}
+                          label='Betrag'
+                          type='number'
+                          value={this.state.amount}
                           onChange={(event) => {
-                            const value = event.target.value
-                            const nextState = field.onChange
-                              ? field.onChange(value, this.state)
-                              : {[field.name]: value}
-                            this.setState(nextState)
-                          }}
-                          />
-                      </P>
-                    ))}
-                    <P>
-                      <Field
-                        label='Betrag'
-                        type='number'
-                        value={this.state.amount}
-                        onChange={(event) => {
-                          this.setState({amount: event.target.value})
-                        }} />
-                    </P>
+                            this.setState({amount: event.target.value})
+                          }} />
+                      </Span>
+                    </Grid>
+                    <br /><br />
                     <Button
+                      disabled={!isSelected}
                       onClick={() => select(pkg)}>
                       Weiter
                     </Button>

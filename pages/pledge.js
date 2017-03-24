@@ -36,7 +36,8 @@ class Pledge extends Component {
           <div>
             {query.package}
             {' '}
-            <A onClick={() => {
+            <A href='/pledge' onClick={event => {
+              event.preventDefault()
               Router.replace('/pledge', '/pledge', {shallow: true})
             }}>
               ändern
