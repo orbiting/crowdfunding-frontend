@@ -13,13 +13,19 @@ import {
   NarrowContainer
 } from '@project-r/styleguide'
 
+const PAYMENT_METHODS = [
+  { key: 'EZS', name: 'Einzahlungsschein' },
+  { key: 'VISA', name: 'Visa' },
+  { key: 'MASTERCARD', name: 'MasterCard' },
+  { key: 'PFC', name: 'PostfFinance Card' }
+]
 let CHECK_EMAIL_TIMEOUT = null
 
 class Pledge extends Component {
   constructor (props) {
     super(props)
     const session = this.props.session || {}
-    const isLoggedIn = (session.user ? true : false)
+    const isLoggedIn = (!!session.user)
     this.state = {
       emailFree: true,
       isLoggingIn: false,
@@ -37,10 +43,10 @@ class Pledge extends Component {
   }
   componentWillReceiveProps (nextProps) {
     const {session } = this.props
-    //set email & name if logged in
-    if(session && session.user && !email) {
-      //TODO name
-      this.setState( {email: session.user.email} )
+    // set email & name if logged in
+    if (session && session.user && !email) {
+      // TODO name
+      this.setState({email: session.user.email})
     }
   }
   render () {
@@ -65,11 +71,11 @@ class Pledge extends Component {
     const handleEmailChange = field => {
       return event => {
         const value = event.target.value
-        this.setState( {email: value} )
-        //check if email is untaken or we need to login
-        //throttle
-        if(CHECK_EMAIL_TIMEOUT) { clearTimeout(CHECK_EMAIL_TIMEOUT) }
-        CHECK_EMAIL_TIMEOUT = setTimeout( async () => {
+        this.setState({email: value})
+        // check if email is untaken or we need to login
+        // throttle
+        if (CHECK_EMAIL_TIMEOUT) { clearTimeout(CHECK_EMAIL_TIMEOUT) }
+        CHECK_EMAIL_TIMEOUT = setTimeout(async () => {
           const {loading, data} = await client.query({
             query: gql`
               query checkEmail($email: String!) {
@@ -80,18 +86,17 @@ class Pledge extends Component {
             `,
             variables: { email: value }
           })
-          console.log("free: "+data.checkEmail.free)
+          console.log('free: ' + data.checkEmail.free)
           this.setState(
             { emailFree: data.checkEmail.free }
           )
         }, 300)
-
       }
     }
 
     const continueWithLogin = field => {
       return async (event) => {
-        this.setState( {isLoggingIn: true } )
+        this.setState({isLoggingIn: true })
         const session = new Session()
         await session.signin(this.state.email)
         try {
@@ -101,8 +106,8 @@ class Pledge extends Component {
             isLoggedIn: true
           })
         } catch (e) {
-          console.log("timeout")
-          this.setState( {isLoggingIn: false } )
+          console.log('timeout')
+          this.setState({isLoggingIn: false })
         }
       }
     }
@@ -227,12 +232,12 @@ class Pledge extends Component {
 Pledge.propTypes = {
   query: PropTypes.object.isRequired,
   client: PropTypes.object.isRequired,
-  session: PropTypes.object.isRequired,
+  session: PropTypes.object.isRequired
 }
 
 const PledgeWithApollo = withApollo(Pledge)
 
-export default withSession(withData( ({url, session}) => (
+export default withSession(withData(({url, session}) => (
   <App>
     <NarrowContainer>
       <H1>Mitmachen</H1>
