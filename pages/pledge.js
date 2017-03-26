@@ -3,7 +3,7 @@ import withData from '../lib/withData'
 import App from '../components/App'
 import Accordion from '../components/Accordion'
 import Router from 'next/router'
-import { gql, withApollo } from 'react-apollo'
+import { gql, withApollo, graphql } from 'react-apollo'
 import withSession from '../lib/auth/with-session'
 import Session from '../lib/auth/session'
 
@@ -256,17 +256,34 @@ class Pledge extends Component {
 
 Pledge.propTypes = {
   query: PropTypes.object.isRequired,
-  client: PropTypes.object.isRequired,
+  client: React.PropTypes.object.isRequired,
+  mutate: PropTypes.func.isRequired,
   session: PropTypes.object.isRequired
 }
 
-const PledgeWithApollo = withApollo(Pledge)
+const submitPledge = gql`
+  mutation submitPledge($total: Int!, $options: [PackageOptionInput!]!) {
+    submitPledge(pledge: {total: $total, options: $options} ) {
+      id
+      total
+      status
+      packageId
+      options {
+        amount
+        price
+        templateId
+      }
+    }
+  }
+`
+
+const PledgeWithSubmit = graphql(submitPledge)(withApollo(Pledge))
 
 export default withSession(withData(({url, session}) => (
   <App>
     <NarrowContainer>
       <H1>Mitmachen</H1>
-      <PledgeWithApollo query={url.query} session={session} />
+      <PledgeWithSubmit query={url.query} session={session} />
     </NarrowContainer>
   </App>
 )))
