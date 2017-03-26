@@ -24,14 +24,10 @@ let CHECK_EMAIL_TIMEOUT = null
 class Pledge extends Component {
   constructor (props) {
     super(props)
-    const session = this.props.session || {}
-    const isLoggedIn = (!!session.user)
     this.state = {
       emailFree: true,
-      isLoggingIn: false,
-      isLoggedIn
+      isLoggingIn: false
     }
-
     this.amountRefSetter = (ref) => {
       this.amountRef = ref
     }
@@ -42,11 +38,15 @@ class Pledge extends Component {
     }
   }
   componentWillReceiveProps (nextProps) {
-    const {session } = this.props
+    const session = this.props.session || {}
+    const {email, isLoggedIn} = this.state
     // set email & name if logged in
-    if (session && session.user && !email) {
+    if (session.user && !email) {
       // TODO name
       this.setState({email: session.user.email})
+    }
+    if (isLoggedIn !== (!!session.user)) {
+      this.setState({isLoggedIn: (!!session.user)})
     }
   }
   render () {
@@ -55,10 +55,14 @@ class Pledge extends Component {
       email,
       emailFree,
       isLoggingIn,
-      isLoggedIn
+      isLoggedIn,
+      paymentMethod,
+      cardNumber,
+      cardMonth,
+      cardYear,
+      cardCVC
     } = this.state
-    const {query, client, session } = this.props
-
+    const {query, client} = this.props
 
     const handleChange = field => {
       return event => {
@@ -76,7 +80,7 @@ class Pledge extends Component {
         // throttle
         if (CHECK_EMAIL_TIMEOUT) { clearTimeout(CHECK_EMAIL_TIMEOUT) }
         CHECK_EMAIL_TIMEOUT = setTimeout(async () => {
-          const {loading, data} = await client.query({
+          const {data} = await client.query({
             query: gql`
               query checkEmail($email: String!) {
                 checkEmail(email: $email) {
@@ -86,7 +90,6 @@ class Pledge extends Component {
             `,
             variables: { email: value }
           })
-          console.log('free: ' + data.checkEmail.free)
           this.setState(
             { emailFree: data.checkEmail.free }
           )
@@ -96,22 +99,55 @@ class Pledge extends Component {
 
     const continueWithLogin = field => {
       return async (event) => {
-        this.setState({isLoggingIn: true })
+        this.setState({isLoggingIn: true})
         const session = new Session()
         await session.signin(this.state.email)
         try {
-          const authenticatedSession = await session.authenticatedSession()
+          await session.authenticatedSession()
           this.setState({
             isLoggingIn: false,
             isLoggedIn: true
           })
         } catch (e) {
           console.log('timeout')
-          this.setState({isLoggingIn: false })
+          this.setState({isLoggingIn: false})
         }
       }
     }
 
+    const choosePaymentMethod = field => {
+      return event => {
+        const value = event.target.value
+        this.setState({paymentMethod: value})
+      }
+    }
+
+    const submitPledge = event => {
+      window.Stripe.setPublishableKey('pk_test_sgFutulewhWC8v8csVIXTMea')
+      // TODO validate card fields
+      window.Stripe.source.create({
+        type: 'card',
+        card: {
+          number: cardNumber,
+          cvc: cardCVC,
+          exp_month: cardMonth,
+          exp_year: cardYear
+        }
+      }, (status, source) => {
+        console.log('response from stripe!')
+        console.log(status)
+        console.log(source)
+        // TODO handle error
+        if (status === 200) {
+          // TODO implement 3D secure
+          if (source.card.three_d_secure === 'required') {
+            window.alert('Cards requiring 3D secure are not supported yet.')
+          } else {
+            // TODO continue with pledge
+          }
+        }
+      })
+    }
 
     return (
       <div>
@@ -173,37 +209,6 @@ class Pledge extends Component {
             onChange={handleEmailChange()} />
         </p>
 
-        <H2>Zahlungsart auswählen</H2>
-        <P>
-          <label>
-            <input type='radio' name='paymentMethod' />
-            {' '}Banküberweisung
-          </label><br />
-          <label>
-            <input type='radio' name='paymentMethod' />
-            {' '}Mastercard
-          </label><br />
-          <label>
-            <input type='radio' name='paymentMethod' />
-            {' '}Visa
-          </label><br />
-          <label>
-            <input type='radio' name='paymentMethod' />
-            {' '}Postcard
-          </label><br />
-          <label>
-            <input type='radio' name='paymentMethod' />
-            {' '}Postfinance
-          </label><br />
-          <label>
-            <input type='radio' name='paymentMethod' />
-            {' '}Paypal
-          </label><br />
-          <label>
-            <input type='radio' name='paymentMethod' />
-            {' '}Twint
-          </label><br />
-        </P>
         {(!emailFree && !isLoggedIn && !isLoggingIn) && (
           <div key='needsLogin'>
             <p>Es existiert bereits ein Account mit dieser Email adresse bei uns. Um weiter zu fahren, müssen Sie sich erst einloggen. Klicken Sie auf Einloggen oder wählen sie eine andere email adresse.</p>
@@ -216,9 +221,29 @@ class Pledge extends Component {
           </div>
         )}
 
+        <script src='https://js.stripe.com/v2/' />
         {(emailFree || isLoggedIn) && (
           <span key='payment'>
             <H2>Zahlungsart auswählen</H2>
+            <P>
+              {PAYMENT_METHODS.map((pm) => (
+                <span key={'span' + pm.key}>
+                  <label>
+                    <input type='radio' name='paymentMethod' onChange={choosePaymentMethod()} key={pm.key} value={pm.key} />
+                    {' '}{pm.name}
+                  </label><br />
+                </span>
+              ))}
+            </P>
+
+            {(paymentMethod === 'VISA' || paymentMethod === 'MASTERCARD') && (
+              <span key='stripe'>
+                <Field label='number' key='number' value={cardNumber} onChange={handleChange('cardNumber')} /> <br />
+                <Field label='month' key='month' value={cardMonth} onChange={handleChange('cardMonth')} /> <br />
+                <Field label='year' key='year' value={cardYear} onChange={handleChange('cardYear')} /> <br />
+                <Field label='cvc' key='cvc' value={cardCVC} onChange={handleChange('cardCVC')} />
+              </span>
+            )}
 
             <Button onClick={submitPledge}>Weiter</Button>
           </span>
