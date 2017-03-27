@@ -107,14 +107,18 @@ class Crowdfunding extends Component {
                   key={package_.id + option.id}
                   onClick={() => this.chooseOption(option)}
                 >
-                  <strong>{option.reward.name}</strong>
                   {' '}
                   CHF
                   {' '}
                   {option.price / 100.0}
                   <br />
                   option.id: {option.id}<br />
-                  reward.id: {option.reward.id}<br />
+                  {!!option.reward && (
+                    <span>
+                      reward.id: {option.reward.id}<br />
+                      <strong>{option.reward.name}</strong>
+                    </span>
+                  )}
                 </p>
               ))}
             </li>

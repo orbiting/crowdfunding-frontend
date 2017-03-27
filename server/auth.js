@@ -66,7 +66,7 @@ exports.configure = ({
 
   // trust first proxy
   if (!dev) {
-    app.set('trust proxy', 1)
+    server.set('trust proxy', 1)
   }
 
   // Add CSRF to all POST requests
