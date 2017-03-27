@@ -143,7 +143,27 @@ class Pledge extends Component {
           if (source.card.three_d_secure === 'required') {
             window.alert('Cards requiring 3D secure are not supported yet.')
           } else {
-            // TODO continue with pledge
+            const total = query.amount
+            const pledgeOptions = JSON.parse(query.pledgeOptions)
+            let user = {email, name}
+            if (isLoggedIn) { // don't provide a user if logged in
+              user = null
+            }
+            // TODO adapt for other paymentMethods
+            const payment = {
+              method: paymentMethod,
+              stripeSourceId: source.id
+            }
+            this.props
+              .mutate({ variables: { total, options: pledgeOptions, user, payment } })
+              .then(({ data }) => {
+                window.alert('Pledge successfull')
+                console.log(data)
+              })
+              .catch(error => {
+                window.alert('Pledge error')
+                console.log(error)
+              })
           }
         }
       })
@@ -262,8 +282,8 @@ Pledge.propTypes = {
 }
 
 const submitPledge = gql`
-  mutation submitPledge($total: Int!, $options: [PackageOptionInput!]!) {
-    submitPledge(pledge: {total: $total, options: $options} ) {
+  mutation submitPledge($total: Int!, $options: [PackageOptionInput!]!, $user: PledgeUserInput, $payment: PledgePaymentInput!) {
+    submitPledge(pledge: {total: $total, options: $options, user: $user, payment: $payment} ) {
       id
       total
       status

@@ -117,7 +117,13 @@ class Accordion extends Component {
           (amount, option) => amount + option.price * option.minAmount,
           0
         ),
-        package: pkg.name
+        package: pkg.name,
+        // TODO remove: this is only for testing purposes
+        pledgeOptions: JSON.stringify([
+          { amount: 1,
+            price: pkg.options[0].price,
+            templateId: pkg.options[0].id }
+        ])
       }
 
       const configurableOptions = pkg.options.filter(option => (
