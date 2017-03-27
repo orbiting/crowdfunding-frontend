@@ -5,7 +5,7 @@ import withData from '../lib/withData'
 import App from '../components/App'
 
 import {
-  H1, P, MediumContainer, Field, Button
+  H1, H2, P, MediumContainer, Field, Button
 } from '@project-r/styleguide'
 
 /*
@@ -27,7 +27,12 @@ query {
 const FaqList = ({data: {faqs}}) => (
   <div>{
     faqs.map(entry => (
-      <P key={entry.id}>{ `${entry.question}: ${entry.answer}` }</P>
+      <div key={entry.id}>
+        <P>
+          <strong>{entry.question}</strong>
+        </P>
+        <P>{entry.answer}</P>
+      </div>
     ))
   }</div>
 )
@@ -49,19 +54,28 @@ class QuestionForm extends Component {
   constructor (...args) {
     super(...args)
     this.state = {
+      question: '',
       successfullySubmitted: false
     }
 
     this.questionRefSetter = (ref) => {
       this.questionRef = ref
     }
+
+    this.changeHandler = this.changeHandler.bind(this)
     this.submitHandler = this.submitHandler.bind(this)
   }
 
-  submitHandler () {
-    const question = this.questionRef.input.value
+  changeHandler (event) {
+    this.setState({
+      question: event.target.value
+    })
+  }
+
+  submitHandler (event) {
+    event.preventDefault()
     this.props
-      .mutate({ variables: { question } })
+      .mutate({ variables: { question: this.state.question } })
       .then(({ data: { success } }) => {
         this.setState({
           successfullySubmitted: true
@@ -74,17 +88,35 @@ class QuestionForm extends Component {
   }
 
   render () {
+    const question = this.state.question
+    const allowSubmit = question.length > 5
     return !this.state.successfullySubmitted
       ? (
         <div>
-          <P>Hast du Frage?</P>
-          <Field ref={this.questionRefSetter} label='Frage' />
-          <Button onClick={this.submitHandler}>Abschicken</Button>
+          <form onSubmit={this.submitHandler}>
+            <H2>Hast Du Frage?</H2>
+            <P>
+              <Field
+                value={question}
+                onChange={this.changeHandler}
+                ref={this.questionRefSetter}
+                label='Deine Frage (mind. 5 Zeichen)'
+                />
+            </P>
+            <P>
+              <Button type='submit' disabled={!allowSubmit}>
+                Abschicken
+              </Button>
+            </P>
+          </form>
         </div>
       )
       : (
         <div>
-          <P>This happened...</P>
+          <P>
+            <strong>Vielen Dank für Deinen Input.</strong>
+          </P>
+          <P>Du liest von uns.</P>
         </div>
       )
   }
