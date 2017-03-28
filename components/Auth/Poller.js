@@ -14,7 +14,7 @@ class Status extends Component {
     const elapsedMs = now.getTime() - this.state.start.getTime()
 
     const {onSuccess, data: {error, me}} = this.props
-    if (me && me.id) {
+    if (me) {
       onSuccess(me, elapsedMs)
       return null
     }

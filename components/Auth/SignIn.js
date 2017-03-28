@@ -14,7 +14,8 @@ class SignIn extends Component {
     this.state = {
       email: '',
       polling: false,
-      loading: false
+      loading: false,
+      success: undefined
     }
   }
   render () {
@@ -33,7 +34,7 @@ class SignIn extends Component {
       )
     }
     if (success) {
-      return success
+      return <span>{success}</span>
     }
     return (
       <div>
@@ -58,18 +59,11 @@ class SignIn extends Component {
             }))
             this.props.signIn(this.state.email)
               .then(({data}) => {
-                if (data) {
-                  this.setState(() => ({
-                    polling: true,
-                    loading: false,
-                    phrase: data.signIn.phrase
-                  }))
-                } else {
-                  this.setState(() => ({
-                    error: 'Unbekannter Fehler',
-                    loading: false
-                  }))
-                }
+                this.setState(() => ({
+                  polling: true,
+                  loading: false,
+                  phrase: data.signIn.phrase
+                }))
               })
               .catch(error => {
                 this.setState(() => ({
@@ -88,7 +82,6 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-  // onSuccess: PropTypes.func.isRequired,
   signIn: PropTypes.func.isRequired
 }
 
