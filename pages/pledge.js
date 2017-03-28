@@ -4,8 +4,8 @@ import App from '../components/App'
 import Accordion from '../components/Accordion'
 import Router from 'next/router'
 import { gql, withApollo, graphql } from 'react-apollo'
-import withSession from '../lib/auth/with-session'
-import Session from '../lib/auth/session'
+import withMe from '../lib/withMe'
+import SignIn from '../components/Auth/SignIn'
 
 import {
   Button,
@@ -38,15 +38,18 @@ class Pledge extends Component {
     }
   }
   componentWillReceiveProps (nextProps) {
-    const session = this.props.session || {}
-    const {email, isLoggedIn} = this.state
-    // set email & name if logged in
-    if (session.user && !email) {
-      // TODO name
-      this.setState({email: session.user.email})
-    }
-    if (isLoggedIn !== (!!session.user)) {
-      this.setState({isLoggedIn: (!!session.user)})
+    const {me} = nextProps
+    const {email, name} = this.state
+
+    if (me) {
+      let nextState = {}
+      if (!email) {
+        nextState.email = me.email
+      }
+      if (!name) {
+        nextState.name = me.name
+      }
+      this.setState(nextState)
     }
   }
   render () {
@@ -54,15 +57,13 @@ class Pledge extends Component {
       name,
       email,
       emailFree,
-      isLoggingIn,
-      isLoggedIn,
       paymentMethod,
       cardNumber,
       cardMonth,
       cardYear,
       cardCVC
     } = this.state
-    const {query, client} = this.props
+    const {query, client, me} = this.props
 
     const handleChange = field => {
       return event => {
@@ -97,24 +98,6 @@ class Pledge extends Component {
       }
     }
 
-    const continueWithLogin = field => {
-      return async (event) => {
-        this.setState({isLoggingIn: true})
-        const session = new Session()
-        await session.signin(this.state.email)
-        try {
-          await session.authenticatedSession()
-          this.setState({
-            isLoggingIn: false,
-            isLoggedIn: true
-          })
-        } catch (e) {
-          console.log('timeout')
-          this.setState({isLoggingIn: false})
-        }
-      }
-    }
-
     const choosePaymentMethod = field => {
       return event => {
         const value = event.target.value
@@ -146,7 +129,7 @@ class Pledge extends Component {
             const total = query.amount
             const pledgeOptions = JSON.parse(query.pledgeOptions)
             let user = {email, name}
-            if (isLoggedIn) { // don't provide a user if logged in
+            if (me) { // don't provide a user if logged in
               user = null
             }
             // TODO adapt for other paymentMethods
@@ -215,34 +198,29 @@ class Pledge extends Component {
 
         <H2>Deine Kontaktinformationen</H2>
         <p style={{marginTop: 0}}>
-          {isLoggedIn && (
+          {me && (
             <strong>Du bist eingeloggt als:</strong>
           )}
           <Field label='Dein Name'
             value={name}
-            disabled={isLoggedIn}
+            disabled={me}
             onChange={handleChange('name')} />
           <br />
           <Field label='Deine E-Mail'
             value={email}
-            disabled={isLoggedIn}
+            disabled={me}
             onChange={handleEmailChange()} />
         </p>
 
-        {(!emailFree && !isLoggedIn && !isLoggingIn) && (
+        {(!emailFree && !me) && (
           <div key='needsLogin'>
             <p>Es existiert bereits ein Account mit dieser Email adresse bei uns. Um weiter zu fahren, müssen Sie sich erst einloggen. Klicken Sie auf Einloggen oder wählen sie eine andere email adresse.</p>
-            <Button onClick={continueWithLogin()}>Einloggen</Button>
-          </div>
-        )}
-        {(!emailFree && !isLoggedIn && isLoggingIn) && (
-          <div key='waitingForLogin'>
-            Wir haben Ihnen eine email geschickt. Bitte klicken Sie den Link darin an um einzuloggen.
+            <SignIn email={email} />
           </div>
         )}
 
         <script src='https://js.stripe.com/v2/' />
-        {(emailFree || isLoggedIn) && (
+        {(emailFree || me) && (
           <span key='payment'>
             <H2>Zahlungsart auswählen</H2>
             <P>
@@ -277,8 +255,7 @@ class Pledge extends Component {
 Pledge.propTypes = {
   query: PropTypes.object.isRequired,
   client: React.PropTypes.object.isRequired,
-  mutate: PropTypes.func.isRequired,
-  session: PropTypes.object.isRequired
+  mutate: PropTypes.func.isRequired
 }
 
 const submitPledge = gql`
@@ -297,13 +274,13 @@ const submitPledge = gql`
   }
 `
 
-const PledgeWithSubmit = graphql(submitPledge)(withApollo(Pledge))
+const PledgeWithSubmit = graphql(submitPledge)(withApollo(withMe(Pledge)))
 
-export default withSession(withData(({url, session}) => (
+export default withData(({url, session}) => (
   <App>
     <NarrowContainer>
       <H1>Mitmachen</H1>
       <PledgeWithSubmit query={url.query} session={session} />
     </NarrowContainer>
   </App>
-)))
+))

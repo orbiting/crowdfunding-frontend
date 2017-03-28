@@ -12,7 +12,7 @@ class SignIn extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      email: '',
+      email: props.email || '',
       polling: false,
       loading: false,
       success: undefined
