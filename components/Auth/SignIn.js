@@ -62,7 +62,7 @@ class SignIn extends Component {
                   this.setState(() => ({
                     polling: true,
                     loading: false,
-                    phrase: data.phrase
+                    phrase: data.signIn.phrase
                   }))
                 } else {
                   this.setState(() => ({

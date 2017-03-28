@@ -11,7 +11,7 @@ class Status extends Component {
   }
   render () {
     const now = new Date()
-    const elapsedMs = now.getTime() - this.state.state.getTime()
+    const elapsedMs = now.getTime() - this.state.start.getTime()
 
     const {onSuccess, data: {error, me}} = this.props
     if (me && me.id) {
@@ -20,7 +20,10 @@ class Status extends Component {
     }
 
     return (
-      <span>{Math.round(elapsedMs / 1000)}s {!!error && error}</span>
+      <span>
+        {Math.round(elapsedMs / 1000)}s
+        {' '}{!!error && error.toString()}
+      </span>
     )
   }
 }
