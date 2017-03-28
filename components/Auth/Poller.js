@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import {graphql} from 'react-apollo'
 import {meQuery} from '../../lib/withMe'
 
@@ -25,10 +25,14 @@ class Status extends Component {
   }
 }
 
+Status.propTypes = {
+  onSuccess: PropTypes.func.isRequired
+}
+
 const Poller = graphql(meQuery, {
   options: {
     pollInterval: 1000
   }
 })(Status)
 
-export default () => Poller
+export default Poller

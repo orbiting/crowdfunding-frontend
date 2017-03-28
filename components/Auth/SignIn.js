@@ -18,15 +18,19 @@ class SignIn extends Component {
     }
   }
   render () {
-    const {polling, loading, success, error} = this.state
+    const {polling, phrase, loading, success, error} = this.state
     if (polling) {
-      return <Poller onSuccess={(me, ms) => {
-        this.setState(() => ({
-          polling: false,
-          success: `Erfolgreich eingeloggt als ${me.name || me.email} (${Math.round(ms / 1000)}s)`
-        }))
-        // this.props.onSuccess()
-      }} />
+      return (
+        <div>
+          <div>Phrase: {phrase}</div>
+          <Poller onSuccess={(me, ms) => {
+            this.setState(() => ({
+              polling: false,
+              success: `Erfolgreich eingeloggt als ${me.name || me.email} (${Math.round(ms / 1000)}s)`
+            }))
+          }} />
+        </div>
+      )
     }
     if (success) {
       return success
@@ -54,11 +58,11 @@ class SignIn extends Component {
             }))
             this.props.signIn(this.state.email)
               .then(({data}) => {
-                console.log('signIn data', data)
                 if (data) {
                   this.setState(() => ({
                     polling: true,
-                    loading: false
+                    loading: false,
+                    phrase: data.phrase
                   }))
                 } else {
                   this.setState(() => ({
@@ -68,7 +72,6 @@ class SignIn extends Component {
                 }
               })
               .catch(error => {
-                console.dir(error)
                 this.setState(() => ({
                   error: error.graphQLErrors
                     ? error.graphQLErrors.map(e => e.message).join(', ')
