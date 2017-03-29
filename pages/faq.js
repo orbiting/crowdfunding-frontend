@@ -26,18 +26,26 @@ query {
 }
 `
 
-const FaqList = ({data: {faqs}}) => (
-  <div>{
-    faqs.map(entry => (
-      <div key={entry.id}>
-        <P>
-          <strong>{entry.question}</strong>
-        </P>
-        <P>{entry.answer}</P>
-      </div>
-    ))
-  }</div>
-)
+const FaqList = ({data: {loading, error, faqs}}) => {
+  if (loading) {
+    return 'Lädt'
+  }
+  if (error) {
+    return error.toString()
+  }
+  return (
+    <div>{
+      faqs.map(entry => (
+        <div key={entry.id}>
+          <P>
+            <strong>{entry.question}</strong>
+          </P>
+          <P>{entry.answer}</P>
+        </div>
+      ))
+    }</div>
+  )
+}
 
 const ConnectedFaqList = graphql(publishedFaqs)(FaqList)
 
