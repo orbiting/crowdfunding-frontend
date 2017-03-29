@@ -7,16 +7,6 @@ if (DEV) {
   require('dotenv').config()
 }
 
-// ensure required ENV vars are set
-let requiredEnv = [
-  'DATABASE_URL',
-  'PUBLIC_URL'
-]
-let unsetEnv = requiredEnv.filter((env) => !(typeof process.env[env] !== 'undefined'))
-if (unsetEnv.length > 0) {
-  throw new Error('Required ENV variables are not set: [' + unsetEnv.join(', ') + ']')
-}
-
 const {PORT} = require('./constants')
 
 const app = next({dir: '.', dev: DEV})
