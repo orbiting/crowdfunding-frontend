@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { gql, graphql } from 'react-apollo'
 
 import withData from '../lib/withData'
+import withMe from '../lib/withMe'
 import App from '../components/App'
+import SignIn from '../components/Auth/SignIn'
 
 import {
   H1, H2, P, MediumContainer, Field, Button
@@ -82,12 +84,12 @@ class QuestionForm extends Component {
         })
       })
       .catch(error => {
-        // window.alert('Pledge error')
         console.log(error)
       })
   }
 
   render () {
+    const {me} = this.props
     const question = this.state.question
     const allowSubmit = question.length > 5
     return !this.state.successfullySubmitted
@@ -103,11 +105,14 @@ class QuestionForm extends Component {
                 label='Deine Frage (mind. 5 Zeichen)'
                 />
             </P>
-            <P>
+            {me ? (<P>
+              Als {me.name || me.email}<br />
               <Button type='submit' disabled={!allowSubmit}>
                 Abschicken
               </Button>
-            </P>
+            </P>) : (
+              <SignIn />
+            )}
           </form>
         </div>
       )
@@ -122,7 +127,7 @@ class QuestionForm extends Component {
   }
 }
 
-const ConnectedQuestionForm = graphql(submitQuestion)(QuestionForm)
+const ConnectedQuestionForm = graphql(submitQuestion)(withMe(QuestionForm))
 
 /*
 Faq page
