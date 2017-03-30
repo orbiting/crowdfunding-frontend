@@ -131,7 +131,18 @@ class Pledge extends Component {
               stripeSourceId: source.id
             }
             this.props
-              .mutate({ variables: { total, options: pledgeOptions, user, payment } })
+              .mutate({
+                variables: {
+                  total,
+                  options: pledgeOptions.map(option => ({
+                    amount: option.amount,
+                    price: option.price,
+                    templateId: option.id
+                  })),
+                  user,
+                  payment
+                }
+              })
               .then(({ data }) => {
                 if (data.submitPledge) {
                   Router.push('/merci', {id: data.submitPledge.id})
@@ -164,7 +175,7 @@ class Pledge extends Component {
               {JSON.parse(query.pledgeOptions)
                 .filter(option => option.configurable && option.amount)
                 .map(option => (
-                  <span key={option.templateId}>
+                  <span key={option.id}>
                     {option.amount}
                     {' x '}
                     {option.name}
