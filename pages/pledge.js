@@ -235,10 +235,10 @@ class Pledge extends Component {
 
             {(paymentMethod === 'VISA' || paymentMethod === 'MASTERCARD') && (
               <P>
-                <Field label='number' value={cardNumber} onChange={handleChange('cardNumber')} /><br />
-                <Field label='month' value={cardMonth} onChange={handleChange('cardMonth')} /><br />
-                <Field label='year' value={cardYear} onChange={handleChange('cardYear')} /><br />
-                <Field label='cvc' value={cardCVC} onChange={handleChange('cardCVC')} />
+                <Field label='Kreditkarten-Nummer' value={cardNumber} onChange={handleChange('cardNumber')} /><br />
+                <Field label='Ablauf Monat' value={cardMonth} onChange={handleChange('cardMonth')} /><br />
+                <Field label='Ablauf Jahr' value={cardYear} onChange={handleChange('cardYear')} /><br />
+                <Field label='Prüfnummer (CVC)' value={cardCVC} onChange={handleChange('cardCVC')} />
               </P>
             )}
 
