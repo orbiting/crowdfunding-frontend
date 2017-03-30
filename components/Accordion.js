@@ -118,21 +118,18 @@ class Accordion extends Component {
           0
         ),
         package: pkg.name,
-        // TODO remove: this is only for testing purposes
-        pledgeOptions: JSON.stringify([
-          { amount: 1,
-            price: pkg.options[0].price,
-            templateId: pkg.options[0].id }
-        ])
-      }
-
-      const configurableOptions = pkg.options.filter(option => (
-        option.minAmount !== option.maxAmount
-      ))
-      if (configurableOptions.length) {
-        configurableOptions.forEach(option => {
-          params[option.id] = this.state[option.id]
-        })
+        packageName: MESSAGES[`package/${pkg.name}/title`],
+        // todo simplify:
+        // we should be able to only transmit option id + amount
+        pledgeOptions: JSON.stringify(
+          pkg.options.map(option => ({
+            amount: this.state[option.id],
+            price: option.price,
+            templateId: option.id,
+            configurable: option.minAmount !== option.maxAmount,
+            name: option.reward && MESSAGES[`option/${option.reward.name}/label`]
+          }))
+        )
       }
 
       this.props.onSelect(

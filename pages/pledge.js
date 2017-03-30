@@ -152,7 +152,7 @@ class Pledge extends Component {
 
         {query.package ? (
           <div>
-            {query.package}
+            {query.packageName}
             {' '}
             <A href='/pledge' onClick={event => {
               event.preventDefault()
@@ -160,6 +160,19 @@ class Pledge extends Component {
             }}>
               ändern
             </A>
+            <P>
+              {JSON.parse(query.pledgeOptions)
+                .filter(option => option.configurable && option.amount)
+                .map(option => (
+                  <span key={option.templateId}>
+                    {option.amount}
+                    {' x '}
+                    {option.name}
+                    <br />
+                  </span>
+                ))
+              }
+            </P>
             <Field label='Betrag'
               ref={this.amountRefSetter}
               value={query.amount / 100}
