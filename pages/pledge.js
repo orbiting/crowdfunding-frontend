@@ -14,12 +14,11 @@ import {
 } from '@project-r/styleguide'
 
 const PAYMENT_METHODS = [
-  { key: 'EZS', name: 'Einzahlungsschein' },
-  { key: 'VISA', name: 'Visa' },
-  { key: 'MASTERCARD', name: 'MasterCard' },
-  { key: 'PFC', name: 'PostfFinance Card' }
+  { disabled: true, key: 'EZS', name: 'Einzahlungsschein' },
+  { disabled: false, key: 'VISA', name: 'Visa' },
+  { disabled: false, key: 'MASTERCARD', name: 'MasterCard' },
+  { disabled: true, key: 'PFC', name: 'PostfFinance Card' }
 ]
-let CHECK_EMAIL_TIMEOUT = null
 
 class Pledge extends Component {
   constructor (props) {
@@ -77,10 +76,11 @@ class Pledge extends Component {
       return event => {
         const value = event.target.value
         this.setState({email: value})
+
         // check if email is untaken or we need to login
         // throttle
-        if (CHECK_EMAIL_TIMEOUT) { clearTimeout(CHECK_EMAIL_TIMEOUT) }
-        CHECK_EMAIL_TIMEOUT = setTimeout(async () => {
+        clearTimeout(this.emailTimeout)
+        this.emailTimeout = setTimeout(async () => {
           const {data} = await client.query({
             query: gql`
               query checkEmail($email: String!) {
@@ -95,13 +95,6 @@ class Pledge extends Component {
             { emailFree: data.checkEmail.free }
           )
         }, 300)
-      }
-    }
-
-    const choosePaymentMethod = field => {
-      return event => {
-        const value = event.target.value
-        this.setState({paymentMethod: value})
       }
     }
 
@@ -140,8 +133,9 @@ class Pledge extends Component {
             this.props
               .mutate({ variables: { total, options: pledgeOptions, user, payment } })
               .then(({ data }) => {
-                window.alert('Pledge successfull')
-                console.log(data)
+                if (data.submitPledge) {
+                  Router.push('/merci', {id: data.submitPledge.id})
+                }
               })
               .catch(error => {
                 window.alert('Pledge error')
@@ -168,13 +162,13 @@ class Pledge extends Component {
             </A>
             <Field label='Betrag'
               ref={this.amountRefSetter}
-              value={query.amount}
+              value={query.amount / 100}
               onChange={event => {
                 const url = {
                   pathname: '/pledge',
                   query: {
                     ...query,
-                    amount: event.target.value
+                    amount: event.target.value * 100
                   }
                 }
                 Router.replace(url, url, {shallow: true})
@@ -225,9 +219,14 @@ class Pledge extends Component {
             <H2>Zahlungsart auswählen</H2>
             <P>
               {PAYMENT_METHODS.map((pm) => (
-                <span key={'span' + pm.key}>
+                <span key={pm.key} style={{opacity: pm.disabled ? 0.5 : 1}}>
                   <label>
-                    <input type='radio' name='paymentMethod' onChange={choosePaymentMethod()} key={pm.key} value={pm.key} />
+                    <input
+                      type='radio'
+                      name='paymentMethod'
+                      disabled={pm.disabled}
+                      onChange={handleChange('paymentMethod')}
+                      value={pm.key} />
                     {' '}{pm.name}
                   </label><br />
                 </span>
@@ -235,12 +234,12 @@ class Pledge extends Component {
             </P>
 
             {(paymentMethod === 'VISA' || paymentMethod === 'MASTERCARD') && (
-              <span key='stripe'>
-                <Field label='number' key='number' value={cardNumber} onChange={handleChange('cardNumber')} /> <br />
-                <Field label='month' key='month' value={cardMonth} onChange={handleChange('cardMonth')} /> <br />
-                <Field label='year' key='year' value={cardYear} onChange={handleChange('cardYear')} /> <br />
-                <Field label='cvc' key='cvc' value={cardCVC} onChange={handleChange('cardCVC')} />
-              </span>
+              <P>
+                <Field label='number' value={cardNumber} onChange={handleChange('cardNumber')} /><br />
+                <Field label='month' value={cardMonth} onChange={handleChange('cardMonth')} /><br />
+                <Field label='year' value={cardYear} onChange={handleChange('cardYear')} /><br />
+                <Field label='cvc' value={cardCVC} onChange={handleChange('cardCVC')} />
+              </P>
             )}
 
             <Button onClick={submitPledge}>Weiter</Button>
