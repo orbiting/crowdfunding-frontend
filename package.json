@@ -15,7 +15,9 @@
     ]
   },
   "babel": {
-    "presets": ["next/babel"],
+    "presets": [
+      "next/babel"
+    ],
     "plugins": [
       "markdown-in-js/babel"
     ]
@@ -23,6 +25,7 @@
   "dependencies": {
     "@project-r/styleguide": "^0.1.6",
     "cross-env": "^3.2.4",
+    "d3-format": "^1.1.1",
     "express": "^4.15.2",
     "express-basic-auth": "^1.0.1",
     "glamor": "^2.20.24",
