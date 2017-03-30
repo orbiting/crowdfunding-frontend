@@ -123,9 +123,9 @@ class Accordion extends Component {
         // we should be able to only transmit option id + amount
         pledgeOptions: JSON.stringify(
           pkg.options.map(option => ({
-            amount: this.state[option.id],
+            amount: this.state[option.id] || option.defaultAmount,
             price: option.price,
-            templateId: option.id,
+            id: option.id,
             configurable: option.minAmount !== option.maxAmount,
             name: option.reward && MESSAGES[`option/${option.reward.name}/label`]
           }))
