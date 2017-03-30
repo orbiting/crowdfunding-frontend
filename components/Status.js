@@ -1,9 +1,19 @@
 import React, {Component} from 'react'
+import {css} from 'glamor'
 import {gql, graphql} from 'react-apollo'
 
 import {
   P
 } from '@project-r/styleguide'
+
+const styles = {
+  primaryNumber: css({
+    fontSize: 86
+  }),
+  secondaryNumber: css({
+    fontSize: 43
+  })
+}
 
 const query = gql`
 {
@@ -31,11 +41,13 @@ class Status extends Component {
 
     return (
       <div>
-        <P>Goal<br />
-           people: {goal.people} money: {goal.money}
+        <P>
+          <span {...styles.primaryNumber}>{status.people}</span><br />
+          von {goal.people} Mitglieder
         </P>
-        <P>Status<br />
-           people: {status.people} money: {status.money}
+        <P>
+          <span {...styles.secondaryNumber}>CHF {status.money / 100}</span><br />
+          von CHF {goal.money / 100} finanziert
         </P>
       </div>
     )
