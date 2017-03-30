@@ -225,8 +225,6 @@ class Pledge extends Component {
             <SignIn email={email} />
           </div>
         )}
-
-        <script src='https://js.stripe.com/v2/' />
         {(emailFree || me) && (
           <span key='payment'>
             <H2>Zahlungsart auswählen</H2>

@@ -18,6 +18,7 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
+          <script src='https://js.stripe.com/v2/' />
           <NextScript />
         </body>
       </html>
