@@ -145,7 +145,13 @@ class Pledge extends Component {
               })
               .then(({ data }) => {
                 if (data.submitPledge) {
-                  Router.push('/merci', {id: data.submitPledge.id})
+                  Router.push({
+                    pathname: '/merci',
+                    query: {
+                      id: data.submitPledge.id,
+                      email: email
+                    }
+                  })
                 }
               })
               .catch(error => {
