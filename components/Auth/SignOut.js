@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {gql, graphql} from 'react-apollo'
+import {meQuery} from '../../lib/withMe'
 
 import {
   Button
@@ -67,7 +68,11 @@ mutation signOut {
 
 const SignOutWithMutation = graphql(signOutMutation, {
   props: ({mutate}) => ({
-    signOut: () => mutate()
+    signOut: () => mutate({
+      refetchQueries: [{
+        query: meQuery
+      }]
+    })
   })
 })(SignOut)
 
