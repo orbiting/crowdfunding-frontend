@@ -6,6 +6,7 @@ import Router from 'next/router'
 import { gql, withApollo, graphql } from 'react-apollo'
 import withMe from '../lib/withMe'
 import SignIn from '../components/Auth/SignIn'
+import SignOut from '../components/Auth/SignOut'
 
 import {
   Button,
@@ -221,20 +222,29 @@ class Pledge extends Component {
         )}
 
         <H2>Deine Kontaktinformationen</H2>
-        <p style={{marginTop: 0}}>
-          {me && (
-            <strong>Du bist eingeloggt als:</strong>
+        <div style={{marginTop: 0}}>
+          {me ? (
+            <span>
+              <strong>Du bist eingeloggt als:</strong><br />
+              {me.name}<br />
+              {me.email}<br /><br />
+              <SignOut />
+            </span>
+          ) : (
+            <span>
+              <Field label='Dein Name'
+                value={name}
+                disabled={me}
+                onChange={handleChange('name')} />
+              <br />
+              <Field label='Deine E-Mail'
+                value={email}
+                disabled={me}
+                onChange={handleEmailChange()} />
+              <br /><br />
+            </span>
           )}
-          <Field label='Dein Name'
-            value={name}
-            disabled={me}
-            onChange={handleChange('name')} />
-          <br />
-          <Field label='Deine E-Mail'
-            value={email}
-            disabled={me}
-            onChange={handleEmailChange()} />
-        </p>
+        </div>
 
         {(!emailFree && !me) && (
           <div key='needsLogin'>
@@ -263,10 +273,21 @@ class Pledge extends Component {
 
             {(paymentMethod === 'VISA' || paymentMethod === 'MASTERCARD') && (
               <P>
-                <Field label='Kreditkarten-Nummer' value={cardNumber} onChange={handleChange('cardNumber')} /><br />
-                <Field label='Ablauf Monat' value={cardMonth} onChange={handleChange('cardMonth')} /><br />
-                <Field label='Ablauf Jahr' value={cardYear} onChange={handleChange('cardYear')} /><br />
-                <Field label='Prüfnummer (CVC)' value={cardCVC} onChange={handleChange('cardCVC')} />
+                <Field label='Kreditkarten-Nummer'
+                  value={cardNumber}
+                  onChange={handleChange('cardNumber')} />
+                <br />
+                <Field label='Ablauf Monat'
+                  value={cardMonth}
+                  onChange={handleChange('cardMonth')} />
+                <br />
+                <Field label='Ablauf Jahr'
+                  value={cardYear}
+                  onChange={handleChange('cardYear')} />
+                <br />
+                <Field label='Prüfnummer (CVC)'
+                  value={cardCVC}
+                  onChange={handleChange('cardCVC')} />
               </P>
             )}
 
