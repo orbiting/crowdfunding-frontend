@@ -28,10 +28,10 @@ query {
 
 const FaqList = ({data: {loading, error, faqs}}) => {
   if (loading) {
-    return 'Lädt'
+    return <div>Lädt</div>
   }
   if (error) {
-    return error.toString()
+    return <div>{error.toString()}</div>
   }
   return (
     <div>{
