@@ -42,28 +42,14 @@ class Pledge extends Component {
       this.amountRef.input.focus()
     }
   }
-  componentWillReceiveProps (nextProps) {
-    const {me} = nextProps
-    const {email, name} = this.state
-
-    if (me) {
-      let nextState = {}
-      if (!email) {
-        nextState.email = me.email
-      }
-      if (!name) {
-        nextState.name = me.name
-      }
-      this.setState(nextState)
-    }
-  }
   render () {
     const {
       name,
       email,
       emailFree,
       paymentMethod,
-      paymentError
+      paymentError,
+      submitError
     } = this.state
     const {query, client, me} = this.props
 
@@ -135,10 +121,9 @@ class Pledge extends Component {
           } else {
             const total = query.amount
             const pledgeOptions = JSON.parse(query.pledgeOptions)
-            let user = {email, name}
-            if (me) { // don't provide a user if logged in
-              user = null
-            }
+
+            // don't provide a user if logged in
+            const user = me ? null : {email, name}
             // TODO adapt for other paymentMethods
             const payment = {
               method: paymentMethod,
@@ -166,11 +151,18 @@ class Pledge extends Component {
                       email: email
                     }
                   })
+                } else {
+                  this.setState({
+                    submitError: 'data.submitPledge fehlt'
+                  })
                 }
               })
               .catch(error => {
-                window.alert('Pledge error')
-                console.log(error)
+                this.setState({
+                  submitError: error.graphQLErrors && error.graphQLErrors.length
+                    ? error.graphQLErrors.map(e => e.message).join(', ')
+                    : error.toString()
+                })
               })
           }
         }
@@ -258,13 +250,13 @@ class Pledge extends Component {
         </div>
 
         {(!emailFree && !me) && (
-          <div key='needsLogin'>
+          <div>
             <p>Es existiert bereits ein Account mit dieser Email adresse bei uns. Um weiter zu fahren, müssen Sie sich erst einloggen. Klicken Sie auf Einloggen oder wählen sie eine andere email adresse.</p>
             <SignIn email={email} />
           </div>
         )}
         {(emailFree || me) && (
-          <span key='payment'>
+          <span>
             <H2>Zahlungsart auswählen</H2>
             <P>
               {PAYMENT_METHODS.map((pm) => (
@@ -372,6 +364,11 @@ class Pledge extends Component {
             {!!paymentError && (
               <P style={{color: colors.error}}>
                 {paymentError}
+              </P>
+            )}
+            {!!submitError && (
+              <P style={{color: colors.error}}>
+                {submitError}
               </P>
             )}
             <Button onClick={submitPledge}>Weiter</Button>
