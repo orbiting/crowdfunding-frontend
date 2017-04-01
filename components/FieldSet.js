@@ -19,7 +19,9 @@ class FieldSet extends Component {
     )
     const errors = fields.reduce(
       (acumulator, {name, validator}) => {
-        acumulator[name] = validator(values[name])
+        if (validator) {
+          acumulator[name] = validator(values[name])
+        }
         return acumulator
       },
       {}

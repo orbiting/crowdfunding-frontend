@@ -9,7 +9,8 @@ import SignOut from '../components/Auth/SignOut'
 import {
   Button,
   H1, H2, Field, P, A,
-  NarrowContainer
+  NarrowContainer,
+  colors
 } from '@project-r/styleguide'
 
 import App from '../components/App'
@@ -62,10 +63,7 @@ class Pledge extends Component {
       email,
       emailFree,
       paymentMethod,
-      cardNumber,
-      cardMonth,
-      cardYear,
-      cardCVC
+      paymentError
     } = this.state
     const {query, client, me} = this.props
 
@@ -104,22 +102,33 @@ class Pledge extends Component {
     }
 
     const submitPledge = event => {
+      const {values} = this.state
       window.Stripe.setPublishableKey('pk_test_sgFutulewhWC8v8csVIXTMea')
-      // TODO validate card fields
       window.Stripe.source.create({
         type: 'card',
+        currency: 'CHF',
+        usage: 'reusable',
         card: {
-          number: cardNumber,
-          cvc: cardCVC,
-          exp_month: cardMonth,
-          exp_year: cardYear
+          number: values.cardNumber,
+          cvc: values.cardCVC,
+          exp_month: values.cardMonth,
+          exp_year: values.cardYear
         }
       }, (status, source) => {
-        console.log('response from stripe!')
-        console.log(status)
-        console.log(source)
-        // TODO handle error
-        if (status === 200) {
+        console.log('stripe', status, source)
+        if (status !== 200) {
+          // source.error.type
+          // source.error.param
+          // source.error.message
+          // see https://stripe.com/docs/api#errors
+          this.setState({
+            paymentError: source.error.message
+          })
+        } else {
+          this.setState({
+            paymentError: undefined
+          })
+
           // TODO implement 3D secure
           if (source.card.three_d_secure === 'required') {
             window.alert('Cards requiring 3D secure are not supported yet.')
@@ -360,6 +369,11 @@ class Pledge extends Component {
               </div>
             )}
 
+            {!!paymentError && (
+              <P style={{color: colors.error}}>
+                {paymentError}
+              </P>
+            )}
             <Button onClick={submitPledge}>Weiter</Button>
           </span>
         )}
