@@ -59,9 +59,9 @@ class FieldSet extends Component {
                     values: {
                       [name]: value
                     },
-                    errors: {
+                    errors: validator ? {
                       [name]: validator(value)
-                    },
+                    } : {},
                     dirty: {
                       [name]: shouldValidate
                     }

@@ -296,56 +296,11 @@ class Pledge extends Component {
                     },
                     {
                       label: 'Ablauf Monat',
-                      name: 'cardMonth',
-                      validator: (value) => {
-                        if (!value) {
-                          return 'Ablauf Monat fehlt'
-                        }
-
-                        const year = this.state.values.cardYear
-                        if (!!year && !window.Stripe.card.validateExpiry(value, year)) {
-                          this.setState((state) => ({
-                            errors: {
-                              ...state.errors,
-                              cardYear: 'Ablauf Jahr ungültig'
-                            }
-                          }))
-                          return 'Ablauf Monat ungültig'
-                        }
-                        this.setState((state) => ({
-                          errors: {
-                            ...state.errors,
-                            cardYear: undefined
-                          }
-                        }))
-                      }
+                      name: 'cardMonth'
                     },
                     {
                       label: 'Ablauf Jahr',
-                      name: 'cardYear',
-                      validator: (value) => {
-                        if (!value) {
-                          return 'Ablauf Jahr fehlt'
-                        }
-
-                        const month = this.state.values.cardMonth
-
-                        if (!!month && !window.Stripe.card.validateExpiry(month, value)) {
-                          this.setState((state) => ({
-                            errors: {
-                              ...state.errors,
-                              cardMonth: 'Ablauf Monat ungültig'
-                            }
-                          }))
-                          return 'Ablauf Jahr ungültig'
-                        }
-                        this.setState((state) => ({
-                          errors: {
-                            ...state.errors,
-                            cardMonth: undefined
-                          }
-                        }))
-                      }
+                      name: 'cardYear'
                     },
                     {
                       label: 'Prüfnummer (CVC)',
@@ -362,20 +317,44 @@ class Pledge extends Component {
                     }
                   ]}
                   onChange={(fields) => {
-                    this.setState((state) => ({
-                      values: {
-                        ...state.values,
-                        ...fields.values
-                      },
-                      errors: {
-                        ...state.errors,
-                        ...fields.errors
-                      },
-                      dirty: {
-                        ...state.dirty,
-                        ...fields.dirty
+                    this.setState((state) => {
+                      const nextState = {
+                        values: {
+                          ...state.values,
+                          ...fields.values
+                        },
+                        errors: {
+                          ...state.errors,
+                          ...fields.errors
+                        },
+                        dirty: {
+                          ...state.dirty,
+                          ...fields.dirty
+                        }
                       }
-                    }))
+
+                      const month = nextState.values.cardMonth
+                      const year = nextState.values.cardYear
+
+                      if (
+                        year && month &&
+                        nextState.dirty.cardMonth &&
+                        nextState.dirty.cardYear &&
+                        !window.Stripe.card.validateExpiry(month, year)
+                      ) {
+                        nextState.errors.cardMonth = 'Ablauf Monat ungültig'
+                        nextState.errors.cardYear = 'Ablauf Jahr ungültig'
+                      } else {
+                        nextState.errors.cardMonth = (
+                          !month && 'Ablauf Monat fehlt'
+                        )
+                        nextState.errors.cardYear = (
+                          !year && 'Ablauf Jahr fehlt'
+                        )
+                      }
+
+                      return nextState
+                    })
                   }} />
                 <br /><br />
               </div>
