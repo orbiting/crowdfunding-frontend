@@ -1,7 +1,5 @@
 import React, {Component, PropTypes} from 'react'
 import withData from '../lib/withData'
-import App from '../components/App'
-import Accordion from '../components/Accordion'
 import Router from 'next/router'
 import { gql, withApollo, graphql } from 'react-apollo'
 import withMe from '../lib/withMe'
@@ -13,6 +11,10 @@ import {
   H1, H2, Field, P, A,
   NarrowContainer
 } from '@project-r/styleguide'
+
+import App from '../components/App'
+import Accordion from '../components/Accordion'
+import FieldSet from '../components/FieldSet'
 
 const PAYMENT_METHODS = [
   { disabled: true, key: 'EZS', name: 'Einzahlungsschein' },
@@ -26,7 +28,9 @@ class Pledge extends Component {
     super(props)
     this.state = {
       emailFree: true,
-      isLoggingIn: false
+      values: {},
+      errors: {},
+      dirty: {}
     }
     this.amountRefSetter = (ref) => {
       this.amountRef = ref
@@ -234,12 +238,10 @@ class Pledge extends Component {
             <span>
               <Field label='Dein Name'
                 value={name}
-                disabled={me}
                 onChange={handleChange('name')} />
               <br />
               <Field label='Deine E-Mail'
                 value={email}
-                disabled={me}
                 onChange={handleEmailChange()} />
               <br /><br />
             </span>
@@ -272,23 +274,111 @@ class Pledge extends Component {
             </P>
 
             {(paymentMethod === 'VISA' || paymentMethod === 'MASTERCARD') && (
-              <P>
-                <Field label='Kreditkarten-Nummer'
-                  value={cardNumber}
-                  onChange={handleChange('cardNumber')} />
-                <br />
-                <Field label='Ablauf Monat'
-                  value={cardMonth}
-                  onChange={handleChange('cardMonth')} />
-                <br />
-                <Field label='Ablauf Jahr'
-                  value={cardYear}
-                  onChange={handleChange('cardYear')} />
-                <br />
-                <Field label='Prüfnummer (CVC)'
-                  value={cardCVC}
-                  onChange={handleChange('cardCVC')} />
-              </P>
+              <div>
+                <FieldSet
+                  values={this.state.values}
+                  errors={this.state.errors}
+                  dirty={this.state.dirty}
+                  fields={[
+                    {
+                      label: 'Kreditkarten-Nummer',
+                      name: 'cardNumber',
+                      mask: '1111 1111 1111 1111',
+                      validator: (value) => (
+                        (
+                          !value &&
+                          'Kreditkarten-Nummer fehlt'
+                        ) || (
+                          !window.Stripe.card.validateCardNumber(value) &&
+                          'Kreditkarten-Nummer ungültig'
+                        )
+                      )
+                    },
+                    {
+                      label: 'Ablauf Monat',
+                      name: 'cardMonth',
+                      validator: (value) => {
+                        if (!value) {
+                          return 'Ablauf Monat fehlt'
+                        }
+
+                        const year = this.state.values.cardYear
+                        if (!!year && !window.Stripe.card.validateExpiry(value, year)) {
+                          this.setState((state) => ({
+                            errors: {
+                              ...state.errors,
+                              cardYear: 'Ablauf Jahr ungültig'
+                            }
+                          }))
+                          return 'Ablauf Monat ungültig'
+                        }
+                        this.setState((state) => ({
+                          errors: {
+                            ...state.errors,
+                            cardYear: undefined
+                          }
+                        }))
+                      }
+                    },
+                    {
+                      label: 'Ablauf Jahr',
+                      name: 'cardYear',
+                      validator: (value) => {
+                        if (!value) {
+                          return 'Ablauf Jahr fehlt'
+                        }
+
+                        const month = this.state.values.cardMonth
+
+                        if (!!month && !window.Stripe.card.validateExpiry(month, value)) {
+                          this.setState((state) => ({
+                            errors: {
+                              ...state.errors,
+                              cardMonth: 'Ablauf Monat ungültig'
+                            }
+                          }))
+                          return 'Ablauf Jahr ungültig'
+                        }
+                        this.setState((state) => ({
+                          errors: {
+                            ...state.errors,
+                            cardMonth: undefined
+                          }
+                        }))
+                      }
+                    },
+                    {
+                      label: 'Prüfnummer (CVC)',
+                      name: 'cardCVC',
+                      validator: (value) => (
+                        (
+                          !value &&
+                          'Prüfnummer (CVC) fehlt'
+                        ) || (
+                          !window.Stripe.card.validateCVC(value) &&
+                          'Prüfnummer (CVC) ungültig'
+                        )
+                      )
+                    }
+                  ]}
+                  onChange={(fields) => {
+                    this.setState((state) => ({
+                      values: {
+                        ...state.values,
+                        ...fields.values
+                      },
+                      errors: {
+                        ...state.errors,
+                        ...fields.errors
+                      },
+                      dirty: {
+                        ...state.dirty,
+                        ...fields.dirty
+                      }
+                    }))
+                  }} />
+                <br /><br />
+              </div>
             )}
 
             <Button onClick={submitPledge}>Weiter</Button>
