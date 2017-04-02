@@ -18,10 +18,12 @@ const chfFormat = swissNumbers.format('$,.0f')
 
 const styles = {
   primaryNumber: css({
-    fontSize: 86
+    fontSize: 86,
+    lineHeight: 1
   }),
   secondaryNumber: css({
-    fontSize: 43
+    fontSize: 43,
+    lineHeight: 1
   }),
   bar: css({
     height: 5,

@@ -111,17 +111,17 @@ class Header extends Component {
             <ul {...styles.menu}>
               <li>
                 <Link href='/updates'>
-                  <a {...styles.link}>Updates</a>
-                </Link>
-              </li>
-              <li>
-                <Link href='/community'>
-                  <a {...styles.link}>Community</a>
+                  <a {...styles.link}>Neues</a>
                 </Link>
               </li>
               <li>
                 <Link href='/events'>
-                  <a {...styles.link}>Veranstaltungen</a>
+                  <a {...styles.link}>Tournee</a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/community'>
+                  <a {...styles.link}>Leute</a>
                 </Link>
               </li>
               <li>
