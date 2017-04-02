@@ -3,7 +3,7 @@ import { gql, graphql } from 'react-apollo'
 
 import withData from '../lib/withData'
 import withMe from '../lib/withMe'
-import App from '../components/App'
+import Frame from '../components/Frame'
 import SignIn from '../components/Auth/SignIn'
 
 import {
@@ -141,7 +141,7 @@ const ConnectedQuestionForm = graphql(submitQuestion)(withMe(QuestionForm))
 Faq page
  */
 export default withData((props) => (
-  <App>
+  <Frame>
     <MediumContainer>
       <H1>FAQ</H1>
       <P>
@@ -150,5 +150,5 @@ export default withData((props) => (
       <ConnectedFaqList />
       <ConnectedQuestionForm />
     </MediumContainer>
-  </App>
+  </Frame>
 ))

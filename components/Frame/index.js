@@ -15,7 +15,7 @@ const styles = {
   })
 }
 
-export default ({ children, cover }) => (
+export default ({ children, cover, sidebar = true }) => (
   <div {...styles.container} className={!cover ? styles.coverless : undefined}>
     <Header cover={cover} />
     {children}

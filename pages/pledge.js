@@ -13,7 +13,7 @@ import {
   colors
 } from '@project-r/styleguide'
 
-import App from '../components/App'
+import Frame from '../components/Frame'
 import Accordion from '../components/Accordion'
 import FieldSet from '../components/FieldSet'
 
@@ -405,10 +405,10 @@ const submitPledge = gql`
 const PledgeWithSubmit = graphql(submitPledge)(withApollo(withMe(Pledge)))
 
 export default withData(({url, session}) => (
-  <App>
+  <Frame>
     <NarrowContainer>
       <H1>Mitmachen</H1>
       <PledgeWithSubmit query={url.query} session={session} />
     </NarrowContainer>
-  </App>
+  </Frame>
 ))

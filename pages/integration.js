@@ -1,5 +1,5 @@
 import React from 'react'
-import App from '../components/App'
+import Frame from '../components/Frame'
 import withData from '../lib/withData'
 
 import Crowdfunding from '../components/Crowdfunding'
@@ -7,11 +7,11 @@ import Pledges from '../components/Pledges'
 import Me from '../components/Auth/Me'
 
 export default withData(({session, isLoggedIn}) => (
-  <App>
+  <Frame>
     <section>
       <Me />
       <Crowdfunding />
       <Pledges />
     </section>
-  </App>
+  </Frame>
 ))

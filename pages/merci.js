@@ -1,6 +1,6 @@
 import React from 'react'
 import withData from '../lib/withData'
-import App from '../components/App'
+import Frame from '../components/Frame'
 import withMe from '../lib/withMe'
 import Poller from '../components/Auth/Poller'
 import SignIn from '../components/Auth/SignIn'
@@ -48,11 +48,11 @@ const Merci = withMe(({me, url: {query}}) => {
 })
 
 const MerciPage = ({url}) => (
-  <App>
+  <Frame>
     <NarrowContainer>
       <Merci url={url} />
     </NarrowContainer>
-  </App>
+  </Frame>
 )
 
 export default withData(MerciPage)
