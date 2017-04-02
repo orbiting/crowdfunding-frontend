@@ -119,7 +119,7 @@ class Accordion extends Component {
       return <P>…</P>
     }
     if (this.props.error) {
-      return <P>{this.props.error}</P>
+      return <P>{this.props.error.toString()}</P>
     }
 
     const {
