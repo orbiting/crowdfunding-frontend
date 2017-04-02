@@ -7,7 +7,7 @@ import Frame from '../components/Frame'
 import SignIn from '../components/Auth/SignIn'
 
 import {
-  H1, H2, P, MediumContainer, Field, Button
+  H1, H2, P, Container, Field, Button
 } from '@project-r/styleguide'
 
 /*
@@ -142,13 +142,13 @@ Faq page
  */
 export default withData((props) => (
   <Frame>
-    <MediumContainer>
+    <Container>
       <H1>FAQ</H1>
       <P>
         Antworten zu den brennenden Fragen.
       </P>
       <ConnectedFaqList />
       <ConnectedQuestionForm />
-    </MediumContainer>
+    </Container>
   </Frame>
 ))

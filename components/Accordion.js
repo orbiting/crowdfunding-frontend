@@ -222,7 +222,7 @@ class Accordion extends Component {
                   {hasOptions && <div style={{marginTop: 20}}>
                     <Grid>
                       {configurableOptions.map((option, i) => (
-                        <Span s='1/2' m='3/6' key={i}>
+                        <Span s='1/2' m='9/18' key={i}>
                           <Field
                             label={MESSAGES[`option/${option.reward.name}/label`] || option.reward.name}
                             type='number'
@@ -250,7 +250,7 @@ class Accordion extends Component {
                             />
                         </Span>
                       ))}
-                      <Span s='1/2' m='3/6'>
+                      <Span s='1/2' m='9/18'>
                         <Field
                           label='Betrag'
                           type='number'

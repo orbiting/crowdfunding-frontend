@@ -3,7 +3,7 @@ import {css, merge} from 'glamor'
 import Link from 'next/link'
 
 import {
-  Logo, linkRule,
+  Logo,
   colors
 } from '@project-r/styleguide'
 
@@ -29,14 +29,37 @@ const styles = {
   barCenter: css({
     maxWidth: 1200,
     margin: '0 auto',
-    padding: '20px 0'
+    padding: '15px 0'
   }),
   barCenterSticky: css({
     borderBottom: `1px solid ${colors.disabled}`,
     height: HEADER_HEIGHT
   }),
+  logo: css({
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    lineHeight: 0
+  }),
   menu: css({
-    float: 'right'
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    paddingLeft: 30,
+    margin: 0,
+    fontSize: 20,
+    '& li': {
+      display: 'inline-block',
+      marginRight: 20
+    }
+  }),
+  link: css({
+    textDecoration: 'none',
+    color: colors.text,
+    ':visited': {
+      color: colors.text
+    },
+    ':hover': {
+      color: '#ccc'
+    }
   })
 }
 
@@ -83,25 +106,30 @@ class Header extends Component {
         <div {...barStyle}>
           <div {...barCenterStyle}>
             <Link href='/'>
-              <a><Logo width={sticky ? 180 : 300} /></a>
+              <a {...styles.logo}><Logo height={sticky ? 30 : 40} /></a>
             </Link>
-            <div {...styles.menu}>
-              <Link href='/updates'>
-                <a {...linkRule}>Updates</a>
-              </Link>
-              {' '}&nbsp;{' '}
-              <Link href='/community'>
-                <a {...linkRule}>Community</a>
-              </Link>
-              {' '}&nbsp;{' '}
-              <Link href='/events'>
-                <a {...linkRule}>Veranstaltungen</a>
-              </Link>
-              {' '}&nbsp;{' '}
-              <Link href='/faq'>
-                <a {...linkRule}>FAQ</a>
-              </Link>
-            </div>
+            <ul {...styles.menu}>
+              <li>
+                <Link href='/updates'>
+                  <a {...styles.link}>Updates</a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/community'>
+                  <a {...styles.link}>Community</a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/events'>
+                  <a {...styles.link}>Veranstaltungen</a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/faq'>
+                  <a {...styles.link}>FAQ</a>
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
         <LoadingBar />

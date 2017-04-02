@@ -3,16 +3,16 @@ import withData from '../lib/withData'
 import Frame from '../components/Frame'
 
 import {
-  H1, P, MediumContainer
+  H1, P, Container
 } from '@project-r/styleguide'
 
 export default withData((props) => (
   <Frame>
-    <MediumContainer>
+    <Container>
       <H1>Community</H1>
       <P>
         Ganz viele, super Leute.
       </P>
-    </MediumContainer>
+    </Container>
   </Frame>
 ))
