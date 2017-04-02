@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {css} from 'glamor'
+import {css, merge} from 'glamor'
 import {gql, graphql} from 'react-apollo'
 
 import {
@@ -13,7 +13,8 @@ const styles = {
   }),
   packageTitle: css({
     fontSize: 22,
-    lineHeight: '28px'
+    lineHeight: '28px',
+    marginBottom: 10
   }),
   packagePrice: css({
     color: colors.primary,
@@ -21,10 +22,25 @@ const styles = {
     fontSize: 22
   }),
   package: css({
+    marginTop: -1,
     fontFamily: 'sans-serif',
-    paddingTop: 10,
-    paddingBottom: 10,
-    borderBottom: `1px solid ${colors.disabled}`
+    paddingTop: 20,
+    paddingBottom: 20,
+    borderBottom: `1px solid ${colors.disabled}`,
+    borderTop: `1px solid ${colors.disabled}`
+  }),
+  packageHighlighted: css({
+    position: 'relative',
+    zIndex: 1,
+    marginBottom: -1,
+    marginLeft: -20,
+    marginRight: -20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    width: 'calc(100% + 40px)',
+    backgroundColor: '#EBF6E5',
+    borderBottom: 'none',
+    borderTop: 'none'
   }),
   packageContent: css({
     '& p': {
@@ -94,7 +110,7 @@ class Accordion extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      activeIndex: 2,
+      activeIndex: undefined,
       selectedIndex: undefined
     }
   }
@@ -155,13 +171,21 @@ class Accordion extends Component {
               0
             )
 
+            const packageStyle = merge(
+              styles.package,
+              pkg.name === 'ABO' && styles.packageHighlighted
+            )
+
             return (
-              <div key={i} {...styles.package}
+              <div key={i} {...packageStyle}
                 style={{
                   cursor: isSelected ? 'default' : 'pointer'
                 }}
                 onMouseOver={() => this.setState({
                   activeIndex: i
+                })}
+                onMouseOut={() => this.setState({
+                  activeIndex: undefined
                 })}
                 onClick={() => {
                   if (!hasOptions) {
