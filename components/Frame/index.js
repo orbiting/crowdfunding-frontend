@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {css} from 'glamor'
 
 import 'glamor/reset'
@@ -12,13 +12,24 @@ const styles = {
     paddingBottom: 60
   }),
   coverless: css({
-    paddingTop: HEADER_HEIGHT + 10
+    paddingTop: HEADER_HEIGHT + 40
   })
 }
 
-export default ({ children, cover, sidebar = true }) => (
-  <div {...styles.container} className={!cover ? styles.coverless : undefined}>
-    <Header cover={cover} />
-    {children}
-  </div>
-)
+class Frame extends Component {
+  constructor (...args) {
+    super(...args)
+    this.state = {}
+  }
+  render () {
+    const {children, cover} = this.props
+    return (
+      <div {...styles.container} className={!cover ? styles.coverless : undefined}>
+        <Header cover={cover} />
+        {children}
+      </div>
+    )
+  }
+}
+
+export default Frame

@@ -9,7 +9,7 @@ import {
 
 import LoadingBar from './LoadingBar'
 
-export const HEADER_HEIGHT = 60
+export const HEADER_HEIGHT = 80
 
 const styles = {
   bar: css({
@@ -29,7 +29,7 @@ const styles = {
   barCenter: css({
     maxWidth: 1200,
     margin: '0 auto',
-    padding: '15px 0'
+    padding: '22px 0'
   }),
   barCenterSticky: css({
     borderBottom: `1px solid ${colors.disabled}`,
@@ -106,7 +106,7 @@ class Header extends Component {
         <div {...barStyle}>
           <div {...barCenterStyle}>
             <Link href='/'>
-              <a {...styles.logo}><Logo height={sticky ? 30 : 40} /></a>
+              <a {...styles.logo}><Logo height={sticky ? 35 : 45} /></a>
             </Link>
             <ul {...styles.menu}>
               <li>
