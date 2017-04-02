@@ -3,7 +3,7 @@ import {css, merge} from 'glamor'
 import Link from 'next/link'
 
 import {
-  Logo, A,
+  Logo, linkRule,
   colors
 } from '@project-r/styleguide'
 
@@ -87,19 +87,19 @@ class Header extends Component {
             </Link>
             <div {...styles.menu}>
               <Link href='/updates'>
-                <A href='#'>Updates</A>
+                <a {...linkRule}>Updates</a>
               </Link>
               {' '}&nbsp;{' '}
               <Link href='/community'>
-                <A href='#'>Community</A>
+                <a {...linkRule}>Community</a>
               </Link>
               {' '}&nbsp;{' '}
               <Link href='/events'>
-                <A href='#'>Veranstaltungen</A>
+                <a {...linkRule}>Veranstaltungen</a>
               </Link>
               {' '}&nbsp;{' '}
               <Link href='/faq'>
-                <A href='#'>FAQ</A>
+                <a {...linkRule}>FAQ</a>
               </Link>
             </div>
           </div>
