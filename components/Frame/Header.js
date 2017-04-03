@@ -7,7 +7,7 @@ import Status from '../Status'
 import {
   Logo,
   Button,
-  Container,
+  Container, CONTENT_PADDING as CONTAINER_PADDING,
   colors, mediaQueries
 } from '@project-r/styleguide'
 
@@ -27,25 +27,34 @@ const styles = {
   }),
   barOpaque: css({
     backgroundColor: '#fff',
-    height: HEADER_HEIGHT,
+    height: 60,
+    [mediaQueries.mUp]: {
+      height: HEADER_HEIGHT
+    },
     borderBottom: `1px solid ${colors.disabled}`
   }),
   logo: css({
-    paddingTop: 22,
+    paddingTop: 20,
+    [mediaQueries.mUp]: {
+      paddingTop: 25
+    },
     display: 'inline-block',
     verticalAlign: 'middle',
     lineHeight: 0
   }),
   menu: css({
-    paddingTop: 22,
-    display: 'inline-block',
-    verticalAlign: 'middle',
-    paddingLeft: 30,
-    margin: 0,
-    fontSize: 20,
-    '& li': {
+    display: 'none',
+    [mediaQueries.mUp]: {
+      paddingTop: 25,
       display: 'inline-block',
-      marginRight: 20
+      verticalAlign: 'middle',
+      paddingLeft: 20,
+      margin: 0,
+      fontSize: 20,
+      '& li': {
+        display: 'inline-block',
+        marginRight: 15
+      }
     }
   }),
   link: css({
@@ -62,9 +71,12 @@ const styles = {
     marginBottom: 40
   }),
   side: css({
-    float: 'right',
+    position: 'absolute',
+    right: 0,
+    top: 0,
     width: '50%',
     [mediaQueries.mUp]: {
+      right: CONTAINER_PADDING,
       width: SIDEBAR_WIDTH
     }
   })
@@ -75,13 +87,14 @@ class Header extends Component {
     super(props)
 
     this.state = {
-      opaque: !this.props.cover
+      opaque: !this.props.cover,
+      mobile: true
     }
 
     this.onScroll = () => {
       const y = window.pageYOffset
 
-      const opaque = y > 200 || !this.props.cover
+      const opaque = y > 150 || !this.props.cover
 
       if (opaque !== this.state.opaque) {
         this.setState(() => ({opaque}))
@@ -114,12 +127,18 @@ class Header extends Component {
     const barStyle = opaque
       ? merge(styles.bar, styles.barOpaque)
       : styles.bar
+
+    let logoHeight = opaque ? 30 : 45
+    if (mobile) {
+      logoHeight = 18
+    }
+
     return (
       <div>
         <div {...barStyle}>
-          <Container>
+          <Container style={{position: 'relative'}}>
             <Link href='/'>
-              <a {...styles.logo}><Logo height={opaque ? 35 : 45} /></a>
+              <a {...styles.logo}><Logo height={logoHeight} /></a>
             </Link>
             <ul {...styles.menu}>
               <li>
@@ -146,7 +165,7 @@ class Header extends Component {
             {opaque && <div {...styles.side}>
               {
                 mobile && (
-                  <Button big primary onClick={() => {
+                  <Button block primary onClick={() => {
                     Router.push('/pledge').then(() => window.scrollTo(0, 0))
                   }}>Mitmachen</Button>
                 )

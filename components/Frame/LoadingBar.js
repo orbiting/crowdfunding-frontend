@@ -9,6 +9,7 @@ import {
 const styles = {
   loadingBar: css({
     position: 'fixed',
+    zIndex: 10,
     top: 0,
     left: 0,
     height: 2,
