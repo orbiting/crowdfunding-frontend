@@ -13,10 +13,10 @@ const styles = {
   }),
   packageTitle: css({
     fontSize: 22,
-    lineHeight: '28px',
-    marginBottom: 10
+    lineHeight: '28px'
   }),
   packagePrice: css({
+    marginTop: 10,
     color: colors.primary,
     lineHeight: '28px',
     fontSize: 22
@@ -34,8 +34,8 @@ const styles = {
   package: css({
     marginTop: -1,
     fontFamily: 'sans-serif',
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingTop: 15,
+    paddingBottom: 15,
     borderBottom: `1px solid ${colors.disabled}`,
     borderTop: `1px solid ${colors.disabled}`
   }),
@@ -224,9 +224,9 @@ class Accordion extends Component {
                 }}>
                 <div {...styles.packageHeader}>
                   <div {...styles.packageTitle}>{MESSAGES[`package/${pkg.name}/title`]}</div>
-                  <div {...styles.packagePrice}>
-                    {price ? `CHF ${price / 100}` : ''}
-                  </div>
+                  {!!price && (<div {...styles.packagePrice}>
+                    {`CHF ${price / 100}`}
+                  </div>)}
                 </div>
                 <div {...styles.packageContent}
                   style={{

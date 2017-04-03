@@ -64,6 +64,7 @@ const styles = {
   }),
   side: css({
     float: 'right',
+    width: '50%',
     [mediaQueries.mUp]: {
       width: SIDEBAR_WIDTH
     }
@@ -87,20 +88,29 @@ class Header extends Component {
         this.setState(() => ({sticky}))
       }
     }
+    this.measure = () => {
+      let mobile = window.innerWidth < mediaQueries.mBreakPoint
+      if (mobile !== this.state.mobile) {
+        this.setState(() => ({mobile}))
+      }
+      this.onScroll()
+    }
   }
   componentDidMount () {
     window.addEventListener('scroll', this.onScroll)
-    this.onScroll()
+    window.addEventListener('resize', this.measure)
+    this.measure()
   }
   componentDidUpdate () {
-    this.onScroll()
+    this.measure()
   }
   componentWillUnmount () {
     window.removeEventListener('scroll', this.onScroll)
+    window.removeEventListener('resize', this.measure)
   }
   render () {
     const {cover} = this.props
-    const {sticky} = this.state
+    const {sticky, mobile} = this.state
 
     const barStyle = sticky
       ? merge(styles.bar, styles.barSticky)
@@ -136,7 +146,7 @@ class Header extends Component {
             </ul>
             <div {...styles.side}>
               {
-                this.props.sticky.button && (
+                sticky && mobile && (
                   <Button big primary onClick={() => {
                     Router.push('/pledge').then(() => window.scrollTo(0, 0))
                   }}>Mitmachen</Button>
