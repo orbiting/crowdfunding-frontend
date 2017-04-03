@@ -5,6 +5,7 @@ import {gql, graphql} from 'react-apollo'
 import {
   Button, Field,
   Grid, Span, P,
+  linkRule,
   colors
 } from '@project-r/styleguide'
 
@@ -127,12 +128,8 @@ class Accordion extends Component {
       selectedIndex
     } = this.state
 
-    const select = pkg => {
+    const select = (pkg, userPrice) => {
       const params = {
-        amount: this.state.amount || pkg.options.reduce(
-          (amount, option) => amount + option.price * option.minAmount,
-          0
-        ),
         package: pkg.name,
         packageName: MESSAGES[`package/${pkg.name}/title`],
         // todo simplify:
@@ -145,6 +142,14 @@ class Accordion extends Component {
             configurable: option.minAmount !== option.maxAmount,
             name: option.reward && MESSAGES[`option/${option.reward.name}/label`]
           }))
+        )
+      }
+      if (userPrice) {
+        params.userPrice = '1'
+      } else {
+        params.amount = this.state.amount || pkg.options.reduce(
+          (amount, option) => amount + option.price * option.minAmount,
+          0
         )
       }
 
@@ -275,6 +280,17 @@ class Accordion extends Component {
             )
           })
         }
+        <P>
+          <a {...linkRule} href='#' onClick={(e) => {
+            e.preventDefault()
+            select(
+              packages.find(pkg => pkg.name === 'ABO'),
+              true
+            )
+          }}>
+            Sie können sich kein Abonnement leisten?
+          </a>
+        </P>
       </div>
     )
   }
