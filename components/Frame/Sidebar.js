@@ -40,7 +40,7 @@ const styles = {
 }
 
 const SidebarInner = () => (
-  <div>
+  <div style={{paddingTop: 10}}>
     <Accordion onSelect={params => {
       Router.push({
         pathname: '/pledge',
@@ -66,13 +66,14 @@ class Sidebar extends Component {
     this.onScroll = () => {
       const y = window.pageYOffset
       const height = window.innerHeight
+      const mobile = window.innerWidth < mediaQueries.mBreakPoint
       const {sticky, setSticky} = this.props
 
       let status = false
       let sidebar = false
       if (y + HEADER_HEIGHT > this.y) {
         status = true
-        if (height - HEADER_HEIGHT > this.innerHeight) {
+        if (!mobile && height - HEADER_HEIGHT > this.innerHeight) {
           sidebar = true
         }
       }
@@ -122,7 +123,9 @@ class Sidebar extends Component {
       <div>
         <Status />
 
-        <div ref={this.innerRef}>
+        <div ref={this.innerRef} style={{
+          visibility: sticky.sidebar ? 'hidden' : 'visible'
+        }}>
           <SidebarInner />
         </div>
 

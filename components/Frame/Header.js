@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {css, merge} from 'glamor'
 import Link from 'next/link'
 import Router from 'next/router'
+import Status from '../Status'
 
 import {
   Logo,
@@ -24,7 +25,7 @@ const styles = {
     left: 0,
     right: 0
   }),
-  barSticky: css({
+  barOpaque: css({
     backgroundColor: '#fff',
     height: HEADER_HEIGHT,
     borderBottom: `1px solid ${colors.disabled}`
@@ -74,16 +75,16 @@ class Header extends Component {
     super(props)
 
     this.state = {
-      sticky: !this.props.cover
+      opaque: !this.props.cover
     }
 
     this.onScroll = () => {
       const y = window.pageYOffset
 
-      const sticky = y > 200 || !this.props.cover
+      const opaque = y > 200 || !this.props.cover
 
-      if (sticky !== this.state.sticky) {
-        this.setState(() => ({sticky}))
+      if (opaque !== this.state.opaque) {
+        this.setState(() => ({opaque}))
       }
     }
     this.measure = () => {
@@ -107,18 +108,18 @@ class Header extends Component {
     window.removeEventListener('resize', this.measure)
   }
   render () {
-    const {cover} = this.props
-    const {sticky, mobile} = this.state
+    const {cover, sticky} = this.props
+    const {opaque, mobile} = this.state
 
-    const barStyle = sticky
-      ? merge(styles.bar, styles.barSticky)
+    const barStyle = opaque
+      ? merge(styles.bar, styles.barOpaque)
       : styles.bar
     return (
       <div>
         <div {...barStyle}>
           <Container>
             <Link href='/'>
-              <a {...styles.logo}><Logo height={sticky ? 35 : 45} /></a>
+              <a {...styles.logo}><Logo height={opaque ? 35 : 45} /></a>
             </Link>
             <ul {...styles.menu}>
               <li>
@@ -142,15 +143,20 @@ class Header extends Component {
                 </Link>
               </li>
             </ul>
-            <div {...styles.side}>
+            {opaque && <div {...styles.side}>
               {
-                sticky && mobile && (
+                mobile && (
                   <Button big primary onClick={() => {
                     Router.push('/pledge').then(() => window.scrollTo(0, 0))
                   }}>Mitmachen</Button>
                 )
               }
-            </div>
+              {
+                !mobile && !!sticky.status && (
+                  <Status compact />
+                )
+              }
+            </div>}
           </Container>
         </div>
         <LoadingBar />

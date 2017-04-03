@@ -63,12 +63,8 @@ const query = gql`
 `
 
 class Status extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {}
-  }
   render () {
-    if (this.props.loading) {
+    if (this.props.loading && !this.props.crowdfunding) {
       return <P>…</P>
     }
     if (this.props.error) {
@@ -85,6 +81,20 @@ class Status extends Component {
       if (hours < 0) {
         hours += 24
       }
+    }
+
+    if (this.props.compact) {
+      return (
+        <div style={{paddingTop: 10}}>
+          <P>
+            <span {...styles.smallNumber}>{status.people}</span>
+            <Label>von {goal.people} Mitglieder</Label>
+          </P>
+          <div {...styles.bar}>
+            <div {...styles.barInner} style={{width: `${Math.ceil(status.people / goal.people * 100)}%`}} />
+          </div>
+        </div>
+      )
     }
 
     return (
@@ -125,6 +135,9 @@ const StatusWithQuery = graphql(query, {
       error: data.error,
       crowdfunding: data.crowdfunding
     }
+  },
+  options: {
+    pollInterval: 2500
   }
 })(Status)
 
