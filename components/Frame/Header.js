@@ -1,9 +1,12 @@
 import React, {Component} from 'react'
 import {css, merge} from 'glamor'
 import Link from 'next/link'
+import Router from 'next/router'
 
 import {
   Logo,
+  Button,
+  Grid, Span,
   colors
 } from '@project-r/styleguide'
 
@@ -28,19 +31,20 @@ const styles = {
   }),
   barCenter: css({
     maxWidth: 1200,
-    margin: '0 auto',
-    padding: '22px 0'
+    margin: '0 auto'
   }),
   barCenterSticky: css({
     borderBottom: `1px solid ${colors.disabled}`,
     height: HEADER_HEIGHT
   }),
   logo: css({
+    paddingTop: 22,
     display: 'inline-block',
     verticalAlign: 'middle',
     lineHeight: 0
   }),
   menu: css({
+    paddingTop: 22,
     display: 'inline-block',
     verticalAlign: 'middle',
     paddingLeft: 30,
@@ -105,31 +109,46 @@ class Header extends Component {
       <div>
         <div {...barStyle}>
           <div {...barCenterStyle}>
-            <Link href='/'>
-              <a {...styles.logo}><Logo height={sticky ? 35 : 45} /></a>
-            </Link>
-            <ul {...styles.menu}>
-              <li>
-                <Link href='/updates'>
-                  <a {...styles.link}>Neues</a>
+            <Grid>
+              <Span m='12/18'>
+                <Link href='/'>
+                  <a {...styles.logo}><Logo height={sticky ? 35 : 45} /></a>
                 </Link>
-              </li>
-              <li>
-                <Link href='/events'>
-                  <a {...styles.link}>Tournee</a>
-                </Link>
-              </li>
-              <li>
-                <Link href='/community'>
-                  <a {...styles.link}>Leute</a>
-                </Link>
-              </li>
-              <li>
-                <Link href='/faq'>
-                  <a {...styles.link}>FAQ</a>
-                </Link>
-              </li>
-            </ul>
+                <ul {...styles.menu}>
+                  <li>
+                    <Link href='/updates'>
+                      <a {...styles.link}>Neues</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href='/events'>
+                      <a {...styles.link}>Tournee</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href='/community'>
+                      <a {...styles.link}>Leute</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href='/faq'>
+                      <a {...styles.link}>FAQ</a>
+                    </Link>
+                  </li>
+                </ul>
+              </Span>
+              {
+                this.props.sticky.button && (
+                  <Span m='6/18' style={{
+                    float: 'right'
+                  }}>
+                    <Button big primary onClick={() => {
+                      Router.push('/pledge').then(() => window.scrollTo(0, 0))
+                    }}>Mitmachen</Button>
+                  </Span>
+                )
+              }
+            </Grid>
           </div>
         </div>
         <LoadingBar />

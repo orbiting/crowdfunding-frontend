@@ -19,14 +19,31 @@ const styles = {
 class Frame extends Component {
   constructor (...args) {
     super(...args)
-    this.state = {}
+    this.state = {
+      sticky: {}
+    }
+    this.setSticky = (sticky) => {
+      this.setState(state => ({
+        sticky: {
+          ...state.sticky,
+          ...sticky
+        }
+      }))
+    }
   }
   render () {
     const {children, cover} = this.props
+    const {sticky} = this.state
     return (
       <div {...styles.container} className={!cover ? styles.coverless : undefined}>
-        <Header cover={cover} />
-        {children}
+        <Header cover={cover} sticky={sticky} />
+        {typeof children === 'function'
+          ? children({
+            sticky,
+            setSticky: this.setSticky
+          })
+          : children
+        }
       </div>
     )
   }
