@@ -6,7 +6,7 @@ import Router from 'next/router'
 import {
   Logo,
   Button,
-  Grid, Span,
+  Container, Grid, Span,
   colors
 } from '@project-r/styleguide'
 
@@ -23,19 +23,12 @@ const styles = {
     },
     top: 0,
     left: 0,
-    right: 0,
-    padding: '0 20px'
+    right: 0
   }),
   barSticky: css({
-    backgroundColor: '#fff'
-  }),
-  barCenter: css({
-    maxWidth: 1200,
-    margin: '0 auto'
-  }),
-  barCenterSticky: css({
-    borderBottom: `1px solid ${colors.disabled}`,
-    height: HEADER_HEIGHT
+    backgroundColor: '#fff',
+    height: HEADER_HEIGHT,
+    borderBottom: `1px solid ${colors.disabled}`
   }),
   logo: css({
     paddingTop: 22,
@@ -102,13 +95,10 @@ class Header extends Component {
     const barStyle = sticky
       ? merge(styles.bar, styles.barSticky)
       : styles.bar
-    const barCenterStyle = sticky
-      ? merge(styles.barCenter, styles.barCenterSticky)
-      : styles.barCenter
     return (
       <div>
         <div {...barStyle}>
-          <div {...barCenterStyle}>
+          <Container>
             <Grid>
               <Span m='12/18'>
                 <Link href='/'>
@@ -149,7 +139,7 @@ class Header extends Component {
                 )
               }
             </Grid>
-          </div>
+          </Container>
         </div>
         <LoadingBar />
         {cover}
