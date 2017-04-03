@@ -3,6 +3,12 @@ import {css} from 'glamor'
 
 import 'glamor/reset'
 import Header, {HEADER_HEIGHT} from './Header'
+import Sidebar, {SIDEBAR_WIDTH} from './Sidebar'
+
+import {
+  Container, CONTENT_PADDING,
+  mediaQueries
+} from '@project-r/styleguide'
 
 css.global('html', {boxSizing: 'border-box'})
 css.global('*, *:before, *:after', {boxSizing: 'inherit'})
@@ -13,6 +19,14 @@ const styles = {
   }),
   coverless: css({
     paddingTop: HEADER_HEIGHT + 40
+  }),
+  sidebar: css({
+    [mediaQueries.mUp]: {
+      position: 'absolute',
+      top: 0,
+      right: CONTENT_PADDING,
+      width: SIDEBAR_WIDTH
+    }
   })
 }
 
@@ -32,11 +46,16 @@ class Frame extends Component {
     }
   }
   render () {
-    const {children, cover} = this.props
+    const {children, cover, sidebar} = this.props
     const {sticky} = this.state
     return (
       <div {...styles.container} className={!cover ? styles.coverless : undefined}>
         <Header cover={cover} sticky={sticky} />
+        {sidebar && <Container style={{position: 'relative'}}>
+          <div {...styles.sidebar}>
+            <Sidebar sticky={sticky} setSticky={this.setSticky} />
+          </div>
+        </Container>}
         {typeof children === 'function'
           ? children({
             sticky,
@@ -47,6 +66,10 @@ class Frame extends Component {
       </div>
     )
   }
+}
+
+Frame.defaultProps = {
+  sidebar: true
 }
 
 export default Frame

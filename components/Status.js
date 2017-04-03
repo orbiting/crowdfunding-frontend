@@ -3,10 +3,11 @@ import {css} from 'glamor'
 import {gql, graphql} from 'react-apollo'
 
 import {
-  P, colors
+  P, Label, colors
 } from '@project-r/styleguide'
 
 import {formatLocale} from 'd3-format'
+import {timeDay} from 'd3-time'
 
 const swissNumbers = formatLocale({
   decimal: '.',
@@ -18,18 +19,31 @@ const chfFormat = swissNumbers.format('$,.0f')
 
 const styles = {
   primaryNumber: css({
-    fontSize: 86,
+    display: 'block',
+    marginBottom: -10,
+    fontSize: 80,
+    fontFamily: 'sans-serif',
     lineHeight: 1
   }),
   secondaryNumber: css({
+    display: 'block',
+    marginBottom: -5,
     fontSize: 43,
+    fontFamily: 'sans-serif',
+    lineHeight: 1
+  }),
+  smallNumber: css({
+    display: 'block',
+    marginBottom: -5,
+    fontSize: 22,
+    fontFamily: 'sans-serif',
     lineHeight: 1
   }),
   bar: css({
-    height: 5,
+    height: 8,
     marginTop: -20,
     marginBottom: 20,
-    backgroundColor: '#ccc'
+    backgroundColor: '#EAEDEB'
   }),
   barInner: css({
     backgroundColor: colors.primary,
@@ -43,6 +57,7 @@ const query = gql`
     id
     goal {people, money}
     status {people, money}
+    endDate
   }
 }
 `
@@ -59,24 +74,45 @@ class Status extends Component {
     if (this.props.error) {
       return <P>{this.props.error}</P>
     }
-    const {crowdfunding: {goal, status}} = this.props
+    const {crowdfunding: {goal, status, endDate}} = this.props
+    const now = new Date()
+    const end = new Date(endDate)
+
+    let days = timeDay.count(now, end)
+    let hours = end.getHours() - now.getHours()
+    if (hours < 0 || (hours === 0 && end.getMinutes() < now.getMinutes())) {
+      days -= 1
+      if (hours < 0) {
+        hours += 24
+      }
+    }
 
     return (
       <div>
         <P>
-          <span {...styles.primaryNumber}>{status.people}</span><br />
-          von {goal.people} Mitglieder
+          <span {...styles.primaryNumber}>{status.people}</span>
+          <Label>von {goal.people} Mitglieder</Label>
         </P>
         <div {...styles.bar}>
           <div {...styles.barInner} style={{width: `${Math.ceil(status.people / goal.people * 100)}%`}} />
         </div>
         <P>
-          <span {...styles.secondaryNumber}>{chfFormat(status.money / 100)}</span><br />
-          von {chfFormat(goal.money / 100)} finanziert
+          <span {...styles.secondaryNumber}>{chfFormat(status.money / 100)}</span>
+          <Label>von {chfFormat(goal.money / 100)} finanziert</Label>
         </P>
         <div {...styles.bar}>
           <div {...styles.barInner} style={{width: `${Math.ceil(status.money / goal.money * 100)}%`}} />
         </div>
+        <P>
+          <span {...styles.smallNumber}>
+            {end > now ? (
+              `${days} Tage ${hours} Stunden`
+            ) : (
+              'Vorbei'
+            )}
+          </span>
+          <Label>Zeit verbleibend</Label>
+        </P>
       </div>
     )
   }

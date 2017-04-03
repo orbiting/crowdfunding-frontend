@@ -7,7 +7,7 @@ import Pledges from '../components/Pledges'
 import Me from '../components/Auth/Me'
 
 export default withData(({session, isLoggedIn}) => (
-  <Frame>
+  <Frame sidebar={false}>
     <section>
       <Me />
       <Crowdfunding />

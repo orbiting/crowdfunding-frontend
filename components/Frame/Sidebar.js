@@ -13,6 +13,8 @@ import {
   linkRule, P
 } from '@project-r/styleguide'
 
+export const SIDEBAR_WIDTH = 320
+
 class Sidebar extends Component {
   constructor (props) {
     super(props)
@@ -60,12 +62,6 @@ class Sidebar extends Component {
       <div>
         <div ref={this.statusRef}>
           <Status />
-          <Button big primary onClick={() => {
-            Router.push('/pledge').then(() => window.scrollTo(0, 0))
-          }}>Mitmachen</Button>
-          <br />
-          <Button big>Erinnern</Button>
-          <br /><br />
         </div>
         <Accordion onSelect={params => {
           Router.push({
@@ -73,6 +69,9 @@ class Sidebar extends Component {
             query: params
           }).then(() => window.scrollTo(0, 0))
         }} />
+        <P>
+          <Button big>Erinnern</Button>
+        </P>
         <P>
           <Link href='/merci'>
             <a {...linkRule}>Schon unterstützt?</a>

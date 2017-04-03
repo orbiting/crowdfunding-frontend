@@ -6,11 +6,12 @@ import Router from 'next/router'
 import {
   Logo,
   Button,
-  Container, Grid, Span,
-  colors
+  Container,
+  colors, mediaQueries
 } from '@project-r/styleguide'
 
 import LoadingBar from './LoadingBar'
+import {SIDEBAR_WIDTH} from './Sidebar'
 
 export const HEADER_HEIGHT = 80
 
@@ -57,6 +58,15 @@ const styles = {
     ':hover': {
       color: '#ccc'
     }
+  }),
+  cover: css({
+    marginBottom: 40
+  }),
+  side: css({
+    float: 'right',
+    [mediaQueries.mUp]: {
+      width: SIDEBAR_WIDTH
+    }
   })
 }
 
@@ -99,50 +109,48 @@ class Header extends Component {
       <div>
         <div {...barStyle}>
           <Container>
-            <Grid>
-              <Span m='12/18'>
-                <Link href='/'>
-                  <a {...styles.logo}><Logo height={sticky ? 35 : 45} /></a>
+            <Link href='/'>
+              <a {...styles.logo}><Logo height={sticky ? 35 : 45} /></a>
+            </Link>
+            <ul {...styles.menu}>
+              <li>
+                <Link href='/updates'>
+                  <a {...styles.link}>Neues</a>
                 </Link>
-                <ul {...styles.menu}>
-                  <li>
-                    <Link href='/updates'>
-                      <a {...styles.link}>Neues</a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href='/events'>
-                      <a {...styles.link}>Tournee</a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href='/community'>
-                      <a {...styles.link}>Leute</a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href='/faq'>
-                      <a {...styles.link}>FAQ</a>
-                    </Link>
-                  </li>
-                </ul>
-              </Span>
+              </li>
+              <li>
+                <Link href='/events'>
+                  <a {...styles.link}>Tournee</a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/community'>
+                  <a {...styles.link}>Leute</a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/faq'>
+                  <a {...styles.link}>FAQ</a>
+                </Link>
+              </li>
+            </ul>
+            <div {...styles.side}>
               {
                 this.props.sticky.button && (
-                  <Span m='6/18' style={{
-                    float: 'right'
-                  }}>
-                    <Button big primary onClick={() => {
-                      Router.push('/pledge').then(() => window.scrollTo(0, 0))
-                    }}>Mitmachen</Button>
-                  </Span>
+                  <Button big primary onClick={() => {
+                    Router.push('/pledge').then(() => window.scrollTo(0, 0))
+                  }}>Mitmachen</Button>
                 )
               }
-            </Grid>
+            </div>
           </Container>
         </div>
         <LoadingBar />
-        {cover}
+        {!!cover && (
+          <div {...styles.cover}>
+            {cover}
+          </div>
+        )}
       </div>
     )
   }

@@ -48,7 +48,7 @@ const Merci = withMe(({me, url: {query}}) => {
 })
 
 const MerciPage = ({url}) => (
-  <Frame>
+  <Frame sidebar={false}>
     <NarrowContainer>
       <Merci url={url} />
     </NarrowContainer>

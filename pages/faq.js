@@ -4,6 +4,7 @@ import { gql, graphql } from 'react-apollo'
 import withData from '../lib/withData'
 import withMe from '../lib/withMe'
 import Frame from '../components/Frame'
+import Content from '../components/Frame/Content'
 import SignIn from '../components/Auth/SignIn'
 
 import {
@@ -143,12 +144,14 @@ Faq page
 export default withData((props) => (
   <Frame>
     <Container>
-      <H1>FAQ</H1>
-      <P>
-        Antworten zu den brennenden Fragen.
-      </P>
-      <ConnectedFaqList />
-      <ConnectedQuestionForm />
+      <Content>
+        <H1>FAQ</H1>
+        <P>
+          Antworten zu den brennenden Fragen.
+        </P>
+        <ConnectedFaqList />
+        <ConnectedQuestionForm />
+      </Content>
     </Container>
   </Frame>
 ))
