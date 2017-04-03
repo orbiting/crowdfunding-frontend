@@ -1,7 +1,5 @@
 import React, {Component, PropTypes} from 'react'
 import withData from '../lib/withData'
-import App from '../components/App'
-import Accordion from '../components/Accordion'
 import Router from 'next/router'
 import { gql, withApollo, graphql } from 'react-apollo'
 import withMe from '../lib/withMe'
@@ -11,8 +9,13 @@ import SignOut from '../components/Auth/SignOut'
 import {
   Button,
   H1, H2, Field, P, A,
-  NarrowContainer
+  NarrowContainer,
+  colors
 } from '@project-r/styleguide'
+
+import App from '../components/App'
+import Accordion from '../components/Accordion'
+import FieldSet from '../components/FieldSet'
 
 const PAYMENT_METHODS = [
   { disabled: true, key: 'EZS', name: 'Einzahlungsschein' },
@@ -26,7 +29,9 @@ class Pledge extends Component {
     super(props)
     this.state = {
       emailFree: true,
-      isLoggingIn: false
+      values: {},
+      errors: {},
+      dirty: {}
     }
     this.amountRefSetter = (ref) => {
       this.amountRef = ref
@@ -37,31 +42,14 @@ class Pledge extends Component {
       this.amountRef.input.focus()
     }
   }
-  componentWillReceiveProps (nextProps) {
-    const {me} = nextProps
-    const {email, name} = this.state
-
-    if (me) {
-      let nextState = {}
-      if (!email) {
-        nextState.email = me.email
-      }
-      if (!name) {
-        nextState.name = me.name
-      }
-      this.setState(nextState)
-    }
-  }
   render () {
     const {
       name,
       email,
       emailFree,
       paymentMethod,
-      cardNumber,
-      cardMonth,
-      cardYear,
-      cardCVC
+      paymentError,
+      submitError
     } = this.state
     const {query, client, me} = this.props
 
@@ -100,32 +88,42 @@ class Pledge extends Component {
     }
 
     const submitPledge = event => {
+      const {values} = this.state
       window.Stripe.setPublishableKey('pk_test_sgFutulewhWC8v8csVIXTMea')
-      // TODO validate card fields
       window.Stripe.source.create({
         type: 'card',
+        currency: 'CHF',
+        usage: 'reusable',
         card: {
-          number: cardNumber,
-          cvc: cardCVC,
-          exp_month: cardMonth,
-          exp_year: cardYear
+          number: values.cardNumber,
+          cvc: values.cardCVC,
+          exp_month: values.cardMonth,
+          exp_year: values.cardYear
         }
       }, (status, source) => {
-        console.log('response from stripe!')
-        console.log(status)
-        console.log(source)
-        // TODO handle error
-        if (status === 200) {
+        console.log('stripe', status, source)
+        if (status !== 200) {
+          // source.error.type
+          // source.error.param
+          // source.error.message
+          // see https://stripe.com/docs/api#errors
+          this.setState({
+            paymentError: source.error.message
+          })
+        } else {
+          this.setState({
+            paymentError: undefined
+          })
+
           // TODO implement 3D secure
           if (source.card.three_d_secure === 'required') {
             window.alert('Cards requiring 3D secure are not supported yet.')
           } else {
             const total = query.amount
             const pledgeOptions = JSON.parse(query.pledgeOptions)
-            let user = {email, name}
-            if (me) { // don't provide a user if logged in
-              user = null
-            }
+
+            // don't provide a user if logged in
+            const user = me ? null : {email, name}
             // TODO adapt for other paymentMethods
             const payment = {
               method: paymentMethod,
@@ -153,11 +151,18 @@ class Pledge extends Component {
                       email: email
                     }
                   })
+                } else {
+                  this.setState({
+                    submitError: 'data.submitPledge fehlt'
+                  })
                 }
               })
               .catch(error => {
-                window.alert('Pledge error')
-                console.log(error)
+                this.setState({
+                  submitError: error.graphQLErrors && error.graphQLErrors.length
+                    ? error.graphQLErrors.map(e => e.message).join(', ')
+                    : error.toString()
+                })
               })
           }
         }
@@ -234,12 +239,10 @@ class Pledge extends Component {
             <span>
               <Field label='Dein Name'
                 value={name}
-                disabled={me}
                 onChange={handleChange('name')} />
               <br />
               <Field label='Deine E-Mail'
                 value={email}
-                disabled={me}
                 onChange={handleEmailChange()} />
               <br /><br />
             </span>
@@ -247,13 +250,13 @@ class Pledge extends Component {
         </div>
 
         {(!emailFree && !me) && (
-          <div key='needsLogin'>
+          <div>
             <p>Es existiert bereits ein Account mit dieser Email adresse bei uns. Um weiter zu fahren, müssen Sie sich erst einloggen. Klicken Sie auf Einloggen oder wählen sie eine andere email adresse.</p>
             <SignIn email={email} />
           </div>
         )}
         {(emailFree || me) && (
-          <span key='payment'>
+          <span>
             <H2>Zahlungsart auswählen</H2>
             <P>
               {PAYMENT_METHODS.map((pm) => (
@@ -272,25 +275,102 @@ class Pledge extends Component {
             </P>
 
             {(paymentMethod === 'VISA' || paymentMethod === 'MASTERCARD') && (
-              <P>
-                <Field label='Kreditkarten-Nummer'
-                  value={cardNumber}
-                  onChange={handleChange('cardNumber')} />
-                <br />
-                <Field label='Ablauf Monat'
-                  value={cardMonth}
-                  onChange={handleChange('cardMonth')} />
-                <br />
-                <Field label='Ablauf Jahr'
-                  value={cardYear}
-                  onChange={handleChange('cardYear')} />
-                <br />
-                <Field label='Prüfnummer (CVC)'
-                  value={cardCVC}
-                  onChange={handleChange('cardCVC')} />
-              </P>
+              <div>
+                <FieldSet
+                  values={this.state.values}
+                  errors={this.state.errors}
+                  dirty={this.state.dirty}
+                  fields={[
+                    {
+                      label: 'Kreditkarten-Nummer',
+                      name: 'cardNumber',
+                      mask: '1111 1111 1111 1111',
+                      validator: (value) => (
+                        (
+                          !value &&
+                          'Kreditkarten-Nummer fehlt'
+                        ) || (
+                          !window.Stripe.card.validateCardNumber(value) &&
+                          'Kreditkarten-Nummer ungültig'
+                        )
+                      )
+                    },
+                    {
+                      label: 'Ablauf Monat',
+                      name: 'cardMonth'
+                    },
+                    {
+                      label: 'Ablauf Jahr',
+                      name: 'cardYear'
+                    },
+                    {
+                      label: 'Prüfnummer (CVC)',
+                      name: 'cardCVC',
+                      validator: (value) => (
+                        (
+                          !value &&
+                          'Prüfnummer (CVC) fehlt'
+                        ) || (
+                          !window.Stripe.card.validateCVC(value) &&
+                          'Prüfnummer (CVC) ungültig'
+                        )
+                      )
+                    }
+                  ]}
+                  onChange={(fields) => {
+                    this.setState((state) => {
+                      const nextState = {
+                        values: {
+                          ...state.values,
+                          ...fields.values
+                        },
+                        errors: {
+                          ...state.errors,
+                          ...fields.errors
+                        },
+                        dirty: {
+                          ...state.dirty,
+                          ...fields.dirty
+                        }
+                      }
+
+                      const month = nextState.values.cardMonth
+                      const year = nextState.values.cardYear
+
+                      if (
+                        year && month &&
+                        nextState.dirty.cardMonth &&
+                        nextState.dirty.cardYear &&
+                        !window.Stripe.card.validateExpiry(month, year)
+                      ) {
+                        nextState.errors.cardMonth = 'Ablauf Monat ungültig'
+                        nextState.errors.cardYear = 'Ablauf Jahr ungültig'
+                      } else {
+                        nextState.errors.cardMonth = (
+                          !month && 'Ablauf Monat fehlt'
+                        )
+                        nextState.errors.cardYear = (
+                          !year && 'Ablauf Jahr fehlt'
+                        )
+                      }
+
+                      return nextState
+                    })
+                  }} />
+                <br /><br />
+              </div>
             )}
 
+            {!!paymentError && (
+              <P style={{color: colors.error}}>
+                {paymentError}
+              </P>
+            )}
+            {!!submitError && (
+              <P style={{color: colors.error}}>
+                {submitError}
+              </P>
+            )}
             <Button onClick={submitPledge}>Weiter</Button>
           </span>
         )}
