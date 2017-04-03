@@ -54,7 +54,7 @@ class Frame extends Component {
     const {sticky} = this.state
     return (
       <div {...styles.container} className={!cover ? styles.coverless : undefined}>
-        <Header cover={cover} sticky={sticky} />
+        <Header cover={cover} sticky={sticky} sidebar={sidebar} />
         {sidebar && <Container style={{position: 'relative'}}>
           <div {...styles.sidebar}>
             <Sidebar sticky={sticky} setSticky={this.setSticky} />

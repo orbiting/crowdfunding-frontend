@@ -108,7 +108,7 @@ class Header extends Component {
     window.removeEventListener('resize', this.measure)
   }
   render () {
-    const {cover, sticky} = this.props
+    const {cover, sticky, sidebar} = this.props
     const {opaque, mobile} = this.state
 
     const barStyle = opaque
@@ -152,7 +152,7 @@ class Header extends Component {
                 )
               }
               {
-                !mobile && !!sticky.status && (
+                !mobile && (!!sticky.status || !sidebar) && (
                   <Status compact />
                 )
               }
