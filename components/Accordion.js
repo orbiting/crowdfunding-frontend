@@ -5,7 +5,6 @@ import {gql, graphql} from 'react-apollo'
 import {
   Button, Field,
   Grid, Span, P,
-  linkRule,
   colors
 } from '@project-r/styleguide'
 
@@ -21,6 +20,16 @@ const styles = {
     color: colors.primary,
     lineHeight: '28px',
     fontSize: 22
+  }),
+  userPriceLink: css({
+    textDecoration: 'none',
+    color: colors.text,
+    ':visited': {
+      color: colors.text
+    },
+    ':hover': {
+      color: '#ccc'
+    }
   }),
   package: css({
     marginTop: -1,
@@ -280,15 +289,15 @@ class Accordion extends Component {
             )
           })
         }
-        <P>
-          <a {...linkRule} href='#' onClick={(e) => {
+        <P style={{marginTop: 20}}>
+          <a {...styles.userPriceLink} href='#' onClick={(e) => {
             e.preventDefault()
             select(
               packages.find(pkg => pkg.name === 'ABO'),
               true
             )
           }}>
-            Sie können sich kein Abonnement leisten?
+            <em>Sie können sich kein Abonnement leisten?</em>
           </a>
         </P>
       </div>

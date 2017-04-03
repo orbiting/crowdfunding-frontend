@@ -198,11 +198,9 @@ class Pledge extends Component {
                 ))
               }
             </P>
-            <P>
-              {!!query.userPrice && (
-                'Journalismus kostet. Wir haben ausgerechnet dass wir initial mindestens 3000 Abonnenten à CHF 240.- brauchen um dauerhaft zu bestehen. Trotzdem wollen wir niemanden ausschliessen. Wie viel könnten Sie den zahlen pro Jahr?'
-              )}
-            </P>
+            {!!query.userPrice && (<P>
+              Journalismus kostet. Wir haben ausgerechnet dass wir initial mindestens 3000 Abonnenten à CHF 240.- brauchen um dauerhaft zu bestehen. Trotzdem wollen wir niemanden ausschliessen. Wie viel könnten Sie den zahlen pro Jahr?
+            </P>)}
             <P>
               <Field label='Betrag'
                 ref={this.amountRefSetter}
