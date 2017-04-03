@@ -56,13 +56,7 @@ class Frame extends Component {
             <Sidebar sticky={sticky} setSticky={this.setSticky} />
           </div>
         </Container>}
-        {typeof children === 'function'
-          ? children({
-            sticky,
-            setSticky: this.setSticky
-          })
-          : children
-        }
+        {children}
       </div>
     )
   }
