@@ -174,15 +174,17 @@ class Pledge extends Component {
         <H2>Belohnungen</H2>
 
         {query.package ? (
-          <div>
-            {query.packageName}
-            {' '}
-            <A href='/pledge' onClick={event => {
-              event.preventDefault()
-              Router.replace('/pledge', '/pledge', {shallow: true})
-            }}>
-              ändern
-            </A>
+          <div style={{marginBottom: 40}}>
+            <P>
+              {query.packageName}
+              {' '}
+              <A href='/pledge' onClick={event => {
+                event.preventDefault()
+                Router.replace('/pledge', '/pledge', {shallow: true})
+              }}>
+                ändern
+              </A>
+            </P>
             <P>
               {JSON.parse(query.pledgeOptions)
                 .filter(option => option.configurable && option.amount)
@@ -196,19 +198,21 @@ class Pledge extends Component {
                 ))
               }
             </P>
-            <Field label='Betrag'
-              ref={this.amountRefSetter}
-              value={query.amount / 100}
-              onChange={event => {
-                const url = {
-                  pathname: '/pledge',
-                  query: {
-                    ...query,
-                    amount: event.target.value * 100
+            <P>
+              <Field label='Betrag'
+                ref={this.amountRefSetter}
+                value={query.amount / 100}
+                onChange={event => {
+                  const url = {
+                    pathname: '/pledge',
+                    query: {
+                      ...query,
+                      amount: event.target.value * 100
+                    }
                   }
-                }
-                Router.replace(url, url, {shallow: true})
-              }} />
+                  Router.replace(url, url, {shallow: true})
+                }} />
+            </P>
           </div>
         ) : (
           <Accordion onSelect={params => {
@@ -227,7 +231,7 @@ class Pledge extends Component {
         )}
 
         <H2>Deine Kontaktinformationen</H2>
-        <div style={{marginTop: 0}}>
+        <div style={{marginTop: 0, marginBottom: 40}}>
           {me ? (
             <span>
               <strong>Du bist eingeloggt als:</strong><br />
