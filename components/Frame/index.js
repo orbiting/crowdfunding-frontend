@@ -2,11 +2,15 @@ import React, {Component} from 'react'
 import {css} from 'glamor'
 
 import 'glamor/reset'
-import Header, {HEADER_HEIGHT} from './Header'
-import Sidebar, {SIDEBAR_WIDTH} from './Sidebar'
+import Header from './Header'
+import Sidebar from './Sidebar'
 
 import {
-  Container, CONTENT_PADDING,
+  SIDEBAR_WIDTH, HEADER_HEIGHT
+} from './constants'
+
+import {
+  Container, CONTENT_PADDING as CONTAINER_PADDING,
   mediaQueries
 } from '@project-r/styleguide'
 
@@ -24,7 +28,7 @@ const styles = {
     [mediaQueries.mUp]: {
       position: 'absolute',
       top: 0,
-      right: CONTENT_PADDING,
+      right: CONTAINER_PADDING,
       width: SIDEBAR_WIDTH
     }
   })

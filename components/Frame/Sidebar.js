@@ -7,15 +7,13 @@ import Router from 'next/router'
 import Link from 'next/link'
 import {css} from 'glamor'
 
-import {HEADER_HEIGHT} from './Header'
+import {HEADER_HEIGHT, SIDEBAR_WIDTH} from './constants'
 
 import {
   Button,
   P,
-  colors
+  colors, mediaQueries
 } from '@project-r/styleguide'
-
-export const SIDEBAR_WIDTH = 320
 
 const styles = {
   link: css({
@@ -27,35 +25,80 @@ const styles = {
     ':hover': {
       color: '#ccc'
     }
+  }),
+  sticky: css({
+    display: 'none',
+    [mediaQueries.mUp]: {
+      display: 'block',
+      position: 'fixed',
+      zIndex: 1,
+      width: SIDEBAR_WIDTH,
+      top: HEADER_HEIGHT,
+      backgroundColor: '#fff'
+    }
   })
 }
+
+const SidebarInner = () => (
+  <div>
+    <Accordion onSelect={params => {
+      Router.push({
+        pathname: '/pledge',
+        query: params
+      }).then(() => window.scrollTo(0, 0))
+    }} />
+    <P>
+      <Button block>Später erinnern</Button>
+    </P>
+    <P style={{textAlign: 'center'}}>
+      <Link href='/merci'>
+        <a {...styles.link}>Schon unterstützt?</a>
+      </Link>
+    </P>
+  </div>
+)
 
 class Sidebar extends Component {
   constructor (props) {
     super(props)
+    this.state = {}
 
     this.onScroll = () => {
       const y = window.pageYOffset
+      const height = window.innerHeight
       const {sticky, setSticky} = this.props
 
-      if (y + HEADER_HEIGHT > this.statusEndY) {
-        if (!sticky.button) {
-          setSticky({
-            button: true
-          })
+      let status = false
+      let sidebar = false
+      if (y + HEADER_HEIGHT > this.y) {
+        status = true
+        if (height - HEADER_HEIGHT > this.innerHeight) {
+          sidebar = true
         }
-      } else if (sticky.button) {
+      }
+
+      if (sticky.status !== status || sticky.sidebar !== sidebar) {
         setSticky({
-          button: false
+          status,
+          sidebar
         })
       }
     }
-    this.statusRef = ref => { this.status = ref }
+    this.innerRef = ref => { this.inner = ref }
     this.measure = () => {
-      if (this.status) {
-        const y = window.pageYOffset
-        const rect = this.status.getBoundingClientRect()
-        this.statusEndY = y + rect.top + rect.height
+      if (this.inner) {
+        const rect = this.inner.getBoundingClientRect()
+
+        this.y = window.pageYOffset + rect.top
+        this.innerHeight = rect.height
+
+        const right = window.innerWidth - rect.right
+
+        if (right !== this.state.right) {
+          this.setState(() => ({
+            right
+          }))
+        }
       }
       this.onScroll()
     }
@@ -73,25 +116,21 @@ class Sidebar extends Component {
     window.removeEventListener('resize', this.measure)
   }
   render () {
+    const {right} = this.state
+    const {sticky} = this.props
     return (
       <div>
-        <div ref={this.statusRef}>
-          <Status />
+        <Status />
+
+        <div ref={this.innerRef}>
+          <SidebarInner />
         </div>
-        <Accordion onSelect={params => {
-          Router.push({
-            pathname: '/pledge',
-            query: params
-          }).then(() => window.scrollTo(0, 0))
-        }} />
-        <P>
-          <Button block>Später erinnern</Button>
-        </P>
-        <P style={{textAlign: 'center'}}>
-          <Link href='/merci'>
-            <a {...styles.link}>Schon unterstützt?</a>
-          </Link>
-        </P>
+
+        {!!sticky.sidebar && (
+          <div {...styles.sticky} style={{right: right}}>
+            <SidebarInner />
+          </div>
+        )}
       </div>
     )
   }

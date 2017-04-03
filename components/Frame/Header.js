@@ -11,9 +11,7 @@ import {
 } from '@project-r/styleguide'
 
 import LoadingBar from './LoadingBar'
-import {SIDEBAR_WIDTH} from './Sidebar'
-
-export const HEADER_HEIGHT = 80
+import {SIDEBAR_WIDTH, HEADER_HEIGHT} from './constants'
 
 const styles = {
   bar: css({

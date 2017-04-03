@@ -1,25 +1,24 @@
 import React from 'react'
 import {css} from 'glamor'
-import {SIDEBAR_WIDTH} from './Sidebar'
 
 import {
   mediaQueries
 } from '@project-r/styleguide'
 
-export const PADDING = 60
+import {CONTENT_PADDING, SIDEBAR_WIDTH} from './constants'
 
 const styles = {
   content: css({
     [mediaQueries.mUp]: {
-      paddingRight: PADDING + SIDEBAR_WIDTH
+      paddingRight: CONTENT_PADDING + SIDEBAR_WIDTH
     },
     [mediaQueries.lUp]: {
-      paddingRight: PADDING * 2 + SIDEBAR_WIDTH
+      paddingRight: CONTENT_PADDING * 2 + SIDEBAR_WIDTH
     }
   }),
   indention: css({
     [mediaQueries.mUp]: {
-      paddingLeft: PADDING
+      paddingLeft: CONTENT_PADDING
     }
   })
 }
