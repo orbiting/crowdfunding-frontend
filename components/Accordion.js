@@ -23,6 +23,7 @@ const styles = {
   }),
   userPriceLink: css({
     textDecoration: 'none',
+    cursor: 'pointer',
     color: colors.text,
     ':visited': {
       color: colors.text
@@ -290,7 +291,7 @@ class Accordion extends Component {
           })
         }
         <P style={{marginTop: 20}}>
-          <a {...styles.userPriceLink} href='#' onClick={(e) => {
+          <a {...styles.userPriceLink} onClick={(e) => {
             e.preventDefault()
             select(
               packages.find(pkg => pkg.name === 'ABO'),
