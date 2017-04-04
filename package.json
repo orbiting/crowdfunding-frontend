@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "node index.js",
     "precommit": "lint-staged",
-    "standardize": "standard --fix 'components/**/*.js' 'lib/**/*.js' 'pages/**/*.js'"
+    "standardize": "standard --fix 'components/**/*.js' 'lib/**/*.js' 'pages/**/*.js'",
+    "heroku-postbuild": "npm run build"
   },
   "lint-staged": {
     "*.js": [
