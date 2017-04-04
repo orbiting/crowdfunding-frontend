@@ -6,8 +6,8 @@ import Crowdfunding from '../components/Crowdfunding'
 import Pledges from '../components/Pledges'
 import Me from '../components/Auth/Me'
 
-export default withData(({session, isLoggedIn}) => (
-  <Frame sidebar={false}>
+export default withData(({url}) => (
+  <Frame url={url} sidebar={false}>
     <section>
       <Me />
       <Crowdfunding />

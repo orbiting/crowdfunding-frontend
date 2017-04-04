@@ -11,6 +11,8 @@ import {
   colors, mediaQueries
 } from '@project-r/styleguide'
 
+import Menu from './Menu'
+import Toggle from './Toggle'
 import LoadingBar from './LoadingBar'
 import {SIDEBAR_WIDTH, HEADER_HEIGHT} from './constants'
 
@@ -33,6 +35,23 @@ const styles = {
     },
     borderBottom: `1px solid ${colors.disabled}`
   }),
+  menuBar: css({
+    position: 'fixed',
+    zIndex: 10,
+    top: 60,
+    left: 0,
+    right: 0,
+    height: 50,
+    backgroundColor: '#fff',
+    borderBottom: `1px solid ${colors.disabled}`,
+    [mediaQueries.mUp]: {
+      display: 'none'
+    }
+  }),
+  menuBarText: css({
+    fontSize: 32,
+    padding: '7px 15px'
+  }),
   logo: css({
     paddingTop: 20,
     [mediaQueries.mUp]: {
@@ -43,18 +62,11 @@ const styles = {
     lineHeight: 0
   }),
   menu: css({
-    display: 'none',
     [mediaQueries.mUp]: {
-      paddingTop: 25,
       display: 'inline-block',
-      verticalAlign: 'middle',
-      paddingLeft: 20,
-      margin: 0,
-      fontSize: 20,
-      '& li': {
-        display: 'inline-block',
-        marginRight: 15
-      }
+      marginLeft: 15,
+      paddingTop: 25,
+      verticalAlign: 'middle'
     }
   }),
   link: css({
@@ -88,7 +100,8 @@ class Header extends Component {
 
     this.state = {
       opaque: !this.props.cover,
-      mobile: true
+      mobile: true,
+      expanded: false
     }
 
     this.onScroll = () => {
@@ -121,8 +134,10 @@ class Header extends Component {
     window.removeEventListener('resize', this.measure)
   }
   render () {
-    const {cover, sticky, sidebar} = this.props
-    const {opaque, mobile} = this.state
+    const {cover, sticky, sidebar, url} = this.props
+    const {mobile, expanded} = this.state
+
+    const opaque = this.state.opaque || expanded
 
     const barStyle = opaque
       ? merge(styles.bar, styles.barOpaque)
@@ -133,6 +148,25 @@ class Header extends Component {
       logoHeight = 18
     }
 
+    const menuItems = [
+      {
+        label: 'Neues',
+        href: '/updates'
+      },
+      {
+        label: 'Tournee',
+        href: '/events'
+      },
+      {
+        label: 'Leute',
+        href: '/community'
+      },
+      {
+        label: 'FAQ',
+        href: '/faq'
+      }
+    ]
+
     return (
       <div>
         <div {...barStyle}>
@@ -140,28 +174,14 @@ class Header extends Component {
             <Link href='/'>
               <a {...styles.logo}><Logo height={logoHeight} /></a>
             </Link>
-            <ul {...styles.menu}>
-              <li>
-                <Link href='/updates'>
-                  <a {...styles.link}>Neues</a>
-                </Link>
-              </li>
-              <li>
-                <Link href='/events'>
-                  <a {...styles.link}>Tournee</a>
-                </Link>
-              </li>
-              <li>
-                <Link href='/community'>
-                  <a {...styles.link}>Leute</a>
-                </Link>
-              </li>
-              <li>
-                <Link href='/faq'>
-                  <a {...styles.link}>FAQ</a>
-                </Link>
-              </li>
-            </ul>
+            <div {...styles.menu}>
+              {(mobile || opaque) && <Menu expanded={expanded}
+                id='primary-menu' items={menuItems}>
+                {
+                  mobile && <Status compact />
+                }
+              </Menu>}
+            </div>
             {opaque && <div {...styles.side}>
               {
                 mobile && (
@@ -178,6 +198,11 @@ class Header extends Component {
             </div>}
           </Container>
         </div>
+        {opaque && <div {...styles.menuBar}>
+          <div {...styles.menuBarText}>{url.pathname}</div>
+          <Toggle expanded={expanded} id='primary-menu'
+            onClick={() => this.setState({expanded: !expanded})} />
+        </div>}
         <LoadingBar />
         {!!cover && (
           <div {...styles.cover}>

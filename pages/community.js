@@ -7,8 +7,8 @@ import {
   H1, P, Container
 } from '@project-r/styleguide'
 
-export default withData((props) => (
-  <Frame>
+export default withData(({url}) => (
+  <Frame url={url}>
     <Container>
       <Content>
         <H1>Community</H1>

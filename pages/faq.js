@@ -141,8 +141,8 @@ const ConnectedQuestionForm = graphql(submitQuestion)(withMe(QuestionForm))
 /*
 Faq page
  */
-export default withData((props) => (
-  <Frame>
+export default withData(({url}) => (
+  <Frame url={url}>
     <Container>
       <Content>
         <H1>FAQ</H1>

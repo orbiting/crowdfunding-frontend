@@ -412,7 +412,7 @@ const submitPledge = gql`
 const PledgeWithSubmit = graphql(submitPledge)(withApollo(withMe(Pledge)))
 
 export default withData(({url, session}) => (
-  <Frame sidebar={false}>
+  <Frame url={url} sidebar={false}>
     <NarrowContainer>
       <H1>Mitmachen</H1>
       <PledgeWithSubmit query={url.query} session={session} />

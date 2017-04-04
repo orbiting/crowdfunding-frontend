@@ -50,11 +50,11 @@ class Frame extends Component {
     }
   }
   render () {
-    const {children, cover, sidebar} = this.props
+    const {children, cover, sidebar, url} = this.props
     const {sticky} = this.state
     return (
       <div {...styles.container} className={!cover ? styles.coverless : undefined}>
-        <Header cover={cover} sticky={sticky} sidebar={sidebar} />
+        <Header url={url} cover={cover} sticky={sticky} sidebar={sidebar} />
         {sidebar && <Container style={{position: 'relative'}}>
           <div {...styles.sidebar}>
             <Sidebar sticky={sticky} setSticky={this.setSticky} />
