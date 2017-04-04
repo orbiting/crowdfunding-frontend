@@ -8,7 +8,7 @@ import Content from '../components/Frame/Content'
 import SignIn from '../components/Auth/SignIn'
 
 import {
-  H1, H2, P, Container, Field, Button
+  H2, P, Container, Field, Button
 } from '@project-r/styleguide'
 
 /*
@@ -145,7 +145,6 @@ export default withData(({url}) => (
   <Frame url={url}>
     <Container>
       <Content>
-        <H1>FAQ</H1>
         <P>
           Antworten zu den brennenden Fragen.
         </P>

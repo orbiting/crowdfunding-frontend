@@ -50,6 +50,7 @@ const styles = {
   }),
   menuBarText: css({
     fontSize: 32,
+    opacity: 0.3,
     padding: '7px 15px'
   }),
   logo: css({
@@ -198,7 +199,7 @@ class Header extends Component {
             </div>}
           </Container>
         </div>
-        {opaque && <div {...styles.menuBar}>
+        {opaque && <div {...styles.menuBar} onClick={() => this.setState({expanded: !expanded})}>
           <div {...styles.menuBarText}>{url.pathname}</div>
           <Toggle expanded={expanded} id='primary-menu'
             onClick={() => this.setState({expanded: !expanded})} />

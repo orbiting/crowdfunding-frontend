@@ -31,6 +31,11 @@ const styles = {
       right: CONTAINER_PADDING,
       width: SIDEBAR_WIDTH
     }
+  }),
+  hideOnMobile: css({
+    [mediaQueries.onlyS]: {
+      display: 'none'
+    }
   })
 }
 
@@ -52,11 +57,16 @@ class Frame extends Component {
   render () {
     const {children, cover, sidebar, url} = this.props
     const {sticky} = this.state
+
+    const sidebarAdditionalStyle = url.pathname !== '/'
+      ? styles.hideOnMobile
+      : {}
+
     return (
       <div {...styles.container} className={!cover ? styles.coverless : undefined}>
         <Header url={url} cover={cover} sticky={sticky} sidebar={sidebar} />
         {sidebar && <Container style={{position: 'relative'}}>
-          <div {...styles.sidebar}>
+          <div {...styles.sidebar} {...sidebarAdditionalStyle}>
             <Sidebar sticky={sticky} setSticky={this.setSticky} />
           </div>
         </Container>}
