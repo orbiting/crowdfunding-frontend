@@ -1,12 +1,16 @@
 {
   "name": "crowdfunding",
   "version": "0.0.1",
+  "engines": {
+    "node": "7.7.4"
+  },
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon -w index.js -w constants.js -w server index.js",
     "build": "next build",
     "start": "node index.js",
     "precommit": "lint-staged",
-    "standardize": "standard --fix 'components/**/*.js' 'lib/**/*.js' 'pages/**/*.js'"
+    "standardize": "standard --fix 'components/**/*.js' 'lib/**/*.js' 'pages/**/*.js'",
+    "heroku-postbuild": "npm run build"
   },
   "lint-staged": {
     "*.js": [

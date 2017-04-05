@@ -6,6 +6,12 @@ Based on [Next.js with Apollo](https://github.com/zeit/next.js/tree/master/examp
 
 ### Environment
 
+You will need an `NPM_TOKEN` in your system environment to install our private @project-r npm packages. For example via `~/.bash_profile`:
+
+```
+export NPM_TOKEN="00000000-0000-0000-0000-000000000000"
+```
+
 You can use a git-excluded `.env` file in development:
 
 ```
