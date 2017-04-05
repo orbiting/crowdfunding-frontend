@@ -96,7 +96,7 @@ class Pledge extends Component {
 
           <div style={{marginBottom: 40}}>
             {query.package ? (
-              <CustomizePackage pkg={
+              <CustomizePackage userPrice={!!query.userPrice} pkg={
                 crowdfunding.packages
                   .find(pkg => pkg.name === query.package)
               } />

@@ -7,9 +7,9 @@ import {
   Grid, Span
 } from '@project-r/styleguide'
 
-const calculateMinPrice = (pkg, state) => {
+const calculateMinPrice = (pkg, state, userPrice) => {
   return Math.max(pkg.options.reduce(
-    (price, option) => price + (option.userPrice
+    (price, option) => price + (option.userPrice && userPrice
       ? 0
       : (option.price * (state[option.id] !== undefined ? state[option.id] : option.minAmount))
     ),
@@ -43,7 +43,9 @@ class CustomizePackage extends Component {
     super(props)
     this.state = {
       values: {
-        price: calculateMinPrice(props.pkg, {})
+        price: props.userPrice
+          ? ''
+          : calculateMinPrice(props.pkg, {}, props.userPrice)
       },
       errors: {},
       dirty: {}
@@ -99,7 +101,7 @@ class CustomizePackage extends Component {
                         }
 
                         this.setState(
-                          (state) => {
+                          (state, props) => {
                             const nextState = setFieldState(
                               option.id,
                               value,
@@ -109,7 +111,8 @@ class CustomizePackage extends Component {
 
                             const minPrice = calculateMinPrice(
                               pkg,
-                              nextState.values
+                              nextState.values,
+                              props.userPrice
                             )
                             if (!state.customPrice || minPrice > state.values.price) {
                               nextState.values.price = minPrice
@@ -141,7 +144,7 @@ class CustomizePackage extends Component {
             value={values.price / 100}
             onChange={(_, value, shouldValidate) => {
               const price = value * 100
-              const minPrice = calculateMinPrice(pkg, values)
+              const minPrice = calculateMinPrice(pkg, values, userPrice)
               const error = priceError(price, minPrice)
 
               this.setState(() => ({customPrice: true}))
