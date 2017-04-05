@@ -130,11 +130,13 @@ class Pledge extends Component {
             ) : (
               <span>
                 <Field label='Ihr Name'
+                  name='name'
                   error={dirty.name && errors.name}
                   value={values.name}
                   onChange={handleChange('name', 'Ihr Name', true)} />
                 <br />
                 <Field label='Ihre E-Mail'
+                  name='email'
                   error={dirty.email && errors.email}
                   value={values.email}
                   onChange={handleChange('email', 'Ihre E-Mail', true)} />

@@ -4,6 +4,7 @@ import { gql, graphql } from 'react-apollo'
 import Router from 'next/router'
 import FieldSet from '../FieldSet'
 import {mergeFields} from '../../lib/utils/fieldState'
+import {compose} from 'redux'
 
 import {
   H2, P, Button,
@@ -16,6 +17,10 @@ const PAYMENT_METHODS = [
   {disabled: true, key: 'POSTFINANCECARD', name: 'PostfFinance Card'},
   {disabled: true, key: 'PAYPAL', name: 'PayPal'}
 ]
+
+const errorToString = error => error.graphQLErrors && error.graphQLErrors.length
+  ? error.graphQLErrors.map(e => e.message).join(', ')
+  : error.toString()
 
 class Submit extends Component {
   constructor (props) {
@@ -38,17 +43,9 @@ class Submit extends Component {
       paymentError,
       submitError
     } = this.state
-    const {me, user, amount, pledgeOptions} = this.props
+    const {me, user, total, options} = this.props
 
-    const handleChange = (field) => {
-      return (_, value) => {
-        this.setState(() => ({
-          [field]: value
-        }))
-      }
-    }
-
-    const submitPledge = event => {
+    const payPledge = pledgeId => {
       const {values} = this.state
 
       window.Stripe.setPublishableKey('pk_test_sgFutulewhWC8v8csVIXTMea')
@@ -69,65 +66,70 @@ class Submit extends Component {
           // source.error.param
           // source.error.message
           // see https://stripe.com/docs/api#errors
-          this.setState({
+          this.setState(() => ({
             paymentError: source.error.message
-          })
-        } else {
-          this.setState({
-            paymentError: undefined
-          })
+          }))
+          return
+        }
+        this.setState({
+          paymentError: undefined
+        })
 
-          // TODO implement 3D secure
-          if (source.card.three_d_secure === 'required') {
-            window.alert('Cards requiring 3D secure are not supported yet.')
-          } else {
-            const total = amount
+        // TODO implement 3D secure
+        if (source.card.three_d_secure === 'required') {
+          window.alert('Cards requiring 3D secure are not supported yet.')
+          return
+        }
 
-            // don't provide a user if logged in
-            const userInput = me || user
-            // TODO adapt for other paymentMethods
-            const payment = {
-              method: paymentMethod,
-              stripeSourceId: source.id
-            }
-            this.props
-              .mutate({
-                variables: {
-                  total,
-                  options: pledgeOptions.map(option => ({
-                    amount: option.amount,
-                    price: option.price,
-                    templateId: option.id
-                  })),
-                  user: userInput,
-                  payment
-                }
-              })
-              .then(({ data }) => {
-                if (data.submitPledge) {
-                  Router.push({
-                    pathname: '/merci',
-                    query: {
-                      id: data.submitPledge.id,
-                      email: email
-                    }
-                  })
-                } else {
-                  this.setState({
-                    submitError: 'data.submitPledge fehlt'
-                  })
-                }
-              })
-              .catch(error => {
-                this.setState({
-                  submitError: error.graphQLErrors && error.graphQLErrors.length
-                    ? error.graphQLErrors.map(e => e.message).join(', ')
-                    : error.toString()
-                })
-              })
-          }
+        this.props.pay({
+          pledgeId,
+          method: 'STRIPE',
+          sourceId: source.id,
+          pspPayload: JSON.stringify(source)
+        })
+          .then(({data}) => {
+            Router.push({
+              pathname: '/merci',
+              query: {
+                id: data.payPledge.id,
+                email: email
+              }
+            })
+          })
+          .catch(error => {
+            console.error('pay', error)
+            this.setState(() => ({
+              paymentError: errorToString(error)
+            }))
+          })
+      })
+    }
+
+    const submitPledge = () => {
+      // TODO: check for client validation errors
+
+      this.props.submit({
+        total,
+        options,
+        user: me || {
+          ...user,
+          birthday: '2017-05-31T23:59:59.999Z' // TODO: Remove!
         }
       })
+        .then(({ data }) => {
+          this.setState(() => ({
+            pledgeId: data.submitPledge.id,
+            submitError: undefined
+          }))
+          payPledge(data.submitPledge.id)
+        })
+        .catch(error => {
+          console.error('submit', error)
+          this.setState(() => ({
+            pledgeId: undefined,
+            submitError: errorToString(error)
+          }))
+        })
     }
 
     return (
@@ -148,7 +150,12 @@ class Submit extends Component {
                   type='radio'
                   name='paymentMethod'
                   disabled={pm.disabled}
-                  onChange={handleChange('paymentMethod')}
+                  onChange={(event) => {
+                    const value = event.target.value
+                    this.setState(() => ({
+                      paymentMethod: value
+                    }))
+                  }}
                   value={pm.key} />
                 {' '}{pm.name}
               </label><br />
@@ -252,25 +259,36 @@ Submit.propTypes = {
   total: PropTypes.number,
   reason: PropTypes.string,
   options: PropTypes.array.isRequired,
-  mutate: PropTypes.func.isRequired
+  submit: PropTypes.func.isRequired
 }
 
 const submitPledge = gql`
-  mutation submitPledge($total: Int!, $options: [PackageOptionInput!]!, $user: PledgeUserInput, $payment: PledgePaymentInput!) {
-    submitPledge(pledge: {total: $total, options: $options, user: $user, payment: $payment} ) {
+  mutation submitPledge($total: Int!, $options: [PackageOptionInput!]!, $user: UserInput) {
+    submitPledge(pledge: {total: $total, options: $options, user: $user}) {
       id
-      total
-      status
-      packageId
-      options {
-        amount
-        price
-        templateId
-      }
     }
   }
 `
 
-const SubmitWithMutations = graphql(submitPledge)(Submit)
+const payPledge = gql`
+  mutation payPledge($pledgeId: ID!, $method: PaymentMethod!, $sourceId: String, $pspPayload: String!) {
+    payPledge(pledgePayment: {pledgeId: $pledgeId, method: $method, sourceId: $sourceId, pspPayload: $pspPayload}) {
+      id
+    }
+  }
+`
+
+const SubmitWithMutations = compose(
+  graphql(submitPledge, {
+    props: ({mutate}) => ({
+      submit: variables => mutate({variables})
+    })
+  }),
+  graphql(payPledge, {
+    props: ({mutate}) => ({
+      pay: variables => mutate({variables})
+    })
+  })
+)(Submit)
 
 export default SubmitWithMutations
