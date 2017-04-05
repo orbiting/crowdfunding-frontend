@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import Router from 'next/router'
 import withT from '../../lib/withT'
+import {mergeFieldState} from '../../lib/fieldState'
 
 import {
   Field, P, A,
@@ -22,21 +23,6 @@ const priceError = (price, minPrice) => {
     return `Betrag, mindestens ${minPrice / 100}`
   }
 }
-
-const setFieldState = (field, value, error, shouldValidate) => (state) => ({
-  values: {
-    ...state.values,
-    [field]: value
-  },
-  errors: {
-    ...state.errors,
-    [field]: error
-  },
-  dirty: {
-    ...state.dirty,
-    [field]: shouldValidate
-  }
-})
 
 class CustomizePackage extends Component {
   constructor (props) {
@@ -102,12 +88,12 @@ class CustomizePackage extends Component {
 
                         this.setState(
                           (state, props) => {
-                            const nextState = setFieldState(
-                              option.id,
+                            const nextState = mergeFieldState({
+                              field: option.id,
                               value,
                               error,
-                              shouldValidate
-                            )(state)
+                              dirty: shouldValidate
+                            })(state)
 
                             const minPrice = calculateMinPrice(
                               pkg,
@@ -148,12 +134,12 @@ class CustomizePackage extends Component {
               const error = priceError(price, minPrice)
 
               this.setState(() => ({customPrice: true}))
-              this.setState(setFieldState(
-                'price',
-                price,
+              this.setState(mergeFieldState({
+                field: 'price',
+                value: price,
                 error,
-                shouldValidate
-              ))
+                dirty: shouldValidate
+              }))
             }} />
         </P>
       </div>

@@ -5,6 +5,7 @@ import Router from 'next/router'
 import withMe from '../lib/withMe'
 import Loader from '../components/Loader'
 import SignOut from '../components/Auth/SignOut'
+import {mergeFieldState} from '../lib/fieldState'
 
 import {
   H1, H2, Field,
@@ -65,21 +66,13 @@ class Pledge extends Component {
 
     const handleChange = (field, label, isRequired) => {
       return (_, value, shouldValidate) => {
-        this.setState((state) => ({
-          values: {
-            ...state.values,
-            [field]: value
-          },
-          errors: {
-            ...state.errors,
-            [field]: isRequired
+        this.setState(mergeFieldState({
+          field,
+          value,
+          error: isRequired
               ? (!value && `${label} fehlt`)
-              : undefined
-          },
-          dirty: {
-            ...state.dirty,
-            [field]: shouldValidate
-          }
+              : undefined,
+          dirty: shouldValidate
         }))
       }
     }
@@ -96,10 +89,12 @@ class Pledge extends Component {
 
           <div style={{marginBottom: 40}}>
             {query.package ? (
-              <CustomizePackage userPrice={!!query.userPrice} pkg={
-                crowdfunding.packages
-                  .find(pkg => pkg.name === query.package)
-              } />
+              <CustomizePackage
+                userPrice={!!query.userPrice}
+                pkg={
+                  crowdfunding.packages
+                    .find(pkg => pkg.name === query.package)
+                } />
             ) : (
               <Accordion extended onSelect={params => {
                 const url = {
