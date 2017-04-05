@@ -260,8 +260,9 @@ class Submit extends Component {
 Submit.propTypes = {
   me: PropTypes.object,
   user: PropTypes.object,
-  amount: PropTypes.number,
-  pledgeOptions: PropTypes.array,
+  total: PropTypes.number,
+  reason: PropTypes.string,
+  options: PropTypes.array.isRequired,
   mutate: PropTypes.func.isRequired
 }
 

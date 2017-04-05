@@ -155,7 +155,6 @@ class Pledge extends Component {
               price: option.price,
               templateId: option.id
             })) : []}
-            amount={query.amount}
             reason={values.reason} />
         </div>
       )} />

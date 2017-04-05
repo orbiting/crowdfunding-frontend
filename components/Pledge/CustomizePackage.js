@@ -121,9 +121,27 @@ class CustomizePackage extends Component {
             })
           }
         </Grid>
-        {!!userPrice && (<P>
-          Journalismus kostet. Wir haben ausgerechnet dass wir initial mindestens 3000 Abonnenten à CHF 240.- brauchen um dauerhaft zu bestehen. Trotzdem wollen wir niemanden ausschliessen. Wie viel könnten Sie den zahlen pro Jahr?
-        </P>)}
+        {!!userPrice && (<div>
+          <P>
+            Journalismus kostet. Wir haben ausgerechnet dass wir initial mindestens 3000 Abonnenten à CHF 240.- brauchen um dauerhaft zu bestehen. Trotzdem wollen wir niemanden ausschliessen. Wie viel könnten Sie den zahlen pro Jahr?
+          </P>
+          <P>
+            <Field label='Begründung'
+              error={dirty.reason && errors.reason}
+              value={values.reason}
+              onChange={(_, value, shouldValidate) => {
+                const error = value.trim().length > 0 || 'Bitte begründen'
+
+                onChange(fieldsState({
+                  field: 'reason',
+                  value,
+                  error,
+                  dirty: shouldValidate
+                }))
+              }}
+              />
+          </P>
+        </div>)}
         <P>
           <Field label='Betrag'
             ref={this.priceRefSetter}
