@@ -106,16 +106,16 @@ class Submit extends Component {
 
     const submitPledge = () => {
       // TODO: check for client validation errors
-
+      // TODO: check if already submitted
       this.props.submit({
         total,
         options,
-        user: me || {
+        user: me ? null : {
           ...user,
           birthday: '2017-05-31T23:59:59.999Z' // TODO: Remove!
         }
       })
-        .then(({ data }) => {
+        .then(({data}) => {
           this.setState(() => ({
             pledgeId: data.submitPledge.id,
             submitError: undefined
@@ -124,22 +124,25 @@ class Submit extends Component {
         })
         .catch(error => {
           console.error('submit', error)
+          const submitError = errorToString(error)
+
+          // TODO: Better Backend Error
+          if (submitError === 'a user with the email adress pledge.user.email already exists, login!') {
+            this.setState(() => ({
+              emailFree: false
+            }))
+            return
+          }
+
           this.setState(() => ({
             pledgeId: undefined,
-            submitError: errorToString(error)
+            submitError
           }))
         })
     }
 
     return (
       <div>
-        {(!emailFree && !me) && (
-          <div>
-            <p>Es existiert bereits ein Account mit dieser Email adresse bei uns. Um weiter zu fahren, müssen Sie sich erst einloggen. Klicken Sie auf Einloggen oder wählen sie eine andere email adresse.</p>
-            <SignIn email={user.email} />
-          </div>
-        )}
-
         <H2>Zahlungsart auswählen</H2>
         <P>
           {PAYMENT_METHODS.map((pm) => (
@@ -236,6 +239,12 @@ class Submit extends Component {
           </div>
         )}
 
+        {(!emailFree && !me) && (
+          <div style={{marginBottom: 40}}>
+            <P>Sie müssen Ihre Email-Adresse verifizieren. Klicken Sie auf jetzt verifizieren oder wählen sie eine andere Email-Adresse.</P>
+            <SignIn email={user.email} />
+          </div>
+        )}
         {!!paymentError && (
           <P style={{color: colors.error}}>
             {paymentError}
