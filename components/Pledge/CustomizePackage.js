@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import Router from 'next/router'
 import withT from '../../lib/withT'
-import {mergeFieldState} from '../../lib/fieldState'
+import {fieldsState} from '../../lib/fieldState'
 
 import {
   Field, P, A,
@@ -27,15 +27,6 @@ const priceError = (price, minPrice) => {
 class CustomizePackage extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      values: {
-        price: props.userPrice
-          ? ''
-          : calculateMinPrice(props.pkg, {}, props.userPrice)
-      },
-      errors: {},
-      dirty: {}
-    }
     this.priceRefSetter = (ref) => {
       this.priceRef = ref
     }
@@ -46,8 +37,20 @@ class CustomizePackage extends Component {
     }
   }
   render () {
-    const {t, pkg, userPrice} = this.props
-    const {values, errors, dirty} = this.state
+    const {
+      t, pkg, userPrice,
+      values, errors, dirty,
+      onChange
+    } = this.props
+
+    let price
+    if (values.price !== undefined) {
+      price = values.price / 100
+    } else {
+      price = userPrice
+        ? ''
+        : calculateMinPrice(pkg, {}, userPrice)
+    }
 
     return (
       <div>
@@ -86,32 +89,30 @@ class CustomizePackage extends Component {
                           return `${label}, minimal ${option.minAmount}`
                         }
 
-                        this.setState(
-                          (state, props) => {
-                            const nextState = mergeFieldState({
-                              field: option.id,
-                              value,
-                              error,
-                              dirty: shouldValidate
-                            })(state)
-
-                            const minPrice = calculateMinPrice(
-                              pkg,
-                              nextState.values,
-                              props.userPrice
-                            )
-                            if (!state.customPrice || minPrice > state.values.price) {
-                              nextState.values.price = minPrice
-                              nextState.customPrice = false
-                            }
-                            nextState.errors.price = priceError(
-                              nextState.values.price,
-                              minPrice
-                            )
-
-                            return nextState
-                          }
+                        const fields = fieldsState({
+                          field: option.id,
+                          value,
+                          error,
+                          dirty: shouldValidate
+                        })
+                        const minPrice = calculateMinPrice(
+                          pkg,
+                          {
+                            ...values,
+                            ...fields.values
+                          },
+                          userPrice
                         )
+                        let price = values.price
+                        if (!this.state.customPrice || minPrice > values.price) {
+                          fields.values.price = price = minPrice
+                          this.setState(() => ({customPrice: false}))
+                        }
+                        fields.errors.price = priceError(
+                          price,
+                          minPrice
+                        )
+                        onChange(fields)
                       }}
                       />
                   </P>
@@ -127,14 +128,14 @@ class CustomizePackage extends Component {
           <Field label='Betrag'
             ref={this.priceRefSetter}
             error={dirty.price && errors.price}
-            value={values.price / 100}
+            value={price}
             onChange={(_, value, shouldValidate) => {
               const price = value * 100
               const minPrice = calculateMinPrice(pkg, values, userPrice)
               const error = priceError(price, minPrice)
 
               this.setState(() => ({customPrice: true}))
-              this.setState(mergeFieldState({
+              onChange(fieldsState({
                 field: 'price',
                 value: price,
                 error,
@@ -148,6 +149,9 @@ class CustomizePackage extends Component {
 }
 
 CustomizePackage.propTypes = {
+  values: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  dirty: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   userPrice: PropTypes.bool,
   pkg: PropTypes.shape({
