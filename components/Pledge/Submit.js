@@ -37,7 +37,6 @@ class Submit extends Component {
   }
   render () {
     const {
-      email,
       emailFree,
       paymentMethod,
       paymentError,
@@ -92,7 +91,7 @@ class Submit extends Component {
               pathname: '/merci',
               query: {
                 id: data.payPledge.id,
-                email: email
+                email: me ? me.email : user.email
               }
             })
           })
@@ -137,7 +136,7 @@ class Submit extends Component {
         {(!emailFree && !me) && (
           <div>
             <p>Es existiert bereits ein Account mit dieser Email adresse bei uns. Um weiter zu fahren, müssen Sie sich erst einloggen. Klicken Sie auf Einloggen oder wählen sie eine andere email adresse.</p>
-            <SignIn email={email} />
+            <SignIn email={user.email} />
           </div>
         )}
 
