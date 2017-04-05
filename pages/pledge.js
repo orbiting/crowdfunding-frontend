@@ -10,8 +10,7 @@ import {
 } from '@project-r/styleguide'
 
 import Frame from '../components/Frame'
-import Accordion from '../components/Accordion'
-import FieldSet from '../components/FieldSet'
+import Accordion from '../components/Pledge/Accordion'
 import Submit from '../components/Pledge/Submit'
 
 class Pledge extends Component {
@@ -33,17 +32,29 @@ class Pledge extends Component {
   }
   render () {
     const {
-      name,
-      email,
-      birthday
+      values,
+      errors,
+      dirty
     } = this.state
     const {query, me} = this.props
 
-    const handleChange = field => {
-      return event => {
-        const value = event.target.value
-        this.setState(() => ({
-          [field]: value
+    const handleChange = (field, label, isRequired) => {
+      return (_, value, shouldValidate) => {
+        this.setState((state) => ({
+          values: {
+            ...state.values,
+            [field]: value
+          },
+          errors: {
+            ...state.errors,
+            [field]: isRequired
+              ? (!value && `${label} fehlt`)
+              : undefined
+          },
+          dirty: {
+            ...state.dirty,
+            [field]: shouldValidate
+          }
         }))
       }
     }
@@ -51,11 +62,6 @@ class Pledge extends Component {
     const pledgeOptions = query.pledgeOptions
       ? JSON.parse(query.pledgeOptions)
       : []
-    const user = {
-      name,
-      email,
-      birthday
-    }
 
     return (
       <div>
@@ -93,12 +99,12 @@ class Pledge extends Component {
               <Field label='Betrag'
                 ref={this.amountRefSetter}
                 value={query.amount / 100}
-                onChange={event => {
+                onChange={(_, value) => {
                   const url = {
                     pathname: '/pledge',
                     query: {
                       ...query,
-                      amount: event.target.value * 100
+                      amount: value * 100
                     }
                   }
                   Router.replace(url, url, {shallow: true})
@@ -106,7 +112,7 @@ class Pledge extends Component {
             </P>
           </div>
         ) : (
-          <Accordion onSelect={params => {
+          <Accordion extended onSelect={params => {
             const url = {
               pathname: '/pledge',
               query: params
@@ -132,74 +138,29 @@ class Pledge extends Component {
             </span>
           ) : (
             <span>
-              <Field label='Dein Name'
-                value={name}
-                onChange={handleChange('name')} />
+              <Field label='Ihr Name'
+                error={dirty.name && errors.name}
+                value={values.name}
+                onChange={handleChange('name', 'Ihr Name', true)} />
               <br />
-              <Field label='Deine E-Mail'
-                value={email}
-                onChange={handleChange('email')} />
+              <Field label='Ihre E-Mail'
+                error={dirty.email && errors.email}
+                value={values.email}
+                onChange={handleChange('email', 'Ihre E-Mail', true)} />
               <br /><br />
             </span>
           )}
-          <Field label='Geburtsdatum'
-            value={birthday}
-            onChange={handleChange('birthday')} />
-          <br /><br />
-          <FieldSet
-            values={this.state.values}
-            errors={this.state.errors}
-            dirty={this.state.dirty}
-            fields={[
-              {
-                label: 'Strasse',
-                name: 'line1'
-              },
-              {
-                label: 'Strassenzusatz',
-                name: 'line2'
-              },
-              {
-                label: 'PLZ',
-                name: 'postalCode'
-              },
-              {
-                label: 'Ort',
-                name: 'city'
-              },
-              {
-                label: 'Land',
-                name: 'country',
-                autocomplete: [
-                  'Schweiz',
-                  'Deutschland',
-                  'Österreich'
-                ]
-              }
-            ]}
-            onChange={(fields) => {
-              this.setState((state) => {
-                const nextState = {
-                  values: {
-                    ...state.values,
-                    ...fields.values
-                  },
-                  errors: {
-                    ...state.errors,
-                    ...fields.errors
-                  },
-                  dirty: {
-                    ...state.dirty,
-                    ...fields.dirty
-                  }
-                }
-
-                return nextState
-              })
-            }} />
         </div>
 
-        <Submit me={me} user={user} pledgeOptions={pledgeOptions} />
+        <Submit
+          me={me}
+          user={{
+            name: values.name,
+            email: values.email
+          }}
+          pledgeOptions={pledgeOptions}
+          amount={query.amount}
+          reason={values.reason} />
       </div>
     )
   }

@@ -168,14 +168,14 @@ class Accordion extends Component {
       )
     }
 
-    const {crowdfunding: {packages}} = this.props
+    const {crowdfunding: {packages}, extended} = this.props
 
     return (
       <div>
         {
           packages.map((pkg, i) => {
             const isSelected = selectedIndex === i
-            const isActive = isSelected || activeIndex === i
+            const isActive = extended || isSelected || activeIndex === i
             const configurableOptions = pkg.options.filter(option => (
               option.minAmount !== option.maxAmount
             ))

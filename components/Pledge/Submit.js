@@ -39,9 +39,8 @@ class Submit extends Component {
     } = this.state
     const {me, user, amount, pledgeOptions} = this.props
 
-    const handleChange = field => {
-      return event => {
-        const value = event.target.value
+    const handleChange = (field) => {
+      return (_, value) => {
         this.setState(() => ({
           [field]: value
         }))

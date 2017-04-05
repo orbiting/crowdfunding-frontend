@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import Accordion from '../Accordion'
+import Accordion from '../Pledge/Accordion'
 import Status from '../Status'
 
 import Router from 'next/router'
