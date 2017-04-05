@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import Router from 'next/router'
 import withT from '../../lib/withT'
-import {fieldsState} from '../../lib/fieldState'
+import {fieldsState} from '../../lib/utils/fieldState'
 
 import {
   Field, P, A,
@@ -45,7 +45,7 @@ class CustomizePackage extends Component {
 
     let price
     if (values.price !== undefined) {
-      price = values.price / 100
+      price = values.price
     } else {
       price = userPrice
         ? ''
@@ -128,7 +128,7 @@ class CustomizePackage extends Component {
           <Field label='Betrag'
             ref={this.priceRefSetter}
             error={dirty.price && errors.price}
-            value={price}
+            value={price / 100}
             onChange={(_, value, shouldValidate) => {
               const price = value * 100
               const minPrice = calculateMinPrice(pkg, values, userPrice)

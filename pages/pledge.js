@@ -5,7 +5,7 @@ import Router from 'next/router'
 import withMe from '../lib/withMe'
 import Loader from '../components/Loader'
 import SignOut from '../components/Auth/SignOut'
-import {mergeField, mergeFields} from '../lib/fieldState'
+import {mergeField, mergeFields} from '../lib/utils/fieldState'
 
 import {
   H1, H2, Field,
@@ -78,9 +78,12 @@ class Pledge extends Component {
     }
 
     const {query, me, loading, error, crowdfunding} = this.props
-    const pledgeOptions = query.pledgeOptions
-      ? JSON.parse(query.pledgeOptions)
-      : []
+
+    const pkg = query.package
+      ? crowdfunding.packages.find(
+          pkg => pkg.name === query.package
+        )
+      : null
 
     return (
       <Loader loading={loading} error={error} render={() => (
@@ -94,10 +97,7 @@ class Pledge extends Component {
                 errors={errors}
                 dirty={dirty}
                 userPrice={!!query.userPrice}
-                pkg={
-                  crowdfunding.packages
-                    .find(pkg => pkg.name === query.package)
-                }
+                pkg={pkg}
                 onChange={(fields) => {
                   this.setState(mergeFields(fields))
                 }} />
@@ -145,11 +145,16 @@ class Pledge extends Component {
 
           <Submit
             me={me}
+            total={values.price}
             user={{
               name: values.name,
               email: values.email
             }}
-            pledgeOptions={pledgeOptions}
+            options={pkg ? pkg.options.map(option => ({
+              amount: values[option.id] || option.minAmount,
+              price: option.price,
+              templateId: option.id
+            })) : []}
             amount={query.amount}
             reason={values.reason} />
         </div>
