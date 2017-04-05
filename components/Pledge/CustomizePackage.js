@@ -8,6 +8,7 @@ import {
   Grid, Span
 } from '@project-r/styleguide'
 
+const absolutMinPrice = 100
 const calculateMinPrice = (pkg, state, userPrice) => {
   return Math.max(pkg.options.reduce(
     (price, option) => price + (option.userPrice && userPrice
@@ -15,7 +16,7 @@ const calculateMinPrice = (pkg, state, userPrice) => {
       : (option.price * (state[option.id] !== undefined ? state[option.id] : option.minAmount))
     ),
     0
-  ), 100)
+  ), absolutMinPrice)
 }
 
 const priceError = (price, minPrice) => {
@@ -27,13 +28,14 @@ const priceError = (price, minPrice) => {
 class CustomizePackage extends Component {
   constructor (props) {
     super(props)
-    this.priceRefSetter = (ref) => {
-      this.priceRef = ref
+    this.state = {}
+    this.focusRefSetter = (ref) => {
+      this.focusRef = ref
     }
   }
   componentDidMount () {
-    if (this.priceRef && this.priceRef.input) {
-      this.priceRef.input.focus()
+    if (this.focusRef && this.focusRef.input) {
+      this.focusRef.input.focus()
     }
   }
   render () {
@@ -51,6 +53,10 @@ class CustomizePackage extends Component {
         ? ''
         : calculateMinPrice(pkg, {}, userPrice)
     }
+    const configurableOptions = pkg.options
+      .filter(option => (
+        option.minAmount !== option.maxAmount
+      ))
 
     return (
       <div>
@@ -65,28 +71,26 @@ class CustomizePackage extends Component {
           </A>
         </P>
         <Grid>
-          {pkg.options
-            .filter(option => (
-              option.minAmount !== option.maxAmount
-            ))
-            .map(option => {
+          {
+            configurableOptions.map((option, i) => {
               const label = t(`option/${option.reward.name}/label`)
 
               return (
                 <Span s='1/2' m='9/18' key={option.id}>
                   <P>
                     <Field
+                      ref={i === 0 ? this.focusRefSetter : undefined}
                       label={label}
                       type='number'
                       error={dirty[option.id] && errors[option.id]}
-                      value={values[option.id] || option.defaultAmount}
+                      value={values[option.id] === undefined ? option.defaultAmount : values[option.id]}
                       onChange={(_, value, shouldValidate) => {
                         let error
                         if (value > option.maxAmount) {
-                          return `${label}, maximal ${option.maxAmount}`
+                          error = `${label}, maximal ${option.maxAmount}`
                         }
                         if (value < option.minAmount) {
-                          return `${label}, minimal ${option.minAmount}`
+                          error = `${label}, minimal ${option.minAmount}`
                         }
 
                         const fields = fieldsState({
@@ -104,7 +108,10 @@ class CustomizePackage extends Component {
                           userPrice
                         )
                         let price = values.price
-                        if (!this.state.customPrice || minPrice > values.price) {
+                        if (
+                          minPrice !== absolutMinPrice &&
+                          (!this.state.customPrice || minPrice > values.price)
+                        ) {
                           fields.values.price = price = minPrice
                           this.setState(() => ({customPrice: false}))
                         }
@@ -144,7 +151,7 @@ class CustomizePackage extends Component {
         </div>)}
         <P>
           <Field label='Betrag'
-            ref={this.priceRefSetter}
+            ref={configurableOptions.length ? undefined : this.focusRefSetter}
             error={dirty.price && errors.price}
             value={price / 100}
             onChange={(_, value, shouldValidate) => {

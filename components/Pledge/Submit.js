@@ -3,6 +3,7 @@ import SignIn from '../Auth/SignIn'
 import { gql, graphql } from 'react-apollo'
 import Router from 'next/router'
 import FieldSet from '../FieldSet'
+import {mergeFields} from '../../lib/utils/fieldState'
 
 import {
   H2, P, Button,
@@ -49,6 +50,7 @@ class Submit extends Component {
 
     const submitPledge = event => {
       const {values} = this.state
+
       window.Stripe.setPublishableKey('pk_test_sgFutulewhWC8v8csVIXTMea')
       window.Stripe.source.create({
         type: 'card',
@@ -199,20 +201,7 @@ class Submit extends Component {
               ]}
               onChange={(fields) => {
                 this.setState((state) => {
-                  const nextState = {
-                    values: {
-                      ...state.values,
-                      ...fields.values
-                    },
-                    errors: {
-                      ...state.errors,
-                      ...fields.errors
-                    },
-                    dirty: {
-                      ...state.dirty,
-                      ...fields.dirty
-                    }
-                  }
+                  const nextState = mergeFields(fields)(state)
 
                   const month = nextState.values.cardMonth
                   const year = nextState.values.cardYear
