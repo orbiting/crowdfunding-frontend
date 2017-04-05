@@ -40,7 +40,8 @@ class Submit extends Component {
       emailFree,
       paymentMethod,
       paymentError,
-      submitError
+      submitError,
+      signInError
     } = this.state
     const {me, user, total, options} = this.props
 
@@ -87,13 +88,27 @@ class Submit extends Component {
           pspPayload: JSON.stringify(source)
         })
           .then(({data}) => {
-            Router.push({
-              pathname: '/merci',
-              query: {
-                id: data.payPledge.id,
-                email: me ? me.email : user.email
-              }
-            })
+            const gotoMerci = () => {
+              Router.push({
+                pathname: '/merci',
+                query: {
+                  id: data.payPledge.id,
+                  email: me ? me.email : user.email
+                }
+              })
+            }
+            if (!me) {
+              this.props.signIn(user.email)
+                .then(() => gotoMerci())
+                .catch(error => {
+                  console.error('signIn', error)
+                  this.setState(() => ({
+                    signInError: errorToString(error)
+                  }))
+                })
+            } else {
+              gotoMerci()
+            }
           })
           .catch(error => {
             console.error('pay', error)
@@ -245,14 +260,19 @@ class Submit extends Component {
             <SignIn email={user.email} />
           </div>
         )}
+        {!!submitError && (
+          <P style={{color: colors.error}}>
+            {submitError}
+          </P>
+        )}
         {!!paymentError && (
           <P style={{color: colors.error}}>
             {paymentError}
           </P>
         )}
-        {!!submitError && (
+        {!!signInError && (
           <P style={{color: colors.error}}>
-            {submitError}
+            {signInError}
           </P>
         )}
         <Button onClick={submitPledge}>Weiter</Button>
@@ -286,6 +306,14 @@ const payPledge = gql`
   }
 `
 
+const signInMutation = gql`
+mutation signIn($email: String!) {
+  signIn(email: $email) {
+    phrase
+  }
+}
+`
+
 const SubmitWithMutations = compose(
   graphql(submitPledge, {
     props: ({mutate}) => ({
@@ -295,6 +323,11 @@ const SubmitWithMutations = compose(
   graphql(payPledge, {
     props: ({mutate}) => ({
       pay: variables => mutate({variables})
+    })
+  }),
+  graphql(signInMutation, {
+    props: ({mutate}) => ({
+      signIn: email => mutate({variables: {email}})
     })
   })
 )(Submit)
