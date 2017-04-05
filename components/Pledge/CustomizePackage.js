@@ -19,10 +19,22 @@ const calculateMinPrice = (pkg, state, userPrice) => {
   ), absolutMinPrice)
 }
 
+const getPrice = ({values, pkg, userPrice}) => {
+  if (values.price !== undefined) {
+    return values.price
+  } else {
+    return userPrice
+      ? ''
+      : calculateMinPrice(pkg, {}, userPrice)
+  }
+}
 const priceError = (price, minPrice) => {
   if (price < minPrice) {
     return `Betrag, mindestens ${minPrice / 100}`
   }
+}
+const reasonError = (value = '') => {
+  return value.trim().length > 0 || 'Bitte begründen'
 }
 
 class CustomizePackage extends Component {
@@ -37,6 +49,27 @@ class CustomizePackage extends Component {
     if (this.focusRef && this.focusRef.input) {
       this.focusRef.input.focus()
     }
+
+    const {
+      onChange,
+      pkg, values, userPrice
+    } = this.props
+
+    const price = getPrice(this.props)
+    const minPrice = calculateMinPrice(
+      pkg,
+      values,
+      userPrice
+    )
+    onChange({
+      values: {
+        price
+      },
+      errors: {
+        price: priceError(price, minPrice),
+        reason: userPrice && reasonError(values.reason)
+      }
+    })
   }
   render () {
     const {
@@ -45,14 +78,7 @@ class CustomizePackage extends Component {
       onChange
     } = this.props
 
-    let price
-    if (values.price !== undefined) {
-      price = values.price
-    } else {
-      price = userPrice
-        ? ''
-        : calculateMinPrice(pkg, {}, userPrice)
-    }
+    const price = getPrice(this.props)
     const configurableOptions = pkg.options
       .filter(option => (
         option.minAmount !== option.maxAmount
@@ -137,12 +163,10 @@ class CustomizePackage extends Component {
               error={dirty.reason && errors.reason}
               value={values.reason}
               onChange={(_, value, shouldValidate) => {
-                const error = value.trim().length > 0 || 'Bitte begründen'
-
                 onChange(fieldsState({
                   field: 'reason',
                   value,
-                  error,
+                  error: reasonError(value),
                   dirty: shouldValidate
                 }))
               }}
