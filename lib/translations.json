@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-06T10:58:26.304Z",
+  "updated": "2017-04-06T12:05:35.152Z",
   "title": "live",
   "data": [
     {
@@ -27,10 +27,6 @@
       "undefined": "Antworten"
     },
     {
-      "key": "Akkordeon",
-      "value": null
-    },
-    {
       "key": "Mitmachen Button",
       "value": "Mitmachen",
       "undefined": "An Bord kommen"
@@ -50,6 +46,10 @@
     {
       "key": "package/POSTER/description",
       "value": "Sie sind vorsichtig und entscheiden sich statt dem Produkt für den Bauplan des Produkts. Diesen erhalten Sie prächtig in A3, ein Schmuck für jede Wand. Aber Achtung: Das Magazin erhalten Sie dafür noch nicht."
+    },
+    {
+      "key": "package/ABO/userPrice/teaser",
+      "value": "Sie können sich kein Abonnement leisten?"
     },
     {
       "key": "package/ABO/title",
@@ -102,6 +102,42 @@
     {
       "key": "merci/signin",
       "value": "Bitte anmelden:"
+    },
+    {
+      "key": "pledge/title",
+      "value": "Mitmachen"
+    },
+    {
+      "key": "pledge/rewards/title",
+      "value": "Belohnungen"
+    },
+    {
+      "key": "pledge/contact/title",
+      "value": "Deine Kontaktinformationen"
+    },
+    {
+      "key": "pledge/contact/signedin-as",
+      "value": "Du bist eingeloggt als:"
+    },
+    {
+      "key": "pledge/contact/name/label",
+      "value": "Ihr Name"
+    },
+    {
+      "key": "pledge/contact/name/error/empty",
+      "value": "Name fehlt"
+    },
+    {
+      "key": "pledge/contact/email/label",
+      "value": "Ihre E-Mail"
+    },
+    {
+      "key": "pledge/contact/email/error/empty",
+      "value": "E-Mail fehlt"
+    },
+    {
+      "key": "pledge/contact/email/error/invalid",
+      "value": "E-Mail ungültig"
     }
   ]
 }

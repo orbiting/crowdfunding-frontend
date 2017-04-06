@@ -2,11 +2,13 @@ import React, {Component, PropTypes} from 'react'
 import withData from '../lib/withData'
 import {gql, graphql} from 'react-apollo'
 import Router from 'next/router'
+import withT from '../lib/withT'
 import withMe from '../lib/withMe'
 import Loader from '../components/Loader'
 import SignOut from '../components/Auth/SignOut'
 import {mergeField, mergeFields} from '../lib/utils/fieldState'
 import {validate as isEmail} from 'email-validator'
+import {compose} from 'redux'
 
 import {
   H1, H2, Field,
@@ -58,29 +60,29 @@ class Pledge extends Component {
       dirty: {}
     }
   }
-  handleName (value, shouldValidate) {
+  handleName (value, shouldValidate, t) {
     this.setState(mergeField({
       field: 'name',
       value,
-      error: (value.trim().length <= 0 && 'Name fehlt'),
+      error: (value.trim().length <= 0 && t('pledge/contact/name/error/empty')),
       dirty: shouldValidate
     }))
   }
-  handleEmail (value, shouldValidate) {
+  handleEmail (value, shouldValidate, t) {
     this.setState(mergeField({
       field: 'email',
       value,
       error: (
-        (value.trim().length <= 0 && 'E-Mail fehlt') ||
-        (!isEmail(value) && 'E-Mail ungültig')
+        (value.trim().length <= 0 && t('pledge/contact/email/error/empty')) ||
+        (!isEmail(value) && t('pledge/contact/email/error/invalid'))
       ),
       dirty: shouldValidate
     }))
   }
   checkUserFields (props) {
     if (!props.me) {
-      this.handleName(this.state.values.email || '', false)
-      this.handleEmail(this.state.values.name || '', false)
+      this.handleName(this.state.values.email || '', false, props.t)
+      this.handleEmail(this.state.values.name || '', false, props.t)
     } else {
       this.setState((state) => ({
         errors: {
@@ -106,7 +108,10 @@ class Pledge extends Component {
       dirty
     } = this.state
 
-    const {query, me, loading, error, crowdfunding} = this.props
+    const {
+      query, me, loading,
+      error, crowdfunding, t
+    } = this.props
 
     const pkg = query.package
       ? crowdfunding.packages.find(
@@ -118,7 +123,8 @@ class Pledge extends Component {
     return (
       <Loader loading={loading} error={error} render={() => (
         <div>
-          <H2>Belohnungen</H2>
+          <H1>{t('pledge/title')}</H1>
+          <H2>{t('pledge/rewards/title')}</H2>
 
           <div style={{marginBottom: 40}}>
             {query.package ? (
@@ -148,31 +154,31 @@ class Pledge extends Component {
             )}
           </div>
 
-          <H2>Deine Kontaktinformationen</H2>
+          <H2>{t('pledge/contact/title')}</H2>
           <div style={{marginTop: 0, marginBottom: 40}}>
             {me ? (
               <span>
-                <strong>Du bist eingeloggt als:</strong><br />
+                <strong>{t('pledge/contact/signedin-as')}</strong><br />
                 {me.name}<br />
                 {me.email}<br /><br />
                 <SignOut />
               </span>
             ) : (
               <span>
-                <Field label='Ihr Name'
+                <Field label={t('pledge/contact/name/label')}
                   name='name'
                   error={dirty.name && errors.name}
                   value={values.name}
                   onChange={(_, value, shouldValidate) => {
-                    this.handleName(value, shouldValidate)
+                    this.handleName(value, shouldValidate, t)
                   }} />
                 <br />
-                <Field label='Ihre E-Mail'
+                <Field label={t('pledge/contact/email/label')}
                   name='email'
                   error={dirty.email && errors.email}
                   value={values.email}
                   onChange={(_, value, shouldValidate) => {
-                    this.handleEmail(value, shouldValidate)
+                    this.handleEmail(value, shouldValidate, t)
                   }} />
                 <br /><br />
               </span>
@@ -218,20 +224,23 @@ Pledge.propTypes = {
   query: PropTypes.object.isRequired
 }
 
-const PledgeWithQueries = graphql(query, {
-  props: ({ data }) => {
-    return {
-      loading: data.loading,
-      error: data.error,
-      crowdfunding: data.crowdfunding
+const PledgeWithQueries = compose(
+  graphql(query, {
+    props: ({ data }) => {
+      return {
+        loading: data.loading,
+        error: data.error,
+        crowdfunding: data.crowdfunding
+      }
     }
-  }
-})(withMe(Pledge))
+  }),
+  withT,
+  withMe
+)(Pledge)
 
 export default withData(({url, session}) => (
   <Frame url={url} sidebar={false}>
     <NarrowContainer>
-      <H1>Mitmachen</H1>
       <PledgeWithQueries query={url.query} session={session} />
     </NarrowContainer>
   </Frame>

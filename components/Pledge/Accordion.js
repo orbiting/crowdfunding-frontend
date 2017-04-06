@@ -204,7 +204,7 @@ class Accordion extends Component {
               true
             )
           }}>
-            <em>Sie können sich kein Abonnement leisten?</em>
+            <em>{t('package/ABO/userPrice/teaser')}</em>
           </a>
         </P>
       </div>
