@@ -49,7 +49,7 @@ class Submit extends Component {
     }
   }
   submitPledge () {
-    const {me, user, total, options, reason} = this.props
+    const {me, user, total, options, reason, t} = this.props
 
     const variables = {
       total,
@@ -65,7 +65,7 @@ class Submit extends Component {
     }
 
     this.setState(() => ({
-      loading: 'einreichen'
+      loading: t('pledge/submit/loading/submit')
     }))
     this.props.submit(variables)
       .then(({data}) => {
@@ -99,11 +99,11 @@ class Submit extends Component {
       })
   }
   payPledge (pledgeId) {
-    const {me, user} = this.props
+    const {me, user, t} = this.props
     const {values} = this.state
 
     this.setState(() => ({
-      loading: 'bezahlen'
+      loading: t('pledge/submit/loading/stripe')
     }))
     window.Stripe.setPublishableKey('pk_test_sgFutulewhWC8v8csVIXTMea')
     window.Stripe.source.create({
@@ -141,7 +141,7 @@ class Submit extends Component {
       }
 
       this.setState(() => ({
-        loading: 'verarbeiten'
+        loading: t('pledge/submit/loading/pay')
       }))
       this.props.pay({
         pledgeId,

@@ -1,11 +1,7 @@
 {
-  "updated": "2017-04-06T13:31:01.553Z",
+  "updated": "2017-04-06T14:21:50.208Z",
   "title": "live",
   "data": [
-    {
-      "key": "Menu",
-      "value": null
-    },
     {
       "key": "menu/updates",
       "value": "Neues",
@@ -254,6 +250,18 @@
     {
       "key": "pledge/submit/pay/method/PAYPAL",
       "value": "PayPal"
+    },
+    {
+      "key": "pledge/submit/loading/submit",
+      "value": "einreichen"
+    },
+    {
+      "key": "pledge/submit/loading/stripe",
+      "value": "bezahlen"
+    },
+    {
+      "key": "pledge/submit/loading/pay",
+      "value": "verarbeiten"
     },
     {
       "key": "status/goal/people",
