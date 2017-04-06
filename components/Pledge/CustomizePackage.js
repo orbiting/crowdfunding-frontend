@@ -156,10 +156,11 @@ class CustomizePackage extends Component {
         </Grid>
         {!!userPrice && (<div>
           <P>
-            Journalismus kostet. Wir haben ausgerechnet dass wir initial mindestens 3000 Abonnenten à CHF 240.- brauchen um dauerhaft zu bestehen. Trotzdem wollen wir niemanden ausschliessen. Wie viel könnten Sie den zahlen pro Jahr?
+            Journalismus kostet. Wir haben ausgerechnet dass wir initial mindestens 3000 Abonnenten à CHF 240.- brauchen um dauerhaft zu bestehen. Trotzdem wollen wir niemanden ausschliessen.
           </P>
           <P>
             <Field label='Begründung'
+              ref={this.focusRefSetter}
               error={dirty.reason && errors.reason}
               value={values.reason}
               onChange={(_, value, shouldValidate) => {
@@ -172,10 +173,14 @@ class CustomizePackage extends Component {
               }}
               />
           </P>
+          <P>
+            Wie viel könnten Sie den zahlen pro Jahr?
+          </P>
         </div>)}
         <P>
           <Field label='Betrag'
-            ref={configurableOptions.length ? undefined : this.focusRefSetter}
+            ref={(configurableOptions.length || userPrice)
+              ? undefined : this.focusRefSetter}
             error={dirty.price && errors.price}
             value={price / 100}
             onChange={(_, value, shouldValidate) => {
