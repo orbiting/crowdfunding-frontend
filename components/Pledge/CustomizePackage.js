@@ -109,7 +109,10 @@ class CustomizePackage extends Component {
         <Grid>
           {
             configurableOptions.map((option, i) => {
-              const label = t(`option/${option.reward.name}/label`)
+              const value = values[option.id] === undefined ? option.defaultAmount : values[option.id]
+              const label = t.pluralize(`option/${option.reward.name}/label`, {
+                count: value
+              }, t(`option/${option.reward.name}/label`))
 
               return (
                 <Span s='1/2' m='9/18' key={option.id}>
@@ -119,7 +122,7 @@ class CustomizePackage extends Component {
                       label={label}
                       type='number'
                       error={dirty[option.id] && errors[option.id]}
-                      value={values[option.id] === undefined ? option.defaultAmount : values[option.id]}
+                      value={value}
                       onChange={(_, value, shouldValidate) => {
                         let error
                         if (value > option.maxAmount) {

@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-06T14:35:40.395Z",
+  "updated": "2017-04-06T14:43:37.227Z",
   "title": "live",
   "data": [
     {
@@ -108,11 +108,19 @@
       "value": "Sie wollen nicht nur ein unabhängiges Magazin lesen, sondern Sie wollen sich auch nachhaltig dafür ein setzten, dass dieses existiert. Und fördern ein neues Modell für Journalismus mit dem nachdrücklichsten Argument, das möglich ist: mit Geld."
     },
     {
-      "key": "option/ABO/label",
+      "key": "option/ABO/label/other",
       "value": "Mitgliedschaften"
     },
     {
-      "key": "option/NOTEBOOK/label",
+      "key": "option/ABO/label/1",
+      "value": "Mitgliedschaft"
+    },
+    {
+      "key": "option/NOTEBOOK/label/other",
+      "value": "Notizbücher"
+    },
+    {
+      "key": "option/NOTEBOOK/label/1",
       "value": "Notizbuch"
     },
     {
