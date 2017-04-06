@@ -34,7 +34,7 @@ const priceError = (price, minPrice) => {
   }
 }
 const reasonError = (value = '') => {
-  return value.trim().length > 0 || 'Bitte begründen'
+  return value.trim().length === 0 && 'Bitte begründen'
 }
 
 class CustomizePackage extends Component {
@@ -174,7 +174,7 @@ class CustomizePackage extends Component {
               />
           </P>
           <P>
-            Wie viel könnten Sie den zahlen pro Jahr?
+            Wie viel könnten Sie zahlen pro Jahr?
           </P>
         </div>)}
         <P>

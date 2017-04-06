@@ -58,6 +58,10 @@ class Submit extends Component {
     } = this.state
     const {me, user, total, options} = this.props
 
+    const errors = objectValues(this.props.errors)
+      .concat(objectValues(this.state.errors))
+      .filter(Boolean)
+
     const payPledge = pledgeId => {
       const {values} = this.state
 
@@ -321,7 +325,30 @@ class Submit extends Component {
             {loading}
           </div>
         ) : (
-          <Button onClick={submitPledge}>Bezahlen</Button>
+          <div>
+            {!!this.state.showErrors && errors.length > 0 && (
+              <P style={{color: colors.error}}>
+                Fehler<br />
+                <ul>
+                  {errors.map((error, i) => (
+                    <li key={i}>{error}</li>
+                  ))}
+                </ul>
+              </P>
+            )}
+            <div style={{opacity: errors.length ? 0.5 : 1}}>
+              <Button
+                onClick={() => {
+                  if (errors.length) {
+                    this.setState(() => ({showErrors: true}))
+                  } else {
+                    submitPledge()
+                  }
+                }}>
+                Bezahlen
+              </Button>
+            </div>
+          </div>
         )}
       </div>
     )
@@ -334,7 +361,8 @@ Submit.propTypes = {
   total: PropTypes.number,
   reason: PropTypes.string,
   options: PropTypes.array.isRequired,
-  submit: PropTypes.func.isRequired
+  submit: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
 }
 
 const submitPledge = gql`
