@@ -343,7 +343,7 @@ class Submit extends Component {
                   if (errors.length) {
                     this.setState(() => ({showErrors: true}))
                   } else {
-                    submitPledge()
+                    this.submitPledge()
                   }
                 }}>
                 Bezahlen
