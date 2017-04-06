@@ -5,6 +5,7 @@ import Router from 'next/router'
 import FieldSet from '../FieldSet'
 import {mergeFields} from '../../lib/utils/fieldState'
 import {compose} from 'redux'
+import {InlineSpinner} from '../Spinner'
 
 import {
   H2, P, Button,
@@ -25,7 +26,7 @@ const errorToString = error => error.graphQLErrors && error.graphQLErrors.length
 const objectValues = (object) => Object.keys(object).map(key => object[key])
 const simpleHash = (object, delimiter = '|') => {
   return objectValues(object).map(value => {
-    if (typeof value === 'object') {
+    if (value && typeof value === 'object') {
       return simpleHash(value, delimiter === '|' ? '$' : `$${delimiter}`)
     }
     return `${value}`
@@ -39,7 +40,8 @@ class Submit extends Component {
       emailFree: true,
       values: {},
       errors: {},
-      dirty: {}
+      dirty: {},
+      loading: false
     }
     this.amountRefSetter = (ref) => {
       this.amountRef = ref
@@ -51,13 +53,17 @@ class Submit extends Component {
       paymentMethod,
       paymentError,
       submitError,
-      signInError
+      signInError,
+      loading
     } = this.state
     const {me, user, total, options} = this.props
 
     const payPledge = pledgeId => {
       const {values} = this.state
 
+      this.setState(() => ({
+        loading: 'bezahlen'
+      }))
       window.Stripe.setPublishableKey('pk_test_sgFutulewhWC8v8csVIXTMea')
       window.Stripe.source.create({
         type: 'card',
@@ -77,11 +83,13 @@ class Submit extends Component {
           // source.error.message
           // see https://stripe.com/docs/api#errors
           this.setState(() => ({
+            loading: false,
             paymentError: source.error.message
           }))
           return
         }
         this.setState({
+          loading: false,
           paymentError: undefined
         })
 
@@ -91,6 +99,9 @@ class Submit extends Component {
           return
         }
 
+        this.setState(() => ({
+          loading: 'verarbeiten'
+        }))
         this.props.pay({
           pledgeId,
           method: 'STRIPE',
@@ -113,6 +124,7 @@ class Submit extends Component {
                 .catch(error => {
                   console.error('signIn', error)
                   this.setState(() => ({
+                    loading: false,
                     signInError: errorToString(error)
                   }))
                 })
@@ -123,6 +135,7 @@ class Submit extends Component {
           .catch(error => {
             console.error('pay', error)
             this.setState(() => ({
+              loading: false,
               paymentError: errorToString(error)
             }))
           })
@@ -147,9 +160,13 @@ class Submit extends Component {
         return
       }
 
+      this.setState(() => ({
+        loading: 'einreichen'
+      }))
       this.props.submit(variables)
         .then(({data}) => {
           this.setState(() => ({
+            loading: false,
             pledgeId: data.submitPledge.id,
             pledgeHash: hash,
             submitError: undefined
@@ -163,13 +180,16 @@ class Submit extends Component {
           // TODO: Better Backend Error
           if (submitError === 'a user with the email adress pledge.user.email already exists, login!') {
             this.setState(() => ({
+              loading: false,
               emailFree: false
             }))
             return
           }
 
           this.setState(() => ({
+            loading: false,
             pledgeId: undefined,
+            pledgeHash: undefined,
             submitError
           }))
         })
@@ -294,7 +314,15 @@ class Submit extends Component {
             {signInError}
           </P>
         )}
-        <Button onClick={submitPledge}>Weiter</Button>
+        {loading ? (
+          <div style={{textAlign: 'center'}}>
+            <InlineSpinner />
+            <br />
+            {loading}
+          </div>
+        ) : (
+          <Button onClick={submitPledge}>Bezahlen</Button>
+        )}
       </div>
     )
   }

@@ -47,6 +47,7 @@ const Spinner = () => {
 }
 
 const inlineBlock = css({
+  position: 'relative',
   display: 'inline-block',
   width: 50,
   height: 50
