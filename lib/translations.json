@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-06T10:22:46.323Z",
+  "updated": "2017-04-06T10:58:26.304Z",
   "title": "live",
   "data": [
     {
@@ -82,6 +82,26 @@
     {
       "key": "option/NOTEBOOK/label",
       "value": "Notizbuch"
+    },
+    {
+      "key": "merci/postpay/title/me",
+      "value": "Merci {name}"
+    },
+    {
+      "key": "merci/postpay/waiting",
+      "value": "Bitte bestätigen Sie ihre Email-Adresse:"
+    },
+    {
+      "key": "merci/postpay/change-email",
+      "value": "ändern"
+    },
+    {
+      "key": "merci/title",
+      "value": "Pledges ansehen"
+    },
+    {
+      "key": "merci/signin",
+      "value": "Bitte anmelden:"
     }
   ]
 }
