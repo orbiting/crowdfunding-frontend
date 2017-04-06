@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-06T13:23:36.218Z",
+  "updated": "2017-04-06T13:31:01.553Z",
   "title": "live",
   "data": [
     {
@@ -7,27 +7,27 @@
       "value": null
     },
     {
-      "key": "Updates",
+      "key": "menu/updates",
       "value": "Neues",
       "undefined": "Neues"
     },
     {
-      "key": "Veranstaltungen",
+      "key": "menu/events",
       "value": "Tournee",
       "undefined": "Action"
     },
     {
-      "key": "Community",
+      "key": "menu/community",
       "value": "Leute",
       "undefined": "Komplizen"
     },
     {
-      "key": "FAQ",
+      "key": "menu/faq",
       "value": "FAQ",
       "undefined": "Antworten"
     },
     {
-      "key": "Mitmachen Button",
+      "key": "header/button",
       "value": "Mitmachen",
       "undefined": "An Bord kommen"
     },
