@@ -23,9 +23,15 @@ const getPrice = ({values, pkg, userPrice}) => {
   if (values.price !== undefined) {
     return values.price
   } else {
-    return userPrice
-      ? ''
-      : calculateMinPrice(pkg, {}, userPrice)
+    if (userPrice) {
+      return ''
+    }
+    const minPrice = calculateMinPrice(pkg, {}, userPrice)
+    if (minPrice === absolutMinPrice) {
+      return ''
+    }
+
+    return minPrice
   }
 }
 const priceError = (price, minPrice) => {
