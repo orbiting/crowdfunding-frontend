@@ -113,6 +113,7 @@ class Pledge extends Component {
           pkg => pkg.name === query.package
         )
       : null
+    const userPrice = !!query.userPrice
 
     return (
       <Loader loading={loading} error={error} render={() => (
@@ -125,7 +126,7 @@ class Pledge extends Component {
                 values={values}
                 errors={errors}
                 dirty={dirty}
-                userPrice={!!query.userPrice}
+                userPrice={userPrice}
                 pkg={pkg}
                 onChange={(fields) => {
                   this.setState(mergeFields(fields))
@@ -190,7 +191,7 @@ class Pledge extends Component {
               price: option.price,
               templateId: option.id
             })) : []}
-            reason={values.reason}
+            reason={userPrice ? values.reason : undefined}
             errors={errors} />
         </div>
       )} />

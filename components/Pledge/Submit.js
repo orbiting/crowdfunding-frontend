@@ -48,11 +48,12 @@ class Submit extends Component {
     }
   }
   submitPledge () {
-    const {me, user, total, options} = this.props
+    const {me, user, total, options, reason} = this.props
 
     const variables = {
       total,
       options,
+      reason,
       user: me ? null : user
     }
     const hash = simpleHash(variables)
@@ -364,8 +365,8 @@ Submit.propTypes = {
 }
 
 const submitPledge = gql`
-  mutation submitPledge($total: Int!, $options: [PackageOptionInput!]!, $user: UserInput) {
-    submitPledge(pledge: {total: $total, options: $options, user: $user}) {
+  mutation submitPledge($total: Int!, $options: [PackageOptionInput!]!, $user: UserInput, $reason: String) {
+    submitPledge(pledge: {total: $total, options: $options, user: $user, reason: $reason}) {
       id
     }
   }
