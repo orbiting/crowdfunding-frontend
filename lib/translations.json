@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-06T14:21:50.208Z",
+  "updated": "2017-04-06T14:35:40.395Z",
   "title": "live",
   "data": [
     {
@@ -37,7 +37,7 @@
     },
     {
       "key": "package/customize/price/error",
-      "value": "Betrag, mindestens {price}"
+      "value": "Betrag, mindestens {formattedCHF}"
     },
     {
       "key": "package/customize/option/error/max",

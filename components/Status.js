@@ -2,21 +2,13 @@ import React, {Component} from 'react'
 import {css} from 'glamor'
 import {gql, graphql} from 'react-apollo'
 import withT from '../lib/withT'
+import {chfFormat} from '../lib/utils/formats'
 
 import {
   P, Label, colors
 } from '@project-r/styleguide'
 
-import {formatLocale} from 'd3-format'
 import {timeDay} from 'd3-time'
-
-const swissNumbers = formatLocale({
-  decimal: '.',
-  thousands: "'",
-  grouping: [3],
-  currency: ['CHF\u00a0', '']
-})
-const chfFormat = swissNumbers.format('$,.0f')
 
 const styles = {
   primaryNumber: css({

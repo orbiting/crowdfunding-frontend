@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import Router from 'next/router'
 import withT from '../../lib/withT'
 import {fieldsState} from '../../lib/utils/fieldState'
+import {chfFormat} from '../../lib/utils/formats'
 
 import {
   Field, P, A,
@@ -37,7 +38,7 @@ const getPrice = ({values, pkg, userPrice}) => {
 const priceError = (price, minPrice, t) => {
   if (price < minPrice) {
     return t('package/customize/price/error', {
-      price: minPrice / 100
+      formattedCHF: chfFormat(minPrice / 100)
     })
   }
 }
