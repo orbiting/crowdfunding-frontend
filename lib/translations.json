@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-06T12:05:35.152Z",
+  "updated": "2017-04-06T12:16:59.129Z",
   "title": "live",
   "data": [
     {
@@ -30,6 +30,42 @@
       "key": "Mitmachen Button",
       "value": "Mitmachen",
       "undefined": "An Bord kommen"
+    },
+    {
+      "key": "package/customize/changePackage",
+      "value": "ändern"
+    },
+    {
+      "key": "package/customize/price/label",
+      "value": "Betrag"
+    },
+    {
+      "key": "package/customize/price/error",
+      "value": "Betrag, mindestens {price}"
+    },
+    {
+      "key": "package/customize/option/error/max",
+      "value": "{label}, maximal {maxAmount}"
+    },
+    {
+      "key": "package/customize/option/error/min",
+      "value": "{label}, minimal {minAmount}"
+    },
+    {
+      "key": "package/customize/userPrice/reason/label",
+      "value": "Begründung"
+    },
+    {
+      "key": "package/customize/userPrice/reason/error",
+      "value": "Bitte begründen"
+    },
+    {
+      "key": "package/customize/userPrice/beforeReason",
+      "value": "Journalismus kostet. Wir haben ausgerechnet dass wir initial mindestens 3000 Abonnenten à CHF 240.- brauchen um dauerhaft zu bestehen. Trotzdem wollen wir niemanden ausschliessen."
+    },
+    {
+      "key": "package/customize/userPrice/beforePrice",
+      "value": "Wie viel könnten Sie zahlen pro Jahr?"
     },
     {
       "key": "package/DONATE/title",
