@@ -60,6 +60,7 @@ class Submit extends Component {
 
     const errors = objectValues(this.props.errors)
       .concat(objectValues(this.state.errors))
+      .concat(!paymentMethod && 'Zahlungsart auswählen')
       .filter(Boolean)
 
     const payPledge = pledgeId => {
@@ -213,6 +214,7 @@ class Submit extends Component {
                   onChange={(event) => {
                     const value = event.target.value
                     this.setState(() => ({
+                      showErrors: false,
                       paymentMethod: value
                     }))
                   }}
