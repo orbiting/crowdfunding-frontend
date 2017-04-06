@@ -192,7 +192,22 @@ class Pledge extends Component {
               templateId: option.id
             })) : []}
             reason={userPrice ? values.reason : undefined}
-            errors={errors} />
+            errors={errors}
+            onError={() => {
+              this.setState((state) => {
+                const dirty = {
+                  ...state.dirty
+                }
+                Object.keys(state.errors).forEach(field => {
+                  if (state.errors[field]) {
+                    dirty[field] = true
+                  }
+                })
+                return {
+                  dirty
+                }
+              })
+            }} />
         </div>
       )} />
     )

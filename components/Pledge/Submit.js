@@ -339,7 +339,21 @@ class Submit extends Component {
               <Button
                 onClick={() => {
                   if (errors.length) {
-                    this.setState(() => ({showErrors: true}))
+                    this.props.onError()
+                    this.setState((state) => {
+                      const dirty = {
+                        ...state.dirty
+                      }
+                      Object.keys(state.errors).forEach(field => {
+                        if (state.errors[field]) {
+                          dirty[field] = true
+                        }
+                      })
+                      return {
+                        dirty,
+                        showErrors: true
+                      }
+                    })
                   } else {
                     this.submitPledge()
                   }
@@ -361,7 +375,8 @@ Submit.propTypes = {
   reason: PropTypes.string,
   options: PropTypes.array.isRequired,
   submit: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  onError: PropTypes.func.isRequired
 }
 
 const submitPledge = gql`
