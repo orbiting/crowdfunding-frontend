@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-06T12:16:59.129Z",
+  "updated": "2017-04-06T12:25:49.279Z",
   "title": "live",
   "data": [
     {
@@ -174,6 +174,70 @@
     {
       "key": "pledge/contact/email/error/invalid",
       "value": "E-Mail ungültig"
+    },
+    {
+      "key": "pledge/submit/pay/title",
+      "value": "Zahlungsart auswählen"
+    },
+    {
+      "key": "pledge/submit/stripe/card/label",
+      "value": "Kreditkarten-Nummer"
+    },
+    {
+      "key": "pledge/submit/stripe/card/error/empty",
+      "value": "Kreditkarten-Nummer fehlt"
+    },
+    {
+      "key": "pledge/submit/stripe/card/error/invalid",
+      "value": "Kreditkarten-Nummer ungültig"
+    },
+    {
+      "key": "pledge/submit/stripe/month/label",
+      "value": "Ablauf Monat"
+    },
+    {
+      "key": "pledge/submit/stripe/month/error/empty",
+      "value": "Ablauf Monat fehlt"
+    },
+    {
+      "key": "pledge/submit/stripe/month/error/invalid",
+      "value": "Ablauf Monat ungültig"
+    },
+    {
+      "key": "pledge/submit/stripe/year/label",
+      "value": "Ablauf Jahr"
+    },
+    {
+      "key": "pledge/submit/stripe/year/error/empty",
+      "value": "Ablauf Jahr fehlt"
+    },
+    {
+      "key": "pledge/submit/stripe/year/error/invalid",
+      "value": "Ablauf Jahr ungültig"
+    },
+    {
+      "key": "pledge/submit/stripe/cvc/label",
+      "value": "Prüfnummer (CVC)"
+    },
+    {
+      "key": "pledge/submit/stripe/cvc/error/empty",
+      "value": "Prüfnummer (CVC) fehlt"
+    },
+    {
+      "key": "pledge/submit/stripe/cvc/error/invalid",
+      "value": "Prüfnummer (CVC) ungültig"
+    },
+    {
+      "key": "pledge/submit/emailVerify/note",
+      "value": "Sie müssen Ihre Email-Adresse verifizieren. Klicken Sie auf jetzt verifizieren oder wählen sie eine andere Email-Adresse."
+    },
+    {
+      "key": "pledge/submit/error/title",
+      "value": "Fehler"
+    },
+    {
+      "key": "pledge/submit/button/pay",
+      "value": "Bezahlen"
     }
   ]
 }
