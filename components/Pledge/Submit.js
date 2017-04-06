@@ -53,10 +53,7 @@ class Submit extends Component {
     const variables = {
       total,
       options,
-      user: me ? null : {
-        ...user,
-        birthday: '2017-05-31T23:59:59.999Z' // TODO: Remove!
-      }
+      user: me ? null : user
     }
     const hash = simpleHash(variables)
 
