@@ -14,10 +14,10 @@ import {
 } from '@project-r/styleguide'
 
 const PAYMENT_METHODS = [
-  {disabled: true, key: 'PAYMENTSLIP', name: 'Einzahlungsschein'},
-  {disabled: false, key: 'STRIPE', name: 'Visa/MasterCard'},
-  {disabled: true, key: 'POSTFINANCECARD', name: 'PostfFinance Card'},
-  {disabled: true, key: 'PAYPAL', name: 'PayPal'}
+  {disabled: true, key: 'PAYMENTSLIP'},
+  {disabled: false, key: 'STRIPE'},
+  {disabled: true, key: 'POSTFINANCECARD'},
+  {disabled: true, key: 'PAYPAL'}
 ]
 
 const errorToString = error => error.graphQLErrors && error.graphQLErrors.length
@@ -217,7 +217,7 @@ class Submit extends Component {
                     }))
                   }}
                   value={pm.key} />
-                {' '}{pm.name}
+                {' '}{t(`pledge/submit/pay/method/${pm.key}`)}
               </label><br />
             </span>
           ))}

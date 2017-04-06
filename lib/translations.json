@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-06T12:25:49.279Z",
+  "updated": "2017-04-06T12:28:59.698Z",
   "title": "live",
   "data": [
     {
@@ -238,6 +238,22 @@
     {
       "key": "pledge/submit/button/pay",
       "value": "Bezahlen"
+    },
+    {
+      "key": "pledge/submit/pay/method/STRIPE",
+      "value": "Visa/MasterCard"
+    },
+    {
+      "key": "pledge/submit/pay/method/PAYMENTSLIP",
+      "value": "Einzahlungsschein"
+    },
+    {
+      "key": "pledge/submit/pay/method/POSTFINANCECARD",
+      "value": "PostfFinance Card"
+    },
+    {
+      "key": "pledge/submit/pay/method/PAYPAL",
+      "value": "PayPal"
     }
   ]
 }
