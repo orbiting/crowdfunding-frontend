@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-06T12:28:59.698Z",
+  "updated": "2017-04-06T12:36:02.589Z",
   "title": "live",
   "data": [
     {
@@ -254,6 +254,38 @@
     {
       "key": "pledge/submit/pay/method/PAYPAL",
       "value": "PayPal"
+    },
+    {
+      "key": "status/goal/people",
+      "value": "von {count} Mitglieder"
+    },
+    {
+      "key": "status/goal/money",
+      "value": "von {formattedCHF} finanziert"
+    },
+    {
+      "key": "status/time/label",
+      "value": "Zeit verbleibend"
+    },
+    {
+      "key": "status/time/ended",
+      "value": "Vorbei"
+    },
+    {
+      "key": "status/time/days/1",
+      "value": "1 Tag"
+    },
+    {
+      "key": "status/time/days/other",
+      "value": "{count} Tage"
+    },
+    {
+      "key": "status/time/hours/1",
+      "value": "1 Stunde"
+    },
+    {
+      "key": "status/time/hours/other",
+      "value": "{count} Stunden"
     }
   ]
 }
