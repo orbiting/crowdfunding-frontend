@@ -28,23 +28,24 @@ const Merci = withMe(({me, url: {query}}) => {
       </div>
     )
   }
-  if (!me) {
-    return (
-      <div>
-        <H1>Deinen Pledge ansehen</H1>
-        {me ? (
+  return (
+    <div>
+      <H1>Pledges ansehen</H1>
+      {me ? (
+        <div>
+          <P>{me.name} {me.email}</P>
           <P>TK</P>
-        ) : (
-          <div>
-            <P>
-              Bitte anmelden:
-            </P>
-            <SignIn />
-          </div>
-        )}
-      </div>
-    )
-  }
+        </div>
+      ) : (
+        <div>
+          <P>
+            Bitte anmelden:
+          </P>
+          <SignIn />
+        </div>
+      )}
+    </div>
+  )
 })
 
 const MerciPage = ({url}) => (

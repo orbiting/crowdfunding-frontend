@@ -179,7 +179,7 @@ class Header extends Component {
               {(mobile || opaque) && <Menu expanded={expanded}
                 id='primary-menu' items={menuItems}>
                 {
-                  mobile && <Status compact />
+                  mobile && expanded && <Status compact />
                 }
               </Menu>}
             </div>
