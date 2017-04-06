@@ -47,6 +47,142 @@ class Submit extends Component {
       this.amountRef = ref
     }
   }
+  submitPledge () {
+    const {me, user, total, options} = this.props
+
+    const variables = {
+      total,
+      options,
+      user: me ? null : {
+        ...user,
+        birthday: '2017-05-31T23:59:59.999Z' // TODO: Remove!
+      }
+    }
+    const hash = simpleHash(variables)
+
+    if (!this.state.submitError && hash === this.state.pledgeHash) {
+      this.payPledge(this.state.pledgeId)
+      return
+    }
+
+    this.setState(() => ({
+      loading: 'einreichen'
+    }))
+    this.props.submit(variables)
+      .then(({data}) => {
+        this.setState(() => ({
+          loading: false,
+          pledgeId: data.submitPledge.id,
+          pledgeHash: hash,
+          submitError: undefined
+        }))
+        this.payPledge(data.submitPledge.id)
+      })
+      .catch(error => {
+        console.error('submit', error)
+        const submitError = errorToString(error)
+
+        // TODO: Better Backend Error
+        if (submitError === 'a user with the email adress pledge.user.email already exists, login!') {
+          this.setState(() => ({
+            loading: false,
+            emailFree: false
+          }))
+          return
+        }
+
+        this.setState(() => ({
+          loading: false,
+          pledgeId: undefined,
+          pledgeHash: undefined,
+          submitError
+        }))
+      })
+  }
+  payPledge (pledgeId) {
+    const {me, user} = this.props
+    const {values} = this.state
+
+    this.setState(() => ({
+      loading: 'bezahlen'
+    }))
+    window.Stripe.setPublishableKey('pk_test_sgFutulewhWC8v8csVIXTMea')
+    window.Stripe.source.create({
+      type: 'card',
+      currency: 'CHF',
+      usage: 'reusable',
+      card: {
+        number: values.cardNumber,
+        cvc: values.cardCVC,
+        exp_month: values.cardMonth,
+        exp_year: values.cardYear
+      }
+    }, (status, source) => {
+      console.log('stripe', status, source)
+      if (status !== 200) {
+        // source.error.type
+        // source.error.param
+        // source.error.message
+        // see https://stripe.com/docs/api#errors
+        this.setState(() => ({
+          loading: false,
+          paymentError: source.error.message
+        }))
+        return
+      }
+      this.setState({
+        loading: false,
+        paymentError: undefined
+      })
+
+      // TODO implement 3D secure
+      if (source.card.three_d_secure === 'required') {
+        window.alert('Cards requiring 3D secure are not supported yet.')
+        return
+      }
+
+      this.setState(() => ({
+        loading: 'verarbeiten'
+      }))
+      this.props.pay({
+        pledgeId,
+        method: 'STRIPE',
+        sourceId: source.id,
+        pspPayload: JSON.stringify(source)
+      })
+        .then(({data}) => {
+          const gotoMerci = () => {
+            Router.push({
+              pathname: '/merci',
+              query: {
+                id: data.payPledge.id,
+                email: me ? me.email : user.email
+              }
+            })
+          }
+          if (!me) {
+            this.props.signIn(user.email)
+              .then(() => gotoMerci())
+              .catch(error => {
+                console.error('signIn', error)
+                this.setState(() => ({
+                  loading: false,
+                  signInError: errorToString(error)
+                }))
+              })
+          } else {
+            gotoMerci()
+          }
+        })
+        .catch(error => {
+          console.error('pay', error)
+          this.setState(() => ({
+            loading: false,
+            paymentError: errorToString(error)
+          }))
+        })
+    })
+  }
   render () {
     const {
       emailFree,
@@ -56,149 +192,12 @@ class Submit extends Component {
       signInError,
       loading
     } = this.state
-    const {me, user, total, options} = this.props
+    const {me, user} = this.props
 
     const errors = objectValues(this.props.errors)
       .concat(objectValues(this.state.errors))
       .concat(!paymentMethod && 'Zahlungsart auswählen')
       .filter(Boolean)
-
-    const payPledge = pledgeId => {
-      const {values} = this.state
-
-      this.setState(() => ({
-        loading: 'bezahlen'
-      }))
-      window.Stripe.setPublishableKey('pk_test_sgFutulewhWC8v8csVIXTMea')
-      window.Stripe.source.create({
-        type: 'card',
-        currency: 'CHF',
-        usage: 'reusable',
-        card: {
-          number: values.cardNumber,
-          cvc: values.cardCVC,
-          exp_month: values.cardMonth,
-          exp_year: values.cardYear
-        }
-      }, (status, source) => {
-        console.log('stripe', status, source)
-        if (status !== 200) {
-          // source.error.type
-          // source.error.param
-          // source.error.message
-          // see https://stripe.com/docs/api#errors
-          this.setState(() => ({
-            loading: false,
-            paymentError: source.error.message
-          }))
-          return
-        }
-        this.setState({
-          loading: false,
-          paymentError: undefined
-        })
-
-        // TODO implement 3D secure
-        if (source.card.three_d_secure === 'required') {
-          window.alert('Cards requiring 3D secure are not supported yet.')
-          return
-        }
-
-        this.setState(() => ({
-          loading: 'verarbeiten'
-        }))
-        this.props.pay({
-          pledgeId,
-          method: 'STRIPE',
-          sourceId: source.id,
-          pspPayload: JSON.stringify(source)
-        })
-          .then(({data}) => {
-            const gotoMerci = () => {
-              Router.push({
-                pathname: '/merci',
-                query: {
-                  id: data.payPledge.id,
-                  email: me ? me.email : user.email
-                }
-              })
-            }
-            if (!me) {
-              this.props.signIn(user.email)
-                .then(() => gotoMerci())
-                .catch(error => {
-                  console.error('signIn', error)
-                  this.setState(() => ({
-                    loading: false,
-                    signInError: errorToString(error)
-                  }))
-                })
-            } else {
-              gotoMerci()
-            }
-          })
-          .catch(error => {
-            console.error('pay', error)
-            this.setState(() => ({
-              loading: false,
-              paymentError: errorToString(error)
-            }))
-          })
-      })
-    }
-
-    const submitPledge = () => {
-      // TODO: check for client validation errors
-
-      const variables = {
-        total,
-        options,
-        user: me ? null : {
-          ...user,
-          birthday: '2017-05-31T23:59:59.999Z' // TODO: Remove!
-        }
-      }
-      const hash = simpleHash(variables)
-
-      if (!submitError && hash === this.state.pledgeHash) {
-        payPledge(this.state.pledgeId)
-        return
-      }
-
-      this.setState(() => ({
-        loading: 'einreichen'
-      }))
-      this.props.submit(variables)
-        .then(({data}) => {
-          this.setState(() => ({
-            loading: false,
-            pledgeId: data.submitPledge.id,
-            pledgeHash: hash,
-            submitError: undefined
-          }))
-          payPledge(data.submitPledge.id)
-        })
-        .catch(error => {
-          console.error('submit', error)
-          const submitError = errorToString(error)
-
-          // TODO: Better Backend Error
-          if (submitError === 'a user with the email adress pledge.user.email already exists, login!') {
-            this.setState(() => ({
-              loading: false,
-              emailFree: false
-            }))
-            return
-          }
-
-          this.setState(() => ({
-            loading: false,
-            pledgeId: undefined,
-            pledgeHash: undefined,
-            submitError
-          }))
-        })
-    }
 
     return (
       <div>
