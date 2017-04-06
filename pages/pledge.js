@@ -6,6 +6,7 @@ import withMe from '../lib/withMe'
 import Loader from '../components/Loader'
 import SignOut from '../components/Auth/SignOut'
 import {mergeField, mergeFields} from '../lib/utils/fieldState'
+import {validate as isEmail} from 'email-validator'
 
 import {
   H1, H2, Field,
@@ -57,25 +58,53 @@ class Pledge extends Component {
       dirty: {}
     }
   }
+  handleName (value, shouldValidate) {
+    this.setState(mergeField({
+      field: 'name',
+      value,
+      error: (value.trim().length <= 0 && 'Name fehlt'),
+      dirty: shouldValidate
+    }))
+  }
+  handleEmail (value, shouldValidate) {
+    this.setState(mergeField({
+      field: 'email',
+      value,
+      error: (
+        (value.trim().length <= 0 && 'E-Mail fehlt') ||
+        (!isEmail(value) && 'E-Mail ungültig')
+      ),
+      dirty: shouldValidate
+    }))
+  }
+  checkUserFields (props) {
+    if (!props.me) {
+      this.handleName(this.state.values.email || '', false)
+      this.handleEmail(this.state.values.name || '', false)
+    } else {
+      this.setState((state) => ({
+        errors: {
+          ...state.errors,
+          email: undefined,
+          name: undefined
+        }
+      }))
+    }
+  }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.me !== this.props.me) {
+      this.checkUserFields(nextProps)
+    }
+  }
+  componentDidMount () {
+    this.checkUserFields(this.props)
+  }
   render () {
     const {
       values,
       errors,
       dirty
     } = this.state
-
-    const handleChange = (field, label, isRequired) => {
-      return (_, value, shouldValidate) => {
-        this.setState(mergeField({
-          field,
-          value,
-          error: isRequired
-              ? (!value && `${label} fehlt`)
-              : undefined,
-          dirty: shouldValidate
-        }))
-      }
-    }
 
     const {query, me, loading, error, crowdfunding} = this.props
 
@@ -133,13 +162,17 @@ class Pledge extends Component {
                   name='name'
                   error={dirty.name && errors.name}
                   value={values.name}
-                  onChange={handleChange('name', 'Ihr Name', true)} />
+                  onChange={(_, value, shouldValidate) => {
+                    this.handleName(value, shouldValidate)
+                  }} />
                 <br />
                 <Field label='Ihre E-Mail'
                   name='email'
                   error={dirty.email && errors.email}
                   value={values.email}
-                  onChange={handleChange('email', 'Ihre E-Mail', true)} />
+                  onChange={(_, value, shouldValidate) => {
+                    this.handleEmail(value, shouldValidate)
+                  }} />
                 <br /><br />
               </span>
             )}
