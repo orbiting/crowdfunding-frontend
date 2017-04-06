@@ -1,21 +1,14 @@
 import React, {Component} from 'react'
 import {css} from 'glamor'
 import {gql, graphql} from 'react-apollo'
+import withT from '../lib/withT'
+import {chfFormat} from '../lib/utils/formats'
 
 import {
   P, Label, colors
 } from '@project-r/styleguide'
 
-import {formatLocale} from 'd3-format'
 import {timeDay} from 'd3-time'
-
-const swissNumbers = formatLocale({
-  decimal: '.',
-  thousands: "'",
-  grouping: [3],
-  currency: ['CHF\u00a0', '']
-})
-const chfFormat = swissNumbers.format('$,.0f')
 
 const styles = {
   primaryNumber: css({
@@ -70,7 +63,7 @@ class Status extends Component {
     if (this.props.error) {
       return <P>{this.props.error}</P>
     }
-    const {crowdfunding: {goal, status, endDate}} = this.props
+    const {crowdfunding: {goal, status, endDate}, t} = this.props
     const now = new Date()
     const end = new Date(endDate)
 
@@ -88,7 +81,9 @@ class Status extends Component {
         <div style={{paddingTop: 10}}>
           <P>
             <span {...styles.smallNumber}>{status.people}</span>
-            <Label>von {goal.people} Mitglieder</Label>
+            <Label>{t('status/goal/people', {
+              count: goal.people
+            })}</Label>
           </P>
           <div {...styles.bar}>
             <div {...styles.barInner} style={{width: `${Math.ceil(status.people / goal.people * 100)}%`}} />
@@ -101,14 +96,20 @@ class Status extends Component {
       <div>
         <P>
           <span {...styles.primaryNumber}>{status.people}</span>
-          <Label>von {goal.people} Mitglieder</Label>
+          <Label>{t('status/goal/people', {
+            count: goal.people
+          })}</Label>
         </P>
         <div {...styles.bar}>
           <div {...styles.barInner} style={{width: `${Math.ceil(status.people / goal.people * 100)}%`}} />
         </div>
         <P>
           <span {...styles.secondaryNumber}>{chfFormat(status.money / 100)}</span>
-          <Label>von {chfFormat(goal.money / 100)} finanziert</Label>
+          <Label>
+            {t('status/goal/money', {
+              formattedCHF: chfFormat(goal.money / 100)
+            })}
+          </Label>
         </P>
         <div {...styles.bar}>
           <div {...styles.barInner} style={{width: `${Math.ceil(status.money / goal.money * 100)}%`}} />
@@ -116,12 +117,25 @@ class Status extends Component {
         <P>
           <span {...styles.smallNumber}>
             {end > now ? (
-              `${days} Tage ${hours} Stunden`
+              [
+                t.pluralize(
+                  'status/time/days',
+                  {
+                    count: days
+                  }
+                ),
+                t.pluralize(
+                  'status/time/hours',
+                  {
+                    count: hours
+                  }
+                )
+              ].join(' ')
             ) : (
-              'Vorbei'
+              t('status/time/ended')
             )}
           </span>
-          <Label>Zeit verbleibend</Label>
+          <Label>{t('status/time/label')}</Label>
         </P>
       </div>
     )
@@ -139,6 +153,6 @@ const StatusWithQuery = graphql(query, {
   options: {
     pollInterval: 2500
   }
-})(Status)
+})(withT(Status))
 
 export default StatusWithQuery

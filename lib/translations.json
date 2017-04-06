@@ -1,0 +1,315 @@
+{
+  "updated": "2017-04-06T14:43:37.227Z",
+  "title": "live",
+  "data": [
+    {
+      "key": "menu/updates",
+      "value": "Neues",
+      "undefined": "Neues"
+    },
+    {
+      "key": "menu/events",
+      "value": "Tournee",
+      "undefined": "Action"
+    },
+    {
+      "key": "menu/community",
+      "value": "Leute",
+      "undefined": "Komplizen"
+    },
+    {
+      "key": "menu/faq",
+      "value": "FAQ",
+      "undefined": "Antworten"
+    },
+    {
+      "key": "header/button",
+      "value": "Mitmachen",
+      "undefined": "An Bord kommen"
+    },
+    {
+      "key": "package/customize/changePackage",
+      "value": "ändern"
+    },
+    {
+      "key": "package/customize/price/label",
+      "value": "Betrag"
+    },
+    {
+      "key": "package/customize/price/error",
+      "value": "Betrag, mindestens {formattedCHF}"
+    },
+    {
+      "key": "package/customize/option/error/max",
+      "value": "{label}, maximal {maxAmount}"
+    },
+    {
+      "key": "package/customize/option/error/min",
+      "value": "{label}, minimal {minAmount}"
+    },
+    {
+      "key": "package/customize/userPrice/reason/label",
+      "value": "Begründung"
+    },
+    {
+      "key": "package/customize/userPrice/reason/error",
+      "value": "Bitte begründen"
+    },
+    {
+      "key": "package/customize/userPrice/beforeReason",
+      "value": "Journalismus kostet. Wir haben ausgerechnet dass wir initial mindestens 3000 Abonnenten à CHF 240.- brauchen um dauerhaft zu bestehen. Trotzdem wollen wir niemanden ausschliessen."
+    },
+    {
+      "key": "package/customize/userPrice/beforePrice",
+      "value": "Wie viel könnten Sie zahlen pro Jahr?"
+    },
+    {
+      "key": "package/DONATE/title",
+      "value": "Spenden – sonst nichts"
+    },
+    {
+      "key": "package/DONATE/description",
+      "value": "Sie wollen hervorragenden Journalismus unterstützen, ohne ihn zu lesen. Aber mit Geld. Denn Sie wissen: ohne Geld läuft nichts, nicht einmal die Ratten in den Lagerschuppen."
+    },
+    {
+      "key": "package/POSTER/title",
+      "value": "Das Manifest"
+    },
+    {
+      "key": "package/POSTER/description",
+      "value": "Sie sind vorsichtig und entscheiden sich statt dem Produkt für den Bauplan des Produkts. Diesen erhalten Sie prächtig in A3, ein Schmuck für jede Wand. Aber Achtung: Das Magazin erhalten Sie dafür noch nicht."
+    },
+    {
+      "key": "package/ABO/userPrice/teaser",
+      "value": "Sie können sich kein Abonnement leisten?"
+    },
+    {
+      "key": "package/ABO/title",
+      "value": "Abonnement für ein Jahr"
+    },
+    {
+      "key": "package/ABO/description",
+      "value": "Willkommen an Bord! Sie erhalten für ein Jahr unser Magazin. Und werden zu einem kleinen Teil Mitbesitzerin."
+    },
+    {
+      "key": "package/ABO_GIVE/title",
+      "value": "Abonnements verschenken"
+    },
+    {
+      "key": "package/ABO_GIVE/description",
+      "value": "Sie wollen Ihren Freunden oder Feinden das heisseste Magazin für ein Jahr schenken. Und haben die Gelegenheit, diesen zusätzlich für X Franken ein Notizbuch dazu zu schenken – damit diese nicht nur Cleveres lesen, sondern auch schreiben können."
+    },
+    {
+      "key": "package/BENEFACTOR/title",
+      "value": "Gönner Abonnement"
+    },
+    {
+      "key": "package/BENEFACTOR/description",
+      "value": "Sie wollen nicht nur ein unabhängiges Magazin lesen, sondern Sie wollen sich auch nachhaltig dafür ein setzten, dass dieses existiert. Und fördern ein neues Modell für Journalismus mit dem nachdrücklichsten Argument, das möglich ist: mit Geld."
+    },
+    {
+      "key": "option/ABO/label/other",
+      "value": "Mitgliedschaften"
+    },
+    {
+      "key": "option/ABO/label/1",
+      "value": "Mitgliedschaft"
+    },
+    {
+      "key": "option/NOTEBOOK/label/other",
+      "value": "Notizbücher"
+    },
+    {
+      "key": "option/NOTEBOOK/label/1",
+      "value": "Notizbuch"
+    },
+    {
+      "key": "merci/postpay/title/me",
+      "value": "Merci {name}"
+    },
+    {
+      "key": "merci/postpay/waiting",
+      "value": "Bitte bestätigen Sie ihre Email-Adresse:"
+    },
+    {
+      "key": "merci/postpay/change-email",
+      "value": "ändern"
+    },
+    {
+      "key": "merci/title",
+      "value": "Pledges ansehen"
+    },
+    {
+      "key": "merci/signin",
+      "value": "Bitte anmelden:"
+    },
+    {
+      "key": "pledge/title",
+      "value": "Mitmachen"
+    },
+    {
+      "key": "pledge/rewards/title",
+      "value": "Belohnungen"
+    },
+    {
+      "key": "pledge/contact/title",
+      "value": "Deine Kontaktinformationen"
+    },
+    {
+      "key": "pledge/contact/signedin-as",
+      "value": "Du bist eingeloggt als:"
+    },
+    {
+      "key": "pledge/contact/name/label",
+      "value": "Ihr Name"
+    },
+    {
+      "key": "pledge/contact/name/error/empty",
+      "value": "Name fehlt"
+    },
+    {
+      "key": "pledge/contact/email/label",
+      "value": "Ihre E-Mail"
+    },
+    {
+      "key": "pledge/contact/email/error/empty",
+      "value": "E-Mail fehlt"
+    },
+    {
+      "key": "pledge/contact/email/error/invalid",
+      "value": "E-Mail ungültig"
+    },
+    {
+      "key": "pledge/submit/pay/title",
+      "value": "Zahlungsart auswählen"
+    },
+    {
+      "key": "pledge/submit/stripe/card/label",
+      "value": "Kreditkarten-Nummer"
+    },
+    {
+      "key": "pledge/submit/stripe/card/error/empty",
+      "value": "Kreditkarten-Nummer fehlt"
+    },
+    {
+      "key": "pledge/submit/stripe/card/error/invalid",
+      "value": "Kreditkarten-Nummer ungültig"
+    },
+    {
+      "key": "pledge/submit/stripe/month/label",
+      "value": "Ablauf Monat"
+    },
+    {
+      "key": "pledge/submit/stripe/month/error/empty",
+      "value": "Ablauf Monat fehlt"
+    },
+    {
+      "key": "pledge/submit/stripe/month/error/invalid",
+      "value": "Ablauf Monat ungültig"
+    },
+    {
+      "key": "pledge/submit/stripe/year/label",
+      "value": "Ablauf Jahr"
+    },
+    {
+      "key": "pledge/submit/stripe/year/error/empty",
+      "value": "Ablauf Jahr fehlt"
+    },
+    {
+      "key": "pledge/submit/stripe/year/error/invalid",
+      "value": "Ablauf Jahr ungültig"
+    },
+    {
+      "key": "pledge/submit/stripe/cvc/label",
+      "value": "Prüfnummer (CVC)"
+    },
+    {
+      "key": "pledge/submit/stripe/cvc/error/empty",
+      "value": "Prüfnummer (CVC) fehlt"
+    },
+    {
+      "key": "pledge/submit/stripe/cvc/error/invalid",
+      "value": "Prüfnummer (CVC) ungültig"
+    },
+    {
+      "key": "pledge/submit/emailVerify/note",
+      "value": "Sie müssen Ihre Email-Adresse verifizieren. Klicken Sie auf jetzt verifizieren oder wählen sie eine andere Email-Adresse."
+    },
+    {
+      "key": "pledge/submit/error/title",
+      "value": "Fehler"
+    },
+    {
+      "key": "pledge/submit/button/pay",
+      "value": "Bezahlen"
+    },
+    {
+      "key": "pledge/submit/pay/method/STRIPE",
+      "value": "Visa/MasterCard"
+    },
+    {
+      "key": "pledge/submit/pay/method/PAYMENTSLIP",
+      "value": "Einzahlungsschein"
+    },
+    {
+      "key": "pledge/submit/pay/method/POSTFINANCECARD",
+      "value": "PostfFinance Card"
+    },
+    {
+      "key": "pledge/submit/pay/method/PAYPAL",
+      "value": "PayPal"
+    },
+    {
+      "key": "pledge/submit/loading/submit",
+      "value": "einreichen"
+    },
+    {
+      "key": "pledge/submit/loading/stripe",
+      "value": "bezahlen"
+    },
+    {
+      "key": "pledge/submit/loading/pay",
+      "value": "verarbeiten"
+    },
+    {
+      "key": "status/goal/people",
+      "value": "von {count} Mitglieder"
+    },
+    {
+      "key": "status/goal/money",
+      "value": "von {formattedCHF} finanziert"
+    },
+    {
+      "key": "status/time/label",
+      "value": "Zeit verbleibend"
+    },
+    {
+      "key": "status/time/ended",
+      "value": "Vorbei"
+    },
+    {
+      "key": "status/time/days/1",
+      "value": "1 Tag"
+    },
+    {
+      "key": "status/time/days/other",
+      "value": "{count} Tage"
+    },
+    {
+      "key": "status/time/hours/1",
+      "value": "1 Stunde"
+    },
+    {
+      "key": "status/time/hours/other",
+      "value": "{count} Stunden"
+    },
+    {
+      "key": "sidebar/signIn",
+      "value": "Schon unterstützt?"
+    },
+    {
+      "key": "sidebar/reminder/button",
+      "value": "Später erinnern"
+    }
+  ]
+}

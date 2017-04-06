@@ -6,6 +6,7 @@ import FieldSet from '../FieldSet'
 import {mergeFields} from '../../lib/utils/fieldState'
 import {compose} from 'redux'
 import {InlineSpinner} from '../Spinner'
+import withT from '../../lib/withT'
 
 import {
   H2, P, Button,
@@ -13,10 +14,10 @@ import {
 } from '@project-r/styleguide'
 
 const PAYMENT_METHODS = [
-  {disabled: true, key: 'PAYMENTSLIP', name: 'Einzahlungsschein'},
-  {disabled: false, key: 'STRIPE', name: 'Visa/MasterCard'},
-  {disabled: true, key: 'POSTFINANCECARD', name: 'PostfFinance Card'},
-  {disabled: true, key: 'PAYPAL', name: 'PayPal'}
+  {disabled: true, key: 'PAYMENTSLIP'},
+  {disabled: false, key: 'STRIPE'},
+  {disabled: true, key: 'POSTFINANCECARD'},
+  {disabled: true, key: 'PAYPAL'}
 ]
 
 const errorToString = error => error.graphQLErrors && error.graphQLErrors.length
@@ -48,7 +49,7 @@ class Submit extends Component {
     }
   }
   submitPledge () {
-    const {me, user, total, options, reason} = this.props
+    const {me, user, total, options, reason, t} = this.props
 
     const variables = {
       total,
@@ -64,7 +65,7 @@ class Submit extends Component {
     }
 
     this.setState(() => ({
-      loading: 'einreichen'
+      loading: t('pledge/submit/loading/submit')
     }))
     this.props.submit(variables)
       .then(({data}) => {
@@ -98,11 +99,11 @@ class Submit extends Component {
       })
   }
   payPledge (pledgeId) {
-    const {me, user} = this.props
+    const {me, user, t} = this.props
     const {values} = this.state
 
     this.setState(() => ({
-      loading: 'bezahlen'
+      loading: t('pledge/submit/loading/stripe')
     }))
     window.Stripe.setPublishableKey('pk_test_sgFutulewhWC8v8csVIXTMea')
     window.Stripe.source.create({
@@ -140,7 +141,7 @@ class Submit extends Component {
       }
 
       this.setState(() => ({
-        loading: 'verarbeiten'
+        loading: t('pledge/submit/loading/pay')
       }))
       this.props.pay({
         pledgeId,
@@ -190,7 +191,7 @@ class Submit extends Component {
       signInError,
       loading
     } = this.state
-    const {me, user} = this.props
+    const {me, user, t} = this.props
 
     const errors = objectValues(this.props.errors)
       .concat(objectValues(this.state.errors))
@@ -199,7 +200,7 @@ class Submit extends Component {
 
     return (
       <div>
-        <H2>Zahlungsart auswählen</H2>
+        <H2>{t('pledge/submit/pay/title')}</H2>
         <P>
           {PAYMENT_METHODS.map((pm) => (
             <span key={pm.key} style={{opacity: pm.disabled ? 0.5 : 1}}>
@@ -216,7 +217,7 @@ class Submit extends Component {
                     }))
                   }}
                   value={pm.key} />
-                {' '}{pm.name}
+                {' '}{t(`pledge/submit/pay/method/${pm.key}`)}
               </label><br />
             </span>
           ))}
@@ -230,37 +231,37 @@ class Submit extends Component {
               dirty={this.state.dirty}
               fields={[
                 {
-                  label: 'Kreditkarten-Nummer',
+                  label: t('pledge/submit/stripe/card/label'),
                   name: 'cardNumber',
                   mask: '1111 1111 1111 1111',
                   validator: (value) => (
                     (
                       !value &&
-                      'Kreditkarten-Nummer fehlt'
+                      t('pledge/submit/stripe/card/error/empty')
                     ) || (
                       !window.Stripe.card.validateCardNumber(value) &&
-                      'Kreditkarten-Nummer ungültig'
+                      t('pledge/submit/stripe/card/error/invalid')
                     )
                   )
                 },
                 {
-                  label: 'Ablauf Monat',
+                  label: t('pledge/submit/stripe/month/label'),
                   name: 'cardMonth'
                 },
                 {
-                  label: 'Ablauf Jahr',
+                  label: t('pledge/submit/stripe/year/label'),
                   name: 'cardYear'
                 },
                 {
-                  label: 'Prüfnummer (CVC)',
+                  label: t('pledge/submit/stripe/cvc/label'),
                   name: 'cardCVC',
                   validator: (value) => (
                     (
                       !value &&
-                      'Prüfnummer (CVC) fehlt'
+                      t('pledge/submit/stripe/cvc/error/empty')
                     ) || (
                       !window.Stripe.card.validateCVC(value) &&
-                      'Prüfnummer (CVC) ungültig'
+                      t('pledge/submit/stripe/cvc/error/invalid')
                     )
                   )
                 }
@@ -278,14 +279,14 @@ class Submit extends Component {
                     nextState.dirty.cardYear &&
                     !window.Stripe.card.validateExpiry(month, year)
                   ) {
-                    nextState.errors.cardMonth = 'Ablauf Monat ungültig'
-                    nextState.errors.cardYear = 'Ablauf Jahr ungültig'
+                    nextState.errors.cardMonth = t('pledge/submit/stripe/month/error/invalid')
+                    nextState.errors.cardYear = t('pledge/submit/stripe/year/error/invalid')
                   } else {
                     nextState.errors.cardMonth = (
-                      !month && 'Ablauf Monat fehlt'
+                      !month && t('pledge/submit/stripe/month/error/empty')
                     )
                     nextState.errors.cardYear = (
-                      !year && 'Ablauf Jahr fehlt'
+                      !year && t('pledge/submit/stripe/year/error/empty')
                     )
                   }
 
@@ -298,7 +299,7 @@ class Submit extends Component {
 
         {(!emailFree && !me) && (
           <div style={{marginBottom: 40}}>
-            <P>Sie müssen Ihre Email-Adresse verifizieren. Klicken Sie auf jetzt verifizieren oder wählen sie eine andere Email-Adresse.</P>
+            <P>{t('pledge/submit/emailVerify/note')}</P>
             <SignIn email={user.email} />
           </div>
         )}
@@ -327,7 +328,7 @@ class Submit extends Component {
           <div>
             {!!this.state.showErrors && errors.length > 0 && (
               <P style={{color: colors.error}}>
-                Fehler<br />
+                {t('pledge/submit/error/title')}<br />
                 <ul>
                   {errors.map((error, i) => (
                     <li key={i}>{error}</li>
@@ -358,7 +359,7 @@ class Submit extends Component {
                     this.submitPledge()
                   }
                 }}>
-                Bezahlen
+                {t('pledge/submit/button/pay')}
               </Button>
             </div>
           </div>
@@ -418,7 +419,8 @@ const SubmitWithMutations = compose(
     props: ({mutate}) => ({
       signIn: email => mutate({variables: {email}})
     })
-  })
+  }),
+  withT
 )(Submit)
 
 export default SubmitWithMutations

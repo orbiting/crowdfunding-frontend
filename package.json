@@ -10,7 +10,8 @@
     "start": "node index.js",
     "precommit": "lint-staged",
     "standardize": "standard --fix 'components/**/*.js' 'lib/**/*.js' 'pages/**/*.js'",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "translations": "gsheets --key=1OHoiENwJH-tqf9yXfXHOevAn17daO_CvB21Rym-oiqk --title=live --pretty --out lib/translations.json"
   },
   "lint-staged": {
     "*.js": [
@@ -45,6 +46,7 @@
   },
   "devDependencies": {
     "dotenv": "^4.0.0",
+    "gsheets": "^2.0.0",
     "husky": "^0.13.2",
     "lint-staged": "^3.4.0",
     "nodemon": "^1.11.0",

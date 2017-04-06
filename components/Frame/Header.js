@@ -3,6 +3,7 @@ import {css, merge} from 'glamor'
 import Link from 'next/link'
 import Router from 'next/router'
 import Status from '../Status'
+import withT from '../../lib/withT'
 
 import {
   Logo,
@@ -135,7 +136,7 @@ class Header extends Component {
     window.removeEventListener('resize', this.measure)
   }
   render () {
-    const {cover, sticky, sidebar, url} = this.props
+    const {cover, sticky, sidebar, url, t} = this.props
     const {mobile, expanded} = this.state
 
     const opaque = this.state.opaque || expanded
@@ -151,19 +152,19 @@ class Header extends Component {
 
     const menuItems = [
       {
-        label: 'Neues',
+        label: t('menu/updates'),
         href: '/updates'
       },
       {
-        label: 'Tournee',
+        label: t('menu/events'),
         href: '/events'
       },
       {
         label: 'Leute',
-        href: '/community'
+        href: t('menu/community')
       },
       {
-        label: 'FAQ',
+        label: t('menu/faq'),
         href: '/faq'
       }
     ]
@@ -188,7 +189,7 @@ class Header extends Component {
                 mobile && (
                   <Button block primary onClick={() => {
                     Router.push('/pledge').then(() => window.scrollTo(0, 0))
-                  }}>Mitmachen</Button>
+                  }}>{t('header/button')}</Button>
                 )
               }
               {
@@ -215,4 +216,4 @@ class Header extends Component {
   }
 }
 
-export default Header
+export default withT(Header)

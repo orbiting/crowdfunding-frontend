@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import Router from 'next/router'
 import withT from '../../lib/withT'
 import {fieldsState} from '../../lib/utils/fieldState'
+import {chfFormat} from '../../lib/utils/formats'
 
 import {
   Field, P, A,
@@ -34,13 +35,15 @@ const getPrice = ({values, pkg, userPrice}) => {
     return minPrice
   }
 }
-const priceError = (price, minPrice) => {
+const priceError = (price, minPrice, t) => {
   if (price < minPrice) {
-    return `Betrag, mindestens ${minPrice / 100}`
+    return t('package/customize/price/error', {
+      formattedCHF: chfFormat(minPrice / 100)
+    })
   }
 }
-const reasonError = (value = '') => {
-  return value.trim().length === 0 && 'Bitte begründen'
+const reasonError = (value = '', t) => {
+  return value.trim().length === 0 && t('package/customize/userPrice/reason/error')
 }
 
 class CustomizePackage extends Component {
@@ -58,7 +61,8 @@ class CustomizePackage extends Component {
 
     const {
       onChange,
-      pkg, values, userPrice
+      pkg, values, userPrice,
+      t
     } = this.props
 
     const price = getPrice(this.props)
@@ -72,8 +76,8 @@ class CustomizePackage extends Component {
         price
       },
       errors: {
-        price: priceError(price, minPrice),
-        reason: userPrice && reasonError(values.reason)
+        price: priceError(price, minPrice, t),
+        reason: userPrice && reasonError(values.reason, t)
       }
     })
   }
@@ -99,13 +103,16 @@ class CustomizePackage extends Component {
             event.preventDefault()
             Router.replace('/pledge', '/pledge', {shallow: true})
           }}>
-            ändern
+            {t('package/customize/changePackage')}
           </A>
         </P>
         <Grid>
           {
             configurableOptions.map((option, i) => {
-              const label = t(`option/${option.reward.name}/label`)
+              const value = values[option.id] === undefined ? option.defaultAmount : values[option.id]
+              const label = t.pluralize(`option/${option.reward.name}/label`, {
+                count: value
+              }, t(`option/${option.reward.name}/label`))
 
               return (
                 <Span s='1/2' m='9/18' key={option.id}>
@@ -115,14 +122,20 @@ class CustomizePackage extends Component {
                       label={label}
                       type='number'
                       error={dirty[option.id] && errors[option.id]}
-                      value={values[option.id] === undefined ? option.defaultAmount : values[option.id]}
+                      value={value}
                       onChange={(_, value, shouldValidate) => {
                         let error
                         if (value > option.maxAmount) {
-                          error = `${label}, maximal ${option.maxAmount}`
+                          error = t('package/customize/option/error/max', {
+                            label,
+                            maxAmount: option.maxAmount
+                          })
                         }
                         if (value < option.minAmount) {
-                          error = `${label}, minimal ${option.minAmount}`
+                          error = t('package/customize/option/error/min', {
+                            label,
+                            minAmount: option.minAmount
+                          })
                         }
 
                         const fields = fieldsState({
@@ -149,7 +162,8 @@ class CustomizePackage extends Component {
                         }
                         fields.errors.price = priceError(
                           price,
-                          minPrice
+                          minPrice,
+                          t
                         )
                         onChange(fields)
                       }}
@@ -162,10 +176,10 @@ class CustomizePackage extends Component {
         </Grid>
         {!!userPrice && (<div>
           <P>
-            Journalismus kostet. Wir haben ausgerechnet dass wir initial mindestens 3000 Abonnenten à CHF 240.- brauchen um dauerhaft zu bestehen. Trotzdem wollen wir niemanden ausschliessen.
+            {t('package/customize/userPrice/beforeReason')}
           </P>
           <P>
-            <Field label='Begründung'
+            <Field label={t('package/customize/userPrice/reason/label')}
               ref={this.focusRefSetter}
               error={dirty.reason && errors.reason}
               value={values.reason}
@@ -173,18 +187,18 @@ class CustomizePackage extends Component {
                 onChange(fieldsState({
                   field: 'reason',
                   value,
-                  error: reasonError(value),
+                  error: reasonError(value, t),
                   dirty: shouldValidate
                 }))
               }}
               />
           </P>
           <P>
-            Wie viel könnten Sie zahlen pro Jahr?
+            {t('package/customize/userPrice/beforePrice')}
           </P>
         </div>)}
         <P>
-          <Field label='Betrag'
+          <Field label={t('package/customize/price/label')}
             ref={(configurableOptions.length || userPrice)
               ? undefined : this.focusRefSetter}
             error={dirty.price && errors.price}
@@ -192,7 +206,7 @@ class CustomizePackage extends Component {
             onChange={(_, value, shouldValidate) => {
               const price = value * 100
               const minPrice = calculateMinPrice(pkg, values, userPrice)
-              const error = priceError(price, minPrice)
+              const error = priceError(price, minPrice, t)
 
               this.setState(() => ({customPrice: true}))
               onChange(fieldsState({
