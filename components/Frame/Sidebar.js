@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import withT from '../../lib/withT'
 
 import Accordion from '../Pledge/Accordion'
 import Status from '../Status'
@@ -39,7 +40,7 @@ const styles = {
   })
 }
 
-const SidebarInner = () => (
+const SidebarInner = withT(({t}) => (
   <div style={{paddingTop: 10}}>
     <Accordion onSelect={params => {
       Router.push({
@@ -48,15 +49,15 @@ const SidebarInner = () => (
       }).then(() => window.scrollTo(0, 0))
     }} />
     <P>
-      <Button block>Später erinnern</Button>
+      <Button block>{t('sidebar/reminder/button')}</Button>
     </P>
     <P style={{textAlign: 'center'}}>
       <Link href='/merci'>
-        <a {...styles.link}>Schon unterstützt?</a>
+        <a {...styles.link}>{t('sidebar/signIn')}</a>
       </Link>
     </P>
   </div>
-)
+))
 
 class Sidebar extends Component {
   constructor (props) {

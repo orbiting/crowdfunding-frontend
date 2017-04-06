@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-06T12:36:02.589Z",
+  "updated": "2017-04-06T13:23:36.218Z",
   "title": "live",
   "data": [
     {
@@ -286,6 +286,14 @@
     {
       "key": "status/time/hours/other",
       "value": "{count} Stunden"
+    },
+    {
+      "key": "sidebar/signIn",
+      "value": "Schon unterstützt?"
+    },
+    {
+      "key": "sidebar/reminder/button",
+      "value": "Später erinnern"
     }
   ]
 }
