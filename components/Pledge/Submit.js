@@ -22,6 +22,16 @@ const errorToString = error => error.graphQLErrors && error.graphQLErrors.length
   ? error.graphQLErrors.map(e => e.message).join(', ')
   : error.toString()
 
+const objectValues = (object) => Object.keys(object).map(key => object[key])
+const simpleHash = (object, delimiter = '|') => {
+  return objectValues(object).map(value => {
+    if (typeof value === 'object') {
+      return simpleHash(value, delimiter === '|' ? '$' : `$${delimiter}`)
+    }
+    return `${value}`
+  }).join(delimiter)
+}
+
 class Submit extends Component {
   constructor (props) {
     super(props)
@@ -121,18 +131,27 @@ class Submit extends Component {
 
     const submitPledge = () => {
       // TODO: check for client validation errors
-      // TODO: check if already submitted
-      this.props.submit({
+
+      const variables = {
         total,
         options,
         user: me ? null : {
           ...user,
           birthday: '2017-05-31T23:59:59.999Z' // TODO: Remove!
         }
-      })
+      }
+      const hash = simpleHash(variables)
+
+      if (!submitError && hash === this.state.pledgeHash) {
+        payPledge(this.state.pledgeId)
+        return
+      }
+
+      this.props.submit(variables)
         .then(({data}) => {
           this.setState(() => ({
             pledgeId: data.submitPledge.id,
+            pledgeHash: hash,
             submitError: undefined
           }))
           payPledge(data.submitPledge.id)
