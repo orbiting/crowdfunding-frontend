@@ -253,8 +253,8 @@ const PledgeWithQueries = compose(
 )(Pledge)
 
 const pledgeQuery = gql`
-{
-  pledge(id: "REPUBLIK") {
+query($pledgeId: ID!) {
+  pledge(id: $pledgeId) {
     id
     package {
       name
@@ -295,8 +295,8 @@ class PledgePage extends Component {
     const {url} = this.props
 
     let pledgeId
-    if (url.query.ORDERID) {
-      pledgeId = url.query.ORDERID.split('_')[0]
+    if (url.query.orderID) {
+      pledgeId = url.query.orderID.split('_')[0]
     }
 
     return (
