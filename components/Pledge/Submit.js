@@ -38,7 +38,7 @@ class Submit extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      emailFree: true,
+      emailVerify: false,
       values: {},
       errors: {},
       dirty: {},
@@ -69,26 +69,24 @@ class Submit extends Component {
     }))
     this.props.submit(variables)
       .then(({data}) => {
+        if (data.submitPledge.emailVerify) {
+          this.setState(() => ({
+            loading: false,
+            emailVerify: true
+          }))
+          return
+        }
         this.setState(() => ({
           loading: false,
-          pledgeId: data.submitPledge.id,
+          pledgeId: data.submitPledge.pledgeId,
           pledgeHash: hash,
           submitError: undefined
         }))
-        this.payPledge(data.submitPledge.id)
+        this.payPledge(data.submitPledge.pledgeId)
       })
       .catch(error => {
         console.error('submit', error)
         const submitError = errorToString(error)
-
-        // TODO: Better Backend Error
-        if (submitError === 'a user with the email adress pledge.user.email already exists, login!') {
-          this.setState(() => ({
-            loading: false,
-            emailFree: false
-          }))
-          return
-        }
 
         this.setState(() => ({
           loading: false,
@@ -154,7 +152,7 @@ class Submit extends Component {
             Router.push({
               pathname: '/merci',
               query: {
-                id: data.payPledge.id,
+                id: data.payPledge.pledgeId,
                 email: me ? me.email : user.email
               }
             })
@@ -184,7 +182,7 @@ class Submit extends Component {
   }
   render () {
     const {
-      emailFree,
+      emailVerify,
       paymentMethod,
       paymentError,
       submitError,
@@ -297,7 +295,7 @@ class Submit extends Component {
           </div>
         )}
 
-        {(!emailFree && !me) && (
+        {(emailVerify && !me) && (
           <div style={{marginBottom: 40}}>
             <P>{t('pledge/submit/emailVerify/note')}</P>
             <SignIn email={user.email} />
@@ -383,7 +381,9 @@ Submit.propTypes = {
 const submitPledge = gql`
   mutation submitPledge($total: Int!, $options: [PackageOptionInput!]!, $user: UserInput, $reason: String) {
     submitPledge(pledge: {total: $total, options: $options, user: $user, reason: $reason}) {
-      id
+      pledgeId
+      userId
+      emailVerify
     }
   }
 `
@@ -391,7 +391,9 @@ const submitPledge = gql`
 const payPledge = gql`
   mutation payPledge($pledgeId: ID!, $method: PaymentMethod!, $sourceId: String, $pspPayload: String!) {
     payPledge(pledgePayment: {pledgeId: $pledgeId, method: $method, sourceId: $sourceId, pspPayload: $pspPayload}) {
-      id
+      pledgeId
+      userId
+      emailVerify
     }
   }
 `
