@@ -1,12 +1,14 @@
 import React, {Component, PropTypes} from 'react'
 import {css, merge} from 'glamor'
 import {gql, graphql} from 'react-apollo'
+import Link from 'next/link'
 import withT from '../../lib/withT'
 
 import {
   Field,
   Grid, Span, P,
-  colors
+  colors,
+  linkRule
 } from '@project-r/styleguide'
 
 const styles = {
@@ -21,17 +23,6 @@ const styles = {
     color: colors.primary,
     lineHeight: '28px',
     fontSize: 22
-  }),
-  userPriceLink: css({
-    textDecoration: 'none',
-    cursor: 'pointer',
-    color: colors.text,
-    ':visited': {
-      color: colors.text
-    },
-    ':hover': {
-      color: '#ccc'
-    }
   }),
   package: css({
     marginTop: -1,
@@ -180,7 +171,7 @@ class Accordion extends Component {
                       {configurableOptions.map((option, i) => (
                         <Span s='1/2' m='9/18' key={i}>
                           <Field
-                            label={t(`option/${option.reward.name}/label`, undefined, option.reward.name)}
+                            label={t.pluralize(`option/${option.reward.name}/label`, {}, option.reward.name)}
                             value={''}
                             onChange={() => {
                               // no-op
@@ -197,15 +188,17 @@ class Accordion extends Component {
           })
         }
         <P style={{marginTop: 20}}>
-          <a {...styles.userPriceLink} onClick={(e) => {
-            e.preventDefault()
-            select(
-              packages.find(pkg => pkg.name === 'ABO'),
-              true
-            )
-          }}>
-            <em>{t('package/ABO/userPrice/teaser')}</em>
-          </a>
+          <Link href='/pledge?package=ABO&userPrice=1'>
+            <a {...linkRule} onClick={(e) => {
+              e.preventDefault()
+              select(
+                packages.find(pkg => pkg.name === 'ABO'),
+                true
+              )
+            }}>
+              <em>{t('package/ABO/userPrice/teaser')}</em>
+            </a>
+          </Link>
         </P>
       </div>
     )
