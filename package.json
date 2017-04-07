@@ -30,6 +30,7 @@
   "dependencies": {
     "@project-r/styleguide": "^0.2.9",
     "cross-env": "^3.2.4",
+    "d3-array": "^1.1.1",
     "d3-format": "^1.1.1",
     "d3-time": "^1.0.6",
     "email-validator": "^1.0.7",
@@ -37,6 +38,7 @@
     "express-basic-auth": "^1.0.1",
     "glamor": "^2.20.24",
     "graphql": "^0.9.1",
+    "js-sha1": "^0.4.1",
     "markdown-in-js": "^1.1.3",
     "next": "^2.0.0",
     "react": "^15.4.2",

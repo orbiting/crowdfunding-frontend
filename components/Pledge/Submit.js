@@ -7,6 +7,7 @@ import {mergeFields} from '../../lib/utils/fieldState'
 import {compose} from 'redux'
 import {InlineSpinner} from '../Spinner'
 import withT from '../../lib/withT'
+import * as postfinance from './postfinance'
 
 import {
   H2, P, Button,
@@ -16,7 +17,7 @@ import {
 const PAYMENT_METHODS = [
   {disabled: true, key: 'PAYMENTSLIP'},
   {disabled: false, key: 'STRIPE'},
-  {disabled: true, key: 'POSTFINANCECARD'},
+  {disabled: false, key: 'POSTFINANCECARD'},
   {disabled: true, key: 'PAYPAL'}
 ]
 
@@ -46,6 +47,9 @@ class Submit extends Component {
     }
     this.amountRefSetter = (ref) => {
       this.amountRef = ref
+    }
+    this.postFinanceFormRef = (ref) => {
+      this.postFinanceForm = ref
     }
   }
   submitPledge () {
@@ -82,7 +86,10 @@ class Submit extends Component {
           pledgeHash: hash,
           submitError: undefined
         }))
-        this.payPledge(data.submitPledge.pledgeId)
+        this.payPledge(
+          data.submitPledge.pledgeId,
+          data.submitPledge.userId
+        )
       })
       .catch(error => {
         console.error('submit', error)
@@ -96,7 +103,28 @@ class Submit extends Component {
         }))
       })
   }
-  payPledge (pledgeId) {
+  payPledge (pledgeId, userId) {
+    const {paymentMethod} = this.state
+
+    if (paymentMethod === 'POSTFINANCECARD') {
+      this.payWithPostFinance(pledgeId, userId)
+    }
+    if (paymentMethod === 'STRIPE') {
+      this.payWithStripe(pledgeId, userId)
+    }
+  }
+  payWithPostFinance (pledgeId, userId) {
+    const {t} = this.props
+
+    this.setState(() => ({
+      loading: t('pledge/submit/loading/postfinance'),
+      pledgeId: pledgeId,
+      userId: userId
+    }), () => {
+      this.postFinanceForm.submit()
+    })
+  }
+  payWithStripe (pledgeId) {
     const {me, user, t} = this.props
     const {values} = this.state
 
@@ -292,6 +320,24 @@ class Submit extends Component {
                 })
               }} />
             <br /><br />
+          </div>
+        )}
+        {(paymentMethod === 'POSTFINANCECARD') && (
+          <div>
+            <form ref={this.postFinanceFormRef} method='post' action='https://e-payment.postfinance.ch/ncol/test/orderstandard.asp'>
+              {
+                postfinance.getParams({
+                  alias: this.state.userId,
+                  orderId: this.state.pledgeId,
+                  amount: this.props.total
+                }).map(param => (
+                  <input key={param.key}
+                    type='hidden'
+                    name={param.key}
+                    value={param.value} />
+                ))
+              }
+            </form>
           </div>
         )}
 

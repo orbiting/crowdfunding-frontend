@@ -54,8 +54,21 @@ const query = gql`
 class Pledge extends Component {
   constructor (props) {
     super(props)
+
+    const values = {}
+
+    const {pledge} = props
+    if (pledge) {
+      values.email = pledge.user.email
+      values.name = pledge.user.name
+      values.reason = pledge.reason
+      pledge.options.forEach(option => {
+        values[option.templateId] = option.amount
+      })
+    }
+
     this.state = {
-      values: {},
+      values,
       errors: {},
       dirty: {}
     }
@@ -186,6 +199,7 @@ class Pledge extends Component {
           </div>
 
           <Submit
+            query={query}
             me={me}
             total={values.price}
             user={{
@@ -238,10 +252,65 @@ const PledgeWithQueries = compose(
   withMe
 )(Pledge)
 
-export default withData(({url, session}) => (
-  <Frame url={url} sidebar={false}>
-    <NarrowContainer>
-      <PledgeWithQueries query={url.query} session={session} />
-    </NarrowContainer>
-  </Frame>
+const pledgeQuery = gql`
+{
+  pledge(id: "REPUBLIK") {
+    id
+    package {
+      name
+    }
+    options {
+      templateId
+      amount
+    }
+    total
+    reason
+    user {
+      name
+      email
+    }
+  }
+}
+`
+
+const PledgeById = graphql(pledgeQuery, {
+  props: ({ data }) => {
+    return {
+      loading: data.loading,
+      error: data.error,
+      pledge: data.pledge
+    }
+  }
+})(({loading, error, pledge, query}) => (
+  <Loader loading={loading} error={error} render={() => (
+    <PledgeWithQueries query={{
+      ...query,
+      package: pledge.package.name
+    }} pledge={pledge} />
+  )} />
 ))
+
+class PledgePage extends Component {
+  render () {
+    const {url} = this.props
+
+    let pledgeId
+    if (url.query.ORDERID) {
+      pledgeId = url.query.ORDERID.split('_')[0]
+    }
+
+    return (
+      <Frame url={url} sidebar={false}>
+        <NarrowContainer>
+          {pledgeId ? (
+            <PledgeById pledgeId={pledgeId} query={url.query} />
+          ) : (
+            <PledgeWithQueries query={url.query} />
+          )}
+        </NarrowContainer>
+      </Frame>
+    )
+  }
+}
+
+export default withData(PledgePage)
