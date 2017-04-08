@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-07T10:15:13.989Z",
+  "updated": "2017-04-08T14:14:30.782Z",
   "title": "live",
   "data": [
     {
@@ -314,6 +314,10 @@
     {
       "key": "sidebar/reminder/button",
       "value": "Später erinnern"
+    },
+    {
+      "key": "pledge/recievePayment/error",
+      "value": "Zahlung fehlgeschlagen"
     }
   ]
 }

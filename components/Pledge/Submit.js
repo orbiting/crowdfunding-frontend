@@ -4,6 +4,7 @@ import { gql, graphql } from 'react-apollo'
 import Router from 'next/router'
 import FieldSet from '../FieldSet'
 import {mergeFields} from '../../lib/utils/fieldState'
+import {errorToString} from '../../lib/utils/errors'
 import {compose} from 'redux'
 import {InlineSpinner} from '../Spinner'
 import withT from '../../lib/withT'
@@ -20,10 +21,6 @@ const PAYMENT_METHODS = [
   {disabled: false, key: 'POSTFINANCECARD'},
   {disabled: true, key: 'PAYPAL'}
 ]
-
-const errorToString = error => error.graphQLErrors && error.graphQLErrors.length
-  ? error.graphQLErrors.map(e => e.message).join(', ')
-  : error.toString()
 
 const objectValues = (object) => Object.keys(object).map(key => object[key])
 const simpleHash = (object, delimiter = '|') => {
@@ -452,22 +449,29 @@ mutation signIn($email: String!) {
 }
 `
 
+export const withPay = Component => {
+  const EnhancedComponent = compose(
+    graphql(payPledge, {
+      props: ({mutate}) => ({
+        pay: variables => mutate({variables})
+      })
+    }),
+    graphql(signInMutation, {
+      props: ({mutate}) => ({
+        signIn: email => mutate({variables: {email}})
+      })
+    })
+  )(Component)
+  return props => <EnhancedComponent {...props} />
+}
+
 const SubmitWithMutations = compose(
   graphql(submitPledge, {
     props: ({mutate}) => ({
       submit: variables => mutate({variables})
     })
   }),
-  graphql(payPledge, {
-    props: ({mutate}) => ({
-      pay: variables => mutate({variables})
-    })
-  }),
-  graphql(signInMutation, {
-    props: ({mutate}) => ({
-      signIn: email => mutate({variables: {email}})
-    })
-  }),
+  withPay,
   withT
 )(Submit)
 
