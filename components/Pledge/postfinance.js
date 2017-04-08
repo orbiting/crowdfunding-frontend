@@ -61,11 +61,11 @@ export const getParams = ({
       value: 'membership'
     }
   ]
+  // ensure correct order for valid sha1
   params.sort((a, b) => ascending(a.key, b.key))
 
-  const secret = PF_INPUT_SECRET
   const paramsString = params.map(param => (
-    `${param.key}=${param.value}${secret}`
+    `${param.key}=${param.value}${PF_INPUT_SECRET}`
   )).join('')
 
   params.push({
