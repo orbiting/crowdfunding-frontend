@@ -5,7 +5,18 @@ export default class MyDocument extends Document {
   static async getInitialProps ({renderPage}) {
     const page = renderPage()
     const styles = renderStatic(() => page.html)
-    return { ...page, ...styles }
+    return {
+      ...page,
+      ...styles,
+      env: require('../constants')
+    }
+  }
+  constructor (props) {
+    super(props)
+    const { __NEXT_DATA__, env } = props
+    if (env) {
+      __NEXT_DATA__.env = this.props.env
+    }
   }
   render () {
     const {css} = this.props

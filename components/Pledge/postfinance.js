@@ -1,5 +1,6 @@
 import sha1 from 'js-sha1'
 import {ascending} from 'd3-array'
+import {PUBLIC_BASE_URL, PF_PSPID, PF_INPUT_SECRET} from '../../constants'
 
 export const getParams = ({
   alias,
@@ -9,7 +10,7 @@ export const getParams = ({
   const params = [
     {
       key: 'PSPID',
-      value: 'projectrTEST'
+      value: PF_PSPID
     },
     {
       key: 'ORDERID',
@@ -37,19 +38,19 @@ export const getParams = ({
     },
     {
       key: 'ACCEPTURL',
-      value: 'http://localhost:3003/pledge'
+      value: `${PUBLIC_BASE_URL}/pledge`
     },
     {
       key: 'EXCEPTIONURL',
-      value: 'http://localhost:3003/pledge'
+      value: `${PUBLIC_BASE_URL}/pledge`
     },
     {
       key: 'DECLINEURL',
-      value: 'http://localhost:3003/pledge'
+      value: `${PUBLIC_BASE_URL}/pledge`
     },
     {
       key: 'CANCELURL',
-      value: 'http://localhost:3003/pledge'
+      value: `${PUBLIC_BASE_URL}/pledge`
     },
     {
       key: 'ALIAS',
@@ -62,7 +63,7 @@ export const getParams = ({
   ]
   params.sort((a, b) => ascending(a.key, b.key))
 
-  const secret = 'h9PqtTTb9txDBBrVaX6U'
+  const secret = PF_INPUT_SECRET
   const paramsString = params.map(param => (
     `${param.key}=${param.value}${secret}`
   )).join('')

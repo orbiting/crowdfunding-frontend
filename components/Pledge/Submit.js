@@ -9,6 +9,7 @@ import {compose} from 'redux'
 import {InlineSpinner} from '../Spinner'
 import withT from '../../lib/withT'
 import * as postfinance from './postfinance'
+import {PF_FORM_ACTION, STRIPE_PUBLISHABLE_KEY} from '../../constants'
 
 import {
   H2, P, Button,
@@ -128,7 +129,7 @@ class Submit extends Component {
     this.setState(() => ({
       loading: t('pledge/submit/loading/stripe')
     }))
-    window.Stripe.setPublishableKey('pk_test_sgFutulewhWC8v8csVIXTMea')
+    window.Stripe.setPublishableKey(STRIPE_PUBLISHABLE_KEY)
     window.Stripe.source.create({
       type: 'card',
       currency: 'CHF',
@@ -321,7 +322,7 @@ class Submit extends Component {
         )}
         {(paymentMethod === 'POSTFINANCECARD') && (
           <div>
-            <form ref={this.postFinanceFormRef} method='post' action='https://e-payment.postfinance.ch/ncol/test/orderstandard.asp'>
+            <form ref={this.postFinanceFormRef} method='post' action={PF_FORM_ACTION}>
               {
                 postfinance.getParams({
                   alias: this.state.userId,

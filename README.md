@@ -16,11 +16,25 @@ You can use a git-excluded `.env` file in development:
 
 ```
 PORT=3003
-API_BASE_URL=http://localhost:3001/graphql
+API_BASE_URL=http://localhost:3001
 API_AUTHORIZATION_HEADER=
 ```
 
-`API_BASE_URL` default to `https://api.satellit.io`. If the API is HTTP basic-auth protected, you can generate a basic authorization header with ``Basic ${(new Buffer('user:password')).toString('base64')}`` in Node.js and use it with `API_AUTHORIZATION_HEADER`.
+`API_BASE_URL` defaults to `https://api.satellit.io`. If the API is HTTP basic-auth protected, you can generate a basic authorization header with ``Basic ${(new Buffer('user:password')).toString('base64')}`` in Node.js and use it with `API_AUTHORIZATION_HEADER`.
+
+#### Payment
+
+Payment provider configuration can be passed in via the environment. `PUBLIC_BASE_URL` is used for PostFinance and PayPal return urls.
+
+```
+PUBLIC_BASE_URL=http://localhost:3003
+
+STRIPE_PUBLISHABLE_KEY=
+
+PF_PSPID=
+PF_INPUT_SECRET=
+PF_FORM_ACTION=https://e-payment.postfinance.ch/ncol/test/orderstandard.asp
+```
 
 #### Basic Auth
 

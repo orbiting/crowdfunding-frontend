@@ -7,7 +7,7 @@ if (DEV) {
   require('dotenv').config()
 }
 
-const {PORT} = require('./constants')
+const PORT = process.env.PORT || 3000
 
 const app = next({dir: '.', dev: DEV})
 const handle = app.getRequestHandler()
