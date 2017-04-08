@@ -17,6 +17,9 @@ class PledgePage extends Component {
     if (url.query.orderID) {
       pledgeId = url.query.orderID.split('_')[0]
     }
+    if (url.query.item_name) {
+      pledgeId = url.query.item_name.split('_')[0]
+    }
 
     return (
       <Frame url={url} sidebar={false}>

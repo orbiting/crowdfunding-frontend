@@ -9,7 +9,12 @@ import {compose} from 'redux'
 import {InlineSpinner} from '../Spinner'
 import withT from '../../lib/withT'
 import * as postfinance from './postfinance'
-import {PF_FORM_ACTION, STRIPE_PUBLISHABLE_KEY} from '../../constants'
+import * as paypal from './paypal'
+import {
+  PF_FORM_ACTION,
+  PAYPAL_FORM_ACTION,
+  STRIPE_PUBLISHABLE_KEY
+} from '../../constants'
 
 import {
   H2, P, Button,
@@ -20,7 +25,7 @@ const PAYMENT_METHODS = [
   {disabled: true, key: 'PAYMENTSLIP'},
   {disabled: false, key: 'STRIPE'},
   {disabled: false, key: 'POSTFINANCECARD'},
-  {disabled: true, key: 'PAYPAL'}
+  {disabled: false, key: 'PAYPAL'}
 ]
 
 const objectValues = (object) => Object.keys(object).map(key => object[key])
@@ -48,6 +53,9 @@ class Submit extends Component {
     }
     this.postFinanceFormRef = (ref) => {
       this.postFinanceForm = ref
+    }
+    this.payPalFormRef = (ref) => {
+      this.payPalForm = ref
     }
   }
   submitPledge () {
@@ -110,6 +118,20 @@ class Submit extends Component {
     if (paymentMethod === 'STRIPE') {
       this.payWithStripe(pledgeId, userId)
     }
+    if (paymentMethod === 'PAYPAL') {
+      this.payWithPayPal(pledgeId, userId)
+    }
+  }
+  payWithPayPal (pledgeId, userId) {
+    const {t} = this.props
+
+    this.setState(() => ({
+      loading: t('pledge/submit/loading/paypal'),
+      pledgeId: pledgeId,
+      userId: userId
+    }), () => {
+      this.payPalForm.submit()
+    })
   }
   payWithPostFinance (pledgeId, userId) {
     const {t} = this.props
@@ -321,22 +343,35 @@ class Submit extends Component {
           </div>
         )}
         {(paymentMethod === 'POSTFINANCECARD') && (
-          <div>
-            <form ref={this.postFinanceFormRef} method='post' action={PF_FORM_ACTION}>
-              {
-                postfinance.getParams({
-                  alias: this.state.userId,
-                  orderId: this.state.pledgeId,
-                  amount: this.props.total
-                }).map(param => (
-                  <input key={param.key}
-                    type='hidden'
-                    name={param.key}
-                    value={param.value} />
-                ))
-              }
-            </form>
-          </div>
+          <form ref={this.postFinanceFormRef} method='post' action={PF_FORM_ACTION}>
+            {
+              postfinance.getParams({
+                alias: this.state.userId,
+                orderId: this.state.pledgeId,
+                amount: this.props.total
+              }).map(param => (
+                <input key={param.key}
+                  type='hidden'
+                  name={param.key}
+                  value={param.value} />
+              ))
+            }
+          </form>
+        )}
+        {(paymentMethod === 'PAYPAL') && (
+          <form ref={this.payPalFormRef} method='post' action={PAYPAL_FORM_ACTION}>
+            {
+              paypal.getParams({
+                itemName: this.state.pledgeId,
+                amount: this.props.total
+              }).map(param => (
+                <input key={param.key}
+                  type='hidden'
+                  name={param.key}
+                  value={param.value} />
+              ))
+            }
+          </form>
         )}
 
         {(emailVerify && !me) && (

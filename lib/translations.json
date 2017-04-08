@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-08T16:06:55.404Z",
+  "updated": "2017-04-08T21:17:47.733Z",
   "title": "live",
   "data": [
     {
@@ -272,6 +272,10 @@
       "value": "weiterleiten"
     },
     {
+      "key": "pledge/submit/loading/paypal",
+      "value": "weiterleiten"
+    },
+    {
       "key": "pledge/submit/loading/pay",
       "value": "verarbeiten"
     },
@@ -322,6 +326,10 @@
     {
       "key": "pledge/recievePayment/noPledge",
       "value": "Pledge nicht gefunden"
+    },
+    {
+      "key": "pledge/recievePayment/paypal/cancel",
+      "value": "Zahlung abgebrochen. Wählen Sie ein anderes Zahlungsmittel um ihre Bestellung abzuschliessen."
     }
   ]
 }

@@ -53,8 +53,29 @@ class PledgeReceivePayment extends Component {
         // https://e-payment-postfinance.v-psp.com/de/guides/user%20guides/statuses-and-errors
         // https://e-payment-postfinance.v-psp.com/de/guides/integration%20guides/possible-errors
       }
-      state.pspPayload = JSON.stringify(query)
     }
+    if (query.item_name) {
+      state.paymentMethod = 'PAYPAL'
+
+      if (query.payment_status === 'Completed') {
+        state.processing = true
+      } else {
+        // see cancel_return in ./paypal.js
+        switch (query.payment_status) {
+          case 'Cancel':
+            state.receiveError = t('pledge/recievePayment/paypal/cancel')
+            break
+          // ToDo: handle errors and recommend specific user action
+          // possible action: retry, choose different method, contact us
+
+          // https://developer.paypal.com/docs/classic/ipn/integration-guide/IPNandPDTVariables/#id091EB04C0HS
+          // - payment_status
+          default:
+            state.receiveError = t('pledge/recievePayment/error')
+        }
+      }
+    }
+    state.pspPayload = JSON.stringify(query)
 
     this.queryFromPledge = () => {
       const {pledge} = this.props
