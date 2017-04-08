@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-08T14:14:30.782Z",
+  "updated": "2017-04-08T16:06:55.404Z",
   "title": "live",
   "data": [
     {
@@ -318,6 +318,10 @@
     {
       "key": "pledge/recievePayment/error",
       "value": "Zahlung fehlgeschlagen"
+    },
+    {
+      "key": "pledge/recievePayment/noPledge",
+      "value": "Pledge nicht gefunden"
     }
   ]
 }

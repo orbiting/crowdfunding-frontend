@@ -132,34 +132,41 @@ class PledgeReceivePayment extends Component {
       return <Loader loading message={t('pledge/submit/loading/pay')} />
     }
 
-    const queryWithData = {
-      ...query,
-      ...this.queryFromPledge()
-    }
     return (
-      <Loader loading={loading} error={error} render={() => (
-        <PledgeForm
-          receiveError={receiveError}
-          query={queryWithData}
-          pledge={pledge} />
-      )} />
+      <Loader loading={loading} error={error} render={() => {
+        const queryWithData = {
+          ...query,
+          ...this.queryFromPledge()
+        }
+
+        return (
+          <PledgeForm
+            receiveError={receiveError}
+            query={queryWithData}
+            pledge={pledge} />
+        )
+      }} />
     )
   }
 }
 
 const PledgeReceivePaymentById = compose(
+  withT,
   graphql(pledgeQuery, {
-    props: ({ data }) => {
+    props: ({ data, ownProps }) => {
+      let error = data.error
+      if (data.pledge === null) {
+        error = ownProps.t('pledge/recievePayment/noPledge')
+      }
       return {
         loading: data.loading,
-        error: data.error,
+        error,
         pledge: data.pledge
       }
     }
   }),
   withPay,
-  withMe,
-  withT
+  withMe
 )(PledgeReceivePayment)
 
 export default PledgeReceivePaymentById
