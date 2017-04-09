@@ -160,8 +160,8 @@ class Header extends Component {
         href: '/events'
       },
       {
-        label: 'Leute',
-        href: t('menu/community')
+        label: t('menu/community'),
+        href: '/community'
       },
       {
         label: t('menu/faq'),
