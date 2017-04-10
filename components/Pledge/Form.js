@@ -64,8 +64,8 @@ class Pledge extends Component {
   }
   checkUserFields (props) {
     if (!props.me) {
-      this.handleName(this.state.values.email || '', false, props.t)
-      this.handleEmail(this.state.values.name || '', false, props.t)
+      this.handleName(this.state.values.name || '', false, props.t)
+      this.handleEmail(this.state.values.email || '', false, props.t)
     } else {
       this.setState((state) => ({
         errors: {
