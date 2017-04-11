@@ -29,7 +29,6 @@ class SignOut extends Component {
             }))
             this.props.signOut()
               .then(({data}) => {
-                console.log('signOut data', data)
                 if (data) {
                   this.setState(() => ({
                     loading: false
