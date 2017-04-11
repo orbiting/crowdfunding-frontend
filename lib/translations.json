@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-06T14:43:37.227Z",
+  "updated": "2017-04-08T21:17:47.733Z",
   "title": "live",
   "data": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "key": "menu/community",
-      "value": "Leute",
+      "value": "Community",
       "undefined": "Komplizen"
     },
     {
@@ -97,7 +97,7 @@
     },
     {
       "key": "package/ABO_GIVE/description",
-      "value": "Sie wollen Ihren Freunden oder Feinden das heisseste Magazin für ein Jahr schenken. Und haben die Gelegenheit, diesen zusätzlich für X Franken ein Notizbuch dazu zu schenken – damit diese nicht nur Cleveres lesen, sondern auch schreiben können."
+      "value": "Sie wollen Ihren Freunden oder Feinden das heisseste Magazin für ein Jahr schenken. Und haben die Gelegenheit, diesen zusätzlich für 20 Franken ein Notizbuch dazu zu schenken – damit diese nicht nur Cleveres lesen, sondern auch schreiben können."
     },
     {
       "key": "package/BENEFACTOR/title",
@@ -253,7 +253,7 @@
     },
     {
       "key": "pledge/submit/pay/method/POSTFINANCECARD",
-      "value": "PostfFinance Card"
+      "value": "PostFinance Card"
     },
     {
       "key": "pledge/submit/pay/method/PAYPAL",
@@ -266,6 +266,14 @@
     {
       "key": "pledge/submit/loading/stripe",
       "value": "bezahlen"
+    },
+    {
+      "key": "pledge/submit/loading/postfinance",
+      "value": "weiterleiten"
+    },
+    {
+      "key": "pledge/submit/loading/paypal",
+      "value": "weiterleiten"
     },
     {
       "key": "pledge/submit/loading/pay",
@@ -310,6 +318,18 @@
     {
       "key": "sidebar/reminder/button",
       "value": "Später erinnern"
+    },
+    {
+      "key": "pledge/recievePayment/error",
+      "value": "Zahlung fehlgeschlagen"
+    },
+    {
+      "key": "pledge/recievePayment/noPledge",
+      "value": "Pledge nicht gefunden"
+    },
+    {
+      "key": "pledge/recievePayment/paypal/cancel",
+      "value": "Zahlung abgebrochen. Wählen Sie ein anderes Zahlungsmittel um ihre Bestellung abzuschliessen."
     }
   ]
 }

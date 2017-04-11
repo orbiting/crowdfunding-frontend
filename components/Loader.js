@@ -4,6 +4,10 @@ import {css} from 'glamor'
 import {HEADER_HEIGHT} from './Frame/constants'
 import Spinner from './Spinner'
 
+import {
+  P
+} from '@project-r/styleguide'
+
 const spacerStyle = css({
   position: 'relative',
   minWidth: '100%',
@@ -12,6 +16,16 @@ const spacerStyle = css({
 const Spacer = ({height, width, children}) => (
   <div {...spacerStyle} style={{minWidth: width, minHeight: height}}>{children}</div>
 )
+
+const messageStyle = css({
+  position: 'absolute',
+  top: '50%',
+  marginTop: 25,
+  maxWidth: 600,
+  textAlign: 'center',
+  marginLeft: 'auto',
+  marginRight: 'auto'
+})
 
 class Loader extends Component {
   constructor (props) {
@@ -29,7 +43,7 @@ class Loader extends Component {
   render () {
     const {visible} = this.state
     const {
-      width, height,
+      width, height, message,
       loading, error, render
     } = this.props
     if (loading && !visible) {
@@ -38,6 +52,7 @@ class Loader extends Component {
       return (
         <Spacer width={width} height={height}>
           <Spinner />
+          {!!message && <P {...messageStyle}>{message}</P>}
         </Spacer>
       )
     } else if (error) {
@@ -52,7 +67,8 @@ class Loader extends Component {
 }
 
 Loader.defaultProps = {
-  delay: 500
+  delay: 500,
+  render: () => null
 }
 
 export default Loader

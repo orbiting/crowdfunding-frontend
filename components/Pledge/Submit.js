@@ -4,9 +4,17 @@ import { gql, graphql } from 'react-apollo'
 import Router from 'next/router'
 import FieldSet from '../FieldSet'
 import {mergeFields} from '../../lib/utils/fieldState'
+import {errorToString} from '../../lib/utils/errors'
 import {compose} from 'redux'
 import {InlineSpinner} from '../Spinner'
 import withT from '../../lib/withT'
+import * as postfinance from './postfinance'
+import * as paypal from './paypal'
+import {
+  PF_FORM_ACTION,
+  PAYPAL_FORM_ACTION,
+  STRIPE_PUBLISHABLE_KEY
+} from '../../constants'
 
 import {
   H2, P, Button,
@@ -16,13 +24,9 @@ import {
 const PAYMENT_METHODS = [
   {disabled: true, key: 'PAYMENTSLIP'},
   {disabled: false, key: 'STRIPE'},
-  {disabled: true, key: 'POSTFINANCECARD'},
-  {disabled: true, key: 'PAYPAL'}
+  {disabled: false, key: 'POSTFINANCECARD'},
+  {disabled: false, key: 'PAYPAL'}
 ]
-
-const errorToString = error => error.graphQLErrors && error.graphQLErrors.length
-  ? error.graphQLErrors.map(e => e.message).join(', ')
-  : error.toString()
 
 const objectValues = (object) => Object.keys(object).map(key => object[key])
 const simpleHash = (object, delimiter = '|') => {
@@ -46,6 +50,12 @@ class Submit extends Component {
     }
     this.amountRefSetter = (ref) => {
       this.amountRef = ref
+    }
+    this.postFinanceFormRef = (ref) => {
+      this.postFinanceForm = ref
+    }
+    this.payPalFormRef = (ref) => {
+      this.payPalForm = ref
     }
   }
   submitPledge () {
@@ -82,7 +92,10 @@ class Submit extends Component {
           pledgeHash: hash,
           submitError: undefined
         }))
-        this.payPledge(data.submitPledge.pledgeId)
+        this.payPledge(
+          data.submitPledge.pledgeId,
+          data.submitPledge.userId
+        )
       })
       .catch(error => {
         console.error('submit', error)
@@ -96,14 +109,49 @@ class Submit extends Component {
         }))
       })
   }
-  payPledge (pledgeId) {
+  payPledge (pledgeId, userId) {
+    const {paymentMethod} = this.state
+
+    if (paymentMethod === 'POSTFINANCECARD') {
+      this.payWithPostFinance(pledgeId, userId)
+    }
+    if (paymentMethod === 'STRIPE') {
+      this.payWithStripe(pledgeId, userId)
+    }
+    if (paymentMethod === 'PAYPAL') {
+      this.payWithPayPal(pledgeId, userId)
+    }
+  }
+  payWithPayPal (pledgeId, userId) {
+    const {t} = this.props
+
+    this.setState(() => ({
+      loading: t('pledge/submit/loading/paypal'),
+      pledgeId: pledgeId,
+      userId: userId
+    }), () => {
+      this.payPalForm.submit()
+    })
+  }
+  payWithPostFinance (pledgeId, userId) {
+    const {t} = this.props
+
+    this.setState(() => ({
+      loading: t('pledge/submit/loading/postfinance'),
+      pledgeId: pledgeId,
+      userId: userId
+    }), () => {
+      this.postFinanceForm.submit()
+    })
+  }
+  payWithStripe (pledgeId) {
     const {me, user, t} = this.props
     const {values} = this.state
 
     this.setState(() => ({
       loading: t('pledge/submit/loading/stripe')
     }))
-    window.Stripe.setPublishableKey('pk_test_sgFutulewhWC8v8csVIXTMea')
+    window.Stripe.setPublishableKey(STRIPE_PUBLISHABLE_KEY)
     window.Stripe.source.create({
       type: 'card',
       currency: 'CHF',
@@ -294,6 +342,37 @@ class Submit extends Component {
             <br /><br />
           </div>
         )}
+        {(paymentMethod === 'POSTFINANCECARD') && (
+          <form ref={this.postFinanceFormRef} method='post' action={PF_FORM_ACTION}>
+            {
+              postfinance.getParams({
+                alias: this.state.userId,
+                orderId: this.state.pledgeId,
+                amount: this.props.total
+              }).map(param => (
+                <input key={param.key}
+                  type='hidden'
+                  name={param.key}
+                  value={param.value} />
+              ))
+            }
+          </form>
+        )}
+        {(paymentMethod === 'PAYPAL') && (
+          <form ref={this.payPalFormRef} method='post' action={PAYPAL_FORM_ACTION}>
+            {
+              paypal.getParams({
+                itemName: this.state.pledgeId,
+                amount: this.props.total
+              }).map(param => (
+                <input key={param.key}
+                  type='hidden'
+                  name={param.key}
+                  value={param.value} />
+              ))
+            }
+          </form>
+        )}
 
         {(emailVerify && !me) && (
           <div style={{marginBottom: 40}}>
@@ -406,22 +485,29 @@ mutation signIn($email: String!) {
 }
 `
 
+export const withPay = Component => {
+  const EnhancedComponent = compose(
+    graphql(payPledge, {
+      props: ({mutate}) => ({
+        pay: variables => mutate({variables})
+      })
+    }),
+    graphql(signInMutation, {
+      props: ({mutate}) => ({
+        signIn: email => mutate({variables: {email}})
+      })
+    })
+  )(Component)
+  return props => <EnhancedComponent {...props} />
+}
+
 const SubmitWithMutations = compose(
   graphql(submitPledge, {
     props: ({mutate}) => ({
       submit: variables => mutate({variables})
     })
   }),
-  graphql(payPledge, {
-    props: ({mutate}) => ({
-      pay: variables => mutate({variables})
-    })
-  }),
-  graphql(signInMutation, {
-    props: ({mutate}) => ({
-      signIn: email => mutate({variables: {email}})
-    })
-  }),
+  withPay,
   withT
 )(Submit)
 
