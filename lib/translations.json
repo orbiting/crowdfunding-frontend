@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-08T21:17:47.733Z",
+  "updated": "2017-04-11T20:19:10.201Z",
   "title": "live",
   "data": [
     {
@@ -9,7 +9,7 @@
     },
     {
       "key": "menu/events",
-      "value": "Tournee",
+      "value": "Live",
       "undefined": "Action"
     },
     {
@@ -19,7 +19,7 @@
     },
     {
       "key": "menu/faq",
-      "value": "FAQ",
+      "value": "Fragen",
       "undefined": "Antworten"
     },
     {
@@ -69,7 +69,7 @@
     },
     {
       "key": "package/DONATE/description",
-      "value": "Sie wollen hervorragenden Journalismus unterstützen, ohne ihn zu lesen. Aber mit Geld. Denn Sie wissen: ohne Geld läuft nichts, nicht einmal die Ratten in den Lagerschuppen."
+      "value": "Sie wollen hervorragenden Journalismus unterstützen, ohne ihn zu lesen. Aber mit Geld. Denn Sie wissen: ohne Geld läuft nichts."
     },
     {
       "key": "package/POSTER/title",
@@ -149,11 +149,11 @@
     },
     {
       "key": "pledge/rewards/title",
-      "value": "Belohnungen"
+      "value": null
     },
     {
       "key": "pledge/contact/title",
-      "value": "Deine Kontaktinformationen"
+      "value": "Ihre Kontaktinformationen"
     },
     {
       "key": "pledge/contact/signedin-as",
@@ -285,11 +285,11 @@
     },
     {
       "key": "status/goal/money",
-      "value": "von {formattedCHF} finanziert"
+      "value": "von {formattedCHF}"
     },
     {
       "key": "status/time/label",
-      "value": "Zeit verbleibend"
+      "value": "bis Deadline"
     },
     {
       "key": "status/time/ended",
@@ -312,12 +312,20 @@
       "value": "{count} Stunden"
     },
     {
+      "key": "status/time/minutes/1",
+      "value": "1 Minute"
+    },
+    {
+      "key": "status/time/minutes/other",
+      "value": "{count} Minuten"
+    },
+    {
       "key": "sidebar/signIn",
-      "value": "Schon unterstützt?"
+      "value": "Sie sind bereits an Bord?"
     },
     {
       "key": "sidebar/reminder/button",
-      "value": "Später erinnern"
+      "value": "Nicht jetzt. Später!\n"
     },
     {
       "key": "pledge/recievePayment/error",
@@ -330,6 +338,34 @@
     {
       "key": "pledge/recievePayment/paypal/cancel",
       "value": "Zahlung abgebrochen. Wählen Sie ein anderes Zahlungsmittel um ihre Bestellung abzuschliessen."
+    },
+    {
+      "key": "api/email/invalid",
+      "value": "E-Mail ungültig"
+    },
+    {
+      "key": "api/unauthorized",
+      "value": "Sie müssen sich zuerst einloggen."
+    },
+    {
+      "key": "api/unexpected",
+      "value": "Ups, da ist was schiefgelaufen. Sorry!"
+    },
+    {
+      "key": "api/membership/claim/alreadyHave",
+      "value": "Sie können keinen Gutscheincode einlösen, weil Sie schon eine Mitgliedschaft haben."
+    },
+    {
+      "key": "api/membership/claim/invalidToken",
+      "value": "Gutscheincode ungültig"
+    },
+    {
+      "key": "api/membership/reduced/alreadyHave",
+      "value": "Sie können nur eine reduzierte Mitgliedschaft kaufen."
+    },
+    {
+      "key": "api/pledge/alreadyPaid",
+      "value": "Dieser Pledge wurde bereits bezahlt."
     }
   ]
 }

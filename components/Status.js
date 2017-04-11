@@ -8,7 +8,7 @@ import {
   P, Label, colors
 } from '@project-r/styleguide'
 
-import {timeDay} from 'd3-time'
+import {timeMinute} from 'd3-time'
 
 const styles = {
   primaryNumber: css({
@@ -67,14 +67,10 @@ class Status extends Component {
     const now = new Date()
     const end = new Date(endDate)
 
-    let days = timeDay.count(now, end)
-    let hours = end.getHours() - now.getHours()
-    if (hours < 0 || (hours === 0 && end.getMinutes() < now.getMinutes())) {
-      days -= 1
-      if (hours < 0) {
-        hours += 24
-      }
-    }
+    const totalMinutes = timeMinute.count(now, end)
+    const minutes = totalMinutes % 60
+    const hours = Math.floor(totalMinutes / 60) % 24
+    const days = Math.floor(totalMinutes / 60 / 24)
 
     if (this.props.compact) {
       return (
@@ -86,7 +82,11 @@ class Status extends Component {
             })}</Label>
           </P>
           <div {...styles.bar}>
-            <div {...styles.barInner} style={{width: `${Math.ceil(status.people / goal.people * 100)}%`}} />
+            <div {...styles.barInner} style={{
+              width: `${Math.ceil(
+                Math.min(1, status.people / goal.people) * 100
+              )}%`
+            }} />
           </div>
         </div>
       )
@@ -101,7 +101,11 @@ class Status extends Component {
           })}</Label>
         </P>
         <div {...styles.bar}>
-          <div {...styles.barInner} style={{width: `${Math.ceil(status.people / goal.people * 100)}%`}} />
+          <div {...styles.barInner} style={{
+            width: `${Math.ceil(
+              Math.min(1, status.people / goal.people) * 100
+            )}%`
+          }} />
         </div>
         <P>
           <span {...styles.secondaryNumber}>{chfFormat(status.money / 100)}</span>
@@ -112,7 +116,11 @@ class Status extends Component {
           </Label>
         </P>
         <div {...styles.bar}>
-          <div {...styles.barInner} style={{width: `${Math.ceil(status.money / goal.money * 100)}%`}} />
+          <div {...styles.barInner} style={{
+            width: `${Math.ceil(
+              Math.min(1, status.money / goal.money) * 100
+            )}%`
+          }} />
         </div>
         <P>
           <span {...styles.smallNumber}>
@@ -128,6 +136,12 @@ class Status extends Component {
                   'status/time/hours',
                   {
                     count: hours
+                  }
+                ),
+                t.pluralize(
+                  'status/time/minutes',
+                  {
+                    count: minutes
                   }
                 )
               ].join(' ')
