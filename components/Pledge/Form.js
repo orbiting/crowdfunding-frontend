@@ -142,9 +142,6 @@ class Pledge extends Component {
                   Router.replace(url, url, {shallow: true})
                     .then(() => {
                       window.scrollTo(0, 0)
-                      if (this.amountRef && this.amountRef.input) {
-                        this.amountRef.input.focus()
-                      }
                     })
                 }} />
               )}
