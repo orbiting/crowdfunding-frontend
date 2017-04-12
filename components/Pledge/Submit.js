@@ -48,6 +48,13 @@ class Submit extends Component {
       dirty: {},
       loading: false
     }
+    if (props.basePledge) {
+      const variables = this.submitVariables(props.basePledge)
+      const hash = simpleHash(variables)
+
+      this.state.pledgeHash = hash
+      this.state.pledgeId = props.basePledge.id
+    }
     this.amountRefSetter = (ref) => {
       this.amountRef = ref
     }
@@ -58,15 +65,21 @@ class Submit extends Component {
       this.payPalForm = ref
     }
   }
-  submitPledge () {
-    const {me, user, total, options, reason, t} = this.props
+  submitVariables (props) {
+    const {me} = this.props
+    const {user, total, options, reason} = props
 
-    const variables = {
+    return {
       total,
       options,
       reason,
       user: me ? null : user
     }
+  }
+  submitPledge () {
+    const {t} = this.props
+
+    const variables = this.submitVariables(this.props)
     const hash = simpleHash(variables)
 
     if (!this.state.submitError && hash === this.state.pledgeHash) {

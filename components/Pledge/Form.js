@@ -25,8 +25,9 @@ class Pledge extends Component {
     super(props)
 
     const values = {}
+    let basePledge
 
-    const {pledge} = props
+    const {pledge, query} = props
     if (pledge) {
       values.email = pledge.user.email
       values.name = pledge.user.name
@@ -35,12 +36,46 @@ class Pledge extends Component {
       pledge.options.forEach(option => {
         values[option.templateId] = option.amount
       })
+      basePledge = {
+        values: {
+          ...values
+        },
+        query: {
+          ...query
+        },
+        pledge
+      }
     }
 
     this.state = {
+      basePledge,
       values,
       errors: {},
       dirty: {}
+    }
+  }
+  submitPledgeProps ({values, query, pledge}) {
+    const {crowdfunding} = this.props
+    const pkg = query.package
+      ? crowdfunding.packages.find(
+          pkg => pkg.name === query.package
+        )
+      : null
+    const userPrice = !!query.userPrice
+
+    return {
+      total: values.price,
+      user: {
+        name: values.name,
+        email: values.email
+      },
+      options: pkg ? pkg.options.map(option => ({
+        amount: values[option.id] || option.minAmount,
+        price: option.price,
+        templateId: option.id
+      })) : [],
+      reason: userPrice ? values.reason : undefined,
+      id: pledge ? pledge.id : undefined
     }
   }
   handleName (value, shouldValidate, t) {
@@ -88,7 +123,8 @@ class Pledge extends Component {
     const {
       values,
       errors,
-      dirty
+      dirty,
+      basePledge
     } = this.state
 
     const {
@@ -181,17 +217,10 @@ class Pledge extends Component {
             <Submit
               query={query}
               me={me}
-              total={values.price}
-              user={{
-                name: values.name,
-                email: values.email
-              }}
-              options={pkg ? pkg.options.map(option => ({
-                amount: values[option.id] || option.minAmount,
-                price: option.price,
-                templateId: option.id
-              })) : []}
-              reason={userPrice ? values.reason : undefined}
+              {...this.submitPledgeProps({values, query})}
+              basePledge={basePledge
+                ? this.submitPledgeProps(basePledge)
+                : undefined}
               errors={errors}
               onError={() => {
                 this.setState((state) => {
