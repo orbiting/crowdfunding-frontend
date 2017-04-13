@@ -128,7 +128,8 @@ class Pledge extends Component {
         const {
           query, me, t,
           crowdfunding,
-          receiveError
+          receiveError,
+          pastPledges
         } = this.props
 
         const pkg = query.package
@@ -177,8 +178,9 @@ class Pledge extends Component {
             <div style={{marginTop: 0, marginBottom: 40}}>
               {me ? (
                 <span>
-                  <strong>{t('pledge/contact/signedinAs')}</strong><br />
-                  {me.name || me.email}
+                  <strong>{t('pledge/contact/signedinAs', {
+                    nameOrEmail: me.name || me.email
+                  })}</strong>
                   {' '}<A href='#' onClick={(e) => {
                     e.preventDefault()
                     this.props.signOut().then(() => {
@@ -186,6 +188,14 @@ class Pledge extends Component {
                       this.handleEmail('', false, t)
                     })
                   }}>{t('pledge/contact/signOut')}</A>
+                  <br />
+                  {' '}{pastPledges.length > 0 && (
+                    <A href='/merci' target='_blank'>
+                      {t.pluralize('pledge/contact/pastPledges', {
+                        count: pastPledges.length
+                      })}
+                    </A>
+                  )}
                   <br /><br />
                 </span>
               ) : (
@@ -288,6 +298,16 @@ const query = gql`
 }
 `
 
+const pastPledgesQuery = gql`
+{
+  me {
+    pledges {
+      id
+    }
+  }
+}
+`
+
 const PledgeWithQueries = compose(
   graphql(query, {
     props: ({ data }) => {
@@ -295,6 +315,13 @@ const PledgeWithQueries = compose(
         loading: data.loading,
         error: data.error,
         crowdfunding: data.crowdfunding
+      }
+    }
+  }),
+  graphql(pastPledgesQuery, {
+    props: ({ data }) => {
+      return {
+        pastPledges: data.me ? data.me.pledges : []
       }
     }
   }),

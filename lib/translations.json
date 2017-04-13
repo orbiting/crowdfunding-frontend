@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-13T17:51:50.221Z",
+  "updated": "2017-04-13T18:29:04.778Z",
   "title": "live",
   "data": [
     {
@@ -173,7 +173,15 @@
     },
     {
       "key": "pledge/contact/signedinAs",
-      "value": "Sie sind angemeldet als:"
+      "value": "Sie sind angemeldet als: {nameOrEmail}"
+    },
+    {
+      "key": "pledge/contact/pastPledges/1",
+      "value": "Sie haben bereits einmal mitgemacht."
+    },
+    {
+      "key": "pledge/contact/pastPledges/other",
+      "value": "Sie haben bereits {count} mal mitgemacht."
     },
     {
       "key": "pledge/contact/signOut",
