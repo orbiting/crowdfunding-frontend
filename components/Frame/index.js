@@ -3,6 +3,7 @@ import {css} from 'glamor'
 
 import 'glamor/reset'
 import Header from './Header'
+import Footer from './Footer'
 import Sidebar from './Sidebar'
 
 import {
@@ -19,7 +20,9 @@ css.global('*, *:before, *:after', {boxSizing: 'inherit'})
 
 const styles = {
   container: css({
-    paddingBottom: 60
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column'
   }),
   coverless: css({
     paddingTop: HEADER_HEIGHT + 40
@@ -36,6 +39,9 @@ const styles = {
     [mediaQueries.onlyS]: {
       display: 'none'
     }
+  }),
+  bodyGrower: css({
+    flexGrow: 1
   })
 }
 
@@ -63,14 +69,17 @@ class Frame extends Component {
       : {}
 
     return (
-      <div {...styles.container} className={!cover ? styles.coverless : undefined}>
-        <Header url={url} cover={cover} sticky={sticky} sidebar={sidebar} />
-        {sidebar && <Container style={{position: 'relative'}}>
-          <div {...styles.sidebar} {...sidebarAdditionalStyle}>
-            <Sidebar sticky={sticky} setSticky={this.setSticky} />
-          </div>
-        </Container>}
-        {children}
+      <div {...styles.container}>
+        <div {...styles.bodyGrower} className={!cover ? styles.coverless : undefined}>
+          <Header url={url} cover={cover} sticky={sticky} sidebar={sidebar} />
+          {sidebar && <Container style={{position: 'relative'}}>
+            <div {...styles.sidebar} {...sidebarAdditionalStyle}>
+              <Sidebar sticky={sticky} setSticky={this.setSticky} />
+            </div>
+          </Container>}
+          {children}
+        </div>
+        <Footer />
       </div>
     )
   }

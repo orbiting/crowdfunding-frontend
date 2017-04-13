@@ -1,52 +1,32 @@
 import React, {PropTypes} from 'react'
-import {css} from 'glamor'
 
-import FacebookIcon from './Icons/Facebook'
-import TwitterIcon from './Icons/Twitter'
-import EmailIcon from './Icons/Email'
-
-const styles = {
-  button: css({
-    padding: '5px 5px',
-    ':hover': {
-      opacity: 0.6
-    },
-    ':first-child': {
-      paddingLeft: 0
-    },
-    ':last-child': {
-      paddingRight: 0
-    }
-  })
-}
+import IconLink from './IconLink'
 
 const ShareButtons = ({url, tweet, emailSubject, emailBody, emailAttachUrl, fill}) => {
   const emailAttache = emailAttachUrl ? `\n\n${url}` : ''
   const shareOptions = [
     {
-      blank: true,
+      target: '_blank',
       href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-      Icon: FacebookIcon
+      icon: 'facebook'
     },
     {
-      blank: true,
+      target: '_blank',
       href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}&url=${encodeURIComponent(url)}`,
-      Icon: TwitterIcon
+      icon: 'twitter'
     },
     {
       href: `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody + emailAttache)}`,
-      Icon: EmailIcon
+      icon: 'email'
     }
   ]
 
   return (
-    <div>
-      {shareOptions.map(({href, blank, Icon}, i) => (
-        <a key={i} href={href} {...styles.button} target={blank ? '_blank' : ''}>
-          <Icon fill={fill} />
-        </a>
+    <span>
+      {shareOptions.map((props, i) => (
+        <IconLink key={i} {...props} fill={fill} />
       ))}
-    </div>
+    </span>
   )
 }
 
