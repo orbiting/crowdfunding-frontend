@@ -457,7 +457,7 @@ class Submit extends Component {
               <label>
                 <input
                   type='checkbox'
-                  checked={this.state.values.paperInvoice}
+                  checked={this.state.values.paperInvoice || false}
                   onChange={(event) => {
                     const checked = event.target.checked
                     this.setState((state) => ({
