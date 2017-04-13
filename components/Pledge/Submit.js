@@ -10,6 +10,7 @@ import {errorToString} from '../../lib/utils/errors'
 import {compose} from 'redux'
 import {InlineSpinner} from '../Spinner'
 import withT from '../../lib/withT'
+import {meQuery} from '../../lib/withMe'
 import * as postfinance from './postfinance'
 import * as paypal from './paypal'
 import {
@@ -557,7 +558,12 @@ export const withPay = Component => {
 const SubmitWithMutations = compose(
   graphql(submitPledge, {
     props: ({mutate}) => ({
-      submit: variables => mutate({variables})
+      submit: variables => mutate({
+        variables,
+        refetchQueries: [{
+          query: meQuery
+        }]
+      })
     })
   }),
   withSignOut,
