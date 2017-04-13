@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-13T14:26:47.272Z",
+  "updated": "2017-04-13T16:05:59.448Z",
   "title": "live",
   "data": [
     {
@@ -144,6 +144,14 @@
       "value": "Bitte anmelden:"
     },
     {
+      "key": "signIn/email/label",
+      "value": "Email-Adresse"
+    },
+    {
+      "key": "signIn/success",
+      "value": "Erfolgreich eingeloggt als {nameOrEmail} ({seconds}s)"
+    },
+    {
       "key": "pledge/title",
       "value": "Mitmachen"
     },
@@ -152,8 +160,16 @@
       "value": "Ihre Kontaktinformationen"
     },
     {
-      "key": "pledge/contact/signedin-as",
-      "value": "Du bist eingeloggt als:"
+      "key": "pledge/contact/signedinAs",
+      "value": "Sie sind angemeldet als:"
+    },
+    {
+      "key": "pledge/contact/signOut",
+      "value": "abmelden"
+    },
+    {
+      "key": "pledge/contact/signIn",
+      "value": "Schon mal unterstützt?"
     },
     {
       "key": "pledge/contact/name/label",

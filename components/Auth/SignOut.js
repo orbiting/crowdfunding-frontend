@@ -1,6 +1,9 @@
 import React, {Component, PropTypes} from 'react'
 import {gql, graphql} from 'react-apollo'
+import {compose} from 'redux'
+import withT from '../../lib/withT'
 import {meQuery} from '../../lib/withMe'
+import {errorToString} from '../../lib/utils/errors'
 
 import {
   Button
@@ -14,6 +17,7 @@ class SignOut extends Component {
     }
   }
   render () {
+    const {t} = this.props
     const {loading, error} = this.state
 
     return (
@@ -35,20 +39,20 @@ class SignOut extends Component {
                   }))
                 } else {
                   this.setState(() => ({
-                    error: 'Unbekannter Fehler',
+                    error: t('signOut/error'),
                     loading: false
                   }))
                 }
               })
               .catch(error => {
                 this.setState(() => ({
-                  error,
+                  error: errorToString(error),
                   loading: false
                 }))
               })
           }}>abmelden</Button>
         <br />
-        {loading ? 'Lädt' : ''}
+        {loading ? t('signOut/loading') : ''}
         {!!error && error}
       </div>
     )
@@ -65,7 +69,7 @@ mutation signOut {
 }
 `
 
-const SignOutWithMutation = graphql(signOutMutation, {
+export const withSignOut = graphql(signOutMutation, {
   props: ({mutate}) => ({
     signOut: () => mutate({
       refetchQueries: [{
@@ -73,6 +77,9 @@ const SignOutWithMutation = graphql(signOutMutation, {
       }]
     })
   })
-})(SignOut)
+})
 
-export default SignOutWithMutation
+export default compose(
+  withSignOut,
+  withT
+)(SignOut)
