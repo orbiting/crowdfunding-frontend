@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-13T09:51:10.492Z",
+  "updated": "2017-04-13T14:26:47.272Z",
   "title": "live",
   "data": [
     {
@@ -148,10 +148,6 @@
       "value": "Mitmachen"
     },
     {
-      "key": "pledge/rewards/title",
-      "value": null
-    },
-    {
       "key": "pledge/contact/title",
       "value": "Ihre Kontaktinformationen"
     },
@@ -268,6 +264,10 @@
       "value": "bezahlen"
     },
     {
+      "key": "pledge/submit/loading/stripe/3dsecure",
+      "value": "3-D Secure"
+    },
+    {
       "key": "pledge/submit/loading/postfinance",
       "value": "weiterleiten"
     },
@@ -338,6 +338,26 @@
     {
       "key": "pledge/recievePayment/paypal/cancel",
       "value": "Zahlung abgebrochen. Wählen Sie ein anderes Zahlungsmittel um ihre Bestellung abzuschliessen."
+    },
+    {
+      "key": "pledge/recievePayment/3dsecure/failed",
+      "value": "3-D Secure fehlgeschlagen. Versuchen Sie es nochmals oder wählen Sie ein anderes Zahlungsmittel."
+    },
+    {
+      "key": "pledge/3dsecure/payment_method_not_available",
+      "value": "Das Zahlungsmittel ist zurzeit nicht verfügbar, versuchen Sie es mit einem anderen Zahlungsmittel."
+    },
+    {
+      "key": "pledge/3dsecure/processing_error",
+      "value": "Unerwarteter Fehler beim Bezahlen. Versuchen Sie es erneut."
+    },
+    {
+      "key": "pledge/3dsecure/unkown",
+      "value": "Unbekannter Fehler beim Bezahlen."
+    },
+    {
+      "key": "pledge/3dsecure/redirect/failed",
+      "value": "3-D Secure ihrer Bank ist nicht verfügbar. Versuchen Sie es mit einem anderen Zahlungsmittel."
     },
     {
       "key": "api/email/invalid",
@@ -414,6 +434,22 @@
     {
       "key": "api/pay/stripe/processing_error",
       "value": "An error occurred while processing the card."
+    },
+    {
+      "key": "api/paypal/unknownError",
+      "value": "Bei der Bezahlung mit Paypal ist etwas schiefgelaufen. Wir haben Ihren Pledge und den Fehler gespeichert. Bitte kontaktieren Sie uns. ID: {id}"
+    },
+    {
+      "key": "api/pay/pf/checksumError",
+      "value": "Die Überprüfung der Bezahlung mit Postfinance ist fehlgeschlagen. Wir haben Ihren Pledge und den Fehler gespeichert. Bitte kontaktieren Sie uns. ID: {id}"
+    },
+    {
+      "key": "api/pay/pspPayload/parseFailed",
+      "value": "Die Bezahldaten konnten nicht überprüft werden. Bitte kontaktieren Sie uns. ID: {id}"
+    },
+    {
+      "key": "api/pay/paymentIdUsedAlready",
+      "value": "Es wurde bereits ein pledge mit dieser Zahlung abgerechnet. Bitte kontaktieren Sie uns. ID: {id}"
     },
     {
       "key": "footer/contact/title",
