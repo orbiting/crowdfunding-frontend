@@ -20,6 +20,7 @@ import {
 import Accordion from './Accordion'
 import Submit from './Submit'
 import CustomizePackage from './CustomizePackage'
+import {pastPledgesQuery} from './queries'
 
 class Pledge extends Component {
   constructor (props) {
@@ -293,16 +294,6 @@ const query = gql`
           }
         }
       }
-    }
-  }
-}
-`
-
-const pastPledgesQuery = gql`
-{
-  me {
-    pledges {
-      id
     }
   }
 }

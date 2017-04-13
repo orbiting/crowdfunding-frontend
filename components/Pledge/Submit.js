@@ -13,6 +13,8 @@ import withT from '../../lib/withT'
 import {meQuery} from '../../lib/withMe'
 import * as postfinance from './postfinance'
 import * as paypal from './paypal'
+import {pastPledgesQuery} from './queries'
+
 import {
   PUBLIC_BASE_URL,
   PF_FORM_ACTION,
@@ -547,7 +549,12 @@ export const withPay = Component => {
   const EnhancedComponent = compose(
     graphql(payPledge, {
       props: ({mutate}) => ({
-        pay: variables => mutate({variables})
+        pay: variables => mutate({
+          variables,
+          refetchQueries: [{
+            query: pastPledgesQuery
+          }]
+        })
       })
     }),
     withSignIn
