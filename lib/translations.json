@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-11T20:19:10.201Z",
+  "updated": "2017-04-13T09:51:10.492Z",
   "title": "live",
   "data": [
     {
@@ -366,6 +366,78 @@
     {
       "key": "api/pledge/alreadyPaid",
       "value": "Dieser Pledge wurde bereits bezahlt."
+    },
+    {
+      "key": "api/pay/stripe/invalid_number",
+      "value": "The card number is not a valid credit card number."
+    },
+    {
+      "key": "api/pay/stripe/invalid_expiry_month",
+      "value": "The card's expiration month is invalid."
+    },
+    {
+      "key": "api/pay/stripe/invalid_expiry_year",
+      "value": "The card's expiration year is invalid."
+    },
+    {
+      "key": "api/pay/stripe/invalid_cvc",
+      "value": "The card's security code is invalid."
+    },
+    {
+      "key": "api/pay/stripe/invalid_swipe_data",
+      "value": "The card's swipe data is invalid."
+    },
+    {
+      "key": "api/pay/stripe/incorrect_number",
+      "value": "The card number is incorrect."
+    },
+    {
+      "key": "api/pay/stripe/expired_card",
+      "value": "The card has expired."
+    },
+    {
+      "key": "api/pay/stripe/incorrect_cvc",
+      "value": "The card's security code is incorrect."
+    },
+    {
+      "key": "api/pay/stripe/incorrect_zip",
+      "value": "The card's zip code failed validation."
+    },
+    {
+      "key": "api/pay/stripe/card_declined",
+      "value": "Ihre Karte wurde abgelehnt."
+    },
+    {
+      "key": "api/pay/stripe/missing",
+      "value": "There is no card on a customer that is being charged."
+    },
+    {
+      "key": "api/pay/stripe/processing_error",
+      "value": "An error occurred while processing the card."
+    },
+    {
+      "key": "footer/contact/title",
+      "value": "Kontakt"
+    },
+    {
+      "key": "footer/contact/address",
+      "value": "Republik AG\nc/o Hotel Rothaus\nSihlhallenstrasse 1\n8004 Zürich\nSchweiz"
+    },
+    {
+      "key": "footer/about/title",
+      "value": "Über uns"
+    },
+    {
+      "key": "footer/about/projecR",
+      "value": "Project R"
+    },
+    {
+      "key": "footer/legal/title",
+      "value": "Rechtliches"
+    },
+    {
+      "key": "footer/legal/imprint",
+      "value": "Impressum"
     }
   ]
 }
