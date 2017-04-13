@@ -145,18 +145,19 @@ class PledgeReceivePayment extends Component {
       sourceId
     })
       .then(({data}) => {
-        const gotoMerci = () => {
+        const gotoMerci = (phrase) => {
           Router.push({
             pathname: '/merci',
             query: {
               id: data.payPledge.pledgeId,
-              email: pledge.user.email
+              email: pledge.user.email,
+              phrase
             }
           })
         }
         if (!me) {
           this.props.signIn(pledge.user.email)
-            .then(() => gotoMerci())
+            .then(({data}) => gotoMerci(data.signIn.phrase))
             .catch(error => {
               console.error('signIn', error)
               this.setState(() => ({

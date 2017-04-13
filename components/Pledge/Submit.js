@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react'
-import SignIn from '../Auth/SignIn'
+import SignIn, {withSignIn} from '../Auth/SignIn'
+import {withSignOut} from '../Auth/SignOut'
+
 import { gql, graphql } from 'react-apollo'
 import Router from 'next/router'
 import FieldSet from '../FieldSet'
@@ -67,20 +69,25 @@ class Submit extends Component {
     }
   }
   submitVariables (props) {
-    const {me} = this.props
     const {user, total, options, reason} = props
 
     return {
       total,
       options,
       reason,
-      user: me ? null : user
+      user
     }
   }
   submitPledge () {
-    const {t} = this.props
+    const {t, me} = this.props
 
     const variables = this.submitVariables(this.props)
+    if (me && me.email !== variables.user.email) {
+      this.props.signOut().then(() => {
+        this.submitPledge()
+      })
+    }
+
     const hash = simpleHash(variables)
 
     if (!this.state.submitError && hash === this.state.pledgeHash) {
@@ -171,18 +178,19 @@ class Submit extends Component {
       pspPayload: JSON.stringify(source)
     })
       .then(({data}) => {
-        const gotoMerci = () => {
+        const gotoMerci = (phrase) => {
           Router.push({
             pathname: '/merci',
             query: {
               id: data.payPledge.pledgeId,
-              email: me ? me.email : user.email
+              email: user.email,
+              phrase
             }
           })
         }
         if (!me) {
           this.props.signIn(user.email)
-            .then(() => gotoMerci())
+            .then(({data}) => gotoMerci(data.signIn.phrase))
             .catch(error => {
               console.error('signIn', error)
               this.setState(() => ({
@@ -515,7 +523,7 @@ Submit.propTypes = {
 }
 
 const submitPledge = gql`
-  mutation submitPledge($total: Int!, $options: [PackageOptionInput!]!, $user: UserInput, $reason: String) {
+  mutation submitPledge($total: Int!, $options: [PackageOptionInput!]!, $user: UserInput!, $reason: String) {
     submitPledge(pledge: {total: $total, options: $options, user: $user, reason: $reason}) {
       pledgeId
       userId
@@ -534,14 +542,6 @@ const payPledge = gql`
   }
 `
 
-const signInMutation = gql`
-mutation signIn($email: String!) {
-  signIn(email: $email) {
-    phrase
-  }
-}
-`
-
 export const withPay = Component => {
   const EnhancedComponent = compose(
     graphql(payPledge, {
@@ -549,11 +549,7 @@ export const withPay = Component => {
         pay: variables => mutate({variables})
       })
     }),
-    graphql(signInMutation, {
-      props: ({mutate}) => ({
-        signIn: email => mutate({variables: {email}})
-      })
-    })
+    withSignIn
   )(Component)
   return props => <EnhancedComponent {...props} />
 }
@@ -564,6 +560,7 @@ const SubmitWithMutations = compose(
       submit: variables => mutate({variables})
     })
   }),
+  withSignOut,
   withPay,
   withT
 )(Submit)

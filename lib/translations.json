@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-13T16:05:59.448Z",
+  "updated": "2017-04-13T17:51:50.221Z",
   "title": "live",
   "data": [
     {
@@ -129,7 +129,7 @@
     },
     {
       "key": "merci/postpay/waiting",
-      "value": "Bitte bestätigen Sie ihre Email-Adresse:"
+      "value": "Wir haben Ihnen an «{email}» ein Bestätigunsemail mit den Wörtern «{phrase}» geschickt. Bitte klicken Sie auf den darin enthaltenen Link."
     },
     {
       "key": "merci/postpay/change-email",
@@ -150,6 +150,18 @@
     {
       "key": "signIn/success",
       "value": "Erfolgreich eingeloggt als {nameOrEmail} ({seconds}s)"
+    },
+    {
+      "key": "signIn/loading",
+      "value": "Lädt"
+    },
+    {
+      "key": "signOut/loading",
+      "value": "Lädt"
+    },
+    {
+      "key": "signOut/error",
+      "value": "Unbekannter Fehler"
     },
     {
       "key": "pledge/title",

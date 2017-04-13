@@ -7,13 +7,14 @@ import withMe from '../../lib/withMe'
 import Router from 'next/router'
 
 import Loader from '../Loader'
-import SignOut from '../Auth/SignOut'
+import SignIn from '../Auth/SignIn'
+import {withSignOut} from '../Auth/SignOut'
 import {mergeField, mergeFields} from '../../lib/utils/fieldState'
 import {validate as isEmail} from 'email-validator'
 
 import {
   H1, H2, Field,
-  P, colors
+  P, A, colors
 } from '@project-r/styleguide'
 
 import Accordion from './Accordion'
@@ -97,19 +98,10 @@ class Pledge extends Component {
       dirty: shouldValidate
     }))
   }
-  checkUserFields (props) {
-    if (!props.me) {
-      this.handleName(this.state.values.name || '', false, props.t)
-      this.handleEmail(this.state.values.email || '', false, props.t)
-    } else {
-      this.setState((state) => ({
-        errors: {
-          ...state.errors,
-          email: undefined,
-          name: undefined
-        }
-      }))
-    }
+  checkUserFields (props, state) {
+    const values = props.me ? props.me : this.state.values
+    this.handleName(values.name || '', false, props.t)
+    this.handleEmail(values.email || '', false, props.t)
   }
   componentWillReceiveProps (nextProps) {
     if (nextProps.me !== this.props.me) {
@@ -185,31 +177,50 @@ class Pledge extends Component {
             <div style={{marginTop: 0, marginBottom: 40}}>
               {me ? (
                 <span>
-                  <strong>{t('pledge/contact/signedin-as')}</strong><br />
-                  {me.name}<br />
-                  {me.email}<br /><br />
-                  <SignOut />
+                  <strong>{t('pledge/contact/signedinAs')}</strong><br />
+                  {me.name || me.email}
+                  {' '}<A href='#' onClick={(e) => {
+                    e.preventDefault()
+                    this.props.signOut().then(() => {
+                      this.handleName('', false, t)
+                      this.handleEmail('', false, t)
+                    })
+                  }}>{t('pledge/contact/signOut')}</A>
+                  <br /><br />
                 </span>
               ) : (
                 <span>
-                  <Field label={t('pledge/contact/name/label')}
-                    name='name'
-                    error={dirty.name && errors.name}
-                    value={values.name}
-                    onChange={(_, value, shouldValidate) => {
-                      this.handleName(value, shouldValidate, t)
-                    }} />
-                  <br />
-                  <Field label={t('pledge/contact/email/label')}
-                    name='email'
-                    error={dirty.email && errors.email}
-                    value={values.email}
-                    onChange={(_, value, shouldValidate) => {
-                      this.handleEmail(value, shouldValidate, t)
-                    }} />
+                  <A href='#' onClick={(e) => {
+                    e.preventDefault()
+                    this.setState(() => ({showSignIn: !this.state.showSignIn}))
+                  }}>{t('pledge/contact/signIn')}</A>
+                  {!!this.state.showSignIn && (
+                    <span>
+                      <br />
+                      <SignIn />
+                    </span>
+                  )}
                   <br /><br />
                 </span>
               )}
+              <span>
+                <Field label={t('pledge/contact/name/label')}
+                  name='name'
+                  error={dirty.name && errors.name}
+                  value={values.name}
+                  onChange={(_, value, shouldValidate) => {
+                    this.handleName(value, shouldValidate, t)
+                  }} />
+                <br />
+                <Field label={t('pledge/contact/email/label')}
+                  name='email'
+                  error={dirty.email && errors.email}
+                  value={values.email}
+                  onChange={(_, value, shouldValidate) => {
+                    this.handleEmail(value, shouldValidate, t)
+                  }} />
+                <br /><br />
+              </span>
             </div>
 
             <Submit
@@ -287,6 +298,7 @@ const PledgeWithQueries = compose(
       }
     }
   }),
+  withSignOut,
   withT,
   withMe
 )(Pledge)
