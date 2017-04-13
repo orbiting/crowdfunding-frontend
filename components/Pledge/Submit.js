@@ -28,7 +28,7 @@ import {
 } from '@project-r/styleguide'
 
 const PAYMENT_METHODS = [
-  {disabled: true, key: 'PAYMENTSLIP'},
+  {disabled: false, key: 'PAYMENTSLIP'},
   {disabled: false, key: 'STRIPE'},
   {disabled: false, key: 'POSTFINANCECARD'},
   {disabled: false, key: 'PAYPAL'}
@@ -44,12 +44,19 @@ const simpleHash = (object, delimiter = '|') => {
   }).join(delimiter)
 }
 
+const COUNTRIES = [
+  'Schweiz', 'Deutschland', 'Österreich'
+]
+
 class Submit extends Component {
   constructor (props) {
     super(props)
     this.state = {
       emailVerify: false,
-      values: {},
+      values: {
+        country: COUNTRIES[0],
+        name: props.user.name
+      },
       errors: {},
       dirty: {},
       loading: false
@@ -69,6 +76,19 @@ class Submit extends Component {
     }
     this.payPalFormRef = (ref) => {
       this.payPalForm = ref
+    }
+  }
+  componentWillReceiveProps (nextProps) {
+    if (
+      nextProps.user.name !== this.state.values.name &&
+      !this.state.dirty.name
+    ) {
+      this.setState((state) => ({
+        values: {
+          ...state.values,
+          name: nextProps.user.name
+        }
+      }))
     }
   }
   submitVariables (props) {
@@ -136,13 +156,13 @@ class Submit extends Component {
   payPledge (pledgeId, userId) {
     const {paymentMethod} = this.state
 
-    if (paymentMethod === 'POSTFINANCECARD') {
+    if (paymentMethod === 'PAYMENTSLIP') {
+      this.payWithPaymentSlip(pledgeId, userId)
+    } else if (paymentMethod === 'POSTFINANCECARD') {
       this.payWithPostFinance(pledgeId, userId)
-    }
-    if (paymentMethod === 'STRIPE') {
+    } else if (paymentMethod === 'STRIPE') {
       this.payWithStripe(pledgeId, userId)
-    }
-    if (paymentMethod === 'PAYPAL') {
+    } else if (paymentMethod === 'PAYPAL') {
       this.payWithPayPal(pledgeId, userId)
     }
   }
@@ -168,18 +188,29 @@ class Submit extends Component {
       this.postFinanceForm.submit()
     })
   }
-  payWithStripeSource (pledgeId, source) {
+  payWithPaymentSlip (pledgeId, userId) {
+    const {values} = this.state
+    this.pay({
+      pledgeId,
+      method: 'PAYMENTSLIP',
+      paperInvoice: values.paperInvoice,
+      address: {
+        name: values.name,
+        line1: values.line1,
+        line2: values.line2,
+        postalCode: values.postalCode,
+        city: values.city,
+        country: values.country
+      }
+    })
+  }
+  pay (data) {
     const {t, me, user} = this.props
 
     this.setState(() => ({
       loading: t('pledge/submit/loading/pay')
     }))
-    this.props.pay({
-      pledgeId,
-      method: 'STRIPE',
-      sourceId: source.id,
-      pspPayload: JSON.stringify(source)
-    })
+    this.props.pay(data)
       .then(({data}) => {
         const gotoMerci = (phrase) => {
           Router.push({
@@ -278,7 +309,12 @@ class Submit extends Component {
           }
           if (source3d.redirect.status === 'succeeded') {
             // can charge immediately
-            this.payWithStripeSource(pledgeId, source3d)
+            this.pay({
+              pledgeId,
+              method: 'STRIPE',
+              sourceId: source3d.id,
+              pspPayload: JSON.stringify(source3d)
+            })
           } else if (source3d.redirect.status === 'failed') {
             // no support or bank 3D Secure down
             this.setState(() => ({
@@ -293,7 +329,12 @@ class Submit extends Component {
         return
       }
 
-      this.payWithStripeSource(pledgeId, source)
+      this.pay({
+        pledgeId,
+        method: 'STRIPE',
+        sourceId: source.id,
+        pspPayload: JSON.stringify(source)
+      })
     })
   }
   render () {
@@ -344,6 +385,94 @@ class Submit extends Component {
           ))}
         </P>
 
+        {(paymentMethod === 'PAYMENTSLIP') && (
+          <div>
+            <P>{t('pledge/submit/paymentslip/title')}</P>
+            <FieldSet
+              values={this.state.values}
+              errors={this.state.errors}
+              dirty={this.state.dirty}
+              fields={[
+                {
+                  label: t('pledge/submit/paymentslip/name/label'),
+                  name: 'name',
+                  validator: (value) => (
+                    (
+                      !value &&
+                      t('pledge/submit/paymentslip/name/error/empty')
+                    )
+                  )
+                },
+                {
+                  label: t('pledge/submit/paymentslip/line1/label'),
+                  name: 'line1',
+                  validator: (value) => (
+                    (
+                      !value &&
+                      t('pledge/submit/paymentslip/line1/error/empty')
+                    )
+                  )
+                },
+                {
+                  label: t('pledge/submit/paymentslip/line2/label'),
+                  name: 'line2'
+                },
+                {
+                  label: t('pledge/submit/paymentslip/postalCode/label'),
+                  name: 'postalCode',
+                  validator: (value) => (
+                    (
+                      !value &&
+                      t('pledge/submit/paymentslip/postalCode/error/empty')
+                    )
+                  )
+                },
+                {
+                  label: t('pledge/submit/paymentslip/city/label'),
+                  name: 'city',
+                  validator: (value) => (
+                    (
+                      !value &&
+                      t('pledge/submit/paymentslip/city/error/empty')
+                    )
+                  )
+                },
+                {
+                  label: t('pledge/submit/paymentslip/country/label'),
+                  name: 'country',
+                  validator: (value) => (
+                    (
+                      !value &&
+                      t('pledge/submit/paymentslip/country/error/empty')
+                    )
+                  ),
+                  autocomplete: COUNTRIES
+                }
+              ]}
+              onChange={(fields) => {
+                this.setState(mergeFields(fields))
+              }} />
+            <br />
+            <P>
+              <label>
+                <input
+                  type='checkbox'
+                  checked={this.state.values.paperInvoice}
+                  onChange={(event) => {
+                    const checked = event.target.checked
+                    this.setState((state) => ({
+                      values: {
+                        ...state.values,
+                        paperInvoice: checked
+                      }
+                    }))
+                  }} />
+                {' '}{t('pledge/submit/paymentslip/paperInvoice')}
+              </label>
+            </P>
+            <br />
+          </div>
+        )}
         {(paymentMethod === 'STRIPE') && (
           <div>
             <FieldSet
@@ -543,8 +672,8 @@ const submitPledge = gql`
 `
 
 const payPledge = gql`
-  mutation payPledge($pledgeId: ID!, $method: PaymentMethod!, $sourceId: String, $pspPayload: String!) {
-    payPledge(pledgePayment: {pledgeId: $pledgeId, method: $method, sourceId: $sourceId, pspPayload: $pspPayload}) {
+  mutation payPledge($pledgeId: ID!, $method: PaymentMethod!, $sourceId: String, $pspPayload: String, $address: AddressInput, $paperInvoice: Boolean) {
+    payPledge(pledgePayment: {pledgeId: $pledgeId, method: $method, sourceId: $sourceId, pspPayload: $pspPayload, address: $address, paperInvoice: $paperInvoice}) {
       pledgeId
       userId
       emailVerify

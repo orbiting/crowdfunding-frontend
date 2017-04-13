@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-13T20:10:51.376Z",
+  "updated": "2017-04-13T21:16:07.024Z",
   "title": "live",
   "data": [
     {
@@ -514,6 +514,58 @@
     {
       "key": "footer/legal/imprint",
       "value": "Impressum"
+    },
+    {
+      "key": "pledge/submit/paymentslip/title",
+      "value": "Ihre Adresse"
+    },
+    {
+      "key": "pledge/submit/paymentslip/name/label",
+      "value": "Anschrift"
+    },
+    {
+      "key": "pledge/submit/paymentslip/name/error/empty",
+      "value": "Anschrift fehlt"
+    },
+    {
+      "key": "pledge/submit/paymentslip/line1/label",
+      "value": "Strasse und Hausnummer"
+    },
+    {
+      "key": "pledge/submit/paymentslip/line1/error/empty",
+      "value": "Strasse und Hausnummer fehlt"
+    },
+    {
+      "key": "pledge/submit/paymentslip/line2/label",
+      "value": "Zusatz (Optional: Einheit, Gebäude, usw.)"
+    },
+    {
+      "key": "pledge/submit/paymentslip/postalCode/label",
+      "value": "Postleitzahl"
+    },
+    {
+      "key": "pledge/submit/paymentslip/postalCode/error/empty",
+      "value": "Postleitzahl fehlt"
+    },
+    {
+      "key": "pledge/submit/paymentslip/city/label",
+      "value": "Stadt"
+    },
+    {
+      "key": "pledge/submit/paymentslip/city/error/empty",
+      "value": "Stadt fehlt"
+    },
+    {
+      "key": "pledge/submit/paymentslip/country/label",
+      "value": "Land"
+    },
+    {
+      "key": "pledge/submit/paymentslip/country/error/empty",
+      "value": "Land fehlt"
+    },
+    {
+      "key": "pledge/submit/paymentslip/paperInvoice",
+      "value": "Rechnung per Post"
     }
   ]
 }
