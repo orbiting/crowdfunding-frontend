@@ -9,6 +9,8 @@ import IconLink from '../IconLink'
 
 const styles = {
   bg: css({
+    position: 'relative',
+    zIndex: 10, // goes over sidebar
     borderTop: '1px solid #DADDDC',
     backgroundColor: '#F6F8F7',
     paddingTop: 30,

@@ -4,17 +4,15 @@ import Frame from '../components/Frame'
 import Content from '../components/Frame/Content'
 
 import {
-  P, Container
+  P
 } from '@project-r/styleguide'
 
 export default withData(({url}) => (
   <Frame url={url}>
-    <Container>
-      <Content>
-        <P>
-          Aktuelles zum Crowdfunding
-        </P>
-      </Content>
-    </Container>
+    <Content>
+      <P>
+        Aktuelles zum Crowdfunding
+      </P>
+    </Content>
   </Frame>
 ))

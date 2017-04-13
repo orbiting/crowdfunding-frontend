@@ -11,7 +11,7 @@ import {
 } from './constants'
 
 import {
-  Container, CONTENT_PADDING as CONTAINER_PADDING,
+  Container,
   mediaQueries
 } from '@project-r/styleguide'
 
@@ -29,9 +29,7 @@ const styles = {
   }),
   sidebar: css({
     [mediaQueries.mUp]: {
-      position: 'absolute',
-      top: 0,
-      right: CONTAINER_PADDING,
+      float: 'right',
       width: SIDEBAR_WIDTH
     }
   }),
@@ -72,12 +70,14 @@ class Frame extends Component {
       <div {...styles.container}>
         <div {...styles.bodyGrower} className={!cover ? styles.coverless : undefined}>
           <Header url={url} cover={cover} sticky={sticky} sidebar={sidebar} />
-          {sidebar && <Container style={{position: 'relative'}}>
-            <div {...styles.sidebar} {...sidebarAdditionalStyle}>
-              <Sidebar sticky={sticky} setSticky={this.setSticky} />
-            </div>
-          </Container>}
-          {children}
+          {sidebar ? (
+            <Container>
+              <div {...styles.sidebar} {...sidebarAdditionalStyle}>
+                <Sidebar sticky={sticky} setSticky={this.setSticky} />
+              </div>
+              {children}
+            </Container>
+          ) : children}
         </div>
         <Footer />
       </div>
