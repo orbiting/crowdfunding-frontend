@@ -34,7 +34,7 @@ const styles = {
     [mediaQueries.mUp]: {
       height: HEADER_HEIGHT
     },
-    borderBottom: `1px solid ${colors.disabled}`
+    borderBottom: `1px solid ${colors.divider}`
   }),
   menuBar: css({
     position: 'fixed',
@@ -44,7 +44,7 @@ const styles = {
     right: 0,
     height: 50,
     backgroundColor: '#fff',
-    borderBottom: `1px solid ${colors.disabled}`,
+    borderBottom: `1px solid ${colors.divider}`,
     [mediaQueries.mUp]: {
       display: 'none'
     }

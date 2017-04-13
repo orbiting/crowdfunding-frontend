@@ -18,8 +18,8 @@ const styles = {
   bg: css({
     position: 'relative',
     zIndex: 10, // goes over sidebar
-    borderTop: '1px solid #DADDDC',
-    backgroundColor: '#F6F8F7',
+    borderTop: `1px solid ${colors.divider}`,
+    backgroundColor: colors.secondaryBg,
     paddingTop: 30,
     paddingBottom: 30,
     marginTop: 100
@@ -74,7 +74,7 @@ const styles = {
     marginTop: 20,
     marginBottom: 20,
     border: 'none',
-    borderBottom: '1px solid #DADDDC'
+    borderBottom: `1px solid ${colors.divider}`
   })
 }
 
