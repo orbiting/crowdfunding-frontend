@@ -309,12 +309,12 @@ class Submit extends Component {
 
     const errors = objectValues(this.props.errors)
       .concat(objectValues(this.state.errors))
-      .concat(!paymentMethod && 'Zahlungsart auswählen')
+      .concat(!paymentMethod && t('pledge/submit/payMethod/error'))
       .filter(Boolean)
 
     return (
       <div>
-        <H2>{t('pledge/submit/pay/title')}</H2>
+        <H2>{t('pledge/submit/payMethod/title')}</H2>
         <P>
           {PAYMENT_METHODS.map((pm) => (
             <span key={pm.key} style={{opacity: pm.disabled ? 0.5 : 1}}>
@@ -325,10 +325,17 @@ class Submit extends Component {
                   disabled={pm.disabled}
                   onChange={(event) => {
                     const value = event.target.value
-                    this.setState(() => ({
-                      showErrors: false,
-                      paymentMethod: value
-                    }))
+                    this.setState((state) => {
+                      const next = {
+                        showErrors: false,
+                        paymentMethod: value
+                      }
+                      if (value !== state.paymentMethod) {
+                        next.errors = {}
+                      }
+
+                      return next
+                    })
                   }}
                   value={pm.key} />
                 {' '}{t(`pledge/submit/pay/method/${pm.key}`)}
@@ -472,14 +479,14 @@ class Submit extends Component {
         ) : (
           <div>
             {!!this.state.showErrors && errors.length > 0 && (
-              <P style={{color: colors.error}}>
+              <div style={{color: colors.error, marginBottom: 40}}>
                 {t('pledge/submit/error/title')}<br />
                 <ul>
                   {errors.map((error, i) => (
                     <li key={i}>{error}</li>
                   ))}
                 </ul>
-              </P>
+              </div>
             )}
             <div style={{opacity: errors.length ? 0.5 : 1}}>
               <Button

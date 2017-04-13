@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-13T18:29:04.778Z",
+  "updated": "2017-04-13T20:10:51.376Z",
   "title": "live",
   "data": [
     {
@@ -212,7 +212,11 @@
       "value": "E-Mail ungültig"
     },
     {
-      "key": "pledge/submit/pay/title",
+      "key": "pledge/submit/payMethod/title",
+      "value": "Zahlungsart auswählen"
+    },
+    {
+      "key": "pledge/submit/payMethod/error",
       "value": "Zahlungsart auswählen"
     },
     {
