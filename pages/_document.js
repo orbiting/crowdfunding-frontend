@@ -26,7 +26,7 @@ export default class MyDocument extends Document {
         <Head>
           <meta name='viewport' content='width=device-width,initial-scale=1' />
           <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
-          <style dangerouslySetInnerHTML={{ __html: fontFaces }} />
+          <style dangerouslySetInnerHTML={{ __html: fontFaces() }} />
           {css ? <style dangerouslySetInnerHTML={{ __html: css }} /> : null}
         </Head>
         <body>
