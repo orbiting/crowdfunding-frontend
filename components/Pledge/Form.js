@@ -156,8 +156,6 @@ class Pledge extends Component {
               </P>
             )}
 
-            <H2>{t('pledge/rewards/title')}</H2>
-
             <div style={{marginBottom: 40}}>
               {query.package ? (
                 <CustomizePackage

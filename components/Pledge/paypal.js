@@ -54,7 +54,7 @@ export const getParams = ({
     },
     {
       key: 'cancel_return',
-      value: `${PUBLIC_BASE_URL}/pledge?item_name=${itemName}&payment_status=Cancel`
+      value: `${PUBLIC_BASE_URL}/pledge?item_name=${itemName}&st=Cancel`
     },
     {
       key: 'bn',

@@ -57,11 +57,11 @@ class PledgeReceivePayment extends Component {
     if (query.item_name) {
       state.paymentMethod = 'PAYPAL'
 
-      if (query.payment_status === 'Completed') {
+      if (query.st === 'Completed') {
         state.processing = true
       } else {
         // see cancel_return in ./paypal.js
-        switch (query.payment_status) {
+        switch (query.st) {
           case 'Cancel':
             state.receiveError = t('pledge/recievePayment/paypal/cancel')
             break
