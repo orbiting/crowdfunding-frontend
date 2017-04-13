@@ -88,7 +88,7 @@ class PledgeReceivePayment extends Component {
         }
       }
     }
-    if (query.pledgeId) {
+    if (query.pledgeId && query.stripe) {
       state.processing = true
       state.action = {
         method: 'checkStripeSource',
