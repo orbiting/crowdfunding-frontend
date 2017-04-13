@@ -20,11 +20,9 @@ const Spacer = ({height, width, children}) => (
 const messageStyle = css({
   position: 'absolute',
   top: '50%',
-  marginTop: 25,
-  maxWidth: 600,
-  textAlign: 'center',
-  marginLeft: 'auto',
-  marginRight: 'auto'
+  marginTop: 30,
+  width: '100%',
+  textAlign: 'center'
 })
 
 class Loader extends Component {

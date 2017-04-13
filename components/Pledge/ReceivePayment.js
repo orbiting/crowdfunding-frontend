@@ -10,6 +10,9 @@ import {compose} from 'redux'
 
 import {withPay} from './Submit'
 import PledgeForm from './Form'
+import {
+  STRIPE_PUBLISHABLE_KEY
+} from '../../constants'
 
 const pledgeQuery = gql`
 query($pledgeId: ID!) {
@@ -41,10 +44,15 @@ class PledgeReceivePayment extends Component {
 
     const state = this.state = {}
     if (query.orderID) {
-      state.paymentMethod = 'POSTFINANCECARD'
-
       if (query.STATUS === '5') {
         state.processing = true
+        state.action = {
+          method: 'pay',
+          argument: {
+            method: 'POSTFINANCECARD',
+            pspPayload: JSON.stringify(query)
+          }
+        }
       } else {
         state.receiveError = t('pledge/recievePayment/error')
         // ToDo: handle errors and recommend specific user action
@@ -55,10 +63,15 @@ class PledgeReceivePayment extends Component {
       }
     }
     if (query.item_name) {
-      state.paymentMethod = 'PAYPAL'
-
       if (query.st === 'Completed') {
         state.processing = true
+        state.action = {
+          method: 'pay',
+          argument: {
+            method: 'PAYPAL',
+            pspPayload: JSON.stringify(query)
+          }
+        }
       } else {
         // see cancel_return in ./paypal.js
         switch (query.st) {
@@ -75,7 +88,17 @@ class PledgeReceivePayment extends Component {
         }
       }
     }
-    state.pspPayload = JSON.stringify(query)
+    if (query.pledgeId && query.stripe) {
+      state.processing = true
+      state.action = {
+        method: 'checkStripeSource',
+        argument: {
+          query: {
+            ...query
+          }
+        }
+      }
+    }
 
     this.queryFromPledge = () => {
       const {pledge} = this.props
@@ -89,6 +112,70 @@ class PledgeReceivePayment extends Component {
       return query
     }
   }
+  checkStripeSource ({query}) {
+    const {t} = this.props
+
+    window.Stripe.setPublishableKey(STRIPE_PUBLISHABLE_KEY)
+    window.Stripe.source.get(
+      query.source,
+      query.client_secret,
+      (status, source) => {
+        if (source.status === 'chargeable') {
+          this.pay({
+            method: 'STRIPE',
+            pspPayload: JSON.stringify(source),
+            sourceId: source.id
+          })
+        } else {
+          this.setState(() => ({
+            processing: false,
+            receiveError: t('pledge/recievePayment/3dsecure/failed')
+          }))
+        }
+      }
+    )
+  }
+  pay ({method, pspPayload, sourceId}) {
+    const {me, pledge, pledgeId} = this.props
+
+    this.props.pay({
+      pledgeId,
+      method,
+      pspPayload,
+      sourceId
+    })
+      .then(({data}) => {
+        const gotoMerci = () => {
+          Router.push({
+            pathname: '/merci',
+            query: {
+              id: data.payPledge.pledgeId,
+              email: pledge.user.email
+            }
+          })
+        }
+        if (!me) {
+          this.props.signIn(pledge.user.email)
+            .then(() => gotoMerci())
+            .catch(error => {
+              console.error('signIn', error)
+              this.setState(() => ({
+                processing: false,
+                receiveError: errorToString(error)
+              }))
+            })
+        } else {
+          gotoMerci()
+        }
+      })
+      .catch(error => {
+        console.error('pay', error)
+        this.setState(() => ({
+          processing: false,
+          receiveError: errorToString(error)
+        }))
+      })
+  }
   componentDidMount () {
     // const {pledge} = this.props
     // if (!pledge) {
@@ -100,49 +187,9 @@ class PledgeReceivePayment extends Component {
     // }
     // Router.replace(url, url, {shallow: true})
 
-    const {processing} = this.state
-    if (processing) {
-      const {
-        paymentMethod, pspPayload
-      } = this.state
-      const {me, pledge} = this.props
-
-      this.props.pay({
-        pledgeId: this.props.pledgeId,
-        method: paymentMethod,
-        pspPayload
-      })
-        .then(({data}) => {
-          const gotoMerci = () => {
-            Router.push({
-              pathname: '/merci',
-              query: {
-                id: data.payPledge.pledgeId,
-                email: pledge.user.email
-              }
-            })
-          }
-          if (!me) {
-            this.props.signIn(pledge.user.email)
-              .then(() => gotoMerci())
-              .catch(error => {
-                console.error('signIn', error)
-                this.setState(() => ({
-                  processing: false,
-                  receiveError: errorToString(error)
-                }))
-              })
-          } else {
-            gotoMerci()
-          }
-        })
-        .catch(error => {
-          console.error('pay', error)
-          this.setState(() => ({
-            processing: false,
-            receiveError: errorToString(error)
-          }))
-        })
+    const {action} = this.state
+    if (action) {
+      this[action.method](action.argument)
     }
   }
   render () {

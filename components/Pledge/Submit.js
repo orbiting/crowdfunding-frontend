@@ -11,6 +11,7 @@ import withT from '../../lib/withT'
 import * as postfinance from './postfinance'
 import * as paypal from './paypal'
 import {
+  PUBLIC_BASE_URL,
   PF_FORM_ACTION,
   PAYPAL_FORM_ACTION,
   STRIPE_PUBLISHABLE_KEY
@@ -157,8 +158,52 @@ class Submit extends Component {
       this.postFinanceForm.submit()
     })
   }
+  payWithStripeSource (pledgeId, source) {
+    const {t, me, user} = this.props
+
+    this.setState(() => ({
+      loading: t('pledge/submit/loading/pay')
+    }))
+    this.props.pay({
+      pledgeId,
+      method: 'STRIPE',
+      sourceId: source.id,
+      pspPayload: JSON.stringify(source)
+    })
+      .then(({data}) => {
+        const gotoMerci = () => {
+          Router.push({
+            pathname: '/merci',
+            query: {
+              id: data.payPledge.pledgeId,
+              email: me ? me.email : user.email
+            }
+          })
+        }
+        if (!me) {
+          this.props.signIn(user.email)
+            .then(() => gotoMerci())
+            .catch(error => {
+              console.error('signIn', error)
+              this.setState(() => ({
+                loading: false,
+                signInError: errorToString(error)
+              }))
+            })
+        } else {
+          gotoMerci()
+        }
+      })
+      .catch(error => {
+        console.error('pay', error)
+        this.setState(() => ({
+          loading: false,
+          paymentError: errorToString(error)
+        }))
+      })
+  }
   payWithStripe (pledgeId) {
-    const {me, user, t} = this.props
+    const {t, total} = this.props
     const {values} = this.state
 
     this.setState(() => ({
@@ -168,6 +213,7 @@ class Submit extends Component {
     window.Stripe.source.create({
       type: 'card',
       currency: 'CHF',
+      amount: total,
       usage: 'reusable',
       card: {
         number: values.cardNumber,
@@ -193,52 +239,50 @@ class Submit extends Component {
         paymentError: undefined
       })
 
-      // TODO implement 3D secure
       if (source.card.three_d_secure === 'required') {
-        window.alert('Cards requiring 3D secure are not supported yet.')
+        this.setState(() => ({
+          loading: t('pledge/submit/loading/stripe/3dsecure')
+        }))
+        window.Stripe.source.create({
+          type: 'three_d_secure',
+          currency: 'CHF',
+          amount: total,
+          three_d_secure: {
+            card: source.id
+          },
+          redirect: {
+            return_url: `${PUBLIC_BASE_URL}/pledge?pledgeId=${pledgeId}&stripe=1`
+          }
+        }, (status, source3d) => {
+          console.log('stripe 3d secure', status, source3d)
+          if (status !== 200) {
+            this.setState(() => ({
+              loading: false,
+              paymentError: t.first([
+                `pledge/3dsecure/${source3d.error.code}`,
+                'pledge/3dsecure/unkown'
+              ])
+            }))
+            return
+          }
+          if (source3d.redirect.status === 'succeeded') {
+            // can charge immediately
+            this.payWithStripeSource(pledgeId, source3d)
+          } else if (source3d.redirect.status === 'failed') {
+            // no support or bank 3D Secure down
+            this.setState(() => ({
+              loading: false,
+              paymentError: t('pledge/3dsecure/redirect/failed')
+            }))
+          } else {
+            window.location = source3d.redirect.url
+          }
+        })
+
         return
       }
 
-      this.setState(() => ({
-        loading: t('pledge/submit/loading/pay')
-      }))
-      this.props.pay({
-        pledgeId,
-        method: 'STRIPE',
-        sourceId: source.id,
-        pspPayload: JSON.stringify(source)
-      })
-        .then(({data}) => {
-          const gotoMerci = () => {
-            Router.push({
-              pathname: '/merci',
-              query: {
-                id: data.payPledge.pledgeId,
-                email: me ? me.email : user.email
-              }
-            })
-          }
-          if (!me) {
-            this.props.signIn(user.email)
-              .then(() => gotoMerci())
-              .catch(error => {
-                console.error('signIn', error)
-                this.setState(() => ({
-                  loading: false,
-                  signInError: errorToString(error)
-                }))
-              })
-          } else {
-            gotoMerci()
-          }
-        })
-        .catch(error => {
-          console.error('pay', error)
-          this.setState(() => ({
-            loading: false,
-            paymentError: errorToString(error)
-          }))
-        })
+      this.payWithStripeSource(pledgeId, source)
     })
   }
   render () {
