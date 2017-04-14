@@ -2,17 +2,19 @@ import React from 'react'
 import {compose} from 'redux'
 import {gql, graphql} from 'react-apollo'
 import Router from 'next/router'
+import {css, merge} from 'glamor'
 
 import withData from '../lib/withData'
 import Frame from '../components/Frame'
 import withMe from '../lib/withMe'
 import withT from '../lib/withT'
+import {intersperse} from '../lib/utils/helpers'
 import Poller from '../components/Auth/Poller'
 import SignIn from '../components/Auth/SignIn'
 import {withSignOut} from '../components/Auth/SignOut'
 import Loader from '../components/Loader'
 import Share from '../components/Share'
-import {timeFormat} from '../lib/utils/formats'
+import {timeFormat, chfFormat} from '../lib/utils/formats'
 
 import {
   PUBLIC_BASE_URL
@@ -21,10 +23,27 @@ import {
 import {
   H1, P, Button, Lead,
   H2, Label, A,
-  NarrowContainer
+  NarrowContainer,
+  colors
 } from '@project-r/styleguide'
 
 const dateTimeFormat = timeFormat('%d. %B %Y %H:%M')
+
+const styles = {
+  pledge: css({
+    padding: 10,
+    marginLeft: -10,
+    marginRight: -10
+  }),
+  pledgeHighlighted: css({
+    backgroundColor: colors.primaryBg
+  }),
+  total: css({
+    color: colors.primary,
+    lineHeight: '28px',
+    fontSize: 22
+  })
+}
 
 const pledgesQuery = gql`
 query pledges {
@@ -74,9 +93,11 @@ const Merci = compose(
       return {
         loading: data.loading,
         error: data.error,
-        pledges: data.me ? data.me.pledges : []
+        pledges: (data.me && data.me.pledges) || []
       }
-    }
+    },
+    returnPartialData: false,
+    fetchPolicy: 'network-only'
   }),
   withSignOut,
   withMe,
@@ -147,25 +168,68 @@ const Merci = compose(
               })}
               emailAttachUrl={false} />
           </P>
-          {pledges.map(pledge => {
-            const configurableOptions = pledge.options.filter(option => (
-              option.minAmount !== option.maxAmount
-            ))
-            const createdAt = new Date(pledge.createdAt)
-            return (
-              <div key={pledge.id} style={{marginBottom: 30}}>
-                <H2 style={{marginBottom: 0}}>{t(`package/${pledge.package.name}/title`)}</H2>
-                <Label>{dateTimeFormat(createdAt)}</Label>
-                {!!configurableOptions.length && (
+          {[].concat(pledges)
+            .reverse()
+            .filter(pledge => pledge.status !== 'DRAFT')
+            .map(pledge => {
+              const configurableOptions = pledge.options.filter(option => (
+                option.minAmount !== option.maxAmount
+              ))
+              const createdAt = new Date(pledge.createdAt)
+              return (
+                <div key={pledge.id} {...merge(
+                  styles.pledge,
+                  query.id === pledge.id && styles.pledgeHighlighted
+                )}>
+                  <H2 style={{marginBottom: 0}}>{t(`package/${pledge.package.name}/title`)}</H2>
+                  <Label>{t('merci/pledge/label', {
+                    formattedDateTime: dateTimeFormat(createdAt)
+                  })}</Label>
+                  {!!configurableOptions.length && (
+                    <ul style={{marginBottom: 0}}>
+                      {configurableOptions.map((option, i) => (
+                        <li key={i}>
+                          {option.amount}
+                          {' '}
+                          {t.pluralize(`option/${option.reward.name}/label`, {
+                            count: option.amount
+                          }, option.reward.name)}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <br />
+                  <span {...styles.total}>{chfFormat(pledge.total / 100)}</span>
+                  <br />
                   <ul>
-                    {configurableOptions.map((option, i) => (
-                      <li key={i}>{option.amount} x {option.name}</li>
-                    ))}
+                    {
+                      pledge.payments.map(payment => (
+                        <li>
+                          {intersperse(
+                            t.first([
+                              `merci/payment/status/${payment.method}/${payment.status}`,
+                              `merci/payment/status/generic/${payment.status}`
+                            ], {
+                              formattedTotal: chfFormat(payment.total / 100),
+                              hrid: payment.hrid,
+                              method: t(`merci/payment/method/${payment.method}`)
+                            }).split('\n'),
+                            (item, i) => <br key={i} />
+                          )}
+                          {payment.method === 'PAYMENTSLIP' && payment.status === 'WAITING' && (
+                            <span>
+                              <br /><br />
+                              {t(`merci/payment/PAYMENTSLIP/paperInvoice/${+(payment.paperInvoice)}`)}
+                            </span>
+                          )}
+                        </li>
+                      ))
+                    }
                   </ul>
-                )}
-              </div>
-            )
-          })}
+                </div>
+              )
+            })}
+          <br />
           <A href='#' onClick={(e) => {
             e.preventDefault()
             props.signOut()

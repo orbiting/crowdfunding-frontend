@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-14T10:40:48.825Z",
+  "updated": "2017-04-14T13:09:04.893Z",
   "title": "live",
   "data": [
     {
@@ -153,7 +153,7 @@
     },
     {
       "key": "merci/lead",
-      "value": "Vielen Dank für deine Unterstützung. Es ist eine Ehre Sie als Mitglied begrüssen zu dürfen. Seien Sie stolz und hissen Sie unsere Flagge im ganze Inter-Land."
+      "value": "Vielen Dank für Ihre Unterstützung. Es ist eine Ehre Sie als Mitglied begrüssen zu dürfen. Seien Sie stolz und hissen Sie unsere Flagge im ganze Inter-Land."
     },
     {
       "key": "merci/share/tweetTemplate",
@@ -166,6 +166,58 @@
     {
       "key": "merci/share/emailBody",
       "value": "Hallo\n\nWerde Mitglied und Abonoment vom der Republik:\n{url}\n\nHerzliche Grüsse,\n{backerName}"
+    },
+    {
+      "key": "merci/pledge/label",
+      "value": "Erstellt {formattedDateTime}"
+    },
+    {
+      "key": "merci/payment/method/STRIPE",
+      "value": "Kreditkarte"
+    },
+    {
+      "key": "merci/payment/method/POSTFINANCECARD",
+      "value": "Postkarte"
+    },
+    {
+      "key": "merci/payment/method/PAYPAL",
+      "value": "PayPal"
+    },
+    {
+      "key": "merci/payment/method/PAYMENTSLIP",
+      "value": "Einzahlungsschein"
+    },
+    {
+      "key": "merci/payment/status/generic/WAITING",
+      "value": "{formattedTotal} ausstehend"
+    },
+    {
+      "key": "merci/payment/status/generic/PAID",
+      "value": "{formattedTotal} bezahlt mit {method}"
+    },
+    {
+      "key": "merci/payment/status/generic/REFUNDED",
+      "value": "{formattedTotal} zurück erstattet"
+    },
+    {
+      "key": "merci/payment/status/generic/CANCELLED",
+      "value": "{formattedTotal} annulliert"
+    },
+    {
+      "key": "merci/payment/status/PAYMENTSLIP/WAITING",
+      "value": "Bitte überweisen Sie {formattedTotal} mit der Mitteilung «{hrid}» an:\n\n\nKonto: 61-11760-6\nProject R Genossenschaft\n8004 Zürich"
+    },
+    {
+      "key": "merci/payment/status/PAYMENTSLIP/PAID",
+      "value": "{formattedTotal} bezahlt"
+    },
+    {
+      "key": "merci/payment/PAYMENTSLIP/paperInvoice/1",
+      "value": "Sie erhalten eine Rechnung per Post"
+    },
+    {
+      "key": "merci/payment/PAYMENTSLIP/paperInvoice/0",
+      "value": "Sie haben die Rechnung per E-Mail erhalten"
     },
     {
       "key": "merci/signOut",
