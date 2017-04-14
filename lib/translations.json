@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-13T21:16:07.024Z",
+  "updated": "2017-04-14T10:40:48.825Z",
   "title": "live",
   "data": [
     {
@@ -124,24 +124,52 @@
       "value": "Notizbuch"
     },
     {
-      "key": "merci/postpay/title/me",
-      "value": "Merci {name}"
-    },
-    {
       "key": "merci/postpay/waiting",
       "value": "Wir haben Ihnen an «{email}» ein Bestätigunsemail mit den Wörtern «{phrase}» geschickt. Bitte klicken Sie auf den darin enthaltenen Link."
     },
     {
-      "key": "merci/postpay/change-email",
-      "value": "ändern"
+      "key": "merci/signedOut/title",
+      "value": "Ihre Gelöbnisse ansehen"
+    },
+    {
+      "key": "merci/signedOut/signIn",
+      "value": "Bitte anmelden:"
+    },
+    {
+      "key": "merci/empty/title",
+      "value": "Hallo {nameOrEmail}"
+    },
+    {
+      "key": "merci/empty/text",
+      "value": "Sie haben uns noch nicht unterstützt."
+    },
+    {
+      "key": "merci/empty/button",
+      "value": "Jetzt mitmachen"
     },
     {
       "key": "merci/title",
-      "value": "Pledges ansehen"
+      "value": "Merci & Willkomen, {name}"
     },
     {
-      "key": "merci/signin",
-      "value": "Bitte anmelden:"
+      "key": "merci/lead",
+      "value": "Vielen Dank für deine Unterstützung. Es ist eine Ehre Sie als Mitglied begrüssen zu dürfen. Seien Sie stolz und hissen Sie unsere Flagge im ganze Inter-Land."
+    },
+    {
+      "key": "merci/share/tweetTemplate",
+      "value": "Journalismus ist mehr als nur ein Geschäft für irgendwelche Konzerne, beteilige dich."
+    },
+    {
+      "key": "merci/share/emailSubject",
+      "value": "Ein neues, unabhängiges Magazin"
+    },
+    {
+      "key": "merci/share/emailBody",
+      "value": "Hallo\n\nWerde Mitglied und Abonoment vom der Republik:\n{url}\n\nHerzliche Grüsse,\n{backerName}"
+    },
+    {
+      "key": "merci/signOut",
+      "value": "Abmelden"
     },
     {
       "key": "signIn/email/label",
