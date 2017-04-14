@@ -13,7 +13,6 @@ import withT from '../../lib/withT'
 import {meQuery} from '../../lib/withMe'
 import * as postfinance from './postfinance'
 import * as paypal from './paypal'
-import {pastPledgesQuery} from './queries'
 import AddressForm, {COUNTRIES} from '../Me/AddressForm'
 
 import {
@@ -627,9 +626,7 @@ export const withPay = Component => {
       props: ({mutate}) => ({
         pay: variables => mutate({
           variables,
-          refetchQueries: [{
-            query: pastPledgesQuery
-          }]
+          refetchQueries: ['pledges', 'pledgeCount']
         })
       })
     }),

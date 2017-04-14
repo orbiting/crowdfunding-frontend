@@ -20,7 +20,6 @@ import {
 import Accordion from './Accordion'
 import Submit from './Submit'
 import CustomizePackage from './CustomizePackage'
-import {pastPledgesQuery} from './queries'
 
 class Pledge extends Component {
   constructor (props) {
@@ -298,6 +297,17 @@ const query = gql`
   }
 }
 `
+const pledgeCountQuery = gql`
+query pledgeCount {
+  me {
+    id
+    pledges {
+      id
+      status
+    }
+  }
+}
+`
 
 const PledgeWithQueries = compose(
   graphql(query, {
@@ -309,7 +319,7 @@ const PledgeWithQueries = compose(
       }
     }
   }),
-  graphql(pastPledgesQuery, {
+  graphql(pledgeCountQuery, {
     props: ({ data }) => {
       return {
         pastPledges: data.me

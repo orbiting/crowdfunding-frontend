@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {graphql} from 'react-apollo'
 import {meQuery} from '../../lib/withMe'
+import {compose} from 'redux'
 
 class Status extends Component {
   constructor (props) {
@@ -32,10 +33,10 @@ Status.propTypes = {
   onSuccess: PropTypes.func.isRequired
 }
 
-const Poller = graphql(meQuery, {
-  options: {
-    pollInterval: 1000
-  }
-})(Status)
-
-export default Poller
+export default compose(
+  graphql(meQuery, {
+    options: {
+      pollInterval: 1000
+    }
+  })
+)(Status)

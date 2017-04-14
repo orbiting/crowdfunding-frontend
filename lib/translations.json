@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-14T17:56:30.011Z",
+  "updated": "2017-04-14T23:13:42.344Z",
   "title": "live",
   "data": [
     {
@@ -254,6 +254,10 @@
     {
       "key": "merci/signOut",
       "value": "Abmelden"
+    },
+    {
+      "key": "signIn/button",
+      "value": "anmelden"
     },
     {
       "key": "signIn/email/label",
