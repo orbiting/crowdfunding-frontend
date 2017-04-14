@@ -168,10 +168,7 @@ const Merci = compose(
           })}
           <A href='#' onClick={(e) => {
             e.preventDefault()
-            this.props.signOut().then(() => {
-              this.handleName('', false, t)
-              this.handleEmail('', false, t)
-            })
+            props.signOut()
           }}>{t('merci/signOut')}</A>
         </div>
       )
