@@ -193,7 +193,7 @@ class Submit extends Component {
     this.pay({
       pledgeId,
       method: 'PAYMENTSLIP',
-      paperInvoice: values.paperInvoice,
+      paperInvoice: values.paperInvoice || false,
       address: {
         name: values.name,
         line1: values.line1,
