@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {gql, graphql} from 'react-apollo'
-import Router from 'next/router'
 
 import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
@@ -10,6 +9,7 @@ import {compose} from 'redux'
 
 import {withPay} from './Submit'
 import PledgeForm from './Form'
+import {gotoMerci} from './merci'
 import {
   STRIPE_PUBLISHABLE_KEY
 } from '../../constants'
@@ -145,19 +145,13 @@ class PledgeReceivePayment extends Component {
       sourceId
     })
       .then(({data}) => {
-        const gotoMerci = (phrase) => {
-          Router.push({
-            pathname: '/merci',
-            query: {
-              id: data.payPledge.pledgeId,
-              email: pledge.user.email,
-              phrase
-            }
-          })
-        }
         if (!me) {
           this.props.signIn(pledge.user.email)
-            .then(({data}) => gotoMerci(data.signIn.phrase))
+            .then(({data}) => gotoMerci({
+              id: data.payPledge.pledgeId,
+              email: pledge.user.email,
+              phrase: data.signIn.phrase
+            }))
             .catch(error => {
               console.error('signIn', error)
               this.setState(() => ({
@@ -166,7 +160,9 @@ class PledgeReceivePayment extends Component {
               }))
             })
         } else {
-          gotoMerci()
+          gotoMerci({
+            id: data.payPledge.pledgeId
+          })
         }
       })
       .catch(error => {

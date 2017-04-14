@@ -3,7 +3,6 @@ import SignIn, {withSignIn} from '../Auth/SignIn'
 import {withSignOut} from '../Auth/SignOut'
 
 import { gql, graphql } from 'react-apollo'
-import Router from 'next/router'
 import FieldSet from '../FieldSet'
 import {mergeFields} from '../../lib/utils/fieldState'
 import {errorToString} from '../../lib/utils/errors'
@@ -14,6 +13,7 @@ import {meQuery} from '../../lib/withMe'
 import * as postfinance from './postfinance'
 import * as paypal from './paypal'
 import AddressForm, {COUNTRIES} from '../Me/AddressForm'
+import {gotoMerci} from './merci'
 
 import {
   PUBLIC_BASE_URL,
@@ -208,19 +208,13 @@ class Submit extends Component {
     }))
     this.props.pay(data)
       .then(({data}) => {
-        const gotoMerci = (phrase) => {
-          Router.push({
-            pathname: '/merci',
-            query: {
-              id: data.payPledge.pledgeId,
-              email: user.email,
-              phrase
-            }
-          })
-        }
         if (!me) {
           this.props.signIn(user.email)
-            .then(({data}) => gotoMerci(data.signIn.phrase))
+            .then(({data}) => gotoMerci({
+              id: data.payPledge.pledgeId,
+              email: user.email,
+              phrase: data.signIn.phrase
+            }))
             .catch(error => {
               console.error('signIn', error)
               this.setState(() => ({
@@ -229,7 +223,9 @@ class Submit extends Component {
               }))
             })
         } else {
-          gotoMerci()
+          gotoMerci({
+            id: data.payPledge.pledgeId
+          })
         }
       })
       .catch(error => {
