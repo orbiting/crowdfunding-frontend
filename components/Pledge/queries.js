@@ -6,6 +6,7 @@ query pastPledges {
     id
     pledges {
       id
+      status
     }
   }
 }

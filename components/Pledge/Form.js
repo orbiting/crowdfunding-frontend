@@ -312,7 +312,9 @@ const PledgeWithQueries = compose(
   graphql(pastPledgesQuery, {
     props: ({ data }) => {
       return {
-        pastPledges: data.me ? data.me.pledges : []
+        pastPledges: data.me
+          ? data.me.pledges.filter(pledge => pledge.status !== 'DRAFT')
+          : []
       }
     }
   }),
