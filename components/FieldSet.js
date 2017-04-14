@@ -1,10 +1,36 @@
 import React, {Component, PropTypes} from 'react'
+import {css} from 'glamor'
 
 import {
   Field, AutocompleteField
 } from '@project-r/styleguide'
 
 import MaskedInput from 'react-maskedinput'
+
+const styles = {
+  mask: css({
+    '::placeholder': {
+      color: 'transparent'
+    },
+    ':focus': {
+      '::placeholder': {
+        color: '#ccc'
+      }
+    }
+  })
+}
+
+export const getErrors = (fields, values) => {
+  return fields.reduce(
+    (acumulator, {name, validator}) => {
+      if (validator) {
+        acumulator[name] = validator(values[name])
+      }
+      return acumulator
+    },
+    {}
+  )
+}
 
 class FieldSet extends Component {
   componentDidMount () {
@@ -17,15 +43,7 @@ class FieldSet extends Component {
       },
       {}
     )
-    const errors = fields.reduce(
-      (acumulator, {name, validator}) => {
-        if (validator) {
-          acumulator[name] = validator(values[name])
-        }
-        return acumulator
-      },
-      {}
-    )
+    const errors = getErrors(fields, values)
 
     onChange({
       values,
@@ -40,14 +58,20 @@ class FieldSet extends Component {
     } = this.props
     return (
       <span>
-        {fields.map(({label, type, name, validator, autocomplete, mask}) => {
+        {fields.map(({label, type, name, validator, autocomplete, mask, maskChar}) => {
           let Component = Field
           let additionalProps = {}
           if (autocomplete) {
             Component = AutocompleteField
             additionalProps.items = autocomplete
           } else if (mask) {
-            additionalProps.renderInput = (props) => <MaskedInput {...props} placeholderChar=' ' mask={mask} />
+            additionalProps.renderInput = (props) => (
+              <MaskedInput
+                {...props}
+                {...styles.mask}
+                placeholderChar={maskChar || ' '}
+                mask={mask} />
+            )
           }
           return (
             <span key={name}>

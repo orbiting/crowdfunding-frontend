@@ -14,6 +14,7 @@ import {meQuery} from '../../lib/withMe'
 import * as postfinance from './postfinance'
 import * as paypal from './paypal'
 import {pastPledgesQuery} from './queries'
+import AddressForm, {COUNTRIES} from '../Me/AddressForm'
 
 import {
   PUBLIC_BASE_URL,
@@ -43,10 +44,6 @@ const simpleHash = (object, delimiter = '|') => {
     return `${value}`
   }).join(delimiter)
 }
-
-const COUNTRIES = [
-  'Schweiz', 'Deutschland', 'Österreich'
-]
 
 class Submit extends Component {
   constructor (props) {
@@ -388,67 +385,10 @@ class Submit extends Component {
         {(paymentMethod === 'PAYMENTSLIP') && (
           <div>
             <P>{t('pledge/submit/paymentslip/title')}</P>
-            <FieldSet
+            <AddressForm
               values={this.state.values}
               errors={this.state.errors}
               dirty={this.state.dirty}
-              fields={[
-                {
-                  label: t('pledge/submit/paymentslip/name/label'),
-                  name: 'name',
-                  validator: (value) => (
-                    (
-                      !value &&
-                      t('pledge/submit/paymentslip/name/error/empty')
-                    )
-                  )
-                },
-                {
-                  label: t('pledge/submit/paymentslip/line1/label'),
-                  name: 'line1',
-                  validator: (value) => (
-                    (
-                      !value &&
-                      t('pledge/submit/paymentslip/line1/error/empty')
-                    )
-                  )
-                },
-                {
-                  label: t('pledge/submit/paymentslip/line2/label'),
-                  name: 'line2'
-                },
-                {
-                  label: t('pledge/submit/paymentslip/postalCode/label'),
-                  name: 'postalCode',
-                  validator: (value) => (
-                    (
-                      !value &&
-                      t('pledge/submit/paymentslip/postalCode/error/empty')
-                    )
-                  )
-                },
-                {
-                  label: t('pledge/submit/paymentslip/city/label'),
-                  name: 'city',
-                  validator: (value) => (
-                    (
-                      !value &&
-                      t('pledge/submit/paymentslip/city/error/empty')
-                    )
-                  )
-                },
-                {
-                  label: t('pledge/submit/paymentslip/country/label'),
-                  name: 'country',
-                  validator: (value) => (
-                    (
-                      !value &&
-                      t('pledge/submit/paymentslip/country/error/empty')
-                    )
-                  ),
-                  autocomplete: COUNTRIES
-                }
-              ]}
               onChange={(fields) => {
                 this.setState(mergeFields(fields))
               }} />

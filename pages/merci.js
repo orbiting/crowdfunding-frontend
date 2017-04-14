@@ -15,6 +15,7 @@ import {withSignOut} from '../components/Auth/SignOut'
 import Loader from '../components/Loader'
 import Share from '../components/Share'
 import {timeFormat, chfFormat} from '../lib/utils/formats'
+import UpdateMe from '../components/Me/Update'
 
 import {
   PUBLIC_BASE_URL
@@ -95,9 +96,7 @@ const Merci = compose(
         error: data.error,
         pledges: (data.me && data.me.pledges) || []
       }
-    },
-    returnPartialData: false,
-    fetchPolicy: 'network-only'
+    }
   }),
   withSignOut,
   withMe,
@@ -118,7 +117,7 @@ const Merci = compose(
     }
     return (
       <div>
-        <h1>{t('merci/signedOut/title')}</h1>
+        <H1>{t('merci/signedOut/title')}</H1>
         <P>
           {t('merci/signedOut/signIn')}
         </P>
@@ -133,9 +132,9 @@ const Merci = compose(
       if (!pledges.length) {
         return (
           <div>
-            <h1>{t('merci/empty/title', {
+            <H1>{t('merci/empty/title', {
               nameOrEmail: me.name || me.email
-            })}</h1>
+            })}</H1>
             <P>
               {t('merci/empty/text')}
             </P>
@@ -234,6 +233,8 @@ const Merci = compose(
             e.preventDefault()
             props.signOut()
           }}>{t('merci/signOut')}</A>
+          <br /><br /><br /><br /><br /><br />
+          <UpdateMe />
         </div>
       )
     }} />

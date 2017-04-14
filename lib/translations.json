@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-14T13:09:04.893Z",
+  "updated": "2017-04-14T17:56:30.011Z",
   "title": "live",
   "data": [
     {
@@ -218,6 +218,38 @@
     {
       "key": "merci/payment/PAYMENTSLIP/paperInvoice/0",
       "value": "Sie haben die Rechnung per E-Mail erhalten"
+    },
+    {
+      "key": "merci/updateMe/title",
+      "value": "Persönliche Angaben"
+    },
+    {
+      "key": "merci/updateMe/birthday/label",
+      "value": "Geburtsdatum"
+    },
+    {
+      "key": "merci/updateMe/birthday/hint",
+      "value": "TT.MM.JJJJ, notwendig für Ihre rechtmässige Mitgliedschaft"
+    },
+    {
+      "key": "merci/updateMe/birthday/error/empty",
+      "value": "Geburtsdatum fehlt"
+    },
+    {
+      "key": "merci/updateMe/birthday/error/invalid",
+      "value": "Geburtsdatum ungültig"
+    },
+    {
+      "key": "merci/updateMe/submit",
+      "value": "Speichern"
+    },
+    {
+      "key": "merci/updateMe/updating",
+      "value": "speichert"
+    },
+    {
+      "key": "merci/updateMe/edit",
+      "value": "ändern"
     },
     {
       "key": "merci/signOut",
@@ -572,6 +604,18 @@
       "value": "Es wurde bereits ein pledge mit dieser Zahlung abgerechnet. Bitte kontaktieren Sie uns. ID: {id}"
     },
     {
+      "key": "api/faq/mail/subject",
+      "value": "Danke für Ihre Frage"
+    },
+    {
+      "key": "api/signin/mail/subject",
+      "value": "Login Versuch"
+    },
+    {
+      "key": "api/pledge/mail/subject",
+      "value": "Vielen Dank!"
+    },
+    {
       "key": "footer/contact/title",
       "value": "Kontakt"
     },
@@ -596,52 +640,56 @@
       "value": "Impressum"
     },
     {
-      "key": "pledge/submit/paymentslip/title",
+      "key": "me/addressForm/title",
       "value": "Ihre Adresse"
     },
     {
-      "key": "pledge/submit/paymentslip/name/label",
+      "key": "me/addressForm/name/label",
       "value": "Anschrift"
     },
     {
-      "key": "pledge/submit/paymentslip/name/error/empty",
+      "key": "me/addressForm/name/error/empty",
       "value": "Anschrift fehlt"
     },
     {
-      "key": "pledge/submit/paymentslip/line1/label",
+      "key": "me/addressForm/line1/label",
       "value": "Strasse und Hausnummer"
     },
     {
-      "key": "pledge/submit/paymentslip/line1/error/empty",
+      "key": "me/addressForm/line1/error/empty",
       "value": "Strasse und Hausnummer fehlt"
     },
     {
-      "key": "pledge/submit/paymentslip/line2/label",
+      "key": "me/addressForm/line2/label",
       "value": "Zusatz (Optional: Einheit, Gebäude, usw.)"
     },
     {
-      "key": "pledge/submit/paymentslip/postalCode/label",
+      "key": "me/addressForm/postalCode/label",
       "value": "Postleitzahl"
     },
     {
-      "key": "pledge/submit/paymentslip/postalCode/error/empty",
+      "key": "me/addressForm/postalCode/error/empty",
       "value": "Postleitzahl fehlt"
     },
     {
-      "key": "pledge/submit/paymentslip/city/label",
+      "key": "me/addressForm/city/label",
       "value": "Stadt"
     },
     {
-      "key": "pledge/submit/paymentslip/city/error/empty",
+      "key": "me/addressForm/city/error/empty",
       "value": "Stadt fehlt"
     },
     {
-      "key": "pledge/submit/paymentslip/country/label",
+      "key": "me/addressForm/country/label",
       "value": "Land"
     },
     {
-      "key": "pledge/submit/paymentslip/country/error/empty",
+      "key": "me/addressForm/country/error/empty",
       "value": "Land fehlt"
+    },
+    {
+      "key": "pledge/submit/paymentslip/title",
+      "value": "Rechnungsadresse"
     },
     {
       "key": "pledge/submit/paymentslip/paperInvoice",
