@@ -29,10 +29,8 @@ const styles = {
   }),
   grid: css({
     marginLeft: -COL_PADDING_S,
-    marginRight: -COL_PADDING_S,
     [mediaQueries.mUp]: {
-      marginLeft: -COL_PADDING_M,
-      marginRight: -COL_PADDING_M
+      marginLeft: -COL_PADDING_M
     },
     ':after': {
       content: '""',
