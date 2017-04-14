@@ -172,8 +172,8 @@ const Merci = compose(
             .reverse()
             .filter(pledge => pledge.status !== 'DRAFT')
             .map(pledge => {
-              const configurableOptions = pledge.options.filter(option => (
-                option.minAmount !== option.maxAmount
+              const options = pledge.options.filter(option => (
+                option.amount && option.minAmount !== option.maxAmount
               ))
               const createdAt = new Date(pledge.createdAt)
               return (
@@ -185,9 +185,9 @@ const Merci = compose(
                   <Label>{t('merci/pledge/label', {
                     formattedDateTime: dateTimeFormat(createdAt)
                   })}</Label>
-                  {!!configurableOptions.length && (
+                  {!!options.length && (
                     <ul style={{marginBottom: 0}}>
-                      {configurableOptions.map((option, i) => (
+                      {options.map((option, i) => (
                         <li key={i}>
                           {option.amount}
                           {' '}
