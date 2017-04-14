@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-14T23:13:42.344Z",
+  "updated": "2017-04-14T23:47:21.694Z",
   "title": "live",
   "data": [
     {
@@ -304,8 +304,12 @@
       "value": "abmelden"
     },
     {
-      "key": "pledge/contact/signIn",
+      "key": "pledge/contact/signIn/show",
       "value": "Schon mal unterstützt?"
+    },
+    {
+      "key": "pledge/contact/signIn/hide",
+      "value": "Das erste Mal hier?"
     },
     {
       "key": "pledge/contact/name/label",

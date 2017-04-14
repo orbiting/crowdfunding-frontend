@@ -131,6 +131,7 @@ class Pledge extends Component {
           receiveError,
           pastPledges
         } = this.props
+        const showSignIn = this.state.showSignIn && !me
 
         const pkg = query.package
           ? crowdfunding.packages.find(
@@ -186,6 +187,7 @@ class Pledge extends Component {
                     this.props.signOut().then(() => {
                       this.handleName('', false, t)
                       this.handleEmail('', false, t)
+                      this.setState(() => ({showSignIn: false}))
                     })
                   }}>{t('pledge/contact/signOut')}</A>
                   <br />
@@ -202,18 +204,18 @@ class Pledge extends Component {
                 <span>
                   <A href='#' onClick={(e) => {
                     e.preventDefault()
-                    this.setState(() => ({showSignIn: !this.state.showSignIn}))
-                  }}>{t('pledge/contact/signIn')}</A>
-                  {!!this.state.showSignIn && (
+                    this.setState(() => ({showSignIn: !showSignIn}))
+                  }}>{t(`pledge/contact/signIn/${showSignIn ? 'hide' : 'show'}`)}</A>
+                  {!!showSignIn && (
                     <span>
-                      <br />
+                      <br /><br />
                       <SignIn />
                     </span>
                   )}
                   <br /><br />
                 </span>
               )}
-              <span>
+              {!showSignIn && <span>
                 <Field label={t('pledge/contact/name/label')}
                   name='name'
                   error={dirty.name && errors.name}
@@ -230,7 +232,7 @@ class Pledge extends Component {
                     this.handleEmail(value, shouldValidate, t)
                   }} />
                 <br /><br />
-              </span>
+              </span>}
             </div>
 
             <Submit
