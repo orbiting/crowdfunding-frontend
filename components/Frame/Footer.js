@@ -28,9 +28,11 @@ const styles = {
     float: 'right'
   }),
   grid: css({
-    marginLeft: -COL_PADDING_S,
+    marginLeft: -COL_PADDING_S / 2,
+    width: `calc(100% + ${COL_PADDING_S}px)`,
     [mediaQueries.mUp]: {
-      marginLeft: -COL_PADDING_M
+      marginLeft: -COL_PADDING_M / 2,
+      width: `calc(100% + ${COL_PADDING_M}px)`
     },
     ':after': {
       content: '""',
@@ -39,8 +41,8 @@ const styles = {
     }
   }),
   column: css({
-    paddingLeft: COL_PADDING_S,
-    paddingRight: COL_PADDING_S,
+    paddingLeft: COL_PADDING_S / 2,
+    paddingRight: COL_PADDING_S / 2,
     fontSize: 12,
     lineHeight: '18px',
     fontFamily: fontFamilies.sansSerifRegular,
@@ -50,8 +52,8 @@ const styles = {
     [mediaQueries.mUp]: {
       fontSize: 17,
       lineHeight: '25px',
-      paddingLeft: COL_PADDING_M,
-      paddingRight: COL_PADDING_M,
+      paddingLeft: COL_PADDING_M / 2,
+      paddingRight: COL_PADDING_M / 2,
       width: '25%'
     },
     '& a': {
@@ -78,7 +80,7 @@ const styles = {
 
 const Footer = ({t}) => (
   <div {...styles.bg}>
-    <Container>
+    <Container style={{overflow: 'hidden'}}>
       <div {...styles.grid}>
         <div {...styles.column}>
           <div {...styles.title}>{t('footer/contact/title')}</div>
