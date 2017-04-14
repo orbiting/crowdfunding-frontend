@@ -203,8 +203,8 @@ const Merci = compose(
                   <br />
                   <ul>
                     {
-                      pledge.payments.map(payment => (
-                        <li>
+                      pledge.payments.map((payment, i) => (
+                        <li key={i}>
                           {intersperse(
                             t.first([
                               `merci/payment/status/${payment.method}/${payment.status}`,
