@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-15T14:26:47.363Z",
+  "updated": "2017-04-15T16:02:00.309Z",
   "title": "live",
   "data": [
     {
@@ -486,6 +486,18 @@
     {
       "key": "sidebar/reminder/button",
       "value": "Nicht jetzt. Später!\n"
+    },
+    {
+      "key": "sidebar/reminder/success",
+      "value": "Wir werden Sie erinnern"
+    },
+    {
+      "key": "sidebar/reminder/cancel",
+      "value": "abbrechen"
+    },
+    {
+      "key": "sidebar/reminder/send",
+      "value": "erinnern"
     },
     {
       "key": "pledge/recievePayment/error",

@@ -1,5 +1,9 @@
 import React, {Component} from 'react'
+import {gql, graphql} from 'react-apollo'
 import withT from '../../lib/withT'
+import {validate as isEmail} from 'email-validator'
+import {compose} from 'redux'
+import {errorToString} from '../../lib/utils/errors'
 
 import Accordion from '../Pledge/Accordion'
 import Status from '../Status'
@@ -11,8 +15,8 @@ import {css} from 'glamor'
 import {HEADER_HEIGHT, SIDEBAR_WIDTH} from './constants'
 
 import {
-  Button,
-  P,
+  Button, Field,
+  P, A, Label,
   colors, mediaQueries
 } from '@project-r/styleguide'
 
@@ -37,27 +41,133 @@ const styles = {
       top: HEADER_HEIGHT,
       backgroundColor: '#fff'
     }
+  }),
+  reminderActions: css({
+    display: 'block',
+    textAlign: 'right',
+    '& a, & span': {
+      cursor: 'pointer'
+    }
   })
 }
 
-const SidebarInner = withT(({t}) => (
-  <div style={{paddingTop: 10}}>
-    <Accordion onSelect={params => {
-      Router.push({
-        pathname: '/pledge',
-        query: params
-      }).then(() => window.scrollTo(0, 0))
-    }} />
-    <P>
-      <Button block>{t('sidebar/reminder/button')}</Button>
-    </P>
-    <P style={{textAlign: 'center'}}>
-      <Link href='/merci'>
-        <a {...styles.link}>{t('sidebar/signIn')}</a>
-      </Link>
-    </P>
-  </div>
-))
+class SidebarInner extends Component {
+  componentDidUpdate () {
+    if (this.autoFocus && this.field) {
+      this.field.input.focus()
+      this.autoFocus = false
+    }
+  }
+  componentDidMount () {
+    const {email, emailDirty} = this.props.state
+    this.handleEmail(email || '', emailDirty || false)
+  }
+  handleEmail (value, shouldValidate) {
+    const {t, onChange} = this.props
+    onChange({
+      email: value,
+      emailError: (
+        (value.trim().length <= 0 && t('pledge/contact/email/error/empty')) ||
+        (!isEmail(value) && t('pledge/contact/email/error/invalid'))
+      ),
+      emailDirty: shouldValidate
+    })
+  }
+  render () {
+    const {
+      t,
+      state: {
+        reminderOpen,
+        email, emailError, emailDirty,
+        reminderError, reminderMessage
+      },
+      onChange, sendReminder
+    } = this.props
+
+    const submitReminder = (e) => {
+      e.preventDefault()
+      if (emailError) {
+        onChange({
+          emailDirty: true
+        })
+        return
+      }
+      sendReminder(email).then(() => {
+        onChange({
+          reminderOpen: false,
+          reminderError: false,
+          reminderMessage: t('sidebar/reminder/success')
+        })
+      }).catch((error) => {
+        onChange({
+          reminderError: errorToString(error)
+        })
+      })
+    }
+
+    return (
+      <div style={{paddingTop: 10}}>
+        <Accordion onSelect={params => {
+          Router.push({
+            pathname: '/pledge',
+            query: params
+          }).then(() => window.scrollTo(0, 0))
+        }} />
+        <P>
+          {reminderOpen ? (
+            <form onSubmit={submitReminder}>
+              <Field label={t('pledge/contact/email/label')}
+                name='email'
+                error={emailDirty && emailError}
+                value={email}
+                ref={ref => { this.field = ref }}
+                onChange={(_, value, shouldValidate) => {
+                  this.handleEmail(value, shouldValidate)
+                }}
+                />
+              <Label {...styles.reminderActions}>
+                <span onClick={() => {
+                  onChange({
+                    reminderOpen: false,
+                    reminderError: undefined,
+                    reminderMessage: undefined
+                  })
+                }}>
+                  {t('sidebar/reminder/cancel')}
+                </span>
+                {' '}
+                <A onClick={submitReminder}>
+                  {t('sidebar/reminder/send')}
+                </A>
+              </Label>
+              {!!reminderError && (
+                <P style={{color: colors.error}}>
+                  {reminderError}
+                </P>
+              )}
+            </form>
+          ) : (
+            reminderMessage ? (
+              <P style={{textAlign: 'center'}}>
+                {reminderMessage}
+              </P>
+            ) : (<Button block onClick={() => {
+              this.autoFocus = true
+              onChange({reminderOpen: true})
+            }}>
+              {t('sidebar/reminder/button')}
+            </Button>)
+          )}
+        </P>
+        <P style={{textAlign: 'center'}}>
+          <Link href='/merci'>
+            <a {...styles.link}>{t('sidebar/signIn')}</a>
+          </Link>
+        </P>
+      </div>
+    )
+  }
+}
 
 class Sidebar extends Component {
   constructor (props) {
@@ -119,7 +229,8 @@ class Sidebar extends Component {
   }
   render () {
     const {right} = this.state
-    const {sticky} = this.props
+    const {sticky, sendReminder, t} = this.props
+    const onChange = state => this.setState(() => (state))
     return (
       <div>
         <Status />
@@ -127,12 +238,18 @@ class Sidebar extends Component {
         <div ref={this.innerRef} style={{
           visibility: sticky.sidebar ? 'hidden' : 'visible'
         }}>
-          <SidebarInner />
+          <SidebarInner t={t}
+            onChange={onChange}
+            state={this.state}
+            sendReminder={sendReminder} />
         </div>
 
         {!!sticky.sidebar && (
           <div {...styles.sticky} style={{right: right}}>
-            <SidebarInner />
+            <SidebarInner t={t}
+              onChange={onChange}
+              state={this.state}
+              sendReminder={sendReminder} />
           </div>
         )}
       </div>
@@ -140,4 +257,17 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar
+const remindMeMutation = gql`
+mutation remindEmail($email: String!) {
+  remindEmail(email: $email)
+}
+`
+
+export default compose(
+  graphql(remindMeMutation, {
+    props: ({mutate}) => ({
+      sendReminder: email => mutate({variables: {email}})
+    })
+  }),
+  withT
+)(Sidebar)
