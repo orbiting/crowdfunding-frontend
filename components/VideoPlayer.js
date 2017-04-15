@@ -19,6 +19,7 @@ const styles = {
   video: css({
     width: '100%',
     height: 'auto',
+    transition: 'height 200ms',
     '::-webkit-media-controls-panel': {
       display: 'none !important'
     },

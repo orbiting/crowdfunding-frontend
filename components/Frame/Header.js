@@ -15,7 +15,11 @@ import {
 import Menu from './Menu'
 import Toggle from './Toggle'
 import LoadingBar from './LoadingBar'
-import {SIDEBAR_WIDTH, HEADER_HEIGHT} from './constants'
+import {
+  SIDEBAR_WIDTH,
+  HEADER_HEIGHT, HEADER_HEIGHT_MOBILE,
+  MENUBAR_HEIGHT
+} from './constants'
 
 const styles = {
   bar: css({
@@ -30,7 +34,7 @@ const styles = {
   }),
   barOpaque: css({
     backgroundColor: '#fff',
-    height: 60,
+    height: HEADER_HEIGHT_MOBILE,
     [mediaQueries.mUp]: {
       height: HEADER_HEIGHT
     },
@@ -39,10 +43,10 @@ const styles = {
   menuBar: css({
     position: 'fixed',
     zIndex: 10,
-    top: 60,
+    top: HEADER_HEIGHT_MOBILE,
     left: 0,
     right: 0,
-    height: 50,
+    height: MENUBAR_HEIGHT,
     backgroundColor: '#fff',
     borderBottom: `1px solid ${colors.divider}`,
     [mediaQueries.mUp]: {
@@ -109,14 +113,15 @@ class Header extends Component {
     this.onScroll = () => {
       const y = window.pageYOffset
 
-      const opaque = y > 150 || !this.props.cover
+      const yOpaque = this.state.mobile ? 70 : 150
+      const opaque = y > yOpaque || !this.props.cover
 
       if (opaque !== this.state.opaque) {
         this.setState(() => ({opaque}))
       }
     }
     this.measure = () => {
-      let mobile = window.innerWidth < mediaQueries.mBreakPoint
+      const mobile = window.innerWidth < mediaQueries.mBreakPoint
       if (mobile !== this.state.mobile) {
         this.setState(() => ({mobile}))
       }
