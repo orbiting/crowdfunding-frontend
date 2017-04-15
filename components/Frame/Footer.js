@@ -43,6 +43,7 @@ const styles = {
   column: css({
     paddingLeft: COL_PADDING_S / 2,
     paddingRight: COL_PADDING_S / 2,
+    marginBottom: 10,
     fontSize: 12,
     lineHeight: '18px',
     fontFamily: fontFamilies.sansSerifRegular,
@@ -91,12 +92,27 @@ const Footer = ({t}) => (
         </div>
         <div {...styles.column}>
           <div {...styles.title}>{t('footer/about/title')}</div>
-          <a href='https://project-r.construction/' target='_blank'>{t('footer/about/projecR')}</a>
-
+          <Link href='/manifest'>
+            <a>{t('footer/about/manifest')}</a>
+          </Link><br />
+          <a href='https://project-r.construction/' target='_blank'>
+            {t('footer/about/projecR')}
+          </a>
         </div>
         <div {...styles.column}>
           <div {...styles.title}>{t('footer/legal/title')}</div>
-          <Link href='/impressum'><a>{t('footer/legal/imprint')}</a></Link>
+          <Link href='/rechtliches/agb'>
+            <a>{t('footer/legal/tos')}</a>
+          </Link><br />
+          <Link href='/rechtliches/datenschutz'>
+            <a>{t('footer/legal/privacy')}</a>
+          </Link><br />
+          <Link href='/rechtliches/statuten'>
+            <a>{t('footer/legal/statute')}</a>
+          </Link><br />
+          <Link href='/rechtliches/impressum'>
+            <a>{t('footer/legal/imprint')}</a>
+          </Link>
         </div>
       </div>
       <hr {...styles.hr} />

@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-15T16:02:00.309Z",
+  "updated": "2017-04-15T17:12:38.147Z",
   "title": "live",
   "data": [
     {
@@ -672,8 +672,24 @@
       "value": "Project R"
     },
     {
+      "key": "footer/about/manifest",
+      "value": "Manifest"
+    },
+    {
       "key": "footer/legal/title",
       "value": "Rechtliches"
+    },
+    {
+      "key": "footer/legal/tos",
+      "value": "AGB"
+    },
+    {
+      "key": "footer/legal/privacy",
+      "value": "Datenschutz"
+    },
+    {
+      "key": "footer/legal/statute",
+      "value": "Statuten"
     },
     {
       "key": "footer/legal/imprint",
