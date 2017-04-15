@@ -101,6 +101,11 @@ class CustomizePackage extends Component {
           {' '}
           <A href='/pledge' onClick={event => {
             event.preventDefault()
+            onChange({
+              values: {
+                price: undefined
+              }
+            })
             Router.replace('/pledge', '/pledge', {shallow: true})
           }}>
             {t('package/customize/changePackage')}

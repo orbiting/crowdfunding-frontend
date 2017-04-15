@@ -65,7 +65,7 @@ class Pledge extends Component {
     const userPrice = !!query.userPrice
 
     return {
-      total: values.price,
+      total: values.price || undefined,
       user: {
         name: values.name,
         email: values.email
