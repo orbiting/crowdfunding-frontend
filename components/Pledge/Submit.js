@@ -3,7 +3,6 @@ import SignIn, {withSignIn} from '../Auth/SignIn'
 import {withSignOut} from '../Auth/SignOut'
 
 import { gql, graphql } from 'react-apollo'
-import Router from 'next/router'
 import FieldSet from '../FieldSet'
 import {mergeFields} from '../../lib/utils/fieldState'
 import {errorToString} from '../../lib/utils/errors'
@@ -13,7 +12,8 @@ import withT from '../../lib/withT'
 import {meQuery} from '../../lib/withMe'
 import * as postfinance from './postfinance'
 import * as paypal from './paypal'
-import {pastPledgesQuery} from './queries'
+import AddressForm, {COUNTRIES} from '../Me/AddressForm'
+import {gotoMerci} from './merci'
 
 import {
   PUBLIC_BASE_URL,
@@ -43,10 +43,6 @@ const simpleHash = (object, delimiter = '|') => {
     return `${value}`
   }).join(delimiter)
 }
-
-const COUNTRIES = [
-  'Schweiz', 'Deutschland', 'Österreich'
-]
 
 class Submit extends Component {
   constructor (props) {
@@ -212,19 +208,13 @@ class Submit extends Component {
     }))
     this.props.pay(data)
       .then(({data}) => {
-        const gotoMerci = (phrase) => {
-          Router.push({
-            pathname: '/merci',
-            query: {
-              id: data.payPledge.pledgeId,
-              email: user.email,
-              phrase
-            }
-          })
-        }
         if (!me) {
           this.props.signIn(user.email)
-            .then(({data}) => gotoMerci(data.signIn.phrase))
+            .then(({data: {signIn}}) => gotoMerci({
+              id: data.payPledge.pledgeId,
+              email: user.email,
+              phrase: signIn.phrase
+            }))
             .catch(error => {
               console.error('signIn', error)
               this.setState(() => ({
@@ -233,7 +223,9 @@ class Submit extends Component {
               }))
             })
         } else {
-          gotoMerci()
+          gotoMerci({
+            id: data.payPledge.pledgeId
+          })
         }
       })
       .catch(error => {
@@ -388,67 +380,10 @@ class Submit extends Component {
         {(paymentMethod === 'PAYMENTSLIP') && (
           <div>
             <P>{t('pledge/submit/paymentslip/title')}</P>
-            <FieldSet
+            <AddressForm
               values={this.state.values}
               errors={this.state.errors}
               dirty={this.state.dirty}
-              fields={[
-                {
-                  label: t('pledge/submit/paymentslip/name/label'),
-                  name: 'name',
-                  validator: (value) => (
-                    (
-                      !value &&
-                      t('pledge/submit/paymentslip/name/error/empty')
-                    )
-                  )
-                },
-                {
-                  label: t('pledge/submit/paymentslip/line1/label'),
-                  name: 'line1',
-                  validator: (value) => (
-                    (
-                      !value &&
-                      t('pledge/submit/paymentslip/line1/error/empty')
-                    )
-                  )
-                },
-                {
-                  label: t('pledge/submit/paymentslip/line2/label'),
-                  name: 'line2'
-                },
-                {
-                  label: t('pledge/submit/paymentslip/postalCode/label'),
-                  name: 'postalCode',
-                  validator: (value) => (
-                    (
-                      !value &&
-                      t('pledge/submit/paymentslip/postalCode/error/empty')
-                    )
-                  )
-                },
-                {
-                  label: t('pledge/submit/paymentslip/city/label'),
-                  name: 'city',
-                  validator: (value) => (
-                    (
-                      !value &&
-                      t('pledge/submit/paymentslip/city/error/empty')
-                    )
-                  )
-                },
-                {
-                  label: t('pledge/submit/paymentslip/country/label'),
-                  name: 'country',
-                  validator: (value) => (
-                    (
-                      !value &&
-                      t('pledge/submit/paymentslip/country/error/empty')
-                    )
-                  ),
-                  autocomplete: COUNTRIES
-                }
-              ]}
               onChange={(fields) => {
                 this.setState(mergeFields(fields))
               }} />
@@ -687,9 +622,7 @@ export const withPay = Component => {
       props: ({mutate}) => ({
         pay: variables => mutate({
           variables,
-          refetchQueries: [{
-            query: pastPledgesQuery
-          }]
+          refetchQueries: ['pledges', 'pledgeCount']
         })
       })
     }),

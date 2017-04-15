@@ -103,7 +103,7 @@ class SignIn extends Component {
                     loading: false
                   }))
                 })
-            }}>anmelden</Button>
+            }}>{t('signIn/button')}</Button>
         </div>
         {loading ? t('signIn/loading') : ''}
       </div>

@@ -33,6 +33,7 @@
     "d3-array": "^1.1.1",
     "d3-format": "^1.1.1",
     "d3-time": "^1.0.6",
+    "d3-time-format": "^2.0.5",
     "email-validator": "^1.0.7",
     "express": "^4.15.2",
     "express-basic-auth": "^1.0.1",

@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-13T21:16:07.024Z",
+  "updated": "2017-04-14T23:47:21.694Z",
   "title": "live",
   "data": [
     {
@@ -124,24 +124,140 @@
       "value": "Notizbuch"
     },
     {
-      "key": "merci/postpay/title/me",
-      "value": "Merci {name}"
-    },
-    {
       "key": "merci/postpay/waiting",
       "value": "Wir haben Ihnen an «{email}» ein Bestätigunsemail mit den Wörtern «{phrase}» geschickt. Bitte klicken Sie auf den darin enthaltenen Link."
     },
     {
-      "key": "merci/postpay/change-email",
-      "value": "ändern"
+      "key": "merci/signedOut/title",
+      "value": "Ihre Gelöbnisse ansehen"
+    },
+    {
+      "key": "merci/signedOut/signIn",
+      "value": "Bitte anmelden:"
+    },
+    {
+      "key": "merci/empty/title",
+      "value": "Hallo {nameOrEmail}"
+    },
+    {
+      "key": "merci/empty/text",
+      "value": "Sie haben uns noch nicht unterstützt."
+    },
+    {
+      "key": "merci/empty/button",
+      "value": "Jetzt mitmachen"
     },
     {
       "key": "merci/title",
-      "value": "Pledges ansehen"
+      "value": "Merci & Willkomen, {name}"
     },
     {
-      "key": "merci/signin",
-      "value": "Bitte anmelden:"
+      "key": "merci/lead",
+      "value": "Vielen Dank für Ihre Unterstützung. Es ist eine Ehre Sie als Mitglied begrüssen zu dürfen. Seien Sie stolz und hissen Sie unsere Flagge im ganze Inter-Land."
+    },
+    {
+      "key": "merci/share/tweetTemplate",
+      "value": "Journalismus ist mehr als nur ein Geschäft für irgendwelche Konzerne, beteilige dich."
+    },
+    {
+      "key": "merci/share/emailSubject",
+      "value": "Ein neues, unabhängiges Magazin"
+    },
+    {
+      "key": "merci/share/emailBody",
+      "value": "Hallo\n\nWerde Mitglied und Abonoment vom der Republik:\n{url}\n\nHerzliche Grüsse,\n{backerName}"
+    },
+    {
+      "key": "merci/pledge/label",
+      "value": "Erstellt {formattedDateTime}"
+    },
+    {
+      "key": "merci/payment/method/STRIPE",
+      "value": "Kreditkarte"
+    },
+    {
+      "key": "merci/payment/method/POSTFINANCECARD",
+      "value": "Postkarte"
+    },
+    {
+      "key": "merci/payment/method/PAYPAL",
+      "value": "PayPal"
+    },
+    {
+      "key": "merci/payment/method/PAYMENTSLIP",
+      "value": "Einzahlungsschein"
+    },
+    {
+      "key": "merci/payment/status/generic/WAITING",
+      "value": "{formattedTotal} ausstehend"
+    },
+    {
+      "key": "merci/payment/status/generic/PAID",
+      "value": "{formattedTotal} bezahlt mit {method}"
+    },
+    {
+      "key": "merci/payment/status/generic/REFUNDED",
+      "value": "{formattedTotal} zurück erstattet"
+    },
+    {
+      "key": "merci/payment/status/generic/CANCELLED",
+      "value": "{formattedTotal} annulliert"
+    },
+    {
+      "key": "merci/payment/status/PAYMENTSLIP/WAITING",
+      "value": "Bitte überweisen Sie {formattedTotal} mit der Mitteilung «{hrid}» an:\n\n\nKonto: 61-11760-6\nProject R Genossenschaft\n8004 Zürich"
+    },
+    {
+      "key": "merci/payment/status/PAYMENTSLIP/PAID",
+      "value": "{formattedTotal} bezahlt"
+    },
+    {
+      "key": "merci/payment/PAYMENTSLIP/paperInvoice/1",
+      "value": "Sie erhalten eine Rechnung per Post"
+    },
+    {
+      "key": "merci/payment/PAYMENTSLIP/paperInvoice/0",
+      "value": "Sie haben die Rechnung per E-Mail erhalten"
+    },
+    {
+      "key": "merci/updateMe/title",
+      "value": "Persönliche Angaben"
+    },
+    {
+      "key": "merci/updateMe/birthday/label",
+      "value": "Geburtsdatum"
+    },
+    {
+      "key": "merci/updateMe/birthday/hint",
+      "value": "TT.MM.JJJJ, notwendig für Ihre rechtmässige Mitgliedschaft"
+    },
+    {
+      "key": "merci/updateMe/birthday/error/empty",
+      "value": "Geburtsdatum fehlt"
+    },
+    {
+      "key": "merci/updateMe/birthday/error/invalid",
+      "value": "Geburtsdatum ungültig"
+    },
+    {
+      "key": "merci/updateMe/submit",
+      "value": "Speichern"
+    },
+    {
+      "key": "merci/updateMe/updating",
+      "value": "speichert"
+    },
+    {
+      "key": "merci/updateMe/edit",
+      "value": "ändern"
+    },
+    {
+      "key": "merci/signOut",
+      "value": "Abmelden"
+    },
+    {
+      "key": "signIn/button",
+      "value": "anmelden"
     },
     {
       "key": "signIn/email/label",
@@ -188,8 +304,12 @@
       "value": "abmelden"
     },
     {
-      "key": "pledge/contact/signIn",
+      "key": "pledge/contact/signIn/show",
       "value": "Schon mal unterstützt?"
+    },
+    {
+      "key": "pledge/contact/signIn/hide",
+      "value": "Das erste Mal hier?"
     },
     {
       "key": "pledge/contact/name/label",
@@ -492,6 +612,18 @@
       "value": "Es wurde bereits ein pledge mit dieser Zahlung abgerechnet. Bitte kontaktieren Sie uns. ID: {id}"
     },
     {
+      "key": "api/faq/mail/subject",
+      "value": "Danke für Ihre Frage"
+    },
+    {
+      "key": "api/signin/mail/subject",
+      "value": "Login Versuch"
+    },
+    {
+      "key": "api/pledge/mail/subject",
+      "value": "Vielen Dank!"
+    },
+    {
       "key": "footer/contact/title",
       "value": "Kontakt"
     },
@@ -516,52 +648,56 @@
       "value": "Impressum"
     },
     {
-      "key": "pledge/submit/paymentslip/title",
+      "key": "me/addressForm/title",
       "value": "Ihre Adresse"
     },
     {
-      "key": "pledge/submit/paymentslip/name/label",
+      "key": "me/addressForm/name/label",
       "value": "Anschrift"
     },
     {
-      "key": "pledge/submit/paymentslip/name/error/empty",
+      "key": "me/addressForm/name/error/empty",
       "value": "Anschrift fehlt"
     },
     {
-      "key": "pledge/submit/paymentslip/line1/label",
+      "key": "me/addressForm/line1/label",
       "value": "Strasse und Hausnummer"
     },
     {
-      "key": "pledge/submit/paymentslip/line1/error/empty",
+      "key": "me/addressForm/line1/error/empty",
       "value": "Strasse und Hausnummer fehlt"
     },
     {
-      "key": "pledge/submit/paymentslip/line2/label",
+      "key": "me/addressForm/line2/label",
       "value": "Zusatz (Optional: Einheit, Gebäude, usw.)"
     },
     {
-      "key": "pledge/submit/paymentslip/postalCode/label",
+      "key": "me/addressForm/postalCode/label",
       "value": "Postleitzahl"
     },
     {
-      "key": "pledge/submit/paymentslip/postalCode/error/empty",
+      "key": "me/addressForm/postalCode/error/empty",
       "value": "Postleitzahl fehlt"
     },
     {
-      "key": "pledge/submit/paymentslip/city/label",
+      "key": "me/addressForm/city/label",
       "value": "Stadt"
     },
     {
-      "key": "pledge/submit/paymentslip/city/error/empty",
+      "key": "me/addressForm/city/error/empty",
       "value": "Stadt fehlt"
     },
     {
-      "key": "pledge/submit/paymentslip/country/label",
+      "key": "me/addressForm/country/label",
       "value": "Land"
     },
     {
-      "key": "pledge/submit/paymentslip/country/error/empty",
+      "key": "me/addressForm/country/error/empty",
       "value": "Land fehlt"
+    },
+    {
+      "key": "pledge/submit/paymentslip/title",
+      "value": "Rechnungsadresse"
     },
     {
       "key": "pledge/submit/paymentslip/paperInvoice",

@@ -20,7 +20,6 @@ import {
 import Accordion from './Accordion'
 import Submit from './Submit'
 import CustomizePackage from './CustomizePackage'
-import {pastPledgesQuery} from './queries'
 
 class Pledge extends Component {
   constructor (props) {
@@ -66,7 +65,7 @@ class Pledge extends Component {
     const userPrice = !!query.userPrice
 
     return {
-      total: values.price,
+      total: values.price || undefined,
       user: {
         name: values.name,
         email: values.email
@@ -132,6 +131,7 @@ class Pledge extends Component {
           receiveError,
           pastPledges
         } = this.props
+        const showSignIn = this.state.showSignIn && !me
 
         const pkg = query.package
           ? crowdfunding.packages.find(
@@ -187,6 +187,7 @@ class Pledge extends Component {
                     this.props.signOut().then(() => {
                       this.handleName('', false, t)
                       this.handleEmail('', false, t)
+                      this.setState(() => ({showSignIn: false}))
                     })
                   }}>{t('pledge/contact/signOut')}</A>
                   <br />
@@ -203,18 +204,18 @@ class Pledge extends Component {
                 <span>
                   <A href='#' onClick={(e) => {
                     e.preventDefault()
-                    this.setState(() => ({showSignIn: !this.state.showSignIn}))
-                  }}>{t('pledge/contact/signIn')}</A>
-                  {!!this.state.showSignIn && (
+                    this.setState(() => ({showSignIn: !showSignIn}))
+                  }}>{t(`pledge/contact/signIn/${showSignIn ? 'hide' : 'show'}`)}</A>
+                  {!!showSignIn && (
                     <span>
-                      <br />
+                      <br /><br />
                       <SignIn />
                     </span>
                   )}
                   <br /><br />
                 </span>
               )}
-              <span>
+              {!showSignIn && <span>
                 <Field label={t('pledge/contact/name/label')}
                   name='name'
                   error={dirty.name && errors.name}
@@ -231,7 +232,7 @@ class Pledge extends Component {
                     this.handleEmail(value, shouldValidate, t)
                   }} />
                 <br /><br />
-              </span>
+              </span>}
             </div>
 
             <Submit
@@ -298,6 +299,17 @@ const query = gql`
   }
 }
 `
+const pledgeCountQuery = gql`
+query pledgeCount {
+  me {
+    id
+    pledges {
+      id
+      status
+    }
+  }
+}
+`
 
 const PledgeWithQueries = compose(
   graphql(query, {
@@ -309,10 +321,12 @@ const PledgeWithQueries = compose(
       }
     }
   }),
-  graphql(pastPledgesQuery, {
+  graphql(pledgeCountQuery, {
     props: ({ data }) => {
       return {
-        pastPledges: data.me ? data.me.pledges : []
+        pastPledges: data.me
+          ? data.me.pledges.filter(pledge => pledge.status !== 'DRAFT')
+          : []
       }
     }
   }),

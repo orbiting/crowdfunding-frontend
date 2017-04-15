@@ -1,8 +1,7 @@
 import React, {Component, PropTypes} from 'react'
-import {gql, graphql} from 'react-apollo'
+import {gql, graphql, withApollo} from 'react-apollo'
 import {compose} from 'redux'
 import withT from '../../lib/withT'
-import {meQuery} from '../../lib/withMe'
 import {errorToString} from '../../lib/utils/errors'
 
 import {
@@ -69,15 +68,17 @@ mutation signOut {
 }
 `
 
-export const withSignOut = graphql(signOutMutation, {
-  props: ({mutate}) => ({
-    signOut: () => mutate({
-      refetchQueries: [{
-        query: meQuery
-      }]
+export const withSignOut = compose(
+  withApollo,
+  graphql(signOutMutation, {
+    props: ({mutate, ownProps}) => ({
+      signOut: () => mutate().then(() => {
+        // clear all potential user data
+        ownProps.client.resetStore()
+      })
     })
   })
-})
+)
 
 export default compose(
   withSignOut,

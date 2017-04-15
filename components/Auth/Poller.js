@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
-import {graphql} from 'react-apollo'
+import {graphql, withApollo} from 'react-apollo'
 import {meQuery} from '../../lib/withMe'
+import {compose} from 'redux'
 
 class Status extends Component {
   constructor (props) {
@@ -9,12 +10,18 @@ class Status extends Component {
       start: new Date()
     }
   }
+  componentDidMount () {
+    this.props.data.startPolling(1000)
+  }
   render () {
     const now = new Date()
     const elapsedMs = now.getTime() - this.state.start.getTime()
 
-    const {onSuccess, data: {error, me}} = this.props
+    const {onSuccess, data: {error, me, stopPolling}, client} = this.props
     if (me) {
+      stopPolling()
+      // refetch everything with user context
+      client.resetStore()
       onSuccess(me, elapsedMs)
       return null
     }
@@ -32,10 +39,7 @@ Status.propTypes = {
   onSuccess: PropTypes.func.isRequired
 }
 
-const Poller = graphql(meQuery, {
-  options: {
-    pollInterval: 1000
-  }
-})(Status)
-
-export default Poller
+export default compose(
+  graphql(meQuery),
+  withApollo
+)(Status)
