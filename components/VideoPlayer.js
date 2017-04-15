@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 
 import {css} from 'glamor'
 import Play from './Icons/Play'
+import Volume from './Icons/Volume'
 
 import {
   colors
@@ -53,9 +54,16 @@ const styles = {
     left: 0,
     height: PROGRESS_HEIGHT
   }),
+  volume: css({
+    position: 'absolute',
+    zIndex: 1,
+    right: 10,
+    bottom: 10,
+    cursor: 'pointer'
+  }),
   scrub: css({
     position: 'absolute',
-    height: '5%',
+    height: '10%',
     bottom: -PROGRESS_HEIGHT,
     left: 0,
     right: 0,
@@ -69,7 +77,8 @@ class VideoPlayer extends Component {
 
     this.state = {
       playing: false,
-      progress: 0
+      progress: 0,
+      muted: false
     }
 
     this.updateProgress = () => {
@@ -178,10 +187,11 @@ class VideoPlayer extends Component {
   }
   render () {
     const {src} = this.props
-    const {playing, progress} = this.state
+    const {playing, progress, muted} = this.state
     return (
       <div {...styles.wrapper}>
         <video {...styles.video}
+          muted={muted}
           ref={this.ref}
           poster={src.poster}>
           <source src={src.hls} type='application/x-mpegURL' />
@@ -192,6 +202,14 @@ class VideoPlayer extends Component {
           onClick={() => this.toggle()}>
           <div {...styles.center}>
             <Play />
+          </div>
+          <div {...styles.volume} onClick={(e) => {
+            e.stopPropagation()
+            this.setState((state) => ({
+              muted: !state.muted
+            }))
+          }}>
+            <Volume off={muted} />
           </div>
         </div>
         <div {...styles.progress}
