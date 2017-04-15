@@ -1,5 +1,4 @@
 import React from 'react'
-import Head from 'next/head'
 import withData from '../../lib/withData'
 import withT from '../../lib/withT'
 import Frame from '../../components/Frame'
@@ -9,10 +8,9 @@ import {
 } from '@project-r/styleguide'
 
 export default withData(withT(({url, t}) => (
-  <Frame url={url}>
-    <Head>
-      <title>Republik Newsletter</title>
-    </Head>
+  <Frame url={url} meta={{
+    title: t('newsletter/title')
+  }}>
     <H1>
       {t('newsletter/title')}
     </H1>
