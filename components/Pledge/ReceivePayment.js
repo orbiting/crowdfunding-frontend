@@ -147,10 +147,10 @@ class PledgeReceivePayment extends Component {
       .then(({data}) => {
         if (!me) {
           this.props.signIn(pledge.user.email)
-            .then(({data}) => gotoMerci({
+            .then(({data: {signIn}}) => gotoMerci({
               id: data.payPledge.pledgeId,
               email: pledge.user.email,
-              phrase: data.signIn.phrase
+              phrase: signIn.phrase
             }))
             .catch(error => {
               console.error('signIn', error)
