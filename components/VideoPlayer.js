@@ -86,9 +86,13 @@ class VideoPlayer extends Component {
       if (!video) {
         return
       }
-      this.setState(() => ({
-        progress: video.currentTime / video.duration
-      }))
+      this.setState(() => {
+        const progress = video.currentTime / video.duration
+        this.props.onProgress && this.props.onProgress(progress)
+        return {
+          progress
+        }
+      })
     }
     this.syncProgress = () => {
       this.readTimeout = setTimeout(

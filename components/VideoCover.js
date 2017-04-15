@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 
 import {css} from 'glamor'
 import VideoPlayer from './VideoPlayer'
+import {scrollIt} from '../lib/utils/scroll'
+import {HEADER_HEIGHT} from './Frame/constants'
 
 import {
   Logo, Container, CONTENT_PADDING as CONTAINER_PADDING
@@ -43,12 +45,26 @@ class VideoCover extends Component {
           </div>
         </Container>
         <VideoPlayer src={src}
-          onPlay={() => this.setState(() => ({
-            playing: true
-          }))}
-          onPause={() => this.setState(() => ({
-            playing: false
-          }))}
+          onPlay={() => {
+            this.setState(() => ({
+              playing: true
+            }))
+          }}
+          onPause={() => {
+            this.ended = false
+            this.setState(() => ({
+              playing: false
+            }))
+          }}
+          onProgress={(progress) => {
+            if (progress > 0.96 && !this.ended) {
+              this.ended = true
+              scrollIt(
+                (window.innerHeight * 0.8) - HEADER_HEIGHT - 40,
+                800
+              )
+            }
+          }}
           style={{
             maxHeight: '80vh'
           }} />
