@@ -105,12 +105,14 @@ class VideoPlayer extends Component {
         playing: true
       }))
       this.syncProgress()
+      this.props.onPlay && this.props.onPlay()
     }
     this.onPause = () => {
       this.setState(() => ({
         playing: false
       }))
       clearTimeout(this.readTimeout)
+      this.props.onPause && this.props.onPause()
     }
     this.scrubRef = ref => { this.scrubber = ref }
     this.scrub = (event) => {
@@ -191,6 +193,7 @@ class VideoPlayer extends Component {
     return (
       <div {...styles.wrapper}>
         <video {...styles.video}
+          style={this.props.style}
           muted={muted}
           ref={this.ref}
           poster={src.poster}>

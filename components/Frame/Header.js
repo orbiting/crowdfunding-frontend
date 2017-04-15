@@ -102,7 +102,7 @@ class Header extends Component {
 
     this.state = {
       opaque: !this.props.cover,
-      mobile: true,
+      mobile: false,
       expanded: false
     }
 
@@ -145,10 +145,7 @@ class Header extends Component {
       ? merge(styles.bar, styles.barOpaque)
       : styles.bar
 
-    let logoHeight = opaque ? 30 : 45
-    if (mobile) {
-      logoHeight = 18
-    }
+    const logoHeight = mobile ? 18 : 30
 
     const menuItems = [
       {
@@ -173,9 +170,13 @@ class Header extends Component {
       <div>
         <div {...barStyle}>
           <Container style={{position: 'relative'}}>
-            <Link href='/'>
-              <a {...styles.logo}><Logo height={logoHeight} /></a>
-            </Link>
+            {opaque && (
+              <Link href='/'>
+                <a {...styles.logo}>
+                  <Logo height={logoHeight} />
+                </a>
+              </Link>
+            )}
             <div {...styles.menu}>
               {(mobile || opaque) && <Menu expanded={expanded}
                 id='primary-menu' items={menuItems}>
