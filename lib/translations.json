@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-14T23:47:21.694Z",
+  "updated": "2017-04-15T14:26:47.363Z",
   "title": "live",
   "data": [
     {
@@ -624,6 +624,26 @@
       "value": "Vielen Dank!"
     },
     {
+      "key": "api/remindeme/mail/subject",
+      "value": "Erinnerung REPUBLIK crowdfunding"
+    },
+    {
+      "key": "api/remindeme/successMessage",
+      "value": "Wir werden Sie erinnern"
+    },
+    {
+      "key": "api/newsletter/invalidRequest",
+      "value": "Ungültige Anfrage"
+    },
+    {
+      "key": "api/newsletter/alreadySubscribed",
+      "value": "Sie sind bereits eingetragen"
+    },
+    {
+      "key": "api/newsletter/subscriptionFailed",
+      "value": "Anmeldung fehlgeschlagen"
+    },
+    {
       "key": "footer/contact/title",
       "value": "Kontakt"
     },
@@ -702,6 +722,14 @@
     {
       "key": "pledge/submit/paymentslip/paperInvoice",
       "value": "Rechnung per Post"
+    },
+    {
+      "key": "newsletter/title",
+      "value": "Newsletter"
+    },
+    {
+      "key": "newsletter/defaultMessage",
+      "value": "Welcome aboard!"
     }
   ]
 }

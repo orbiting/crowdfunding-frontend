@@ -1,38 +1,25 @@
 import React from 'react'
-import {css} from 'glamor'
 import Head from 'next/head'
+import withData from '../../lib/withData'
+import withT from '../../lib/withT'
+import Frame from '../../components/Frame'
 
 import {
-  NarrowContainer, Logo, mediaQueries
+  H1, P
 } from '@project-r/styleguide'
 
-const styles = {
-  logoContainer: css({
-    textAlign: 'center',
-    paddingTop: 25,
-    [mediaQueries.mUp]: {
-      paddingTop: 20 * 2
-    }
-  }),
-  welcomeMessage: css({
-    textAlign: 'center'
-  })
-}
-
-export default ({url}) => (
-  <div>
+export default withData(withT(({url, t}) => (
+  <Frame url={url}>
     <Head>
       <title>Republik Newsletter</title>
     </Head>
-    <NarrowContainer>
-      <div {...styles.logoContainer}>
-        <Logo />
-      </div>
-      <h2 {...styles.welcomeMessage}>
-        {url.query.message
-          ? url.query.message
-          : 'Welcome aboard!'}
-      </h2>
-    </NarrowContainer>
-  </div>
-)
+    <H1>
+      {t('newsletter/title')}
+    </H1>
+    <P>
+      {url.query.message
+        ? url.query.message
+        : t('newsletter/defaultMessage')}
+    </P>
+  </Frame>
+)))
