@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {css} from 'glamor'
+import Head from 'next/head'
 
 import 'glamor/reset'
 import Header from './Header'
@@ -59,15 +60,26 @@ class Frame extends Component {
     }
   }
   render () {
-    const {children, cover, sidebar, url} = this.props
+    const {children, cover, sidebar, url, meta} = this.props
     const {sticky} = this.state
 
     const sidebarAdditionalStyle = url.pathname !== '/'
       ? styles.hideOnMobile
       : {}
 
+    let metaTags = null
+    if (meta) {
+      const title = meta.pageTitle || `${meta.title} — Republik`
+      metaTags = (
+        <Head>
+          <title>{title}</title>
+        </Head>
+      )
+    }
+
     return (
       <div {...styles.container}>
+        {metaTags}
         <div {...styles.bodyGrower} className={!cover ? styles.coverless : undefined}>
           <Header url={url} cover={cover} sticky={sticky} sidebar={sidebar} />
           {sidebar ? (
