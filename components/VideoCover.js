@@ -161,7 +161,12 @@ class VideoCover extends Component {
             }))
           }}
           onProgress={(progress) => {
-            if (progress > 0.95 && !ended && videoHeight) {
+            if (
+              progress > 0.95 &&
+              !ended &&
+              videoHeight &&
+              !(this.player && this.player.scrubbing)
+            ) {
               this.setState(() => ({ended: true}), () => {
                 const topFixed = mobile
                   ? HEADER_HEIGHT_MOBILE + MENUBAR_HEIGHT
