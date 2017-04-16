@@ -25,8 +25,14 @@ exports.config = {
 
   // Sauce Labs platform configurator
   // https://docs.saucelabs.com/reference/platforms-configurator
-  capabilities: [{
+  capabilities: SAUCE ? [{
     maxInstances: 5,
+    browserName: 'firefox'
+  }, {
+    browserName: 'internet explorer',
+    platform: 'Windows 7',
+    version: '11.0'
+  }] : [{
     browserName: 'firefox'
   }],
   sync: true,
@@ -53,7 +59,7 @@ exports.config = {
   // Options to be passed to Jasmine.
   jasmineNodeOpts: {
     // Jasmine default timeout
-    defaultTimeoutInterval: 60000,
+    defaultTimeoutInterval: 120000,
     // The Jasmine framework allows interception of each assertion in order to log the state of the application
     // or website depending on the result. For example, it is pretty handy to take a screenshot every time
     // an assertion fails.
