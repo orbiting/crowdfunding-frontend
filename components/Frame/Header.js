@@ -23,7 +23,7 @@ import {
 
 const styles = {
   bar: css({
-    zIndex: 10,
+    zIndex: 20, // goes over footer
     position: 'fixed',
     '@media print': {
       position: 'absolute'
@@ -178,7 +178,15 @@ class Header extends Component {
             {opaque && (
               <Link href='/'>
                 <a {...styles.logo}>
-                  <Logo height={logoHeight} />
+                  <span onClick={(e) => {
+                    if (mobile && expanded) {
+                      e.stopPropagation()
+                      e.preventDefault()
+                      this.setState({expanded: false})
+                    }
+                  }}>
+                    <Logo height={logoHeight} />
+                  </span>
                 </a>
               </Link>
             )}
@@ -207,7 +215,9 @@ class Header extends Component {
           </Container>
         </div>
         {opaque && <div {...styles.menuBar} onClick={() => this.setState({expanded: !expanded})}>
-          <div {...styles.menuBarText}>{url.pathname}</div>
+          <div {...styles.menuBarText}>
+            {t(`menu${url.pathname}`, {}, url.pathname)}
+          </div>
           <Toggle expanded={expanded} id='primary-menu'
             onClick={() => this.setState({expanded: !expanded})} />
         </div>}
