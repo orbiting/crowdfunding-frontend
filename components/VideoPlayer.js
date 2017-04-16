@@ -30,7 +30,7 @@ const styles = {
       display: 'none !important'
     }
   }),
-  play: css({
+  controls: css({
     position: 'absolute',
     top: 0,
     left: 0,
@@ -40,13 +40,14 @@ const styles = {
     cursor: 'pointer',
     transition: 'opacity 200ms'
   }),
-  center: css({
+  play: css({
     position: 'absolute',
     top: '50%',
     left: '5%',
     right: '5%',
     marginTop: -18,
-    textAlign: 'center'
+    textAlign: 'center',
+    transition: 'opacity 200ms'
   }),
   progress: css({
     position: 'absolute',
@@ -57,12 +58,13 @@ const styles = {
   }),
   volume: css({
     position: 'absolute',
-    zIndex: 1,
+    zIndex: 6,
     right: 10,
     bottom: 10,
     cursor: 'pointer'
   }),
   scrub: css({
+    zIndex: 3,
     position: 'absolute',
     height: '10%',
     bottom: -PROGRESS_HEIGHT,
@@ -193,8 +195,9 @@ class VideoPlayer extends Component {
     this.video.removeEventListener('pause', this.onPause)
   }
   render () {
-    const {src} = this.props
+    const {src, hidePlay} = this.props
     const {playing, progress, muted} = this.state
+
     return (
       <div {...styles.wrapper}>
         <video {...styles.video}
@@ -205,10 +208,12 @@ class VideoPlayer extends Component {
           <source src={src.hls} type='application/x-mpegURL' />
           <source src={src.mp4} type='video/mp4' />
         </video>
-        <div {...styles.play}
+        <div {...styles.controls}
           style={{opacity: playing ? 0 : 1}}
           onClick={() => this.toggle()}>
-          <div {...styles.center}>
+          <div {...styles.play} style={{
+            opacity: (hidePlay || playing) ? 0 : 1
+          }}>
             <Play />
           </div>
           <div {...styles.volume} onClick={(e) => {
@@ -232,4 +237,9 @@ class VideoPlayer extends Component {
     )
   }
 }
+
+VideoPlayer.defaultProps = {
+  hidePlay: false
+}
+
 export default VideoPlayer

@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 
 import {css} from 'glamor'
 import VideoPlayer from './VideoPlayer'
+import Play from './Icons/Play'
+
 import {scrollIt} from '../lib/utils/scroll'
 import {
   HEADER_HEIGHT,
@@ -15,6 +17,14 @@ import {
   mediaQueries
 } from '@project-r/styleguide'
 
+const blinkBg = css.keyframes({
+  'from, to': {
+    backgroundColor: 'transparent'
+  },
+  '50%': {
+    backgroundColor: 'white'
+  }
+})
 const styles = {
   wrapper: css({
     position: 'relative',
@@ -26,9 +36,36 @@ const styles = {
     position: 'absolute',
     top: 20,
     left: CONTAINER_PADDING,
-    zIndex: 1,
+    zIndex: 2,
     width: '30%',
     transition: 'opacity 200ms'
+  }),
+  cover: css({
+    position: 'absolute',
+    cursor: 'pointer',
+    zIndex: 1,
+    left: 0,
+    top: 0
+  }),
+  poster: css({
+    width: '100%',
+    height: '56.25vw'
+  }),
+  cursor: css({
+    position: 'absolute',
+    top: '39.5%',
+    left: '65.6%',
+    height: '11%',
+    width: '0.3%',
+    minWidth: 1,
+    animation: `1s ${blinkBg} step-end infinite`
+  }),
+  play: css({
+    position: 'absolute',
+    top: '60%',
+    left: '5%',
+    right: '5%',
+    textAlign: 'center'
   })
 }
 
@@ -37,7 +74,8 @@ class VideoCover extends Component {
     super(props)
 
     this.state = {
-      playing: false
+      playing: false,
+      cover: true
     }
     this.measure = () => {
       this.setState(() => {
@@ -51,6 +89,7 @@ class VideoCover extends Component {
         }
       })
     }
+    this.ref = ref => { this.player = ref }
   }
   componentDidMount () {
     window.addEventListener('resize', this.measure)
@@ -64,7 +103,7 @@ class VideoCover extends Component {
     const {
       playing, ended,
       videoHeight, windowHeight,
-      mobile
+      mobile, cover
     } = this.state
 
     const limitedHeight = (!playing || !videoHeight)
@@ -80,7 +119,24 @@ class VideoCover extends Component {
             <Logo fill='#fff' />
           </div>
         </Container>
-        <VideoPlayer src={src}
+        <div {...styles.cover}
+          style={{opacity: cover ? 1 : 0}}
+          onClick={() => {
+            this.setState(() => {
+              this.player.toggle()
+              return {
+                cover: false
+              }
+            })
+          }}>
+          <img src={src.poster} {...styles.poster} style={heightStyle} />
+          <div {...styles.cursor} />
+          <div {...styles.play}>
+            <Play />
+          </div>
+        </div>
+        <VideoPlayer ref={this.ref} src={src}
+          hidePlay={cover}
           onPlay={() => {
             this.setState(() => ({
               playing: true
@@ -103,6 +159,9 @@ class VideoCover extends Component {
                   800
                 )
               })
+            }
+            if (progress > 0.999 && !cover) {
+              this.setState(() => ({cover: true}))
             }
           }}
           style={heightStyle} />
