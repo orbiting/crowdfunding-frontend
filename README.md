@@ -34,6 +34,9 @@ STRIPE_PUBLISHABLE_KEY=
 PF_PSPID=
 PF_INPUT_SECRET=
 PF_FORM_ACTION=https://e-payment.postfinance.ch/ncol/test/orderstandard.asp
+
+PAYPAL_FORM_ACTION=https://www.sandbox.paypal.com/cgi-bin/webscr
+PAYPAL_BUSINESS=
 ```
 
 #### Basic Auth
