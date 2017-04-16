@@ -3,6 +3,7 @@ import {css} from 'glamor'
 
 import {HEADER_HEIGHT} from './Frame/constants'
 import Spinner from './Spinner'
+import {errorToString} from '../lib/utils/errors'
 
 import {
   P
@@ -56,7 +57,7 @@ class Loader extends Component {
     } else if (error) {
       return (
         <Spacer width={width} height={height}>
-          {error.toString()}
+          {errorToString(error)}
         </Spacer>
       )
     }
