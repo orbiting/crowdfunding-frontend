@@ -179,9 +179,7 @@ class Header extends Component {
               <Link href='/'>
                 <a {...styles.logo}>
                   <span onClick={(e) => {
-                    if (mobile && expanded) {
-                      e.stopPropagation()
-                      e.preventDefault()
+                    if (mobile && expanded && url.pathname === '/') {
                       this.setState({expanded: false})
                     }
                   }}>
