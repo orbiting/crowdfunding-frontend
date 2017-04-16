@@ -15,7 +15,7 @@ export NPM_TOKEN="00000000-0000-0000-0000-000000000000"
 You can use a git-excluded `.env` file in development:
 
 ```
-PORT=3003
+PORT=3000
 API_BASE_URL=http://localhost:3001
 API_AUTHORIZATION_HEADER=
 ```
@@ -27,7 +27,7 @@ API_AUTHORIZATION_HEADER=
 Payment provider configuration can be passed in via the environment. `PUBLIC_BASE_URL` is used for PostFinance and PayPal return urls.
 
 ```
-PUBLIC_BASE_URL=http://localhost:3003
+PUBLIC_BASE_URL=http://localhost:3000
 
 STRIPE_PUBLISHABLE_KEY=
 

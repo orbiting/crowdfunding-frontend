@@ -25,14 +25,28 @@ exports.config = {
 
   // Sauce Labs platform configurator
   // https://docs.saucelabs.com/reference/platforms-configurator
-  capabilities: SAUCE ? [{
-    maxInstances: 5,
-    browserName: 'firefox'
-  }, {
-    browserName: 'internet explorer',
-    platform: 'Windows 7',
-    version: '11.0'
-  }] : [{
+  capabilities: SAUCE ? [
+    {
+      browserName: 'firefox',
+      platform: 'Windows 8',
+      version: '45.0'
+    },
+    {
+      browserName: 'internet explorer',
+      platform: 'Windows 7',
+      version: '11.0'
+    },
+    {
+      browserName: 'safari',
+      platform: 'macOS 10.12',
+      version: '10.0'
+    },
+    {
+      browserName: 'chrome',
+      platform: 'Windows 10',
+      version: '45.0'
+    }
+  ] : [{
     browserName: 'firefox'
   }],
   sync: true,
@@ -44,7 +58,7 @@ exports.config = {
   screenshotPath: './test/errorShots/',
 
   // Urls starting with "/" will be prepended.
-  baseUrl: 'http://localhost:3003',
+  baseUrl: 'http://localhost:3000',
   waitforTimeout: 10000,
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
