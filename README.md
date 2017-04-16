@@ -20,7 +20,7 @@ API_BASE_URL=http://localhost:3001
 API_AUTHORIZATION_HEADER=
 ```
 
-`API_BASE_URL` defaults to `https://api.satellit.io`. If the API is HTTP basic-auth protected, you can generate a basic authorization header with ``Basic ${(new Buffer('user:password')).toString('base64')}`` in Node.js and use it with `API_AUTHORIZATION_HEADER`.
+`API_BASE_URL` defaults to `https://api.satellit.online`. If the API is HTTP basic-auth protected, you can generate a basic authorization header with ``Basic ${(new Buffer('user:password')).toString('base64')}`` in Node.js and use it with `API_AUTHORIZATION_HEADER`.
 
 #### Payment
 
