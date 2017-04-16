@@ -52,3 +52,34 @@ BASIC_AUTH_REALM=
 npm install
 npm run dev
 ```
+
+### Testing
+
+We use [webdriver.io](http://webdriver.io/) and utilize [saucelabs.com](https://saucelabs.com/) VM arsenal for end to end testing.
+
+You will need following environment variables (`.env` supported):
+
+```
+SAUCE_USERNAME=
+SAUCE_ACCESS_KEY=
+```
+
+```
+npm run test
+```
+
+This will start a [Sauce Connect Proxy](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy+FAQS), make sure to allow incomming connections to it.
+
+#### Local
+
+To run the tests locally you will need a [running selenium standalone server](http://webdriver.io/guide.html).
+
+```
+LOCAL=1 npm run test
+```
+
+Run a [webdriver.io repl](http://webdriver.io/guide/usage/repl.html):
+
+```
+$(npm bin)/wdio repl 
+```
