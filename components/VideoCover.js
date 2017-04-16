@@ -54,7 +54,8 @@ const styles = {
   maxWidth: css({
     position: 'relative',
     margin: '0 auto',
-    maxWidth: `${MAX_HEIGHT_VH * (16 / 9)}vh`
+    maxWidth: `${MAX_HEIGHT_VH * (16 / 9)}vh`,
+    overflow: 'hidden'
   }),
   poster: css({
     width: 'auto',
