@@ -25,10 +25,13 @@ const blinkBg = css.keyframes({
     backgroundColor: 'white'
   }
 })
+
+const MAX_HEIGHT_VH = 80
+
 const styles = {
   wrapper: css({
     position: 'relative',
-    height: '56.25vw',
+    height: `${(9 / 16) * 100}vw`,
     backgroundColor: '#000',
     transition: 'height 200ms'
   }),
@@ -45,11 +48,17 @@ const styles = {
     cursor: 'pointer',
     zIndex: 1,
     left: 0,
-    top: 0
+    top: 0,
+    right: 0
+  }),
+  maxWidth: css({
+    position: 'relative',
+    margin: '0 auto',
+    maxWidth: `${MAX_HEIGHT_VH * (16 / 9)}vh`
   }),
   poster: css({
-    width: '100%',
-    height: '56.25vw'
+    width: 'auto',
+    height: `${(9 / 16) * 100}vw`
   }),
   cursor: css({
     position: 'absolute',
@@ -58,6 +67,7 @@ const styles = {
     height: '11%',
     width: '0.3%',
     minWidth: 1,
+    maxWidth: 2,
     animation: `1s ${blinkBg} step-end infinite`
   }),
   play: css({
@@ -81,7 +91,7 @@ class VideoCover extends Component {
       this.setState(() => {
         const windowWidth = window.innerWidth
         const windowHeight = window.innerHeight
-        let videoHeight = windowWidth * 0.5625
+        let videoHeight = windowWidth * (9 / 16)
         return {
           mobile: windowWidth < mediaQueries.mBreakPoint,
           windowHeight,
@@ -109,7 +119,7 @@ class VideoCover extends Component {
     const limitedHeight = (!playing || !videoHeight)
     const heightStyle = {
       height: playing && !ended ? windowHeight : videoHeight,
-      maxHeight: limitedHeight ? '80vh' : undefined
+      maxHeight: limitedHeight ? `${MAX_HEIGHT_VH}vh` : undefined
     }
     return (
       <div {...styles.wrapper} style={heightStyle}>
@@ -129,10 +139,12 @@ class VideoCover extends Component {
               }
             })
           }}>
-          <img src={src.poster} {...styles.poster} style={heightStyle} />
-          <div {...styles.cursor} />
-          <div {...styles.play}>
-            <Play />
+          <div {...styles.maxWidth}>
+            <img src={src.poster} {...styles.poster} style={heightStyle} />
+            <div {...styles.cursor} />
+            <div {...styles.play}>
+              <Play />
+            </div>
           </div>
         </div>
         <VideoPlayer ref={this.ref} src={src}
