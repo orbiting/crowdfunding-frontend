@@ -3,7 +3,7 @@ const next = require('next')
 const basicAuth = require('express-basic-auth')
 
 const DEV = process.env.NODE_ENV && process.env.NODE_ENV !== 'production'
-if (DEV) {
+if (DEV || process.env.DOTENV) {
   require('dotenv').config()
 }
 
