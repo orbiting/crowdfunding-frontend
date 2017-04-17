@@ -28,6 +28,15 @@ export default class MyDocument extends Document {
           <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
           <style dangerouslySetInnerHTML={{ __html: fontFaces() }} />
           {css ? <style dangerouslySetInnerHTML={{ __html: css }} /> : null}
+          <meta name='author' content='Republik' />
+          <link rel='apple-touch-icon' sizes='180x180' href='/static/apple-touch-icon.png' />
+          <link rel='icon' type='image/png' href='/static/favicon-32x32.png' sizes='32x32' />
+          <link rel='icon' type='image/png' href='/static/favicon-16x16.png' sizes='16x16' />
+          <link rel='manifest' href='/static/manifest.json' />
+          <link rel='mask-icon' href='/static/safari-pinned-tab.svg' color='#000000' />
+          <link rel='shortcut icon' href='/static/favicon.ico' />
+          <meta name='msapplication-config' content='/static/browserconfig.xml' />
+          <meta name='theme-color' content='#000000' />
         </Head>
         <body>
           <Main />
