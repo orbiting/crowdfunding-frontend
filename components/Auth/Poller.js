@@ -13,16 +13,33 @@ class Status extends Component {
   componentDidMount () {
     this.props.data.startPolling(1000)
   }
+  componentDidUpdate () {
+    const {me, onSuccess} = this.props
+    if (me) {
+      const now = new Date()
+      const elapsedMs = now.getTime() - this.state.start.getTime()
+      this.props.data.stopPolling()
+
+      onSuccess && onSuccess(me, elapsedMs)
+    }
+  }
+  componentWillUnmount () {
+    // refetch everything with user context
+    const client = this.props.client
+    // nextTick to avoid in-flight queries
+    setTimeout(
+      () => {
+        client.resetStore()
+      },
+      0
+    )
+  }
   render () {
     const now = new Date()
     const elapsedMs = now.getTime() - this.state.start.getTime()
 
-    const {onSuccess, data: {error, me, stopPolling}, client} = this.props
+    const {data: {error, me}} = this.props
     if (me) {
-      stopPolling()
-      // refetch everything with user context
-      client.resetStore()
-      onSuccess(me, elapsedMs)
       return null
     }
 
@@ -36,7 +53,7 @@ class Status extends Component {
 }
 
 Status.propTypes = {
-  onSuccess: PropTypes.func.isRequired
+  onSuccess: PropTypes.func
 }
 
 export default compose(
