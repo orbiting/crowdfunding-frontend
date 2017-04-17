@@ -126,6 +126,7 @@ class Submit extends Component {
       this.props.signOut().then(() => {
         this.submitPledge()
       })
+      return
     }
 
     const hash = simpleHash(variables)
