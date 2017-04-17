@@ -49,6 +49,15 @@ BASIC_AUTH_PASS=
 BASIC_AUTH_REALM=
 ```
 
+#### Piwik
+
+Defaults to track on the listed site, can be overwritten:
+
+```
+PIWIK_URL_BASE=https://piwik.project-r.construction
+PIWIK_SITE_ID=2
+```
+
 ### Install and Run
 
 ```bash

@@ -20,7 +20,11 @@ export default class MyDocument extends Document {
     }
   }
   render () {
-    const {css} = this.props
+    const {css, env} = this.props
+    const piwik = (
+      !!env.PIWIK_URL_BASE &&
+      !!env.PIWIK_SITE_ID
+    )
     return (
       <html>
         <Head>
@@ -42,6 +46,19 @@ export default class MyDocument extends Document {
           <Main />
           <script src='https://js.stripe.com/v2/' />
           <NextScript />
+          {piwik && <script dangerouslySetInnerHTML={{__html: `
+            var _paq = _paq || [];
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+              _paq.push(['setTrackerUrl', '${env.PIWIK_URL_BASE}/piwik.php']);
+              _paq.push(['setSiteId', '${env.PIWIK_SITE_ID}']);
+              var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+              g.type='text/javascript'; g.async=true; g.defer=true; g.src='${env.PIWIK_URL_BASE}/piwik.js'; s.parentNode.insertBefore(g,s);
+            })();`}} />}
+          {piwik && <noscript>
+            <img src={`${env.PIWIK_URL_BASE}/piwik.php?idsite=${env.PIWIK_SITE_ID}&rec=1`} style={{border: 0}} alt='' />
+          </noscript>}
         </body>
       </html>
     )
