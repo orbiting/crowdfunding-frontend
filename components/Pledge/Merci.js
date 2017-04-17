@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {compose} from 'redux'
 import {gql, graphql} from 'react-apollo'
 import Router from 'next/router'
+import Link from 'next/link'
 import {css, merge} from 'glamor'
 
 import withT from '../../lib/withT'
@@ -16,6 +17,7 @@ import SignIn from '../Auth/SignIn'
 import Loader from '../Loader'
 import Share from '../Share'
 import UpdateMe from '../Me/Update'
+import ClaimPledge from './Claim'
 
 import {
   PUBLIC_BASE_URL
@@ -23,7 +25,7 @@ import {
 
 import {
   H1, P, Button, Lead,
-  H2, Label, A,
+  H2, Label, A, linkRule,
   colors
 } from '@project-r/styleguide'
 
@@ -99,6 +101,11 @@ query myPledges {
 class Merci extends Component {
   render () {
     const {me, t, url: {query}} = this.props
+    if (query.claim) {
+      return (
+        <ClaimPledge t={t} me={me} id={query.claim} />
+      )
+    }
     if (!me) {
       if (query.email && query.phrase) {
         return (
@@ -108,6 +115,16 @@ class Merci extends Component {
               phrase: query.phrase
             })}<br />
             <Poller />
+            {!!query.id && (
+              <Link href={{
+                pathname: '/merci',
+                query: {
+                  claim: query.id
+                }
+              }}>
+                <a {...linkRule}><br /><br />{t('merci/postpay/reclaim')}</a>
+              </Link>
+            )}
           </P>
         )
       }
