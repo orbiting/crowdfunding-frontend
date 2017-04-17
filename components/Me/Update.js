@@ -164,7 +164,6 @@ class Update extends Component {
             <div>
               <H2>{t('merci/updateMe/title')}</H2>
               <AddressForm
-                key={isEditing ? 'address-edit' : 'address-check'}
                 values={values}
                 errors={errors}
                 dirty={dirty}
@@ -172,7 +171,6 @@ class Update extends Component {
                   this.setState(mergeFields(fields))
                 }} />
               <FieldSet
-                key={isEditing ? 'birthday-edit' : 'birthday-check'}
                 values={values}
                 errors={errors}
                 dirty={dirty}

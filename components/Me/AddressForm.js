@@ -60,7 +60,7 @@ export const fields = (t) => [
         t('me/addressForm/country/error/empty')
       )
     ),
-    autocomplete: COUNTRIES
+    suggestions: COUNTRIES
   }
 ]
 

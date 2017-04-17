@@ -99,6 +99,26 @@ class Submit extends Component {
   }
   submitPledge () {
     const {t, me} = this.props
+    const errorMessages = this.getErrorMessages()
+
+    if (errorMessages.length) {
+      this.props.onError()
+      this.setState((state) => {
+        const dirty = {
+          ...state.dirty
+        }
+        Object.keys(state.errors).forEach(field => {
+          if (state.errors[field]) {
+            dirty[field] = true
+          }
+        })
+        return {
+          dirty,
+          showErrors: true
+        }
+      })
+      return
+    }
 
     const variables = this.submitVariables(this.props)
     if (me && me.email !== variables.user.email) {
@@ -329,6 +349,15 @@ class Submit extends Component {
       })
     })
   }
+  getErrorMessages () {
+    const {paymentMethod} = this.state
+    const {t} = this.props
+
+    return objectValues(this.props.errors)
+      .concat(objectValues(this.state.errors))
+      .concat(!paymentMethod && t('pledge/submit/payMethod/error'))
+      .filter(Boolean)
+  }
   render () {
     const {
       emailVerify,
@@ -340,10 +369,7 @@ class Submit extends Component {
     } = this.state
     const {me, user, t} = this.props
 
-    const errors = objectValues(this.props.errors)
-      .concat(objectValues(this.state.errors))
-      .concat(!paymentMethod && t('pledge/submit/payMethod/error'))
-      .filter(Boolean)
+    const errorMessages = this.getErrorMessages()
 
     return (
       <div>
@@ -409,7 +435,9 @@ class Submit extends Component {
           </div>
         )}
         {(paymentMethod === 'STRIPE') && (
-          <div>
+          <from method='post' onSubmit={(e) => {
+            e.preventDefault()
+          }}>
             <FieldSet
               values={this.state.values}
               errors={this.state.errors}
@@ -418,6 +446,7 @@ class Submit extends Component {
                 {
                   label: t('pledge/submit/stripe/card/label'),
                   name: 'cardNumber',
+                  autoComplete: 'cc-number',
                   mask: '1111 1111 1111 1111',
                   validator: (value) => (
                     (
@@ -431,15 +460,18 @@ class Submit extends Component {
                 },
                 {
                   label: t('pledge/submit/stripe/month/label'),
-                  name: 'cardMonth'
+                  name: 'cardMonth',
+                  autoComplete: 'cc-exp-month'
                 },
                 {
                   label: t('pledge/submit/stripe/year/label'),
-                  name: 'cardYear'
+                  name: 'cardYear',
+                  autoComplete: 'cc-exp-year'
                 },
                 {
                   label: t('pledge/submit/stripe/cvc/label'),
                   name: 'cardCVC',
+                  autoComplete: 'cc-csc',
                   validator: (value) => (
                     (
                       !value &&
@@ -479,7 +511,7 @@ class Submit extends Component {
                 })
               }} />
             <br /><br />
-          </div>
+          </from>
         )}
         {(paymentMethod === 'POSTFINANCECARD') && (
           <form ref={this.postFinanceFormRef} method='post' action={PF_FORM_ACTION}>
@@ -542,38 +574,20 @@ class Submit extends Component {
           </div>
         ) : (
           <div>
-            {!!this.state.showErrors && errors.length > 0 && (
+            {!!this.state.showErrors && errorMessages.length > 0 && (
               <div style={{color: colors.error, marginBottom: 40}}>
                 {t('pledge/submit/error/title')}<br />
                 <ul>
-                  {errors.map((error, i) => (
+                  {errorMessages.map((error, i) => (
                     <li key={i}>{error}</li>
                   ))}
                 </ul>
               </div>
             )}
-            <div style={{opacity: errors.length ? 0.5 : 1}}>
+            <div style={{opacity: errorMessages.length ? 0.5 : 1}}>
               <Button
                 onClick={() => {
-                  if (errors.length) {
-                    this.props.onError()
-                    this.setState((state) => {
-                      const dirty = {
-                        ...state.dirty
-                      }
-                      Object.keys(state.errors).forEach(field => {
-                        if (state.errors[field]) {
-                          dirty[field] = true
-                        }
-                      })
-                      return {
-                        dirty,
-                        showErrors: true
-                      }
-                    })
-                  } else {
-                    this.submitPledge()
-                  }
+                  this.submitPledge()
                 }}>
                 {t('pledge/submit/button/pay')}
               </Button>
