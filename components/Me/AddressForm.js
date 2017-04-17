@@ -59,8 +59,7 @@ export const fields = (t) => [
         !value &&
         t('me/addressForm/country/error/empty')
       )
-    ),
-    suggestions: COUNTRIES
+    )
   }
 ]
 
