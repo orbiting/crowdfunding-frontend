@@ -252,7 +252,7 @@ const mutation = gql`mutation updateMe($user: UserInput!, $address: AddressInput
     id
   }
 }`
-const query = gql`query myAddress {
+export const query = gql`query myAddress {
   me {
     id
     name
@@ -284,7 +284,7 @@ export default compose(
     props: ({data}) => ({
       loading: data.loading,
       error: data.error,
-      me: data.me
+      me: data.loading ? undefined : data.me
     })
   }),
   withT
