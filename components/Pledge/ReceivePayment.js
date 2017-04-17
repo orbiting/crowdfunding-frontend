@@ -9,7 +9,7 @@ import {compose} from 'redux'
 
 import {withPay} from './Submit'
 import PledgeForm from './Form'
-import {gotoMerci} from './merci'
+import {gotoMerci} from './Merci'
 import {
   STRIPE_PUBLISHABLE_KEY
 } from '../../constants'

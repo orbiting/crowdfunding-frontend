@@ -13,7 +13,7 @@ import {meQuery} from '../../lib/withMe'
 import * as postfinance from './postfinance'
 import * as paypal from './paypal'
 import AddressForm, {COUNTRIES} from '../Me/AddressForm'
-import {gotoMerci} from './merci'
+import {gotoMerci} from './Merci'
 
 import {
   PUBLIC_BASE_URL,

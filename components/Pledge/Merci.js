@@ -19,7 +19,7 @@ import UpdateMe from '../Me/Update'
 
 import {
   PUBLIC_BASE_URL
-} from '../constants'
+} from '../../constants'
 
 import {
   H1, P, Button, Lead,
