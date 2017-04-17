@@ -16,6 +16,16 @@ app.prepare()
 .then(() => {
   const server = express()
 
+  if (!DEV) {
+    server.enable('trust proxy')
+    server.use((req, res, next) => {
+      if (`${req.protocol}://${req.get('Host')}` !== process.env.PUBLIC_BASE_URL) {
+        return res.redirect(process.env.PUBLIC_BASE_URL + req.url)
+      }
+      return next()
+    })
+  }
+
   if (process.env.BASIC_AUTH_PASS) {
     server.use(basicAuth({
       users: { [process.env.BASIC_AUTH_USER]: process.env.BASIC_AUTH_PASS },
