@@ -54,8 +54,8 @@ const styles = {
   })
 }
 
-const pledgesQuery = gql`
-query pledges {
+export const pledgesQuery = gql`
+query myPledges {
   me {
     id
     pledges {

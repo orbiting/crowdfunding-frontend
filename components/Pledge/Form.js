@@ -20,6 +20,7 @@ import {
 import Accordion from './Accordion'
 import Submit from './Submit'
 import CustomizePackage from './CustomizePackage'
+import {pledgesQuery} from './Merci'
 
 class Pledge extends Component {
   constructor (props) {
@@ -299,17 +300,6 @@ const query = gql`
   }
 }
 `
-const pledgeCountQuery = gql`
-query pledgeCount {
-  me {
-    id
-    pledges {
-      id
-      status
-    }
-  }
-}
-`
 
 const PledgeWithQueries = compose(
   graphql(query, {
@@ -321,12 +311,18 @@ const PledgeWithQueries = compose(
       }
     }
   }),
-  graphql(pledgeCountQuery, {
+  graphql(pledgesQuery, {
     props: ({ data }) => {
       return {
-        pastPledges: data.me
-          ? data.me.pledges.filter(pledge => pledge.status !== 'DRAFT')
-          : []
+        pastPledges: (
+          (
+            !data.loading &&
+            !data.error &&
+            data.me &&
+            data.me.pledges &&
+            data.me.pledges.filter(pledge => pledge.status !== 'DRAFT')
+          ) || []
+        )
       }
     }
   }),
