@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-16T23:10:03.936Z",
+  "updated": "2017-04-17T22:34:56.227Z",
   "title": "live",
   "data": [
     {
@@ -130,6 +130,22 @@
     {
       "key": "merci/postpay/waiting",
       "value": "Wir haben Ihnen an «{email}» ein Bestätigunsemail mit den Wörtern «{phrase}» geschickt. Bitte klicken Sie auf den darin enthaltenen Link."
+    },
+    {
+      "key": "merci/postpay/reclaim",
+      "value": "Falsche Email-Adresse?"
+    },
+    {
+      "key": "merci/claim/signIn/before",
+      "value": "Geben Sie ihre richtige Email-Addresse ein:"
+    },
+    {
+      "key": "merci/claim/signIn/button",
+      "value": "ändern"
+    },
+    {
+      "key": "merci/claim/loading",
+      "value": "überprüfen"
     },
     {
       "key": "merci/signedOut/title",
@@ -270,6 +286,18 @@
     {
       "key": "signIn/success",
       "value": "Erfolgreich eingeloggt als {nameOrEmail} ({seconds}s)"
+    },
+    {
+      "key": "signIn/polling",
+      "value": "Wir haben Ihnen an «{email}» ein Bestätigunsemail mit den Wörtern «{phrase}» geschickt. Bitte klicken Sie auf den darin enthaltenen Link."
+    },
+    {
+      "key": "signIn/email/error/empty",
+      "value": "E-Mail fehlt"
+    },
+    {
+      "key": "signIn/email/error/invalid",
+      "value": "E-Mail ungültig"
     },
     {
       "key": "signIn/loading",
@@ -534,6 +562,14 @@
     {
       "key": "pledge/3dsecure/redirect/failed",
       "value": "3-D Secure ihrer Bank ist nicht verfügbar. Versuchen Sie es mit einem anderen Zahlungsmittel."
+    },
+    {
+      "key": "api/auth/success",
+      "value": "Signin erfolgreich, Sie können dieses Fenster wieder schliessen."
+    },
+    {
+      "key": "api/auth/error",
+      "value": "Token ungültig. Bitte versuchen Sie das mit der Anmeldung erneut."
     },
     {
       "key": "api/email/invalid",

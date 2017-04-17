@@ -3,10 +3,12 @@ import {gql, graphql} from 'react-apollo'
 import {css} from 'glamor'
 import {compose} from 'redux'
 import withT from '../../lib/withT'
-import {errorToString} from '../../lib/utils/errors'
+import {validate as isEmail} from 'email-validator'
+import ErrorMessage from '../ErrorMessage'
+import {InlineSpinner} from '../Spinner'
 
 import {
-  Button,
+  Button, P,
   Field
 } from '@project-r/styleguide'
 
@@ -27,7 +29,8 @@ const styles = {
   button: css({
     width: '38%',
     minWidth: 140,
-    maxWidth: 160
+    maxWidth: 160,
+    textAlign: 'center'
   })
 }
 
@@ -42,12 +45,19 @@ class SignIn extends Component {
     }
   }
   render () {
-    const {t} = this.props
-    const {polling, phrase, loading, success, error} = this.state
+    const {t, label} = this.props
+    const {
+      polling, phrase, loading, success,
+      error, dirty, email,
+      serverError
+    } = this.state
     if (polling) {
       return (
         <div>
-          <div>Phrase: {phrase}</div>
+          <P>{t('signIn/polling', {
+            phrase,
+            email
+          })}</P>
           <Poller onSuccess={(me, ms) => {
             this.setState(() => ({
               polling: false,
@@ -70,27 +80,37 @@ class SignIn extends Component {
             <Field
               name='email'
               label={t('signIn/email/label')}
-              error={error}
-              onChange={event => {
-                const value = event.target.value
+              error={dirty && error}
+              onChange={(_, value, shouldValidate) => {
                 this.setState(() => ({
-                  email: value
+                  email: value,
+                  error: (
+                    (value.trim().length <= 0 && t('signIn/email/error/empty')) ||
+                    (!isEmail(value) && t('signIn/email/error/invalid'))
+                  ),
+                  dirty: shouldValidate
                 }))
               }}
-              value={this.state.email} />
+              value={email} />
           </div>
           <div {...styles.button}>
-            <Button
+            {loading ? <InlineSpinner /> : <Button
               block
               disabled={loading}
               onClick={() => {
+                if (error) {
+                  this.setState(() => ({
+                    dirty: true
+                  }))
+                  return
+                }
                 if (loading) {
                   return
                 }
                 this.setState(() => ({
                   loading: true
                 }))
-                this.props.signIn(this.state.email)
+                this.props.signIn(email)
                   .then(({data}) => {
                     this.setState(() => ({
                       polling: true,
@@ -100,14 +120,14 @@ class SignIn extends Component {
                   })
                   .catch(error => {
                     this.setState(() => ({
-                      error: errorToString(error),
+                      serverError: error,
                       loading: false
                     }))
                   })
-              }}>{t('signIn/button')}</Button>
+              }}>{label || t('signIn/button')}</Button>}
           </div>
         </div>
-        {loading ? <div>{t('signIn/loading')}</div> : ''}
+        {!!serverError && <ErrorMessage error={serverError} />}
       </div>
     )
   }

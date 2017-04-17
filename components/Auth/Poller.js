@@ -29,7 +29,7 @@ class Status extends Component {
     this.tick()
   }
   componentDidUpdate () {
-    const {me, onSuccess} = this.props
+    const {data: {me}, onSuccess} = this.props
     if (me) {
       clearTimeout(this.tickTimeout)
       const elapsedMs = this.state.now - this.state.start
@@ -61,7 +61,7 @@ class Status extends Component {
     return (
       <span>
         {Math.round(elapsedMs / 1000)}s
-        {' '}{!!error && error.toString()}
+        {!!error && <span><br />{error.toString()}</span>}
       </span>
     )
   }
