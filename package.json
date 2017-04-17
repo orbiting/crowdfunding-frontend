@@ -11,7 +11,8 @@
     "precommit": "lint-staged",
     "standardize": "standard --fix 'components/**/*.js' 'lib/**/*.js' 'pages/**/*.js'",
     "heroku-postbuild": "npm run build",
-    "translations": "gsheets --key=1OHoiENwJH-tqf9yXfXHOevAn17daO_CvB21Rym-oiqk --title=live --pretty --out lib/translations.json"
+    "translations": "gsheets --key=1OHoiENwJH-tqf9yXfXHOevAn17daO_CvB21Rym-oiqk --title=live --pretty --out lib/translations.json",
+    "test": "wdio test/wdio.conf.js"
   },
   "lint-staged": {
     "*.js": [
@@ -29,6 +30,7 @@
   },
   "dependencies": {
     "@project-r/styleguide": "^0.3.5",
+    "core-js": "^2.4.1",
     "cross-env": "^3.2.4",
     "d3-array": "^1.1.1",
     "d3-ease": "^1.0.3",
@@ -54,6 +56,11 @@
     "husky": "^0.13.2",
     "lint-staged": "^3.4.0",
     "nodemon": "^1.11.0",
-    "standard": "^9.0.2"
+    "standard": "^9.0.2",
+    "wdio-dot-reporter": "0.0.8",
+    "wdio-jasmine-framework": "^0.3.0",
+    "wdio-sauce-service": "^0.3.1",
+    "wdio-spec-reporter": "^0.1.0",
+    "webdriverio": "^4.6.2"
   }
 }

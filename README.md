@@ -15,25 +15,28 @@ export NPM_TOKEN="00000000-0000-0000-0000-000000000000"
 You can use a git-excluded `.env` file in development:
 
 ```
-PORT=3003
+PORT=3000
 API_BASE_URL=http://localhost:3001
 API_AUTHORIZATION_HEADER=
 ```
 
-`API_BASE_URL` defaults to `https://api.satellit.io`. If the API is HTTP basic-auth protected, you can generate a basic authorization header with ``Basic ${(new Buffer('user:password')).toString('base64')}`` in Node.js and use it with `API_AUTHORIZATION_HEADER`.
+`API_BASE_URL` defaults to `https://api.satellit.online`. If the API is HTTP basic-auth protected, you can generate a basic authorization header with ``Basic ${(new Buffer('user:password')).toString('base64')}`` in Node.js and use it with `API_AUTHORIZATION_HEADER`.
 
 #### Payment
 
 Payment provider configuration can be passed in via the environment. `PUBLIC_BASE_URL` is used for PostFinance and PayPal return urls.
 
 ```
-PUBLIC_BASE_URL=http://localhost:3003
+PUBLIC_BASE_URL=http://localhost:3000
 
 STRIPE_PUBLISHABLE_KEY=
 
 PF_PSPID=
 PF_INPUT_SECRET=
 PF_FORM_ACTION=https://e-payment.postfinance.ch/ncol/test/orderstandard.asp
+
+PAYPAL_FORM_ACTION=https://www.sandbox.paypal.com/cgi-bin/webscr
+PAYPAL_BUSINESS=
 ```
 
 #### Basic Auth
@@ -51,4 +54,35 @@ BASIC_AUTH_REALM=
 ```bash
 npm install
 npm run dev
+```
+
+### Testing
+
+We use [webdriver.io](http://webdriver.io/) and utilize [saucelabs.com](https://saucelabs.com/) VM arsenal for end to end testing.
+
+You will need following environment variables (`.env` supported):
+
+```
+SAUCE_USERNAME=
+SAUCE_ACCESS_KEY=
+```
+
+```
+npm run test
+```
+
+This will start a [Sauce Connect Proxy](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy+FAQS), make sure to allow incomming connections to it.
+
+#### Local
+
+To run the tests locally you will need a [running selenium standalone server](http://webdriver.io/guide.html).
+
+```
+LOCAL=1 npm run test
+```
+
+Run a [webdriver.io repl](http://webdriver.io/guide/usage/repl.html):
+
+```
+$(npm bin)/wdio repl 
 ```

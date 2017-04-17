@@ -2,22 +2,24 @@ import React, {PropTypes} from 'react'
 import {css} from 'glamor'
 import Link from 'next/link'
 
-import {HEADER_HEIGHT} from './constants'
+import {HEADER_HEIGHT_MOBILE, MENUBAR_HEIGHT} from './constants'
 
 import {
   colors, mediaQueries
 } from '@project-r/styleguide'
 
 const ITEM_MARGIN_LEFT = 10
+const M_HEADER_HEIGHT = HEADER_HEIGHT_MOBILE + MENUBAR_HEIGHT
+
 const menuStyle = css({
   [mediaQueries.onlyS]: {
     display: 'flex',
     backgroundColor: '#fff',
     boxSizing: 'border-box',
     position: 'absolute',
-    top: HEADER_HEIGHT,
+    top: M_HEADER_HEIGHT,
     left: 0,
-    height: `calc(100vh - ${HEADER_HEIGHT}px)`,
+    height: `calc(100vh - ${M_HEADER_HEIGHT}px)`,
     width: '100vw',
     flexDirection: 'column',
     padding: 20,

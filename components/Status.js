@@ -3,6 +3,7 @@ import {css} from 'glamor'
 import {gql, graphql} from 'react-apollo'
 import withT from '../lib/withT'
 import {chfFormat} from '../lib/utils/formats'
+import {errorToString} from '../lib/utils/errors'
 
 import {
   P, Label, colors
@@ -61,7 +62,7 @@ class Status extends Component {
       return <P>…</P>
     }
     if (this.props.error) {
-      return <P>{this.props.error}</P>
+      return <P>{errorToString(this.props.error)}</P>
     }
     const {crowdfunding: {goal, status, endDate}, t} = this.props
     const now = new Date()
