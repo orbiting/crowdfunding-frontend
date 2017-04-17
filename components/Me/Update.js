@@ -17,14 +17,7 @@ import {
 } from '@project-r/styleguide'
 
 const birthdayFormat = '%d.%m.%Y'
-const birthdayUserFormat = swissTime.format(birthdayFormat)
-const birthdayUserParse = swissTime.parse(birthdayFormat)
-
-const birthdayAPIFormat = swissTime.format('%Y-%m-%dT00:00:00.000Z')
-const birthdayBaseParse = swissTime.parse('%Y-%m-%d')
-const birthdayAPIParse = (string) => (
-  string && birthdayBaseParse(string.split('T')[0])
-)
+const birthdayParse = swissTime.parse(birthdayFormat)
 
 const fields = (t) => [
   {
@@ -33,7 +26,7 @@ const fields = (t) => [
     mask: '11.11.1111',
     maskChar: '_',
     validator: (value) => {
-      const parsedDate = birthdayUserParse(value)
+      const parsedDate = birthdayParse(value)
       return (
         (
           (
@@ -69,10 +62,8 @@ const getValues = (me) => {
     addressState.name = me.name
   }
 
-  const parsedBirthday = birthdayAPIParse(me.birthday)
-
   return {
-    birthday: parsedBirthday ? birthdayUserFormat(parsedBirthday) : '',
+    birthday: me.birthday || '',
     ...addressState
   }
 }
@@ -153,7 +144,7 @@ class Update extends Component {
               </P>
               <P>
                 <Label key='birthday'>{t('merci/updateMe/birthday/label')}</Label><br />
-                {birthdayUserFormat(birthdayAPIParse(me.birthday))}
+                {me.birthday}
               </P>
               <A href='#' onClick={(e) => {
                 e.preventDefault()
@@ -223,9 +214,7 @@ class Update extends Component {
                         user: {
                           name: me.name,
                           email: me.email,
-                          birthday: birthdayAPIFormat(
-                            birthdayUserParse(values.birthday)
-                          )
+                          birthday: values.birthday
                         },
                         address: {
                           name: values.name,
