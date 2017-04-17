@@ -6,24 +6,40 @@ import {compose} from 'redux'
 class Status extends Component {
   constructor (props) {
     super(props)
+    const now = (new Date()).getTime()
     this.state = {
-      start: new Date()
+      now,
+      start: now
+    }
+    this.tick = () => {
+      clearTimeout(this.tickTimeout)
+      this.tickTimeout = setTimeout(
+        () => {
+          this.setState(() => ({
+            now: (new Date()).getTime()
+          }))
+          this.tick()
+        },
+        1000
+      )
     }
   }
   componentDidMount () {
     this.props.data.startPolling(1000)
+    this.tick()
   }
   componentDidUpdate () {
     const {me, onSuccess} = this.props
     if (me) {
-      const now = new Date()
-      const elapsedMs = now.getTime() - this.state.start.getTime()
+      clearTimeout(this.tickTimeout)
+      const elapsedMs = this.state.now - this.state.start
       this.props.data.stopPolling()
 
       onSuccess && onSuccess(me, elapsedMs)
     }
   }
   componentWillUnmount () {
+    clearTimeout(this.tickTimeout)
     // refetch everything with user context
     const client = this.props.client
     // nextTick to avoid in-flight queries
@@ -35,8 +51,7 @@ class Status extends Component {
     )
   }
   render () {
-    const now = new Date()
-    const elapsedMs = now.getTime() - this.state.start.getTime()
+    const elapsedMs = this.state.now - this.state.start
 
     const {data: {error, me}} = this.props
     if (me) {

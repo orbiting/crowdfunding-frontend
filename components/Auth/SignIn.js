@@ -64,48 +64,50 @@ class SignIn extends Component {
       return <span>{success}</span>
     }
     return (
-      <div {...styles.form}>
-        <div {...styles.input}>
-          <Field
-            name='email'
-            label={t('signIn/email/label')}
-            error={error}
-            onChange={event => {
-              const value = event.target.value
-              this.setState(() => ({
-                email: value
-              }))
-            }}
-            value={this.state.email} />
+      <div>
+        <div {...styles.form}>
+          <div {...styles.input}>
+            <Field
+              name='email'
+              label={t('signIn/email/label')}
+              error={error}
+              onChange={event => {
+                const value = event.target.value
+                this.setState(() => ({
+                  email: value
+                }))
+              }}
+              value={this.state.email} />
+          </div>
+          <div {...styles.button}>
+            <Button
+              block
+              disabled={loading}
+              onClick={() => {
+                if (loading) {
+                  return
+                }
+                this.setState(() => ({
+                  loading: true
+                }))
+                this.props.signIn(this.state.email)
+                  .then(({data}) => {
+                    this.setState(() => ({
+                      polling: true,
+                      loading: false,
+                      phrase: data.signIn.phrase
+                    }))
+                  })
+                  .catch(error => {
+                    this.setState(() => ({
+                      error: errorToString(error),
+                      loading: false
+                    }))
+                  })
+              }}>{t('signIn/button')}</Button>
+          </div>
         </div>
-        <div {...styles.button}>
-          <Button
-            block
-            disabled={loading}
-            onClick={() => {
-              if (loading) {
-                return
-              }
-              this.setState(() => ({
-                loading: true
-              }))
-              this.props.signIn(this.state.email)
-                .then(({data}) => {
-                  this.setState(() => ({
-                    polling: true,
-                    loading: false,
-                    phrase: data.signIn.phrase
-                  }))
-                })
-                .catch(error => {
-                  this.setState(() => ({
-                    error: errorToString(error),
-                    loading: false
-                  }))
-                })
-            }}>{t('signIn/button')}</Button>
-        </div>
-        {loading ? t('signIn/loading') : ''}
+        {loading ? <div>{t('signIn/loading')}</div> : ''}
       </div>
     )
   }
