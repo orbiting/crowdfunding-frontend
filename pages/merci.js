@@ -111,7 +111,7 @@ const Merci = compose(
             email: query.email,
             phrase: query.phrase
           })}<br />
-          <Poller onSuccess={() => {}} />
+          <Poller />
         </P>
       )
     }
