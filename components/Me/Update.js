@@ -263,7 +263,7 @@ const mutation = gql`mutation updateMe($user: UserInput!, $address: AddressInput
     id
   }
 }`
-const query = gql`query me {
+const query = gql`query myAddress {
   me {
     id
     name

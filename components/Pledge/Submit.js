@@ -636,7 +636,10 @@ export const withPay = Component => {
       props: ({mutate}) => ({
         pay: variables => mutate({
           variables,
-          refetchQueries: ['pledges', 'pledgeCount']
+          refetchQueries: [
+            'pledges', 'pledgeCount',
+            'myAddress'
+          ]
         })
       })
     }),

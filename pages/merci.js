@@ -94,7 +94,14 @@ const Merci = compose(
       return {
         loading: data.loading,
         error: data.error,
-        pledges: (data.me && data.me.pledges) || []
+        pledges: (
+          (
+            !data.loading &&
+            !data.error &&
+            data.me &&
+            data.me.pledges
+          ) || []
+        )
       }
     }
   }),
@@ -170,6 +177,7 @@ const Merci = compose(
           {[].concat(pledges)
             .reverse()
             .filter(pledge => pledge.status !== 'DRAFT')
+            .filter(pledge => pledge.options)
             .map(pledge => {
               const options = pledge.options.filter(option => (
                 option.amount && option.minAmount !== option.maxAmount
