@@ -40,13 +40,26 @@ const PAYMENT_METHODS = [
   {
     disabled: false,
     key: 'STRIPE',
-    Icon: () => (
-      <span>
-        <PSPIcons.Visa />
-        <span style={{display: 'inline-block', width: 10}} />
-        <PSPIcons.Mastercard />
-      </span>
-    )
+    Icon: ({values}) => {
+      let cardType = null
+      if (typeof window !== 'undefined' && window.Stripe && values && values.cardNumber) {
+        cardType = window.Stripe.card.cardType(values.cardNumber)
+        if (cardType === 'Unknown') {
+          cardType = null
+        }
+      }
+      return (
+        <span>
+          <span style={{opacity: !cardType || cardType === 'Visa' ? 1 : 0.4}}>
+            <PSPIcons.Visa />
+          </span>
+          <span style={{display: 'inline-block', width: 10}} />
+          <span style={{opacity: !cardType || cardType === 'MasterCard' ? 1 : 0.4}}>
+            <PSPIcons.Mastercard />
+          </span>
+        </span>
+      )
+    }
   },
   {
     disabled: false,
@@ -480,7 +493,7 @@ class Submit extends Component {
                   })
                 }}
                 value={pm.key} />
-              {pm.Icon ? <pm.Icon /> : null}
+              {pm.Icon ? <pm.Icon values={this.state.values} /> : null}
               <span {...(pm.Icon
                 ? styles.paymentMethodTextWithIcon
                 : styles.paymentMethodTextOnly
