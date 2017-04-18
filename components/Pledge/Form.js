@@ -20,7 +20,7 @@ import {
 import Accordion from './Accordion'
 import Submit from './Submit'
 import CustomizePackage from './CustomizePackage'
-import {pledgesQuery} from './Merci'
+import {myThingsQuery} from '../Me/queries'
 
 class Pledge extends Component {
   constructor (props) {
@@ -311,7 +311,7 @@ const PledgeWithQueries = compose(
       }
     }
   }),
-  graphql(pledgesQuery, {
+  graphql(myThingsQuery, {
     props: ({ data }) => {
       return {
         pastPledges: (

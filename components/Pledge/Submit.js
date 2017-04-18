@@ -13,8 +13,9 @@ import {meQuery} from '../../lib/withMe'
 import * as postfinance from './postfinance'
 import * as paypal from './paypal'
 import AddressForm, {COUNTRIES} from '../Me/AddressForm'
-import {gotoMerci, pledgesQuery} from './Merci'
+import {gotoMerci} from './Merci'
 import {query as addressQuery} from '../Me/Update'
+import {myThingsQuery} from '../Me/queries'
 
 import {
   PUBLIC_BASE_URL,
@@ -639,7 +640,7 @@ export const withPay = Component => {
         pay: variables => mutate({
           variables,
           refetchQueries: [
-            {query: pledgesQuery},
+            {query: myThingsQuery},
             {query: addressQuery}
           ]
         })

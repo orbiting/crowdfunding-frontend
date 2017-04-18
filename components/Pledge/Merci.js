@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {compose} from 'redux'
-import {gql, graphql} from 'react-apollo'
+import {graphql} from 'react-apollo'
 import Router from 'next/router'
 import Link from 'next/link'
 import {css, merge} from 'glamor'
@@ -18,6 +18,8 @@ import SignIn from '../Auth/SignIn'
 import Loader from '../Loader'
 import Share from '../Share'
 import UpdateMe from '../Me/Update'
+import Memberships from '../Me/Memberships'
+import {myThingsQuery} from '../Me/queries'
 import ClaimPledge from './Claim'
 
 import {
@@ -65,48 +67,6 @@ const styles = {
   })
 }
 
-export const pledgesQuery = gql`
-query myPledges {
-  me {
-    id
-    pledges {
-      id
-      package {
-        name
-      }
-      options {
-        reward {
-          ... on MembershipType {
-            name
-          }
-          ... on Goodie {
-            name
-          }
-        }
-        minAmount
-        maxAmount
-        amount
-      }
-      status
-      total
-      payments {
-        method
-        paperInvoice
-        total
-        status
-        hrid
-        createdAt
-        updatedAt
-      }
-      memberships {
-        voucherCode
-      }
-      createdAt
-    }
-  }
-}
-`
-
 class Merci extends Component {
   render () {
     const {me, t, url: {query}} = this.props
@@ -151,53 +111,59 @@ class Merci extends Component {
     const {loading, error, pledges} = this.props
     return (
       <Loader loading={loading} error={error} render={() => {
-        if (!pledges.length) {
-          return (
-            <div>
-              <H1>{t('merci/empty/title', {
-                nameOrEmail: me.name || me.email
-              })}</H1>
-              <P>
-                {t('merci/empty/text')}
-              </P>
-              <Button primary onClick={() => {
-                Router.push('/pledge')
-                  .then(() => window.scrollTo(0, 0))
-              }}>
-                {t('merci/empty/button')}
-              </Button>
-            </div>
-          )
-        }
+        const displayablePledges = pledges
+          .filter(pledge => pledge.status !== 'DRAFT')
+          .filter(pledge => pledge.options)
+          .reverse()
+        const hasPledges = displayablePledges.length > 0
 
         return (
           <div>
-            <H1>{t('merci/title', {
+            <H1>{hasPledges ? t('merci/title', {
               name: me.name
+            }) : t('merci/empty/title', {
+              nameOrEmail: me.name || me.email
             })}</H1>
-            <Lead>
-              {t('merci/lead')}
-            </Lead>
-            <P>
-              <Share
-                url={`${PUBLIC_BASE_URL}/`}
-                tweet={t('merci/share/tweetTemplate')}
-                emailSubject={t('merci/share/emailSubject')}
-                emailBody={t('merci/share/emailBody', {
-                  url: `${PUBLIC_BASE_URL}/`,
-                  backerName: me.name
-                })}
-                emailAttachUrl={false} />
-            </P>
-            {[].concat(pledges)
-              .reverse()
-              .filter(pledge => pledge.status !== 'DRAFT')
-              .filter(pledge => pledge.options)
+            {hasPledges && (<div>
+              <Lead>
+                {t('merci/lead')}
+              </Lead>
+              <P>
+                <Share
+                  url={`${PUBLIC_BASE_URL}/`}
+                  tweet={t('merci/share/tweetTemplate')}
+                  emailSubject={t('merci/share/emailSubject')}
+                  emailBody={t('merci/share/emailBody', {
+                    url: `${PUBLIC_BASE_URL}/`,
+                    backerName: me.name
+                  })}
+                  emailAttachUrl={false} />
+              </P>
+            </div>)}
+            <Memberships />
+            <H2>{t.pluralize('merci/pledges/title', {
+              count: displayablePledges.length
+            })}</H2>
+            {!hasPledges && (
+              <div>
+                <P>
+                  {t('merci/empty/text')}
+                </P>
+                <Button primary onClick={() => {
+                  Router.push('/pledge')
+                    .then(() => window.scrollTo(0, 0))
+                }}>
+                  {t('merci/empty/button')}
+                </Button>
+              </div>
+            )}
+            {displayablePledges
               .map(pledge => {
                 const options = pledge.options.filter(option => (
                   option.amount && option.minAmount !== option.maxAmount
                 ))
                 const createdAt = new Date(pledge.createdAt)
+
                 return (
                   <div key={pledge.id} {...merge(
                     styles.pledge,
@@ -257,7 +223,7 @@ class Merci extends Component {
               this.props.signOut()
             }}>{t('merci/signOut')}</A>
             <br /><br /><br /><br /><br /><br />
-            <UpdateMe />
+            {!!me.name && <UpdateMe />}
           </div>
         )
       }} />
@@ -266,7 +232,7 @@ class Merci extends Component {
 }
 
 export default compose(
-  graphql(pledgesQuery, {
+  graphql(myThingsQuery, {
     props: ({data}) => {
       return {
         loading: data.loading,
