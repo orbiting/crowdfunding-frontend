@@ -20,7 +20,7 @@ import {
 import Accordion from './Accordion'
 import Submit from './Submit'
 import CustomizePackage from './CustomizePackage'
-import {pledgesQuery} from './Merci'
+import {myThingsQuery} from '../Me/queries'
 
 class Pledge extends Component {
   constructor (props) {
@@ -99,7 +99,7 @@ class Pledge extends Component {
       dirty: shouldValidate
     }))
   }
-  checkUserFields (props, state) {
+  checkUserFields (props) {
     const values = props.me ? props.me : this.state.values
     this.handleName(values.name || '', false, props.t)
     this.handleEmail(values.email || '', false, props.t)
@@ -311,7 +311,7 @@ const PledgeWithQueries = compose(
       }
     }
   }),
-  graphql(pledgesQuery, {
+  graphql(myThingsQuery, {
     props: ({ data }) => {
       return {
         pastPledges: (

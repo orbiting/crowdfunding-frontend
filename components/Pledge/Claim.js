@@ -34,21 +34,6 @@ class ClaimPledge extends Component {
         })
       })
       .catch(error => {
-        // workaround for apollo mutation issue
-        // - blow up here: https://github.com/apollographql/apollo-client/blob/4077015194b688e4332cbde466dbeeb0b4f119df/src/data/store.ts#L145
-        //
-        // Message vary by browser and environment (TypeError)
-        // (
-        //   error.message === 'Cannot read property \'variables\' of undefined' ||
-        //   error.message === 'queryStoreValue is undefined'
-        // )
-        // We can only check if's not a graph ql error from the server
-        if (!error.graphQLErrors) {
-          gotoMerci({
-            id
-          })
-          return
-        }
         this.setState(() => ({
           loading: false,
           error

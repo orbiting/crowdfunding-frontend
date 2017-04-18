@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react'
-import {graphql, withApollo} from 'react-apollo'
+import {graphql} from 'react-apollo'
 import {meQuery} from '../../lib/withMe'
 import {compose} from 'redux'
 
-class Status extends Component {
+class Poller extends Component {
   constructor (props) {
     super(props)
     const now = (new Date()).getTime()
@@ -40,15 +40,6 @@ class Status extends Component {
   }
   componentWillUnmount () {
     clearTimeout(this.tickTimeout)
-    // refetch everything with user context
-    const client = this.props.client
-    // nextTick to avoid in-flight queries
-    setTimeout(
-      () => {
-        client.resetStore()
-      },
-      0
-    )
   }
   render () {
     const elapsedMs = this.state.now - this.state.start
@@ -67,11 +58,10 @@ class Status extends Component {
   }
 }
 
-Status.propTypes = {
+Poller.propTypes = {
   onSuccess: PropTypes.func
 }
 
 export default compose(
-  graphql(meQuery),
-  withApollo
-)(Status)
+  graphql(meQuery)
+)(Poller)

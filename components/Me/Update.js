@@ -211,11 +211,7 @@ class Update extends Component {
                       }
                       this.setState(() => ({updating: true}))
                       this.props.update({
-                        user: {
-                          name: me.name,
-                          email: me.email,
-                          birthday: values.birthday
-                        },
+                        birthday: values.birthday,
                         address: {
                           name: values.name,
                           line1: values.line1,
@@ -247,8 +243,8 @@ class Update extends Component {
   }
 }
 
-const mutation = gql`mutation updateMe($user: UserInput!, $address: AddressInput!) {
-  updateMe(user: $user, address: $address) {
+const mutation = gql`mutation updateMe($birthday: Date!, $address: AddressInput!) {
+  updateMe(birthday: $birthday, address: $address) {
     id
   }
 }`
