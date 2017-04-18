@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {css} from 'glamor'
 
 import {
-  Field, AutosuggestField
+  Field
 } from '@project-r/styleguide'
 
 import MaskedInput from 'react-maskedinput'
@@ -58,13 +58,10 @@ class FieldSet extends Component {
     } = this.props
     return (
       <span>
-        {fields.map(({label, type, autoComplete, name, validator, suggestions, mask, maskChar}) => {
+        {fields.map(({label, type, autoComplete, name, validator, mask, maskChar}) => {
           let Component = Field
           let additionalProps = {}
-          if (suggestions) {
-            Component = AutosuggestField
-            additionalProps.items = suggestions
-          } else if (mask) {
+          if (mask) {
             additionalProps.renderInput = (props) => (
               <MaskedInput
                 {...props}
@@ -110,7 +107,6 @@ FieldSet.propTypes = {
     type: PropTypes.string,
     validator: PropTypes.func,
     autoComplete: PropTypes.string,
-    suggestions: PropTypes.arrayOf(PropTypes.string),
     mask: PropTypes.string
   })).isRequired,
   onFieldChange: PropTypes.func
