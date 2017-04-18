@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-18T23:06:08.749Z",
+  "updated": "2017-04-18T23:22:18.976Z",
   "title": "live",
   "data": [
     {
@@ -453,7 +453,7 @@
     },
     {
       "key": "pledge/submit/button/legal",
-      "value": "Wenn du einen Beitrag leistest, erklärst du dich mit den <a href=\"/legal/tos\" target=\"_blank\">AGB</a>, <a href=\"/legal/privacy\" target=\"_blank\">Datenschutzerklärung</a>, <a href=\"/legal/statute\" target=\"_blank\">Project R Genossenschafts Statuten</a> einverstanden."
+      "value": "Mit dem Bezahlen erklären Sie sich mit den <a href=\"/legal/tos\" target=\"_blank\">AGB</a>s, der <a href=\"/legal/privacy\" target=\"_blank\">Datenschutzerklärung</a> und den <a href=\"/legal/statute\" target=\"_blank\">Project R Genossenschaftsstatuten</a> einverstanden."
     },
     {
       "key": "pledge/submit/pay/method/STRIPE",
