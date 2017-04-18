@@ -10,9 +10,12 @@ import {mergeFields} from '../../lib/utils/fieldState'
 import {errorToString} from '../../lib/utils/errors'
 import withT from '../../lib/withT'
 import {meQuery} from '../../lib/withMe'
+import {chfFormat} from '../../lib/utils/formats'
 
 import FieldSet from '../FieldSet'
 import {InlineSpinner} from '../Spinner'
+import RawHtml from '../RawHtml'
+
 import * as postfinance from './postfinance'
 import * as paypal from './paypal'
 import {gotoMerci} from './Merci'
@@ -687,12 +690,23 @@ class Submit extends Component {
             )}
             <div style={{opacity: errorMessages.length ? 0.5 : 1}}>
               <Button
+                block
                 onClick={() => {
                   this.submitPledge()
                 }}>
-                {t('pledge/submit/button/pay')}
+                {t('pledge/submit/button/pay', {
+                  formattedChf: this.props.total
+                    ? chfFormat(this.props.total / 100)
+                    : ''
+                })}
               </Button>
             </div>
+            <br />
+            <Label>
+              <RawHtml dangerouslySetInnerHTML={{
+                __html: t('pledge/submit/button/legal')
+              }} />
+            </Label>
           </div>
         )}
       </div>
