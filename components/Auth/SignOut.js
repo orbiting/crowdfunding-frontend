@@ -3,6 +3,7 @@ import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
 import withT from '../../lib/withT'
 import {errorToString} from '../../lib/utils/errors'
+import {meQuery} from '../../lib/withMe'
 
 import {
   Button
@@ -71,7 +72,11 @@ mutation signOut {
 export const withSignOut = compose(
   graphql(signOutMutation, {
     props: ({mutate, ownProps}) => ({
-      signOut: () => mutate()
+      signOut: () => mutate({
+        refetchQueries: [{
+          query: meQuery
+        }]
+      })
     })
   })
 )
