@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-18T11:30:25.612Z",
+  "updated": "2017-04-18T14:02:20.264Z",
   "title": "live",
   "data": [
     {
@@ -825,7 +825,7 @@
     },
     {
       "key": "memberships/give/description",
-      "value": "Sie können Abonements mit dem folgenden Code verschenken:<br />\n{voucherCode}<br />\n<br />\nAuf <a href=\"https://www.republik.ch/claim\">republik.ch/claim</a> kann der Code eingelöst und in eine Mitgliedschaft und Abonnoment verwandelt werden. Sobald der Code eingelöst ist, ist das Abonnoment weg.\n"
+      "value": "Sie können Abonements mit dem folgenden Gutscheincode verschenken:<br />\n{voucherCode}<br />\n<br />\nAuf <a href=\"https://www.republik.ch/claim\">republik.ch/claim</a> kann der Code eingelöst und in eine Mitgliedschaft und Abonnoment verwandelt werden. Sobald der Code eingelöst ist, ist das Abonnoment weg.\n"
     },
     {
       "key": "memberships/type/ABO",
@@ -838,6 +838,26 @@
     {
       "key": "memberships/label",
       "value": "Erstellt {formattedDateTime}"
+    },
+    {
+      "key": "memberships/claim/lead",
+      "value": "Mitgliedschaft und Abonnement einlösen"
+    },
+    {
+      "key": "memberships/claim/voucherCode/label",
+      "value": "Gutscheincode"
+    },
+    {
+      "key": "memberships/claim/voucherCode/label/error/empty",
+      "value": "Gutscheincode fehlt"
+    },
+    {
+      "key": "memberships/claim/button",
+      "value": "einlösen"
+    },
+    {
+      "key": "memberships/claim/loading",
+      "value": "überprüfen"
     }
   ]
 }
