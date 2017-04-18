@@ -56,10 +56,17 @@ class ClaimMembership extends Component {
       dirty: shouldValidate
     }))
   }
-  checkUserFields (props) {
-    const values = props.me ? props.me : this.state.values
-    this.handleName(values.name || '', false, props.t)
-    this.handleEmail(values.email || '', false, props.t)
+  checkUserFields ({me, t}) {
+    const defaultValues = {
+      name: (me && me.name) || '',
+      email: (me && me.email) || ''
+    }
+    const values = {
+      ...defaultValues,
+      ...this.state.values
+    }
+    this.handleName(values.name, false, t)
+    this.handleEmail(values.email, false, t)
   }
   componentWillReceiveProps (nextProps) {
     if (nextProps.me !== this.props.me) {
@@ -82,8 +89,7 @@ class ClaimMembership extends Component {
       loading: true
     }))
 
-    const catchError = (name) => (error) => {
-      console.error(name, error)
+    const catchError = error => {
       this.setState(() => ({
         loading: false,
         serverError: error
@@ -93,7 +99,7 @@ class ClaimMembership extends Component {
     if (me && me.email !== values.email) {
       this.props.signOut().then(() => {
         this.claim()
-      }).catch(catchError('signOut'))
+      }).catch(catchError)
       return
     }
 
@@ -105,7 +111,7 @@ class ClaimMembership extends Component {
             phrase: data.signIn.phrase
           }))
         })
-        .catch(catchError('signIn'))
+        .catch(catchError)
       return
     }
 
@@ -114,14 +120,14 @@ class ClaimMembership extends Component {
         .then(() => {
           gotoMerci({})
         })
-        .catch(catchError('claim'))
+        .catch(catchError)
     }
     if (me.name !== values.name) {
       this.props.updateName(values.name)
         .then(() => {
           claim()
         })
-        .catch(catchError('updateName'))
+        .catch(catchError)
       return
     }
     claim()
