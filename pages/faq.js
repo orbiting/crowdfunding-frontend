@@ -17,7 +17,6 @@ List of published questions and answers
 const publishedFaqs = gql`
 query {
   faqs {
-    published
     category
     question
     answer
