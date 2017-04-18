@@ -101,16 +101,16 @@ const Footer = ({t}) => (
         </div>
         <div {...styles.column}>
           <div {...styles.title}>{t('footer/legal/title')}</div>
-          <Link href='/rechtliches/agb'>
+          <Link href='/legal/tos'>
             <a>{t('footer/legal/tos')}</a>
           </Link><br />
-          <Link href='/rechtliches/datenschutz'>
+          <Link href='/legal/privacy'>
             <a>{t('footer/legal/privacy')}</a>
           </Link><br />
-          <Link href='/rechtliches/statuten'>
+          <Link href='/legal/statute'>
             <a>{t('footer/legal/statute')}</a>
           </Link><br />
-          <Link href='/rechtliches/impressum'>
+          <Link href='/legal/imprint'>
             <a>{t('footer/legal/imprint')}</a>
           </Link>
         </div>

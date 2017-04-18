@@ -214,7 +214,10 @@ class Header extends Component {
         </div>
         {opaque && <div {...styles.menuBar} onClick={() => this.setState({expanded: !expanded})}>
           <div {...styles.menuBarText}>
-            {t(`menu${url.pathname}`, {}, url.pathname)}
+            {t.first([
+              `menu${url.pathname}`,
+              `footer${url.pathname}`
+            ], {}, url.pathname)}
           </div>
           <Toggle expanded={expanded} id='primary-menu'
             onClick={() => this.setState({expanded: !expanded})} />
