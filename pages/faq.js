@@ -16,13 +16,11 @@ List of published questions and answers
  */
 const publishedFaqs = gql`
 query {
-  faqs(status: PUBLISHED) {
-    id
-    status
+  faqs {
+    published
+    category
     question
     answer
-    createdAt
-    updatedAt
   }
 }
 `
