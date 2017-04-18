@@ -31,7 +31,7 @@ class Memberships extends Component {
     const expanded = !!this.state[membership.id]
 
     return (
-      <div>
+      <span>
         <A href='#' onClick={(e) => {
           e.preventDefault()
           this.setState((state) => ({
@@ -42,15 +42,15 @@ class Memberships extends Component {
         </A>
         <br />
         {expanded && (
-          <div style={{margin: '10px 0'}}>
+          <span style={{display: 'block', margin: '10px 0'}}>
             <RawHtml dangerouslySetInnerHTML={{
               __html: t('memberships/give/description', {
                 voucherCode: membership.voucherCode
               })
             }} />
-          </div>
+          </span>
         )}
-      </div>
+      </span>
     )
   }
   render () {
@@ -70,7 +70,7 @@ class Memberships extends Component {
                 const createdAt = new Date(membership.createdAt)
 
                 return (
-                  <li key={memberships.id}>
+                  <li key={membership.id}>
                     {t(
                       `memberships/type/${membership.type.name}`,
                       {},
