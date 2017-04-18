@@ -60,6 +60,10 @@ class Memberships extends Component {
     } = this.props
     return (
       <Loader loading={loading} error={error} render={() => {
+        if (!memberships.length) {
+          return null
+        }
+
         return (
           <div>
             <H2>{t.pluralize('memberships/title', {
