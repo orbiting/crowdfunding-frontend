@@ -30,10 +30,16 @@ class ClaimPledge extends Component {
     this.props.claim(id)
       .then(() => {
         gotoMerci({
-          pledgeId: id
+          id
         })
       })
       .catch(error => {
+        if (error.toString() === 'TypeError: Cannot read property \'variables\' of undefined') {
+          gotoMerci({
+            id
+          })
+          return
+        }
         this.setState(() => ({
           loading: false,
           error

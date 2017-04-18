@@ -4,6 +4,7 @@ import {gql, graphql} from 'react-apollo'
 import Router from 'next/router'
 import Link from 'next/link'
 import {css, merge} from 'glamor'
+import {format} from 'url'
 
 import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
@@ -30,12 +31,17 @@ import {
 } from '@project-r/styleguide'
 
 export const gotoMerci = (query) => {
-  Router.push({
+  // workaround for apollo cache issues
+  window.location = format({
     pathname: '/merci',
     query
-  }).then(() => {
-    window.scrollTo(0, 0)
   })
+  // Router.push({
+  //   pathname: '/merci',
+  //   query
+  // }).then(() => {
+  //   window.scrollTo(0, 0)
+  // })
 }
 
 const dateTimeFormat = timeFormat('%d. %B %Y %H:%M')
