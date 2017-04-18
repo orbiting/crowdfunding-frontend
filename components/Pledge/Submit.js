@@ -354,11 +354,16 @@ class Submit extends Component {
   }
   getErrorMessages () {
     const {paymentMethod} = this.state
-    const {t} = this.props
+    const {t, options} = this.props
 
-    return objectValues(this.props.errors)
+    return ([
+      options.length < 1 && t('pledge/submit/package/error')
+    ])
+      .concat(objectValues(this.props.errors))
       .concat(objectValues(this.state.errors))
-      .concat(!paymentMethod && t('pledge/submit/payMethod/error'))
+      .concat([
+        !paymentMethod && t('pledge/submit/payMethod/error')
+      ])
       .filter(Boolean)
   }
   render () {

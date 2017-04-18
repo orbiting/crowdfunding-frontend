@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-18T18:24:03.311Z",
+  "updated": "2017-04-18T20:15:52.280Z",
   "title": "live",
   "data": [
     {
@@ -370,6 +370,10 @@
     {
       "key": "pledge/contact/email/error/invalid",
       "value": "E-Mail ungültig"
+    },
+    {
+      "key": "pledge/submit/package/error",
+      "value": "Wählen Sie zuoberst ein Abonnement und Mitgliedschaft oder Sepnden aus"
     },
     {
       "key": "pledge/submit/payMethod/title",
