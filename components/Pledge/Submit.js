@@ -1,21 +1,28 @@
 import React, {Component, PropTypes} from 'react'
+import {css} from 'glamor'
+import {gql, graphql} from 'react-apollo'
+import {compose} from 'redux'
+
 import SignIn, {withSignIn} from '../Auth/SignIn'
 import {withSignOut} from '../Auth/SignOut'
 
-import { gql, graphql } from 'react-apollo'
-import FieldSet from '../FieldSet'
 import {mergeFields} from '../../lib/utils/fieldState'
 import {errorToString} from '../../lib/utils/errors'
-import {compose} from 'redux'
-import {InlineSpinner} from '../Spinner'
 import withT from '../../lib/withT'
 import {meQuery} from '../../lib/withMe'
+
+import FieldSet from '../FieldSet'
+import {InlineSpinner} from '../Spinner'
 import * as postfinance from './postfinance'
 import * as paypal from './paypal'
-import AddressForm, {COUNTRIES} from '../Me/AddressForm'
 import {gotoMerci} from './Merci'
+
+import AddressForm, {COUNTRIES} from '../Me/AddressForm'
 import {query as addressQuery} from '../Me/Update'
 import {myThingsQuery} from '../Me/queries'
+
+import LockIcon from '../Icons/Lock'
+import * as PSPIcons from '../Icons/PSP'
 
 import {
   PUBLIC_BASE_URL,
@@ -25,15 +32,37 @@ import {
 } from '../../constants'
 
 import {
-  H2, P, Button,
-  colors
+  H2, P, Button, Label,
+  colors, fontFamilies
 } from '@project-r/styleguide'
 
 const PAYMENT_METHODS = [
-  {disabled: false, key: 'PAYMENTSLIP'},
-  {disabled: false, key: 'STRIPE'},
-  {disabled: false, key: 'POSTFINANCECARD'},
-  {disabled: false, key: 'PAYPAL'}
+  {
+    disabled: false,
+    key: 'STRIPE',
+    Icon: () => (
+      <span>
+        <PSPIcons.Visa />
+        <span style={{display: 'inline-block', width: 10}} />
+        <PSPIcons.Mastercard />
+      </span>
+    )
+  },
+  {
+    disabled: false,
+    key: 'POSTFINANCECARD',
+    bgColor: '#FCCC12',
+    Icon: PSPIcons.Postcard
+  },
+  {
+    disabled: false,
+    key: 'PAYMENTSLIP'
+  },
+  {
+    disabled: false,
+    key: 'PAYPAL',
+    Icon: PSPIcons.PayPal
+  }
 ]
 
 const objectValues = (object) => Object.keys(object).map(key => object[key])
@@ -44,6 +73,44 @@ const simpleHash = (object, delimiter = '|') => {
     }
     return `${value}`
   }).join(delimiter)
+}
+
+const styles = {
+  secure: css({
+    fontFamily: fontFamilies.sansSerifMedium,
+    fontSize: 14,
+    color: colors.primary,
+    marginBottom: 20,
+    '& svg': {
+      marginRight: 5
+    }
+  }),
+  paymentMethod: css({
+    fontFamily: fontFamilies.sansSerifMedium,
+    fontSize: 14,
+    color: '#000',
+    display: 'inline-block',
+    border: `1px solid ${colors.secondary}`,
+    padding: 10,
+    cursor: 'pointer',
+    marginRight: 10,
+    marginBottom: 10,
+    lineHeight: 0,
+    height: 62,
+    verticalAlign: 'top',
+
+    '& input': {
+      display: 'none'
+    }
+  }),
+  paymentMethodTextOnly: css({
+    lineHeight: '40px'
+  }),
+  paymentMethodTextWithIcon: css({
+    position: 'absolute',
+    left: -10000,
+    top: 'auto'
+  })
 }
 
 class Submit extends Component {
@@ -382,38 +449,51 @@ class Submit extends Component {
     return (
       <div>
         <H2>{t('pledge/submit/payMethod/title')}</H2>
+        <div {...styles.secure}>
+          <LockIcon /> {t('pledge/submit/secure')}
+        </div>
         <P>
-          {PAYMENT_METHODS.map((pm) => (
-            <span key={pm.key} style={{opacity: pm.disabled ? 0.5 : 1}}>
-              <label>
-                <input
-                  type='radio'
-                  name='paymentMethod'
-                  disabled={pm.disabled}
-                  onChange={(event) => {
-                    const value = event.target.value
-                    this.setState((state) => {
-                      const next = {
-                        showErrors: false,
-                        paymentMethod: value
-                      }
-                      if (value !== state.paymentMethod) {
-                        next.errors = {}
-                      }
+          <Label>{t('pledge/submit/payMethod/label')}</Label><br />
+          {PAYMENT_METHODS.filter(pm => !pm.disabled).map((pm) => (
+            <label key={pm.key}
+              {...styles.paymentMethod}
+              style={{
+                backgroundColor: pm.bgColor,
+                opacity: paymentMethod === pm.key ? 1 : 0.4
+              }}>
+              <input
+                type='radio'
+                name='paymentMethod'
+                disabled={pm.disabled}
+                onChange={(event) => {
+                  const value = event.target.value
+                  this.setState((state) => {
+                    const next = {
+                      showErrors: false,
+                      paymentMethod: value
+                    }
+                    if (value !== state.paymentMethod) {
+                      next.errors = {}
+                    }
 
-                      return next
-                    })
-                  }}
-                  value={pm.key} />
-                {' '}{t(`pledge/submit/pay/method/${pm.key}`)}
-              </label><br />
-            </span>
+                    return next
+                  })
+                }}
+                value={pm.key} />
+              {pm.Icon ? <pm.Icon /> : null}
+              <span {...(pm.Icon
+                ? styles.paymentMethodTextWithIcon
+                : styles.paymentMethodTextOnly
+              )}>
+                {t(`pledge/submit/pay/method/${pm.key}`)}
+              </span>
+            </label>
           ))}
         </P>
 
         {(paymentMethod === 'PAYMENTSLIP') && (
           <div>
-            <P>{t('pledge/submit/paymentslip/title')}</P>
+            <Label>{t('pledge/submit/paymentslip/title')}</Label>
             <AddressForm
               values={this.state.values}
               errors={this.state.errors}

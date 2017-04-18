@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-18T20:15:52.280Z",
+  "updated": "2017-04-18T22:10:53.561Z",
   "title": "live",
   "data": [
     {
@@ -382,6 +382,14 @@
     {
       "key": "pledge/submit/payMethod/error",
       "value": "Zahlungsart auswählen"
+    },
+    {
+      "key": "pledge/submit/payMethod/label",
+      "value": "Wählen Sie eine Zahlungsart"
+    },
+    {
+      "key": "pledge/submit/secure",
+      "value": "Sichere Verbindung"
     },
     {
       "key": "pledge/submit/stripe/card/label",
