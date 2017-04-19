@@ -95,6 +95,9 @@ const Footer = ({t}) => (
           <Link href='/manifest'>
             <a>{t('footer/about/manifest')}</a>
           </Link><br />
+          <Link href='/crew'>
+            <a>{t('footer/crew')}</a>
+          </Link><br />
           <a href='https://project-r.construction/' target='_blank'>
             {t('footer/about/projecR')}
           </a>

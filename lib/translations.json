@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-18T23:22:18.976Z",
+  "updated": "2017-04-19T11:16:57.892Z",
   "title": "live",
   "data": [
     {
@@ -616,8 +616,8 @@
       "value": "Gutscheincode ungültig"
     },
     {
-      "key": "api/membership/reduced/alreadyHave",
-      "value": "Sie können nur eine reduzierte Mitgliedschaft kaufen."
+      "key": "api/membership/reduced/alreadyHas",
+      "value": "Sie können leider keine reduzierte Mitgliedschaft kaufen, da sie bereits eine Mitgliedschaft gekauft haben."
     },
     {
       "key": "api/pledge/alreadyPaid",
@@ -730,6 +730,10 @@
     {
       "key": "footer/about/title",
       "value": "Über uns"
+    },
+    {
+      "key": "footer/crew",
+      "value": "Crew"
     },
     {
       "key": "footer/about/projecR",
