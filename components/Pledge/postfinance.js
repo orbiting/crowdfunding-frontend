@@ -1,11 +1,12 @@
-import sha1 from 'js-sha1'
 import {ascending} from 'd3-array'
-import {PUBLIC_BASE_URL, PF_PSPID, PF_INPUT_SECRET} from '../../constants'
+import {PUBLIC_BASE_URL, PF_PSPID} from '../../constants'
 
 export const getParams = ({
   alias,
+  userId,
   orderId,
-  amount
+  amount,
+  sha
 }) => {
   const params = [
     {
@@ -57,6 +58,10 @@ export const getParams = ({
       value: alias || ''
     },
     {
+      key: 'USERID',
+      value: userId || ''
+    },
+    {
       key: 'ALIASUSAGE',
       value: 'membership'
     }
@@ -64,13 +69,9 @@ export const getParams = ({
   // ensure correct order for valid sha1
   params.sort((a, b) => ascending(a.key, b.key))
 
-  const paramsString = params.map(param => (
-    `${param.key}=${param.value}${PF_INPUT_SECRET}`
-  )).join('')
-
   params.push({
     key: 'SHASIGN',
-    value: sha1(paramsString).toUpperCase()
+    value: sha
   })
 
   return params

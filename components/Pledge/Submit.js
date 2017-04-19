@@ -215,8 +215,19 @@ class Submit extends Component {
 
     const hash = simpleHash(variables)
 
-    if (!this.state.submitError && hash === this.state.pledgeHash) {
-      this.payPledge(this.state.pledgeId)
+    if (
+      !this.state.submitError &&
+      this.state.pledgeHash === hash &&
+      // Special Case: POSTFINANCECARD
+      // - we need a pledgeResponse with pfAliasId and pfSHA
+      // - this can be missing if returning from a PSP redirect
+      // - in those cases we create a new pledge
+      (
+        this.state.paymentMethod !== 'POSTFINANCECARD' ||
+        this.state.pledgeResponse
+      )
+    ) {
+      this.payPledge(this.state.pledgeId, this.state.pledgeResponse)
       return
     }
 
@@ -236,11 +247,12 @@ class Submit extends Component {
           loading: false,
           pledgeId: data.submitPledge.pledgeId,
           pledgeHash: hash,
+          pledgeResponse: data.submitPledge,
           submitError: undefined
         }))
         this.payPledge(
           data.submitPledge.pledgeId,
-          data.submitPledge.userId
+          data.submitPledge
         )
       })
       .catch(error => {
@@ -255,42 +267,43 @@ class Submit extends Component {
         }))
       })
   }
-  payPledge (pledgeId, userId) {
+  payPledge (pledgeId, pledgeResponse) {
     const {paymentMethod} = this.state
 
     if (paymentMethod === 'PAYMENTSLIP') {
-      this.payWithPaymentSlip(pledgeId, userId)
+      this.payWithPaymentSlip(pledgeId)
     } else if (paymentMethod === 'POSTFINANCECARD') {
-      this.payWithPostFinance(pledgeId, userId)
+      this.payWithPostFinance(pledgeId, pledgeResponse)
     } else if (paymentMethod === 'STRIPE') {
-      this.payWithStripe(pledgeId, userId)
+      this.payWithStripe(pledgeId)
     } else if (paymentMethod === 'PAYPAL') {
-      this.payWithPayPal(pledgeId, userId)
+      this.payWithPayPal(pledgeId)
     }
   }
-  payWithPayPal (pledgeId, userId) {
+  payWithPayPal (pledgeId) {
     const {t} = this.props
 
     this.setState(() => ({
       loading: t('pledge/submit/loading/paypal'),
-      pledgeId: pledgeId,
-      userId: userId
+      pledgeId: pledgeId
     }), () => {
       this.payPalForm.submit()
     })
   }
-  payWithPostFinance (pledgeId, userId) {
+  payWithPostFinance (pledgeId, pledgeResponse) {
     const {t} = this.props
 
     this.setState(() => ({
       loading: t('pledge/submit/loading/postfinance'),
       pledgeId: pledgeId,
-      userId: userId
+      userId: pledgeResponse.userId,
+      pfAliasId: pledgeResponse.pfAliasId,
+      pfSHA: pledgeResponse.pfSHA
     }), () => {
       this.postFinanceForm.submit()
     })
   }
-  payWithPaymentSlip (pledgeId, userId) {
+  payWithPaymentSlip (pledgeId) {
     const {values} = this.state
     this.pay({
       pledgeId,
@@ -621,9 +634,11 @@ class Submit extends Component {
           <form ref={this.postFinanceFormRef} method='post' action={PF_FORM_ACTION}>
             {
               postfinance.getParams({
-                alias: this.state.userId,
+                userId: this.state.userId,
                 orderId: this.state.pledgeId,
-                amount: this.props.total
+                amount: this.props.total,
+                alias: this.state.pfAliasId,
+                sha: this.state.pfSHA
               }).map(param => (
                 <input key={param.key}
                   type='hidden'
@@ -731,6 +746,8 @@ const submitPledge = gql`
       pledgeId
       userId
       emailVerify
+      pfAliasId
+      pfSHA
     }
   }
 `
