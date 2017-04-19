@@ -27,11 +27,19 @@ class ClaimMembership extends Component {
       dirty: {}
     }
   }
-  handleName (value, shouldValidate, t) {
+  handleFirstName (value, shouldValidate, t) {
     this.setState(mergeField({
-      field: 'name',
+      field: 'firstName',
       value,
-      error: (value.trim().length <= 0 && t('pledge/contact/name/error/empty')),
+      error: (value.trim().length <= 0 && t('pledge/contact/firstName/error/empty')),
+      dirty: shouldValidate
+    }))
+  }
+  handleLastName (value, shouldValidate, t) {
+    this.setState(mergeField({
+      field: 'lastName',
+      value,
+      error: (value.trim().length <= 0 && t('pledge/contact/lastName/error/empty')),
       dirty: shouldValidate
     }))
   }
@@ -58,14 +66,16 @@ class ClaimMembership extends Component {
   }
   checkUserFields ({me, t}) {
     const defaultValues = {
-      name: (me && me.name) || '',
+      firstName: (me && me.firstName) || '',
+      lastName: (me && me.lastName) || '',
       email: (me && me.email) || ''
     }
     const values = {
       ...defaultValues,
       ...this.state.values
     }
-    this.handleName(values.name, false, t)
+    this.handleFirstName(values.firstName, false, t)
+    this.handleLastName(values.lastName, false, t)
     this.handleEmail(values.email, false, t)
   }
   componentWillReceiveProps (nextProps) {
@@ -122,8 +132,14 @@ class ClaimMembership extends Component {
         })
         .catch(catchError)
     }
-    if (me.name !== values.name) {
-      this.props.updateName(values.name)
+    if (
+      me.firstName !== values.firstName ||
+      me.lastName !== values.lastName
+    ) {
+      this.props.updateName({
+        firstName: values.firstName,
+        lastName: values.lastName
+      })
         .then(() => {
           claim()
         })
@@ -171,12 +187,20 @@ class ClaimMembership extends Component {
         <P>
           {t('memberships/claim/lead')}
         </P>
-        <Field label={t('pledge/contact/name/label')}
-          name='name'
-          error={dirty.name && errors.name}
-          value={values.name}
+        <Field label={t('pledge/contact/firstName/label')}
+          name='firstName'
+          error={dirty.firstName && errors.firstName}
+          value={values.firstName}
           onChange={(_, value, shouldValidate) => {
-            this.handleName(value, shouldValidate, t)
+            this.handleFirstName(value, shouldValidate, t)
+          }} />
+        <br />
+        <Field label={t('pledge/contact/lastName/label')}
+          name='lastName'
+          error={dirty.lastName && errors.lastName}
+          value={values.lastName}
+          onChange={(_, value, shouldValidate) => {
+            this.handleLastName(value, shouldValidate, t)
           }} />
         <br />
         <Field label={t('pledge/contact/email/label')}
@@ -203,7 +227,8 @@ class ClaimMembership extends Component {
                 this.setState((state) => ({
                   dirty: {
                     ...state.dirty,
-                    name: true,
+                    firstName: true,
+                    lastName: true,
                     email: true,
                     voucherCode: true
                   }
@@ -232,8 +257,8 @@ mutation claimMembership($voucherCode: String!) {
   claimMembership(voucherCode: $voucherCode)
 }`
 
-const updateName = gql`mutation updateName($name: String!) {
-  updateMe(name: $name) {
+const updateName = gql`mutation updateName($firstName: String!, $lastName: String!) {
+  updateMe(firstName: $firstName, lastName: $lastName) {
     id
   }
 }`
@@ -250,10 +275,8 @@ export default compose(
   }),
   graphql(updateName, {
     props: ({mutate}) => ({
-      updateName: name => mutate({
-        variables: {
-          name
-        },
+      updateName: variables => mutate({
+        variables,
         refetchQueries: [{
           query: meQuery
         }]

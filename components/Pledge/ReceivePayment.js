@@ -29,7 +29,8 @@ query($pledgeId: ID!) {
     donation
     reason
     user {
-      name
+      firstName
+      lastName
       email
     }
   }

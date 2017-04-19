@@ -31,7 +31,8 @@ class Pledge extends Component {
     const {pledge, query} = props
     if (pledge) {
       values.email = pledge.user.email
-      values.name = pledge.user.name
+      values.firstName = pledge.user.firstName
+      values.lastName = pledge.user.lastName
       values.reason = pledge.reason
       values.price = pledge.total
       pledge.options.forEach(option => {
@@ -67,7 +68,8 @@ class Pledge extends Component {
     return {
       total: values.price || undefined,
       user: {
-        name: values.name,
+        firstName: values.firstName,
+        lastName: values.lastName,
         email: values.email
       },
       options: pkg ? pkg.options.map(option => ({
@@ -79,11 +81,19 @@ class Pledge extends Component {
       id: pledge ? pledge.id : undefined
     }
   }
-  handleName (value, shouldValidate, t) {
+  handleFirstName (value, shouldValidate, t) {
     this.setState(mergeField({
-      field: 'name',
+      field: 'firstName',
       value,
-      error: (value.trim().length <= 0 && t('pledge/contact/name/error/empty')),
+      error: (value.trim().length <= 0 && t('pledge/contact/firstName/error/empty')),
+      dirty: shouldValidate
+    }))
+  }
+  handleLastName (value, shouldValidate, t) {
+    this.setState(mergeField({
+      field: 'lastName',
+      value,
+      error: (value.trim().length <= 0 && t('pledge/contact/lastName/error/empty')),
       dirty: shouldValidate
     }))
   }
@@ -100,7 +110,8 @@ class Pledge extends Component {
   }
   checkUserFields (props) {
     const values = props.me ? props.me : this.state.values
-    this.handleName(values.name || '', false, props.t)
+    this.handleFirstName(values.firstName || '', false, props.t)
+    this.handleLastName(values.lastName || '', false, props.t)
     this.handleEmail(values.email || '', false, props.t)
   }
   componentWillReceiveProps (nextProps) {
@@ -176,7 +187,8 @@ class Pledge extends Component {
                   {' '}<A href='#' onClick={(e) => {
                     e.preventDefault()
                     this.props.signOut().then(() => {
-                      this.handleName('', false, t)
+                      this.handleFirstName('', false, t)
+                      this.handleLastName('', false, t)
                       this.handleEmail('', false, t)
                       this.setState(() => ({showSignIn: false}))
                     })
@@ -207,12 +219,20 @@ class Pledge extends Component {
                 </span>
               )}
               {!showSignIn && <span>
-                <Field label={t('pledge/contact/name/label')}
-                  name='name'
-                  error={dirty.name && errors.name}
-                  value={values.name}
+                <Field label={t('pledge/contact/firstName/label')}
+                  name='firstName'
+                  error={dirty.firstName && errors.firstName}
+                  value={values.firstName}
                   onChange={(_, value, shouldValidate) => {
-                    this.handleName(value, shouldValidate, t)
+                    this.handleFirstName(value, shouldValidate, t)
+                  }} />
+                <br />
+                <Field label={t('pledge/contact/lastName/label')}
+                  name='lastName'
+                  error={dirty.lastName && errors.lastName}
+                  value={values.lastName}
+                  onChange={(_, value, shouldValidate) => {
+                    this.handleLastName(value, shouldValidate, t)
                   }} />
                 <br />
                 <Field label={t('pledge/contact/email/label')}

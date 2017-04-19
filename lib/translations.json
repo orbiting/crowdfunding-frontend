@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-19T20:30:12.622Z",
+  "updated": "2017-04-19T20:59:53.424Z",
   "title": "live",
   "data": [
     {
@@ -363,12 +363,20 @@
       "value": "Das erste Mal hier?"
     },
     {
-      "key": "pledge/contact/name/label",
-      "value": "Ihr Name"
+      "key": "pledge/contact/firstName/label",
+      "value": "Ihr Vorname"
     },
     {
-      "key": "pledge/contact/name/error/empty",
-      "value": "Name fehlt"
+      "key": "pledge/contact/firstName/error/empty",
+      "value": "Vorname fehlt"
+    },
+    {
+      "key": "pledge/contact/lastName/label",
+      "value": "Ihr Nachname"
+    },
+    {
+      "key": "pledge/contact/lastName/error/empty",
+      "value": "Nachname fehlt"
     },
     {
       "key": "pledge/contact/email/label",
