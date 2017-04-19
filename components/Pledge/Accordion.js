@@ -5,7 +5,6 @@ import Link from 'next/link'
 import withT from '../../lib/withT'
 
 import {
-  Field,
   P,
   colors,
   linkRule,
@@ -145,10 +144,6 @@ class Accordion extends Component {
         {
           packages.map((pkg, i) => {
             const isActive = activeIndex === i
-            const configurableOptions = pkg.options.filter(option => (
-              option.minAmount !== option.maxAmount
-            ))
-            const hasOptions = !!configurableOptions.length
 
             const price = pkg.options.reduce(
               (amount, option) => amount + option.price * option.minAmount,
@@ -185,18 +180,6 @@ class Accordion extends Component {
                       display: (isActive || extended) ? 'block' : 'none'
                     }}>
                     <p>{t(`package/${pkg.name}/description`)}</p>
-                    {hasOptions && <div style={{marginTop: -10, marginBottom: 20}}>
-                      {configurableOptions.map((option, i) => (
-                        <Field key={i}
-                          label={t.pluralize(`option/${option.reward.name}/label`, {}, option.reward.name)}
-                          value={''}
-                          onChange={() => {
-                            // no-op
-                            // can only be changed on pledge page
-                          }}
-                          />
-                      ))}
-                    </div>}
                     <span {...linkRule}>{t('package/choose')}</span>
                   </div>
                 </a>
