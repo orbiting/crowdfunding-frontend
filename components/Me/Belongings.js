@@ -14,7 +14,7 @@ import {withSignOut} from '../Auth/SignOut'
 import Loader from '../Loader'
 import Share from '../Share'
 import UpdateMe from './Update'
-import Memberships from './Memberships'
+import {GiveMemberships, ClaimedMemberships} from './Memberships'
 import {myThingsQuery} from './queries'
 
 import {
@@ -37,11 +37,6 @@ const styles = {
   }),
   pledgeHighlighted: css({
     backgroundColor: colors.primaryBg
-  }),
-  total: css({
-    color: colors.primary,
-    lineHeight: '28px',
-    fontSize: 22
   })
 }
 
@@ -76,7 +71,7 @@ const Belongings = ({loading, error, pledges, me, t, signOut, highlightPledgeId}
               emailAttachUrl={false} />
           </P>
         </div>)}
-        <Memberships />
+        <ClaimedMemberships />
         <H2>{t.pluralize('merci/pledges/title', {
           count: displayablePledges.length
         })}</H2>
@@ -122,9 +117,6 @@ const Belongings = ({loading, error, pledges, me, t, signOut, highlightPledgeId}
                     ))}
                   </ul>
                 )}
-                <br />
-                <span {...styles.total}>{chfFormat(pledge.total / 100)}</span>
-                <br />
                 <ul>
                   {
                     pledge.payments.map((payment, i) => (
@@ -150,6 +142,9 @@ const Belongings = ({loading, error, pledges, me, t, signOut, highlightPledgeId}
                     ))
                   }
                 </ul>
+                <GiveMemberships
+                  memberships={pledge.memberships}
+                  isGivePackage={pledge.package.name === 'ABO_GIVE'} />
               </div>
             )
           })}

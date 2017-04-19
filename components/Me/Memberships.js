@@ -14,44 +14,96 @@ import {
 
 const dateTimeFormat = timeFormat('%d. %B %Y %H:%M')
 
-class Memberships extends Component {
+class MembershipGiver extends Component {
   constructor (props) {
     super(props)
     this.state = {}
   }
-  renderGive (membership) {
-    const {
-      t
-    } = this.props
+  render () {
+    const {memberships, t, isGivePackage} = this.props
+    const {showGiveable, showGiven} = this.state
 
-    if (!membership.voucherCode) {
+    const giveable = memberships.filter(m => m.voucherCode)
+    const given = memberships.filter(m => m.claimerName)
+
+    const hasGiveable = !!giveable.length
+    const hasGiven = !!given.length
+
+    if (!hasGiven && !hasGiveable) {
       return null
     }
 
-    const expanded = !!this.state[membership.id]
-
     return (
-      <span>
-        <A href='#' onClick={(e) => {
-          e.preventDefault()
-          this.setState((state) => ({
-            [membership.id]: !state[membership.id]
-          }))
-        }}>
-          {t(`memberships/give/${expanded ? 'hide' : 'show'}`)}
-        </A>
-        <br />
-        {expanded && (
-          <span style={{display: 'block', margin: '10px 0'}}>
-            <RawHtml dangerouslySetInnerHTML={{
-              __html: t('memberships/give/description', {
-                voucherCode: membership.voucherCode
-              })
-            }} />
-          </span>
+      <div>
+        {!isGivePackage && hasGiveable && (
+          <A href='#' onClick={(e) => {
+            e.preventDefault()
+            this.setState(() => ({showGiveable: !showGiveable}))
+          }}>
+            {t('memberships/giver/giveable/show')}<br />
+          </A>
         )}
-      </span>
+        {hasGiveable && (isGivePackage || showGiveable) && (
+          <div style={{margin: '10px 0'}}>
+            <RawHtml dangerouslySetInnerHTML={{
+              __html: !isGivePackage
+                ? t('memberships/give/description/before/notGive')
+                : t.pluralize('memberships/give/description/before', {
+                  count: giveable.length
+                })
+            }} />
+            <ul>
+              {giveable.map((membership, i) => (
+                <li key={i}>
+                  <code>{membership.voucherCode}</code>
+                </li>
+              ))}
+            </ul>
+            <RawHtml dangerouslySetInnerHTML={{
+              __html: t('memberships/give/description/after')
+            }} />
+          </div>
+        )}
+        {hasGiven && (
+          <A href='#' onClick={(e) => {
+            e.preventDefault()
+            this.setState(() => ({showGiven: !showGiven}))
+          }}>
+            {isGivePackage
+              ? t.pluralize('memberships/giver/given', {
+                count: given.length
+              })
+              : t('memberships/giver/given/notGive')
+            }
+          </A>
+        )}
+        {hasGiven && showGiven && (
+          <div style={{margin: '10px 0'}}>
+            <RawHtml dangerouslySetInnerHTML={{
+              __html: t('memberships/giver/description')
+            }} />
+            <ul>
+              {given.map((membership, i) => (
+                <li key={i}>
+                  {membership.claimerName}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     )
+  }
+}
+
+export const GiveMemberships = compose(
+  withT
+)(MembershipGiver)
+
+class MembershipsList extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {}
   }
   render () {
     const {
@@ -84,8 +136,7 @@ class Memberships extends Component {
                       {t('memberships/label', {
                         formattedDateTime: dateTimeFormat(createdAt)
                       })}
-                    </Label><br />
-                    {this.renderGive(membership)}
+                    </Label>
                   </li>
                 )
               })}
@@ -97,7 +148,7 @@ class Memberships extends Component {
   }
 }
 
-export default compose(
+export const ClaimedMemberships = compose(
   graphql(myThingsQuery, {
     props: ({data}) => {
       return {
@@ -108,11 +159,12 @@ export default compose(
             !data.loading &&
             !data.error &&
             data.me &&
-            data.me.memberships
+            data.me.memberships &&
+            data.me.memberships.filter(m => !m.voucherCode)
           ) || []
         )
       }
     }
   }),
   withT
-)(Memberships)
+)(MembershipsList)

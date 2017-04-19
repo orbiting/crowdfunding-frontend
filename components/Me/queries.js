@@ -6,6 +6,7 @@ query myThings {
     id
     memberships {
       id
+      claimerName
       voucherCode
       createdAt
       type {
@@ -41,6 +42,15 @@ query myThings {
         hrid
         createdAt
         updatedAt
+      }
+      memberships {
+        id
+        claimerName
+        voucherCode
+        createdAt
+        type {
+          name
+        }
       }
       createdAt
     }
