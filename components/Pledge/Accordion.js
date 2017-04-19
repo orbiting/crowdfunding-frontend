@@ -40,7 +40,7 @@ const styles = {
     paddingLeft: 10,
     paddingRight: 10,
     width: 'calc(100% + 20px)',
-    backgroundColor: '#EBF6E5',
+    backgroundColor: colors.primaryBg,
     borderBottom: 'none',
     paddingBottom: 16,
     borderTop: 'none',
@@ -58,10 +58,8 @@ const styles = {
     fontSize: 20
   }),
   packageContent: css({
-    '& p': {
-      lineHeight: 1.3,
-      fontWeight: 300
-    }
+    fontSize: 17,
+    lineHeight: '25px'
   }),
   buffer: css({
     // catch negative margin from last package
