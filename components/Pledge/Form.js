@@ -4,7 +4,6 @@ import {compose} from 'redux'
 
 import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
-import Router from 'next/router'
 
 import Loader from '../Loader'
 import SignIn from '../Auth/SignIn'
@@ -163,16 +162,7 @@ class Pledge extends Component {
                     this.setState(mergeFields(fields))
                   }} />
               ) : (
-                <Accordion extended onSelect={params => {
-                  const url = {
-                    pathname: '/pledge',
-                    query: params
-                  }
-                  Router.replace(url, url, {shallow: true})
-                    .then(() => {
-                      window.scrollTo(0, 0)
-                    })
-                }} />
+                <Accordion extended />
               )}
             </div>
 

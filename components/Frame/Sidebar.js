@@ -8,8 +8,6 @@ import {errorToString} from '../../lib/utils/errors'
 import Accordion from '../Pledge/Accordion'
 import Status from '../Status'
 
-import Router from 'next/router'
-import Link from 'next/link'
 import {css} from 'glamor'
 
 import {HEADER_HEIGHT, SIDEBAR_WIDTH} from './constants'
@@ -107,63 +105,63 @@ class SidebarInner extends Component {
 
     return (
       <div style={{paddingTop: 10}}>
-        <Accordion onSelect={params => {
-          Router.push({
-            pathname: '/pledge',
-            query: params
-          }).then(() => window.scrollTo(0, 0))
-        }} />
-        <P>
-          {reminderOpen ? (
-            <form onSubmit={submitReminder}>
-              <Field label={t('pledge/contact/email/label')}
-                name='email'
-                error={emailDirty && emailError}
-                value={email}
-                ref={ref => { this.field = ref }}
-                onChange={(_, value, shouldValidate) => {
-                  this.handleEmail(value, shouldValidate)
-                }}
-                />
-              <Label {...styles.reminderActions}>
-                <span onClick={() => {
-                  onChange({
-                    reminderOpen: false,
-                    reminderError: undefined,
-                    reminderMessage: undefined
-                  })
-                }}>
-                  {t('sidebar/reminder/cancel')}
-                </span>
-                {' '}
-                <A onClick={submitReminder}>
-                  {t('sidebar/reminder/send')}
-                </A>
-              </Label>
-              {!!reminderError && (
-                <P style={{color: colors.error}}>
-                  {reminderError}
+        <Accordion links={[
+          {
+            href: '/merci',
+            text: t('sidebar/signIn')
+          },
+          {
+            href: 'mailto:laurent.burst@project-r.construction',
+            text: t('sidebar/investor')
+          }
+        ]}>
+          <div style={{margin: '20px 0'}}>
+            {reminderOpen ? (
+              <form onSubmit={submitReminder}>
+                <Field label={t('pledge/contact/email/label')}
+                  name='email'
+                  error={emailDirty && emailError}
+                  value={email}
+                  ref={ref => { this.field = ref }}
+                  onChange={(_, value, shouldValidate) => {
+                    this.handleEmail(value, shouldValidate)
+                  }}
+                  />
+                <Label {...styles.reminderActions}>
+                  <span onClick={() => {
+                    onChange({
+                      reminderOpen: false,
+                      reminderError: undefined,
+                      reminderMessage: undefined
+                    })
+                  }}>
+                    {t('sidebar/reminder/cancel')}
+                  </span>
+                  {' '}
+                  <A onClick={submitReminder}>
+                    {t('sidebar/reminder/send')}
+                  </A>
+                </Label>
+                {!!reminderError && (
+                  <P style={{color: colors.error}}>
+                    {reminderError}
+                  </P>
+                )}
+              </form>
+            ) : (
+              reminderMessage ? (
+                <P style={{textAlign: 'center'}}>
+                  {reminderMessage}
                 </P>
-              )}
-            </form>
-          ) : (
-            reminderMessage ? (
-              <P style={{textAlign: 'center'}}>
-                {reminderMessage}
-              </P>
-            ) : (<Button block onClick={() => {
-              this.autoFocus = true
-              onChange({reminderOpen: true})
-            }}>
-              {t('sidebar/reminder/button')}
-            </Button>)
-          )}
-        </P>
-        <P style={{textAlign: 'center'}}>
-          <Link href='/merci'>
-            <a {...styles.link}>{t('sidebar/signIn')}</a>
-          </Link>
-        </P>
+              ) : (<Button block onClick={() => {
+                this.autoFocus = true
+                onChange({reminderOpen: true})
+              }}>
+                {t('sidebar/reminder/button')}
+              </Button>)
+            )}
+          </div>
+        </Accordion>
       </div>
     )
   }

@@ -6,28 +6,28 @@ import withT from '../../lib/withT'
 
 import {
   Field,
-  P, A,
+  P,
   colors,
-  linkRule
+  linkRule,
+  fontFamilies
 } from '@project-r/styleguide'
 
 const styles = {
+  title: css({
+    fontFamily: fontFamilies.sansSerifRegular,
+    fontSize: 19,
+    lineHeight: '28px',
+    marginBottom: 15
+  }),
   packageHeader: css({
   }),
-  packageTitle: css({
-    fontSize: 22,
-    lineHeight: '28px'
-  }),
-  packagePrice: css({
-    marginTop: 10,
-    color: colors.primary,
-    lineHeight: '28px',
-    fontSize: 22
-  }),
   package: css({
+    display: 'block',
+    textDecoration: 'none',
+    color: '#000',
     marginTop: -1,
-    fontFamily: 'sans-serif',
-    paddingTop: 15,
+    fontFamily: fontFamilies.sansSerifRegular,
+    paddingTop: 10,
     paddingBottom: 15,
     borderBottom: `1px solid ${colors.divider}`,
     borderTop: `1px solid ${colors.divider}`
@@ -43,13 +43,34 @@ const styles = {
     width: 'calc(100% + 20px)',
     backgroundColor: '#EBF6E5',
     borderBottom: 'none',
-    borderTop: 'none'
+    paddingBottom: 16,
+    borderTop: 'none',
+    paddingTop: 11
+  }),
+  packageTitle: css({
+    fontFamily: fontFamilies.sansSerifMedium,
+    fontSize: 20,
+    lineHeight: '26px'
+  }),
+  packagePrice: css({
+    marginTop: 0,
+    color: colors.primary,
+    lineHeight: '26px',
+    fontSize: 20
   }),
   packageContent: css({
     '& p': {
       lineHeight: 1.3,
       fontWeight: 300
     }
+  }),
+  buffer: css({
+    // catch negative margin from last package
+    marginTop: -1,
+    marginBottom: 20
+  }),
+  links: css({
+    lineHeight: '22px'
   })
 }
 
@@ -101,31 +122,29 @@ class Accordion extends Component {
     }
 
     const {
-      activeIndex,
-      selectedIndex
+      activeIndex
     } = this.state
 
-    const select = (pkg, userPrice) => {
-      const params = {
-        package: pkg.name
-      }
-      if (userPrice) {
-        params.userPrice = '1'
-      }
+    const {
+      t,
+      crowdfunding: {packages},
+      children,
+      extended
+    } = this.props
 
-      this.props.onSelect(
-        params
-      )
-    }
-
-    const {t, crowdfunding: {packages}, extended} = this.props
+    const links = [
+      {
+        href: '/pledge?package=ABO&userPrice=1',
+        text: t('package/ABO/userPrice/teaser')
+      }
+    ].concat(this.props.links || [])
 
     return (
       <div>
+        <div {...styles.title}>{t('package/title')}</div>
         {
           packages.map((pkg, i) => {
-            const isSelected = selectedIndex === i
-            const isActive = extended || isSelected || activeIndex === i
+            const isActive = activeIndex === i
             const configurableOptions = pkg.options.filter(option => (
               option.minAmount !== option.maxAmount
             ))
@@ -138,73 +157,73 @@ class Accordion extends Component {
 
             const packageStyle = merge(
               styles.package,
-              pkg.name === 'ABO' && styles.packageHighlighted
+              isActive && styles.packageHighlighted
             )
 
             return (
-              <div key={i} {...packageStyle}
-                style={{
-                  cursor: isSelected ? 'default' : 'pointer'
-                }}
-                onMouseOver={() => this.setState({
-                  activeIndex: i
-                })}
-                onMouseOut={() => this.setState({
-                  activeIndex: undefined
-                })}
-                onClick={() => {
-                  return select(pkg)
-                }}>
-                <div {...styles.packageHeader}>
-                  <div {...styles.packageTitle}>{t(`package/${pkg.name}/title`)}</div>
-                  {!!price && (<div {...styles.packagePrice}>
-                    {`CHF ${price / 100}`}
-                  </div>)}
-                </div>
-                <div {...styles.packageContent}
-                  style={{
-                    display: isActive ? 'block' : 'none'
-                  }}>
-                  <p>{t(`package/${pkg.name}/description`)}</p>
-                  {hasOptions && <div style={{marginTop: -10, marginBottom: 20}}>
-                    {configurableOptions.map((option, i) => (
-                      <Field key={i}
-                        label={t.pluralize(`option/${option.reward.name}/label`, {}, option.reward.name)}
-                        value={''}
-                        onChange={() => {
-                          // no-op
-                          // can only be changed on pledge page
-                        }}
-                        />
-                    ))}
-                  </div>}
-                  <A>{t('package/choose')}</A>
-                </div>
-              </div>
+              <Link key={i} href={{
+                pathname: 'pledge',
+                query: {
+                  package: pkg.name
+                }
+              }}>
+                <a {...packageStyle}
+                  onMouseOver={() => this.setState({
+                    activeIndex: i
+                  })}
+                  onMouseOut={() => this.setState({
+                    activeIndex: undefined
+                  })}>
+                  <div {...styles.packageHeader}>
+                    <div {...styles.packageTitle}>{t(`package/${pkg.name}/title`)}</div>
+                    {!!price && (<div {...styles.packagePrice}>
+                      {`CHF ${price / 100}`}
+                    </div>)}
+                  </div>
+                  <div {...styles.packageContent}
+                    style={{
+                      display: (isActive || extended) ? 'block' : 'none'
+                    }}>
+                    <p>{t(`package/${pkg.name}/description`)}</p>
+                    {hasOptions && <div style={{marginTop: -10, marginBottom: 20}}>
+                      {configurableOptions.map((option, i) => (
+                        <Field key={i}
+                          label={t.pluralize(`option/${option.reward.name}/label`, {}, option.reward.name)}
+                          value={''}
+                          onChange={() => {
+                            // no-op
+                            // can only be changed on pledge page
+                          }}
+                          />
+                      ))}
+                    </div>}
+                    <span {...linkRule}>{t('package/choose')}</span>
+                  </div>
+                </a>
+              </Link>
             )
           })
         }
-        <P style={{marginTop: 20}}>
-          <Link href='/pledge?package=ABO&userPrice=1'>
-            <a {...linkRule} onClick={(e) => {
-              e.preventDefault()
-              select(
-                packages.find(pkg => pkg.name === 'ABO'),
-                true
-              )
-            }}>
-              <em>{t('package/ABO/userPrice/teaser')}</em>
-            </a>
-          </Link>
-        </P>
+        <div {...styles.buffer} />
+        {children}
+        <div {...styles.links}>
+          {
+            links.map((link, i) => (
+              <Link key={i} href={link.href}>
+                <a {...linkRule}>
+                  {link.text}<br />
+                </a>
+              </Link>
+            ))
+          }
+        </div>
       </div>
     )
   }
 }
 
 Accordion.propTypes = {
-  t: PropTypes.func.isRequired,
-  onSelect: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired
 }
 
 const AccordionWithQuery = graphql(query, {

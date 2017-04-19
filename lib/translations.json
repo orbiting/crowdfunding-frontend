@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-19T14:41:28.377Z",
+  "updated": "2017-04-19T20:30:12.622Z",
   "title": "live",
   "data": [
     {
@@ -30,6 +30,10 @@
       "key": "header/button",
       "value": "Mitmachen",
       "undefined": "An Bord kommen"
+    },
+    {
+      "key": "package/title",
+      "value": "Abo und Mitgliedschaft für ein Jahr"
     },
     {
       "key": "package/customize/changePackage",
@@ -69,7 +73,7 @@
     },
     {
       "key": "package/DONATE/title",
-      "value": "Spenden – sonst nichts"
+      "value": "Spenden, sonst nichts"
     },
     {
       "key": "package/DONATE/description",
@@ -89,7 +93,8 @@
     },
     {
       "key": "package/ABO/title",
-      "value": "Abonnement für ein Jahr"
+      "value": "Für mich",
+      "undefined": "Abonnement für ein Jahr"
     },
     {
       "key": "package/ABO/description",
@@ -97,7 +102,8 @@
     },
     {
       "key": "package/ABO_GIVE/title",
-      "value": "Abonnements verschenken"
+      "value": "Für andere",
+      "undefined": "Abonnements verschenken"
     },
     {
       "key": "package/ABO_GIVE/description",
@@ -105,7 +111,8 @@
     },
     {
       "key": "package/BENEFACTOR/title",
-      "value": "Gönner Abonnement"
+      "value": "Für Gönner",
+      "undefined": "Gönner Abonnement"
     },
     {
       "key": "package/BENEFACTOR/description",
@@ -542,6 +549,10 @@
     {
       "key": "sidebar/signIn",
       "value": "Sie sind bereits an Bord?"
+    },
+    {
+      "key": "sidebar/investor",
+      "value": "Investor werden"
     },
     {
       "key": "sidebar/reminder/button",
