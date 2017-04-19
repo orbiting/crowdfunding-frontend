@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-19T14:08:05.869Z",
+  "updated": "2017-04-19T14:41:28.377Z",
   "title": "live",
   "data": [
     {
@@ -736,7 +736,7 @@
       "value": "Über uns"
     },
     {
-      "key": "footer/about/crew",
+      "key": "footer/crew",
       "value": "Crew"
     },
     {
