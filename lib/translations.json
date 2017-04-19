@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-19T11:16:57.892Z",
+  "updated": "2017-04-19T14:08:05.869Z",
   "title": "live",
   "data": [
     {
@@ -126,6 +126,10 @@
     {
       "key": "option/NOTEBOOK/label/1",
       "value": "Notizbuch"
+    },
+    {
+      "key": "package/choose",
+      "value": "Auswählen"
     },
     {
       "key": "merci/postpay/waiting",
@@ -732,7 +736,7 @@
       "value": "Über uns"
     },
     {
-      "key": "footer/crew",
+      "key": "footer/about/crew",
       "value": "Crew"
     },
     {

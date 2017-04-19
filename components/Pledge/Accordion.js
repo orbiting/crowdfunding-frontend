@@ -6,7 +6,7 @@ import withT from '../../lib/withT'
 
 import {
   Field,
-  Grid, Span, P,
+  P, A,
   colors,
   linkRule
 } from '@project-r/styleguide'
@@ -29,8 +29,8 @@ const styles = {
     fontFamily: 'sans-serif',
     paddingTop: 15,
     paddingBottom: 15,
-    borderBottom: `1px solid ${colors.disabled}`,
-    borderTop: `1px solid ${colors.disabled}`
+    borderBottom: `1px solid ${colors.divider}`,
+    borderTop: `1px solid ${colors.divider}`
   }),
   packageHighlighted: css({
     position: 'relative',
@@ -167,21 +167,18 @@ class Accordion extends Component {
                   }}>
                   <p>{t(`package/${pkg.name}/description`)}</p>
                   {hasOptions && <div style={{marginTop: -10, marginBottom: 20}}>
-                    <Grid>
-                      {configurableOptions.map((option, i) => (
-                        <Span s='1/2' m='9/18' key={i}>
-                          <Field
-                            label={t.pluralize(`option/${option.reward.name}/label`, {}, option.reward.name)}
-                            value={''}
-                            onChange={() => {
-                              // no-op
-                              // can only be changed on pledge page
-                            }}
-                            />
-                        </Span>
-                      ))}
-                    </Grid>
+                    {configurableOptions.map((option, i) => (
+                      <Field key={i}
+                        label={t.pluralize(`option/${option.reward.name}/label`, {}, option.reward.name)}
+                        value={''}
+                        onChange={() => {
+                          // no-op
+                          // can only be changed on pledge page
+                        }}
+                        />
+                    ))}
                   </div>}
+                  <A>{t('package/choose')}</A>
                 </div>
               </div>
             )
