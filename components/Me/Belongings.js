@@ -16,6 +16,7 @@ import Share from '../Share'
 import UpdateMe from './Update'
 import {GiveMemberships, ClaimedMemberships} from './Memberships'
 import {myThingsQuery} from './queries'
+import RawHtml from '../RawHtml'
 
 import {
   PUBLIC_BASE_URL
@@ -57,7 +58,9 @@ const Belongings = ({loading, error, pledges, me, t, signOut, highlightPledgeId}
         })}</H1>
         {hasPledges && (<div>
           <Lead>
-            {t('merci/lead')}
+            <RawHtml dangerouslySetInnerHTML={{
+              __html: t('merci/lead')
+            }} />
           </Lead>
           <P>
             <Share
