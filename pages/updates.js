@@ -3,16 +3,12 @@ import withData from '../lib/withData'
 import Frame from '../components/Frame'
 import Content from '../components/Frame/Content'
 
-import {
-  P
-} from '@project-r/styleguide'
+import List from '../components/Updates/List'
 
-export default withData(({url}) => (
+export default withData(({url, serverContext}) => (
   <Frame url={url}>
-    <Content>
-      <P>
-        Aktuelles zum Crowdfunding
-      </P>
+    <Content indented>
+      <List slug={url.query.slug} serverContext={serverContext} />
     </Content>
   </Frame>
 ))

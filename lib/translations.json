@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-20T21:39:45.169Z",
+  "updated": "2017-04-20T22:16:07.958Z",
   "title": "live",
   "data": [
     {
@@ -983,6 +983,34 @@
     {
       "key": "events/all",
       "value": "Alle Ereignisse"
+    },
+    {
+      "key": "events/labels/description",
+      "value": "Was"
+    },
+    {
+      "key": "events/labels/date",
+      "value": "Wann"
+    },
+    {
+      "key": "events/labels/location",
+      "value": "Wo"
+    },
+    {
+      "key": "updates/pageTitle",
+      "value": "Neues"
+    },
+    {
+      "key": "updates/metaDescription",
+      "value": "Aktuelles zum Crowdfunding"
+    },
+    {
+      "key": "updates/404",
+      "value": "Update nicht gefunden"
+    },
+    {
+      "key": "updates/all",
+      "value": "Alle Meldungen"
     }
   ]
 }

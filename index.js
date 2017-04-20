@@ -39,6 +39,11 @@ app.prepare()
       slug: req.params.slug
     })
   })
+  server.get('/updates/:slug', (req, res) => {
+    return app.render(req, res, '/updates', {
+      slug: req.params.slug
+    })
+  })
   server.get('*', (req, res) => {
     return handle(req, res)
   })
