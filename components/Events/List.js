@@ -5,6 +5,7 @@ import {timeDay} from 'd3-time'
 import Link from 'next/link'
 
 import Loader from '../Loader'
+import Meta from '../Frame/Meta'
 
 import withT from '../../lib/withT'
 import {parseDate} from '../../lib/utils/formats'
@@ -12,6 +13,10 @@ import {parseDate} from '../../lib/utils/formats'
 import {
   Interaction, linkRule
 } from '@project-r/styleguide'
+
+import {
+  PUBLIC_BASE_URL
+} from '../../constants'
 
 import Event from './Detail'
 
@@ -23,6 +28,7 @@ query {
     slug
     title
     description
+    metaDescription
     link
     date
     time
@@ -62,6 +68,12 @@ const Overview = compose(
     if (event) {
       return (
         <div>
+          <Meta data={{
+            title: event.title,
+            description: event.metaDescription,
+            url: `${PUBLIC_BASE_URL}/events/${event.slug}`,
+            image: `${PUBLIC_BASE_URL}/static/social-media/events.png`
+          }} />
           <Event event={event} />
           <Link href='/events'>
             <a {...linkRule}>{t('events/all')}</a>
@@ -79,6 +91,12 @@ const Overview = compose(
     })
     return (
       <div>
+        <Meta data={{
+          title: t('events/pageTitle'),
+          description: t('events/metaDescription'),
+          url: `${PUBLIC_BASE_URL}/events`,
+          image: `${PUBLIC_BASE_URL}/static/social-media/events.png`
+        }} />
         {!!upcoming.length && (
           <H2 style={{marginBottom: 15}}>
             {t('events/upcoming')}

@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import {css} from 'glamor'
-import Head from 'next/head'
 
 import 'glamor/reset'
 import Header from './Header'
 import Footer from './Footer'
 import Sidebar from './Sidebar'
+import Meta from './Meta'
 
 import {
   SIDEBAR_WIDTH, HEADER_HEIGHT
@@ -67,19 +67,9 @@ class Frame extends Component {
       ? styles.hideOnMobile
       : {}
 
-    let metaTags = null
-    if (meta) {
-      const title = meta.pageTitle || `${meta.title} — Republik`
-      metaTags = (
-        <Head>
-          <title>{title}</title>
-        </Head>
-      )
-    }
-
     return (
       <div {...styles.container}>
-        {metaTags}
+        {!!meta && <Meta data={meta} />}
         <div {...styles.bodyGrower} className={!cover ? styles.coverless : undefined}>
           <Header url={url} cover={cover} sticky={sticky} sidebar={sidebar} />
           {sidebar ? (
