@@ -12,8 +12,6 @@ import {
 } from './Frame/constants'
 
 import {
-  Logo,
-  Container, CONTENT_PADDING as CONTAINER_PADDING,
   mediaQueries
 } from '@project-r/styleguide'
 
@@ -34,14 +32,6 @@ const styles = {
     height: `${(9 / 16) * 100}vw`,
     backgroundColor: '#000',
     transition: 'height 200ms'
-  }),
-  logo: css({
-    position: 'absolute',
-    top: 20,
-    left: CONTAINER_PADDING,
-    zIndex: 2,
-    width: '30%',
-    transition: 'opacity 200ms'
   }),
   cover: css({
     position: 'absolute',
@@ -124,12 +114,6 @@ class VideoCover extends Component {
     }
     return (
       <div {...styles.wrapper} style={heightStyle}>
-        <Container style={{position: 'relative'}}>
-          <div {...styles.logo}
-            style={{opacity: playing ? 0 : 1}}>
-            <Logo fill='#fff' />
-          </div>
-        </Container>
         <div {...styles.cover}
           style={{opacity: cover ? 1 : 0}}
           onClick={() => {
