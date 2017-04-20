@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-20T22:16:07.958Z",
+  "updated": "2017-04-20T23:04:45.397Z",
   "title": "live",
   "data": [
     {
@@ -1011,6 +1011,34 @@
     {
       "key": "updates/all",
       "value": "Alle Meldungen"
+    },
+    {
+      "key": "faq/pageTitle",
+      "value": "Fragen"
+    },
+    {
+      "key": "faq/metaDescription",
+      "value": "Antworten zu den brennenden Fragen."
+    },
+    {
+      "key": "faq/form/title",
+      "value": "Keine Antwort gefunden?"
+    },
+    {
+      "key": "faq/form/question/label",
+      "value": "Deine Frage (mind. 5 Zeichen)"
+    },
+    {
+      "key": "faq/form/question/submit",
+      "value": "Abschicken"
+    },
+    {
+      "key": "faq/form/merci/title",
+      "value": "Vielen Dank für Deinen Input."
+    },
+    {
+      "key": "faq/form/merci/text",
+      "value": "Du liest von uns."
     }
   ]
 }
