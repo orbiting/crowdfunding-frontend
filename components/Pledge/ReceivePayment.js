@@ -10,9 +10,7 @@ import {compose} from 'redux'
 import {withPay} from './Submit'
 import PledgeForm from './Form'
 import {gotoMerci} from './Merci'
-import {
-  STRIPE_PUBLISHABLE_KEY
-} from '../../constants'
+import loadStripe from './stripe'
 
 const pledgeQuery = gql`
 query($pledgeId: ID!) {
@@ -116,25 +114,33 @@ class PledgeReceivePayment extends Component {
   checkStripeSource ({query}) {
     const {t} = this.props
 
-    window.Stripe.setPublishableKey(STRIPE_PUBLISHABLE_KEY)
-    window.Stripe.source.get(
-      query.source,
-      query.client_secret,
-      (status, source) => {
-        if (source.status === 'chargeable') {
-          this.pay({
-            method: 'STRIPE',
-            pspPayload: JSON.stringify(source),
-            sourceId: source.id
-          })
-        } else {
-          this.setState(() => ({
-            processing: false,
-            receiveError: t('pledge/recievePayment/3dsecure/failed')
-          }))
-        }
-      }
-    )
+    loadStripe()
+      .then(stripe => {
+        stripe.source.get(
+          query.source,
+          query.client_secret,
+          (status, source) => {
+            if (source.status === 'chargeable') {
+              this.pay({
+                method: 'STRIPE',
+                pspPayload: JSON.stringify(source),
+                sourceId: source.id
+              })
+            } else {
+              this.setState(() => ({
+                processing: false,
+                receiveError: t('pledge/recievePayment/3dsecure/failed')
+              }))
+            }
+          }
+        )
+      })
+      .catch(() => {
+        this.setState(() => ({
+          processing: false,
+          receiveError: t('pledge/submit/stripe/js/failed')
+        }))
+      })
   }
   pay ({method, pspPayload, sourceId}) {
     const {me, pledge, pledgeId} = this.props

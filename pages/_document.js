@@ -44,7 +44,6 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          <script src='https://js.stripe.com/v2/' />
           <NextScript />
           {piwik && <script dangerouslySetInnerHTML={{__html: `
             var _paq = _paq || [];
