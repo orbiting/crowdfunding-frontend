@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-20T12:28:32.205Z",
+  "updated": "2017-04-20T21:05:49.905Z",
   "title": "live",
   "data": [
     {
@@ -959,6 +959,22 @@
     {
       "key": "print/paymentslip/reduction",
       "value": "selbst bestimmte reduktion"
+    },
+    {
+      "key": "events/upcoming",
+      "value": "Anstehende Ereignisse"
+    },
+    {
+      "key": "events/past",
+      "value": "Vergangene Ereignisse"
+    },
+    {
+      "key": "events/404",
+      "value": "Ereigniss nicht gefunden"
+    },
+    {
+      "key": "events/all",
+      "value": "Alle Ereignisse"
     }
   ]
 }

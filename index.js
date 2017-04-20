@@ -34,6 +34,11 @@ app.prepare()
     }))
   }
 
+  server.get('/events/:slug', (req, res) => {
+    return app.render(req, res, '/events', {
+      slug: req.params.slug
+    })
+  })
   server.get('*', (req, res) => {
     return handle(req, res)
   })
