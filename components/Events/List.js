@@ -74,7 +74,7 @@ const Overview = compose(
             url: `${PUBLIC_BASE_URL}/events/${event.slug}`,
             image: `${PUBLIC_BASE_URL}/static/social-media/events.png`
           }} />
-          <Event event={event} />
+          <Event data={event} />
           <Link href='/events'>
             <a {...linkRule}>{t('events/all')}</a>
           </Link>
@@ -103,7 +103,7 @@ const Overview = compose(
           </H2>
         )}
         {upcoming.map(event => (
-          <Event key={event.slug} event={event} />
+          <Event key={event.slug} data={event} />
         ))}
         {!!past.length && (
           <H2 style={{marginBottom: 15}}>
@@ -111,7 +111,7 @@ const Overview = compose(
           </H2>
         )}
         {past.map(event => (
-          <Event key={event.slug} event={event} />
+          <Event key={event.slug} data={event} />
         ))}
       </div>
     )

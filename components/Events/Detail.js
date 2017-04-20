@@ -59,7 +59,7 @@ const weekday = swissTime.format('%A')
 
 const Event = withT(({
   t,
-  event: {
+  data: {
     title,
     description,
     link,
@@ -86,7 +86,7 @@ const Event = withT(({
   return (
     <div {...styles.container}>
       <div {...styles.block}>
-        <Label>Was</Label>
+        <Label>{t('events/labels/description')}</Label>
         <H1>{title}</H1>
         <P>
           {intersperse(
@@ -104,7 +104,7 @@ const Event = withT(({
       </div>
 
       <div {...styles.block}>
-        <Label>Wann</Label>
+        <Label>{t('events/labels/date')}</Label>
         <P>{[
           weekday(date),
           rawDate,
@@ -113,7 +113,7 @@ const Event = withT(({
       </div>
 
       <div {...styles.block}>
-        {!!where && <Label>Wo</Label>}
+        {!!where && <Label>{t('events/labels/location')}</Label>}
         {!!where && <P>{location}</P>}
         {!!where && <hr {...styles.hr} />}
         <P>
