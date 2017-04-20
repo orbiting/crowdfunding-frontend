@@ -13,8 +13,10 @@ import {withSignOut} from '../Auth/SignOut'
 import {withSignIn} from '../Auth/SignIn'
 
 import {
-  Field, Button, P
+  Field, Button, Interaction
 } from '@project-r/styleguide'
+
+const {H2, P} = Interaction
 
 class ClaimMembership extends Component {
   constructor (props) {
@@ -184,9 +186,9 @@ class ClaimMembership extends Component {
 
     return (
       <div>
-        <P>
+        <H2 style={{marginBottom: 20}}>
           {t('memberships/claim/lead')}
-        </P>
+        </H2>
         <Field label={t('pledge/contact/firstName/label')}
           name='firstName'
           error={dirty.firstName && errors.firstName}

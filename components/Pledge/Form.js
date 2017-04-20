@@ -12,14 +12,17 @@ import {mergeField, mergeFields} from '../../lib/utils/fieldState'
 import {validate as isEmail} from 'email-validator'
 
 import {
-  H1, H2, Field,
-  P, A, colors
+  Interaction,
+  Field,
+  A, colors
 } from '@project-r/styleguide'
 
 import Accordion from './Accordion'
 import Submit from './Submit'
 import CustomizePackage from './CustomizePackage'
 import {myThingsQuery} from '../Me/queries'
+
+const {H1, H2, P} = Interaction
 
 class Pledge extends Component {
   constructor (props) {
@@ -178,7 +181,7 @@ class Pledge extends Component {
             </div>
 
             <H2>{t('pledge/contact/title')}</H2>
-            <div style={{marginTop: 0, marginBottom: 40}}>
+            <div style={{marginTop: 10, marginBottom: 40}}>
               {me ? (
                 <span>
                   <strong>{t('pledge/contact/signedinAs', {
@@ -215,7 +218,7 @@ class Pledge extends Component {
                       <SignIn />
                     </span>
                   )}
-                  <br /><br />
+                  <br />
                 </span>
               )}
               {!showSignIn && <span>

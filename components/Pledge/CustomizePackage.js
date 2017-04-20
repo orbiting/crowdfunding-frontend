@@ -5,9 +5,11 @@ import {fieldsState} from '../../lib/utils/fieldState'
 import {chfFormat} from '../../lib/utils/formats'
 
 import {
-  Field, P, A,
+  Field, A, Interaction,
   Grid, Span
 } from '@project-r/styleguide'
+
+const {P} = Interaction
 
 const absolutMinPrice = 100
 const calculateMinPrice = (pkg, state, userPrice) => {
@@ -96,7 +98,7 @@ class CustomizePackage extends Component {
 
     return (
       <div>
-        <P>
+        <P style={{marginBottom: 10}}>
           {t(`package/${pkg.name}/title`)}
           {' '}
           <A href='/pledge' onClick={event => {
@@ -121,7 +123,7 @@ class CustomizePackage extends Component {
 
               return (
                 <Span s='1/2' m='9/18' key={option.id}>
-                  <P>
+                  <div style={{marginBottom: 20}}>
                     <Field
                       ref={i === 0 ? this.focusRefSetter : undefined}
                       label={label}
@@ -173,7 +175,7 @@ class CustomizePackage extends Component {
                         onChange(fields)
                       }}
                       />
-                  </P>
+                  </div>
                 </Span>
               )
             })
@@ -183,7 +185,7 @@ class CustomizePackage extends Component {
           <P>
             {t('package/customize/userPrice/beforeReason')}
           </P>
-          <P>
+          <div style={{marginBottom: 20}}>
             <Field label={t('package/customize/userPrice/reason/label')}
               ref={this.focusRefSetter}
               error={dirty.reason && errors.reason}
@@ -197,12 +199,12 @@ class CustomizePackage extends Component {
                 }))
               }}
               />
-          </P>
+          </div>
           <P>
             {t('package/customize/userPrice/beforePrice')}
           </P>
         </div>)}
-        <P>
+        <div style={{marginBottom: 20}}>
           <Field label={t('package/customize/price/label')}
             ref={(configurableOptions.length || userPrice)
               ? undefined : this.focusRefSetter}
@@ -221,7 +223,7 @@ class CustomizePackage extends Component {
                 dirty: shouldValidate
               }))
             }} />
-        </P>
+        </div>
       </div>
     )
   }

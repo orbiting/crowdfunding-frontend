@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-19T23:58:49.561Z",
+  "updated": "2017-04-20T12:28:32.205Z",
   "title": "live",
   "data": [
     {
@@ -263,6 +263,10 @@
     {
       "key": "merci/payment/PAYMENTSLIP/paperInvoice/0",
       "value": "Sie haben die Rechnung per E-Mail erhalten"
+    },
+    {
+      "key": "merci/updateMe/address/label",
+      "value": "Adresse"
     },
     {
       "key": "merci/updateMe/title",
@@ -951,6 +955,10 @@
     {
       "key": "memberships/claim/loading",
       "value": "überprüfen"
+    },
+    {
+      "key": "print/paymentslip/reduction",
+      "value": "selbst bestimmte reduktion"
     }
   ]
 }

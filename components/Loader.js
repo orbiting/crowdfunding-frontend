@@ -6,8 +6,10 @@ import Spinner from './Spinner'
 import {errorToString} from '../lib/utils/errors'
 
 import {
-  P
+  Interaction
 } from '@project-r/styleguide'
+
+const {P} = Interaction
 
 const spacerStyle = css({
   position: 'relative',

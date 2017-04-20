@@ -14,8 +14,11 @@ import Belongings from '../Me/Belongings'
 import ClaimPledge from './Claim'
 
 import {
-  H1, P, linkRule
+  linkRule,
+  Interaction
 } from '@project-r/styleguide'
+
+const {H1, P} = Interaction
 
 export const gotoMerci = (query) => {
   // workaround for apollo cache issues

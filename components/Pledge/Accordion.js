@@ -3,9 +3,9 @@ import {css, merge} from 'glamor'
 import {gql, graphql} from 'react-apollo'
 import Link from 'next/link'
 import withT from '../../lib/withT'
+import Loader from '../Loader'
 
 import {
-  P,
   colors,
   linkRule,
   fontFamilies
@@ -111,11 +111,9 @@ class Accordion extends Component {
     }
   }
   render () {
-    if (this.props.loading) {
-      return <P>…</P>
-    }
-    if (this.props.error) {
-      return <P>{this.props.error.toString()}</P>
+    const {loading, error} = this.props
+    if (loading || error) {
+      return <Loader loading={loading} error={error} height={400} />
     }
 
     const {

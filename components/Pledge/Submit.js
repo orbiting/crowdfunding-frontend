@@ -36,9 +36,11 @@ import {
 } from '../../constants'
 
 import {
-  H2, P, Button, Label,
+  Interaction, Button, Label,
   colors, fontFamilies
 } from '@project-r/styleguide'
+
+const {H2, P} = Interaction
 
 const PAYMENT_METHODS = [
   {
@@ -98,6 +100,7 @@ const styles = {
     fontSize: 14,
     color: colors.primary,
     marginBottom: 20,
+    marginTop: 10,
     '& svg': {
       marginRight: 5
     }
@@ -542,7 +545,7 @@ class Submit extends Component {
         </P>
 
         {(paymentMethod === 'PAYMENTSLIP') && (
-          <div>
+          <div style={{marginTop: 20}}>
             <Label>{t('pledge/submit/paymentslip/title')}</Label>
             <AddressForm
               values={this.state.values}
@@ -690,7 +693,7 @@ class Submit extends Component {
             }
           </form>
         )}
-
+        <br /><br />
         {(emailVerify && !me) && (
           <div style={{marginBottom: 40}}>
             <P>{t('pledge/submit/emailVerify/note')}</P>

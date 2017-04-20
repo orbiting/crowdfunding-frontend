@@ -13,8 +13,10 @@ import withT from '../../lib/withT'
 import AddressForm, {COUNTRIES, fields as addressFields} from './AddressForm'
 
 import {
-  H2, Label, Button, P, A, colors
+  Interaction, Label, Button, A, colors
 } from '@project-r/styleguide'
+
+const {H2, P} = Interaction
 
 const birthdayFormat = '%d.%m.%Y'
 const birthdayParse = swissTime.parse(birthdayFormat)
@@ -131,6 +133,9 @@ class Update extends Component {
             <div>
               <H2>{t('merci/updateMe/title')}</H2>
               <P>
+                <Label>{t('merci/updateMe/address/label')}</Label><br />
+              </P>
+              <P>
                 {!!me.address && intersperse(
                   [
                     me.address.name,
@@ -146,6 +151,7 @@ class Update extends Component {
                 <Label key='birthday'>{t('merci/updateMe/birthday/label')}</Label><br />
                 {me.birthday}
               </P>
+              <br />
               <A href='#' onClick={(e) => {
                 e.preventDefault()
                 this.startEditing()
@@ -154,6 +160,8 @@ class Update extends Component {
           ) : (
             <div>
               <H2>{t('merci/updateMe/title')}</H2>
+              <br />
+              <Label>{t('merci/updateMe/address/label')}</Label><br /><br />
               <AddressForm
                 values={values}
                 errors={errors}
@@ -161,6 +169,8 @@ class Update extends Component {
                 onChange={(fields) => {
                   this.setState(mergeFields(fields))
                 }} />
+              <br />
+              <br />
               <FieldSet
                 values={values}
                 errors={errors}

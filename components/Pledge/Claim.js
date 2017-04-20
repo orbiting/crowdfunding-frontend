@@ -6,8 +6,10 @@ import ErrorMessage from '../ErrorMessage'
 import {gotoMerci} from './Merci'
 
 import {
-  P
+  Interaction
 } from '@project-r/styleguide'
+
+const {P} = Interaction
 
 class ClaimPledge extends Component {
   constructor (props) {

@@ -9,8 +9,10 @@ import Loader from '../Loader'
 import RawHtml from '../RawHtml'
 
 import {
-  H2, Label, A
+  Interaction, Label, A
 } from '@project-r/styleguide'
+
+const {H2} = Interaction
 
 const dateTimeFormat = timeFormat('%d. %B %Y %H:%M')
 

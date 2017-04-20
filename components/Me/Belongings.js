@@ -23,10 +23,13 @@ import {
 } from '../../constants'
 
 import {
-  H1, P, Button, Lead,
-  H2, Label, A,
+  Interaction,
+  Button, Lead,
+  Label, A,
   colors
 } from '@project-r/styleguide'
+
+const {H1, H2, P} = Interaction
 
 const dateTimeFormat = timeFormat('%d. %B %Y %H:%M')
 
@@ -62,7 +65,7 @@ const Belongings = ({loading, error, pledges, me, t, signOut, highlightPledgeId}
               __html: t('merci/lead')
             }} />
           </Lead>
-          <P>
+          <P style={{marginBottom: 20}}>
             <Share
               url={`${PUBLIC_BASE_URL}/`}
               tweet={t('merci/share/tweetTemplate')}
