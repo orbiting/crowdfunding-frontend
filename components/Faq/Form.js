@@ -11,7 +11,8 @@ import {
   Interaction, Field, Button
 } from '@project-r/styleguide'
 
-const {H2, P} = Interaction
+import {H2} from './List'
+const {P} = Interaction
 
 const submitQuestion = gql`
 mutation submitQuestion($question: String!) {
