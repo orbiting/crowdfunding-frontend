@@ -56,6 +56,11 @@ const styles = {
       textDecoration: 'none'
     }
   }),
+  answer: css({
+    borderBottom: `1px solid ${colors.divider}`,
+    paddingBottom: 10,
+    marginBottom: 40
+  }),
   active: css({
     fontFamily: fontFamilies.sansSerifMedium,
     marginBottom: 10
@@ -120,7 +125,7 @@ class FaqList extends Component {
                           {faq.question}
                         </a>
                       </P>
-                      {active && <P>{faq.answer}</P>}
+                      {active && <P {...styles.answer}>{faq.answer}</P>}
                     </div>
                   )
                 })}
