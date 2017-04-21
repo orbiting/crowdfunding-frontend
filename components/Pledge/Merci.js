@@ -10,6 +10,7 @@ import Poller from '../Auth/Poller'
 import SignIn from '../Auth/SignIn'
 
 import Belongings from '../Me/Belongings'
+import RawHtml from '../RawHtml'
 
 import ClaimPledge from './Claim'
 
@@ -49,10 +50,13 @@ class Merci extends Component {
       if (query.email && query.phrase) {
         return (
           <P>
-            {t('merci/postpay/waiting', {
-              email: query.email,
-              phrase: query.phrase
-            })}<br />
+            <RawHtml dangerouslySetInnerHTML={{
+              __html: t('merci/postpay/waiting', {
+                email: query.email,
+                phrase: query.phrase
+              })
+            }} />
+            <br />
             <Poller />
             {!!query.id && (
               <Link href={{

@@ -60,11 +60,9 @@ const Belongings = ({loading, error, pledges, me, t, signOut, highlightPledgeId}
           nameOrEmail: me.name || me.email
         })}</H1>
         {hasPledges && (<div>
-          <Lead>
-            <RawHtml dangerouslySetInnerHTML={{
-              __html: t('merci/lead')
-            }} />
-          </Lead>
+          <RawHtml type={Lead} style='serif' dangerouslySetInnerHTML={{
+            __html: t('merci/lead')
+          }} />
           <P style={{marginBottom: 20}}>
             <Share
               url={`${PUBLIC_BASE_URL}/`}
