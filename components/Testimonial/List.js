@@ -59,10 +59,19 @@ const styles = {
     )),
     lineHeight: 0,
     padding: PADDING,
-    '& img': {
-      width: '100%'
-    },
     position: 'relative'
+  }),
+  aspect: css({
+    width: '100%',
+    paddingBottom: '100%',
+    position: 'relative',
+    backgroundColor: '#ccc',
+    '& img': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%'
+    }
   }),
   itemArrow: css({
     position: 'absolute',
@@ -157,7 +166,7 @@ class List extends Component {
   render () {
     const {
       loading, error, testimonials, t,
-      firstId, clearFirstId
+      onSelect
     } = this.props
     const {columns, open} = this.state
 
@@ -185,9 +194,7 @@ class List extends Component {
           const isActive = open[row] === id
           items.push((
             <div key={id} {...styles.item} onClick={(e) => {
-              if (firstId) {
-                clearFirstId()
-              }
+              onSelect()
               this.setState((state) => ({
                 open: {
                   ...state.open,
@@ -195,7 +202,9 @@ class List extends Component {
                 }
               }))
             }}>
-              <img src={image} />
+              <div {...styles.aspect}>
+                <img src={image} />
+              </div>
               {!isActive && <div {...styles.name}>{name}</div>}
               {isActive && <div {...styles.itemArrow} />}
             </div>
@@ -281,13 +290,21 @@ class Container extends Component {
           }} />
         <br /><br />
         <ListWithQuery
-          firstId={query ? undefined : id}
-          clearFirstId={() => {
-            Router.push(
-              '/community',
-              '/community',
-              {shallow: true}
-            )
+          firstId={query ? undefined : id || this.state.clearedFirstId}
+          onSelect={() => {
+            if (!id) {
+              return
+            }
+            this.setState(() => ({
+              // keep it around for the query
+              clearedFirstId: id
+            }), () => {
+              Router.push(
+                '/community',
+                '/community',
+                {shallow: true}
+              )
+            })
           }}
           name={query}
           seed={seed} />
