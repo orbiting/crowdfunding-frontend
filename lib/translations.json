@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-20T23:04:45.397Z",
+  "updated": "2017-04-21T00:19:07.291Z",
   "title": "live",
   "data": [
     {
@@ -319,6 +319,10 @@
     {
       "key": "signIn/polling",
       "value": "Jetzt müssen Sie noch Ihre Mailadresse bestätigen. Wir haben Ihnen ein kurzes Mail geschickt. Dieses enthält fett gedruckt die drei seltsamen Wörter: <b>«{phrase}»</b> Gehen Sie zu Ihrem Postfach, öffnen Sie das Mail, kontrollieren Sie, ob dort die drei gleichen seltsamen Wörter stehen. Sind es dieselben, klicken Sie den Link darunter. <br /> (Die Sache mit den drei Wörtern ist leider nötig. Es ist eine Sicherheitsmassname, damit niemand mit Ihrer Mailadresse Unfug treiben kann.) "
+    },
+    {
+      "key": "signIn/cancel",
+      "value": "abbrechen"
     },
     {
       "key": "signIn/email/error/empty",
@@ -1026,7 +1030,11 @@
     },
     {
       "key": "faq/form/question/label",
-      "value": "Deine Frage (mind. 5 Zeichen)"
+      "value": "Deine Frage"
+    },
+    {
+      "key": "faq/form/question/error",
+      "value": "Deine Frage, mind. 5 Zeichen"
     },
     {
       "key": "faq/form/question/submit",
