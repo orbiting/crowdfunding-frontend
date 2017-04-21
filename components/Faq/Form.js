@@ -11,6 +11,7 @@ import {withSignOut} from '../Auth/SignOut'
 import {withSignIn} from '../Auth/SignIn'
 import ErrorMessage from '../ErrorMessage'
 import {InlineSpinner} from '../Spinner'
+import RawHtml from '../RawHtml'
 
 import Poller from '../Auth/Poller'
 
@@ -198,10 +199,12 @@ class QuestionForm extends Component {
 
           {!!polling && (
             <div>
-              <P>{t('signIn/polling', {
-                phrase,
-                email: values.email
-              })}</P>
+              <RawHtml type={P} dangerouslySetInnerHTML={{
+                __html: t('signIn/polling', {
+                  phrase,
+                  email: values.email
+                })
+              }} />
               <Poller onSuccess={() => {
                 this.setState(() => ({
                   polling: false

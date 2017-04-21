@@ -1,30 +1,50 @@
-import {createElement} from 'react'
+import {createElement, PropTypes} from 'react'
 
 import {css} from 'glamor'
 import {
-  colors
+  colors, fontFamilies
 } from '@project-r/styleguide'
 
-const style = css({
-  '& a': {
-    textDecoration: 'none',
-    color: colors.primary,
-    ':visited': {
-      color: colors.primary
-    },
-    ':hover': {
-      color: colors.secondary
+const styles = {
+  default: css({
+    '& a': {
+      textDecoration: 'none',
+      color: colors.primary,
+      ':visited': {
+        color: colors.primary
+      },
+      ':hover': {
+        color: colors.secondary
+      }
     }
-  }
-})
+  }),
+  sansSerif: css({
+    '& b': {
+      fontFamily: fontFamilies.sansSerifMedium,
+      fontWeight: 'normal'
+    }
+  }),
+  serif: css({
+    '& b': {
+      fontFamily: fontFamilies.serifBold,
+      fontWeight: 'normal'
+    }
+  })
+}
 
-const RawHtml = ({type, dangerouslySetInnerHTML}) => createElement(type, {
-  ...style,
+const RawHtml = ({type, style, dangerouslySetInnerHTML}) => createElement(type, {
+  ...styles.default,
+  ...styles[style],
   dangerouslySetInnerHTML
 })
 
 RawHtml.defaultProps = {
-  type: 'span'
+  type: 'span',
+  style: 'sansSerif'
+}
+
+RawHtml.propTypes = {
+  style: PropTypes.oneOf(['serif', 'sansSerif']).isRequired
 }
 
 export default RawHtml

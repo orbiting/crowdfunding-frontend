@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-21T00:19:07.291Z",
+  "updated": "2017-04-21T09:36:12.000Z",
   "title": "live",
   "data": [
     {
@@ -146,7 +146,7 @@
     },
     {
       "key": "merci/postpay/waiting",
-      "value": "Danke, Sie sind mit dem Wichtigsten durch. Jetzt müssen Sie noch Ihre Mailadresse bestätigen. Wir haben Ihnen ein kurzes Mail geschickt. Dieses enthält fett gedruckt die drei seltsamen Wörter: <b>«{phrase}»</b> Gehen Sie zu Ihrem Postfach, öffnen Sie das Mail, kontrollieren Sie, ob dort die drei gleichen seltsamen Wörter stehen. Sind es dieselben, klicken Sie den Link darunter. <br /> (Die Sache mit den drei Wörtern ist leider nötig. Es ist eine Sicherheitsmassname, damit niemand mit Ihrer Mailadresse Unfug treiben kann.) "
+      "value": "Danke, Sie sind mit dem Wichtigsten durch. Jetzt müssen Sie noch Ihre Mailadresse bestätigen. Wir haben Ihnen ein kurzes Mail geschickt. Dieses enthält fett gedruckt die drei seltsamen Wörter: <b>«{phrase}»</b>.<br /><br />Gehen Sie zu Ihrem Postfach, öffnen Sie das Mail, kontrollieren Sie, ob dort die drei gleichen seltsamen Wörter stehen. Sind es dieselben, klicken Sie den Link darunter. <br /><br /> (Die Sache mit den drei Wörtern ist leider nötig. Es ist eine Sicherheitsmassname, damit niemand mit Ihrer Mailadresse Unfug treiben kann.) "
     },
     {
       "key": "merci/postpay/reclaim",
@@ -318,7 +318,7 @@
     },
     {
       "key": "signIn/polling",
-      "value": "Jetzt müssen Sie noch Ihre Mailadresse bestätigen. Wir haben Ihnen ein kurzes Mail geschickt. Dieses enthält fett gedruckt die drei seltsamen Wörter: <b>«{phrase}»</b> Gehen Sie zu Ihrem Postfach, öffnen Sie das Mail, kontrollieren Sie, ob dort die drei gleichen seltsamen Wörter stehen. Sind es dieselben, klicken Sie den Link darunter. <br /> (Die Sache mit den drei Wörtern ist leider nötig. Es ist eine Sicherheitsmassname, damit niemand mit Ihrer Mailadresse Unfug treiben kann.) "
+      "value": "Jetzt müssen Sie noch Ihre Mailadresse bestätigen. Wir haben Ihnen ein kurzes Mail geschickt. Dieses enthält fett gedruckt die drei seltsamen Wörter: <b>«{phrase}»</b>.<br /><br /> Gehen Sie zu Ihrem Postfach, öffnen Sie das Mail, kontrollieren Sie, ob dort die drei gleichen seltsamen Wörter stehen. Sind es dieselben, klicken Sie den Link darunter. <br /><br />(Die Sache mit den drei Wörtern ist leider nötig. Es ist eine Sicherheitsmassname, damit niemand mit Ihrer Mailadresse Unfug treiben kann.) "
     },
     {
       "key": "signIn/cancel",
@@ -963,6 +963,10 @@
     {
       "key": "print/paymentslip/reduction",
       "value": "selbst bestimmte reduktion"
+    },
+    {
+      "key": "api/testimonial/image/required",
+      "value": "Ein neues Testimonial braucht ein Bild."
     },
     {
       "key": "events/pageTitle",

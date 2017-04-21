@@ -11,6 +11,7 @@ import {mergeField} from '../../lib/utils/fieldState'
 import Poller from '../Auth/Poller'
 import {withSignOut} from '../Auth/SignOut'
 import {withSignIn} from '../Auth/SignIn'
+import RawHtml from '../RawHtml'
 
 import {
   Field, Button, Interaction
@@ -163,10 +164,12 @@ class ClaimMembership extends Component {
     if (polling) {
       return (
         <div>
-          <P>{t('signIn/polling', {
-            phrase,
-            email: values.email
-          })}</P>
+          <RawHtml type={P} dangerouslySetInnerHTML={{
+            __html: t('signIn/polling', {
+              phrase,
+              email: values.email
+            })
+          }} />
           <Poller onSuccess={() => {
             this.setState(() => ({
               polling: false

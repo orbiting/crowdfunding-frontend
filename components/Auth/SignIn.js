@@ -6,6 +6,7 @@ import withT from '../../lib/withT'
 import {validate as isEmail} from 'email-validator'
 import ErrorMessage from '../ErrorMessage'
 import {InlineSpinner} from '../Spinner'
+import RawHtml from '../RawHtml'
 
 import {
   Button, P,
@@ -54,10 +55,12 @@ class SignIn extends Component {
     if (polling) {
       return (
         <div>
-          <P>{t('signIn/polling', {
-            phrase,
-            email
-          })}</P>
+          <RawHtml type={P} dangerouslySetInnerHTML={{
+            __html: t('signIn/polling', {
+              phrase,
+              email
+            })
+          }} />
           <Poller onSuccess={(me, ms) => {
             this.setState(() => ({
               polling: false,
