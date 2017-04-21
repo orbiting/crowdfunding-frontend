@@ -79,7 +79,8 @@ class QuestionForm extends Component {
 
     this.setState(() => ({
       loading: true,
-      success: false
+      success: false,
+      serverError: undefined
     }))
 
     const catchError = error => {

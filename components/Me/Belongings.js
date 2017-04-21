@@ -14,6 +14,7 @@ import {withSignOut} from '../Auth/SignOut'
 import Loader from '../Loader'
 import Share from '../Share'
 import UpdateMe from './Update'
+import Testimonial from './Testimonial'
 import {GiveMemberships, ClaimedMemberships} from './Memberships'
 import {myThingsQuery} from './queries'
 import RawHtml from '../RawHtml'
@@ -76,6 +77,7 @@ const Belongings = ({loading, error, pledges, me, t, signOut, highlightPledgeId}
           </P>
         </div>)}
         <ClaimedMemberships />
+        <Testimonial />
         <H2>{t.pluralize('merci/pledges/title', {
           count: displayablePledges.length
         })}</H2>
@@ -104,10 +106,14 @@ const Belongings = ({loading, error, pledges, me, t, signOut, highlightPledgeId}
                 styles.pledge,
                 highlightPledgeId === pledge.id && styles.pledgeHighlighted
               )}>
-                <H2 style={{marginBottom: 0}}>{t(`package/${pledge.package.name}/title`)}</H2>
-                <Label>{t('merci/pledge/label', {
-                  formattedDateTime: dateTimeFormat(createdAt)
-                })}</Label>
+                <H2 style={{marginBottom: 0}}>
+                  {t(`package/${pledge.package.name}/title`)}
+                </H2>
+                <Label>
+                  {t('merci/pledge/label', {
+                    formattedDateTime: dateTimeFormat(createdAt)
+                  })}
+                </Label>
                 {!!options.length && (
                   <ul style={{marginBottom: 0}}>
                     {options.map((option, i) => (

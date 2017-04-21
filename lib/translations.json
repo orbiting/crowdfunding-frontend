@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-21T09:36:12.000Z",
+  "updated": "2017-04-21T13:33:05.303Z",
   "title": "live",
   "data": [
     {
@@ -1051,6 +1051,50 @@
     {
       "key": "faq/form/merci/text",
       "value": "Du liest von uns."
+    },
+    {
+      "key": "testimonial/title",
+      "value": "Jetzt ein Statement abgeben"
+    },
+    {
+      "key": "testimonial/description",
+      "value": "Sie können ein Statement abgeben und zusammen mit einem Portraitfoto auf unserer Community-Seite veröffentlichen."
+    },
+    {
+      "key": "testimonial/submit",
+      "value": "veröffentlichen"
+    },
+    {
+      "key": "testimonial/role/label",
+      "value": "Rolle"
+    },
+    {
+      "key": "testimonial/quote/label",
+      "value": "Statement"
+    },
+    {
+      "key": "testimonial/quote/error",
+      "value": "Statement fehlt"
+    },
+    {
+      "key": "testimonial/pickImage",
+      "value": "Portraitfoto auswählen"
+    },
+    {
+      "key": "testimonial/pickImage/invalidType",
+      "value": "Nur Fotos erlaubt (jpg, png, gif)"
+    },
+    {
+      "key": "testimonial/pickImage/readError",
+      "value": "Foto konnte nicht geladen werden"
+    },
+    {
+      "key": "testimonial/pickImage/tooBig",
+      "value": "Maximal 2mb"
+    },
+    {
+      "key": "testimonial/pickImage/empty",
+      "value": "Sie müssen ein Portraitfoto hochladen"
     }
   ]
 }
