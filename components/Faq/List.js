@@ -104,10 +104,10 @@ class FaqList extends Component {
             {faqsByCategory.map(({key: title, values}) => (
               <div {...styles.category} key={title}>
                 <H2>{title}</H2>
-                {values.map(faq => {
+                {values.map((faq, i) => {
                   const active = this.state[slug(faq.question)]
                   return (
-                    <div {...styles.faq}>
+                    <div key={i} {...styles.faq}>
                       <a {...styles.faqAnchor} id={slug(faq.question)} />
                       <P {...merge(styles.question, active && styles.active)}>
                         <a href={`#${slug(faq.question)}`}
