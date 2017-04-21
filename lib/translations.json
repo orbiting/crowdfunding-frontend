@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-21T13:33:05.303Z",
+  "updated": "2017-04-21T21:58:59.194Z",
   "title": "live",
   "data": [
     {
@@ -13,7 +13,7 @@
     },
     {
       "key": "menu/events",
-      "value": "Live",
+      "value": "Veranstaltungen",
       "undefined": "Action"
     },
     {
@@ -33,11 +33,11 @@
     },
     {
       "key": "package/title",
-      "value": "Abo und Mitgliedschaft für ein Jahr"
+      "value": "Abo & Mitgliedschaft für ein Jahr"
     },
     {
       "key": "package/customize/changePackage",
-      "value": "ändern"
+      "value": "(ändern)"
     },
     {
       "key": "package/customize/price/label",
@@ -65,7 +65,7 @@
     },
     {
       "key": "package/customize/userPrice/beforeReason",
-      "value": "Journalismus kostet. Wir haben ausgerechnet dass wir initial mindestens 3000 Abonnenten à CHF 240.- brauchen um dauerhaft zu bestehen. Trotzdem wollen wir niemanden ausschliessen."
+      "value": "Journalismus kostet. Aber wir wollen wir niemanden ausschliessen. Falls Sie sich die 240 Franken nicht leisten können, bitten wir Sie um eine knappe Begründung und einen Preis, der Ihnen fair scheint. Willkommen an Bord!"
     },
     {
       "key": "package/customize/userPrice/beforePrice",
@@ -82,7 +82,7 @@
     },
     {
       "key": "package/DONATE/description",
-      "value": "Sie wollen hervorragenden Journalismus unterstützen, ohne ihn zu lesen. Aber mit Geld. Denn Sie wissen: ohne Geld läuft nichts."
+      "value": "Sie wollen hervorragenden Journalismus unterstützen, ohne ihn zu lesen. Aber mit Geld. Denn Sie wissen: Guter Journalismus kostet."
     },
     {
       "key": "package/POSTER/title",
@@ -94,7 +94,7 @@
     },
     {
       "key": "package/ABO/userPrice/teaser",
-      "value": "Sie können sich kein Abonnement leisten?"
+      "value": "Sie können sich den Betrag nicht leisten?"
     },
     {
       "key": "package/ABO/title",
@@ -103,7 +103,7 @@
     },
     {
       "key": "package/ABO/description",
-      "value": "Willkommen an Bord! Sie erhalten für ein Jahr unser Magazin. Und werden zu einem kleinen Teil Mitbesitzerin."
+      "value": "Willkommen an Bord! Sie erhalten für ein Jahr unser Magazin. Und werden automatisch Mitglied der Project R Genossenschaft. Und damit zu einem kleinen Teil Verleger oder Verlegerin der Republik."
     },
     {
       "key": "package/ABO_GIVE/title",
@@ -121,7 +121,7 @@
     },
     {
       "key": "package/BENEFACTOR/description",
-      "value": "Sie wollen nicht nur ein unabhängiges Magazin lesen, sondern Sie wollen sich auch nachhaltig dafür ein setzten, dass dieses existiert. Und fördern ein neues Modell für Journalismus mit dem nachdrücklichsten Argument, das möglich ist: mit Geld."
+      "value": "Sie wollen nicht nur ein unabhängiges Magazin lesen, sondern Sie wollen sich auch energisch dafür einsetzten, dass dieses existiert. Wie alle werden Sie automatisch Mitglied der Project R Genossenschaft. Und damit Verleger oder Verlegerin der Republik. Um uns für Ihre Grosszügigkeit zu revanchieren, schicken wir Ihnen das Start-Up-Verleger-Paket: ein Manifest, einen Anstecker in Gold & ein signiertes Manual für Journalismus im 21. Jahrhundert."
     },
     {
       "key": "option/ABO/label/other",
@@ -166,7 +166,7 @@
     },
     {
       "key": "merci/signedOut/title",
-      "value": "Ihre Gelöbnisse ansehen"
+      "value": "Zur persönlichen Übersicht gehen"
     },
     {
       "key": "merci/signedOut/signIn",
@@ -206,11 +206,11 @@
     },
     {
       "key": "merci/pledges/title/1",
-      "value": "Ihre Unterstützung"
+      "value": "Ihre Entscheidung"
     },
     {
       "key": "merci/pledges/title/other",
-      "value": "Ihre Unterstützungen"
+      "value": "Ihre Entscheidungen"
     },
     {
       "key": "merci/pledge/label",
@@ -222,7 +222,7 @@
     },
     {
       "key": "merci/payment/method/POSTFINANCECARD",
-      "value": "Postkarte"
+      "value": "Postcard"
     },
     {
       "key": "merci/payment/method/PAYPAL",
@@ -370,7 +370,7 @@
     },
     {
       "key": "pledge/contact/signIn/show",
-      "value": "Schon mal unterstützt?"
+      "value": "Schon mal ausgefüllt?"
     },
     {
       "key": "pledge/contact/signIn/hide",
@@ -582,7 +582,7 @@
     },
     {
       "key": "sidebar/investor",
-      "value": "Investor werden"
+      "value": "Sie wollen Investor, bzw. Investorin der Republik AG werden?"
     },
     {
       "key": "sidebar/reminder/button",
@@ -590,7 +590,7 @@
     },
     {
       "key": "sidebar/reminder/success",
-      "value": "Wir werden Sie erinnern"
+      "value": "Wir werden Sie erinnern!"
     },
     {
       "key": "sidebar/reminder/cancel",
@@ -598,7 +598,7 @@
     },
     {
       "key": "sidebar/reminder/send",
-      "value": "erinnern"
+      "value": "Fehler"
     },
     {
       "key": "pledge/recievePayment/error",
@@ -606,7 +606,7 @@
     },
     {
       "key": "pledge/recievePayment/noPledge",
-      "value": "Pledge nicht gefunden"
+      "value": "Das Produkt nicht gefunden"
     },
     {
       "key": "pledge/recievePayment/paypal/cancel",
@@ -666,7 +666,7 @@
     },
     {
       "key": "api/pledge/alreadyPaid",
-      "value": "Dieser Pledge wurde bereits bezahlt."
+      "value": "Sie haben bereits bezahlt."
     },
     {
       "key": "api/pay/stripe/invalid_number",
@@ -730,7 +730,7 @@
     },
     {
       "key": "api/pay/paymentIdUsedAlready",
-      "value": "Es wurde bereits ein pledge mit dieser Zahlung abgerechnet. Bitte kontaktieren Sie uns unter kontakt@repulik.ch und geben Sie folgende Nummer an: ID: {id}"
+      "value": "Das wurde bereits bezahlt. Bitte kontaktieren Sie uns unter kontakt@repulik.ch und geben Sie folgende Nummer an: ID: {id}"
     },
     {
       "key": "api/faq/mail/subject",
@@ -890,11 +890,11 @@
     },
     {
       "key": "memberships/giver/given/1",
-      "value": "Sie haben ein Abo und Mitgliedschaft bereits verschenkt."
+      "value": "Sie haben schon ein Abo und eine Mitgliedschaft verschenkt."
     },
     {
       "key": "memberships/giver/given/other",
-      "value": "Sie haben {count} Abos und Mitgliedschaften bereits verschenkt."
+      "value": "Sie haben schon {count} Abos und Mitgliedschaften verschenkt."
     },
     {
       "key": "memberships/giver/description",
@@ -922,7 +922,7 @@
     },
     {
       "key": "memberships/give/description/after",
-      "value": "Auf <a href=\"/claim\">republik.ch/claim</a> können Gutscheincodes eingelöst und in Mitgliedschaften und Abonnoments verwandelt werden."
+      "value": "Alle Gutscheincodes können auf der Seite auf <a href=\"/claim\">republik.ch/claim</a> eingelöst werden. Wer das tut, erhält pro Code ein Abo & eine Mitgliedschaft."
     },
     {
       "key": "memberships/type/ABO",
@@ -969,6 +969,16 @@
       "value": "Ein neues Testimonial braucht ein Bild."
     },
     {
+      "key": "api/testimonial/pledge/required",
+      "value": "Sie müssen zuerst Unterstützen bevor sie ein Testimonial abgeben können.",
+      "undefined": "x"
+    },
+    {
+      "key": "api/testimonial/mail/subject",
+      "value": "Vielen Dank für das Testimonial",
+      "undefined": "x"
+    },
+    {
       "key": "events/pageTitle",
       "value": "Live"
     },
@@ -978,11 +988,11 @@
     },
     {
       "key": "events/upcoming",
-      "value": "Anstehende Ereignisse"
+      "value": "Kommende Veranstaltungen"
     },
     {
       "key": "events/past",
-      "value": "Vergangene Ereignisse"
+      "value": "Vergangene Veranstaltungen"
     },
     {
       "key": "events/404",
@@ -1030,7 +1040,7 @@
     },
     {
       "key": "faq/form/title",
-      "value": "Keine Antwort gefunden?"
+      "value": "Haben Sie noch eine Frage?"
     },
     {
       "key": "faq/form/question/label",
@@ -1095,6 +1105,18 @@
     {
       "key": "testimonial/pickImage/empty",
       "value": "Sie müssen ein Portraitfoto hochladen"
+    },
+    {
+      "key": "testimonial/list/before",
+      "value": "Noch kein Mitglied? Jetzt <a href=\"/pledge\">mitmachen</a> und Mitglied werden!"
+    },
+    {
+      "key": "testimonial/search/label",
+      "value": "Suchen"
+    },
+    {
+      "key": "testimonial/detail/share/emailSubject",
+      "value": "{name} unterstützt die Republik"
     }
   ]
 }
