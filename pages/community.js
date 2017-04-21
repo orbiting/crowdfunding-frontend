@@ -11,7 +11,7 @@ class CommunityPage extends Component {
     return (
       <Frame url={url}>
         <Content>
-          <List id={url.query.id} />
+          <List url={url} />
         </Content>
       </Frame>
     )

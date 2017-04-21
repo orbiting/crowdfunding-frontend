@@ -3,6 +3,7 @@ import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
 import {css} from 'glamor'
 import {max} from 'd3-array'
+import Router from 'next/router'
 
 import withT from '../../lib/withT'
 import RawHtml from '../RawHtml'
@@ -63,6 +64,17 @@ const styles = {
     },
     position: 'relative'
   }),
+  itemArrow: css({
+    position: 'absolute',
+    bottom: 0,
+    left: '50%',
+    marginLeft: -12.5,
+    width: 0,
+    height: 0,
+    borderStyle: 'solid',
+    borderWidth: '0 12.5px 17px 12.5px',
+    borderColor: 'transparent transparent #ffffff transparent'
+  }),
   name: css({
     position: 'absolute',
     bottom: PADDING + 5,
@@ -119,9 +131,13 @@ class List extends Component {
       ))
       const size = SIZES[sizeIndex]
       const columns = size.columns
-      console.log('measure', size)
       if (columns !== this.state.columns) {
-        this.setState(() => ({columns}))
+        this.setState(() => ({
+          columns,
+          open: {
+            0: this.props.firstId
+          }
+        }))
       }
       // this.onScroll()
     }
@@ -139,7 +155,10 @@ class List extends Component {
     window.removeEventListener('resize', this.measure)
   }
   render () {
-    const {loading, error, testimonials, t} = this.props
+    const {
+      loading, error, testimonials, t,
+      firstId, clearFirstId
+    } = this.props
     const {columns, open} = this.state
 
     return (
@@ -149,28 +168,51 @@ class List extends Component {
         testimonials.forEach(({id, image, name}, i) => {
           const row = Math.floor(i / columns)
           const offset = i % columns
-          const openId = open[row - 1] || (i === lastIndex && open[row])
+          const openId = open[row - 1]
           if (
-            (offset === 0 || i === lastIndex) &&
-            openId
+            openId &&
+            (offset === 0 || i === lastIndex)
           ) {
             const openItem = testimonials
               .find(testimonial => testimonial.id === openId)
             if (openItem) {
               items.push(
-                <Detail key={`detail-${row - 1}`} t={t} data={openItem} />
+                <Detail key={`detail${row - 1}`} t={t} data={openItem} />
               )
             }
           }
 
+          const isActive = open[row] === id
           items.push((
             <div key={id} {...styles.item} onClick={(e) => {
-              window.location = `/community?id=${id}`
+              if (firstId) {
+                clearFirstId()
+              }
+              this.setState((state) => ({
+                open: {
+                  ...state.open,
+                  [row]: state.open[row] === id ? undefined : id
+                }
+              }))
             }}>
               <img src={image} />
-              <div {...styles.name}>{name}</div>
+              {!isActive && <div {...styles.name}>{name}</div>}
+              {isActive && <div {...styles.itemArrow} />}
             </div>
           ))
+
+          const lastOpenId = open[row]
+          if (
+            i === lastIndex && lastOpenId
+          ) {
+            const openItem = testimonials
+              .find(testimonial => testimonial.id === lastOpenId)
+            if (openItem) {
+              items.push(
+                <Detail key={`detail${row}`} t={t} data={openItem} />
+              )
+            }
+          }
         })
 
         return (
@@ -221,7 +263,7 @@ class Container extends Component {
     }
   }
   render () {
-    const {t, id} = this.props
+    const {t, url: {query: {id}}} = this.props
     const {seed, query} = this.state
     return (
       <div>
@@ -238,7 +280,17 @@ class Container extends Component {
             }))
           }} />
         <br /><br />
-        <ListWithQuery firstId={query ? undefined : id} name={query} seed={seed} />
+        <ListWithQuery
+          firstId={query ? undefined : id}
+          clearFirstId={() => {
+            Router.push(
+              '/community',
+              '/community',
+              {shallow: true}
+            )
+          }}
+          name={query}
+          seed={seed} />
       </div>
     )
   }
