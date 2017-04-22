@@ -8,20 +8,16 @@ import Router from 'next/router'
 import withT from '../../lib/withT'
 import RawHtml from '../RawHtml'
 import Loader from '../Loader'
-import Share from '../Share'
-import VideoPlayer from '../VideoPlayer'
 import Play from '../Icons/Play'
+
+import Detail from './Detail'
 
 import {
   Interaction, mediaQueries, fontFamilies,
-  Field, P as SerifP, colors
+  Field
 } from '@project-r/styleguide'
 
-import {
-  PUBLIC_BASE_URL
-} from '../../constants'
-
-const {P, H2} = Interaction
+const {P} = Interaction
 
 const SIZES = [
   {minWidth: 0, columns: 3},
@@ -66,9 +62,10 @@ const styles = {
   aspect: css({
     width: '100%',
     paddingBottom: '100%',
+    overflow: 'hidden',
     position: 'relative',
     backgroundColor: '#ccc',
-    '& img': {
+    '& > *': {
       position: 'absolute',
       top: 0,
       left: 0,
@@ -104,37 +101,17 @@ const styles = {
     position: 'absolute',
     right: PADDING + 5,
     top: PADDING + 5
-  }),
-  detail: css({
-    width: '100%',
-    padding: '30px 45px',
-    float: 'left'
-  }),
-  detailRole: css({
-    fontSize: 17,
-    fontFamily: fontFamilies.sansSerifRegular,
-    color: colors.secondary
   })
 }
 
-const Detail = ({t, data: {id, name, role, quote, image, video}}) => (
-  <div {...styles.detail}>
-    <H2>{name} <span {...styles.detailRole}>{role}</span></H2>
-    {video
-      ? (
-        <div style={{maxWidth: 400, marginBottom: 20, marginTop: 10}}>
-          <VideoPlayer src={{...video, poster: image}} autoPlay />
-        </div>
-        )
-      : <SerifP>«{quote}»</SerifP>
-    }
-    <Share
-      fill={colors.secondary}
-      url={`${PUBLIC_BASE_URL}/community?id=${id}`}
-      emailSubject={t('testimonial/detail/share/emailSubject', {
-        name,
-        role
-      })} />
+export const Item = ({image, name, video, isActive, onClick, imageRenderer, style}) => (
+  <div {...styles.item} style={style} onClick={onClick}>
+    <div {...styles.aspect}>
+      {imageRenderer ? imageRenderer() : <img src={image} />}
+    </div>
+    {!!video && <div {...styles.play}><Play /></div>}
+    {!isActive && <div {...styles.name}>{name}</div>}
+    {isActive && <div {...styles.itemArrow} />}
   </div>
 )
 
@@ -207,22 +184,20 @@ class List extends Component {
 
           const isActive = open[row] === id
           items.push((
-            <div key={id} {...styles.item} onClick={(e) => {
-              onSelect()
-              this.setState((state) => ({
-                open: {
-                  ...state.open,
-                  [row]: state.open[row] === id ? undefined : id
-                }
-              }))
-            }}>
-              <div {...styles.aspect}>
-                <img src={image} />
-              </div>
-              {!!video && <div {...styles.play}><Play /></div>}
-              {!isActive && <div {...styles.name}>{name}</div>}
-              {isActive && <div {...styles.itemArrow} />}
-            </div>
+            <Item key={id}
+              image={image}
+              name={name}
+              video={video}
+              isActive={isActive}
+              onClick={() => {
+                onSelect()
+                this.setState((state) => ({
+                  open: {
+                    ...state.open,
+                    [row]: state.open[row] === id ? undefined : id
+                  }
+                }))
+              }} />
           ))
 
           const lastOpenId = open[row]

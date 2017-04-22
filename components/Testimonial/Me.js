@@ -2,8 +2,10 @@ import React, {Component} from 'react'
 import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
 import {range} from 'd3-array'
+import {css} from 'glamor'
 
 import withT from '../../lib/withT'
+import withMe from '../../lib/withMe'
 import {mergeFields} from '../../lib/utils/fieldState'
 
 import ErrorMessage from '../ErrorMessage'
@@ -12,8 +14,11 @@ import Loader from '../Loader'
 import FieldSet, {getErrors} from '../FieldSet'
 import RawHtml from '../RawHtml'
 
+import {Item} from './List'
+import Detail from './Detail'
+
 import {
-  Interaction, Button
+  Interaction, Button, A
 } from '@project-r/styleguide'
 
 const {H2, P} = Interaction
@@ -34,6 +39,17 @@ const fields = (t) => [
     )
   }
 ]
+
+const styles = {
+  previewImage: css({
+    filter: 'grayscale(1)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    width: '100%',
+    height: '100%',
+    display: 'block'
+  })
+}
 
 const readFile = (file) => {
   return new Promise((resolve, reject) => {
@@ -176,7 +192,7 @@ class Testimonial extends Component {
     this.updateFields(this.props)
   }
   render () {
-    const {t, loading, error, testimonial} = this.props
+    const {t, loading, error, testimonial, me} = this.props
     const {
       values, dirty, errors,
       submitting,
@@ -195,6 +211,13 @@ class Testimonial extends Component {
       .concat(imageMissing)
       .filter(Boolean)
 
+    const showDetail = !!(values.quote || '').trim()
+    const pickImage = (event) => {
+      event.preventDefault()
+      this.fileInput.value = null
+      this.fileInput.click()
+    }
+
     return (
       <Loader loading={loading} error={error} render={() => (
         <div style={{marginBottom: 40}}>
@@ -209,7 +232,8 @@ class Testimonial extends Component {
                 dirty: {
                   ...state.dirty,
                   quote: true,
-                  role: true
+                  role: true,
+                  image: true
                 }
               }))
               return
@@ -232,37 +256,51 @@ class Testimonial extends Component {
               onChange={event => this.onFile(event)}
               style={{display: 'none'}}
             />
-            <Button black onClick={(event) => {
-              event.preventDefault()
-              this.fileInput.value = null
-              this.fileInput.click()
-            }}>
-              {t('testimonial/pickImage')}
-            </Button>
+            {!imageSrc && (
+              <Button onClick={pickImage}>
+                {t('testimonial/pickImage')}
+              </Button>
+            )}
+            {!!imageSrc && <A href='#' onClick={pickImage}>
+              {t('testimonial/pickImage/update')}
+            </A>}
             <br />
             {!!imageError && <ErrorMessage error={imageError} />}
             <br />
             {!!imageSrc && (
-              <div style={{marginBottom: 20}}>
-                <div style={{
-                  backgroundImage: `url(${imageSrc})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  width: 256,
-                  height: 256
-                }} />
-              </div>
+              <Item
+                style={{marginLeft: -5, cursor: 'default'}}
+                name={me.name}
+                imageRenderer={() => (
+                  <div {...styles.previewImage} style={{
+                    backgroundImage: `url(${imageSrc})`
+                  }} />
+                )}
+                isActive={showDetail} />
             )}
+            {!!imageSrc && showDetail && (
+              <Detail t={t} data={{
+                id: testimonial && testimonial.id,
+                name: me.name,
+                role: values.role,
+                quote: values.quote
+              }} />
+            )}
+            <br style={{clear: 'both'}} />
+            <br />
 
             {!!serverError && <ErrorMessage error={serverError} />}
-            {submitting
-              ? <InlineSpinner />
-              : (
-                <div style={{opacity: errorMessages.length ? 0.5 : 1}}>
-                  <Button type='submit'>
-                    {t('testimonial/submit')}
-                  </Button>
-                </div>
+            {
+              !!imageSrc && (
+                submitting
+                ? <InlineSpinner />
+                : (
+                  <div style={{opacity: errorMessages.length ? 0.5 : 1}}>
+                    <Button black type='submit'>
+                      {t('testimonial/submit')}
+                    </Button>
+                  </div>
+                )
               )
             }
           </form>
@@ -313,5 +351,6 @@ export default compose(
       testimonial: data.loading ? undefined : data.me && data.me.testimonial
     })
   }),
-  withT
+  withT,
+  withMe
 )(Testimonial)
