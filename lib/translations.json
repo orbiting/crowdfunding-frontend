@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-22T13:35:45.363Z",
+  "updated": "2017-04-22T14:28:48.605Z",
   "title": "live",
   "data": [
     {
@@ -817,7 +817,7 @@
     },
     {
       "key": "me/addressForm/line2/label",
-      "value": "Zusatz (Optional: Einheit, Gebäude, usw.)"
+      "value": "Zusatz (Optional)"
     },
     {
       "key": "me/addressForm/postalCode/label",
@@ -1108,6 +1108,10 @@
     {
       "key": "testimonial/pickImage/update",
       "value": "Portraitfoto ändern"
+    },
+    {
+      "key": "testimonial/quote/tooLong",
+      "value": "Statement, maximal 140 Zeichen"
     }
   ]
 }

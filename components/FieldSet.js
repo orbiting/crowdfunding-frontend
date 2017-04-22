@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {css} from 'glamor'
+import AutosizeInput from 'react-textarea-autosize'
 
 import {
   Field
@@ -58,9 +59,15 @@ class FieldSet extends Component {
     } = this.props
     return (
       <span>
-        {fields.map(({label, type, autoComplete, name, validator, mask, maskChar}) => {
+        {fields.map(({label, type, autoComplete, name, validator, mask, autoSize, maskChar}) => {
           let Component = Field
           let additionalProps = {}
+          if (autoSize) {
+            additionalProps.renderInput = (props) => (
+              <AutosizeInput
+                {...props} />
+            )
+          }
           if (mask) {
             additionalProps.renderInput = (props) => (
               <MaskedInput
@@ -71,28 +78,25 @@ class FieldSet extends Component {
             )
           }
           return (
-            <span key={name}>
-              <Component label={label} type={type}
-                {...additionalProps}
-                name={autoComplete || name}
-                autoComplete={autoComplete}
-                value={values[name]}
-                error={dirty[name] && errors[name]}
-                onChange={(_, value, shouldValidate) => {
-                  onChange({
-                    values: {
-                      [name]: value
-                    },
-                    errors: validator ? {
-                      [name]: validator(value)
-                    } : {},
-                    dirty: {
-                      [name]: shouldValidate
-                    }
-                  })
-                }} />
-              <br />
-            </span>
+            <Component key={name} label={label} type={type}
+              {...additionalProps}
+              name={autoComplete || name}
+              autoComplete={autoComplete}
+              value={values[name]}
+              error={dirty[name] && errors[name]}
+              onChange={(_, value, shouldValidate) => {
+                onChange({
+                  values: {
+                    [name]: value
+                  },
+                  errors: validator ? {
+                    [name]: validator(value)
+                  } : {},
+                  dirty: {
+                    [name]: shouldValidate
+                  }
+                })
+              }} />
           )
         })}
       </span>

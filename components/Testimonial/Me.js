@@ -31,10 +31,15 @@ const fields = (t) => [
   {
     label: t('testimonial/quote/label'),
     name: 'quote',
+    autoSize: true,
     validator: (value) => (
       (
         !value.trim() &&
         t('testimonial/quote/error')
+      ) ||
+      (
+        value.trim().length >= 140 &&
+        t('testimonial/quote/tooLong')
       )
     )
   }
@@ -252,7 +257,19 @@ class Testimonial extends Component {
               dirty={dirty}
               fields={fields(t)}
               onChange={(fields) => {
-                this.setState(mergeFields(fields))
+                this.setState((state) => {
+                  const next = mergeFields(fields)(state)
+                  if (
+                    next.values.quote &&
+                    next.values.quote.trim().length
+                  ) {
+                    next.dirty = {
+                      ...next.dirty,
+                      quote: true
+                    }
+                  }
+                  return next
+                })
               }} />
             <br />
             <input
