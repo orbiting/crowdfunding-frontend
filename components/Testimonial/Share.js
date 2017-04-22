@@ -3,12 +3,10 @@ import {gql, graphql} from 'react-apollo'
 import {css} from 'glamor'
 import {compose} from 'redux'
 
-import withT from '../../lib/withT'
-
 import Loader from '../Loader'
 
 import {
-  P, Logo, fontFamilies
+  P, Interaction, Logo, fontFamilies
 } from '@project-r/styleguide'
 
 const styles = {
@@ -45,6 +43,11 @@ const styles = {
   number: css({
     fontSize: 30,
     fontFamily: fontFamilies.sansSerifMedium
+  }),
+  videoTitle: css({
+    fontSize: 60,
+    lineHeight: '75px',
+    marginBottom: 20
   })
 }
 
@@ -63,16 +66,23 @@ const fontSizeBoost = length => {
   }
 }
 
-const Item = ({loading, error, testimonial: {quote, image, video}}) => (
+const Item = ({loading, error, testimonial: {quote, image, name, video, sequenceNumber}}) => (
   <Loader loading={loading} error={error} render={() => (
     <div {...styles.container}>
       <img {...styles.image} src={image} />
       <div {...styles.text}>
-        <P {...styles.quote}
+        {quote && <P {...styles.quote}
           style={{fontSize: 24 + fontSizeBoost(quote.length)}}>
           «{quote}»
-        </P>
-        <div {...styles.number}>Abo #59</div>
+        </P>}
+        {video && (
+          <Interaction.H2 {...styles.videoTitle}>
+            {name}
+          </Interaction.H2>
+        )}
+        {!!sequenceNumber && (
+          <div {...styles.number}>Abo #{sequenceNumber}</div>
+        )}
       </div>
       <div {...styles.logo}>
         <Logo />
@@ -82,7 +92,7 @@ const Item = ({loading, error, testimonial: {quote, image, video}}) => (
 )
 
 const query = gql`query testimonials($firstId: ID) {
-  testimonials(seed: -0.2, firstId: $firstId, limit: 1) {
+  testimonials(firstId: $firstId, limit: 1) {
     id
     name
     role
@@ -106,6 +116,5 @@ export default compose(
         testimonial: data.testimonials && data.testimonials[0]
       })
     }
-  }),
-  withT
+  })
 )(Item)
