@@ -13,7 +13,8 @@ const styles = {
   container: css({
     position: 'relative',
     width: 1200,
-    height: 628
+    height: 628,
+    backgroundColor: '#fff'
   }),
   logo: css({
     position: 'absolute',

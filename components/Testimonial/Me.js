@@ -345,8 +345,6 @@ const mutation = gql`mutation submitTestimonial($role: String!, $quote: String!,
   }
 }`
 
-      // published
-      // adminUnpublished
 const query = gql`query myTestimonial {
   me {
     id
@@ -356,6 +354,8 @@ const query = gql`query myTestimonial {
       role
       quote
       image
+      published
+      adminUnpublished
       video {
         hls
         mp4
