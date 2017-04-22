@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-21T21:58:59.194Z",
+  "updated": "2017-04-22T13:35:45.363Z",
   "title": "live",
   "data": [
     {
@@ -8,28 +8,23 @@
     },
     {
       "key": "menu/updates",
-      "value": "Neues",
-      "undefined": "Neues"
+      "value": "Neues"
     },
     {
       "key": "menu/events",
-      "value": "Veranstaltungen",
-      "undefined": "Action"
+      "value": "Veranstaltungen"
     },
     {
       "key": "menu/community",
-      "value": "Community",
-      "undefined": "Komplizen"
+      "value": "Community"
     },
     {
       "key": "menu/faq",
-      "value": "Fragen",
-      "undefined": "Antworten"
+      "value": "Fragen"
     },
     {
       "key": "header/button",
-      "value": "Mitmachen",
-      "undefined": "An Bord kommen"
+      "value": "Mitmachen"
     },
     {
       "key": "package/title",
@@ -83,14 +78,6 @@
     {
       "key": "package/DONATE/description",
       "value": "Sie wollen hervorragenden Journalismus unterstützen, ohne ihn zu lesen. Aber mit Geld. Denn Sie wissen: Guter Journalismus kostet."
-    },
-    {
-      "key": "package/POSTER/title",
-      "value": "Das Manifest"
-    },
-    {
-      "key": "package/POSTER/description",
-      "value": "Sie sind vorsichtig und entscheiden sich statt dem Produkt für den Bauplan des Produkts. Diesen erhalten Sie prächtig in A3, ein Schmuck für jede Wand. Aber Achtung: Das Magazin erhalten Sie dafür noch nicht."
     },
     {
       "key": "package/ABO/userPrice/teaser",
@@ -482,7 +469,7 @@
     },
     {
       "key": "pledge/submit/emailVerify/note",
-      "value": "Sie müssen Ihre Email-Adresse verifizieren. Klicken Sie auf jetzt verifizieren oder wählen sie eine andere Email-Adresse."
+      "value": "Diese Mailadresse wurde schon einmal verwendet. Wir haben eine Mail geschickt. Bitte bestätigen Sie, dass Sie der Besitzer oder die Besitzerin sind, indem Sie auf den Link in der Mail klicken. "
     },
     {
       "key": "pledge/submit/error/title",
@@ -598,7 +585,7 @@
     },
     {
       "key": "sidebar/reminder/send",
-      "value": "Fehler"
+      "value": "erinnern Sie mich!"
     },
     {
       "key": "pledge/recievePayment/error",
@@ -770,7 +757,7 @@
     },
     {
       "key": "footer/contact/address",
-      "value": "Republik AG\nc/o Hotel Rothaus\nSihlhallenstrasse 1\n8004 Zürich\nSchweiz"
+      "value": "Republik \nProject R Genossenschaft\nSihlhallenstrasse 1\n8004 Zürich\nSchweiz"
     },
     {
       "key": "footer/about/title",
@@ -910,15 +897,15 @@
     },
     {
       "key": "memberships/give/description/before/notGive",
-      "value": "Wollen Sie das Abo nicht selber nutzen? Und nicht Mitglied von Porject R werden? Sie können Ihr Abo und Mitgliedschaft mit dem folgendem Gutscheincode verschenken:"
+      "value": "Wollen Sie das Abo nicht selber nutzen? Und nicht Mitglied von Project R werden? Sie können Ihr Abo und Mitgliedschaft mit folgendem Gutscheincode verschenken:"
     },
     {
       "key": "memberships/give/description/before/1",
-      "value": "Sie können ein Abo und Mitgliedschaft mit dem folgendem Gutscheincode verschenken:"
+      "value": "Sie können das Abo und die Mitgliedschaft mit folgendem Gutscheincode verschenken:"
     },
     {
       "key": "memberships/give/description/before/other",
-      "value": "Sie können Abos und Mitgliedschaften mit folgenden Gutscheincodes verschenken:"
+      "value": "Sie können die Abos und Mitgliedschaften mit folgenden Gutscheincodes verschenken:"
     },
     {
       "key": "memberships/give/description/after",
@@ -980,7 +967,7 @@
     },
     {
       "key": "events/pageTitle",
-      "value": "Live"
+      "value": "Veranstaltungen"
     },
     {
       "key": "events/metaDescription",
@@ -1117,6 +1104,10 @@
     {
       "key": "testimonial/detail/share/emailSubject",
       "value": "{name} unterstützt die Republik"
+    },
+    {
+      "key": "testimonial/pickImage/update",
+      "value": "Portraitfoto ändern"
     }
   ]
 }

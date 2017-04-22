@@ -137,7 +137,7 @@ class SidebarInner extends Component {
                   }}>
                     {t('sidebar/reminder/cancel')}
                   </span>
-                  {' '}
+                  {' '}&nbsp;{' '}
                   <A onClick={submitReminder}>
                     {t('sidebar/reminder/send')}
                   </A>
