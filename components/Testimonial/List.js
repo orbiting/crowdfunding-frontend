@@ -4,6 +4,7 @@ import {compose} from 'redux'
 import {css} from 'glamor'
 import {max} from 'd3-array'
 import Router from 'next/router'
+import Meta from '../Frame/Meta'
 
 import withT from '../../lib/withT'
 import RawHtml from '../RawHtml'
@@ -11,6 +12,10 @@ import Loader from '../Loader'
 import Play from '../Icons/Play'
 
 import Detail from './Detail'
+
+import {
+  PUBLIC_BASE_URL
+} from '../../constants'
 
 import {
   Interaction, mediaQueries, fontFamilies,
@@ -157,7 +162,7 @@ class List extends Component {
   render () {
     const {
       loading, error, testimonials, t,
-      onSelect
+      onSelect, queryId
     } = this.props
     const {columns, open} = this.state
 
@@ -165,6 +170,12 @@ class List extends Component {
       <Loader loading={testimonials ? false : loading} error={error} render={() => {
         const items = []
         const lastIndex = testimonials.length - 1
+        const requestedTestimonial = (
+          testimonials.length &&
+          testimonials[0].id === queryId &&
+          testimonials[0]
+        )
+
         testimonials.forEach(({id, image, video, name}, i) => {
           const row = Math.floor(i / columns)
           const offset = i % columns
@@ -216,8 +227,24 @@ class List extends Component {
           }
         })
 
+        const metaData = requestedTestimonial
+          ? ({
+            pageTitle: t('testimonial/meta/single/pageTitle', requestedTestimonial),
+            title: t('testimonial/meta/single/title', requestedTestimonial),
+            description: t('testimonial/meta/single/description', requestedTestimonial),
+            url: `${PUBLIC_BASE_URL}/community?id=${requestedTestimonial.id}`,
+            image: requestedTestimonial.smImage
+          })
+          : ({
+            title: t('testimonial/meta/title'),
+            description: t('testimonial/meta/description'),
+            url: `${PUBLIC_BASE_URL}/community`,
+            image: `${PUBLIC_BASE_URL}/static/social-media/community.png`
+          })
+
         return (
           <div {...styles.grid}>
+            <Meta data={metaData} />
             {items}
           </div>
         )
@@ -283,6 +310,7 @@ class Container extends Component {
         <br /><br />
         <ListWithQuery
           firstId={query ? undefined : id || this.state.clearedFirstId}
+          queryId={id}
           onSelect={() => {
             if (!id) {
               return

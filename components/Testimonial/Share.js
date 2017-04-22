@@ -2,6 +2,7 @@ import React from 'react'
 import {gql, graphql} from 'react-apollo'
 import {css} from 'glamor'
 import {compose} from 'redux'
+import Head from 'next/head'
 
 import Loader from '../Loader'
 
@@ -70,6 +71,9 @@ const fontSizeBoost = length => {
 const Item = ({loading, error, testimonial: {quote, image, name, video, sequenceNumber}}) => (
   <Loader loading={loading} error={error} render={() => (
     <div {...styles.container}>
+      <Head>
+        <meta name='robots' content='noindex' />
+      </Head>
       <img {...styles.image} src={image} />
       <div {...styles.text}>
         {quote && <P {...styles.quote}

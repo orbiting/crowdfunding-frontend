@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-22T21:26:43.043Z",
+  "updated": "2017-04-22T23:39:16.570Z",
   "title": "live",
   "data": [
     {
@@ -1124,6 +1124,26 @@
     {
       "key": "testimonial/unpublished",
       "value": "Wir können leider ihr Statement nicht publizieren. Schreiben Sie an kontakt@republik.ch für weitere Informationen."
+    },
+    {
+      "key": "testimonial/meta/title",
+      "value": "Community"
+    },
+    {
+      "key": "testimonial/meta/description",
+      "value": "Noch kein Mitglied? Jetzt mitmachen und Mitglied werden!"
+    },
+    {
+      "key": "testimonial/meta/single/title",
+      "value": "{name} unterstützt die Republik"
+    },
+    {
+      "key": "testimonial/meta/single/pageTitle",
+      "value": "{name} — Community — Republik"
+    },
+    {
+      "key": "testimonial/meta/single/description",
+      "value": "Jetzt beim Crowdfunding mitmachen und an Board kommen."
     }
   ]
 }
