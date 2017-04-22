@@ -177,7 +177,9 @@ class List extends Component {
               .find(testimonial => testimonial.id === openId)
             if (openItem) {
               items.push(
-                <Detail key={`detail${row - 1}`} t={t} data={openItem} />
+                <Detail
+                  key={`detail${row - 1}`}
+                  t={t} data={openItem} />
               )
             }
           }
@@ -224,8 +226,8 @@ class List extends Component {
   }
 }
 
-const query = gql`query testimonials($seed: Float!, $name: String, $firstId: ID) {
-  testimonials(seed: $seed, name: $name, firstId: $firstId) {
+const query = gql`query testimonials($seed: Float, $search: String, $firstId: ID) {
+  testimonials(seed: $seed, search: $search, firstId: $firstId) {
     id
     name
     role
@@ -296,7 +298,7 @@ class Container extends Component {
               )
             })
           }}
-          name={query}
+          search={query}
           seed={seed} />
       </div>
     )

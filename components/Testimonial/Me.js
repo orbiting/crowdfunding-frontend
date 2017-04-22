@@ -229,6 +229,8 @@ class Testimonial extends Component {
       return null
     }
 
+    const unpublished = !!(testimonial && testimonial.adminUnpublished)
+
     return (
       <Loader loading={loading} error={error} render={() => (
         <div style={{marginBottom: 40}}>
@@ -312,6 +314,7 @@ class Testimonial extends Component {
             <br style={{clear: 'both'}} />
             <br />
 
+            {unpublished && <ErrorMessage error={t('testimonial/unpublished')} />}
             {!!serverError && <ErrorMessage error={serverError} />}
             {
               !!imageSrc && (
@@ -320,7 +323,10 @@ class Testimonial extends Component {
                 : (
                   <div style={{opacity: errorMessages.length ? 0.5 : 1}}>
                     <Button black type='submit'>
-                      {t('testimonial/submit')}
+                      {testimonial && testimonial.published
+                        ? t('testimonial/update')
+                        : t('testimonial/submit')
+                      }
                     </Button>
                   </div>
                 )
@@ -338,6 +344,9 @@ const mutation = gql`mutation submitTestimonial($role: String!, $quote: String!,
     id
   }
 }`
+
+      // published
+      // adminUnpublished
 const query = gql`query myTestimonial {
   me {
     id

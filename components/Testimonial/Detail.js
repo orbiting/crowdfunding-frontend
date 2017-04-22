@@ -21,6 +21,9 @@ const styles = {
     padding: '30px 45px',
     float: 'left'
   }),
+  detailTitle: css({
+    lineHeight: '20px'
+  }),
   detailRole: css({
     fontSize: 17,
     fontFamily: fontFamilies.sansSerifRegular,
@@ -30,11 +33,13 @@ const styles = {
 
 const Detail = ({t, data: {id, name, role, quote, image, video}}) => (
   <div {...styles.detail}>
-    <H2>{name} <span {...styles.detailRole}>{role}</span></H2>
+    <H2 {...styles.detailTitle}>
+      {name} <span {...styles.detailRole}>{role}</span>
+    </H2>
     {video
       ? (
         <div style={{maxWidth: 400, marginBottom: 20, marginTop: 10}}>
-          <VideoPlayer src={{...video, poster: image}} autoPlay />
+          <VideoPlayer key={id} src={{...video, poster: image}} autoPlay />
         </div>
         )
       : <SerifP>«{quote}»</SerifP>
