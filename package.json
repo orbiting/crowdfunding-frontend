@@ -12,7 +12,8 @@
     "standardize": "standard --fix 'components/**/*.js' 'lib/**/*.js' 'pages/**/*.js'",
     "heroku-postbuild": "npm run build",
     "translations": "gsheets --key=1OHoiENwJH-tqf9yXfXHOevAn17daO_CvB21Rym-oiqk --title=live --pretty --out lib/translations.json",
-    "test": "wdio test/wdio.conf.js"
+    "test": "wdio test/wdio.conf.js",
+    "klog": "find . -name '*.js' -not -path \"./node_modules*\" -not -path \"./.next*\" | xargs wc -l"
   },
   "lint-staged": {
     "*.js": [
