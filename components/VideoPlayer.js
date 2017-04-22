@@ -202,6 +202,7 @@ class VideoPlayer extends Component {
       <div {...styles.wrapper}>
         <video {...styles.video}
           style={this.props.style}
+          autoPlay={this.props.autoPlay}
           muted={muted}
           ref={this.ref}
           poster={src.poster}>

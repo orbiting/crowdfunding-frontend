@@ -9,6 +9,8 @@ import withT from '../../lib/withT'
 import RawHtml from '../RawHtml'
 import Loader from '../Loader'
 import Share from '../Share'
+import VideoPlayer from '../VideoPlayer'
+import Play from '../Icons/Play'
 
 import {
   Interaction, mediaQueries, fontFamilies,
@@ -98,6 +100,11 @@ const styles = {
     color: '#fff',
     fontFamily: fontFamilies.sansSerifMedium
   }),
+  play: css({
+    position: 'absolute',
+    right: PADDING + 5,
+    top: PADDING + 5
+  }),
   detail: css({
     width: '100%',
     padding: '30px 45px',
@@ -110,10 +117,17 @@ const styles = {
   })
 }
 
-const Detail = ({t, data: {id, name, role, quote}}) => (
+const Detail = ({t, data: {id, name, role, quote, image, video}}) => (
   <div {...styles.detail}>
     <H2>{name} <span {...styles.detailRole}>{role}</span></H2>
-    <SerifP>«{quote}»</SerifP>
+    {video
+      ? (
+        <div style={{maxWidth: 400, marginBottom: 20, marginTop: 10}}>
+          <VideoPlayer src={{...video, poster: image}} autoPlay />
+        </div>
+        )
+      : <SerifP>«{quote}»</SerifP>
+    }
     <Share
       fill={colors.secondary}
       url={`${PUBLIC_BASE_URL}/community?id=${id}`}
@@ -174,7 +188,7 @@ class List extends Component {
       <Loader loading={testimonials ? false : loading} error={error} render={() => {
         const items = []
         const lastIndex = testimonials.length - 1
-        testimonials.forEach(({id, image, name}, i) => {
+        testimonials.forEach(({id, image, video, name}, i) => {
           const row = Math.floor(i / columns)
           const offset = i % columns
           const openId = open[row - 1]
@@ -205,6 +219,7 @@ class List extends Component {
               <div {...styles.aspect}>
                 <img src={image} />
               </div>
+              {!!video && <div {...styles.play}><Play /></div>}
               {!isActive && <div {...styles.name}>{name}</div>}
               {isActive && <div {...styles.itemArrow} />}
             </div>
