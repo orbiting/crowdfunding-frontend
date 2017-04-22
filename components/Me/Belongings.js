@@ -45,7 +45,7 @@ const styles = {
   })
 }
 
-const Belongings = ({loading, error, pledges, me, t, signOut, highlightPledgeId}) => (
+const Belongings = ({loading, error, pledges, hasMemberships, me, t, signOut, highlightPledgeId}) => (
   <Loader loading={loading} error={error} render={() => {
     const displayablePledges = pledges
       .filter(pledge => pledge.status !== 'DRAFT')
@@ -77,7 +77,7 @@ const Belongings = ({loading, error, pledges, me, t, signOut, highlightPledgeId}
           </P>
         </div>)}
         <ClaimedMemberships />
-        <Testimonial />
+        {(hasPledges || hasMemberships) && <Testimonial />}
         <H2>{t.pluralize('merci/pledges/title', {
           count: displayablePledges.length
         })}</H2>
@@ -158,13 +158,13 @@ const Belongings = ({loading, error, pledges, me, t, signOut, highlightPledgeId}
               </div>
             )
           })}
-        <br />
+        <br /><br /><br /><br /><br /><br />
+        {(hasPledges || hasMemberships) && !!me.name && <UpdateMe />}
+        <br /><br />
         <A href='#' onClick={(e) => {
           e.preventDefault()
           signOut()
         }}>{t('merci/signOut')}</A>
-        <br /><br /><br /><br /><br /><br />
-        {!!me.name && <UpdateMe />}
       </div>
     )
   }} />
@@ -183,6 +183,15 @@ export default compose(
             data.me &&
             data.me.pledges
           ) || []
+        ),
+        hasMemberships: (
+          (
+            !data.loading &&
+            !data.error &&
+            data.me &&
+            data.me.memberships &&
+            !!data.me.memberships.length
+          )
         )
       }
     }

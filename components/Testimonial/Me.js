@@ -137,7 +137,7 @@ class Testimonial extends Component {
       image: image ? image.content : undefined
     })
       .then(() => {
-        // give keycdn a few seconds to pruge
+        // give keycdn a few seconds to pruge image
         // https://www.keycdn.com/support/purge-cdn-cache/
         setTimeout(() => {
           this.setState(() => ({
@@ -216,6 +216,12 @@ class Testimonial extends Component {
       event.preventDefault()
       this.fileInput.value = null
       this.fileInput.click()
+    }
+
+    // video testimonials are imported
+    // and can't be edited here
+    if (testimonial && testimonial.video) {
+      return null
     }
 
     return (
