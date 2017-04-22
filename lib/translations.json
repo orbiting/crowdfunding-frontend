@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-21T19:55:29.678Z",
+  "updated": "2017-04-22T21:26:43.043Z",
   "title": "live",
   "data": [
     {
@@ -8,32 +8,27 @@
     },
     {
       "key": "menu/updates",
-      "value": "Neues",
-      "undefined": "Neues"
+      "value": "Neues"
     },
     {
       "key": "menu/events",
-      "value": "Veranstaltungen",
-      "undefined": "Action"
+      "value": "Veranstaltungen"
     },
     {
       "key": "menu/community",
-      "value": "Community",
-      "undefined": "Komplizen"
+      "value": "Community"
     },
     {
       "key": "menu/faq",
-      "value": "Fragen",
-      "undefined": "Antworten"
+      "value": "Fragen"
     },
     {
       "key": "header/button",
-      "value": "Mitmachen",
-      "undefined": "An Bord kommen"
+      "value": "Mitmachen"
     },
     {
       "key": "package/title",
-      "value": "Abo & Mitgliedschaft für ein Jahr"
+      "value": "Abo und Mitgliedschaft für ein Jahr"
     },
     {
       "key": "package/customize/changePackage",
@@ -65,7 +60,7 @@
     },
     {
       "key": "package/customize/userPrice/beforeReason",
-      "value": "Journalismus kostet. Aber wir wollen wir niemanden ausschliessen. Falls Sie sich die 240 Franken nicht leisten können, bitten wir Sie um eine knappe Begründung und einen Preis, der Ihnen fair scheint. Willkommen an Bord!"
+      "value": "Journalismus kostet. Aber wir wollen niemanden ausschliessen. Falls Sie sich die 240 Franken nicht leisten können, bitten wir Sie um eine knappe Begründung und einen Preis, der Ihnen fair scheint. Willkommen an Bord!"
     },
     {
       "key": "package/customize/userPrice/beforePrice",
@@ -82,15 +77,7 @@
     },
     {
       "key": "package/DONATE/description",
-      "value": "Sie wollen hervorragenden Journalismus unterstützen, ohne ihn zu lesen. Aber mit Geld. Denn Sie wissen: ohne Geld läuft nichts."
-    },
-    {
-      "key": "package/POSTER/title",
-      "value": "Das Manifest"
-    },
-    {
-      "key": "package/POSTER/description",
-      "value": "Sie sind vorsichtig und entscheiden sich statt dem Produkt für den Bauplan des Produkts. Diesen erhalten Sie prächtig in A3, ein Schmuck für jede Wand. Aber Achtung: Das Magazin erhalten Sie dafür noch nicht."
+      "value": "Sie wollen hervorragenden Journalismus unterstützen, ohne ihn zu lesen. Aber mit Geld. Denn Sie wissen: Guter Journalismus kostet."
     },
     {
       "key": "package/ABO/userPrice/teaser",
@@ -121,7 +108,7 @@
     },
     {
       "key": "package/BENEFACTOR/description",
-      "value": "Sie wollen nicht nur ein unabhängiges Magazin lesen, sondern Sie wollen sich auch energisch dafür einsetzten, dass dieses existiert. Und fördern unser neues Modell für Journalismus mit dem besten Argument, das möglich ist: mit Geld. Dazu werden Sie automatisch Mitglied der Project R Genossenschaft. Und damit ein klein wenig Verleger oder Verlegerin der Republik. Um uns für Ihre Grosszügigkeit zu revanchieren, schicken wir Ihnen das Start-Up-Verleger-Paket: ein Plakat mit dem Manifest, 10 Buttons + ein signiertes Manual für Journalismus im 21. Jahrhundert."
+      "value": "Sie wollen nicht nur ein unabhängiges Magazin lesen, sondern Sie wollen sich auch energisch dafür einsetzen, dass dieses existiert. Wie alle werden Sie automatisch Mitglied der Project R Genossenschaft. Und damit Verleger oder Verlegerin der Republik. Um uns für Ihre Grosszügigkeit zu revanchieren, schicken wir Ihnen das Start-up-Verleger-Paket: ein Manifest, einen Anstecker in Gold und ein signiertes Manual für Journalismus im 21. Jahrhundert."
     },
     {
       "key": "option/ABO/label/other",
@@ -146,15 +133,15 @@
     },
     {
       "key": "merci/postpay/waiting",
-      "value": "Danke, Sie sind mit dem Wichtigsten durch. Jetzt müssen Sie noch Ihre Mailadresse bestätigen. Wir haben Ihnen ein kurzes Mail geschickt. Dieses enthält fett gedruckt die drei seltsamen Wörter: <b>«{phrase}»</b>.<br /><br />Gehen Sie zu Ihrem Postfach, öffnen Sie das Mail, kontrollieren Sie, ob dort die drei gleichen seltsamen Wörter stehen. Sind es dieselben, klicken Sie den Link darunter. <br /><br /> (Die Sache mit den drei Wörtern ist leider nötig. Es ist eine Sicherheitsmassname, damit niemand mit Ihrer Mailadresse Unfug treiben kann.) "
+      "value": "Danke, Sie sind mit dem Wichtigsten durch. Jetzt müssen Sie noch Ihre Mailadresse bestätigen. Wir haben Ihnen ein kurzes Mail geschickt. Dieses enthält fett gedruckt die drei seltsamen Wörter: <b>«{phrase}»</b>.<br /><br />Gehen Sie zu Ihrem Postfach, öffnen Sie das Mail, kontrollieren Sie, ob dort die drei gleichen seltsamen Wörter stehen. Sind es dieselben, klicken Sie den Link darunter. <br /><br /> (Die Sache mit den drei Wörtern ist leider nötig. Es ist eine Sicherheitsmassnahme, damit niemand mit Ihrer Mailadresse Unfug treiben kann.)"
     },
     {
       "key": "merci/postpay/reclaim",
-      "value": "Falsche Email-Adresse?"
+      "value": "Falsche E-Mail-Adresse?"
     },
     {
       "key": "merci/claim/signIn/before",
-      "value": "Geben Sie ihre richtige Email-Addresse ein:"
+      "value": "Geben Sie Ihre richtige E-Mail-Adresse ein:"
     },
     {
       "key": "merci/claim/signIn/button",
@@ -190,7 +177,7 @@
     },
     {
       "key": "merci/lead",
-      "value": "Vielen Dank für Ihre Unterstützung. Es ist uns eine Ehre, Sie als Teil unseres Unternehmens zu begrüssen. <br /> Auf dieser Seite finden Sie alles, was wir von Ihnen wissen: Ihre Einkäufe, Ihre Postadresse (brauchen wir leider) und Ihr Foto (brauchen wir nicht, würde uns aber freuen), letzteres mit einem Slogan (würde uns ebenfalls freuen). <br /> Hier unser Slogan: Lang lebe die Republik! "
+      "value": "Vielen Dank für Ihre Unterstützung. Es ist uns eine Ehre, Sie als Teil unseres Unternehmens zu begrüssen. <br /> Auf dieser Seite finden Sie alles, was wir von Ihnen wissen: Ihre Einkäufe, Ihre Postadresse (brauchen wir leider) und Ihr Foto (brauchen wir nicht, würde uns aber freuen), Letzteres mit einem Slogan (würde uns ebenfalls freuen). <br /> Hier unser Slogan: Lang lebe die Republik!"
     },
     {
       "key": "merci/share/tweetTemplate",
@@ -202,7 +189,7 @@
     },
     {
       "key": "merci/share/emailBody",
-      "value": "Hallo\n\nWerde Mitglied und Abonoment vom der Republik:\n{url}\n\nHerzliche Grüsse,\n{backerName}"
+      "value": "Hallo Werde Mitglied und Abonnent der Republik: {url} Herzliche Grüsse, {backerName}"
     },
     {
       "key": "merci/pledges/title/1",
@@ -222,7 +209,7 @@
     },
     {
       "key": "merci/payment/method/POSTFINANCECARD",
-      "value": "Postkarte"
+      "value": "Postcard"
     },
     {
       "key": "merci/payment/method/PAYPAL",
@@ -242,7 +229,7 @@
     },
     {
       "key": "merci/payment/status/generic/REFUNDED",
-      "value": "{formattedTotal} zurück erstattet"
+      "value": "{formattedTotal} zurückerstattet"
     },
     {
       "key": "merci/payment/status/generic/CANCELLED",
@@ -250,7 +237,7 @@
     },
     {
       "key": "merci/payment/status/PAYMENTSLIP/WAITING",
-      "value": "Bitte überweisen Sie {formattedTotal} mit der Mitteilung «{hrid}» an:\n\n\nKonto: 61-11760-6\nProject R Genossenschaft\n8004 Zürich"
+      "value": "Bitte überweisen Sie {formattedTotal} mit der Mitteilung «{hrid}» an: Konto: 61-11760-6 Project R Genossenschaft 8004 Zürich"
     },
     {
       "key": "merci/payment/status/PAYMENTSLIP/PAID",
@@ -302,7 +289,7 @@
     },
     {
       "key": "merci/signOut",
-      "value": "Abmelden"
+      "value": "abmelden"
     },
     {
       "key": "signIn/button",
@@ -310,7 +297,7 @@
     },
     {
       "key": "signIn/email/label",
-      "value": "Email-Adresse"
+      "value": "E-Mail-Adresse"
     },
     {
       "key": "signIn/success",
@@ -318,7 +305,7 @@
     },
     {
       "key": "signIn/polling",
-      "value": "Jetzt müssen Sie noch Ihre Mailadresse bestätigen. Wir haben Ihnen ein kurzes Mail geschickt. Dieses enthält fett gedruckt die drei seltsamen Wörter: <b>«{phrase}»</b>.<br /><br /> Gehen Sie zu Ihrem Postfach, öffnen Sie das Mail, kontrollieren Sie, ob dort die drei gleichen seltsamen Wörter stehen. Sind es dieselben, klicken Sie den Link darunter. <br /><br />(Die Sache mit den drei Wörtern ist leider nötig. Es ist eine Sicherheitsmassname, damit niemand mit Ihrer Mailadresse Unfug treiben kann.) "
+      "value": "Jetzt müssen Sie noch Ihre Mailadresse bestätigen. Wir haben Ihnen ein kurzes Mail geschickt. Dieses enthält fett gedruckt die drei seltsamen Wörter: <b>«{phrase}»</b>.<br /><br /> Gehen Sie zu Ihrem Postfach, öffnen Sie das Mail, kontrollieren Sie, ob dort die drei gleichen seltsamen Wörter stehen. Sind es dieselben, klicken Sie den Link darunter. <br /><br />(Die Sache mit den drei Wörtern ist leider nötig. Es ist eine Sicherheitsmassnahme, damit niemand mit Ihrer Mailadresse Unfug treiben kann.)"
     },
     {
       "key": "signIn/cancel",
@@ -406,7 +393,7 @@
     },
     {
       "key": "pledge/submit/package/error",
-      "value": "Wählen Sie zuoberst ein Abonnement und Mitgliedschaft oder Sepnden aus"
+      "value": "Wählen Sie zuoberst ein Abonnement und eine Mitgliedschaft oder Spenden aus"
     },
     {
       "key": "pledge/submit/payMethod/title",
@@ -426,11 +413,11 @@
     },
     {
       "key": "pledge/submit/stripe/js/loading",
-      "value": "Kreditkartenzahlungen wird vorbereitet"
+      "value": "Kreditkartenzahlung wird vorbereitet"
     },
     {
       "key": "pledge/submit/stripe/js/failed",
-      "value": "Kreditkartenzahlungen sind zur Zeit nicht möglich. Wählen Sie eine andere Zahlungsart."
+      "value": "Kreditkartenzahlungen sind zurzeit nicht möglich. Wählen Sie eine andere Zahlungsart."
     },
     {
       "key": "pledge/submit/stripe/card/label",
@@ -482,7 +469,7 @@
     },
     {
       "key": "pledge/submit/emailVerify/note",
-      "value": "Sie müssen Ihre Email-Adresse verifizieren. Klicken Sie auf jetzt verifizieren oder wählen sie eine andere Email-Adresse."
+      "value": "Diese Mailadresse wurde schon einmal verwendet. Wir haben ein Mail geschickt. Bitte bestätigen Sie, dass Sie der Besitzer oder die Besitzerin sind, indem Sie auf den Link im Mail klicken."
     },
     {
       "key": "pledge/submit/error/title",
@@ -494,7 +481,7 @@
     },
     {
       "key": "pledge/submit/button/legal",
-      "value": "Mit dem Bezahlen erklären Sie sich mit den <a href=\"/legal/tos\" target=\"_blank\">AGB</a>s, der <a href=\"/legal/privacy\" target=\"_blank\">Datenschutzerklärung</a> und den <a href=\"/legal/statute\" target=\"_blank\">Project R Genossenschaftsstatuten</a> einverstanden."
+      "value": "Mit dem Bezahlen erklären Sie sich mit der <a href=\"/legal/tos\" target=\"_blank\">AGB</a>s, der <a href=\"/legal/privacy\" target=\"_blank\">Datenschutzerklärung</a> und den <a href=\"/legal/statute\" target=\"_blank\">Statuten der Project R Genossenschaft</a> einverstanden."
     },
     {
       "key": "pledge/submit/pay/method/STRIPE",
@@ -582,11 +569,15 @@
     },
     {
       "key": "sidebar/investor",
-      "value": "Sie wollen Investor, bzw. Investorin der Republik AG werden?"
+      "value": "Sie wollen Investor bzw. Investorin der Republik AG werden?"
+    },
+    {
+      "key": "sidebar/investor/subject",
+      "value": "Investitionsmöglichkeiten bei der Republik AG"
     },
     {
       "key": "sidebar/reminder/button",
-      "value": "Nicht jetzt. Später!\n"
+      "value": "Nicht jetzt. Später!"
     },
     {
       "key": "sidebar/reminder/success",
@@ -610,7 +601,7 @@
     },
     {
       "key": "pledge/recievePayment/paypal/cancel",
-      "value": "Zahlung abgebrochen. Wählen Sie ein anderes Zahlungsmittel um ihre Bestellung abzuschliessen."
+      "value": "Zahlung abgebrochen. Wählen Sie ein anderes Zahlungsmittel, um Ihre Bestellung abzuschliessen."
     },
     {
       "key": "pledge/recievePayment/3dsecure/failed",
@@ -630,15 +621,15 @@
     },
     {
       "key": "pledge/3dsecure/redirect/failed",
-      "value": "3-D Secure ihrer Bank ist nicht verfügbar. Versuchen Sie es mit einem anderen Zahlungsmittel."
+      "value": "3-D Secure Ihrer Bank ist nicht verfügbar. Versuchen Sie es mit einem anderen Zahlungsmittel."
     },
     {
       "key": "api/auth/success",
-      "value": "Perfekt! Ihre E-Mail Adresse ist somit bestätigt. Sie können dieses Fenster wieder schliessen."
+      "value": "Perfekt! Ihre E-Mail-Adresse ist somit bestätigt. Sie können dieses Fenster wieder schliessen."
     },
     {
       "key": "api/auth/error",
-      "value": "Leider hat etwas nicht ganz geklappt. Bitte versuchen Sie, den Link zur Anmeldung erneut zu klicken. Klappt das ein zweites Mal nicht, stehen wir Ihnen gerne mit Rat zur Verfügung. Schreiben Sie uns ihr Problem auf kontakt@republik.ch. "
+      "value": "Leider hat etwas nicht ganz geklappt. Bitte versuchen Sie, den Link zur Anmeldung erneut zu klicken. Klappt das ein zweites Mal nicht, stehen wir Ihnen gerne mit Rat zur Verfügung. Schreiben Sie uns Ihr Problem an kontakt@republik.ch."
     },
     {
       "key": "api/email/invalid",
@@ -674,19 +665,19 @@
     },
     {
       "key": "api/pay/stripe/invalid_expiry_month",
-      "value": "The card's expiration month is invalid."
+      "value": "The card’s expiration month is invalid."
     },
     {
       "key": "api/pay/stripe/invalid_expiry_year",
-      "value": "The card's expiration year is invalid."
+      "value": "The card’s expiration year is invalid."
     },
     {
       "key": "api/pay/stripe/invalid_cvc",
-      "value": "The card's security code is invalid."
+      "value": "The card’s security code is invalid."
     },
     {
       "key": "api/pay/stripe/invalid_swipe_data",
-      "value": "The card's swipe data is invalid."
+      "value": "The card’s swipe data is invalid."
     },
     {
       "key": "api/pay/stripe/incorrect_number",
@@ -698,11 +689,11 @@
     },
     {
       "key": "api/pay/stripe/incorrect_cvc",
-      "value": "The card's security code is incorrect."
+      "value": "The card’s security code is incorrect."
     },
     {
       "key": "api/pay/stripe/incorrect_zip",
-      "value": "The card's zip code failed validation."
+      "value": "The card’s zip code failed validation."
     },
     {
       "key": "api/pay/stripe/card_declined",
@@ -718,7 +709,7 @@
     },
     {
       "key": "api/paypal/unknownError",
-      "value": "Bei der Bezahlung mit Paypal ist etwas schiefgelaufen. Wir haben Ihre Angaben und den Fehler gespeichert. Bitte kontaktieren Sie uns unter kontakt@repulik.ch und geben Sie folgende Nummer an: ID: {id}"
+      "value": "Bei der Bezahlung mit PayPal ist etwas schiefgelaufen. Wir haben Ihre Angaben und den Fehler gespeichert. Bitte kontaktieren Sie uns unter kontakt@repulik.ch und geben Sie folgende Nummer an: ID: {id}"
     },
     {
       "key": "api/pay/pf/checksumError",
@@ -738,7 +729,7 @@
     },
     {
       "key": "api/signin/mail/subject",
-      "value": "E-Mail Adresse bestätigen (für die REPUBLIK)"
+      "value": "E-Mail-Adresse bestätigen (für die Republik)"
     },
     {
       "key": "api/pledge/mail/subject",
@@ -746,7 +737,7 @@
     },
     {
       "key": "api/remindeme/mail/subject",
-      "value": "Erinnerung REPUBLIK crowdfunding"
+      "value": "Erinnerung Republik Crowdfunding"
     },
     {
       "key": "api/remindeme/successMessage",
@@ -770,7 +761,7 @@
     },
     {
       "key": "footer/contact/address",
-      "value": "Republik AG\nc/o Hotel Rothaus\nSihlhallenstrasse 1\n8004 Zürich\nSchweiz"
+      "value": "Republik Project R Genossenschaft Sihlhallenstrasse 1 8004 Zürich Schweiz"
     },
     {
       "key": "footer/about/title",
@@ -826,11 +817,11 @@
     },
     {
       "key": "me/addressForm/line1/error/empty",
-      "value": "Strasse und Hausnummer fehlt"
+      "value": "Strasse und Hausnummer fehlen"
     },
     {
       "key": "me/addressForm/line2/label",
-      "value": "Zusatz (Optional: Einheit, Gebäude, usw.)"
+      "value": "Zusatz (Optional: Einheit, Gebäude usw.)"
     },
     {
       "key": "me/addressForm/postalCode/label",
@@ -874,11 +865,11 @@
     },
     {
       "key": "memberships/title/1",
-      "value": "Ihre Mitgliedschaft und Abonoment"
+      "value": "Ihre Mitgliedschaft und Ihr Abonnement"
     },
     {
       "key": "memberships/title/other",
-      "value": "Ihre Mitgliedschaften und Abonoments"
+      "value": "Ihre Mitgliedschaften und Abonnements"
     },
     {
       "key": "memberships/giver/giveable/show",
@@ -910,31 +901,31 @@
     },
     {
       "key": "memberships/give/description/before/notGive",
-      "value": "Wollen Sie das Abo nicht selber nutzen? Und nicht Mitglied von Porject R werden? Sie können Ihr Abo und Mitgliedschaft mit dem folgendem Gutscheincode verschenken:"
+      "value": "Wollen Sie das Abo nicht selber nutzen? Und nicht Mitglied von Project R werden? Sie können Ihr Abo und Ihre Mitgliedschaft mit folgendem Gutscheincode verschenken:"
     },
     {
       "key": "memberships/give/description/before/1",
-      "value": "Sie können ein Abo und Mitgliedschaft mit dem folgendem Gutscheincode verschenken:"
+      "value": "Sie können das Abo und die Mitgliedschaft mit folgendem Gutscheincode verschenken:"
     },
     {
       "key": "memberships/give/description/before/other",
-      "value": "Sie können Abos und Mitgliedschaften mit folgenden Gutscheincodes verschenken:"
+      "value": "Sie können die Abos und Mitgliedschaften mit folgenden Gutscheincodes verschenken:"
     },
     {
       "key": "memberships/give/description/after",
-      "value": "Alle Gutscheincodes können auf der Seite auf <a href=\"/claim\">republik.ch/claim</a> eingelöst werden. Wer das tut, erhält pro Code ein Abo & eine Mitgliedschaft."
+      "value": "Alle Gutscheincodes können auf der Seite auf <a href=\"/claim\">republik.ch/claim</a> eingelöst werden. Wer das tut, erhält pro Code ein Abo und eine Mitgliedschaft."
     },
     {
       "key": "memberships/type/ABO",
-      "value": "Mitglieschaft und Abonnement"
+      "value": "Mitgliedschaft und Abonnement"
     },
     {
       "key": "memberships/type/BENEFACTOR_ABO",
-      "value": "Gönner-Mitglieschaft und -Abonnement"
+      "value": "Gönner-Mitgliedschaft und -Abonnement"
     },
     {
       "key": "memberships/type/REDUCED_ABO",
-      "value": "Mitglieschaft und Abonnement (reduziert)"
+      "value": "Mitgliedschaft und Abonnement (reduziert)"
     },
     {
       "key": "memberships/label",
@@ -962,15 +953,25 @@
     },
     {
       "key": "print/paymentslip/reduction",
-      "value": "selbst bestimmte reduktion"
+      "value": "selbst bestimmte Reduktion"
     },
     {
       "key": "api/testimonial/image/required",
       "value": "Ein neues Testimonial braucht ein Bild."
     },
     {
+      "key": "api/testimonial/pledge/required",
+      "value": "Sie müssen uns zuerst unterstützen, bevor Sie ein Testimonial abgeben können.",
+      "undefined": "x"
+    },
+    {
+      "key": "api/testimonial/mail/subject",
+      "value": "Vielen Dank für das Testimonial",
+      "undefined": "x"
+    },
+    {
       "key": "events/pageTitle",
-      "value": "Live"
+      "value": "Veranstaltungen"
     },
     {
       "key": "events/metaDescription",
@@ -986,7 +987,7 @@
     },
     {
       "key": "events/404",
-      "value": "Ereigniss nicht gefunden"
+      "value": "Ereignis nicht gefunden"
     },
     {
       "key": "events/all",
@@ -1034,11 +1035,11 @@
     },
     {
       "key": "faq/form/question/label",
-      "value": "Deine Frage"
+      "value": "Ihre Frage"
     },
     {
       "key": "faq/form/question/error",
-      "value": "Deine Frage, mind. 5 Zeichen"
+      "value": "Ihre Frage, mind. 5 Zeichen"
     },
     {
       "key": "faq/form/question/submit",
@@ -1046,11 +1047,11 @@
     },
     {
       "key": "faq/form/merci/title",
-      "value": "Vielen Dank für Deinen Input."
+      "value": "Vielen Dank für Ihren Input."
     },
     {
       "key": "faq/form/merci/text",
-      "value": "Du liest von uns."
+      "value": "Sie lesen von uns."
     },
     {
       "key": "testimonial/title",
@@ -1058,7 +1059,7 @@
     },
     {
       "key": "testimonial/description",
-      "value": "Sie können ein Statement abgeben und zusammen mit einem Portraitfoto auf unserer Community-Seite veröffentlichen."
+      "value": "Sie können ein Statement abgeben und es zusammen mit einem Porträtfoto auf unserer Community-Seite veröffentlichen."
     },
     {
       "key": "testimonial/submit",
@@ -1066,7 +1067,7 @@
     },
     {
       "key": "testimonial/role/label",
-      "value": "Rolle"
+      "value": "Funktion"
     },
     {
       "key": "testimonial/quote/label",
@@ -1078,7 +1079,7 @@
     },
     {
       "key": "testimonial/pickImage",
-      "value": "Portraitfoto auswählen"
+      "value": "Porträtfoto auswählen"
     },
     {
       "key": "testimonial/pickImage/invalidType",
@@ -1090,11 +1091,11 @@
     },
     {
       "key": "testimonial/pickImage/tooBig",
-      "value": "Maximal 2mb"
+      "value": "Maximal 2 MB"
     },
     {
       "key": "testimonial/pickImage/empty",
-      "value": "Sie müssen ein Portraitfoto hochladen"
+      "value": "Sie müssen ein Foto hochladen"
     },
     {
       "key": "testimonial/list/before",
@@ -1103,6 +1104,26 @@
     {
       "key": "testimonial/search/label",
       "value": "Suchen"
+    },
+    {
+      "key": "testimonial/detail/share/emailSubject",
+      "value": "{name} unterstützt die Republik"
+    },
+    {
+      "key": "testimonial/pickImage/update",
+      "value": "Portraitfoto ändern"
+    },
+    {
+      "key": "testimonial/quote/tooLong",
+      "value": "Statement, maximal 140 Zeichen"
+    },
+    {
+      "key": "testimonial/update",
+      "value": "aktualisieren"
+    },
+    {
+      "key": "testimonial/unpublished",
+      "value": "Wir können leider ihr Statement nicht publizieren. Schreiben Sie an kontakt@republik.ch für weitere Informationen."
     }
   ]
 }

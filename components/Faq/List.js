@@ -6,6 +6,7 @@ import {compose} from 'redux'
 import Loader from '../Loader'
 import Meta from '../Frame/Meta'
 import withT from '../../lib/withT'
+import {intersperse} from '../../lib/utils/helpers'
 
 import {
   Interaction, colors,
@@ -60,6 +61,15 @@ const styles = {
     borderBottom: `1px solid ${colors.divider}`,
     paddingBottom: 10,
     marginBottom: 40
+  }),
+  answerP: css({
+    margin: '20px 0 20px 0',
+    ':first-child': {
+      marginTop: 0
+    },
+    ':last-child': {
+      marginBottom: 0
+    }
   }),
   active: css({
     fontFamily: fontFamilies.sansSerifMedium,
@@ -125,7 +135,18 @@ class FaqList extends Component {
                           {faq.question}
                         </a>
                       </P>
-                      {active && <P {...styles.answer}>{faq.answer}</P>}
+                      {active && (
+                        <div {...styles.answer}>
+                          {(faq.answer || '').split('\n\n').map((p, i) => (
+                            <P {...styles.answerP} key={`p${i}`}>
+                              {intersperse(
+                                p.split('\n'),
+                                (d, i) => <br key={i} />
+                              )}
+                            </P>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   )
                 })}

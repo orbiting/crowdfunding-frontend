@@ -1,18 +1,27 @@
-import React from 'react'
+import React, {Component} from 'react'
 import withData from '../lib/withData'
 import Frame from '../components/Frame'
 import Content from '../components/Frame/Content'
 
-import {
-  P
-} from '@project-r/styleguide'
+import List from '../components/Testimonial/List'
+import Share from '../components/Testimonial/Share'
 
-export default withData(({url}) => (
-  <Frame url={url}>
-    <Content>
-      <P>
-        Ganz viele, super Leute.
-      </P>
-    </Content>
-  </Frame>
-))
+class CommunityPage extends Component {
+  render () {
+    const {url} = this.props
+
+    if (url.query.share) {
+      return <Share firstId={url.query.share} />
+    }
+
+    return (
+      <Frame url={url}>
+        <Content>
+          <List url={url} />
+        </Content>
+      </Frame>
+    )
+  }
+}
+
+export default withData(CommunityPage)
