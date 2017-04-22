@@ -111,7 +111,7 @@ class SidebarInner extends Component {
             text: t('sidebar/signIn')
           },
           {
-            href: 'mailto:laurent.burst@project-r.construction',
+            href: `mailto:ir@republik.ch?subject=${encodeURIComponent(t('sidebar/investor/subject'))}`,
             text: t('sidebar/investor')
           }
         ]}>
