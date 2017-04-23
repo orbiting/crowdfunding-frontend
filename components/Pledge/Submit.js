@@ -567,24 +567,19 @@ class Submit extends Component {
                 this.setState(mergeFields(fields))
               }} />
             <br />
-            <P>
-              <label>
-                <input
-                  type='checkbox'
-                  checked={this.state.values.paperInvoice || false}
-                  onChange={(event) => {
-                    const checked = event.target.checked
-                    this.setState((state) => ({
-                      values: {
-                        ...state.values,
-                        paperInvoice: checked
-                      }
-                    }))
-                  }} />
-                {' '}{t('pledge/submit/paymentslip/paperInvoice')}
-              </label>
-            </P>
-            <br />
+            <Checkbox
+              checked={this.state.values.paperInvoice || false}
+              onChange={(_, checked) => {
+                this.setState((state) => ({
+                  values: {
+                    ...state.values,
+                    paperInvoice: checked
+                  }
+                }))
+              }}>
+              {t('pledge/submit/paymentslip/paperInvoice')}
+            </Checkbox>
+            <br /><br />
           </div>
         )}
         {(paymentMethod === 'STRIPE') && (
