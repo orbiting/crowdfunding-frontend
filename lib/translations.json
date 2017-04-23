@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-23T20:07:29.719Z",
+  "updated": "2017-04-23T22:18:19.075Z",
   "title": "live",
   "data": [
     {
@@ -541,7 +541,7 @@
     },
     {
       "key": "status/goal/people",
-      "value": "von {count} Mitglieder"
+      "value": "von {count} Mitgliedern"
     },
     {
       "key": "status/goal/money",
