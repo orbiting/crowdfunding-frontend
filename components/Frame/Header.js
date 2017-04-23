@@ -125,6 +125,10 @@ class Header extends Component {
       if (mobile !== this.state.mobile) {
         this.setState(() => ({mobile}))
       }
+      const hasStatusSpace = window.innerWidth >= 965
+      if (hasStatusSpace !== this.state.hasStatusSpace) {
+        this.setState(() => ({hasStatusSpace}))
+      }
       this.onScroll()
     }
   }
@@ -142,7 +146,7 @@ class Header extends Component {
   }
   render () {
     const {cover, sticky, sidebar, url, t} = this.props
-    const {mobile, expanded} = this.state
+    const {mobile, expanded, hasStatusSpace} = this.state
 
     const opaque = this.state.opaque || expanded
 
@@ -209,7 +213,7 @@ class Header extends Component {
                 )
               }
               {
-                !mobile && (!!sticky.status || !sidebar) && (
+                !mobile && !!hasStatusSpace && (!!sticky.status || !sidebar) && (
                   <Status compact />
                 )
               }
