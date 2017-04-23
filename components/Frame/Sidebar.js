@@ -4,6 +4,7 @@ import withT from '../../lib/withT'
 import {validate as isEmail} from 'email-validator'
 import {compose} from 'redux'
 import {errorToString} from '../../lib/utils/errors'
+import Router from 'next/router'
 
 import Accordion from '../Pledge/Accordion'
 import Status from '../Status'
@@ -19,6 +20,12 @@ import {
 } from '@project-r/styleguide'
 
 const styles = {
+  container: css({
+    paddingTop: 10,
+    [mediaQueries.onlyS]: {
+      marginBottom: 30
+    }
+  }),
   link: css({
     textDecoration: 'none',
     color: colors.text,
@@ -38,6 +45,12 @@ const styles = {
       width: SIDEBAR_WIDTH,
       top: HEADER_HEIGHT,
       backgroundColor: '#fff'
+    }
+  }),
+  button: css({
+    marginBottom: 10,
+    [mediaQueries.onlyS]: {
+      display: 'none'
     }
   }),
   reminderActions: css({
@@ -104,7 +117,7 @@ class SidebarInner extends Component {
     }
 
     return (
-      <div style={{paddingTop: 10}}>
+      <div {...styles.container}>
         <Accordion links={[
           {
             href: '/merci',
@@ -116,6 +129,11 @@ class SidebarInner extends Component {
           }
         ]}>
           <div style={{margin: '20px 0'}}>
+            <div {...styles.button}>
+              <Button block primary onClick={() => {
+                Router.push('/pledge').then(() => window.scrollTo(0, 0))
+              }}>{t('header/button')}</Button>
+            </div>
             {reminderOpen ? (
               <form onSubmit={submitReminder}>
                 <Field label={t('pledge/contact/email/label')}
