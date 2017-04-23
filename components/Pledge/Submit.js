@@ -36,7 +36,7 @@ import {
 } from '../../constants'
 
 import {
-  Interaction, Button, Label,
+  Interaction, Button, Label, Checkbox,
   colors, fontFamilies
 } from '@project-r/styleguide'
 
@@ -138,6 +138,7 @@ class Submit extends Component {
     super(props)
     this.state = {
       emailVerify: false,
+      legal: false,
       values: {
         country: COUNTRIES[0],
         name: [
@@ -459,7 +460,10 @@ class Submit extends Component {
     })
   }
   getErrorMessages () {
-    const {paymentMethod, loadingStripe, loadingStripeError} = this.state
+    const {
+      paymentMethod, loadingStripe, loadingStripeError,
+      legal
+    } = this.state
     const {t, options} = this.props
 
     return ([
@@ -470,7 +474,8 @@ class Submit extends Component {
       .concat([
         !paymentMethod && t('pledge/submit/payMethod/error'),
         paymentMethod === 'STRIPE' && loadingStripe && t('pledge/submit/stripe/js/loading'),
-        paymentMethod === 'STRIPE' && loadingStripeError && t('pledge/submit/stripe/js/failed')
+        paymentMethod === 'STRIPE' && loadingStripeError && t('pledge/submit/stripe/js/failed'),
+        !legal && t('pledge/submit/legal/error')
       ])
       .filter(Boolean)
   }
@@ -740,6 +745,16 @@ class Submit extends Component {
                 </ul>
               </div>
             )}
+            <Checkbox
+              checked={this.state.legal}
+              onChange={(_, checked) => {
+                this.setState(() => ({legal: checked}))
+              }}>
+              <RawHtml dangerouslySetInnerHTML={{
+                __html: t('pledge/submit/legal/label')
+              }} />
+            </Checkbox>
+            <br /><br />
             <div style={{opacity: errorMessages.length ? 0.5 : 1}}>
               <Button
                 block
@@ -753,12 +768,6 @@ class Submit extends Component {
                 })}
               </Button>
             </div>
-            <br />
-            <Label>
-              <RawHtml dangerouslySetInnerHTML={{
-                __html: t('pledge/submit/button/legal')
-              }} />
-            </Label>
           </div>
         )}
       </div>

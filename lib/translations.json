@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-23T15:40:19.057Z",
+  "updated": "2017-04-23T18:06:57.603Z",
   "title": "live",
   "data": [
     {
@@ -484,8 +484,12 @@
       "value": "{formattedChf} bezahlen"
     },
     {
-      "key": "pledge/submit/button/legal",
-      "value": "Mit dem Bezahlen erklären Sie sich mit der <a href=\"/legal/tos\" target=\"_blank\">AGB</a>s, der <a href=\"/legal/privacy\" target=\"_blank\">Datenschutzerklärung</a> und den <a href=\"/legal/statute\" target=\"_blank\">Statuten der Project R Genossenschaft</a> einverstanden."
+      "key": "pledge/submit/legal/label",
+      "value": "Ich erkläre mich mit den <a href=\"/legal/tos\" target=\"_blank\">AGB</a>s, der <a href=\"/legal/privacy\" target=\"_blank\">Datenschutzerklärung</a> und den <a href=\"/legal/statute\" target=\"_blank\">Statuten der Project R Genossenschaft</a> einverstanden."
+    },
+    {
+      "key": "pledge/submit/legal/error",
+      "value": "Sie müssen sich mit den AGBs, der Datenschutzerklärung und den Statuten der Project R Genossenschaft einverstanden erklären."
     },
     {
       "key": "pledge/submit/pay/method/STRIPE",
@@ -766,7 +770,7 @@
     },
     {
       "key": "footer/contact/address",
-      "value": "Republik Project R Genossenschaft Sihlhallenstrasse 1 8004 Zürich Schweiz"
+      "value": "Republik \nProject R Genossenschaft \nSihlhallenstrasse 1 \n8004 Zürich \nSchweiz"
     },
     {
       "key": "footer/about/title",
@@ -1116,7 +1120,7 @@
     },
     {
       "key": "testimonial/pickImage/update",
-      "value": "Portraitfoto ändern"
+      "value": "Porträtfoto ändern"
     },
     {
       "key": "testimonial/quote/tooLong",
