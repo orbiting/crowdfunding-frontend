@@ -53,7 +53,6 @@ const Detail = ({t, data: {id, name, role, quote, image, video}}) => (
         : <SerifP>«{quote}»</SerifP>
       }
       <Share
-        fill={colors.secondary}
         url={`${PUBLIC_BASE_URL}/community?id=${id}`}
         emailSubject={t('testimonial/detail/share/emailSubject', {
           name,

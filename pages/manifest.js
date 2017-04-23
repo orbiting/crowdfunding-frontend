@@ -141,7 +141,7 @@ ${PUBLIC_BASE_URL}
           Manifest teilen
         </P>
         <P style={{marginBottom: SPACE / 2}}>
-          <Share {...share} />
+          <Share fill='#000' {...share} />
         </P>
         <P>
           <A href={`${STATIC_BASE_URL}/static/manifest.pdf`}>

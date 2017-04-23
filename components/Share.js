@@ -2,6 +2,10 @@ import React, {PropTypes} from 'react'
 
 import IconLink from './IconLink'
 
+import {
+  colors
+} from '@project-r/styleguide'
+
 const ShareButtons = ({url, tweet, emailSubject, emailBody, emailAttachUrl, fill}) => {
   const emailAttache = emailAttachUrl ? `\n\n${url}` : ''
   const shareOptions = [
@@ -40,6 +44,7 @@ ShareButtons.propTypes = {
 }
 
 ShareButtons.defaultProps = {
+  fill: colors.secondary,
   tweet: '',
   emailBody: '',
   emailAttachUrl: true

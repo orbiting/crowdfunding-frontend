@@ -78,7 +78,6 @@ const Update = withT(({
 
       <P>
         <Share
-          fill={colors.secondary}
           url={`${PUBLIC_BASE_URL}/updates/${slug}`}
           emailSubject={title}
           tweet={title} />
