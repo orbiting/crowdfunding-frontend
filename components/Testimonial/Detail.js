@@ -13,7 +13,7 @@ import {
   P as SerifP, colors
 } from '@project-r/styleguide'
 
-const {H2} = Interaction
+const {H3} = Interaction
 
 const styles = {
   detail: css({
@@ -38,9 +38,9 @@ const Detail = ({t, share, data: {id, name, role, quote, image, video}}) => (
       marginLeft: 'auto',
       marginRight: 'auto'
     } : {}}>
-      <H2 {...styles.detailTitle}>
+      <H3 {...styles.detailTitle}>
         {name} <span {...styles.detailRole}>{role}</span>
-      </H2>
+      </H3>
       {video
         ? (
           <div style={{

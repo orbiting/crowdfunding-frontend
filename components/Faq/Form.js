@@ -224,9 +224,9 @@ class QuestionForm extends Component {
           )}
           {!!serverError && <ErrorMessage error={serverError} />}
           {!!success && <div style={{marginTop: 20}}>
-            <Interaction.H2>
+            <Interaction.H3>
               {t('faq/form/merci/title')}
-            </Interaction.H2>
+            </Interaction.H3>
             <P>
               {t('faq/form/merci/text')}
             </P>

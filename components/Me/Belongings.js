@@ -26,11 +26,11 @@ import {
 import {
   Interaction,
   Button, Lead,
-  Label, A,
+  Label, A, H1,
   colors
 } from '@project-r/styleguide'
 
-const {H1, H2, P} = Interaction
+const {H2, H3, P} = Interaction
 
 const dateTimeFormat = timeFormat('%d. %B %Y %H:%M')
 
@@ -64,7 +64,7 @@ const Belongings = ({loading, error, pledges, hasMemberships, me, t, signOut, hi
           <RawHtml type={Lead} style='serif' dangerouslySetInnerHTML={{
             __html: t('merci/lead')
           }} />
-          <P style={{marginBottom: 20}}>
+          <P>
             <Share
               url={`${PUBLIC_BASE_URL}/`}
               tweet={t('merci/share/tweetTemplate')}
@@ -76,9 +76,14 @@ const Belongings = ({loading, error, pledges, hasMemberships, me, t, signOut, hi
               emailAttachUrl={false} />
           </P>
         </div>)}
+        <div style={{marginBottom: 80}} />
         <ClaimedMemberships />
-        {(hasPledges || hasMemberships) && <Testimonial />}
-        <H2>{t.pluralize('merci/pledges/title', {
+        {(hasPledges || hasMemberships) && (
+          <div style={{marginTop: 80}}>
+            <Testimonial />
+          </div>
+        )}
+        <H2 style={{marginTop: 80}}>{t.pluralize('merci/pledges/title', {
           count: displayablePledges.length
         })}</H2>
         {!hasPledges && (
@@ -106,9 +111,9 @@ const Belongings = ({loading, error, pledges, hasMemberships, me, t, signOut, hi
                 styles.pledge,
                 highlightPledgeId === pledge.id && styles.pledgeHighlighted
               )}>
-                <H2 style={{marginBottom: 0}}>
+                <H3 style={{marginBottom: 0}}>
                   {t(`package/${pledge.package.name}/title`)}
-                </H2>
+                </H3>
                 <Label>
                   {t('merci/pledge/label', {
                     formattedDateTime: dateTimeFormat(createdAt)
@@ -158,8 +163,12 @@ const Belongings = ({loading, error, pledges, hasMemberships, me, t, signOut, hi
               </div>
             )
           })}
-        <br /><br /><br /><br /><br /><br />
-        {(hasPledges || hasMemberships) && !!me.name && <UpdateMe />}
+        <div />
+        {(hasPledges || hasMemberships) && !!me.name && (
+          <div style={{marginTop: 80}}>
+            <UpdateMe />
+          </div>
+        )}
         <br /><br />
         <A href='#' onClick={(e) => {
           e.preventDefault()

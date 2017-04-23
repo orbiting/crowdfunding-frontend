@@ -20,7 +20,7 @@ import {
 
 import Event from './Detail'
 
-const {H2} = Interaction
+const {H3} = Interaction
 
 const query = gql`
 query {
@@ -98,17 +98,17 @@ const Overview = compose(
           image: `${STATIC_BASE_URL}/static/social-media/events.png`
         }} />
         {!!upcoming.length && (
-          <H2 style={{marginBottom: 15}}>
+          <H3 style={{marginBottom: 15}}>
             {t('events/upcoming')}
-          </H2>
+          </H3>
         )}
         {upcoming.map(event => (
           <Event key={event.slug} data={event} />
         ))}
         {!!past.length && (
-          <H2 style={{marginBottom: 15}}>
+          <H3 style={{marginBottom: 15}}>
             {t('events/past')}
-          </H2>
+          </H3>
         )}
         {past.map(event => (
           <Event key={event.slug} data={event} />

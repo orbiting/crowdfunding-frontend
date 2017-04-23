@@ -31,10 +31,6 @@ const styles = {
     marginBottom: 40
   }),
   title: css({
-    fontFamily: fontFamilies.sansSerifRegular,
-    fontWeight: 'normal',
-    fontSize: 30,
-    letterSpacing: -0.26,
     marginBottom: 20
   }),
   faq: css({
@@ -78,7 +74,7 @@ const styles = {
 }
 
 export const H2 = ({children}) => (
-  <h2 {...styles.title}>{children}</h2>
+  <Interaction.H2 {...styles.title}>{children}</Interaction.H2>
 )
 
 const slug = string => string
