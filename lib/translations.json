@@ -1,10 +1,14 @@
 {
-  "updated": "2017-04-23T19:35:30.278Z",
+  "updated": "2017-04-23T20:07:29.719Z",
   "title": "live",
   "data": [
     {
       "key": "menu/",
       "value": "Crowdfunding"
+    },
+    {
+      "key": "menu/crew",
+      "value": "Wir"
     },
     {
       "key": "menu/updates",
@@ -21,6 +25,10 @@
     {
       "key": "menu/faq",
       "value": "Fragen"
+    },
+    {
+      "key": "menu/pledge",
+      "value": "Mitmachen"
     },
     {
       "key": "header/button",

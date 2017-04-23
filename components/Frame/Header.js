@@ -154,6 +154,10 @@ class Header extends Component {
 
     const menuItems = [
       {
+        label: t('menu/crew'),
+        href: '/crew'
+      },
+      {
         label: t('menu/updates'),
         href: '/updates'
       },
