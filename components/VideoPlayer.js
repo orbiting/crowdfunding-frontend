@@ -8,6 +8,10 @@ import {
   colors
 } from '@project-r/styleguide'
 
+import {
+  STATIC_BASE_URL
+} from '../constants'
+
 const PROGRESS_HEIGHT = 4
 
 const styles = {
@@ -216,7 +220,7 @@ class VideoPlayer extends Component {
           poster={src.poster}>
           <source src={src.hls} type='application/x-mpegURL' />
           <source src={src.mp4} type='video/mp4' />
-          {!!src.subtitles && <track label='Deutsch' kind='subtitles' srcLang='de' src={src.subtitles} default />}
+          {!!src.subtitles && <track label='Deutsch' kind='subtitles' srcLang='de' src={src.subtitles.replace(STATIC_BASE_URL, '')} default />}
         </video>
         <div {...styles.controls}
           style={{opacity: playing ? 0 : 1}}
