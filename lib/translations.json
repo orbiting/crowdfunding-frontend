@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-23T19:29:11.083Z",
+  "updated": "2017-04-23T19:35:30.278Z",
   "title": "live",
   "data": [
     {
@@ -594,7 +594,7 @@
     },
     {
       "key": "sidebar/reminder/send",
-      "value": "Fehler"
+      "value": "erinnern"
     },
     {
       "key": "pledge/recievePayment/error",
