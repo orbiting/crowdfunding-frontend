@@ -13,7 +13,7 @@ import {
 } from '@project-r/styleguide'
 
 import {
-  PUBLIC_BASE_URL
+  PUBLIC_BASE_URL, STATIC_BASE_URL
 } from '../../constants'
 
 import Update from './Detail'
@@ -81,7 +81,7 @@ const Overview = compose(
           title: t('updates/pageTitle'),
           description: t('updates/metaDescription'),
           url: `${PUBLIC_BASE_URL}/updates`,
-          image: `${PUBLIC_BASE_URL}/static/social-media/updates.png`
+          image: `${STATIC_BASE_URL}/static/social-media/updates.png`
         }} />
         {updates.map(update => (
           <Update key={update.slug} data={update} />

@@ -15,7 +15,7 @@ import {
 } from '@project-r/styleguide'
 
 import {
-  PUBLIC_BASE_URL
+  PUBLIC_BASE_URL, STATIC_BASE_URL
 } from '../../constants'
 
 import Event from './Detail'
@@ -72,7 +72,7 @@ const Overview = compose(
             title: event.title,
             description: event.metaDescription,
             url: `${PUBLIC_BASE_URL}/events/${event.slug}`,
-            image: `${PUBLIC_BASE_URL}/static/social-media/events.png`
+            image: `${STATIC_BASE_URL}/static/social-media/events.png`
           }} />
           <Event data={event} />
           <Link href='/events'>
@@ -95,7 +95,7 @@ const Overview = compose(
           title: t('events/pageTitle'),
           description: t('events/metaDescription'),
           url: `${PUBLIC_BASE_URL}/events`,
-          image: `${PUBLIC_BASE_URL}/static/social-media/events.png`
+          image: `${STATIC_BASE_URL}/static/social-media/events.png`
         }} />
         {!!upcoming.length && (
           <H2 style={{marginBottom: 15}}>

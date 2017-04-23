@@ -13,7 +13,8 @@
     "heroku-postbuild": "npm run build",
     "translations": "gsheets --key=1OHoiENwJH-tqf9yXfXHOevAn17daO_CvB21Rym-oiqk --title=live --pretty --out lib/translations.json",
     "test": "wdio test/wdio.conf.js",
-    "klog": "find . -name '*.js' -not -path \"./node_modules*\" -not -path \"./.next*\" | xargs wc -l"
+    "klog": "find . -name '*.js' -not -path \"./node_modules*\" -not -path \"./.next*\" | xargs wc -l",
+    "upload-assets": "s3cmd sync --verbose --acl-public -c ./.s3cfg static/ s3://republik/cf_gui/static/"
   },
   "lint-staged": {
     "*.js": [

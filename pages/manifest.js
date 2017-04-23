@@ -14,7 +14,7 @@ import {
 } from '@project-r/styleguide'
 
 import {
-  PUBLIC_BASE_URL
+  PUBLIC_BASE_URL, STATIC_BASE_URL
 } from '../constants'
 
 const SPACE = 60
@@ -91,7 +91,7 @@ export default ({url}) => {
   const meta = {
     title: 'Für diesen Journalismus steht Project R',
     description: 'Unterstützen Sie unser Crowdfunding!',
-    image: `${PUBLIC_BASE_URL}/static/social-media/manifest.png`,
+    image: `${STATIC_BASE_URL}/static/social-media/manifest.png`,
     url: `${PUBLIC_BASE_URL}${url.pathname}`
   }
   const share = {
@@ -144,7 +144,9 @@ ${PUBLIC_BASE_URL}
           <Share {...share} />
         </P>
         <P>
-          <A href='/static/manifest.pdf'>Manifest als PDF herunterladen</A>
+          <A href={`${STATIC_BASE_URL}/static/manifest.pdf`}>
+            Manifest als PDF herunterladen
+          </A>
         </P>
 
         <div {...styles.nav}>

@@ -22,17 +22,48 @@ API_AUTHORIZATION_HEADER=
 
 `API_BASE_URL` defaults to `https://api.satellit.online`. If the API is HTTP basic-auth protected, you can generate a basic authorization header with ``Basic ${(new Buffer('user:password')).toString('base64')}`` in Node.js and use it with `API_AUTHORIZATION_HEADER`.
 
+#### Public Base Url
+
+```
+PUBLIC_BASE_URL=https://example.com
+```
+
+
+
+#### Static Assets
+
+Static assets can be loaded from a CDN.
+
+```
+STATIC_BASE_URL=https://assets.example.com
+```
+
+This defaults to `PUBLIC_BASE_URL`.
+
+This is prepended to all `/static` references:
+
+```
+import {
+  STATIC_BASE_URL
+} from '../constants'
+
+export default () => (
+  <A href={`${STATIC_BASE_URL}/static/manifest.pdf`}>
+    Manifest als PDF herunterladen
+  </A>
+)
+```
+
 #### Payment
 
 Payment provider configuration can be passed in via the environment. `PUBLIC_BASE_URL` is used for PostFinance and PayPal return urls.
 
 ```
-PUBLIC_BASE_URL=http://localhost:3000
+PUBLIC_BASE_URL=https://example.com
 
 STRIPE_PUBLISHABLE_KEY=
 
 PF_PSPID=
-PF_INPUT_SECRET=
 PF_FORM_ACTION=https://e-payment.postfinance.ch/ncol/test/orderstandard.asp
 
 PAYPAL_FORM_ACTION=https://www.sandbox.paypal.com/cgi-bin/webscr

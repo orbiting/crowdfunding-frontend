@@ -13,5 +13,6 @@
 
 # misc
 .DS_Store
+.s3cfg
 .env
 npm-debug.log

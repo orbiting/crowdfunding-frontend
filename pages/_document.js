@@ -20,10 +20,13 @@ export default class MyDocument extends Document {
     }
   }
   render () {
-    const {css, env} = this.props
+    const {css, env: {
+      PIWIK_URL_BASE, PIWIK_SITE_ID,
+      STATIC_BASE_URL
+    }} = this.props
     const piwik = (
-      !!env.PIWIK_URL_BASE &&
-      !!env.PIWIK_SITE_ID
+      !!PIWIK_URL_BASE &&
+      !!PIWIK_SITE_ID
     )
     return (
       <html>
@@ -33,12 +36,13 @@ export default class MyDocument extends Document {
           <style dangerouslySetInnerHTML={{ __html: fontFaces() }} />
           {css ? <style dangerouslySetInnerHTML={{ __html: css }} /> : null}
           <meta name='author' content='Republik' />
-          <link rel='apple-touch-icon' sizes='180x180' href='/static/apple-touch-icon.png' />
-          <link rel='icon' type='image/png' href='/static/favicon-32x32.png' sizes='32x32' />
-          <link rel='icon' type='image/png' href='/static/favicon-16x16.png' sizes='16x16' />
-          <link rel='manifest' href='/static/manifest.json' />
-          <link rel='mask-icon' href='/static/safari-pinned-tab.svg' color='#000000' />
-          <link rel='shortcut icon' href='/static/favicon.ico' />
+          <link rel='apple-touch-icon' sizes='180x180' href={`${STATIC_BASE_URL}/static/apple-touch-icon.png`} />
+          <link rel='icon' type='image/png' href={`${STATIC_BASE_URL}/static/favicon-32x32.png`} sizes='32x32' />
+          <link rel='icon' type='image/png' href={`${STATIC_BASE_URL}/static/favicon-16x16.png`} sizes='16x16' />
+          <link rel='manifest' href={`${STATIC_BASE_URL}/static/manifest.json`} />
+          <link rel='mask-icon' href={`${STATIC_BASE_URL}/static/safari-pinned-tab.svg`} color='#000000' />
+          <link rel='shortcut icon' href={`${STATIC_BASE_URL}/static/favicon.ico`} />
+          { /* browserconfig.xml can contain other static references, we skip cdnifing it */ }
           <meta name='msapplication-config' content='/static/browserconfig.xml' />
           <meta name='theme-color' content='#000000' />
         </Head>
@@ -50,13 +54,13 @@ export default class MyDocument extends Document {
             _paq.push(['trackPageView']);
             _paq.push(['enableLinkTracking']);
             (function() {
-              _paq.push(['setTrackerUrl', '${env.PIWIK_URL_BASE}/piwik.php']);
-              _paq.push(['setSiteId', '${env.PIWIK_SITE_ID}']);
+              _paq.push(['setTrackerUrl', '${PIWIK_URL_BASE}/piwik.php']);
+              _paq.push(['setSiteId', '${PIWIK_SITE_ID}']);
               var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-              g.type='text/javascript'; g.async=true; g.defer=true; g.src='${env.PIWIK_URL_BASE}/piwik.js'; s.parentNode.insertBefore(g,s);
+              g.type='text/javascript'; g.async=true; g.defer=true; g.src='${PIWIK_URL_BASE}/piwik.js'; s.parentNode.insertBefore(g,s);
             })();`}} />}
           {piwik && <noscript>
-            <img src={`${env.PIWIK_URL_BASE}/piwik.php?idsite=${env.PIWIK_SITE_ID}&rec=1`} style={{border: 0}} alt='' />
+            <img src={`${PIWIK_URL_BASE}/piwik.php?idsite=${PIWIK_SITE_ID}&rec=1`} style={{border: 0}} alt='' />
           </noscript>}
         </body>
       </html>

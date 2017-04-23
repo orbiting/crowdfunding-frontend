@@ -19,7 +19,7 @@ import {
 } from '../Frame/constants'
 
 import {
-  PUBLIC_BASE_URL
+  PUBLIC_BASE_URL, STATIC_BASE_URL
 } from '../../constants'
 
 import {nest} from 'd3-collection'
@@ -114,7 +114,7 @@ class FaqList extends Component {
               title: t('faq/pageTitle'),
               description: t('faq/metaDescription'),
               url: `${PUBLIC_BASE_URL}/faq`,
-              image: `${PUBLIC_BASE_URL}/static/social-media/faq.png`
+              image: `${STATIC_BASE_URL}/static/social-media/faq.png`
             }} />
             {faqsByCategory.map(({key: title, values}) => (
               <div {...styles.category} key={title}>
