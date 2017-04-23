@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-23T18:13:35.457Z",
+  "updated": "2017-04-23T19:29:11.083Z",
   "title": "live",
   "data": [
     {
@@ -572,12 +572,9 @@
       "value": "{count} Minuten"
     },
     {
-      "key": "sidebar/signIn",
-      "value": "Sie sind bereits an Bord?"
-    },
-    {
       "key": "sidebar/investor",
-      "value": "Sie wollen Investor bzw. Investorin der Republik AG werden?"
+      "value": "Sie wollen Investor/Investorin werden?",
+      "undefined": "Sie wollen Investor bzw. Investorin der Republik AG werden?"
     },
     {
       "key": "sidebar/investor/subject",
@@ -1173,6 +1170,26 @@
     {
       "key": "testimonial/meta/single/description",
       "value": "Jetzt beim Crowdfunding mitmachen und an Board kommen."
+    },
+    {
+      "key": "footer/me/title",
+      "value": "Ihr Profil"
+    },
+    {
+      "key": "footer/me/merci/signIn",
+      "value": "Bereits an Bord?"
+    },
+    {
+      "key": "footer/me/merci/signedIn",
+      "value": "Ihre Entscheidungen"
+    },
+    {
+      "key": "footer/me/signOut",
+      "value": "Abmelden"
+    },
+    {
+      "key": "footer/me/claim",
+      "value": "Gutscheincode einlösen"
     }
   ]
 }

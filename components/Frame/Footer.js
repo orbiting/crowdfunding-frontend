@@ -1,8 +1,12 @@
 import React from 'react'
 import {css} from 'glamor'
-import withT from '../../lib/withT'
-import {intersperse} from '../../lib/utils/helpers'
 import Link from 'next/link'
+import {compose} from 'redux'
+
+import withT from '../../lib/withT'
+import withMe from '../../lib/withMe'
+import {withSignOut} from '../Auth/SignOut'
+import {intersperse} from '../../lib/utils/helpers'
 
 import {
   Container, Logo, colors, mediaQueries,
@@ -79,7 +83,7 @@ const styles = {
   })
 }
 
-const Footer = ({t}) => (
+const Footer = ({t, me, signOut}) => (
   <div {...styles.bg}>
     <Container style={{overflow: 'hidden'}}>
       <div {...styles.grid}>
@@ -117,6 +121,21 @@ const Footer = ({t}) => (
             <a>{t('footer/legal/imprint')}</a>
           </Link>
         </div>
+        <div {...styles.column}>
+          <div {...styles.title}>{t('footer/me/title')}</div>
+          <Link href='/merci'>
+            <a>{t(me ? 'footer/me/merci/signedIn' : 'footer/me/merci/signIn')}</a>
+          </Link><br />
+          <Link href='/claim'>
+            <a>{t('footer/me/claim')}</a>
+          </Link><br />
+          {!!me && <a href='#' onClick={(e) => {
+            e.preventDefault()
+            signOut()
+          }}>
+            {t('footer/me/signOut')}
+          </a>}
+        </div>
       </div>
       <hr {...styles.hr} />
       <Logo fill={colors.secondary} width={140} />
@@ -128,4 +147,8 @@ const Footer = ({t}) => (
   </div>
 )
 
-export default withT(Footer)
+export default compose(
+  withT,
+  withMe,
+  withSignOut
+)(Footer)

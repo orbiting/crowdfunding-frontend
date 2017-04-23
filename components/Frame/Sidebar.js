@@ -120,10 +120,6 @@ class SidebarInner extends Component {
       <div {...styles.container}>
         <Accordion links={[
           {
-            href: '/merci',
-            text: t('sidebar/signIn')
-          },
-          {
             href: `mailto:ir@republik.ch?subject=${encodeURIComponent(t('sidebar/investor/subject'))}`,
             text: t('sidebar/investor')
           }
