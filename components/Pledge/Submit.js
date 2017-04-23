@@ -140,7 +140,10 @@ class Submit extends Component {
       emailVerify: false,
       values: {
         country: COUNTRIES[0],
-        name: props.user.name
+        name: [
+          props.user.firstName,
+          props.user.lastName
+        ].filter(Boolean).join(' ')
       },
       errors: {},
       dirty: {},
@@ -164,14 +167,18 @@ class Submit extends Component {
     }
   }
   componentWillReceiveProps (nextProps) {
+    const nextName = [
+      nextProps.user.firstName,
+      nextProps.user.lastName
+    ].filter(Boolean).join(' ')
     if (
-      nextProps.user.name !== this.state.values.name &&
+      nextName !== this.state.values.name &&
       !this.state.dirty.name
     ) {
       this.setState((state) => ({
         values: {
           ...state.values,
-          name: nextProps.user.name
+          name: nextName
         }
       }))
     }
