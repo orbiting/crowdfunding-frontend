@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import {css} from 'glamor'
 import Play from './Icons/Play'
 import Volume from './Icons/Volume'
+import Spinner from './Spinner'
 
 import {
   colors
@@ -85,7 +86,8 @@ class VideoPlayer extends Component {
     this.state = {
       playing: false,
       progress: 0,
-      muted: false
+      muted: false,
+      loading: true
     }
 
     this.updateProgress = () => {
@@ -113,7 +115,8 @@ class VideoPlayer extends Component {
     this.ref = ref => { this.video = ref }
     this.onPlay = () => {
       this.setState(() => ({
-        playing: true
+        playing: true,
+        loading: false
       }))
       this.syncProgress()
       this.props.onPlay && this.props.onPlay()
@@ -125,7 +128,16 @@ class VideoPlayer extends Component {
       clearTimeout(this.readTimeout)
       this.props.onPause && this.props.onPause()
     }
-    this.onProgress = () => {}
+    this.onLoadStart = () => {
+      this.setState(() => ({
+        loading: true
+      }))
+    }
+    this.onCanPlay = () => {
+      this.setState(() => ({
+        loading: false
+      }))
+    }
     this.scrubRef = ref => { this.scrubber = ref }
     this.scrub = (event) => {
       const {scrubber, video} = this
@@ -194,7 +206,8 @@ class VideoPlayer extends Component {
   componentDidMount () {
     this.video.addEventListener('play', this.onPlay)
     this.video.addEventListener('pause', this.onPause)
-    this.video.addEventListener('progress', this.onProgress)
+    this.video.addEventListener('loadstart', this.onLoadStart)
+    this.video.addEventListener('canplay', this.onCanPlay)
 
     if (this.video.textTracks && this.video.textTracks.length) {
       this.video.textTracks[0].mode = 'showing'
@@ -203,11 +216,13 @@ class VideoPlayer extends Component {
   componentWillUnmount () {
     this.video.removeEventListener('play', this.onPlay)
     this.video.removeEventListener('pause', this.onPause)
+    this.video.removeEventListener('loadstart', this.onLoadStart)
     this.video.removeEventListener('progress', this.onProgress)
+    this.video.removeEventListener('canplay', this.onCanPlay)
   }
   render () {
     const {src, hidePlay} = this.props
-    const {playing, progress, muted} = this.state
+    const {playing, progress, muted, loading} = this.state
 
     return (
       <div {...styles.wrapper}>
@@ -230,6 +245,7 @@ class VideoPlayer extends Component {
           }}>
             <Play />
           </div>
+          {loading && <Spinner />}
           <div {...styles.volume} onClick={(e) => {
             e.stopPropagation()
             this.setState((state) => ({
