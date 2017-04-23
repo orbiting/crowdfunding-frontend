@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-23T18:06:57.603Z",
+  "updated": "2017-04-23T18:13:35.457Z",
   "title": "live",
   "data": [
     {
@@ -959,6 +959,18 @@
     {
       "key": "memberships/claim/loading",
       "value": "überprüfen"
+    },
+    {
+      "key": "memberships/claim/legal/label",
+      "value": "Ich erkläre mich mit der <a href=\"/legal/privacy\" target=\"_blank\">Datenschutzerklärung</a> und den <a href=\"/legal/statute\" target=\"_blank\">Statuten der Project R Genossenschaft</a> einverstanden."
+    },
+    {
+      "key": "memberships/claim/legal/error",
+      "value": "Sie müssen sich mit der Datenschutzerklärung und den Statuten der Project R Genossenschaft einverstanden erklären."
+    },
+    {
+      "key": "memberships/claim/error/title",
+      "value": "Fehler"
     },
     {
       "key": "print/paymentslip/reduction",

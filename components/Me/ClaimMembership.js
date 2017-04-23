@@ -14,7 +14,8 @@ import {withSignIn} from '../Auth/SignIn'
 import RawHtml from '../RawHtml'
 
 import {
-  Field, Button, Interaction
+  Field, Button, Checkbox, Interaction,
+  colors
 } from '@project-r/styleguide'
 
 const {H2, P} = Interaction
@@ -25,6 +26,7 @@ class ClaimMembership extends Component {
     this.state = {
       loading: false,
       serverError: undefined,
+      legal: false,
       values: {},
       errors: {},
       dirty: {}
@@ -158,7 +160,8 @@ class ClaimMembership extends Component {
       serverError,
       values, dirty, errors,
       loading,
-      polling, phrase
+      polling, phrase,
+      legal
     } = this.state
 
     if (polling) {
@@ -185,6 +188,9 @@ class ClaimMembership extends Component {
 
     const errorMessages = Object.keys(errors)
       .map(key => errors[key])
+      .concat([
+        !legal && t('memberships/claim/legal/error')
+      ])
       .filter(Boolean)
 
     return (
@@ -225,11 +231,32 @@ class ClaimMembership extends Component {
           }} />
         <br />
         <br />
+        {!!this.state.showErrors && errorMessages.length > 0 && (
+          <div style={{color: colors.error, marginBottom: 40}}>
+            {t('memberships/claim/error/title')}<br />
+            <ul>
+              {errorMessages.map((error, i) => (
+                <li key={i}>{error}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <Checkbox
+          checked={this.state.legal}
+          onChange={(_, checked) => {
+            this.setState(() => ({legal: checked}))
+          }}>
+          <RawHtml dangerouslySetInnerHTML={{
+            __html: t('memberships/claim/legal/label')
+          }} />
+        </Checkbox>
+        <br /><br />
         <div style={{opacity: errorMessages.length ? 0.5 : 1}}>
           <Button
             onClick={() => {
               if (errorMessages.length) {
                 this.setState((state) => ({
+                  showErrors: true,
                   dirty: {
                     ...state.dirty,
                     firstName: true,
