@@ -149,7 +149,8 @@ class Testimonial extends Component {
             submitting: false,
             success: true,
             image: undefined,
-            imageHash: randomSeed()
+            imageHash: randomSeed(),
+            dirty: {}
           }))
           // reload image again just in case
           setTimeout(() => {
@@ -229,6 +230,11 @@ class Testimonial extends Component {
       return null
     }
 
+    const isDirty = (
+      image ||
+      Object.keys(dirty).map(key => dirty[key])
+        .filter(Boolean).length
+    )
     const unpublished = !!(testimonial && testimonial.adminUnpublished)
 
     return (
@@ -253,26 +259,6 @@ class Testimonial extends Component {
             }
             this.submit()
           }}>
-            <FieldSet
-              values={values}
-              errors={errors}
-              dirty={dirty}
-              fields={fields(t)}
-              onChange={(fields) => {
-                this.setState((state) => {
-                  const next = mergeFields(fields)(state)
-                  if (
-                    next.values.quote &&
-                    next.values.quote.trim().length
-                  ) {
-                    next.dirty = {
-                      ...next.dirty,
-                      quote: true
-                    }
-                  }
-                  return next
-                })
-              }} />
             <br />
             <input
               type='file'
@@ -293,23 +279,52 @@ class Testimonial extends Component {
             {!!imageError && <ErrorMessage error={imageError} />}
             <br />
             {!!imageSrc && (
-              <Item
-                style={{marginLeft: -5, cursor: 'default'}}
-                name={me.name}
-                imageRenderer={() => (
-                  <div {...styles.previewImage} style={{
-                    backgroundImage: `url(${imageSrc})`
-                  }} />
+              <div>
+                <div style={{width: 150, float: 'left'}}>
+                  <Item
+                    style={{width: '100%', marginLeft: -5, cursor: 'default'}}
+                    name={me.name}
+                    imageRenderer={() => (
+                      <div {...styles.previewImage} style={{
+                        backgroundImage: `url(${imageSrc})`
+                      }} />
+                    )}
+                    isActive={showDetail} />
+                </div>
+                <div style={{width: 'calc(100% - 150px)', float: 'left'}}>
+                  <FieldSet
+                    values={values}
+                    errors={errors}
+                    dirty={dirty}
+                    fields={fields(t)}
+                    onChange={(fields) => {
+                      this.setState((state) => {
+                        const next = mergeFields(fields)(state)
+                        if (
+                          next.values.quote &&
+                          next.values.quote.trim().length
+                        ) {
+                          next.dirty = {
+                            ...next.dirty,
+                            quote: true
+                          }
+                        }
+                        return next
+                      })
+                    }} />
+                </div>
+                <br style={{clear: 'both'}} />
+                {showDetail && (
+                  <Detail t={t}
+                    share={testimonial && testimonial.published && !isDirty}
+                    data={{
+                      id: testimonial && testimonial.id,
+                      name: me.name,
+                      role: values.role,
+                      quote: values.quote
+                    }} />
                 )}
-                isActive={showDetail} />
-            )}
-            {!!imageSrc && showDetail && (
-              <Detail t={t} data={{
-                id: testimonial && testimonial.id,
-                name: me.name,
-                role: values.role,
-                quote: values.quote
-              }} />
+              </div>
             )}
             <br style={{clear: 'both'}} />
             <br />

@@ -31,7 +31,7 @@ const styles = {
   })
 }
 
-const Detail = ({t, data: {id, name, role, quote, image, video}}) => (
+const Detail = ({t, share, data: {id, name, role, quote, image, video}}) => (
   <div {...styles.detail}>
     <div style={video ? {
       maxWidth: 400,
@@ -52,14 +52,18 @@ const Detail = ({t, data: {id, name, role, quote, image, video}}) => (
           )
         : <SerifP>«{quote}»</SerifP>
       }
-      <Share
+      {share && <Share
         url={`${PUBLIC_BASE_URL}/community?id=${id}`}
         emailSubject={t('testimonial/detail/share/emailSubject', {
           name,
           role
-        })} />
+        })} />}
     </div>
   </div>
 )
+
+Detail.defaultProps = {
+  share: true
+}
 
 export default Detail
