@@ -263,6 +263,7 @@ const query = gql`query testimonials($seed: Float, $search: String, $firstId: ID
     video {
       hls
       mp4
+      subtitles
       youtube
     }
   }

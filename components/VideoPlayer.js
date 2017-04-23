@@ -121,6 +121,7 @@ class VideoPlayer extends Component {
       clearTimeout(this.readTimeout)
       this.props.onPause && this.props.onPause()
     }
+    this.onProgress = () => {}
     this.scrubRef = ref => { this.scrubber = ref }
     this.scrub = (event) => {
       const {scrubber, video} = this
@@ -189,10 +190,16 @@ class VideoPlayer extends Component {
   componentDidMount () {
     this.video.addEventListener('play', this.onPlay)
     this.video.addEventListener('pause', this.onPause)
+    this.video.addEventListener('progress', this.onProgress)
+
+    if (this.video.textTracks && this.video.textTracks[0]) {
+      this.video.textTracks[0].mode = 'showing'
+    }
   }
   componentWillUnmount () {
     this.video.removeEventListener('play', this.onPlay)
     this.video.removeEventListener('pause', this.onPause)
+    this.video.removeEventListener('progress', this.onProgress)
   }
   render () {
     const {src, hidePlay} = this.props
@@ -205,9 +212,11 @@ class VideoPlayer extends Component {
           autoPlay={this.props.autoPlay}
           muted={muted}
           ref={this.ref}
+          crossOrigin='anonymous'
           poster={src.poster}>
           <source src={src.hls} type='application/x-mpegURL' />
           <source src={src.mp4} type='video/mp4' />
+          {!!src.subtitles && <track label='Deutsch' kind='subtitles' srcLang='de' src={src.subtitles} default />}
         </video>
         <div {...styles.controls}
           style={{opacity: playing ? 0 : 1}}

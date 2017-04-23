@@ -33,24 +33,33 @@ const styles = {
 
 const Detail = ({t, data: {id, name, role, quote, image, video}}) => (
   <div {...styles.detail}>
-    <H2 {...styles.detailTitle}>
-      {name} <span {...styles.detailRole}>{role}</span>
-    </H2>
-    {video
-      ? (
-        <div style={{maxWidth: 400, marginBottom: 20, marginTop: 10}}>
-          <VideoPlayer key={id} src={{...video, poster: image}} autoPlay />
-        </div>
-        )
-      : <SerifP>«{quote}»</SerifP>
-    }
-    <Share
-      fill={colors.secondary}
-      url={`${PUBLIC_BASE_URL}/community?id=${id}`}
-      emailSubject={t('testimonial/detail/share/emailSubject', {
-        name,
-        role
-      })} />
+    <div style={video ? {
+      maxWidth: 400,
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    } : {}}>
+      <H2 {...styles.detailTitle}>
+        {name} <span {...styles.detailRole}>{role}</span>
+      </H2>
+      {video
+        ? (
+          <div style={{
+            marginBottom: 20,
+            marginTop: 10
+          }}>
+            <VideoPlayer key={id} src={{...video, poster: image}} autoPlay />
+          </div>
+          )
+        : <SerifP>«{quote}»</SerifP>
+      }
+      <Share
+        fill={colors.secondary}
+        url={`${PUBLIC_BASE_URL}/community?id=${id}`}
+        emailSubject={t('testimonial/detail/share/emailSubject', {
+          name,
+          role
+        })} />
+    </div>
   </div>
 )
 
