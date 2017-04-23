@@ -8,14 +8,12 @@ import {chfFormat} from '../../lib/utils/formats'
 import {errorToString} from '../../lib/utils/errors'
 
 import {
-  P, Label, colors
+  P, Label
 } from '@project-r/styleguide'
 
 import {timeMinute} from 'd3-time'
 
 import Bar from './Bar'
-
-const BAR_COLOR = '#EAEDEB'
 
 const styles = {
   primaryNumber: css({
@@ -38,16 +36,6 @@ const styles = {
     fontSize: 22,
     fontFamily: 'sans-serif',
     lineHeight: 1
-  }),
-  bar: css({
-    height: 8,
-    marginTop: -20,
-    marginBottom: 20,
-    backgroundColor: BAR_COLOR
-  }),
-  barInner: css({
-    backgroundColor: colors.primary,
-    height: '100%'
   })
 }
 
