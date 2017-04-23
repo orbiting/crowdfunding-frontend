@@ -192,7 +192,7 @@ class VideoPlayer extends Component {
     this.video.addEventListener('pause', this.onPause)
     this.video.addEventListener('progress', this.onProgress)
 
-    if (this.video.textTracks && this.video.textTracks[0]) {
+    if (this.video.textTracks && this.video.textTracks.length) {
       this.video.textTracks[0].mode = 'showing'
     }
   }
