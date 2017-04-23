@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import {css} from 'glamor'
 import Play from './Icons/Play'
 import Volume from './Icons/Volume'
-import Spinner from './Spinner'
+import {InlineSpinner} from './Spinner'
 
 import {
   colors
@@ -87,7 +87,7 @@ class VideoPlayer extends Component {
       playing: false,
       progress: 0,
       muted: false,
-      loading: true
+      loading: false
     }
 
     this.updateProgress = () => {
@@ -223,6 +223,7 @@ class VideoPlayer extends Component {
     this.video.addEventListener('pause', this.onPause)
     this.video.addEventListener('loadstart', this.onLoadStart)
     this.video.addEventListener('canplay', this.onCanPlay)
+    this.video.addEventListener('canplaythrough', this.onCanPlay)
     this.video.addEventListener('loadedmetadata', this.onLoadedMetaData)
 
     this.setTextTracksMode()
@@ -236,6 +237,7 @@ class VideoPlayer extends Component {
     this.video.removeEventListener('loadstart', this.onLoadStart)
     this.video.removeEventListener('progress', this.onProgress)
     this.video.removeEventListener('canplay', this.onCanPlay)
+    this.video.removeEventListener('canplaythrough', this.onCanPlay)
     this.video.removeEventListener('loadedmetadata', this.onLoadedMetaData)
   }
   render () {
@@ -264,13 +266,14 @@ class VideoPlayer extends Component {
           }}>
             <Play />
           </div>
-          {loading && <Spinner />}
           <div {...styles.volume} onClick={(e) => {
             e.stopPropagation()
             this.setState((state) => ({
               muted: !state.muted
             }))
           }}>
+            {loading && <InlineSpinner size={25} />}
+            {' '}
             <Volume off={muted} />
           </div>
         </div>

@@ -4,8 +4,6 @@ import {css} from 'glamor'
 const containerStyle = css({
   display: 'block',
   position: 'absolute',
-  width: 50,
-  height: 50,
   top: '50%',
   left: '50%'
 })
@@ -25,7 +23,7 @@ const barStyle = css({
   left: '-10%'
 })
 
-const Spinner = () => {
+const Spinner = ({size}) => {
   let bars = []
   for (let i = 0; i < 12; i++) {
     let style = {}
@@ -40,7 +38,7 @@ const Spinner = () => {
   }
 
   return (
-    <span {...containerStyle}>
+    <span {...containerStyle} style={{width: size, height: size}}>
       {bars}
     </span>
   )
@@ -48,15 +46,17 @@ const Spinner = () => {
 
 const inlineBlock = css({
   position: 'relative',
-  display: 'inline-block',
-  width: 50,
-  height: 50
+  display: 'inline-block'
 })
 
-export const InlineSpinner = () => (
-  <span {...inlineBlock}>
-    <Spinner />
+export const InlineSpinner = ({size}) => (
+  <span {...inlineBlock} style={{width: size, height: size}}>
+    <Spinner size={size} />
   </span>
 )
+
+Spinner.defaultProps = InlineSpinner.defaultProps = {
+  size: 50
+}
 
 export default Spinner
