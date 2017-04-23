@@ -138,6 +138,9 @@ class VideoPlayer extends Component {
         loading: false
       }))
     }
+    this.onLoadedMetaData = () => {
+      this.setTextTracksMode()
+    }
     this.scrubRef = ref => { this.scrubber = ref }
     this.scrub = (event) => {
       const {scrubber, video} = this
@@ -203,15 +206,29 @@ class VideoPlayer extends Component {
     const {video} = this
     video && video.pause()
   }
+  setTextTracksMode () {
+    const {muted} = this.state
+    const {src} = this.props
+
+    if (!src.subtitles || muted === this._textTrackMode) {
+      return
+    }
+    if (this.video.textTracks && this.video.textTracks.length) {
+      this.video.textTracks[0].mode = muted ? 'showing' : 'hidden'
+      this._textTrackMode = muted
+    }
+  }
   componentDidMount () {
     this.video.addEventListener('play', this.onPlay)
     this.video.addEventListener('pause', this.onPause)
     this.video.addEventListener('loadstart', this.onLoadStart)
     this.video.addEventListener('canplay', this.onCanPlay)
+    this.video.addEventListener('loadedmetadata', this.onLoadedMetaData)
 
-    if (this.video.textTracks && this.video.textTracks.length) {
-      this.video.textTracks[0].mode = 'showing'
-    }
+    this.setTextTracksMode()
+  }
+  componentDidUpdate () {
+    this.setTextTracksMode()
   }
   componentWillUnmount () {
     this.video.removeEventListener('play', this.onPlay)
@@ -219,6 +236,7 @@ class VideoPlayer extends Component {
     this.video.removeEventListener('loadstart', this.onLoadStart)
     this.video.removeEventListener('progress', this.onProgress)
     this.video.removeEventListener('canplay', this.onCanPlay)
+    this.video.removeEventListener('loadedmetadata', this.onLoadedMetaData)
   }
   render () {
     const {src, hidePlay} = this.props
