@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-23T14:31:34.167Z",
+  "updated": "2017-04-23T15:40:19.057Z",
   "title": "live",
   "data": [
     {
@@ -1129,6 +1129,14 @@
     {
       "key": "testimonial/unpublished",
       "value": "Wir können leider ihr Statement nicht publizieren. Schreiben Sie an kontakt@republik.ch für weitere Informationen."
+    },
+    {
+      "key": "testimonial/unpublish/user",
+      "value": "Statement zurücknehmen"
+    },
+    {
+      "key": "testimonial/unpublished/user",
+      "value": "Sie haben ihr Statement zurückgezogen, es erscheint nicht mehr auf der Community Seite."
     },
     {
       "key": "testimonial/meta/title",

@@ -347,6 +347,18 @@ class Testimonial extends Component {
                 )
               )
             }
+            {testimonial && testimonial.published && (
+              <A href='#' onClick={(e) => {
+                e.preventDefault()
+                this.props.unpublish()
+              }}>
+                <br />
+                {t('testimonial/unpublish/user')}
+              </A>
+            )}
+            {testimonial && !testimonial.published && (
+              <ErrorMessage error={t('testimonial/unpublished/user')} />
+            )}
           </form>
         </div>
       )} />
@@ -354,10 +366,13 @@ class Testimonial extends Component {
   }
 }
 
-const mutation = gql`mutation submitTestimonial($role: String!, $quote: String!, $image: String) {
+const submitMutation = gql`mutation submitTestimonial($role: String!, $quote: String!, $image: String) {
   submitTestimonial(role: $role, quote: $quote, image: $image) {
     id
   }
+}`
+const unpublishMutation = gql`mutation unpublishTestimonial {
+  unpublishTestimonial
 }`
 
 const query = gql`query myTestimonial {
@@ -381,7 +396,16 @@ const query = gql`query myTestimonial {
 }`
 
 export default compose(
-  graphql(mutation, {
+  graphql(unpublishMutation, {
+    props: ({mutate}) => ({
+      unpublish: () => mutate({
+        refetchQueries: [{
+          query
+        }]
+      })
+    })
+  }),
+  graphql(submitMutation, {
     props: ({mutate}) => ({
       submit: variables => mutate({
         variables,
