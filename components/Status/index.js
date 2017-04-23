@@ -1,15 +1,21 @@
 import React, {Component} from 'react'
 import {css} from 'glamor'
 import {gql, graphql} from 'react-apollo'
-import withT from '../lib/withT'
-import {chfFormat} from '../lib/utils/formats'
-import {errorToString} from '../lib/utils/errors'
+import {ascending} from 'd3-array'
+
+import withT from '../../lib/withT'
+import {chfFormat} from '../../lib/utils/formats'
+import {errorToString} from '../../lib/utils/errors'
 
 import {
   P, Label, colors
 } from '@project-r/styleguide'
 
 import {timeMinute} from 'd3-time'
+
+import Bar from './Bar'
+
+const BAR_COLOR = '#EAEDEB'
 
 const styles = {
   primaryNumber: css({
@@ -37,7 +43,7 @@ const styles = {
     height: 8,
     marginTop: -20,
     marginBottom: 20,
-    backgroundColor: '#EAEDEB'
+    backgroundColor: BAR_COLOR
   }),
   barInner: css({
     backgroundColor: colors.primary,
@@ -45,16 +51,21 @@ const styles = {
   })
 }
 
-const query = gql`
-{
+const query = gql`{
   crowdfunding(name: "REPUBLIK") {
     id
-    goal {people, money}
-    status {people, money}
+    goals {
+      people
+      money
+      description
+    }
+    status {
+      people
+      money
+    }
     endDate
   }
-}
-`
+}`
 
 class Status extends Component {
   render () {
@@ -64,7 +75,7 @@ class Status extends Component {
     if (this.props.error) {
       return <P>{errorToString(this.props.error)}</P>
     }
-    const {crowdfunding: {goal, status, endDate}, t} = this.props
+    const {crowdfunding: {goals, status, endDate}, t} = this.props
     const now = new Date()
     const end = new Date(endDate)
 
@@ -72,6 +83,14 @@ class Status extends Component {
     const minutes = totalMinutes % 60
     const hours = Math.floor(totalMinutes / 60) % 24
     const days = Math.floor(totalMinutes / 60 / 24)
+
+    if (!goals.length) {
+      return
+    }
+
+    const goalsByPeople = [].concat(goals)
+      .sort((a, b) => ascending(a.people, b.people))
+    const goal = goalsByPeople[goalsByPeople.length - 1]
 
     if (this.props.compact) {
       return (
@@ -82,13 +101,7 @@ class Status extends Component {
               count: goal.people
             })}</Label>
           </P>
-          <div {...styles.bar}>
-            <div {...styles.barInner} style={{
-              width: `${Math.ceil(
-                Math.min(1, status.people / goal.people) * 100
-              )}%`
-            }} />
-          </div>
+          <Bar goals={goalsByPeople} status={status} accessor='people' />
         </div>
       )
     }
@@ -101,13 +114,7 @@ class Status extends Component {
             count: goal.people
           })}</Label>
         </P>
-        <div {...styles.bar}>
-          <div {...styles.barInner} style={{
-            width: `${Math.ceil(
-              Math.min(1, status.people / goal.people) * 100
-            )}%`
-          }} />
-        </div>
+        <Bar goals={goalsByPeople} status={status} accessor='people' />
         <P>
           <span {...styles.secondaryNumber}>{chfFormat(status.money / 100)}</span>
           <Label>
@@ -116,13 +123,11 @@ class Status extends Component {
             })}
           </Label>
         </P>
-        <div {...styles.bar}>
-          <div {...styles.barInner} style={{
-            width: `${Math.ceil(
-              Math.min(1, status.money / goal.money) * 100
-            )}%`
-          }} />
-        </div>
+        <Bar
+          goals={goalsByPeople}
+          status={status}
+          accessor='money'
+          format={(value) => chfFormat(value / 100)} />
         <P>
           <span {...styles.smallNumber}>
             {end > now ? (
@@ -166,7 +171,7 @@ const StatusWithQuery = graphql(query, {
     }
   },
   options: {
-    pollInterval: 2500
+    pollInterval: 3000
   }
 })(withT(Status))
 
