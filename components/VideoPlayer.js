@@ -253,6 +253,7 @@ class VideoPlayer extends Component {
           poster={src.poster}>
           <source src={src.hls} type='application/x-mpegURL' />
           <source src={src.mp4} type='video/mp4' />
+          { /* crossOrigin subtitles won't work in older browser, serve from static */ }
           {!!src.subtitles && <track label='Deutsch' kind='subtitles' srcLang='de' src={src.subtitles.replace(STATIC_BASE_URL, '')} default />}
         </video>
         <div {...styles.controls}
