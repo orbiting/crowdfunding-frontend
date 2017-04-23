@@ -23,6 +23,24 @@ const birthdayParse = swissTime.parse(birthdayFormat)
 
 const fields = (t) => [
   {
+    label: t('pledge/contact/firstName/label'),
+    name: 'firstName',
+    validator: (value) => (
+      value.trim().length <= 0 && t('pledge/contact/firstName/error/empty')
+    )
+  },
+  {
+    label: t('pledge/contact/lastName/label'),
+    name: 'lastName',
+    validator: (value) => (
+      value.trim().length <= 0 && t('pledge/contact/lastName/error/empty')
+    )
+  },
+  {
+    label: t('merci/updateMe/phone/label'),
+    name: 'phoneNumber'
+  },
+  {
     label: t('merci/updateMe/birthday/label'),
     name: 'birthday',
     mask: '11.11.1111',
@@ -61,10 +79,15 @@ const getValues = (me) => {
       country: me.address.country
     }
   } else if (me) {
-    addressState.name = me.name
+    addressState.name = [
+      me.firstName,
+      me.lastName
+    ].filter(Boolean).join(' ')
   }
 
   return {
+    firstName: me.firstName || '',
+    lastName: me.lastName || '',
     birthday: me.birthday || '',
     ...addressState
   }
@@ -131,7 +154,20 @@ class Update extends Component {
         <div>
           {!isEditing ? (
             <div>
-              <H2>{t('merci/updateMe/title')}</H2>
+              <H2 style={{marginBottom: 30}}>{t('merci/updateMe/title')}</H2>
+              <P>
+                {intersperse(
+                  [
+                    me.name,
+                    me.phoneNumber
+                  ].filter(Boolean),
+                  (_, i) => <br key={i} />
+                )}
+              </P>
+              <P>
+                <Label key='birthday'>{t('merci/updateMe/birthday/label')}</Label><br />
+                {me.birthday}
+              </P>
               <P>
                 <Label>{t('merci/updateMe/address/label')}</Label><br />
               </P>
@@ -147,10 +183,6 @@ class Update extends Component {
                   (_, i) => <br key={i} />
                 )}
               </P>
-              <P>
-                <Label key='birthday'>{t('merci/updateMe/birthday/label')}</Label><br />
-                {me.birthday}
-              </P>
               <br />
               <A href='#' onClick={(e) => {
                 e.preventDefault()
@@ -161,7 +193,17 @@ class Update extends Component {
             <div>
               <H2>{t('merci/updateMe/title')}</H2>
               <br />
-              <Label>{t('merci/updateMe/address/label')}</Label><br /><br />
+              <FieldSet
+                values={values}
+                errors={errors}
+                dirty={dirty}
+                onChange={(fields) => {
+                  this.setState(mergeFields(fields))
+                }}
+                fields={fields(t)} />
+              <Label>{t('merci/updateMe/birthday/hint')}</Label><br />
+              <br /><br />
+              <Label>{t('merci/updateMe/address/label')}</Label><br />
               <AddressForm
                 values={values}
                 errors={errors}
@@ -171,16 +213,7 @@ class Update extends Component {
                 }} />
               <br />
               <br />
-              <FieldSet
-                values={values}
-                errors={errors}
-                dirty={dirty}
-                onChange={(fields) => {
-                  this.setState(mergeFields(fields))
-                }}
-                fields={fields(t)} />
-              <Label>{t('merci/updateMe/birthday/hint')}</Label>
-              <br /><br /><br />
+              <br />
               {updating ? (
                 <div style={{textAlign: 'center'}}>
                   <InlineSpinner />
@@ -221,6 +254,9 @@ class Update extends Component {
                       }
                       this.setState(() => ({updating: true}))
                       this.props.update({
+                        firstName: values.firstName,
+                        lastName: values.lastName,
+                        phoneNumber: values.phoneNumber,
                         birthday: values.birthday,
                         address: {
                           name: values.name,
@@ -253,8 +289,8 @@ class Update extends Component {
   }
 }
 
-const mutation = gql`mutation updateMe($birthday: Date!, $address: AddressInput!) {
-  updateMe(birthday: $birthday, address: $address) {
+const mutation = gql`mutation updateMe($birthday: Date!, $firstName: String!, $lastName: String!, $phoneNumber: String, $address: AddressInput!) {
+  updateMe(birthday: $birthday, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, address: $address) {
     id
   }
 }`
@@ -262,6 +298,9 @@ export const query = gql`query myAddress {
   me {
     id
     name
+    firstName
+    lastName
+    phoneNumber
     email
     birthday
     address {

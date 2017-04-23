@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-22T23:39:16.570Z",
+  "updated": "2017-04-23T14:31:34.167Z",
   "title": "live",
   "data": [
     {
@@ -262,6 +262,10 @@
     {
       "key": "merci/updateMe/birthday/label",
       "value": "Geburtsdatum"
+    },
+    {
+      "key": "merci/updateMe/phone/label",
+      "value": "Telefonnummer (Optional)"
     },
     {
       "key": "merci/updateMe/birthday/hint",
@@ -712,8 +716,9 @@
       "value": "Bei der Bezahlung mit PayPal ist etwas schiefgelaufen. Wir haben Ihre Angaben und den Fehler gespeichert. Bitte kontaktieren Sie uns unter kontakt@repulik.ch und geben Sie folgende Nummer an: ID: {id}"
     },
     {
-      "key": "api/pay/pf/checksumError",
-      "value": "Die Überprüfung der Bezahlung mit Postfinance ist fehlgeschlagen. Wir haben Ihre Angaben und den Fehler gespeichert. Bitte kontaktieren Sie uns unter kontakt@repulik.ch und geben Sie folgende Nummer an: ID: {id}"
+      "key": "api/pay/pf/error",
+      "value": "Die Überprüfung der Bezahlung mit Postfinance ist fehlgeschlagen. Wir haben Ihre Angaben und den Fehler gespeichert. Bitte kontaktieren Sie uns unter kontakt@repulik.ch und geben Sie folgende Nummer an: ID: {id}",
+      "undefined": "key angepasst, bitte beachten beim einpflegen der Korrekturen"
     },
     {
       "key": "api/pay/pspPayload/parseFailed",
