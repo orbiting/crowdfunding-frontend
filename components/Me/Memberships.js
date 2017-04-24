@@ -19,13 +19,13 @@ const styles = {
   a: merge(linkRule, {
     fontSize: 17,
     lineHeight: '25px',
-    fontFamilies: fontFamilies.sansSerifMedium
+    fontFamily: fontFamilies.sansSerifMedium
   }),
   p: css({
     margin: 0,
     fontSize: 17,
     lineHeight: '25px',
-    fontFamilies: fontFamilies.sansSerifRegular
+    fontFamily: fontFamilies.sansSerifRegular
   })
 }
 
