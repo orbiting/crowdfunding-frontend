@@ -19,6 +19,7 @@ query myThings {
         name
       }
       options {
+        templateId
         reward {
           ... on MembershipType {
             name
@@ -30,6 +31,7 @@ query myThings {
         minAmount
         maxAmount
         amount
+        price
       }
       status
       total
