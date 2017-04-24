@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {css} from 'glamor'
 import Link from 'next/link'
 import 'glamor/reset'
+import Router from 'next/router'
+
+import track from '../../lib/piwik'
 
 import IconLink from '../IconLink'
 import Newsletter from './PureNewsletter'
@@ -58,41 +61,61 @@ const styles = {
   })
 }
 
-export default ({url, inverted}) => (
-  <div {...styles.container}>
-    <Newsletter inverted={inverted} />
+class Footer extends Component {
+  componentDidMount () {
+    Router.onRouteChangeComplete = (url) => {
+      clearTimeout(this.timeout)
+      this.setState({loading: false})
 
-    <div {...styles.nav}>
-      <div {...styles.mainNav}>
-        {url.pathname === '/' || url.pathname === '/countdown' ? (
-          <Link href='/manifest'>
-            <a {...linkRule}>Manifest</a>
-          </Link>
-        ) : (
-          <Link href='/'>
-            <a {...linkRule}>
-              {(new Date()) > COUNTDOWN_DATE ? 'Crowdfunding' : 'Countdown'}
-            </a>
-          </Link>
-        )}
-        <br />
-        <A href='https://project-r.construction/' target='_blank'>Project R</A>
+      // update url manually, seems necessary after client navigation
+      track(['setCustomUrl', window.location.href])
+      track(['trackPageView'])
+    }
+  }
+  componentWillUnmount () {
+    Router.onRouteChangeComplete = null
+  }
+  render () {
+    const {url, inverted} = this.props
+    return (
+      <div {...styles.container}>
+        <Newsletter inverted={inverted} />
+
+        <div {...styles.nav}>
+          <div {...styles.mainNav}>
+            {url.pathname === '/' || url.pathname === '/countdown' ? (
+              <Link href='/manifest'>
+                <a {...linkRule}>Manifest</a>
+              </Link>
+            ) : (
+              <Link href='/'>
+                <a {...linkRule}>
+                  {(new Date()) > COUNTDOWN_DATE ? 'Crowdfunding' : 'Countdown'}
+                </a>
+              </Link>
+            )}
+            <br />
+            <A href='https://project-r.construction/' target='_blank'>Project R</A>
+          </div>
+        </div>
+
+        <address {...styles.address} style={{marginBottom: 20}}>
+          <A href='https://goo.gl/maps/j1F8cXQhrmo' target='_blank'>
+            Republik<br />
+            c/o Hotel Rothaus<br />
+            Sihlhallenstrasse 1<br />
+            8004 Zürich<br />
+          </A>
+          <A href={`mailto:${EMAIL}`}>
+            {EMAIL}
+          </A>
+        </address>
+
+        <IconLink fill={inverted ? '#fff' : '#000'} icon='facebook' href='https://www.facebook.com/RepublikMagazin' target='_blank' />
+        <IconLink fill={inverted ? '#fff' : '#000'} icon='twitter' href='https://twitter.com/RepublikMagazin' target='_blank' />
       </div>
-    </div>
+    )
+  }
+}
 
-    <address {...styles.address} style={{marginBottom: 20}}>
-      <A href='https://goo.gl/maps/j1F8cXQhrmo' target='_blank'>
-        Republik<br />
-        c/o Hotel Rothaus<br />
-        Sihlhallenstrasse 1<br />
-        8004 Zürich<br />
-      </A>
-      <A href={`mailto:${EMAIL}`}>
-        {EMAIL}
-      </A>
-    </address>
-
-    <IconLink fill={inverted ? '#fff' : '#000'} icon='facebook' href='https://www.facebook.com/RepublikMagazin' target='_blank' />
-    <IconLink fill={inverted ? '#fff' : '#000'} icon='twitter' href='https://twitter.com/RepublikMagazin' target='_blank' />
-  </div>
-)
+export default Footer

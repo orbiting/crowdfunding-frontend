@@ -32,7 +32,7 @@ const styles = {
   }),
   whiteOnBlack: css({
     textRendering: 'optimizeLegibility',
-    '-webkit-font-smoothing': 'antialiased',
+    WebkitFontSmoothing: 'antialiased',
     '& ::selection': {
       color: '#000',
       backgroundColor: '#fff'
