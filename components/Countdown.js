@@ -111,7 +111,7 @@ class Countdown extends Component {
           <figure {...styles.holder}>
             <div {...styles.number}>{hours}</div>
             <figcaption {...styles.caption}>
-              {days === 1 ? 'Stunde' : 'Stunden'}
+              {hours === 1 ? 'Stunde' : 'Stunden'}
             </figcaption>
           </figure>
           <figure {...styles.holder}>
