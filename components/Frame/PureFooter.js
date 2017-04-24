@@ -77,6 +77,8 @@ class Footer extends Component {
   }
   render () {
     const {url, inverted} = this.props
+    const crowdfundingLive = (new Date()) > COUNTDOWN_DATE
+
     return (
       <div {...styles.container}>
         <Newsletter inverted={inverted} />
@@ -88,9 +90,14 @@ class Footer extends Component {
                 <a {...linkRule}>Manifest</a>
               </Link>
             ) : (
-              <Link href='/'>
+              <Link {...(crowdfundingLive ? {
+                href: '/'
+              } : {
+                href: '/countdown',
+                as: '/'
+              })}>
                 <a {...linkRule}>
-                  {(new Date()) > COUNTDOWN_DATE ? 'Crowdfunding' : 'Countdown'}
+                  {crowdfundingLive ? 'Crowdfunding' : 'Countdown'}
                 </a>
               </Link>
             )}
