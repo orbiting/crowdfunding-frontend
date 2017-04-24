@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-24T00:27:33.870Z",
+  "updated": "2017-04-24T01:00:42.730Z",
   "title": "live",
   "data": [
     {
@@ -1054,6 +1054,18 @@
     {
       "key": "faq/metaDescription",
       "value": "Antworten zu den brennenden Fragen."
+    },
+    {
+      "key": "faq/before/title",
+      "value": "FAQ — Ihre häufigsten Fragen"
+    },
+    {
+      "key": "faq/before/support/title",
+      "value": "Support"
+    },
+    {
+      "key": "faq/before/support/text",
+      "value": "Bei allen technischen Problemen beim Crowdfunding helfen wir Ihnen gerne so schnell wie möglich per Mail: <a href=\"mailto:kontakt@republik.ch\">kontakt@republik.ch</a>"
     },
     {
       "key": "faq/form/title",

@@ -7,6 +7,7 @@ import Loader from '../Loader'
 import Meta from '../Frame/Meta'
 import withT from '../../lib/withT'
 import {intersperse} from '../../lib/utils/helpers'
+import RawHtml from '../RawHtml'
 
 import {
   Interaction, colors,
@@ -112,6 +113,12 @@ class FaqList extends Component {
               url: `${PUBLIC_BASE_URL}/faq`,
               image: `${STATIC_BASE_URL}/static/social-media/faq.png`
             }} />
+            <H2>{t('faq/before/title')}</H2>
+            <Interaction.H3>{t('faq/before/support/title')}</Interaction.H3>
+            <RawHtml type={P} dangerouslySetInnerHTML={{
+              __html: t('faq/before/support/text')
+            }} />
+            <br />
             {faqsByCategory.map(({key: title, values}) => (
               <div {...styles.category} key={title}>
                 <H2>{title}</H2>
