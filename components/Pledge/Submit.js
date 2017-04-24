@@ -11,6 +11,7 @@ import {errorToString} from '../../lib/utils/errors'
 import withT from '../../lib/withT'
 import {meQuery} from '../../lib/withMe'
 import {chfFormat} from '../../lib/utils/formats'
+import track from '../../lib/piwik'
 
 import FieldSet from '../FieldSet'
 import {InlineSpinner} from '../Spinner'
@@ -153,6 +154,8 @@ class Submit extends Component {
     if (props.basePledge) {
       const variables = this.submitVariables(props.basePledge)
       const hash = simpleHash(variables)
+
+      setPendingOrder(variables)
 
       this.state.pledgeHash = hash
       this.state.pledgeId = props.basePledge.id
@@ -803,6 +806,11 @@ const payPledge = gql`
   }
 `
 
+let pendingOrder
+const setPendingOrder = order => {
+  pendingOrder = order
+}
+
 export const withPay = Component => {
   const EnhancedComponent = compose(
     graphql(payPledge, {
@@ -813,6 +821,36 @@ export const withPay = Component => {
             {query: myThingsQuery},
             {query: addressQuery}
           ]
+        }).then(response => {
+          return new Promise((resolve, reject) => {
+            if (!pendingOrder) {
+              resolve(response)
+            } else {
+              pendingOrder.options.forEach(option => {
+                track([
+                  'addEcommerceItem',
+                  option.templateId, // (required) SKU: Product unique identifier
+                  undefined, // (optional) Product name
+                  undefined, // (optional) Product category
+                  option.price / 100, // (recommended) Product price
+                  option.amount // (optional, default to 1) Product quantity
+                ])
+              })
+              track([
+                'trackEcommerceOrder',
+                response.data.payPledge.pledgeId, // (required) Unique Order ID
+                pendingOrder.total / 100, // (required) Order Revenue grand total (includes tax, shipping, and subtracted discount)
+                undefined, // (optional) Order sub total (excludes shipping)
+                undefined, // (optional) Tax amount
+                undefined, // (optional) Shipping amount
+                !!pendingOrder.reason // (optional) Discount offered (set to false for unspecified parameter)
+              ])
+              // give piwik a second to track
+              setTimeout(() => {
+                resolve(response)
+              }, 1000)
+            }
+          })
         })
       })
     }),
@@ -824,12 +862,16 @@ export const withPay = Component => {
 const SubmitWithMutations = compose(
   graphql(submitPledge, {
     props: ({mutate}) => ({
-      submit: variables => mutate({
-        variables,
-        refetchQueries: [{
-          query: meQuery
-        }]
-      })
+      submit: variables => {
+        setPendingOrder(variables)
+
+        return mutate({
+          variables,
+          refetchQueries: [{
+            query: meQuery
+          }]
+        })
+      }
     })
   }),
   withSignOut,
