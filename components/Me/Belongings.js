@@ -55,7 +55,8 @@ class PledgeList extends Component {
         track([
           'addEcommerceItem',
           option.templateId, // (required) SKU: Product unique identifier
-          option.reward.name, // (optional) Product name
+          option.reward ? option.reward.name : 'DONATE',
+          // (optional) Product name
           undefined, // (optional) Product category
           option.price / 100, // (recommended) Product price
           option.amount // (optional, default to 1) Product quantity
