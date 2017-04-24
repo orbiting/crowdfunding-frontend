@@ -9,6 +9,7 @@ query myThings {
       claimerName
       voucherCode
       createdAt
+      sequenceNumber
       type {
         name
       }
@@ -50,6 +51,7 @@ query myThings {
         claimerName
         voucherCode
         createdAt
+        sequenceNumber
         type {
           name
         }

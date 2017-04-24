@@ -76,6 +76,7 @@ class MembershipGiver extends Component {
               {giveable.map((membership, i) => (
                 <li key={i}>
                   <code>{membership.voucherCode}</code>
+                  {' '}({t('memberships/sequenceNumber/label', membership)})
                 </li>
               ))}
             </ul>
@@ -106,6 +107,7 @@ class MembershipGiver extends Component {
               {given.map((membership, i) => (
                 <li key={i}>
                   {membership.claimerName}
+                  {' '}({t('memberships/sequenceNumber/label', membership)})
                 </li>
               ))}
             </ul>
@@ -151,7 +153,8 @@ class MembershipsList extends Component {
                       `memberships/type/${membership.type.name}`,
                       {},
                       membership.type.name
-                    )}<br />
+                    )}
+                    {' '}({t('memberships/sequenceNumber/suffix', membership)})<br />
                     <Label>
                       {t('memberships/label', {
                         formattedDateTime: dateTimeFormat(createdAt)

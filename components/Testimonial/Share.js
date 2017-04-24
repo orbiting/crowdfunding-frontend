@@ -4,6 +4,8 @@ import {css} from 'glamor'
 import {compose} from 'redux'
 import Head from 'next/head'
 
+import withT from '../../lib/withT'
+
 import Loader from '../Loader'
 
 import {
@@ -72,7 +74,7 @@ const fontSizeBoost = length => {
   return 0
 }
 
-const Item = ({loading, error, testimonial: {quote, image, name, video, sequenceNumber}}) => (
+const Item = ({loading, error, t, testimonial: {quote, image, name, video, sequenceNumber}}) => (
   <Loader loading={loading} error={error} render={() => (
     <div {...styles.container}>
       <Head>
@@ -90,7 +92,9 @@ const Item = ({loading, error, testimonial: {quote, image, name, video, sequence
           </Interaction.H2>
         )}
         {!!sequenceNumber && (
-          <div {...styles.number}>Abo #{sequenceNumber}</div>
+          <div {...styles.number}>{t('memberships/sequenceNumber/label', {
+            sequenceNumber
+          })}</div>
         )}
       </div>
       <div {...styles.logo}>
@@ -117,6 +121,7 @@ const query = gql`query testimonials($firstId: ID) {
 }`
 
 export default compose(
+  withT,
   graphql(query, {
     props: ({data, ownProps: {name}}) => {
       return ({

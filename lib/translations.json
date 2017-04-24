@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-24T01:00:42.730Z",
+  "updated": "2017-04-24T03:22:30.607Z",
   "title": "live",
   "data": [
     {
@@ -775,7 +775,7 @@
     },
     {
       "key": "footer/contact/address",
-      "value": "Republik \nProject R Genossenschaft \nSihlhallenstrasse 1 \n8004 Zürich \nSchweiz"
+      "value": "Republik \nProject R Genossenschaft \nSihlhallenstrasse 1 \n8004 Zürich \nSchweiz\nkontakt@republik.ch"
     },
     {
       "key": "footer/about/title",
@@ -976,6 +976,14 @@
     {
       "key": "memberships/claim/error/title",
       "value": "Fehler"
+    },
+    {
+      "key": "memberships/sequenceNumber/label",
+      "value": "Abo #{sequenceNumber}"
+    },
+    {
+      "key": "memberships/sequenceNumber/suffix",
+      "value": "#{sequenceNumber}"
     },
     {
       "key": "print/paymentslip/reduction",
@@ -1201,7 +1209,7 @@
     },
     {
       "key": "footer/me/merci/signedIn",
-      "value": "Ihre Entscheidungen"
+      "value": "Ihre persönliche Übersicht"
     },
     {
       "key": "footer/me/signOut",
