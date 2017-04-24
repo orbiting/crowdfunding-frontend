@@ -8,6 +8,8 @@ if (DEV || process.env.DOTENV) {
   require('dotenv').config()
 }
 
+const COUNTDOWN_DATE = require('./constants').COUNTDOWN_DATE
+
 const PORT = process.env.PORT || 3000
 
 const app = next({dir: '.', dev: DEV})
@@ -33,6 +35,34 @@ app.prepare()
       challenge: true,
       realm: process.env.BASIC_AUTH_REALM
     }))
+  }
+
+  // only attach middle-ware if we're not already past it
+  if ((new Date()) < COUNTDOWN_DATE) {
+    const ALLOWED_PATHS = [
+      '/_next',
+      '/_webpack/',
+      '/__webpack_hmr',
+      '/static/',
+      '/newsletter/',
+      '/manifest'
+    ]
+
+    server.use((req, res, next) => {
+      const now = new Date()
+      if (now < COUNTDOWN_DATE) {
+        if (ALLOWED_PATHS.some(path => req.url.startsWith(path))) {
+          return next()
+        }
+        if (req.url === '/') {
+          return app.render(req, res, '/countdown', {})
+        }
+        req.path = '/404'
+        req.url = '/404'
+        return handle(req, res)
+      }
+      return next()
+    })
   }
 
   server.use(newsletter)
