@@ -66,6 +66,10 @@ const fontSizeBoost = length => {
   if (length < 100) {
     return 4
   }
+  if (length > 400) {
+    return -2
+  }
+  return 0
 }
 
 const Item = ({loading, error, testimonial: {quote, image, name, video, sequenceNumber}}) => (
