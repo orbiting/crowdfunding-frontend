@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import {css} from 'glamor'
+import {css, merge} from 'glamor'
 import Link from 'next/link'
 
 import {HEADER_HEIGHT_MOBILE, MENUBAR_HEIGHT} from './constants'
@@ -72,14 +72,22 @@ const linkStyle = css({
     color: '#ccc'
   }
 })
+const linkActiveStyle = css({
+  color: '#ccc',
+  ':visited': {
+    color: '#ccc'
+  }
+})
 
-const Menu = ({items, expanded, id, children}) => (
+const Menu = ({items, expanded, id, children, url}) => (
   <nav {...menuStyle} role='navigation' id={id} aria-expanded={expanded}>
     <ul {...listStyle}>
       {items.map(({label, href}, i) => (
         <li {...listItemStyle} key={i}>
           <Link href={href}>
-            <a {...linkStyle}>{label}</a>
+            <a {...merge(linkStyle, url.pathname === href && linkActiveStyle)}>
+              {label}
+            </a>
           </Link>
         </li>
       ))}

@@ -198,7 +198,7 @@ class Header extends Component {
             )}
             <div {...styles.menu}>
               {(mobile || opaque) && <Menu expanded={expanded}
-                id='primary-menu' items={menuItems}>
+                id='primary-menu' items={menuItems} url={url}>
                 {
                   mobile && expanded && <Status compact />
                 }
