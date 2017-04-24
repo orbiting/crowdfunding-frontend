@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import {css} from 'glamor'
 import Play from './Icons/Play'
 import Volume from './Icons/Volume'
+import Subtitles from './Icons/Subtitles'
 import {InlineSpinner} from './Spinner'
 
 import {
@@ -61,7 +62,7 @@ const styles = {
     left: 0,
     height: PROGRESS_HEIGHT
   }),
-  volume: css({
+  icons: css({
     position: 'absolute',
     zIndex: 6,
     right: 10,
@@ -87,6 +88,7 @@ class VideoPlayer extends Component {
       playing: false,
       progress: 0,
       muted: false,
+      subtitles: false,
       loading: false
     }
 
@@ -207,15 +209,15 @@ class VideoPlayer extends Component {
     video && video.pause()
   }
   setTextTracksMode () {
-    const {muted} = this.state
+    const {subtitles} = this.state
     const {src} = this.props
 
-    if (!src.subtitles || muted === this._textTrackMode) {
+    if (!src.subtitles || subtitles === this._textTrackMode) {
       return
     }
     if (this.video.textTracks && this.video.textTracks.length) {
-      this.video.textTracks[0].mode = muted ? 'showing' : 'hidden'
-      this._textTrackMode = muted
+      this.video.textTracks[0].mode = subtitles ? 'showing' : 'hidden'
+      this._textTrackMode = subtitles
     }
   }
   componentDidMount () {
@@ -242,7 +244,11 @@ class VideoPlayer extends Component {
   }
   render () {
     const {src, hidePlay} = this.props
-    const {playing, progress, muted, loading} = this.state
+    const {
+      playing, progress,
+      muted, subtitles,
+      loading
+    } = this.state
 
     return (
       <div {...styles.wrapper}>
@@ -266,15 +272,32 @@ class VideoPlayer extends Component {
           }}>
             <Play />
           </div>
-          <div {...styles.volume} onClick={(e) => {
-            e.stopPropagation()
-            this.setState((state) => ({
-              muted: !state.muted
-            }))
-          }}>
+          <div {...styles.icons}>
             {loading && <InlineSpinner size={25} />}
             {' '}
-            <Volume off={muted} />
+            <a href='#'
+              title={`Untertitel ${subtitles ? 'an' : 'aus'}`}
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                this.setState((state) => ({
+                  subtitles: !state.subtitles
+                }))
+              }}>
+              <Subtitles off={!subtitles} />
+            </a>
+            {' '}
+            <a href='#'
+              title={`Audio ${muted ? 'aus' : 'an'}`}
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                this.setState((state) => ({
+                  muted: !state.muted
+                }))
+              }}>
+              <Volume off={muted} />
+            </a>
           </div>
         </div>
         <div {...styles.progress}
