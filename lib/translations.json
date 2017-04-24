@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-24T21:57:21.088Z",
+  "updated": "2017-04-24T23:53:03.052Z",
   "title": "live",
   "data": [
     {
@@ -609,8 +609,36 @@
       "value": "erinnern"
     },
     {
+      "key": "pledge/recievePayment/pf/mailto/subject",
+      "value": "PostFinance {status}"
+    },
+    {
+      "key": "pledge/recievePayment/pf/mailto/body",
+      "value": "Liebe Republik,\n\nLass uns über Geld sprechen.\n\nBuchungsreferenz:\n{pledgeId}\n\nPostFinance:\n{payload}"
+    },
+    {
+      "key": "pledge/recievePayment/pf/92",
+      "value": "Während des Zahlungsverfahrens ist ein technisches Problem bei PostFinance aufgetreten, das zu einem nicht vorhersehbaren Resultat geführt hat.<br />\n<br />\nBitte nehmen Sie Kontakt mit uns auf unter <a href=\"{mailto}\">zahlungen@republik.ch</a>. Sie sollten es nicht erneut versuchen da die Buchung möglicherweise bereits akzeptiert wurde."
+    },
+    {
+      "key": "pledge/recievePayment/pf/invalid",
+      "value": "Die Zahlung ist ungültig. Versuchen Sie eine andere Zahlungsmethode."
+    },
+    {
+      "key": "pledge/recievePayment/pf/denied",
+      "value": "Die Zahlung wurde verweigert. Nutzen Sie eine andere Karte oder wählen Sie eine andere Zahlungsmethode."
+    },
+    {
+      "key": "pledge/recievePayment/pf/canceled",
+      "value": "Zahlung abgebrochen. Wählen Sie ein anderes Zahlungsmittel, um Ihre Bestellung abzuschliessen."
+    },
+    {
+      "key": "pledge/recievePayment/pf/retry",
+      "value": "Während des Zahlungsverfahrens ist ein technisches Problem bei PostFinance aufgetreten, versuchen Sie es erneut oder wählen Sie eine andere Zahlungsmethode."
+    },
+    {
       "key": "pledge/recievePayment/error",
-      "value": "Zahlung fehlgeschlagen"
+      "value": "Zahlung fehlgeschlagen.<br />\n<br />\nBitte versuchen Sie es erneut oder kontaktieren Sie uns unter <a href=\"{mailto}\">zahlungen@republik.ch</a>."
     },
     {
       "key": "pledge/recievePayment/noPledge",

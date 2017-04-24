@@ -5,6 +5,7 @@ import {compose} from 'redux'
 import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
 
+import RawHtml from '../RawHtml'
 import Loader from '../Loader'
 import SignIn from '../Auth/SignIn'
 import {withSignOut} from '../Auth/SignOut'
@@ -159,8 +160,10 @@ class Pledge extends Component {
             <H1>{t('pledge/title')}</H1>
 
             {!!receiveError && (
-              <P style={{color: colors.error}}>
-                {receiveError}
+              <P style={{color: colors.error, marginBottom: 40}}>
+                <RawHtml dangerouslySetInnerHTML={{
+                  __html: receiveError
+                }} />
               </P>
             )}
 

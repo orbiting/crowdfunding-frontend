@@ -53,12 +53,65 @@ class PledgeReceivePayment extends Component {
           }
         }
       } else {
-        state.receiveError = t('pledge/recievePayment/error')
-        // ToDo: handle errors and recommend specific user action
-        // possible action: retry, choose different method, contact us
-
         // https://e-payment-postfinance.v-psp.com/de/guides/user%20guides/statuses-and-errors
         // https://e-payment-postfinance.v-psp.com/de/guides/integration%20guides/possible-errors
+
+        const errorVariables = {
+          mailto: `mailto:zahlungen@republik.ch?subject=${
+            encodeURIComponent(
+              t(
+                'pledge/recievePayment/pf/mailto/subject',
+                {status: query.STATUS}
+              )
+            )}&body=${
+            encodeURIComponent(
+              t(
+                'pledge/recievePayment/pf/mailto/body',
+                {
+                  pledgeId: query.orderID,
+                  payload: JSON.stringify(query, null, 2)
+                }
+              )
+            )}`
+        }
+
+        switch (query.STATUS) {
+          case '92':
+            state.receiveError = t(
+              'pledge/recievePayment/pf/92',
+              errorVariables
+            )
+            break
+          case '93':
+            state.receiveError = t(
+              'pledge/recievePayment/pf/retry',
+              errorVariables
+            )
+            break
+          case '0':
+            state.receiveError = t(
+              'pledge/recievePayment/pf/invalid',
+              errorVariables
+            )
+            break
+          case '1':
+            state.receiveError = t(
+              'pledge/recievePayment/pf/canceled',
+              errorVariables
+            )
+            break
+          case '2':
+            state.receiveError = t(
+              'pledge/recievePayment/pf/denied',
+              errorVariables
+            )
+            break
+          default:
+            state.receiveError = t(
+              'pledge/recievePayment/error',
+              errorVariables
+            )
+        }
       }
     }
     if (query.item_name) {
