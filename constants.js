@@ -23,7 +23,7 @@ const parseCountdownDateTime = require('d3-time-format').timeParse('%d.%m.%Y %H:
 
 exports.COUNTDOWN_UTC = typeof window !== 'undefined'
   ? ENV.COUNTDOWN_UTC
-  : parseCountdownDateTime(ENV.COUNTDOWN).toISOString()
+  : (parseCountdownDateTime(ENV.COUNTDOWN) || new Date(2000, 0, 1)).toISOString()
 
 exports.COUNTDOWN_DATE = new Date(exports.COUNTDOWN_UTC)
 exports.COUNTDOWN_NOTE = ENV.COUNTDOWN_NOTE
