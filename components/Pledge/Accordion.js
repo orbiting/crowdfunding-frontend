@@ -153,7 +153,7 @@ class Accordion extends Component {
 
             return (
               <Link key={i} href={{
-                pathname: 'pledge',
+                pathname: '/pledge',
                 query: {
                   package: pkg.name
                 }
