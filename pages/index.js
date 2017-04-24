@@ -99,13 +99,13 @@ Die Kurzporträts der Crew finden Sie [hier](/crew). Und dazu im Video – die L
 
 Das Problem der traditionellen Medien ist, dass ihr Geschäftsmodell zusammengebrochen ist. Über ein Jahrhundert lang waren Zeitungsverlage praktisch Gelddruckmaschinen mit enormer Rendite: Man verkaufte Nachrichten an die Leserinnen und Leser – und die Leserinnen und Leser an die Werbung.
 
-Doch das ist Geschichte. Denn die Inserate sind ins Netz verschwunden. Und die grossen Verlage folgen dem Geschäft. Die Gewinne machen heute die Suchmaschinen: für Jobs, Autos, Immobilien, Liebe, Tierfutter. Nur brauchen Suchmaschinen keine Leitartikel mehr auf der Rückseite. Verlage wie Tamedia, Ringier – oder in Deutschland Springer – verlassen deshalb die Publizistik. Ihr Geld, ihre Ideen, ihre Planung investieren sie in das neue Geschäft. Redet man mit Leuten der Chefetage, ist es längt keine Frage mehr, ob Journalismus noch zum Geschäft von morgen gehört. Er tut es nicht. Ihre Zukunft sehen die Medienkonzerne als Schweizer Amazon.
+Doch das ist Geschichte. Denn die Inserate sind ins Netz verschwunden. Und die grossen Verlage folgen dem Geschäft. Die Gewinne machen heute die Suchmaschinen: für Jobs, Autos, Immobilien, Liebe, Tierfutter. Nur brauchen Suchmaschinen keine Leitartikel mehr auf der Rückseite. Verlage wie Tamedia, Ringier – oder in Deutschland Springer – verlassen deshalb die Publizistik. Ihr Geld, ihre Ideen, ihre Planung investieren sie in das neue Geschäft. Redet man mit Leuten der Chefetage, ist es längt keine Frage mehr, ob Journalismus noch zum Geschäft von morgen gehört. Er tut es nicht. Ihre Zukunft sehen die Medienkonzerne als Schweizer Amazon.
 
 Bis es so weit ist, wird die sterbende Cashcow noch so lange wie möglich gemolken. Investitionen fliessen kaum mehr; bei eigenen Medien wird nur noch gespart. Dazu wird fusioniert, was geht. Kleinere Zeitungen werden zwecks Reichweite eingekauft. Und verdaut. Bereits heute beherrschen Tamedia, NZZ und Ringier zusammen 80 Prozent der veröffentlichten Meinung.
 
 ![Baseler Zeitung, Tages-Anzeiger](/static/index/medienvielfalt.jpg)
 
-Doch das ist Geschichte. Denn die Inserate sind ins Netz verschwunden. Und die grossen Verlage folgen dem Geschäft. Die Gewinne machen heute die Suchmaschinen: für Jobs, Autos, Immobilien, Liebe, Tierfutter. Nur brauchen Suchmaschinen keine Leitartikel mehr auf der Rückseite. Verlage wie Tamedia, Ringier – oder in Deutschland Springer – verlassen deshalb die Publizistik. Ihr Geld, ihre Ideen, ihre Planung investieren sie in das neue Geschäft. Redet man mit Leuten der Chefetage, ist es längt keine Frage mehr, ob Journalismus noch zum Geschäft von morgen gehört. Er tut es nicht. Ihre Zukunft sehen die Medienkonzerne als Schweizer Amazon.
+Doch das ist Geschichte. Denn die Inserate sind ins Netz verschwunden. Und die grossen Verlage folgen dem Geschäft. Die Gewinne machen heute die Suchmaschinen: für Jobs, Autos, Immobilien, Liebe, Tierfutter. Nur brauchen Suchmaschinen keine Leitartikel mehr auf der Rückseite. Verlage wie Tamedia, Ringier – oder in Deutschland Springer – verlassen deshalb die Publizistik. Ihr Geld, ihre Ideen, ihre Planung investieren sie in das neue Geschäft. Redet man mit Leuten der Chefetage, ist es längt keine Frage mehr, ob Journalismus noch zum Geschäft von morgen gehört. Er tut es nicht. Ihre Zukunft sehen die Medienkonzerne als Schweizer Amazon.
 
 Kurz: Es ist das Organigramm von Frankensteins Monster. Zwar hat die Zeitung noch hervorragende Journalisten und Artikel, als Zeitung ist sie aber so gut wie unsteuerbar. Und sie ist keineswegs allein. Ringier hat die gesamte «Blick»-Gruppe zusammengeschmolzen, die NZZ ihre Regionalzeitungen. Ökonomisch machen diese Fusionen zwar Sinn, für die Öffentlichkeit aber sind sie ein Problem. Denn mit dem Zusammenschmelzen wird die Identität der Blätter vernichtet, ihre Kompetenz, ihre Tradition. Und in der politischen Debatte verfällt die Meinungsvielfalt: Mit den Fusionen verarmt der Wettbewerb an Standpunkten, Ideen, Blickwinkeln. 
 
@@ -194,7 +194,7 @@ Willkommen an Bord!
 
         <div style={{margin: '15px 0 40px'}}>
           <Label style={{display: 'block', marginBottom: 5}}>
-            Jetzt andere die Republik aufmerksam machen:
+            Jetzt andere auf die Republik aufmerksam machen:
           </Label>
           <Share
             url={PUBLIC_BASE_URL + url.pathname}
