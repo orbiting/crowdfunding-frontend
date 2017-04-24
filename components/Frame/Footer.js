@@ -109,15 +109,24 @@ class Footer extends Component {
           <div {...styles.grid}>
             <div {...styles.column}>
               <div {...styles.title}>{t('footer/contact/title')}</div>
+              {intersperse(
+                t('footer/contact/name').split('\n'),
+                (item, i) => <br key={i} />
+              )}
               <a href='https://www.google.ch/maps/place/Sihlhallenstrasse+1,+8004+Zürich' target='_blank'>{intersperse(
                 t('footer/contact/address').split('\n'),
                 (item, i) => <br key={i} />
-              )}</a>
+              )}</a><br />
+              <a href={`mailto:${t('footer/contact/mail')}`}>
+                {t('footer/contact/mail')}
+              </a>
             </div>
             <div {...styles.column}>
               <div {...styles.title}>{t('footer/about/title')}</div>
-              <Link href='/manifest'>
-                <a>{t('footer/about/manifest')}</a>
+              <Link href='/manifest' target='_blank'>
+                <a target='_blank'>
+                  {t('footer/about/manifest')}
+                </a>
               </Link><br />
               <Link href='/crew'>
                 <a>{t('footer/crew')}</a>
