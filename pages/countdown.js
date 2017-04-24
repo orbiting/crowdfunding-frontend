@@ -10,7 +10,7 @@ import Countdown from '../components/Countdown'
 import PureFooter, {SPACE} from '../components/Frame/PureFooter'
 
 import {
-  PUBLIC_BASE_URL
+  PUBLIC_BASE_URL, COUNTDOWN_DATE
 } from '../constants'
 
 const styles = {
@@ -40,8 +40,6 @@ const styles = {
   })
 }
 
-const DATE = new Date('2017-04-26T05:00:00.000Z')
-
 export default ({url}) => {
   const meta = {
     title: 'Unterstützen Sie das Magazin von Project R',
@@ -69,7 +67,7 @@ export default ({url}) => {
           <div {...styles.logoContainer}>
             <Logo fill='#fff' />
           </div>
-          <Countdown to={DATE} />
+          <Countdown to={COUNTDOWN_DATE} />
           <PureFooter inverted url={url} />
         </div>
       </NarrowContainer>

@@ -1,12 +1,17 @@
 import React, {Component} from 'react'
 import {css} from 'glamor'
 import {timeMinute} from 'd3-time'
-import {timeFormatLocale} from 'd3-time-format'
+
+import {swissTime} from '../lib/utils/formats'
 
 import {
   fontFamilies,
   mediaQueries
 } from '@project-r/styleguide'
+
+import {
+  COUNTDOWN_NOTE
+} from '../constants'
 
 const styles = {
   container: css({
@@ -49,23 +54,17 @@ const styles = {
   })
 }
 
-const timeFormat = timeFormatLocale({
-  'dateTime': '%A, der %e. %B %Y, %X',
-  'date': '%d.%m.%Y',
-  'time': '%H:%M:%S',
-  'periods': ['AM', 'PM'],
-  'days': ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
-  'shortDays': ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
-  'months': ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
-  'shortMonths': ['Jan', 'Feb', 'Mrz', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez']
-}).format
-
-const toTimeFormat = timeFormat('%d. %B %Y')
+const toTimeFormat = swissTime.format('%d. %B %Y')
 
 class Countdown extends Component {
   tick () {
     const now = new Date()
     const msToNextMinute = (60 - now.getSeconds()) * 1000 - now.getMilliseconds() + 1
+
+    const {to} = this.props
+    if (now > to) {
+      window.location = '/'
+    }
 
     clearTimeout(this.timeout)
     this.timeout = setTimeout(
@@ -122,7 +121,12 @@ class Countdown extends Component {
             </figcaption>
           </figure>
         </div>
-        <div {...styles.bigText} style={{maxWidth: 500, margin: '0 auto'}}>bis zum Start des Crowdfundings am {toTimeFormat(to)}</div>
+        <div {...styles.bigText} style={{maxWidth: 500, margin: '0 auto'}}>
+          bis zum Start des Crowdfundings am {toTimeFormat(to)}
+          {!!COUNTDOWN_NOTE && !!COUNTDOWN_NOTE.trim().length && (
+            <span><br /><br />{COUNTDOWN_NOTE}</span>
+          )}
+        </div>
       </div>
     )
   }

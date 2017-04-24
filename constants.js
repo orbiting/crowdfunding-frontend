@@ -18,3 +18,12 @@ exports.PAYPAL_BUSINESS = ENV.PAYPAL_BUSINESS
 
 exports.PIWIK_URL_BASE = ENV.PIWIK_URL_BASE || 'https://piwik.project-r.construction'
 exports.PIWIK_SITE_ID = ENV.PIWIK_SITE_ID || '2'
+
+const parseCountdownDateTime = require('d3-time-format').timeParse('%d.%m.%Y %H:%M')
+
+exports.COUNTDOWN_UTC = typeof window !== 'undefined'
+  ? ENV.COUNTDOWN_UTC
+  : parseCountdownDateTime(ENV.COUNTDOWN).toISOString()
+
+exports.COUNTDOWN_DATE = new Date(exports.COUNTDOWN_UTC)
+exports.COUNTDOWN_NOTE = ENV.COUNTDOWN_NOTE

@@ -7,6 +7,10 @@ import {
   Button, Field, mediaQueries, fontFamilies
 } from '@project-r/styleguide'
 
+import {
+  COUNTDOWN_DATE
+} from '../../constants'
+
 const pRule = css({
   fontFamily: fontFamilies.sansSerifRegular,
   fontSize: 18
@@ -90,6 +94,12 @@ class Newsletter extends Component {
   render () {
     const {inverted} = this.props
     const {message, email, dirty, error} = this.state
+
+    const now = new Date()
+
+    if (now > COUNTDOWN_DATE) {
+      return null
+    }
 
     return (
       <div>

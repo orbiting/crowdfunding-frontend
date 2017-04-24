@@ -10,6 +10,10 @@ import {
   mediaQueries, fontFamilies
 } from '@project-r/styleguide'
 
+import {
+  COUNTDOWN_DATE
+} from '../../constants'
+
 css.global('html', {boxSizing: 'border-box'})
 css.global('*, *:before, *:after', {boxSizing: 'inherit'})
 
@@ -66,7 +70,9 @@ export default ({url, inverted}) => (
           </Link>
         ) : (
           <Link href='/'>
-            <a {...linkRule}>Crowdfunding</a>
+            <a {...linkRule}>
+              {(new Date()) > COUNTDOWN_DATE ? 'Crowdfunding' : 'Countdown'}
+            </a>
           </Link>
         )}
         <br />

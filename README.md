@@ -100,6 +100,8 @@ COUNTDOWN_NOTE=
 
 `COUNTDOWN` follows following [d3-time-format](https://github.com/d3/d3-time-format): `%d.%m.%Y %H:%M` and is always parsed on the server and send as UTC to browsers around the world. The timezone of your server counts.
 
+`constants.js` will export a `COUNTDOWN_UTC` (`Date.toISOString()`) and `COUNTDOWN_DATE` from it, for usage in the application code.
+
 The newsletter sign up requires the following ENV variables:
 
 ```
