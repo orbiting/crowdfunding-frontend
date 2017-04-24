@@ -42,7 +42,8 @@ const menuStyle = css({
 const listStyle = css({
   fontSize: 16,
   [mediaQueries.onlyS]: {
-    fontSize: 20
+    fontSize: 20,
+    marginBottom: 40
   },
   listStyle: 'none',
   margin: 0,
@@ -76,6 +77,9 @@ const linkActiveStyle = css({
   color: '#ccc',
   ':visited': {
     color: '#ccc'
+  },
+  [mediaQueries.onlyS]: {
+    display: 'none'
   }
 })
 
