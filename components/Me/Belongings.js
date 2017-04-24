@@ -39,7 +39,8 @@ const styles = {
   pledge: css({
     padding: 10,
     marginLeft: -10,
-    marginRight: -10
+    marginRight: -10,
+    marginBottom: 30
   }),
   pledgeHighlighted: css({
     backgroundColor: colors.primaryBg
