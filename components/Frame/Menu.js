@@ -5,13 +5,14 @@ import Link from 'next/link'
 import {HEADER_HEIGHT_MOBILE, MENUBAR_HEIGHT} from './constants'
 
 import {
-  colors, mediaQueries
+  colors, mediaQueries, fontFamilies
 } from '@project-r/styleguide'
 
 const ITEM_MARGIN_LEFT = 10
 const M_HEADER_HEIGHT = HEADER_HEIGHT_MOBILE + MENUBAR_HEIGHT
 
 const menuStyle = css({
+  fontFamily: fontFamilies.sansSerifRegular,
   [mediaQueries.onlyS]: {
     display: 'flex',
     backgroundColor: '#fff',
