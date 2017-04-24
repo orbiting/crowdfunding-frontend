@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {timeFormat} from '../../lib/utils/formats'
 import {compose} from 'redux'
 import {graphql} from 'react-apollo'
+import {css, merge} from 'glamor'
 
 import withT from '../../lib/withT'
 import {myThingsQuery} from './queries'
@@ -9,10 +10,27 @@ import Loader from '../Loader'
 import RawHtml from '../RawHtml'
 
 import {
-  Interaction, Label, A
+  Interaction, Label, linkRule, fontFamilies
 } from '@project-r/styleguide'
 
 const {H2} = Interaction
+
+const styles = {
+  a: merge(linkRule, {
+    fontSize: 17,
+    lineHeight: '25px',
+    fontFamilies: fontFamilies.sansSerifMedium
+  }),
+  p: css({
+    margin: 0,
+    fontSize: 17,
+    lineHeight: '25px',
+    fontFamilies: fontFamilies.sansSerifRegular
+  })
+}
+
+const A = ({children, ...props}) => <a {...props} {...styles.a}>{children}</a>
+const P = ({children, ...props}) => <p {...props} {...styles.p}>{children}</p>
 
 const dateTimeFormat = timeFormat('%d. %B %Y %H:%M')
 
@@ -47,7 +65,7 @@ class MembershipGiver extends Component {
         )}
         {hasGiveable && (isGivePackage || showGiveable) && (
           <div style={{margin: '10px 0'}}>
-            <RawHtml dangerouslySetInnerHTML={{
+            <RawHtml type={P} dangerouslySetInnerHTML={{
               __html: !isGivePackage
                 ? t('memberships/give/description/before/notGive')
                 : t.pluralize('memberships/give/description/before', {
@@ -61,7 +79,7 @@ class MembershipGiver extends Component {
                 </li>
               ))}
             </ul>
-            <RawHtml dangerouslySetInnerHTML={{
+            <RawHtml type={P} dangerouslySetInnerHTML={{
               __html: t('memberships/give/description/after')
             }} />
           </div>
@@ -81,7 +99,7 @@ class MembershipGiver extends Component {
         )}
         {hasGiven && showGiven && (
           <div style={{margin: '10px 0'}}>
-            <RawHtml dangerouslySetInnerHTML={{
+            <RawHtml type={P} dangerouslySetInnerHTML={{
               __html: t('memberships/giver/description')
             }} />
             <ul>
