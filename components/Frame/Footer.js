@@ -90,7 +90,14 @@ class Footer extends Component {
     track(['setUserId', me ? me.email : false])
   }
   componentWillReceiveProps ({me}) {
-    if (me !== this.props.me) {
+    if (
+      me !== this.props.me &&
+      !(
+        me &&
+        this.props.me &&
+        me.email === this.props.me.email
+      )
+    ) {
       track(['setUserId', me ? me.email : false])
     }
   }
