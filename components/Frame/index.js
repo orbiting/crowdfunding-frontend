@@ -13,11 +13,16 @@ import {
 
 import {
   Container,
-  mediaQueries
+  mediaQueries,
+  fontFamilies
 } from '@project-r/styleguide'
 
 css.global('html', {boxSizing: 'border-box'})
 css.global('*, *:before, *:after', {boxSizing: 'inherit'})
+
+css.global('body', {
+  fontFamily: fontFamilies.sansSerifRegular
+})
 
 const styles = {
   container: css({
