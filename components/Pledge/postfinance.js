@@ -54,16 +54,8 @@ export const getParams = ({
       value: `${PUBLIC_BASE_URL}/pledge`
     },
     {
-      key: 'ALIAS',
-      value: alias || ''
-    },
-    {
       key: 'USERID',
       value: userId || ''
-    },
-    {
-      key: 'ALIASUSAGE',
-      value: 'membership'
     }
   ]
   // ensure correct order for valid sha1

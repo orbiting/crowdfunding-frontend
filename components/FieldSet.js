@@ -49,7 +49,7 @@ class FieldSet extends Component {
     onChange({
       values,
       errors
-    })
+    }, true)
   }
   render () {
     const {

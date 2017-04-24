@@ -16,7 +16,6 @@ import track from '../../lib/piwik'
 import FieldSet from '../FieldSet'
 import {InlineSpinner} from '../Spinner'
 import RawHtml from '../RawHtml'
-import Loader from '../Loader'
 
 import * as postfinance from './postfinance'
 import * as paypal from './paypal'
@@ -138,6 +137,7 @@ class Submit extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      paymentMethod: 'STRIPE',
       emailVerify: false,
       legal: false,
       values: {
@@ -516,25 +516,6 @@ class Submit extends Component {
                 disabled={pm.disabled}
                 onChange={(event) => {
                   const value = event.target.value
-                  if (value === 'STRIPE' && !this.state.stripe) {
-                    this.setState(() => ({
-                      loadingStripe: true,
-                      loadingStripeError: undefined
-                    }))
-                    loadStripe()
-                      .then(stripe => {
-                        this.setState(() => ({
-                          loadingStripe: false,
-                          stripe
-                        }))
-                      })
-                      .catch(() => {
-                        this.setState(() => ({
-                          loadingStripe: false,
-                          loadingStripeError: t('pledge/submit/stripe/js/failed')
-                        }))
-                      })
-                  }
                   this.setState((state) => {
                     const next = {
                       showErrors: false,
@@ -586,89 +567,110 @@ class Submit extends Component {
           </div>
         )}
         {(paymentMethod === 'STRIPE') && (
-          <Loader
-            height={280}
-            loading={this.state.loadingStripe}
-            error={this.state.loadingStripeError}
-            render={() => (
-              <from method='post' onSubmit={(e) => {
-                e.preventDefault()
-              }}>
-                <FieldSet
-                  values={this.state.values}
-                  errors={this.state.errors}
-                  dirty={this.state.dirty}
-                  fields={[
-                    {
-                      label: t('pledge/submit/stripe/card/label'),
-                      name: 'cardNumber',
-                      autoComplete: 'cc-number',
-                      mask: '1111 1111 1111 1111',
-                      validator: (value) => (
-                        (
-                          !value &&
-                          t('pledge/submit/stripe/card/error/empty')
-                        ) || (
-                          !this.state.stripe.card.validateCardNumber(value) &&
-                          t('pledge/submit/stripe/card/error/invalid')
-                        )
-                      )
-                    },
-                    {
-                      label: t('pledge/submit/stripe/month/label'),
-                      name: 'cardMonth',
-                      autoComplete: 'cc-exp-month'
-                    },
-                    {
-                      label: t('pledge/submit/stripe/year/label'),
-                      name: 'cardYear',
-                      autoComplete: 'cc-exp-year'
-                    },
-                    {
-                      label: t('pledge/submit/stripe/cvc/label'),
-                      name: 'cardCVC',
-                      autoComplete: 'cc-csc',
-                      validator: (value) => (
-                        (
-                          !value &&
-                          t('pledge/submit/stripe/cvc/error/empty')
-                        ) || (
-                          !this.state.stripe.card.validateCVC(value) &&
-                          t('pledge/submit/stripe/cvc/error/invalid')
-                        )
-                      )
-                    }
-                  ]}
-                  onChange={(fields) => {
-                    this.setState((state) => {
-                      const nextState = mergeFields(fields)(state)
-
-                      const month = nextState.values.cardMonth
-                      const year = nextState.values.cardYear
-
-                      if (
-                        year && month &&
-                        nextState.dirty.cardMonth &&
-                        nextState.dirty.cardYear &&
-                        !this.state.stripe.card.validateExpiry(month, year)
-                      ) {
-                        nextState.errors.cardMonth = t('pledge/submit/stripe/month/error/invalid')
-                        nextState.errors.cardYear = t('pledge/submit/stripe/year/error/invalid')
-                      } else {
-                        nextState.errors.cardMonth = (
-                          !month && t('pledge/submit/stripe/month/error/empty')
-                        )
-                        nextState.errors.cardYear = (
-                          !year && t('pledge/submit/stripe/year/error/empty')
-                        )
-                      }
-
-                      return nextState
+          <from method='post' onSubmit={(e) => {
+            e.preventDefault()
+          }}>
+            <Label>{t('pledge/submit/stripe/prefered')}</Label>
+            <FieldSet
+              values={this.state.values}
+              errors={this.state.errors}
+              dirty={this.state.dirty}
+              fields={[
+                {
+                  label: t('pledge/submit/stripe/card/label'),
+                  name: 'cardNumber',
+                  autoComplete: 'cc-number',
+                  mask: '1111 1111 1111 1111',
+                  validator: (value) => (
+                    (
+                      !value &&
+                      t('pledge/submit/stripe/card/error/empty')
+                    ) || (
+                      !!this.state.stripe &&
+                      !this.state.stripe.card.validateCardNumber(value) &&
+                      t('pledge/submit/stripe/card/error/invalid')
+                    )
+                  )
+                },
+                {
+                  label: t('pledge/submit/stripe/month/label'),
+                  name: 'cardMonth',
+                  autoComplete: 'cc-exp-month'
+                },
+                {
+                  label: t('pledge/submit/stripe/year/label'),
+                  name: 'cardYear',
+                  autoComplete: 'cc-exp-year'
+                },
+                {
+                  label: t('pledge/submit/stripe/cvc/label'),
+                  name: 'cardCVC',
+                  autoComplete: 'cc-csc',
+                  validator: (value) => (
+                    (
+                      !value &&
+                      t('pledge/submit/stripe/cvc/error/empty')
+                    ) || (
+                      !!this.state.stripe &&
+                      !this.state.stripe.card.validateCVC(value) &&
+                      t('pledge/submit/stripe/cvc/error/invalid')
+                    )
+                  )
+                }
+              ]}
+              onChange={(fields, mounting) => {
+                if (
+                  !mounting &&
+                  !this.state.stripe &&
+                  !this.state.loadingStripe
+                ) {
+                  this.setState(() => ({
+                    loadingStripe: true,
+                    loadingStripeError: undefined
+                  }))
+                  loadStripe()
+                    .then(stripe => {
+                      this.setState(() => ({
+                        loadingStripe: false,
+                        stripe
+                      }))
                     })
-                  }} />
-                <br /><br />
-              </from>
-          )} />
+                    .catch(() => {
+                      this.setState(() => ({
+                        loadingStripe: false,
+                        loadingStripeError: t('pledge/submit/stripe/js/failed')
+                      }))
+                    })
+                }
+                this.setState((state) => {
+                  const nextState = mergeFields(fields)(state)
+
+                  const month = nextState.values.cardMonth
+                  const year = nextState.values.cardYear
+
+                  if (
+                    year && month &&
+                    nextState.dirty.cardMonth &&
+                    nextState.dirty.cardYear &&
+                    !!this.state.stripe &&
+                    !this.state.stripe.card.validateExpiry(month, year)
+                  ) {
+                    nextState.errors.cardMonth = t('pledge/submit/stripe/month/error/invalid')
+                    nextState.errors.cardYear = t('pledge/submit/stripe/year/error/invalid')
+                  } else {
+                    nextState.errors.cardMonth = (
+                      !month && t('pledge/submit/stripe/month/error/empty')
+                    )
+                    nextState.errors.cardYear = (
+                      !year && t('pledge/submit/stripe/year/error/empty')
+                    )
+                  }
+
+                  return nextState
+                })
+              }} />
+            <br /><br />
+          </from>
         )}
         {(paymentMethod === 'POSTFINANCECARD') && (
           <form ref={this.postFinanceFormRef} method='post' action={PF_FORM_ACTION}>
