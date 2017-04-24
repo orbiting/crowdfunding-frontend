@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-24T17:28:12.340Z",
+  "updated": "2017-04-24T21:57:21.088Z",
   "title": "live",
   "data": [
     {
@@ -8,7 +8,7 @@
     },
     {
       "key": "menu/crew",
-      "value": "Wir"
+      "value": "Crew"
     },
     {
       "key": "menu/updates",
@@ -116,7 +116,7 @@
     },
     {
       "key": "package/BENEFACTOR/description",
-      "value": "Sie wollen nicht nur ein unabhängiges Magazin lesen, sondern Sie wollen sich auch energisch dafür einsetzen, dass dieses existiert. Wie alle werden Sie automatisch Mitglied der Project R Genossenschaft. Und damit Verleger oder Verlegerin der Republik. Um uns für Ihre Grosszügigkeit zu revanchieren, schicken wir Ihnen das Start-up-Verleger-Paket: ein Manifest, einen Anstecker in Gold und ein signiertes Manual für Journalismus im 21. Jahrhundert."
+      "value": "Sie wollen nicht nur ein unabhängiges Magazin lesen, sondern Sie wollen sich auch energisch dafür einsetzen, dass dieses existiert. Wie alle werden Sie automatisch Mitglied der Project R Genossenschaft. Und damit Verleger oder Verlegerin der Republik. Um uns für Ihre Grosszügigkeit zu revanchieren, schicken wir Ihnen das Start-up-Verleger-Paket: ein Manifest, einen besonderen Anstecker und ein signiertes Manual für Journalismus im 21. Jahrhundert."
     },
     {
       "key": "option/ABO/label/other",
@@ -422,6 +422,10 @@
     {
       "key": "pledge/submit/secure",
       "value": "Sichere Verbindung"
+    },
+    {
+      "key": "pledge/submit/stripe/prefered",
+      "value": "Bitte zahlen Sie mit Kreditkarte, es ist für uns am günstigsten."
     },
     {
       "key": "pledge/submit/stripe/js/loading",
