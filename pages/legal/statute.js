@@ -7,8 +7,12 @@ import md from 'markdown-in-js'
 import mdComponents from '../../lib/utils/mdComponents'
 
 import {
-  H1
+  H1, P, A
 } from '@project-r/styleguide'
+
+import {
+  STATIC_BASE_URL
+} from '../../constants'
 
 export default withData(({url}) => {
   const title = 'Statuten'
@@ -18,6 +22,12 @@ export default withData(({url}) => {
         <H1>
           {title}
         </H1>
+
+        <P>
+          <A download href={`${STATIC_BASE_URL}/static/statuten_project_r_genossenschaft_unterschrieben.pdf`}>
+            PDF herunterladen
+          </A>
+        </P>
 
         {md(mdComponents)`
 ## I. Firma, Sitz und Zweck
