@@ -2,7 +2,7 @@ import React from 'react'
 import {css} from 'glamor'
 
 import {
-  P, H2, A, Label, mediaQueries
+  P, Interaction, H2, A, Label, mediaQueries
 } from '@project-r/styleguide'
 
 const portraitStyle = css({
@@ -18,7 +18,7 @@ const portraitStyle = css({
 const portraitImageLeftStyle = css({
   [mediaQueries.mUp]: {
     float: 'left',
-    width: '50%',
+    width: '60%',
     marginTop: 3,
     marginRight: 20,
     marginBottom: 10
@@ -27,30 +27,23 @@ const portraitImageLeftStyle = css({
 const portraitImageRightStyle = css({
   [mediaQueries.mUp]: {
     float: 'right',
-    width: '50%',
+    width: '60%',
     marginTop: 3,
     marginLeft: 20,
     marginBottom: 10
   }
 })
 
-export const RawPortrait = ({image, children, odd}) => (
-  <div {...portraitStyle}>
-    <img className={odd ? portraitImageLeftStyle : portraitImageRightStyle} src={image} alt='' />
-    {children}
-  </div>
-)
-
 const Portrait = ({odd, image, description, name, age, title, email}) => (
-  <RawPortrait odd={odd} image={image}>
+  <div {...portraitStyle}>
     <H2 style={{marginBottom: 0}}>{name},&nbsp;{age}</H2>
     <Label>{title}</Label><br /><br />
-    <P>
+    <img className={odd ? portraitImageLeftStyle : portraitImageRightStyle} src={image} alt='' />
+    <P style={{marginTop: 0, marginBottom: 10}}>
       {description}
-      <br />
-      <A href={`mailto:${email}`}>{email}</A>
     </P>
-  </RawPortrait>
+    <Interaction.P><A href={`mailto:${email}`}>{email}</A></Interaction.P>
+  </div>
 )
 
 export default Portrait

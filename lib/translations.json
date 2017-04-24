@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-23T22:18:19.075Z",
+  "updated": "2017-04-24T00:27:33.870Z",
   "title": "live",
   "data": [
     {
@@ -1198,6 +1198,22 @@
     {
       "key": "footer/me/claim",
       "value": "Gutscheincode einlösen"
+    },
+    {
+      "key": "crew/pageTitle",
+      "value": "Crew — Republik"
+    },
+    {
+      "key": "crew/title",
+      "value": "Project-R-Crew"
+    },
+    {
+      "key": "crew/description",
+      "value": "Die Project-R-Crew arbeitet derzeit – gemeinsam mit zahlreichen Komplizinnen im Hintergrund – an der Gesellschaftsform, dem Aufbau der Crowdfunding-Plattform, der IT-Entwicklung und dem Redaktionskonzept."
+    },
+    {
+      "key": "crew/lead",
+      "value": "Zur Aufbau-Crew gehören:"
     }
   ]
 }
