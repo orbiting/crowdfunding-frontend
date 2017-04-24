@@ -1,10 +1,9 @@
 import React from 'react'
 import {css} from 'glamor'
 import Head from 'next/head'
-import Link from 'next/link'
 
 import Share from '../components/Share'
-import IconLink from '../components/IconLink'
+import PureFooter, {SPACE, A} from '../components/Frame/PureFooter'
 
 import {
   NarrowContainer,
@@ -16,21 +15,6 @@ import {
 import {
   PUBLIC_BASE_URL, STATIC_BASE_URL
 } from '../constants'
-
-const SPACE = 60
-const EMAIL = 'kontakt@republik.ch'
-
-const linkRule = css({
-  textDecoration: 'none',
-  color: 'inherit',
-  ':hover': {
-    opacity: 0.6
-  }
-})
-
-const A = ({children, ...props}) => (
-  <a {...props} {...linkRule}>{children}</a>
-)
 
 const pRule = css({
   fontFamily: fontFamilies.sansSerifRegular,
@@ -149,30 +133,7 @@ ${PUBLIC_BASE_URL}
           </A>
         </P>
 
-        <div {...styles.nav}>
-          <div {...styles.mainNav}>
-            <Link href='/'>
-              <a {...linkRule}>Crowdfunding</a>
-            </Link>
-            <br />
-            <A href='https://project-r.construction/' target='_blank'>Project R</A>
-          </div>
-        </div>
-
-        <address {...styles.address} style={{marginBottom: 20}}>
-          <A href='https://goo.gl/maps/j1F8cXQhrmo' target='_blank'>
-            Republik<br />
-            c/o Hotel Rothaus<br />
-            Sihlhallenstrasse 1<br />
-            8004 Zürich<br />
-          </A>
-          <A href={`mailto:${EMAIL}`}>
-            {EMAIL}
-          </A>
-        </address>
-
-        <IconLink icon='facebook' href='https://www.facebook.com/RepublikMagazin' target='_blank' />
-        <IconLink icon='twitter' href='https://twitter.com/RepublikMagazin' target='_blank' />
+        <PureFooter url={url} />
       </div>
     </NarrowContainer>
   )
