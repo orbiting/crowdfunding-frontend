@@ -43,7 +43,7 @@ class PledgeReceivePayment extends Component {
 
     const state = this.state = {}
     if (query.orderID) {
-      if (query.STATUS === '5' || query.STATUS === '9') {
+      if (query.STATUS === '9' || query.STATUS === '91') {
         state.processing = true
         state.action = {
           method: 'pay',
