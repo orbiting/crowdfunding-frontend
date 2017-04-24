@@ -89,6 +89,28 @@ PIWIK_URL_BASE=https://piwik.project-r.construction
 PIWIK_SITE_ID=2
 ```
 
+#### Countdown Teaser
+
+You can configure a countdown date, before that date a teaser website 
+
+```
+COUNTDOWN=26.04.2017 07:00
+COUNTDOWN_NOTE=
+```
+
+`COUNTDOWN` follows following [d3-time-format](https://github.com/d3/d3-time-format): `%d.%m.%Y %H:%M` and is always parsed on the server and send as UTC to browsers around the world. The timezone of your server counts.
+
+The newsletter sign up requires the following ENV variables:
+
+```
+MANDRILL_API_KEY=
+MAILCHIMP_API_KEY=
+MAILCHIMP_LIST_ID=
+SUBSCRIBE_SECRET=
+```
+
+Shout-out to [Schmidsi](https://github.com/schmidsi) for building the countdown page.
+
 ### Install and Run
 
 ```bash

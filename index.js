@@ -1,6 +1,7 @@
 const express = require('express')
 const next = require('next')
 const basicAuth = require('express-basic-auth')
+const newsletter = require('./server/newsletter')
 
 const DEV = process.env.NODE_ENV && process.env.NODE_ENV !== 'production'
 if (DEV || process.env.DOTENV) {
@@ -33,6 +34,8 @@ app.prepare()
       realm: process.env.BASIC_AUTH_REALM
     }))
   }
+
+  server.use(newsletter)
 
   server.get('/events/:slug', (req, res) => {
     return app.render(req, res, '/events', {

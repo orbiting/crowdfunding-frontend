@@ -1,12 +1,17 @@
 import React from 'react'
 import {css} from 'glamor'
 import Link from 'next/link'
+import 'glamor/reset'
 
 import IconLink from '../IconLink'
+import Newsletter from './PureNewsletter'
 
 import {
   mediaQueries, fontFamilies
 } from '@project-r/styleguide'
+
+css.global('html', {boxSizing: 'border-box'})
+css.global('*, *:before, *:after', {boxSizing: 'inherit'})
 
 const EMAIL = 'kontakt@republik.ch'
 
@@ -51,6 +56,8 @@ const styles = {
 
 export default ({url, inverted}) => (
   <div {...styles.container}>
+    <Newsletter inverted={inverted} />
+
     <div {...styles.nav}>
       <div {...styles.mainNav}>
         {url.pathname === '/' || url.pathname === '/countdown' ? (

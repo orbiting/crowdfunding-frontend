@@ -47,7 +47,11 @@ const styles = {
   }),
   column: css({
     maxWidth: 500,
-    margin: `${SPACE}px auto`
+    margin: `${SPACE}px auto`,
+    '& ::selection': {
+      color: '#fff',
+      backgroundColor: '#000'
+    }
   }),
   nav: css({
     marginTop: SPACE,
