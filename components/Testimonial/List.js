@@ -203,7 +203,9 @@ class List extends Component {
               video={video}
               isActive={isActive}
               onClick={() => {
-                onSelect()
+                if (onSelect(id) === false) {
+                  return
+                }
                 this.setState((state) => ({
                   open: {
                     ...state.open,
@@ -253,8 +255,8 @@ class List extends Component {
   }
 }
 
-const query = gql`query testimonials($seed: Float, $search: String, $firstId: ID) {
-  testimonials(seed: $seed, search: $search, firstId: $firstId) {
+const query = gql`query testimonials($seed: Float, $search: String, $firstId: ID, $limit: Int) {
+  testimonials(seed: $seed, search: $search, firstId: $firstId, limit: $limit) {
     id
     name
     role
@@ -269,7 +271,7 @@ const query = gql`query testimonials($seed: Float, $search: String, $firstId: ID
   }
 }`
 
-const ListWithQuery = compose(
+export const ListWithQuery = compose(
   withT,
   graphql(query, {
     props: ({data, ownProps: {name}}) => {
