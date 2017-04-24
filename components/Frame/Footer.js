@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {css} from 'glamor'
 import Link from 'next/link'
 import {compose} from 'redux'
@@ -7,6 +7,7 @@ import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
 import {withSignOut} from '../Auth/SignOut'
 import {intersperse} from '../../lib/utils/helpers'
+import track from '../../lib/piwik'
 
 import {
   Container, Logo, colors, mediaQueries,
@@ -83,69 +84,83 @@ const styles = {
   })
 }
 
-const Footer = ({t, me, signOut}) => (
-  <div {...styles.bg}>
-    <Container style={{overflow: 'hidden'}}>
-      <div {...styles.grid}>
-        <div {...styles.column}>
-          <div {...styles.title}>{t('footer/contact/title')}</div>
-          <a href='https://www.google.ch/maps/place/Sihlhallenstrasse+1,+8004+Zürich' target='_blank'>{intersperse(
-            t('footer/contact/address').split('\n'),
-            (item, i) => <br key={i} />
-          )}</a>
-        </div>
-        <div {...styles.column}>
-          <div {...styles.title}>{t('footer/about/title')}</div>
-          <Link href='/manifest'>
-            <a>{t('footer/about/manifest')}</a>
-          </Link><br />
-          <Link href='/crew'>
-            <a>{t('footer/crew')}</a>
-          </Link><br />
-          <a href='https://project-r.construction/' target='_blank'>
-            {t('footer/about/projecR')}
-          </a>
-        </div>
-        <div {...styles.column}>
-          <div {...styles.title}>{t('footer/legal/title')}</div>
-          <Link href='/legal/tos'>
-            <a>{t('footer/legal/tos')}</a>
-          </Link><br />
-          <Link href='/legal/privacy'>
-            <a>{t('footer/legal/privacy')}</a>
-          </Link><br />
-          <Link href='/legal/statute'>
-            <a>{t('footer/legal/statute')}</a>
-          </Link><br />
-          <Link href='/legal/imprint'>
-            <a>{t('footer/legal/imprint')}</a>
-          </Link>
-        </div>
-        <div {...styles.column}>
-          <div {...styles.title}>{t('footer/me/title')}</div>
-          <Link href='/merci'>
-            <a>{t(me ? 'footer/me/merci/signedIn' : 'footer/me/merci/signIn')}</a>
-          </Link><br />
-          <Link href='/claim'>
-            <a>{t('footer/me/claim')}</a>
-          </Link><br />
-          {!!me && <a href='#' onClick={(e) => {
-            e.preventDefault()
-            signOut()
-          }}>
-            {t('footer/me/signOut')}
-          </a>}
-        </div>
+class Footer extends Component {
+  componentDidMount () {
+    const {me} = this.props
+    track(['setUserId', me ? me.email : false])
+  }
+  componentWillReceiveProps ({me}) {
+    if (me !== this.props.me) {
+      track(['setUserId', me ? me.email : false])
+    }
+  }
+  render () {
+    const {t, me, signOut} = this.props
+    return (
+      <div {...styles.bg}>
+        <Container style={{overflow: 'hidden'}}>
+          <div {...styles.grid}>
+            <div {...styles.column}>
+              <div {...styles.title}>{t('footer/contact/title')}</div>
+              <a href='https://www.google.ch/maps/place/Sihlhallenstrasse+1,+8004+Zürich' target='_blank'>{intersperse(
+                t('footer/contact/address').split('\n'),
+                (item, i) => <br key={i} />
+              )}</a>
+            </div>
+            <div {...styles.column}>
+              <div {...styles.title}>{t('footer/about/title')}</div>
+              <Link href='/manifest'>
+                <a>{t('footer/about/manifest')}</a>
+              </Link><br />
+              <Link href='/crew'>
+                <a>{t('footer/crew')}</a>
+              </Link><br />
+              <a href='https://project-r.construction/' target='_blank'>
+                {t('footer/about/projecR')}
+              </a>
+            </div>
+            <div {...styles.column}>
+              <div {...styles.title}>{t('footer/legal/title')}</div>
+              <Link href='/legal/tos'>
+                <a>{t('footer/legal/tos')}</a>
+              </Link><br />
+              <Link href='/legal/privacy'>
+                <a>{t('footer/legal/privacy')}</a>
+              </Link><br />
+              <Link href='/legal/statute'>
+                <a>{t('footer/legal/statute')}</a>
+              </Link><br />
+              <Link href='/legal/imprint'>
+                <a>{t('footer/legal/imprint')}</a>
+              </Link>
+            </div>
+            <div {...styles.column}>
+              <div {...styles.title}>{t('footer/me/title')}</div>
+              <Link href='/merci'>
+                <a>{t(me ? 'footer/me/merci/signedIn' : 'footer/me/merci/signIn')}</a>
+              </Link><br />
+              <Link href='/claim'>
+                <a>{t('footer/me/claim')}</a>
+              </Link><br />
+              {!!me && <a href='#' onClick={(e) => {
+                e.preventDefault()
+                signOut()
+              }}>
+                {t('footer/me/signOut')}
+              </a>}
+            </div>
+          </div>
+          <hr {...styles.hr} />
+          <Logo fill={colors.secondary} width={140} />
+          <div {...styles.icons}>
+            <IconLink icon='facebook' href='https://www.facebook.com/RepublikMagazin' target='_blank' fill={colors.secondary} />
+            <IconLink icon='twitter' href='https://twitter.com/RepublikMagazin' target='_blank' fill={colors.secondary} />
+          </div>
+        </Container>
       </div>
-      <hr {...styles.hr} />
-      <Logo fill={colors.secondary} width={140} />
-      <div {...styles.icons}>
-        <IconLink icon='facebook' href='https://www.facebook.com/RepublikMagazin' target='_blank' fill={colors.secondary} />
-        <IconLink icon='twitter' href='https://twitter.com/RepublikMagazin' target='_blank' fill={colors.secondary} />
-      </div>
-    </Container>
-  </div>
-)
+    )
+  }
+}
 
 export default compose(
   withT,
