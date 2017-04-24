@@ -337,7 +337,7 @@ class Testimonial extends Component {
                 ? <InlineSpinner />
                 : (
                   <div style={{opacity: errorMessages.length ? 0.5 : 1}}>
-                    <Button black type='submit'>
+                    <Button type='submit'>
                       {testimonial && testimonial.published
                         ? t('testimonial/update')
                         : t('testimonial/submit')
