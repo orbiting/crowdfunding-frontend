@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-24T23:53:03.052Z",
+  "updated": "2017-04-25T01:02:29.654Z",
   "title": "live",
   "data": [
     {
@@ -75,6 +75,10 @@
       "value": "Wie viel könnten Sie zahlen pro Jahr?"
     },
     {
+      "key": "package/price",
+      "value": "{formattedCHF}"
+    },
+    {
       "key": "package/DONATE/title",
       "value": "Spenden, sonst nichts"
     },
@@ -99,6 +103,10 @@
     {
       "key": "package/ABO/description",
       "value": "Willkommen an Bord! Sie erhalten für ein Jahr unser Magazin. Und werden automatisch Mitglied der Project R Genossenschaft. Und damit zu einem kleinen Teil Verleger oder Verlegerin der Republik."
+    },
+    {
+      "key": "package/ABO_GIVE/price",
+      "value": "ab {formattedCHF}"
     },
     {
       "key": "package/ABO_GIVE/title",

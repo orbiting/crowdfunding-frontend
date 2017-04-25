@@ -168,7 +168,12 @@ class Accordion extends Component {
                   <div {...styles.packageHeader}>
                     <div {...styles.packageTitle}>{t(`package/${pkg.name}/title`)}</div>
                     {!!price && (<div {...styles.packagePrice}>
-                      {`CHF ${price / 100}`}
+                      {t.first([
+                        `package/${pkg.name}/price`,
+                        'package/price'
+                      ], {
+                        formattedCHF: `CHF ${price / 100}`
+                      })}
                     </div>)}
                   </div>
                   <div {...styles.packageContent}
