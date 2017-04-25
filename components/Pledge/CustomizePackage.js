@@ -1,12 +1,14 @@
 import React, {Component, PropTypes} from 'react'
 import Router from 'next/router'
+import {css} from 'glamor'
+
 import withT from '../../lib/withT'
 import {fieldsState} from '../../lib/utils/fieldState'
 import {chfFormat} from '../../lib/utils/formats'
 
 import {
   Field, A, Interaction,
-  Grid, Span
+  Grid, Span, fontFamilies
 } from '@project-r/styleguide'
 
 const {P} = Interaction
@@ -46,6 +48,19 @@ const priceError = (price, minPrice, t) => {
 }
 const reasonError = (value = '', t) => {
   return value.trim().length === 0 && t('package/customize/userPrice/reason/error')
+}
+
+const styles = {
+  title: css({
+    fontFamily: fontFamilies.sansSerifRegular,
+    fontSize: 19,
+    lineHeight: '28px'
+  }),
+  packageTitle: css({
+    fontFamily: fontFamilies.sansSerifMedium,
+    fontSize: 21,
+    lineHeight: '32px'
+  })
 }
 
 class CustomizePackage extends Component {
@@ -98,8 +113,11 @@ class CustomizePackage extends Component {
 
     return (
       <div>
-        <P style={{marginBottom: 10}}>
-          {t(`package/${pkg.name}/title`)}
+        <div {...styles.title}>
+          {pkg.name === 'DONATE' ? <span>&nbsp;</span> : t('package/title')}
+        </div>
+        <div style={{marginBottom: 10}}>
+          <span {...styles.packageTitle}>{t(`package/${pkg.name}/title`)}</span>
           {' '}
           <A href='/pledge' onClick={event => {
             event.preventDefault()
@@ -112,6 +130,9 @@ class CustomizePackage extends Component {
           }}>
             {t('package/customize/changePackage')}
           </A>
+        </div>
+        <P style={{marginBottom: 10}}>
+          {t(`package/${pkg.name}/description`)}
         </P>
         <Grid>
           {

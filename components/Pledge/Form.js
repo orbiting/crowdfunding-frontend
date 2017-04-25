@@ -187,9 +187,9 @@ class Pledge extends Component {
             <div style={{marginTop: 10, marginBottom: 40}}>
               {me ? (
                 <span>
-                  <strong>{t('pledge/contact/signedinAs', {
+                  {t('pledge/contact/signedinAs', {
                     nameOrEmail: me.name || me.email
-                  })}</strong>
+                  })}
                   {' '}<A href='#' onClick={(e) => {
                     e.preventDefault()
                     this.props.signOut().then(() => {
@@ -199,7 +199,7 @@ class Pledge extends Component {
                       this.setState(() => ({showSignIn: false}))
                     })
                   }}>{t('pledge/contact/signOut')}</A>
-                  <br />
+                  <br /><br />
                   {' '}{pastPledges.length > 0 && (
                     <A href='/merci' target='_blank'>
                       {t.pluralize('pledge/contact/pastPledges', {
