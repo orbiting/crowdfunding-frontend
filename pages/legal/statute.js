@@ -211,7 +211,9 @@ Die Organe der Genossenschaft sind:
 
 4. Der Vorstand ist für die ordnungsgemässe Durchführung der Urabstimmung verantwortlich.
 
+
 **Artikel 18 – Befugnisse**
+
 
 1. Der Gesamtheit der Mitglieder stehen folgende unübertragbaren Befugnisse zu:
 
@@ -282,6 +284,7 @@ Die Organe der Genossenschaft sind:
 **Artikel 22 – Mitgliederversammlung anstelle einer Urabstimmung**
 
 1. Das Ansetzen einer Mitgliederversammlung anstelle einer Urabstimmung ist zulässig, und sämtliche Bestimmungen, die für Einberufung, Befugnisse und Durchführung von Urabstimmungen gelten, gelten in diesem Fall analog, sofern anwendbar und sofern nachstehend keine besonderen Bestimmungen bestehen, auch im Falle der Durchführung einer Mitgliederversammlung. 
+
 2. Zu Mitgliederversammlungen ist analog zu Artikel 17 Absatz 3 einzuladen, allerdings unter Einhaltung einer Einladungsfrist von mindestens zwanzig (20) Tagen (ab Versand der Einladung).
 
 **Artikel 23 – Durchführung und Beschlussfassung**
