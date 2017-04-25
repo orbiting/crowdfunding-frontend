@@ -83,7 +83,8 @@ const styles = {
 let globalState = {
   playingRef: undefined,
   muted: false,
-  subtitles: false
+  subtitles: false,
+  instances: []
 }
 
 class VideoPlayer extends Component {
@@ -202,6 +203,9 @@ class VideoPlayer extends Component {
       this.scrub(event)
       this.scrubbing = false
     }
+    this.setInstanceState = (state) => {
+      this.setState(state)
+    }
   }
   toggle () {
     const {video} = this
@@ -234,6 +238,9 @@ class VideoPlayer extends Component {
     }
   }
   componentDidMount () {
+    globalState.instances
+      .push(this.setInstanceState)
+
     this.video.addEventListener('play', this.onPlay)
     this.video.addEventListener('pause', this.onPause)
     this.video.addEventListener('loadstart', this.onLoadStart)
@@ -247,6 +254,12 @@ class VideoPlayer extends Component {
     this.setTextTracksMode()
   }
   componentWillUnmount () {
+    globalState.instances = globalState.instances
+      .filter(setter => setter !== this.setInstanceState)
+    if (globalState.playingRef === this.video) {
+      globalState.playingRef = undefined
+    }
+
     this.video.removeEventListener('play', this.onPlay)
     this.video.removeEventListener('pause', this.onPause)
     this.video.removeEventListener('loadstart', this.onLoadStart)
@@ -254,10 +267,6 @@ class VideoPlayer extends Component {
     this.video.removeEventListener('canplay', this.onCanPlay)
     this.video.removeEventListener('canplaythrough', this.onCanPlay)
     this.video.removeEventListener('loadedmetadata', this.onLoadedMetaData)
-
-    if (globalState.playingRef === this.video) {
-      globalState.playingRef = undefined
-    }
   }
   render () {
     const {src, hidePlay} = this.props
@@ -297,11 +306,12 @@ class VideoPlayer extends Component {
               onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
-                this.setState((state) => {
-                  globalState.subtitles = !state.subtitles
-                  return {
-                    subtitles: !state.subtitles
-                  }
+                const next = {
+                  subtitles: !subtitles
+                }
+                globalState.subtitles = next.subtitles
+                globalState.instances.forEach(setter => {
+                  setter(next)
                 })
               }}>
               <Subtitles off={!subtitles} />
@@ -312,11 +322,12 @@ class VideoPlayer extends Component {
               onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
-                this.setState((state) => {
-                  globalState.muted = !state.muted
-                  return {
-                    muted: !state.muted
-                  }
+                const next = {
+                  muted: !muted
+                }
+                globalState.muted = next.muted
+                globalState.instances.forEach(setter => {
+                  setter(next)
                 })
               }}>
               <Volume off={muted} />
