@@ -80,6 +80,12 @@ const styles = {
   })
 }
 
+let globalState = {
+  playingRef: undefined,
+  muted: false,
+  subtitles: false
+}
+
 class VideoPlayer extends Component {
   constructor (props) {
     super(props)
@@ -87,8 +93,8 @@ class VideoPlayer extends Component {
     this.state = {
       playing: false,
       progress: 0,
-      muted: false,
-      subtitles: false,
+      muted: globalState.muted,
+      subtitles: globalState.subtitles,
       loading: false
     }
 
@@ -116,6 +122,13 @@ class VideoPlayer extends Component {
     }
     this.ref = ref => { this.video = ref }
     this.onPlay = () => {
+      if (
+        globalState.playingRef &&
+        globalState.playingRef !== this.video
+      ) {
+        globalState.playingRef.pause()
+      }
+      globalState.playingRef = this.video
       this.setState(() => ({
         playing: true,
         loading: false
@@ -241,6 +254,10 @@ class VideoPlayer extends Component {
     this.video.removeEventListener('canplay', this.onCanPlay)
     this.video.removeEventListener('canplaythrough', this.onCanPlay)
     this.video.removeEventListener('loadedmetadata', this.onLoadedMetaData)
+
+    if (globalState.playingRef === this.video) {
+      globalState.playingRef = undefined
+    }
   }
   render () {
     const {src, hidePlay} = this.props
@@ -280,9 +297,12 @@ class VideoPlayer extends Component {
               onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
-                this.setState((state) => ({
-                  subtitles: !state.subtitles
-                }))
+                this.setState((state) => {
+                  globalState.subtitles = !state.subtitles
+                  return {
+                    subtitles: !state.subtitles
+                  }
+                })
               }}>
               <Subtitles off={!subtitles} />
             </a>}
@@ -292,9 +312,12 @@ class VideoPlayer extends Component {
               onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
-                this.setState((state) => ({
-                  muted: !state.muted
-                }))
+                this.setState((state) => {
+                  globalState.muted = !state.muted
+                  return {
+                    muted: !state.muted
+                  }
+                })
               }}>
               <Volume off={muted} />
             </a>
