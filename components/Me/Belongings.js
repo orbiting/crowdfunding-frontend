@@ -113,6 +113,14 @@ class PledgeList extends Component {
                 {
                   pledge.payments.map((payment, i) => (
                     <li key={i}>
+                      {payment.method === 'PAYMENTSLIP' && payment.status === 'WAITING' && (
+                        <span>
+                          <RawHtml dangerouslySetInnerHTML={{
+                            __html: t(`merci/payment/PAYMENTSLIP/paperInvoice/${+(payment.paperInvoice)}`)
+                          }} />
+                          <br /><br />
+                        </span>
+                      )}
                       <RawHtml dangerouslySetInnerHTML={{
                         __html: t.first([
                           `merci/payment/status/${payment.method}/${payment.status}`,
@@ -123,14 +131,6 @@ class PledgeList extends Component {
                           method: t(`merci/payment/method/${payment.method}`)
                         })
                       }} />
-                      {payment.method === 'PAYMENTSLIP' && payment.status === 'WAITING' && (
-                        <span>
-                          <br /><br />
-                          <RawHtml dangerouslySetInnerHTML={{
-                            __html: t(`merci/payment/PAYMENTSLIP/paperInvoice/${+(payment.paperInvoice)}`)
-                          }} />
-                        </span>
-                      )}
                     </li>
                   ))
                 }
