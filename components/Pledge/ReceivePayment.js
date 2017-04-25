@@ -125,16 +125,44 @@ class PledgeReceivePayment extends Component {
           }
         }
       } else {
-        // see cancel_return in ./paypal.js
+        // https://developer.paypal.com/docs/classic/ipn/integration-guide/IPNandPDTVariables/#id091EB04C0HS
+        // - payment_status
         switch (query.st) {
           case 'Cancel':
+            // see cancel_return in ./paypal.js
             state.receiveError = t('pledge/recievePayment/paypal/cancel')
             break
-          // ToDo: handle errors and recommend specific user action
-          // possible action: retry, choose different method, contact us
-
-          // https://developer.paypal.com/docs/classic/ipn/integration-guide/IPNandPDTVariables/#id091EB04C0HS
-          // - payment_status
+          case 'Denied':
+          case 'Expired':
+          case 'Failed':
+          case 'Voided':
+            state.receiveError = t('pledge/recievePayment/paypal/deny')
+            break
+          case 'Canceled_Reversal':
+          case 'Refunded':
+          case 'Reversed':
+          case 'Processed':
+          case 'Pending':
+            const errorVariables = {
+              mailto: `mailto:zahlungen@republik.ch?subject=${
+                encodeURIComponent(
+                  t(
+                    'pledge/recievePayment/paypal/mailto/subject',
+                    {status: query.st}
+                  )
+                )}&body=${
+                encodeURIComponent(
+                  t(
+                    'pledge/recievePayment/paypal/mailto/body',
+                    {
+                      pledgeId: query.item_name,
+                      payload: JSON.stringify(query, null, 2)
+                    }
+                  )
+                )}`
+            }
+            state.receiveError = t('pledge/recievePayment/paypal/contactUs', errorVariables)
+            break
           default:
             state.receiveError = t('pledge/recievePayment/error')
         }

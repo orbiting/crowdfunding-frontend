@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-25T01:02:29.654Z",
+  "updated": "2017-04-25T01:52:14.157Z",
   "title": "live",
   "data": [
     {
@@ -68,7 +68,7 @@
     },
     {
       "key": "package/customize/userPrice/beforeReason",
-      "value": "Journalismus kostet. Aber wir wollen niemanden ausschliessen. Falls Sie sich die 240 Franken nicht leisten können, bitten wir Sie um eine knappe Begründung und einen Preis, der Ihnen fair scheint. Willkommen an Bord!"
+      "value": "Journalismus kostet. Aber wir wollen niemanden ausschliessen. Falls Sie sich die 240 Franken nicht leisten können, bitten wir Sie um eine knappe Begründung und einen Preis, der Ihnen fair scheint. "
     },
     {
       "key": "package/customize/userPrice/beforePrice",
@@ -149,7 +149,8 @@
     },
     {
       "key": "merci/postpay/waiting",
-      "value": "Danke, Sie sind mit dem Wichtigsten durch. Jetzt müssen Sie noch Ihre Mailadresse bestätigen. Wir haben Ihnen ein kurzes Mail geschickt. Dieses enthält fett gedruckt die drei seltsamen Wörter: <b>«{phrase}»</b>.<br /><br />Gehen Sie zu Ihrem Postfach, öffnen Sie das Mail, kontrollieren Sie, ob dort die drei gleichen seltsamen Wörter stehen. Sind es dieselben, klicken Sie den Link darunter. <br /><br /> (Die Sache mit den drei Wörtern ist leider nötig. Es ist eine Sicherheitsmassnahme, damit niemand mit Ihrer Mailadresse Unfug treiben kann.)"
+      "value": "Danke, Sie sind mit dem Wichtigsten durch. Jetzt müssen Sie noch Ihre Mailadresse bestätigen. Wir haben Ihnen ein kurzes Mail an die Adresse {email} geschickt. Dieses enthält fett gedruckt die drei seltsamen Wörter: <b>«{phrase}»</b>.<br /><br />Gehen Sie zu Ihrem Postfach, öffnen Sie das Mail, kontrollieren Sie, ob dort die drei gleichen seltsamen Wörter stehen. Sind es dieselben, klicken Sie den Link darunter. <br /><br /> (Die Sache mit den drei Wörtern ist leider nötig. Es ist eine Sicherheitsmassnahme, damit niemand mit Ihrer Mailadresse Unfug treiben kann.)",
+      "undefined": "clara"
     },
     {
       "key": "merci/postpay/reclaim",
@@ -622,7 +623,7 @@
     },
     {
       "key": "pledge/recievePayment/pf/mailto/body",
-      "value": "Liebe Republik,\n\nLass uns über Geld sprechen.\n\nBuchungsreferenz:\n{pledgeId}\n\nPostFinance:\n{payload}"
+      "value": "Liebe Republik,\n\nLasst uns über Geld sprechen.\n\nBuchungsreferenz:\n{pledgeId}\n\nPostFinance:\n{payload}"
     },
     {
       "key": "pledge/recievePayment/pf/92",
@@ -655,6 +656,22 @@
     {
       "key": "pledge/recievePayment/paypal/cancel",
       "value": "Zahlung abgebrochen. Wählen Sie ein anderes Zahlungsmittel, um Ihre Bestellung abzuschliessen."
+    },
+    {
+      "key": "pledge/recievePayment/paypal/deny",
+      "value": "Zahlung fehlgeschlagen.<br />\n<br />\nWählen Sie ein anderes Zahlungsmittel, um Ihre Bestellung abzuschliessen."
+    },
+    {
+      "key": "pledge/recievePayment/paypal/contactUs",
+      "value": "Während des Zahlungsverfahrens mit PayPal ist ein Problem aufgetreten, das zu einem nicht vorhersehbaren Resultat geführt hat.<br />\n<br />\nBitte nehmen Sie Kontakt mit uns auf unter <a href=\"{mailto}\">zahlungen@republik.ch</a>. Sie sollten es nicht erneut versuchen da die Buchung möglicherweise bereits akzeptiert wurde."
+    },
+    {
+      "key": "pledge/recievePayment/paypal/mailto/subject",
+      "value": "PayPal {status}"
+    },
+    {
+      "key": "pledge/recievePayment/paypal/mailto/body",
+      "value": "Liebe Republik,\n\nLasst uns über Geld sprechen.\n\nBuchungsreferenz:\n{pledgeId}\n\nPayPal:\n{payload}"
     },
     {
       "key": "pledge/recievePayment/3dsecure/failed",
@@ -765,8 +782,12 @@
       "value": "Bei der Bezahlung mit PayPal ist etwas schiefgelaufen. Wir haben Ihre Angaben und den Fehler gespeichert. Bitte kontaktieren Sie uns unter kontakt@repulik.ch und geben Sie folgende Nummer an: ID: {id}"
     },
     {
-      "key": "api/pay/pf/error",
-      "value": "Die Überprüfung der Bezahlung mit Postfinance ist fehlgeschlagen. Wir haben Ihre Angaben und den Fehler gespeichert. Bitte kontaktieren Sie uns unter kontakt@repulik.ch und geben Sie folgende Nummer an: ID: {id}",
+      "key": "api/paypal/deny",
+      "value": "Zahlung fehlgeschlagen.<br />\n<br />\nWählen Sie ein anderes Zahlungsmittel, um Ihre Bestellung abzuschliessen."
+    },
+    {
+      "key": "pledge/recievePayment/paypal/contactUs",
+      "value": "Während des Zahlungsverfahrens mit PayPal ist ein Problem aufgetreten, das zu einem nicht vorhersehbaren Resultat geführt hat.<br />\n<br />\nBitte nehmen Sie Kontakt mit uns auf unter <a href=\"{mailto}\">zahlungen@republik.ch</a>. Sie sollten es nicht erneut versuchen da die Buchung möglicherweise bereits akzeptiert wurde.",
       "undefined": "key angepasst, bitte beachten beim einpflegen der Korrekturen"
     },
     {
@@ -895,11 +916,11 @@
     },
     {
       "key": "me/addressForm/city/label",
-      "value": "Stadt"
+      "value": "Ort"
     },
     {
       "key": "me/addressForm/city/error/empty",
-      "value": "Stadt fehlt"
+      "value": "Ort fehlt"
     },
     {
       "key": "me/addressForm/country/label",
