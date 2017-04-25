@@ -1,6 +1,7 @@
 import React from 'react'
 import md from 'markdown-in-js'
 import Router from 'next/router'
+import {css} from 'glamor'
 
 import withData from '../lib/withData'
 import mdComponents from '../lib/utils/mdComponents'
@@ -17,8 +18,19 @@ import {
 } from '../constants'
 
 import {
-  Label, Button, Lead
+  Label, Button, Lead, colors
 } from '@project-r/styleguide'
+
+const styles = {
+  mediaDiversity: css({
+    margin: '20px 0',
+    '& img': {
+      width: 'calc(50% - 10px)',
+      border: `1px solid ${colors.divider}`,
+      margin: 5
+    }
+  })
+}
 
 const VIDEOS = {
   main: {
@@ -104,7 +116,24 @@ Doch das ist Geschichte. Denn die Inserate sind ins Netz verschwunden. Und die g
 
 Bis es so weit ist, wird die sterbende Cashcow noch so lange wie möglich gemolken. Investitionen fliessen kaum mehr; bei eigenen Medien wird nur noch gespart. Dazu wird fusioniert, was geht. Kleinere Zeitungen werden zwecks Reichweite eingekauft. Und verdaut. Bereits heute beherrschen Tamedia, NZZ und Ringier zusammen 80 Prozent der veröffentlichten Meinung.
 
-![Baseler Zeitung, Tages-Anzeiger](/static/index/medienvielfalt.jpg)
+`}
+
+        <div {...styles.mediaDiversity}>
+          <img
+            alt='«Amokfahrer rast in Menschen in London» bazonline.ch am 22. März 2017 um 16 Uhr'
+            src={`${STATIC_BASE_URL}/static/index/baz.png`} />
+          <img
+            alt='«Amokfahrer rast in Menschen in London» tagesanzeiger.ch am 22. März 2017 um 16 Uhr'
+            src={`${STATIC_BASE_URL}/static/index/ta.png`} />
+          <img
+            alt='«Amokfahrer rast in Menschen in London» derbund.ch am 22. März 2017 um 16 Uhr'
+            src={`${STATIC_BASE_URL}/static/index/bund.png`} />
+          <img
+            alt='«Amokfahrer rast in Menschen in London» bernerzeitung.ch am 22. März 2017 um 16 Uhr'
+            src={`${STATIC_BASE_URL}/static/index/bz.png`} />
+        </div>
+
+        {md(mdComponents)`
 
 Auch ohne weitere Deals verflacht der Journalismus. Denn in der Krise fusionieren die grossen Verlage ihre Medien zu riesigen Klumpen. Beim «Tages-Anzeiger» etwa werden die schnellen News mit «20 Minuten» gemacht, die Bundeshaus-Berichterstattung kommt vom «Bund», Ausland, Wirtschaft und Kultur liefert zu immer grösseren Teilen die «Süddeutsche Zeitung», zu kleinen Teilen die «Basler Zeitung», die hinteren Bünde sind mit der «SonntagsZeitung» zusammengelegt worden. Und gedruckt wird mit der NZZ.
 
