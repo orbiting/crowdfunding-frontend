@@ -9,7 +9,8 @@ import {chfFormat} from '../../lib/utils/formats'
 
 import {
   Field, A, Interaction,
-  Grid, Span, fontFamilies
+  Grid, Span, fontFamilies,
+  mediaQueries
 } from '@project-r/styleguide'
 
 import {
@@ -68,9 +69,12 @@ const styles = {
   }),
   packageImage: css({
     float: 'right',
-    paddingLeft: 30,
     maxWidth: 150,
-    maxHeight: 200
+    maxHeight: 200,
+    paddingLeft: 10,
+    [mediaQueries.mUp]: {
+      paddingLeft: 30
+    }
   })
 }
 
