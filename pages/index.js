@@ -17,7 +17,7 @@ import {
 } from '../constants'
 
 import {
-  Label, Button
+  Label, Button, Lead
 } from '@project-r/styleguide'
 
 const VIDEOS = {
@@ -41,9 +41,10 @@ export default withData(({url}) => (
   )}>
     <div>
       <Content indented>
+        <Lead>
+          Willkommen zum Crowdfunding für das digitale Magazin Republik von Project&nbsp;R
+        </Lead>
         {md(mdComponents)`
-## Willkommen zum Crowdfunding für das digitale Magazin Republik von Project&nbsp;R 
-
 Die Republik ist eine kleine Rebellion. Für den Journalismus. Und gegen die Medienkonzerne. Denn die grossen Verlage verlassen die Publizistik: Sie bauen sich in hohem Tempo in Internet-Handelshäuser um. Das ist eine schlechte Nachricht für den Journalismus. Aber auch für die Demokratie. Denn ohne vernünftige Informationen fallen schlechte Entscheidungen. 
 
 Eine funktionierende Demokratie braucht funktionierende Medien. Und dafür braucht es nicht nur Journalistinnen und Journalisten, sondern auch Sie. Als Leserinnen. Als Bürger. Als Menschen, die bereit sind, etwas Geld in unabhängigen Journalismus zu investieren.
@@ -66,7 +67,7 @@ Eine funktionierende Demokratie braucht funktionierende Medien. Und dafür brauc
         {md(mdComponents)`
 <br />
 
-## Worum es geht
+# Worum es geht
 
 Es ist Zeit, selbst Verantwortung zu übernehmen. Unsere Aufgabe dabei ist, eine zeitgemässe Form für den Journalismus zu entwickeln. Die Republik wird ein schlankes, schlagkräftiges Magazin im Netz. Mit dem Ziel, bei den grossen Themen, Fragen und Debatten Klarheit und Überblick zu bieten. Und das aufrichtig, ohne Schnörkel, mit grossem Herzen. Unser Ziel dabei ist, gemeinsam mit Ihnen ein neues Modell im Medienmarkt zu etablieren: kompromisslos in der Qualität, ohne Werbung, finanziert von den Leserinnen und Lesern. Es ist Zeit für Journalismus ohne Bullshit.
         
@@ -83,7 +84,7 @@ Mit diesem Betrag können Sie einen echten Unterschied machen. Denn es ist Zeit,
 [Jetzt Mitmachen!](/pledge)  
         
 
-## Wer sind wir 
+# Wer sind wir 
 
 Ihr Partner bei diesem Projekt ist die Aufbaucrew der Republik und von Project R. Wir sind seit drei Jahren an der Arbeit, zuerst lange in Nachtarbeit, seit Januar 2017 hauptberuflich. Mittlerweile besteht die Crew aus fast einem Dutzend Journalisten, Start-up-, Kommunikations-, Organisations- und IT-Spezialistinnen. (Und einigen Dutzend Komplizen und Beraterinnen im Hintergrund.)
 
@@ -95,7 +96,7 @@ Die Kurzporträts der Crew finden Sie [hier](/crew). Und dazu im Video – die L
         </div>
 
         {md(mdComponents)`
-## Warum wir es tun          
+# Warum wir es&nbsp;tun          
 
 Das Problem der traditionellen Medien ist, dass ihr Geschäftsmodell zusammengebrochen ist. Über ein Jahrhundert lang waren Zeitungsverlage praktisch Gelddruckmaschinen mit enormer Rendite: Man verkaufte Nachrichten an die Leserinnen und Leser – und die Leserinnen und Leser an die Werbung.
 
@@ -129,13 +130,9 @@ Kurz: Die flächendeckende Übernahme der Schweizer Medien durch den Chef der gr
 
 Doch selbst wenn sich nichts ändert, ist das Schweizer Mediensystem alles andere als in Form, um seinen Job als Wachhund der Demokratie wahrzunehmen. Denn die zwei politisch folgenreichsten Innovationen der Schweizer Medien im vergangenen Jahrzehnt sind alles andere als förderlich für die Öffentlichkeit. 
 
-**Innovation Nummer 1: Die Doppelzange**
+**Innovation Nummer 1: Die Doppelzange**. Eine Person, die Differenzen mit Christoph Blocher hat, gerät doppelt ins Schussfeld. Sie bekommt nicht nur Ärger mit der grössten Partei. Sondern wird auch in der «Weltwoche» und der «Basler Zeitung» angegriffen. Die Doppelzange ist ein ebenso neues wie wirksames Disziplinierungsinstrument in der Schweizer Politik – nicht zuletzt für unabhängige Köpfe im bürgerlichen Lager. Und sogar in der SVP selbst.
 
-Eine Person, die Differenzen mit Christoph Blocher hat, gerät doppelt ins Schussfeld. Sie bekommt nicht nur Ärger mit der grössten Partei. Sondern wird auch in der «Weltwoche» und der «Basler Zeitung» angegriffen. Die Doppelzange ist ein ebenso neues wie wirksames Disziplinierungsinstrument in der Schweizer Politik – nicht zuletzt für unabhängige Köpfe im bürgerlichen Lager. Und sogar in der SVP selbst.
-
-**Innovation Nummer 2: Die kleine Empörungsgeschichte**
-
-Sie entsteht aus der Logik des Internet-Journalismus. Eine ideale Geschichte für schnelle Onlineportale muss folgende Merkmale haben: Sie muss schnell produzierbar sein, dazu leicht verständlich, möglichst viele Reaktionen auslösen und fortsetzbar sein. Die kleine Empörungsgeschichte erfüllt diese Vorgaben nahezu ideal: Eine SP-Nationalrätin raucht im Rauchverbot, ein SVP-Nationalrat beschäftigt eine Asylbewerberin als Putzkraft, ein jugendlicher Gewalttäter erhält eine teure Therapie. Kaum ist die Story erschienen, springt die Konkurrenz auf. Und dann rollt eine flächendeckende Walze: Empörte Leserkommentare, Expertenmeinungen, Verteidigungen der Angeschuldigten, Rücktrittsforderungen, Pressekonferenzen mit Live-Tickern, und am Ende mahnen die Medienwissenschaftler. Sollte irgendwann in der Zukunft eine Historikerin zu bestimmen versuchen, was das bedeutendste Ereignis in der Schweizer Politik der letzten Jahre war, käme sie – rein quantitativ – zum Schluss, dass es mit mehreren tausend Artikeln die Geschichte eines grünen Nationalrats gewesen sein musste, der einer Bekannten privat ein Bild seines Penis schickte. 
+**Innovation Nummer 2: Die kleine Empörungsgeschichte**. Sie entsteht aus der Logik des Internet-Journalismus. Eine ideale Geschichte für schnelle Onlineportale muss folgende Merkmale haben: Sie muss schnell produzierbar sein, dazu leicht verständlich, möglichst viele Reaktionen auslösen und fortsetzbar sein. Die kleine Empörungsgeschichte erfüllt diese Vorgaben nahezu ideal: Eine SP-Nationalrätin raucht im Rauchverbot, ein SVP-Nationalrat beschäftigt eine Asylbewerberin als Putzkraft, ein jugendlicher Gewalttäter erhält eine teure Therapie. Kaum ist die Story erschienen, springt die Konkurrenz auf. Und dann rollt eine flächendeckende Walze: Empörte Leserkommentare, Expertenmeinungen, Verteidigungen der Angeschuldigten, Rücktrittsforderungen, Pressekonferenzen mit Live-Tickern, und am Ende mahnen die Medienwissenschaftler. Sollte irgendwann in der Zukunft eine Historikerin zu bestimmen versuchen, was das bedeutendste Ereignis in der Schweizer Politik der letzten Jahre war, käme sie – rein quantitativ – zum Schluss, dass es mit mehreren tausend Artikeln die Geschichte eines grünen Nationalrats gewesen sein musste, der einer Bekannten privat ein Bild seines Penis schickte. 
 
 Das Resultat der kleinen Empörungsgeschichte ist mehr als nur Zeitverschwendung. Nach dem «Fall Carlos» etwa, dem Jugendlichen mit der teuren Therapie, mussten die Jugendarbeiter im Kanton Aargau aus Furcht vor Medienanfragen ihre Dossiers rückwirkend neu begründen. Und alle Fälle unartiger Jugendlicher gingen ab sofort über den Tisch des Regierungsrats. Statt dass man sagte: «Du dumme Siech hast Seich gemacht, jetzt gehst du zwei Wochen auf die Alp und denkst nach!» – wurde nun aus jeder Dummheit ein Verwaltungsakt. 
 
@@ -152,7 +149,7 @@ Kurz: Es ist Zeit für etwas Neues. Unsere Pläne für die Republik finden Sie g
 
 [![TK](/static/index/rothaus_manifest.jpg)](/manifest)
 
-## Was wir versprechen
+# Was wir versprechen
 
 Die Republik wird ein Magazin für die öffentliche Debatte – für Politik, Wirtschaft, Gesellschaft. Ihr Job ist alles, was unklar, lärmig, verwickelt ist. Wir sehen uns als Service. Während Sie ein vernünftiges Leben führen – mit Familie, Job, Hobby –, arbeiten wir uns durch den Staub der Welt. Und liefern Ihnen das Wesentliche. Mit Ihrem Abonnement finanzieren Sie sich quasi ein privates Expeditionsteam in die Wirklichkeit.
 
@@ -202,7 +199,7 @@ Willkommen an Bord!
         </div>
 
         {md(mdComponents)`
-## Community
+# Community
 
 Die Republik kann nicht ein Projekt von wenigen sein. Ein neues Fundament für unabhängigen Journalismus bauen wir nur gemeinsam – oder gar nicht. Sehen Sie hier, wer schon an Bord ist:
   `}
