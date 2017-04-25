@@ -271,7 +271,6 @@ class Submit extends Component {
         )
       })
       .catch(error => {
-        console.error('submit', error)
         const submitError = errorToString(error)
 
         this.setState(() => ({
@@ -350,7 +349,6 @@ class Submit extends Component {
               phrase: signIn.phrase
             }))
             .catch(error => {
-              console.error('signIn', error)
               this.setState(() => ({
                 loading: false,
                 signInError: errorToString(error)
@@ -363,7 +361,6 @@ class Submit extends Component {
         }
       })
       .catch(error => {
-        console.error('pay', error)
         this.setState(() => ({
           loading: false,
           paymentError: errorToString(error)
@@ -389,12 +386,16 @@ class Submit extends Component {
         exp_year: values.cardYear
       }
     }, (status, source) => {
-      console.log('stripe', status, source)
       if (status !== 200) {
         // source.error.type
         // source.error.param
         // source.error.message
         // see https://stripe.com/docs/api#errors
+        // - never happens because we use client validation
+        // - only when charging some additional errors can happen
+        //   those are handled server side in the pay mutation
+        // - if it happens, we simply display the English message
+        // test cards https://stripe.com/docs/testing#cards
         this.setState(() => ({
           loading: false,
           paymentError: source.error.message
@@ -421,7 +422,6 @@ class Submit extends Component {
             return_url: `${PUBLIC_BASE_URL}/pledge?pledgeId=${pledgeId}&stripe=1`
           }
         }, (status, source3d) => {
-          console.log('stripe 3d secure', status, source3d)
           if (status !== 200) {
             this.setState(() => ({
               loading: false,
@@ -713,17 +713,17 @@ class Submit extends Component {
           </div>
         )}
         {!!submitError && (
-          <P style={{color: colors.error}}>
+          <P style={{color: colors.error, marginBottom: 40}}>
             {submitError}
           </P>
         )}
         {!!paymentError && (
-          <P style={{color: colors.error}}>
+          <P style={{color: colors.error, marginBottom: 40}}>
             {paymentError}
           </P>
         )}
         {!!signInError && (
-          <P style={{color: colors.error}}>
+          <P style={{color: colors.error, marginBottom: 40}}>
             {signInError}
           </P>
         )}

@@ -241,7 +241,6 @@ class PledgeReceivePayment extends Component {
               phrase: signIn.phrase
             }))
             .catch(error => {
-              console.error('signIn', error)
               this.setState(() => ({
                 processing: false,
                 receiveError: errorToString(error)
@@ -254,7 +253,6 @@ class PledgeReceivePayment extends Component {
         }
       })
       .catch(error => {
-        console.error('pay', error)
         this.setState(() => ({
           processing: false,
           receiveError: errorToString(error)
