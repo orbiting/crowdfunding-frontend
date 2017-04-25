@@ -3,7 +3,6 @@ const next = require('next')
 const basicAuth = require('express-basic-auth')
 const newsletter = require('./server/newsletter')
 
-// can be removed after public launch
 const cookieParser = require('cookie-parser')
 
 const DEV = process.env.NODE_ENV && process.env.NODE_ENV !== 'production'
