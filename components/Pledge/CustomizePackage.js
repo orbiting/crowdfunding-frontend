@@ -126,6 +126,24 @@ class CustomizePackage extends Component {
         option.minAmount !== option.maxAmount
       ))
 
+    const minPrice = calculateMinPrice(pkg, values, userPrice)
+
+    const onPriceChange = (_, value, shouldValidate) => {
+      const price = String(value).length
+        ? (Math.round(parseInt(value, 10)) * 100) || 0
+        : 0
+      const minPrice = calculateMinPrice(pkg, values, userPrice)
+      const error = priceError(price, minPrice, t)
+
+      this.setState(() => ({customPrice: true}))
+      onChange(fieldsState({
+        field: 'price',
+        value: price,
+        error,
+        dirty: shouldValidate
+      }))
+    }
+
     return (
       <div>
         <div {...styles.title}>
@@ -218,10 +236,10 @@ class CustomizePackage extends Component {
                       error={dirty[option.id] && errors[option.id]}
                       value={value}
                       onInc={value < option.maxAmount && (() => {
-                        onFieldChange(undefined, value + 1)
+                        onFieldChange(undefined, value + 1, dirty[option.id])
                       })}
                       onDec={value > option.minAmount && (() => {
-                        onFieldChange(undefined, value - 1)
+                        onFieldChange(undefined, value - 1, dirty[option.id])
                       })}
                       onChange={onFieldChange}
                       />
@@ -264,19 +282,13 @@ class CustomizePackage extends Component {
               ? undefined : this.focusRefSetter}
             error={dirty.price && errors.price}
             value={price / 100}
-            onChange={(_, value, shouldValidate) => {
-              const price = value * 100
-              const minPrice = calculateMinPrice(pkg, values, userPrice)
-              const error = priceError(price, minPrice, t)
-
-              this.setState(() => ({customPrice: true}))
-              onChange(fieldsState({
-                field: 'price',
-                value: price,
-                error,
-                dirty: shouldValidate
-              }))
-            }} />
+            onDec={price - 1000 >= minPrice && (() => {
+              onPriceChange(undefined, (price - 1000) / 100, dirty.price)
+            })}
+            onInc={() => {
+              onPriceChange(undefined, (price + 1000) / 100, dirty.price)
+            }}
+            onChange={onPriceChange} />
         </div>
       </div>
     )
