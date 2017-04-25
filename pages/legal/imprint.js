@@ -10,12 +10,15 @@ import {
 const {H1, H2, P} = Interaction
 
 export default withData(({url}) => {
-  const title = 'Impressum'
+  const meta = {
+    title: 'Impressum',
+    description: 'Jetzt unser Crowdfunding unterstützen.'
+  }
   return (
-    <Frame url={url} meta={{title}}>
+    <Frame url={url} meta={meta}>
       <Content>
         <H1>
-          {title}
+          {meta.title}
         </H1>
         <br />
         <H2>Kontakt</H2>

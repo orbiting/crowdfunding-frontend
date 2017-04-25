@@ -48,7 +48,12 @@ const VIDEOS = {
 }
 
 export default withData(({url}) => (
-  <Frame url={url} meta={{pageTitle: 'Republik'}} cover={(
+  <Frame url={url} meta={{
+    pageTitle: 'Republik — das digitale Magazin von Project R',
+    title: 'Republik — das digitale Magazin von Project R',
+    description: 'Jetzt unser Crowdfunding unterstützen.',
+    image: VIDEOS.main.poster
+  }} cover={(
     <VideoCover src={VIDEOS.main} />
   )}>
     <div>

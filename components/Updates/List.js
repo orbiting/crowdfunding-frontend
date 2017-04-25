@@ -78,7 +78,8 @@ const Overview = compose(
     return (
       <div>
         <Meta data={{
-          title: t('updates/pageTitle'),
+          pageTitle: t('updates/pageTitle'),
+          title: t('updates/title'),
           description: t('updates/metaDescription'),
           url: `${PUBLIC_BASE_URL}/updates`,
           image: `${STATIC_BASE_URL}/static/social-media/updates.png`

@@ -15,12 +15,16 @@ import {
 } from '../../constants'
 
 export default withData(({url}) => {
-  const title = 'Statuten'
+  const meta = {
+    title: 'Statuten',
+    description: 'Jetzt unser Crowdfunding unterstützen.'
+  }
+
   return (
-    <Frame url={url} meta={{title}}>
+    <Frame url={url} meta={meta}>
       <Content indented>
         <H1>
-          {title}
+          {meta.title}
         </H1>
 
         <P>

@@ -8,7 +8,7 @@ import {
 } from '@project-r/styleguide'
 
 const MerciPage = ({url}) => (
-  <Frame url={url} sidebar={false}>
+  <Frame url={url} meta={{title: 'Merci'}} sidebar={false}>
     <NarrowContainer>
       <Merci url={url} />
     </NarrowContainer>

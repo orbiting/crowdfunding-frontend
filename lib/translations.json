@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-25T14:18:55.686Z",
+  "updated": "2017-04-25T18:34:32.945Z",
   "title": "live",
   "data": [
     {
@@ -812,11 +812,15 @@
       "value": "Vielen Dank!"
     },
     {
-      "key": "api/remindeme/mail/subject",
+      "key": "api/remindme/mail/subject",
       "value": "Erinnerung Republik Crowdfunding"
     },
     {
-      "key": "api/remindeme/successMessage",
+      "key": "api/payment/received/mail/subject",
+      "value": "Vielen Dank! Wir haben Ihre Zahlung erhalten."
+    },
+    {
+      "key": "api/remindme/successMessage",
       "value": "Wir werden Sie erinnern"
     },
     {
@@ -1075,11 +1079,15 @@
     },
     {
       "key": "events/pageTitle",
-      "value": "Veranstaltungen"
+      "value": "Veranstaltungen — Republik"
+    },
+    {
+      "key": "events/title",
+      "value": "Alle Veranstaltungen im Überblick"
     },
     {
       "key": "events/metaDescription",
-      "value": "Erleben Sie uns live an einem unserer Ereignisse"
+      "value": "Das digitale Magazin von Project R — jetzt unser Crowdfunding unterstützen."
     },
     {
       "key": "events/upcoming",
@@ -1111,11 +1119,15 @@
     },
     {
       "key": "updates/pageTitle",
-      "value": "Neues"
+      "value": "Neues — Republik"
+    },
+    {
+      "key": "updates/title",
+      "value": "Neuigkeiten zum Crowdfunding"
     },
     {
       "key": "updates/metaDescription",
-      "value": "Aktuelles zum Crowdfunding"
+      "value": "Das digitale Magazin von Project R — jetzt unser Crowdfunding unterstützen."
     },
     {
       "key": "updates/404",
@@ -1130,8 +1142,12 @@
       "value": "Fragen"
     },
     {
+      "key": "faq/title",
+      "value": "Antworten auf die häufigsten Fragen"
+    },
+    {
       "key": "faq/metaDescription",
-      "value": "Antworten zu den brennenden Fragen."
+      "value": "Jetzt unser Crowdfunding unterstützen."
     },
     {
       "key": "faq/before/title",
@@ -1223,7 +1239,7 @@
     },
     {
       "key": "testimonial/detail/share/emailSubject",
-      "value": "{name} unterstützt die Republik"
+      "value": "{name} unterstützt Republik"
     },
     {
       "key": "testimonial/pickImage/update",
@@ -1254,16 +1270,20 @@
       "value": "Sie haben ihr Statement zurückgezogen, es erscheint nicht mehr auf der Community-Seite."
     },
     {
+      "key": "testimonial/meta/pageTitle",
+      "value": "Community — Republik"
+    },
+    {
       "key": "testimonial/meta/title",
-      "value": "Community"
+      "value": "Die ganze Community auf einen Blick"
     },
     {
       "key": "testimonial/meta/description",
-      "value": "Noch kein Mitglied? Jetzt mitmachen und Mitglied werden!"
+      "value": "Jetzt unser Crowdfunding unterstützen."
     },
     {
       "key": "testimonial/meta/single/title",
-      "value": "{name} unterstützt die Republik"
+      "value": "{name} unterstützt Republik"
     },
     {
       "key": "testimonial/meta/single/pageTitle",
@@ -1271,7 +1291,7 @@
     },
     {
       "key": "testimonial/meta/single/description",
-      "value": "Jetzt beim Crowdfunding mitmachen und an Board kommen."
+      "value": "Jetzt unser Crowdfunding unterstützen."
     },
     {
       "key": "footer/me/title",
@@ -1299,11 +1319,11 @@
     },
     {
       "key": "crew/title",
-      "value": "Project-R-Crew"
+      "value": "Wer steckt dahinter?"
     },
     {
       "key": "crew/description",
-      "value": "Die Project-R-Crew arbeitet derzeit – gemeinsam mit zahlreichen Komplizinnen im Hintergrund – an der Gesellschaftsform, dem Aufbau der Crowdfunding-Plattform, der IT-Entwicklung und dem Redaktionskonzept."
+      "value": "Die Crew stellt sich vor — jetzt unser Crowdfunding unterstützen."
     },
     {
       "key": "crew/lead",

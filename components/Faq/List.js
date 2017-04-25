@@ -107,7 +107,8 @@ class FaqList extends Component {
         return (
           <div>
             <Meta data={{
-              title: t('faq/pageTitle'),
+              pageTitle: t('faq/pageTitle'),
+              title: t('faq/title'),
               description: t('faq/metaDescription'),
               url: `${PUBLIC_BASE_URL}/faq`,
               image: `${STATIC_BASE_URL}/static/social-media/faq.png`

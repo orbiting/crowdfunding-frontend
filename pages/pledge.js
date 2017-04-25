@@ -11,6 +11,11 @@ import PledgeReceivePayment from '../components/Pledge/ReceivePayment'
 
 class PledgePage extends Component {
   render () {
+    const meta = {
+      title: 'Jetzt mitmachen beim Crowdfunding',
+      description: 'Lasst uns gemeinsam ein neues Fundament für unabhängigen Journalismus bauen!'
+    }
+
     const {url} = this.props
 
     let pledgeId
@@ -25,7 +30,7 @@ class PledgePage extends Component {
     }
 
     return (
-      <Frame url={url} sidebar={false}>
+      <Frame meta={meta} url={url} sidebar={false}>
         <NarrowContainer>
           {pledgeId ? (
             <PledgeReceivePayment

@@ -7,9 +7,13 @@ import md from 'markdown-in-js'
 import mdComponents from '../../lib/utils/mdComponents'
 
 export default withData(({url}) => {
-  const title = 'AGB'
+  const meta = {
+    title: 'AGB',
+    description: 'Jetzt unser Crowdfunding unterstützen.'
+  }
+
   return (
-    <Frame url={url} meta={{title}}>
+    <Frame url={url} meta={meta}>
       <Content>
         {md(mdComponents)`
 ## Allgemeine Geschäftsbedingungen 

@@ -238,6 +238,7 @@ class List extends Component {
             image: requestedTestimonial.smImage
           })
           : ({
+            pageTitle: t('testimonial/meta/pageTitle'),
             title: t('testimonial/meta/title'),
             description: t('testimonial/meta/description'),
             url: `${PUBLIC_BASE_URL}/community`,
