@@ -74,14 +74,14 @@ const Cover = ({image, children}) => (
     {...coverStyle}
     {...css({[mqLarge]: {backgroundImage: `url('${image.src}')`}})}>
     <img {...coverImageStyle} src={image.src} alt={image.alt} />
-    <div {...leadStyle}>
+    {!!children && <div {...leadStyle}>
       <div {...leadContainerStyle}>
         <div {...leadCenterStyle}>
           {children}
         </div>
       </div>
       {!!image.credit && <div {...creditStyle}>{image.credit}</div>}
-    </div>
+    </div>}
   </div>
 )
 
