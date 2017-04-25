@@ -64,7 +64,7 @@ export default withData(({url}) => (
           Willkommen zum Crowdfunding für das digitale Magazin Republik von Project&nbsp;R
         </Lead>
         {md(mdComponents)`
-Die Republik ist eine kleine Rebellion. Für den Journalismus. Und gegen die Medienkonzerne. Denn die grossen Verlage verlassen die Publizistik: Sie bauen sich in hohem Tempo in Internet-Handelshäuser um. Das ist eine schlechte Nachricht für den Journalismus. Aber auch für die Demokratie. Denn ohne vernünftige Informationen fällt man schlechte Entscheidungen. 
+Die Republik ist eine kleine Rebellion. Für den Journalismus. Und gegen die Medienkonzerne. Denn die grossen Verlage verlassen die Publizistik: Sie bauen sich in hohem Tempo in Internet-Handelshäuser um. Das ist eine schlechte Nachricht für den Journalismus. Aber auch für die Demokratie. Denn ohne vernünftige Informationen fällt man schlechte Entscheidungen.
 
 Eine funktionierende Demokratie braucht funktionierende Medien. Und dafür braucht es nicht nur Journalistinnen und Journalisten, sondern auch Sie. Als Leserinnen. Als Bürger. Als Menschen, die bereit sind, etwas Geld in unabhängigen Journalismus zu investieren.
 
@@ -89,21 +89,21 @@ Eine funktionierende Demokratie braucht funktionierende Medien. Und dafür brauc
 # Worum es geht
 
 Es ist Zeit, selbst Verantwortung zu übernehmen. Unsere Aufgabe dabei ist, eine zeitgemässe Form für den Journalismus zu entwickeln. Die Republik wird ein schlankes, schlagkräftiges Magazin im Netz. Mit dem Ziel, bei den grossen Themen, Fragen und Debatten Klarheit und Überblick zu bieten. Und das aufrichtig, ohne Schnörkel, mit grossem Herzen. Unser Ziel dabei ist, gemeinsam mit Ihnen ein neues Modell im Medienmarkt zu etablieren: kompromisslos in der Qualität, ohne Werbung, finanziert von den Leserinnen und Lesern. Es ist Zeit für Journalismus ohne Bullshit.
-        
+
 Bis jetzt haben Investorinnen und Spender rund 3,5 Millionen Franken zugesagt. Die Zahlung der Gelder ist aber an eine Bedingung geknüpft: den Test, ob das Publikum das neue Magazin auch will. Dazu dient dieses Crowdfunding. Wir brauchen mindestens 3000 zukünftige Leserinnen und Leser, die bereit sind, Republik zu abonnieren. Und wir müssen mindestens 750\u2009000 Franken zusammenbekommen.
 
-Schaffen wir beide Ziele, zahlen die Investoren. Und die Entwicklung der Republik ist für fast zwei Jahre gesichert. Scheitern wir, fliesst kein Franken. Wir schliessen unser Unternehmen. Und Sie erhalten Ihren Beitrag zurück.      
-        
+Schaffen wir beide Ziele, zahlen die Investoren. Und die Entwicklung der Republik ist für fast zwei Jahre gesichert. Scheitern wir, fliesst kein Franken. Wir schliessen unser Unternehmen. Und Sie erhalten Ihren Beitrag zurück.
+
 Entscheiden Sie sich, mitzumachen, werden Sie Abonnentin. Sie erhalten ab Anfang 2018 ein Jahr lang die Republik. Plus vergünstigten Zugang zu allen Veranstaltungen. Ausserdem werden Sie automatisch ein Teil des Unternehmens – als Mitglied der Project R Genossenschaft. Kurz, Sie werden ein klein wenig Verleger der Republik. Und haben dadurch auch die Privilegien einer Verlegerin: etwa den Einblick in alle wichtigen Entscheide der Redaktion. Damit machen Sie übrigens kein schlechtes Geschäft: Denn für jedes Abonnement, in das Sie für den Start der Republik investieren, riskieren die grossen Investorinnen und Investoren 1118.40 Franken zusätzlich.
 
-Ihr Risiko beträgt dabei 240 Franken pro Jahr. Also der Preis, den man pro Jahr wöchentlich für einen Kaffee im Restaurant ausgibt. 
+Ihr Risiko beträgt dabei 240 Franken pro Jahr. Also der Preis, den man pro Jahr wöchentlich für einen Kaffee im Restaurant ausgibt.
 
-Mit diesem Betrag können Sie einen echten Unterschied machen. Denn es ist Zeit, dem Journalismus ein neues Fundament zu bauen. Und das schafft niemand allein. Sondern nur viele gemeinsam: wir mit Ihnen. Willkommen an Bord!       
+Mit diesem Betrag können Sie einen echten Unterschied machen. Denn es ist Zeit, dem Journalismus ein neues Fundament zu bauen. Und das schafft niemand allein. Sondern nur viele gemeinsam: wir mit Ihnen. Willkommen an Bord!
 
-[Jetzt mitmachen!](/pledge)  
-        
+[Jetzt mitmachen!](/pledge)
 
-# Wer wir sind 
+
+# Wer wir sind
 
 Ihre Partnerin bei diesem Projekt ist die Aufbaucrew der Republik und von Project R. Wir sind seit drei Jahren an der Arbeit, zuerst lange in Nachtarbeit, seit Januar 2017 hauptberuflich. Mittlerweile besteht die Crew aus fast einem Dutzend Journalisten, Start-up-, Kommunikations-, Organisations- und IT-Spezialistinnen. (Und einigen Dutzend Komplizen und Beraterinnen im Hintergrund.)
   `}
@@ -121,7 +121,7 @@ Ihre Partnerin bei diesem Projekt ist die Aufbaucrew der Republik und von Projec
         </div>
 
         {md(mdComponents)`
-# Warum wir es&nbsp;tun          
+# Warum wir es&nbsp;tun
 
 Das Problem der traditionellen Medien ist, dass ihr Geschäftsmodell zusammengebrochen ist. Über ein Jahrhundert lang waren Zeitungsverlage praktisch Gelddruckmaschinen mit enormer Rendite: Man verkaufte Nachrichten an die Leserinnen und Leser – und die Leserinnen und Leser an die Werbung.
 
@@ -150,37 +150,37 @@ Bis es so weit ist, wird die sterbende Cashcow noch so lange wie möglich gemolk
 
 Auch ohne weitere Deals verflacht der Journalismus. Denn in der Krise fusionieren die grossen Verlage ihre Medien zu riesigen Klumpen. Beim «Tages-Anzeiger» etwa werden die schnellen News mit «20 Minuten» gemacht, die Bundeshaus-Berichterstattung kommt vom «Bund», Ausland, Wirtschaft und Kultur liefert zu immer grösseren Teilen die «Süddeutsche Zeitung», zu kleinen Teilen die «Basler Zeitung», die hinteren Bünde sind mit der «SonntagsZeitung» zusammengelegt worden. Und gedruckt wird mit der NZZ.
 
-Kurz: Es ist das Organigramm von Frankensteins Monster. Zwar hat die Zeitung noch hervorragende Journalisten und Artikel, als Zeitung ist sie aber so gut wie unsteuerbar. Und sie ist keineswegs allein. Ringier hat die gesamte «Blick»-Gruppe zusammengeschmolzen, die NZZ ihre Regionalzeitungen. Ökonomisch machen diese Fusionen zwar Sinn, für die Öffentlichkeit aber sind sie ein Problem. Denn mit dem Zusammenschmelzen wird die Identität der Blätter vernichtet, ihre Kompetenz, ihre Tradition. Und in der politischen Debatte verfällt die Meinungsvielfalt: Mit den Fusionen verarmt der Wettbewerb an Standpunkten, Ideen, Blickwinkeln. 
+Kurz: Es ist das Organigramm von Frankensteins Monster. Zwar hat die Zeitung noch hervorragende Journalisten und Artikel, als Zeitung ist sie aber so gut wie unsteuerbar. Und sie ist keineswegs allein. Ringier hat die gesamte «Blick»-Gruppe zusammengeschmolzen, die NZZ ihre Regionalzeitungen. Ökonomisch machen diese Fusionen zwar Sinn, für die Öffentlichkeit aber sind sie ein Problem. Denn mit dem Zusammenschmelzen wird die Identität der Blätter vernichtet, ihre Kompetenz, ihre Tradition. Und in der politischen Debatte verfällt die Meinungsvielfalt: Mit den Fusionen verarmt der Wettbewerb an Standpunkten, Ideen, Blickwinkeln.
 
 ## Comeback der Parteipresse
 
-Stattdessen erlebt die rechte Parteipresse ein Comeback. Im Frühling 2002 übernahm eine Gruppe von Rechtsbürgerlichen um Financier Tito Tettamanti die «Weltwoche». Acht Jahre später kauften fast exakt dieselben Leute die «Basler Zeitung». Nach langem Versteckspiel stellte sich SVP-Milliardär Christoph Blocher als der wahre Käufer heraus. 
+Stattdessen erlebt die rechte Parteipresse ein Comeback. Im Frühling 2002 übernahm eine Gruppe von Rechtsbürgerlichen um Financier Tito Tettamanti die «Weltwoche». Acht Jahre später kauften fast exakt dieselben Leute die «Basler Zeitung». Nach langem Versteckspiel stellte sich SVP-Milliardär Christoph Blocher als der wahre Käufer heraus.
 
-In der Schweiz wiederholt sich damit die gleiche Geschichte wie in den USA: Mit sinkenden Einnahmen werden Medien zum Spielzeug für Milliardäre. Statt Umsatzrendite wollen sie Einfluss: eine politische Dividende. Das ist kein gutes Zeichen für die Demokratie. Denn die Ballung von Kapital, Medienmacht und Politik ist ein klassisches Merkmal der Oligarchie. 
+In der Schweiz wiederholt sich damit die gleiche Geschichte wie in den USA: Mit sinkenden Einnahmen werden Medien zum Spielzeug für Milliardäre. Statt Umsatzrendite wollen sie Einfluss: eine politische Dividende. Das ist kein gutes Zeichen für die Demokratie. Denn die Ballung von Kapital, Medienmacht und Politik ist ein klassisches Merkmal der Oligarchie.
 
-In den USA führten die Medien-Investments von Milliardären dazu, dass sich das Mediensystem radikal in zwei Lager spaltet. Und heute nicht mehr unterschiedliche Blickwinkel auf die Wirklichkeit vermittelt, sondern zwei komplett verschiedene Wirklichkeiten. Die Amerikaner leben in zwei Paralleluniversen, nicht nur mit verschiedenen Meinungen, sondern mit komplett verschiedenen Fakten. Kein Wunder, radikalisierte sich die Gesellschaft. Und Donald Trump kam in seinem Universum mit allen Lügen durch. Die Spaltung der Welt gebiert Monster. 
+In den USA führten die Medien-Investments von Milliardären dazu, dass sich das Mediensystem radikal in zwei Lager spaltet. Und heute nicht mehr unterschiedliche Blickwinkel auf die Wirklichkeit vermittelt, sondern zwei komplett verschiedene Wirklichkeiten. Die Amerikaner leben in zwei Paralleluniversen, nicht nur mit verschiedenen Meinungen, sondern mit komplett verschiedenen Fakten. Kein Wunder, radikalisierte sich die Gesellschaft. Und Donald Trump kam in seinem Universum mit allen Lügen durch. Die Spaltung der Welt gebiert Monster.
 
-In der Schweiz könnte das System noch absurder ausfallen. Deshalb, weil nur noch ein einziger Käufer von Medientiteln auf dem Markt ist: Christoph Blocher. Mit der Tamedia AG stand er zweimal kurz vor einem Geschäftsabschluss – zuerst mit dem Kauf der «SonntagsZeitung», später mit dem Tausch der «Basler Zeitung» gegen die Zürcher Landzeitungen plus der «Berner Zeitung». Beide Deals scheiterten nur knapp an einem Veto im Tamedia-Verwaltungsrat. 
+In der Schweiz könnte das System noch absurder ausfallen. Deshalb, weil nur noch ein einziger Käufer von Medientiteln auf dem Markt ist: Christoph Blocher. Mit der Tamedia AG stand er zweimal kurz vor einem Geschäftsabschluss – zuerst mit dem Kauf der «SonntagsZeitung», später mit dem Tausch der «Basler Zeitung» gegen die Zürcher Landzeitungen plus der «Berner Zeitung». Beide Deals scheiterten nur knapp an einem Veto im Tamedia-Verwaltungsrat.
 
 Auch die NZZ wird von ganz rechts bedrängt. 2014 kauften SVP-Strohmänner massiv NZZ-Aktien. Der Druck wirkte. Der freisinnige NZZ-Verwaltungsrat wählte den Blocher-Biografen Markus Somm zum Chefredaktor. Erst nach massiven Protesten aus Redaktion und Leserschaft wurde Somm fallen gelassen. Aber nicht sein Kurs. Auch ohne ihn driftet die NZZ entschlossen nach rechts.
 
-Diesen Frühling haben SVP-Kreise ein Kaufangebot für die gesamte «Blick»-Gruppe gemacht. Dazu droht Blocher den Verlegern mit der Lancierung einer Gratis-Sonntagszeitung. Und lässt in Basel bereits eine Druckmaschine bauen. 
+Diesen Frühling haben SVP-Kreise ein Kaufangebot für die gesamte «Blick»-Gruppe gemacht. Dazu droht Blocher den Verlegern mit der Lancierung einer Gratis-Sonntagszeitung. Und lässt in Basel bereits eine Druckmaschine bauen.
 
-Kurz: Die flächendeckende Übernahme der Schweizer Medien durch den Chef der grössten Schweizer Partei ist kein unplausibles Szenario. Kein Wunder, schiesst die SVP mit allen Mitteln gegen die SRG. Sie wäre dann die letzte verbliebene Konkurrentin auf dem Meinungsmarkt. 
+Kurz: Die flächendeckende Übernahme der Schweizer Medien durch den Chef der grössten Schweizer Partei ist kein unplausibles Szenario. Kein Wunder, schiesst die SVP mit allen Mitteln gegen die SRG. Sie wäre dann die letzte verbliebene Konkurrentin auf dem Meinungsmarkt.
 
 ## Pervertierter Journalismus
 
-Doch selbst wenn sich nichts ändert, ist das Schweizer Mediensystem alles andere als in Form, um seinen Job als Wachhund der Demokratie wahrzunehmen. Denn die zwei politisch folgenreichsten Innovationen der Schweizer Medien im vergangenen Jahrzehnt sind alles andere als förderlich für die Öffentlichkeit. 
+Doch selbst wenn sich nichts ändert, ist das Schweizer Mediensystem alles andere als in Form, um seinen Job als Wachhund der Demokratie wahrzunehmen. Denn die zwei politisch folgenreichsten Innovationen der Schweizer Medien im vergangenen Jahrzehnt sind alles andere als förderlich für die Öffentlichkeit.
 
 **Innovation Nummer 1: Die Doppelzange**. Eine Person, die Differenzen mit Christoph Blocher hat, gerät doppelt ins Schussfeld. Sie bekommt nicht nur Ärger mit der grössten Partei. Sondern wird auch in der «Weltwoche» und der «Basler Zeitung» angegriffen. Die Doppelzange ist ein ebenso neues wie wirksames Disziplinierungsinstrument in der Schweizer Politik – nicht zuletzt für unabhängige Köpfe im bürgerlichen Lager. Und sogar in der SVP selbst.
 
-**Innovation Nummer 2: Die kleine Empörungsgeschichte**. Sie entsteht aus der Logik des Internet-Journalismus. Eine ideale Geschichte für schnelle Onlineportale muss folgende Merkmale haben: Sie muss schnell produzierbar sein, dazu leicht verständlich, möglichst viele Reaktionen auslösen und fortsetzbar sein. Die kleine Empörungsgeschichte erfüllt diese Vorgaben nahezu ideal: Eine SP-Nationalrätin raucht im Rauchverbot, ein SVP-Nationalrat beschäftigt eine Asylbewerberin als Putzkraft, ein jugendlicher Gewalttäter erhält eine teure Therapie. Kaum ist die Story erschienen, springt die Konkurrenz auf. Und dann rollt eine flächendeckende Walze: Empörte Leserkommentare, Expertenmeinungen, Verteidigungen der Angeschuldigten, Rücktrittsforderungen, Pressekonferenzen mit Live-Tickern, und am Ende mahnen die Medienwissenschaftler. Sollte irgendwann in der Zukunft eine Historikerin zu bestimmen versuchen, was das bedeutendste Ereignis in der Schweizer Politik der letzten Jahre war, käme sie – rein quantitativ – zum Schluss, dass es mit mehreren Tausend Artikeln die Geschichte eines grünen Nationalrats gewesen sein musste, der einer Bekannten privat ein Bild seines Penis schickte. 
+**Innovation Nummer 2: Die kleine Empörungsgeschichte**. Sie entsteht aus der Logik des Internet-Journalismus. Eine ideale Geschichte für schnelle Onlineportale muss folgende Merkmale haben: Sie muss schnell produzierbar sein, dazu leicht verständlich, möglichst viele Reaktionen auslösen und fortsetzbar sein. Die kleine Empörungsgeschichte erfüllt diese Vorgaben nahezu ideal: Eine SP-Nationalrätin raucht im Rauchverbot, ein SVP-Nationalrat beschäftigt eine Asylbewerberin als Putzkraft, ein jugendlicher Gewalttäter erhält eine teure Therapie. Kaum ist die Story erschienen, springt die Konkurrenz auf. Und dann rollt eine flächendeckende Walze: Empörte Leserkommentare, Expertenmeinungen, Verteidigungen der Angeschuldigten, Rücktrittsforderungen, Pressekonferenzen mit Live-Tickern, und am Ende mahnen die Medienwissenschaftler. Sollte irgendwann in der Zukunft eine Historikerin zu bestimmen versuchen, was das bedeutendste Ereignis in der Schweizer Politik der letzten Jahre war, käme sie – rein quantitativ – zum Schluss, dass es mit mehreren Tausend Artikeln die Geschichte eines grünen Nationalrats gewesen sein musste, der einer Bekannten privat ein Bild seines Penis schickte.
 
-Das Resultat der kleinen Empörungsgeschichte ist mehr als nur Zeitverschwendung. Nach dem «Fall Carlos» etwa, dem Jugendlichen mit der teuren Therapie, mussten die Jugendarbeiter im Kanton Aargau aus Furcht vor Medienanfragen ihre Dossiers rückwirkend neu begründen. Und alle Fälle unartiger Jugendlicher gingen ab sofort über den Tisch des Regierungsrats. Statt dass man sagte: «Du dumme Siech hast Seich gemacht, jetzt gehst du zwei Wochen auf die Alp und denkst nach!» – wurde nun aus jeder Dummheit ein Verwaltungsakt. 
+Das Resultat der kleinen Empörungsgeschichte ist mehr als nur Zeitverschwendung. Nach dem «Fall Carlos» etwa, dem Jugendlichen mit der teuren Therapie, mussten die Jugendarbeiter im Kanton Aargau aus Furcht vor Medienanfragen ihre Dossiers rückwirkend neu begründen. Und alle Fälle unartiger Jugendlicher gingen ab sofort über den Tisch des Regierungsrats. Statt dass man sagte: «Du dumme Siech hast Seich gemacht, jetzt gehst du zwei Wochen auf die Alp und denkst nach!» – wurde nun aus jeder Dummheit ein Verwaltungsakt.
 
-Der Job der Medien wäre, für freiere Köpfe und schlankere Lösungen zu sorgen. Die Doppelzange und die kleine Empörungsgeschichte bewirken das exakte Gegenteil. Ihr Produkt ist: mehr Angst. Und mehr Bürokratie. 
+Der Job der Medien wäre, für freiere Köpfe und schlankere Lösungen zu sorgen. Die Doppelzange und die kleine Empörungsgeschichte bewirken das exakte Gegenteil. Ihr Produkt ist: mehr Angst. Und mehr Bürokratie.
 
-Kurz: Es ist Zeit für etwas Neues. Unsere Pläne für die Republik finden Sie gleich als Nächstes. Den Link zum Republik-Manifest von Project R [hier](/manifest). Und den Link, um sofort mitzumachen, hier: [Jetzt mitmachen!](/pledge)  
+Kurz: Es ist Zeit für etwas Neues. Unsere Pläne für die Republik finden Sie gleich als Nächstes. Den Link zum Republik-Manifest von Project R [hier](/manifest). Und den Link, um sofort mitzumachen, hier: [Jetzt mitmachen!](/pledge)
 
   `}
 
@@ -195,7 +195,7 @@ Kurz: Es ist Zeit für etwas Neues. Unsere Pläne für die Republik finden Sie g
 
 Die Republik wird ein Magazin für die öffentliche Debatte – für Politik, Wirtschaft, Gesellschaft. Ihr Job ist alles, was unklar, lärmig, verwickelt ist. Wir sehen uns als Service. Während Sie ein vernünftiges Leben führen – mit Familie, Job, Hobby –, arbeiten wir uns durch den Staub der Welt. Und liefern Ihnen das Wesentliche. Mit Ihrem Abonnement finanzieren Sie sich quasi ein privates Expeditionsteam in die Wirklichkeit.
 
-Die Produkte unseres Magazins werden entweder sehr kurz oder lang sein: Sie bekommen das Konzentrat – oder die ganze Geschichte. Um das zu erreichen, werden wir anders arbeiten als die herkömmlichen Medien: 
+Die Produkte unseres Magazins werden entweder sehr kurz oder lang sein: Sie bekommen das Konzentrat – oder die ganze Geschichte. Um das zu erreichen, werden wir anders arbeiten als die herkömmlichen Medien:
 
 1. Da wir als kleinere Crew gegen weit grössere Redaktionen antreten, bleibt uns nichts als Konzentration: Wir dürfen nichts machen als das Wichtige. Aber dieses müssen wir gross machen, gross in der Recherche, im Blick, in der Aufmachung – und grosszügig in der Haltung: So, als hätte die Schweiz Anschluss ans Meer.
 
@@ -209,7 +209,7 @@ Die Redaktion, die das leisten muss, wird aus sehr verschiedenen Leuten bestehen
 
 Sobald Sie ein Abonnement kaufen, werden Sie ein klein wenig Besitzer oder Besitzerin des Unternehmens. Sie sind Mitglied der Project R Genossenschaft, die das grösste Aktienpaket an der Republik hält. Damit erhalten Sie Einladungen zu Veranstaltungen, Einblick in die Entscheidungen der Redaktion und freien Zugang zum Magazin. Und haben die Möglichkeit, jeden Artikel im Netz mit Freunden zu teilen.
 
-Die Artikel sind teilbar, weil wir Wirkung auf die politische Debatte wollen. Die Republik ist politisch nicht festgelegt, aber keineswegs neutral: Sie steht für die Verteidigung der Institutionen der Demokratie – wie etwa des Rechtsstaates – gegen den Vormarsch der Autoritären. Sie steht gegen die Diktatur der Angst. Und für die Werte der Aufklärung: für Klarheit im Stil, für Treue zu Fakten, für Lösungen von Fall zu Fall, für Offenheit gegenüber Kritik, für Respektlosigkeit vor der Macht und Respekt vor dem Menschen, für die Freiheit des Einzelnen und aller seiner Gedanken. 
+Die Artikel sind teilbar, weil wir Wirkung auf die politische Debatte wollen. Die Republik ist politisch nicht festgelegt, aber keineswegs neutral: Sie steht für die Verteidigung der Institutionen der Demokratie – wie etwa des Rechtsstaates – gegen den Vormarsch der Autoritären. Sie steht gegen die Diktatur der Angst. Und für die Werte der Aufklärung: für Klarheit im Stil, für Treue zu Fakten, für Lösungen von Fall zu Fall, für Offenheit gegenüber Kritik, für Respektlosigkeit vor der Macht und Respekt vor dem Menschen, für die Freiheit des Einzelnen und aller seiner Gedanken.
 
 ## Ein neues Modell
 
@@ -217,9 +217,9 @@ Es ist uns klar, dass unsere Aufgabe aus mehr als nur Worten besteht. Dass nicht
 
 ![](/static/index/vernetzt.jpg)
 
-Last, not least ist die Republik ausbaufähig. Wir wünschen der Konkurrenz nur das Beste. Aber sollten die Zeitungen weiter ins Graue gespart oder an politische Akteure verkauft werden, können wir das Projekt ausbauen: in Richtung Feuilleton, in Richtung Lokalredaktionen oder Romandie. Oder wohin immer es nötig ist. Wir sind unabhängig von Verlegern, Börse und Werbung. Und wir werden das nutzen. Unsere Verpflichtung gilt niemandem ausser unseren Leserinnen und Lesern. Denn wir gehören keinem Verlag, machen keine Werbung. Wir gehören nur – ein wenig – Ihnen. 
+Last, not least ist die Republik ausbaufähig. Wir wünschen der Konkurrenz nur das Beste. Aber sollten die Zeitungen weiter ins Graue gespart oder an politische Akteure verkauft werden, können wir das Projekt ausbauen: in Richtung Feuilleton, in Richtung Lokalredaktionen oder Romandie. Oder wohin immer es nötig ist. Wir sind unabhängig von Verlegern, Börse und Werbung. Und wir werden das nutzen. Unsere Verpflichtung gilt niemandem ausser unseren Leserinnen und Lesern. Denn wir gehören keinem Verlag, machen keine Werbung. Wir gehören nur – ein wenig – Ihnen.
 
-So weit unser Versprechen. Jetzt ist es Zeit für Ihre Entscheidung. 
+So weit unser Versprechen. Jetzt ist es Zeit für Ihre Entscheidung.
 
 Willkommen an Bord!
 
