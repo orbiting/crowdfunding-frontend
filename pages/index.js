@@ -198,9 +198,7 @@ Die Republik wird ein Magazin für die öffentliche Debatte – für Politik, Wi
 Die Produkte unseres Magazins werden entweder sehr kurz oder lang sein: Sie bekommen das Konzentrat – oder die ganze Geschichte. Um das zu erreichen, werden wir anders arbeiten als die herkömmlichen Medien: 
 
 1. Da wir als kleinere Crew gegen weit grössere Redaktionen antreten, bleibt uns nichts als Konzentration: Wir dürfen nichts machen als das Wichtige. Aber dieses müssen wir gross machen, gross in der Recherche, im Blick, in der Aufmachung – und grosszügig in der Haltung: So als hätte die Schweiz Anschluss ans Meer.
-
 2. Da wir uns konzentrieren müssen, werden wir auf Halbes, Halbgutes, Halbgedachtes, Halblanges, kurz: auf Bullshit verzichten. Wir werden Sie nicht mit Unfertigem belästigen.
-
 3. Unser Ziel ist ein komplett anderes als das der traditionellen Medien. Das Ziel einer traditionellen Zeitung ist die Abarbeitung der täglichen Agenda, das Ziel eines traditionellen Onlineportals sind Reichweite und Klicks. Wir, als leserfinanziertes Medium, haben keine andere Wahl, als Sie zu überzeugen. Denn ohne Überzeugung zahlen Sie nicht. Bei unseren Texten werden die Autoren leiden, nicht die Leserinnen.
 
 ## Die Redaktion
