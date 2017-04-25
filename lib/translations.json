@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-25T18:40:36.236Z",
+  "updated": "2017-04-25T19:30:52.752Z",
   "title": "live",
   "data": [
     {
@@ -210,11 +210,11 @@
     },
     {
       "key": "merci/pledges/title/1",
-      "value": "Ihre Entscheidung"
+      "value": "Ihre Teilnahme"
     },
     {
       "key": "merci/pledges/title/other",
-      "value": "Ihre Entscheidungen"
+      "value": "Ihre Teilnahme"
     },
     {
       "key": "merci/pledge/label",
@@ -254,7 +254,7 @@
     },
     {
       "key": "merci/payment/status/PAYMENTSLIP/WAITING",
-      "value": "Bitte überweisen Sie {formattedTotal} mit der Mitteilung «{hrid}» an:<br />\nPC 61-11760-6<br />\nIBAN: CH50 0900 0000 6101 1760 6<br />\nlautend auf:<br />\nProject R Genossenschaft<br />\nSihlhallenstrasse 1<br />\n8004 Zürich\n"
+      "value": "Bitte überweisen Sie {formattedTotal} mit der Mitteilung «{hrid}» im Betreff-Feld an:<br /><br />\nPC 61-11760-6<br />\nIBAN: CH50 0900 0000 6101 1760 6<br />\nlautend auf:<br />\nProject R Genossenschaft<br />\nSihlhallenstrasse 1<br />\n8004 Zürich\n"
     },
     {
       "key": "merci/payment/status/PAYMENTSLIP/PAID",
@@ -494,7 +494,7 @@
     },
     {
       "key": "pledge/submit/emailVerify/note",
-      "value": "Diese Mailadresse wurde schon einmal verwendet. Wir haben ein Mail geschickt. Bitte bestätigen Sie, dass Sie der Besitzer oder die Besitzerin sind, indem Sie auf den Link im Mail klicken."
+      "value": "Diese Mailadresse wurde schon einmal verwendet. Wir haben ein Mail geschickt. Falls das Ihre Mailadresse ist, klicken Sie bitte auf «anmelden»."
     },
     {
       "key": "pledge/submit/error/title",
