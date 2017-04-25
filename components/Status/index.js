@@ -5,7 +5,6 @@ import {ascending} from 'd3-array'
 
 import withT from '../../lib/withT'
 import {chfFormat, countFormat} from '../../lib/utils/formats'
-import {errorToString} from '../../lib/utils/errors'
 
 import {
   P, Label
@@ -57,12 +56,10 @@ const query = gql`{
 
 class Status extends Component {
   render () {
-    if (this.props.loading && !this.props.crowdfunding) {
-      return <P>…</P>
+    if ((this.props.loading || this.props.error) && !this.props.crowdfunding) {
+      return null
     }
-    if (this.props.error) {
-      return <P>{errorToString(this.props.error)}</P>
-    }
+
     const {crowdfunding: {goals, status, endDate}, t} = this.props
     const now = new Date()
     const end = new Date(endDate)
