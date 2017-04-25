@@ -12,6 +12,10 @@ import {
   Grid, Span, fontFamilies
 } from '@project-r/styleguide'
 
+import {
+  STATIC_BASE_URL
+} from '../../constants'
+
 const {P} = Interaction
 
 const absolutMinPrice = 100
@@ -61,6 +65,12 @@ const styles = {
     fontFamily: fontFamilies.sansSerifMedium,
     fontSize: 21,
     lineHeight: '32px'
+  }),
+  packageImage: css({
+    float: 'right',
+    paddingLeft: 30,
+    maxWidth: 150,
+    maxHeight: 200
   })
 }
 
@@ -133,6 +143,10 @@ class CustomizePackage extends Component {
           </A>
         </div>
         <P style={{marginBottom: 10}}>
+          {pkg.name === 'ABO_GIVE' && (
+            <img {...styles.packageImage}
+              src={`${STATIC_BASE_URL}/static/packages/moleskine.jpg`} />
+          )}
           {t(`package/${pkg.name}/description`)}
         </P>
         <Grid>
