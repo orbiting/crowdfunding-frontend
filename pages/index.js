@@ -1,6 +1,7 @@
 import React from 'react'
 import md from 'markdown-in-js'
 import Router from 'next/router'
+import Link from 'next/link'
 import {css} from 'glamor'
 
 import withData from '../lib/withData'
@@ -18,7 +19,8 @@ import {
 } from '../constants'
 
 import {
-  Label, Button, Lead, colors
+  Label, Button, Lead, colors,
+  P, A, linkRule
 } from '@project-r/styleguide'
 
 const styles = {
@@ -104,9 +106,15 @@ Mit diesem Betrag können Sie einen echten Unterschied machen. Denn es ist Zeit,
 # Wer sind wir 
 
 Ihr Partner bei diesem Projekt ist die Aufbaucrew der Republik und von Project R. Wir sind seit drei Jahren an der Arbeit, zuerst lange in Nachtarbeit, seit Januar 2017 hauptberuflich. Mittlerweile besteht die Crew aus fast einem Dutzend Journalisten, Start-up-, Kommunikations-, Organisations- und IT-Spezialistinnen. (Und einigen Dutzend Komplizen und Beraterinnen im Hintergrund.)
-
-Die Kurzporträts der Crew finden Sie [hier](/crew). Und dazu im Video – die Lesung unseres [Manifests](/manifest) zur Gründung der Republik:
   `}
+
+        <P>
+          Die Kurzporträts der Crew finden Sie
+          {' '}
+          <Link href='/crew'><a {...linkRule}>hier</a></Link>.
+          {' '}
+          Und dazu im Video – die Lesung unseres <A href='/manifest' target='_blank'>Manifests</A> zur Gründung der Republik:
+        </P>
 
         <div style={{marginBottom: 40, marginTop: 10}}>
           <VideoPlayer src={VIDEOS.team} />
@@ -181,7 +189,7 @@ Kurz: Es ist Zeit für etwas Neues. Unsere Pläne für die Republik finden Sie g
         {md(mdComponents)`
 <br />
 
-[![TK](/static/index/rothaus_manifest.jpg)](/manifest)
+![TK](/static/index/rothaus_manifest.jpg)
 
 # Was wir versprechen
 

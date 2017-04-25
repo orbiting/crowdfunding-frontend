@@ -123,14 +123,12 @@ class Footer extends Component {
             </div>
             <div {...styles.column}>
               <div {...styles.title}>{t('footer/about/title')}</div>
-              <Link href='/manifest' target='_blank'>
-                <a target='_blank'>
-                  {t('footer/about/manifest')}
-                </a>
-              </Link><br />
               <Link href='/crew'>
                 <a>{t('footer/crew')}</a>
               </Link><br />
+              <a href='/manifest' target='_blank'>
+                {t('footer/about/manifest')}
+              </a><br />
               <a href='https://project-r.construction/' target='_blank'>
                 {t('footer/about/projecR')}
               </a>
