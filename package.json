@@ -14,8 +14,10 @@
     "translations": "gsheets --key=1OHoiENwJH-tqf9yXfXHOevAn17daO_CvB21Rym-oiqk --title=live --pretty --out lib/translations.json",
     "test": "wdio test/wdio.conf.js",
     "klog": "find . -name '*.js' -not -path \"./node_modules*\" -not -path \"./.next*\" | xargs wc -l",
-    "upload-assets": "s3cmd sync --exclude=static/subtitles/ --verbose --acl-public -c ./.s3cfg static/ s3://republik/cf_gui/static/",
-    "upload-subtitles": "s3cmd sync --no-mime-magic -m text/vtt --verbose --acl-public -c ./.s3cfg static/subtitles/ s3://republik/cf_gui/static/subtitles/"
+    "upload-assets": "s3cmd sync --exclude=static/subtitles/ --verbose --acl-public -c ./.s3cfg static/ s3://republik-staging/cf_gui/static/",
+    "upload-subtitles": "s3cmd sync --no-mime-magic -m text/vtt --verbose --acl-public -c ./.s3cfg static/subtitles/ s3://republik-staging/cf_gui/static/subtitles/",
+    "upload-assets-production": "s3cmd sync --exclude=static/subtitles/ --verbose --acl-public -c ./.s3cfg static/ s3://republik/cf_gui/static/",
+    "upload-subtitles-production": "s3cmd sync --no-mime-magic -m text/vtt --verbose --acl-public -c ./.s3cfg static/subtitles/ s3://republik/cf_gui/static/subtitles/"
   },
   "lint-staged": {
     "*.js": [
