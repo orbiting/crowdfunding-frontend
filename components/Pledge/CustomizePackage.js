@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import Router from 'next/router'
 import {css} from 'glamor'
+import AutosizeInput from 'react-textarea-autosize'
 
 import withT from '../../lib/withT'
 import {fieldsState} from '../../lib/utils/fieldState'
@@ -211,6 +212,10 @@ class CustomizePackage extends Component {
               ref={this.focusRefSetter}
               error={dirty.reason && errors.reason}
               value={values.reason}
+              renderInput={(props) => (
+                <AutosizeInput
+                  {...props} />
+              )}
               onChange={(_, value, shouldValidate) => {
                 onChange(fieldsState({
                   field: 'reason',
