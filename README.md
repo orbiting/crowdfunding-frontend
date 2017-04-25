@@ -102,6 +102,11 @@ COUNTDOWN_NOTE=
 
 `constants.js` will export a `COUNTDOWN_UTC` (`Date.toISOString()`) and `COUNTDOWN_DATE` from it, for usage in the application code.
 
+Additionally you can configure a backdoor URL. Opening that URL sets a cookie which allows to circumvent the countdown page.
+```
+BACKDOOR_URL=/OpenSesame
+```
+
 The newsletter sign up requires the following ENV variables:
 
 ```
