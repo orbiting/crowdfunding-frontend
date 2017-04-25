@@ -77,8 +77,8 @@ const Strong = ({children}) => <span {...styles.strong}>{children}</span>
 
 export default ({url}) => {
   const meta = {
-    title: 'Für diesen Journalismus steht Project R',
-    description: 'Unterstützen Sie unser Crowdfunding!',
+    title: 'Das Project-R-Manifest für die Republik',
+    description: 'Jetzt unser Crowdfunding für das digitale Magazin unterstützen.',
     image: `${STATIC_BASE_URL}/static/social-media/manifest.png`,
     url: `${PUBLIC_BASE_URL}${url.pathname}`
   }
@@ -98,7 +98,7 @@ ${PUBLIC_BASE_URL}
   return (
     <NarrowContainer>
       <Head>
-        <title>Republik Manifest</title>
+        <title>Manifest — Republik</title>
         <meta name='description' content={meta.description} />
         <meta property='og:type' content='website' />
         <meta property='og:url' content={meta.url} />
