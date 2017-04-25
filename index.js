@@ -3,12 +3,16 @@ const next = require('next')
 const basicAuth = require('express-basic-auth')
 const newsletter = require('./server/newsletter')
 
+// can be removed after public launch
+const cookieParser = require('cookie-parser')
+
 const DEV = process.env.NODE_ENV && process.env.NODE_ENV !== 'production'
 if (DEV || process.env.DOTENV) {
   require('dotenv').config()
 }
 
 const COUNTDOWN_DATE = require('./constants').COUNTDOWN_DATE
+const BACKDOOR_URL = require('./constants').BACKDOOR_URL
 
 const PORT = process.env.PORT || 3000
 
@@ -48,10 +52,16 @@ app.prepare()
       '/manifest'
     ]
 
+    server.use(cookieParser())
     server.use((req, res, next) => {
       const now = new Date()
       if (now < COUNTDOWN_DATE) {
-        if (ALLOWED_PATHS.some(path => req.url.startsWith(path))) {
+        if (req.url === BACKDOOR_URL) {
+          res.cookie('aliBaba', 'OpenSesame', { maxAge: 2880000, httpOnly: true })
+          return res.redirect('/')
+        }
+        if (req.cookies.aliBaba === 'OpenSesame' ||
+          ALLOWED_PATHS.some(path => req.url.startsWith(path))) {
           return next()
         }
         if (req.url === '/') {
