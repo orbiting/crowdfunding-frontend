@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-25T01:52:14.157Z",
+  "updated": "2017-04-25T14:18:55.686Z",
   "title": "live",
   "data": [
     {
@@ -254,7 +254,7 @@
     },
     {
       "key": "merci/payment/status/PAYMENTSLIP/WAITING",
-      "value": "Bitte überweisen Sie {formattedTotal} mit der Mitteilung «{hrid}» an: Konto: 61-11760-6 Project R Genossenschaft 8004 Zürich"
+      "value": "Bitte überweisen Sie {formattedTotal} mit der Mitteilung «{hrid}» an:<br />\nPC 61-11760-6<br />\nIBAN: CH50 0900 0000 6101 1760 6<br />\nlautend auf:<br />\nProject R Genossenschaft<br />\nSihlhallenstrasse 1<br />\n8004 Zürich\n"
     },
     {
       "key": "merci/payment/status/PAYMENTSLIP/PAID",
@@ -743,7 +743,8 @@
     },
     {
       "key": "api/pay/stripe/invalid_cvc",
-      "value": "The card’s security code is invalid."
+      "value": "The card’s security code is invalid.",
+      "undefined": "please translate, it happens"
     },
     {
       "key": "api/pay/stripe/invalid_swipe_data",
@@ -751,15 +752,18 @@
     },
     {
       "key": "api/pay/stripe/incorrect_number",
-      "value": "The card number is incorrect."
+      "value": "The card number is incorrect.",
+      "undefined": "please translate, it happens"
     },
     {
       "key": "api/pay/stripe/expired_card",
-      "value": "The card has expired."
+      "value": "The card has expired.",
+      "undefined": "please translate, it happens"
     },
     {
       "key": "api/pay/stripe/incorrect_cvc",
-      "value": "The card’s security code is incorrect."
+      "value": "The card’s security code is incorrect.",
+      "undefined": "please translate, it happens"
     },
     {
       "key": "api/pay/stripe/incorrect_zip",
@@ -775,19 +779,16 @@
     },
     {
       "key": "api/pay/stripe/processing_error",
-      "value": "An error occurred while processing the card."
-    },
-    {
-      "key": "api/paypal/unknownError",
-      "value": "Bei der Bezahlung mit PayPal ist etwas schiefgelaufen. Wir haben Ihre Angaben und den Fehler gespeichert. Bitte kontaktieren Sie uns unter kontakt@repulik.ch und geben Sie folgende Nummer an: ID: {id}"
+      "value": "An error occurred while processing the card.",
+      "undefined": "please translate, it happens"
     },
     {
       "key": "api/paypal/deny",
-      "value": "Zahlung fehlgeschlagen.<br />\n<br />\nWählen Sie ein anderes Zahlungsmittel, um Ihre Bestellung abzuschliessen."
+      "value": "Zahlung fehlgeschlagen. Wählen Sie ein anderes Zahlungsmittel, um Ihre Bestellung abzuschliessen."
     },
     {
-      "key": "pledge/recievePayment/paypal/contactUs",
-      "value": "Während des Zahlungsverfahrens mit PayPal ist ein Problem aufgetreten, das zu einem nicht vorhersehbaren Resultat geführt hat.<br />\n<br />\nBitte nehmen Sie Kontakt mit uns auf unter <a href=\"{mailto}\">zahlungen@republik.ch</a>. Sie sollten es nicht erneut versuchen da die Buchung möglicherweise bereits akzeptiert wurde.",
+      "key": "api/paypal/contactUs",
+      "value": "Während des Zahlungsverfahrens mit PayPal ist ein Problem aufgetreten, das zu einem nicht vorhersehbaren Resultat geführt hat. Bitte nehmen Sie Kontakt mit uns auf unter zahlungen@republik.ch. Sie sollten es nicht erneut versuchen da die Buchung möglicherweise bereits akzeptiert wurde.",
       "undefined": "key angepasst, bitte beachten beim einpflegen der Korrekturen"
     },
     {
@@ -852,7 +853,7 @@
     },
     {
       "key": "footer/crew",
-      "value": "Wir"
+      "value": "Crew"
     },
     {
       "key": "footer/about/projecR",
@@ -1233,6 +1234,10 @@
       "value": "Statement, maximal 140 Zeichen"
     },
     {
+      "key": "testimonial/role/tooLong",
+      "value": "Funktion, maximal 60 Zeichen"
+    },
+    {
       "key": "testimonial/update",
       "value": "aktualisieren"
     },
@@ -1246,7 +1251,7 @@
     },
     {
       "key": "testimonial/unpublished/user",
-      "value": "Sie haben ihr Statement zurückgezogen, es erscheint nicht mehr auf der Community Seite."
+      "value": "Sie haben ihr Statement zurückgezogen, es erscheint nicht mehr auf der Community-Seite."
     },
     {
       "key": "testimonial/meta/title",
