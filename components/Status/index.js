@@ -4,7 +4,7 @@ import {gql, graphql} from 'react-apollo'
 import {ascending} from 'd3-array'
 
 import withT from '../../lib/withT'
-import {chfFormat} from '../../lib/utils/formats'
+import {chfFormat, countFormat} from '../../lib/utils/formats'
 import {errorToString} from '../../lib/utils/errors'
 
 import {
@@ -102,7 +102,11 @@ class Status extends Component {
             count: goal.people
           })}</Label>
         </P>
-        <Bar goals={goalsByPeople} status={status} accessor='people' />
+        <Bar
+          goals={goalsByPeople}
+          status={status}
+          accessor='people'
+          format={countFormat} />
         <P>
           <span {...styles.secondaryNumber}>{chfFormat(status.money / 100)}</span>
           <Label>

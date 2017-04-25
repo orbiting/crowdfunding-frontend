@@ -90,7 +90,7 @@ Eine funktionierende Demokratie braucht funktionierende Medien. Und dafür brauc
 
 Es ist Zeit, selbst Verantwortung zu übernehmen. Unsere Aufgabe dabei ist, eine zeitgemässe Form für den Journalismus zu entwickeln. Die Republik wird ein schlankes, schlagkräftiges Magazin im Netz. Mit dem Ziel, bei den grossen Themen, Fragen und Debatten Klarheit und Überblick zu bieten. Und das aufrichtig, ohne Schnörkel, mit grossem Herzen. Unser Ziel dabei ist, gemeinsam mit Ihnen ein neues Modell im Medienmarkt zu etablieren: kompromisslos in der Qualität, ohne Werbung, finanziert von den Leserinnen und Lesern. Es ist Zeit für Journalismus ohne Bullshit.
         
-Bis jetzt haben Investorinnen und Spender rund 3,5 Millionen Franken zugesagt. Die Zahlung der Gelder ist aber an eine Bedingung geknüpft: den Test, ob das Publikum das neue Magazin auch will. Dazu dient dieses Crowdfunding. Wir brauchen mindestens 3000 zukünftige Leserinnen und Leser, die bereit sind, Republik zu abonnieren. Und wir müssen mindestens 750’000 Franken zusammenbekommen.
+Bis jetzt haben Investorinnen und Spender rund 3,5 Millionen Franken zugesagt. Die Zahlung der Gelder ist aber an eine Bedingung geknüpft: den Test, ob das Publikum das neue Magazin auch will. Dazu dient dieses Crowdfunding. Wir brauchen mindestens 3000 zukünftige Leserinnen und Leser, die bereit sind, Republik zu abonnieren. Und wir müssen mindestens 750\u2009000 Franken zusammenbekommen.
 
 Schaffen wir beide Ziele, zahlen die Investoren. Und die Entwicklung der Republik ist für fast zwei Jahre gesichert. Scheitern wir, fliesst kein Franken. Wir schliessen unser Unternehmen. Und Sie erhalten Ihren Beitrag abzüglich Transaktionsgebühren zurück.      
         
