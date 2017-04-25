@@ -125,7 +125,7 @@ class Header extends Component {
       if (mobile !== this.state.mobile) {
         this.setState(() => ({mobile}))
       }
-      const hasStatusSpace = window.innerWidth >= 965
+      const hasStatusSpace = window.innerWidth >= 1000
       if (hasStatusSpace !== this.state.hasStatusSpace) {
         this.setState(() => ({hasStatusSpace}))
       }

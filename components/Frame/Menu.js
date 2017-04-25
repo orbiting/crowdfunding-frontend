@@ -8,7 +8,6 @@ import {
   colors, mediaQueries, fontFamilies
 } from '@project-r/styleguide'
 
-const ITEM_MARGIN_LEFT = 10
 const M_HEADER_HEIGHT = HEADER_HEIGHT_MOBILE + MENUBAR_HEIGHT
 
 const menuStyle = css({
@@ -46,6 +45,9 @@ const listStyle = css({
     fontSize: 20,
     marginBottom: 40
   },
+  [mediaQueries.mUp]: {
+    marginLeft: 10
+  },
   listStyle: 'none',
   margin: 0,
   paddingLeft: 0,
@@ -59,7 +61,7 @@ const listItemStyle = css({
   },
   [mediaQueries.mUp]: {
     float: 'left',
-    marginLeft: ITEM_MARGIN_LEFT,
+    marginRight: 16,
     position: 'relative'
   }
 })
