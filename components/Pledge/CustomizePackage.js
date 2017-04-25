@@ -161,59 +161,69 @@ class CustomizePackage extends Component {
                 count: value
               }, t(`option/${option.reward.name}/label`))
 
+              const onFieldChange = (_, value, shouldValidate) => {
+                let error
+                const parsedValue = String(value).length
+                  ? parseInt(value, 10) || 0
+                  : ''
+                if (parsedValue > option.maxAmount) {
+                  error = t('package/customize/option/error/max', {
+                    label,
+                    maxAmount: option.maxAmount
+                  })
+                }
+                if (parsedValue < option.minAmount) {
+                  error = t('package/customize/option/error/min', {
+                    label,
+                    minAmount: option.minAmount
+                  })
+                }
+
+                const fields = fieldsState({
+                  field: option.id,
+                  value: parsedValue,
+                  error,
+                  dirty: shouldValidate
+                })
+                const minPrice = calculateMinPrice(
+                  pkg,
+                  {
+                    ...values,
+                    ...fields.values
+                  },
+                  userPrice
+                )
+                let price = values.price
+                if (
+                  minPrice !== absolutMinPrice &&
+                  (!this.state.customPrice || minPrice > values.price)
+                ) {
+                  fields.values.price = price = minPrice
+                  this.setState(() => ({customPrice: false}))
+                }
+                fields.errors.price = priceError(
+                  price,
+                  minPrice,
+                  t
+                )
+                onChange(fields)
+              }
+
               return (
                 <Span s='1/2' m='9/18' key={option.id}>
                   <div style={{marginBottom: 20}}>
                     <Field
                       ref={i === 0 ? this.focusRefSetter : undefined}
                       label={label}
-                      type='number'
                       error={dirty[option.id] && errors[option.id]}
                       value={value}
-                      onChange={(_, value, shouldValidate) => {
-                        let error
-                        if (value > option.maxAmount) {
-                          error = t('package/customize/option/error/max', {
-                            label,
-                            maxAmount: option.maxAmount
-                          })
-                        }
-                        if (value < option.minAmount) {
-                          error = t('package/customize/option/error/min', {
-                            label,
-                            minAmount: option.minAmount
-                          })
-                        }
-
-                        const fields = fieldsState({
-                          field: option.id,
-                          value,
-                          error,
-                          dirty: shouldValidate
-                        })
-                        const minPrice = calculateMinPrice(
-                          pkg,
-                          {
-                            ...values,
-                            ...fields.values
-                          },
-                          userPrice
-                        )
-                        let price = values.price
-                        if (
-                          minPrice !== absolutMinPrice &&
-                          (!this.state.customPrice || minPrice > values.price)
-                        ) {
-                          fields.values.price = price = minPrice
-                          this.setState(() => ({customPrice: false}))
-                        }
-                        fields.errors.price = priceError(
-                          price,
-                          minPrice,
-                          t
-                        )
-                        onChange(fields)
-                      }}
+                      onInc={value < option.maxAmount && (() => {
+                        onFieldChange(undefined, value + 1)
+                      })}
+                      onDec={value > option.minAmount && (() => {
+                        onFieldChange(undefined, value - 1)
+                      })}
+                      onChange={onFieldChange}
                       />
                   </div>
                 </Span>
