@@ -275,7 +275,7 @@ class VideoPlayer extends Component {
           <div {...styles.icons}>
             {loading && <InlineSpinner size={25} />}
             {' '}
-            <a href='#'
+            {!!src.subtitles && <a href='#'
               title={`Untertitel ${subtitles ? 'an' : 'aus'}`}
               onClick={(e) => {
                 e.preventDefault()
@@ -285,7 +285,7 @@ class VideoPlayer extends Component {
                 }))
               }}>
               <Subtitles off={!subtitles} />
-            </a>
+            </a>}
             {' '}
             <a href='#'
               title={`Audio ${muted ? 'aus' : 'an'}`}
