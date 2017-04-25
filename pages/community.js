@@ -17,7 +17,7 @@ class CommunityPage extends Component {
     return (
       <Frame url={url}>
         <Content>
-          <List url={url} />
+          <List meta url={url} />
         </Content>
       </Frame>
     )

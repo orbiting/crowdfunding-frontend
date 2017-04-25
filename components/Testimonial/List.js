@@ -162,7 +162,7 @@ class List extends Component {
   render () {
     const {
       loading, error, testimonials, t,
-      onSelect, queryId
+      onSelect, queryId, meta
     } = this.props
     const {columns, open} = this.state
 
@@ -246,7 +246,7 @@ class List extends Component {
 
         return (
           <div {...styles.grid}>
-            <Meta data={metaData} />
+            {!!meta && <Meta data={metaData} />}
             {items}
           </div>
         )
@@ -294,7 +294,7 @@ class Container extends Component {
     }
   }
   render () {
-    const {t, url: {query: {id}}} = this.props
+    const {t, url: {query: {id}}, meta} = this.props
     const {seed, query} = this.state
     return (
       <div>
@@ -312,6 +312,7 @@ class Container extends Component {
           }} />
         <br /><br />
         <ListWithQuery
+          meta={meta}
           firstId={query ? undefined : id || this.state.clearedFirstId}
           queryId={id}
           onSelect={() => {
