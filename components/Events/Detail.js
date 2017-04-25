@@ -37,6 +37,9 @@ const styles = {
     border: 0,
     borderTop: `1px solid ${colors.divider}`
   }),
+  title: css({
+    marginBottom: 15
+  }),
   label: css({
     fontSize: 17,
     fontFamily: fontFamilies.sansSerifMedium,
@@ -87,7 +90,7 @@ const Event = withT(({
     <div {...styles.container}>
       <div {...styles.block}>
         <Label>{t('events/labels/description')}</Label>
-        <H1>{title}</H1>
+        <H1 {...styles.title}>{title}</H1>
         <P>
           {intersperse(
             (description || '').split('\n'),

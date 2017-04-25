@@ -3,6 +3,7 @@ import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
 import {timeDay} from 'd3-time'
 import Link from 'next/link'
+import {css} from 'glamor'
 
 import Loader from '../Loader'
 import Meta from '../Frame/Meta'
@@ -11,8 +12,12 @@ import withT from '../../lib/withT'
 import {parseDate} from '../../lib/utils/formats'
 
 import {
-  Interaction, linkRule
+  Interaction, linkRule, mediaQueries
 } from '@project-r/styleguide'
+
+import {
+  CONTENT_PADDING
+} from '../Frame/constants'
 
 import {
   PUBLIC_BASE_URL, STATIC_BASE_URL
@@ -21,6 +26,15 @@ import {
 import Event from './Detail'
 
 const {H3} = Interaction
+
+const styles = {
+  sectionTitle: css({
+    marginBottom: 15,
+    [mediaQueries.mUp]: {
+      paddingLeft: CONTENT_PADDING
+    }
+  })
+}
 
 const query = gql`
 query {
@@ -98,7 +112,7 @@ const Overview = compose(
           image: `${STATIC_BASE_URL}/static/social-media/events.png`
         }} />
         {!!upcoming.length && (
-          <H3 style={{marginBottom: 15}}>
+          <H3 {...styles.sectionTitle}>
             {t('events/upcoming')}
           </H3>
         )}
@@ -106,7 +120,7 @@ const Overview = compose(
           <Event key={event.slug} data={event} />
         ))}
         {!!past.length && (
-          <H3 style={{marginBottom: 15}}>
+          <H3 {...styles.sectionTitle}>
             {t('events/past')}
           </H3>
         )}
