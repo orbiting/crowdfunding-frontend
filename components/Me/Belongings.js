@@ -6,7 +6,6 @@ import {css, merge} from 'glamor'
 
 import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
-import {intersperse} from '../../lib/utils/helpers'
 import {timeFormat, chfFormat} from '../../lib/utils/formats'
 import track from '../../lib/piwik'
 
@@ -114,21 +113,22 @@ class PledgeList extends Component {
                 {
                   pledge.payments.map((payment, i) => (
                     <li key={i}>
-                      {intersperse(
-                        t.first([
+                      <RawHtml dangerouslySetInnerHTML={{
+                        __html: t.first([
                           `merci/payment/status/${payment.method}/${payment.status}`,
                           `merci/payment/status/generic/${payment.status}`
                         ], {
                           formattedTotal: chfFormat(payment.total / 100),
                           hrid: payment.hrid,
                           method: t(`merci/payment/method/${payment.method}`)
-                        }).split('\n'),
-                        (item, i) => <br key={i} />
-                      )}
+                        })
+                      }} />
                       {payment.method === 'PAYMENTSLIP' && payment.status === 'WAITING' && (
                         <span>
                           <br /><br />
-                          {t(`merci/payment/PAYMENTSLIP/paperInvoice/${+(payment.paperInvoice)}`)}
+                          <RawHtml dangerouslySetInnerHTML={{
+                            __html: t(`merci/payment/PAYMENTSLIP/paperInvoice/${+(payment.paperInvoice)}`)
+                          }} />
                         </span>
                       )}
                     </li>
