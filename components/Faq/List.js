@@ -55,7 +55,6 @@ const styles = {
     }
   }),
   answer: css({
-    borderBottom: `1px solid ${colors.divider}`,
     paddingBottom: 10,
     marginBottom: 40
   }),
