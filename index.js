@@ -49,24 +49,29 @@ app.prepare()
     ]
 
     server.use((req, res, next) => {
-      const BACKDOOR_URL = process.env.BACKDOOR_URL || ''
-      const cookies = (
-        req.headers.cookie &&
-        require('cookie').parse(req.headers.cookie)
-      ) || {}
       const now = new Date()
       if (now < COUNTDOWN_DATE) {
+        const BACKDOOR_URL = process.env.BACKDOOR_URL || ''
         if (req.url === BACKDOOR_URL) {
           res.cookie('OpenSesame', BACKDOOR_URL, { maxAge: 2880000, httpOnly: true })
           return res.redirect('/')
         }
-        if ((cookies && cookies['OpenSesame'] === BACKDOOR_URL) ||
-          ALLOWED_PATHS.some(path => req.url.startsWith(path))) {
+
+        const cookies = (
+          req.headers.cookie &&
+          require('cookie').parse(req.headers.cookie)
+        ) || {}
+        if (
+          cookies['OpenSesame'] === BACKDOOR_URL ||
+          ALLOWED_PATHS.some(path => req.url.startsWith(path))
+        ) {
           return next()
         }
+
         if (req.url === '/') {
           return app.render(req, res, '/countdown', {})
         }
+
         req.path = '/404'
         req.url = '/404'
         return handle(req, res)
