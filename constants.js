@@ -27,4 +27,3 @@ exports.COUNTDOWN_UTC = typeof window !== 'undefined'
 
 exports.COUNTDOWN_DATE = new Date(exports.COUNTDOWN_UTC)
 exports.COUNTDOWN_NOTE = ENV.COUNTDOWN_NOTE
-exports.BACKDOOR_URL = ENV.BACKDOOR_URL
