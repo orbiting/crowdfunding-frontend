@@ -37,7 +37,7 @@ import {
 
 import {
   Interaction, Button, Label, Checkbox,
-  colors, fontFamilies
+  colors, fontFamilies, Radio
 } from '@project-r/styleguide'
 
 const {H2, P} = Interaction
@@ -551,19 +551,35 @@ class Submit extends Component {
                 this.setState(mergeFields(fields))
               }} />
             <br />
-            <Checkbox
-              checked={this.state.values.paperInvoice || false}
-              onChange={(_, checked) => {
-                this.setState((state) => ({
-                  values: {
-                    ...state.values,
-                    paperInvoice: checked
-                  }
-                }))
-              }}>
-              {t('pledge/submit/paymentslip/paperInvoice')}
-            </Checkbox>
-            <br /><br />
+            <div style={{marginBottom: 5}}>
+              <Radio
+                checked={!this.state.values.paperInvoice}
+                onChange={() => {
+                  this.setState((state) => ({
+                    values: {
+                      ...state.values,
+                      paperInvoice: false
+                    }
+                  }))
+                }}>
+                {t('pledge/submit/paymentslip/emailInvoice')}
+              </Radio>
+            </div>
+            <div>
+              <Radio
+                checked={!!this.state.values.paperInvoice}
+                onChange={() => {
+                  this.setState((state) => ({
+                    values: {
+                      ...state.values,
+                      paperInvoice: true
+                    }
+                  }))
+                }}>
+                {t('pledge/submit/paymentslip/paperInvoice')}
+              </Radio>
+            </div>
+            <br />
           </div>
         )}
         {(paymentMethod === 'STRIPE') && (

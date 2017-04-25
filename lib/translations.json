@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-25T19:30:52.752Z",
+  "updated": "2017-04-25T23:52:02.048Z",
   "title": "live",
   "data": [
     {
@@ -182,7 +182,7 @@
     },
     {
       "key": "merci/empty/text",
-      "value": "Sie haben uns noch nicht unterstützt."
+      "value": "Möchten auch Sie uns unterstützen?"
     },
     {
       "key": "merci/empty/button",
@@ -326,7 +326,7 @@
     },
     {
       "key": "signIn/polling",
-      "value": "Jetzt müssen Sie noch Ihre Mailadresse bestätigen. Wir haben Ihnen ein kurzes Mail geschickt. Dieses enthält fett gedruckt die drei seltsamen Wörter: <b>«{phrase}»</b>.<br /><br /> Gehen Sie zu Ihrem Postfach, öffnen Sie das Mail, kontrollieren Sie, ob dort die drei gleichen seltsamen Wörter stehen. Sind es dieselben, klicken Sie den Link darunter. <br /><br />(Die Sache mit den drei Wörtern ist leider nötig. Es ist eine Sicherheitsmassnahme, damit niemand mit Ihrer Mailadresse Unfug treiben kann.)"
+      "value": "Jetzt müssen Sie noch Ihre Mailadresse bestätigen. Wir haben Ihnen ein kurzes Mail an die Adresse {email} geschickt. Dieses enthält fett gedruckt die drei seltsamen Wörter: <b>«{phrase}»</b>.<br /><br /> Gehen Sie zu Ihrem Postfach, öffnen Sie das Mail, kontrollieren Sie, ob dort die drei gleichen seltsamen Wörter stehen. Sind es dieselben, klicken Sie den Link darunter. <br /><br />(Die Sache mit den drei Wörtern ist leider nötig. Es ist eine Sicherheitsmassnahme, damit niemand mit Ihrer Mailadresse Unfug treiben kann.)"
     },
     {
       "key": "signIn/cancel",
@@ -426,7 +426,7 @@
     },
     {
       "key": "pledge/submit/payMethod/label",
-      "value": "Wählen Sie eine Zahlungsart"
+      "value": "Wählen Sie eine Zahlungsart:"
     },
     {
       "key": "pledge/submit/secure",
@@ -434,7 +434,7 @@
     },
     {
       "key": "pledge/submit/stripe/prefered",
-      "value": "Bitte zahlen Sie mit Kreditkarte, es ist für uns am günstigsten."
+      "value": "Falls es für Sie keinen Unterschied macht: Die Kreditkarte ist für uns das bevorzugte Zahlungsmittel."
     },
     {
       "key": "pledge/submit/stripe/js/loading",
@@ -909,7 +909,7 @@
     },
     {
       "key": "me/addressForm/line2/label",
-      "value": "Zusatz (Optional: Einheit, Gebäude usw.)"
+      "value": "Zusatz (Optional)"
     },
     {
       "key": "me/addressForm/postalCode/label",
@@ -938,6 +938,10 @@
     {
       "key": "pledge/submit/paymentslip/title",
       "value": "Rechnungsadresse"
+    },
+    {
+      "key": "pledge/submit/paymentslip/emailInvoice",
+      "value": "Zahlungsanweisungen per E-Mail"
     },
     {
       "key": "pledge/submit/paymentslip/paperInvoice",
@@ -1001,7 +1005,7 @@
     },
     {
       "key": "memberships/give/description/after",
-      "value": "Alle Gutscheincodes können auf der Seite auf <a href=\"/claim\">republik.ch/claim</a> eingelöst werden. Wer das tut, erhält pro Code ein Abo und eine Mitgliedschaft."
+      "value": "Die Gutscheincodes können dann von dem neuen Besitzer, der neuen Besitzerin auf der Seite auf <a href=\"/claim\">republik.ch/claim</a> eingelöst werden. Wer das tut, erhält pro Code ein Abo und eine Mitgliedschaft."
     },
     {
       "key": "memberships/type/ABO",
@@ -1231,7 +1235,7 @@
     },
     {
       "key": "testimonial/list/before",
-      "value": "Noch kein Mitglied? Jetzt <a href=\"/pledge\">mitmachen</a> und Mitglied werden!"
+      "value": "Noch nicht Mitglied? Jetzt <a href=\"/pledge\">mitmachen</a> und Mitglied werden!"
     },
     {
       "key": "testimonial/search/label",
@@ -1328,6 +1332,10 @@
     {
       "key": "crew/lead",
       "value": "Zur Aufbau-Crew gehören:"
+    },
+    {
+      "key": "TODO",
+      "value": "Wollen Sie nochmal mitmachen? Sie können Abos und Mitgliedschaften verschenken oder auch einfach spenden."
     }
   ]
 }
