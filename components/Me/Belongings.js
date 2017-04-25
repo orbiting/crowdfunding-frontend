@@ -184,10 +184,10 @@ const Belongings = ({loading, error, pledges, hasMemberships, me, t, signOut, hi
             <Testimonial />
           </div>
         )}
-        <H2 style={{marginTop: 80}}>{t.pluralize('merci/pledges/title', {
+        {(hasPledges || !hasMemberships) && (<H2 style={{marginTop: 80}}>{t.pluralize('merci/pledges/title', {
           count: displayablePledges.length
-        })}</H2>
-        {!hasPledges && (
+        })}</H2>)}
+        {!hasPledges && !hasMemberships && (
           <div>
             <P>
               {t('merci/empty/text')}
