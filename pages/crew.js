@@ -5,6 +5,7 @@ import withT from '../lib/withT'
 import Frame from '../components/Frame'
 import Content from '../components/Frame/Content'
 import Portrait from '../components/Portrait'
+import ImageCover from '../components/ImageCover'
 
 import {
   Lead
@@ -21,17 +22,18 @@ export default withData(withT(({url, t}) => {
     pageTitle: t('crew/pageTitle'),
     title: t('crew/title'),
     description: t('crew/description'),
-    image: `${STATIC_BASE_URL}/static/social-media/crew.jpg`,
+    image: `${STATIC_BASE_URL}/static/team/bern.jpg`,
     url: `${PUBLIC_BASE_URL}${url.pathname}`
   }
 
   return (
-    <Frame url={url} meta={meta}>
+    <Frame url={url} meta={meta} cover={(
+      <ImageCover image={{
+        src: meta.image,
+        alt: 'Taufe des Namen und Logo in Bern'
+      }} />
+    )}>
       <Content indented>
-        <img src={meta.image} style={{
-          width: '100%',
-          marginBottom: 30
-        }} />
         <Lead>{t('crew/lead')}</Lead>
         {team.map((person, i) => <Portrait key={i} {...person} odd={!(i % 2)} />)}
       </Content>
