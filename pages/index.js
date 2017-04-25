@@ -49,7 +49,7 @@ Die Republik ist eine kleine Rebellion. Für den Journalismus. Und gegen die Med
 
 Eine funktionierende Demokratie braucht funktionierende Medien. Und dafür braucht es nicht nur Journalistinnen und Journalisten, sondern auch Sie. Als Leserinnen. Als Bürger. Als Menschen, die bereit sind, etwas Geld in unabhängigen Journalismus zu investieren.
 
-[Jetzt Mitmachen!](/pledge)
+[Jetzt mitmachen!](/pledge)
 
 
   `}
@@ -81,7 +81,7 @@ Ihr Risiko beträgt dabei 240 Franken pro Jahr. Also der Preis, den man pro Jahr
 
 Mit diesem Betrag können Sie einen echten Unterschied machen. Denn es ist Zeit, dem Journalismus ein neues Fundament zu bauen. Und das schafft niemand alleine. Sondern nur viele gemeinsam: wir mit Ihnen. Willkommen an Bord!       
 
-[Jetzt Mitmachen!](/pledge)  
+[Jetzt mitmachen!](/pledge)  
         
 
 # Wer sind wir 
@@ -138,7 +138,7 @@ Das Resultat der kleinen Empörungsgeschichte ist mehr als nur Zeitverschwendung
 
 Der Job der Medien wäre, für freiere Köpfe und schlankere Lösungen zu sorgen. Die Doppelzange und die kleine Empörungsgeschichte bewirken das exakte Gegenteil. Ihr Produkt ist: mehr Angst. Und mehr Bürokratie. 
 
-Kurz: Es ist Zeit für etwas Neues. Unsere Pläne für die Republik finden Sie gleich als nächstes. Und den Button, um sofort mitzumachen, hier: [Jetzt Mitmachen!](/pledge)  
+Kurz: Es ist Zeit für etwas Neues. Unsere Pläne für die Republik finden Sie gleich als nächstes. Und den Button, um sofort mitzumachen, hier: [Jetzt mitmachen!](/pledge)  
 
   `}
 
@@ -186,7 +186,7 @@ Willkommen an Bord!
         <Button primary onClick={() => {
           Router.push('/pledge')
         }} style={{minWidth: 300}}>
-          Jetzt Mitmachen!
+          Jetzt mitmachen!
         </Button>
 
         <div style={{margin: '15px 0 40px'}}>
