@@ -2,7 +2,6 @@ import React from 'react'
 import {css} from 'glamor'
 
 import {swissTime} from '../../lib/utils/formats'
-import {intersperse} from '../../lib/utils/helpers'
 import withT from '../../lib/withT'
 
 import {
@@ -13,6 +12,7 @@ import {
 import {CONTENT_PADDING} from '../Frame/constants'
 
 import Share from '../Share'
+import RawHtml from '../RawHtml'
 
 import {
   PUBLIC_BASE_URL
@@ -21,6 +21,16 @@ import {
 const BLOCK_PADDING_TOP = 10
 
 const styles = {
+  content: css({
+    color: colors.text,
+    fontFamily: fontFamilies.serifRegular,
+    fontSize: 16,
+    lineHeight: '25px',
+    [mediaQueries.mUp]: {
+      fontSize: 21,
+      lineHeight: '32px'
+    }
+  }),
   container: css({
     borderBottom: `1px solid ${colors.divider}`,
     marginBottom: 60
@@ -46,6 +56,10 @@ const styles = {
   })
 }
 
+const Content = ({children, ...props}) => (
+  <div {...props} {...styles.content} />
+)
+
 const publishedDateTimeFormat = swissTime.format('%e. %B %Y %H Uhr')
 
 const Update = withT(({
@@ -59,22 +73,15 @@ const Update = withT(({
 }) => {
   const date = new Date(publishedDateTime)
 
-  const paragraphs = (text || '').split('\n\n')
-
   return (
     <div {...styles.container}>
       <H1 style={{marginBottom: 15}}>{title}</H1>
       <div {...styles.label}>
         {publishedDateTimeFormat(date)}
       </div>
-      {paragraphs.map(p => (
-        <P>
-          {intersperse(
-            p.split('\n'),
-            (d, i) => <br key={i} />
-          )}
-        </P>
-      ))}
+      <RawHtml style='serif' type={Content} dangerouslySetInnerHTML={{
+        __html: text || ''
+      }} />
 
       <P>
         <Share
