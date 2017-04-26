@@ -64,7 +64,7 @@ class FieldSet extends Component {
           let additionalProps = {}
           if (autoSize) {
             additionalProps.renderInput = (props) => (
-              <AutosizeInput
+              <AutosizeInput style={{paddingBottom: 9}}
                 {...props} />
             )
           }

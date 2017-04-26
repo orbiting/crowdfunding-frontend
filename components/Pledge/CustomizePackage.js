@@ -259,7 +259,7 @@ class CustomizePackage extends Component {
               error={dirty.reason && errors.reason}
               value={values.reason}
               renderInput={(props) => (
-                <AutosizeInput
+                <AutosizeInput style={{paddingBottom: 9}}
                   {...props} />
               )}
               onChange={(_, value, shouldValidate) => {
