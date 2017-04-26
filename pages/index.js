@@ -54,7 +54,7 @@ export default withData(({url}) => (
     pageTitle: 'Republik — das digitale Magazin von Project R',
     title: 'Republik — das digitale Magazin von Project R',
     description: 'Jetzt unser Crowdfunding unterstützen.',
-    image: VIDEOS.main.poster
+    image: `${STATIC_BASE_URL}/static/social-media/main.jpg`
   }} cover={(
     <VideoCover src={VIDEOS.main} />
   )}>

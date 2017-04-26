@@ -5,6 +5,10 @@ import {
   NarrowContainer
 } from '@project-r/styleguide'
 
+import {
+  STATIC_BASE_URL
+} from '../constants'
+
 import Frame from '../components/Frame'
 import PledgeForm from '../components/Pledge/Form'
 import PledgeReceivePayment from '../components/Pledge/ReceivePayment'
@@ -13,7 +17,8 @@ class PledgePage extends Component {
   render () {
     const meta = {
       title: 'Jetzt mitmachen beim Crowdfunding',
-      description: 'Lasst uns gemeinsam ein neues Fundament für unabhängigen Journalismus bauen!'
+      description: 'Lasst uns gemeinsam ein neues Fundament für unabhängigen Journalismus bauen!',
+      image: `${STATIC_BASE_URL}/static/social-media/main.jpg`
     }
 
     const {url} = this.props
