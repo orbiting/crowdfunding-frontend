@@ -189,7 +189,7 @@ Kurz: Es ist Zeit für etwas Neues. Unsere Pläne für die Republik finden Sie g
         {md(mdComponents)`
 <br />
 
-![TK](/static/index/rothaus_manifest.jpg)
+![Das Manifest hängt am Balkon des Hotel Rothaus](/static/index/rothaus_manifest.jpg)
 
 # Was wir versprechen
 
