@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-25T23:52:02.048Z",
+  "updated": "2017-04-26T00:35:53.381Z",
   "title": "live",
   "data": [
     {
@@ -262,11 +262,11 @@
     },
     {
       "key": "merci/payment/PAYMENTSLIP/paperInvoice/1",
-      "value": "Sie erhalten eine Rechnung per Post"
+      "value": "Sie erhalten eine Rechnung per Post. Sollte der Brief verloren gehen, hier noch einmal alle Zahlungsinformationen auf einen Blick:"
     },
     {
       "key": "merci/payment/PAYMENTSLIP/paperInvoice/0",
-      "value": "Sie haben die Rechnung per E-Mail erhalten"
+      "value": "Sie haben die Zahlungsanweisungen per E-Mail erhalten. Und hier schon ein Überblick:"
     },
     {
       "key": "merci/updateMe/address/label",
@@ -1240,6 +1240,10 @@
     {
       "key": "testimonial/search/label",
       "value": "Suchen"
+    },
+    {
+      "key": "testimonial/search/videosOnly",
+      "value": "Nur Videos"
     },
     {
       "key": "testimonial/detail/share/emailSubject",

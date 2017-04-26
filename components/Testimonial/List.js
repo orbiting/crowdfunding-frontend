@@ -19,7 +19,7 @@ import {
 
 import {
   Interaction, mediaQueries, fontFamilies,
-  Field
+  Field, Checkbox
 } from '@project-r/styleguide'
 
 const {P} = Interaction
@@ -256,8 +256,8 @@ class List extends Component {
   }
 }
 
-const query = gql`query testimonials($seed: Float, $search: String, $firstId: ID, $limit: Int) {
-  testimonials(seed: $seed, search: $search, firstId: $firstId, limit: $limit) {
+const query = gql`query testimonials($seed: Float, $search: String, $firstId: ID, $limit: Int, $videosOnly: Boolean) {
+  testimonials(seed: $seed, search: $search, firstId: $firstId, limit: $limit, videosOnly: $videosOnly) {
     id
     name
     role
@@ -285,6 +285,11 @@ export const ListWithQuery = compose(
   })
 )(List)
 
+ListWithQuery.defaultProps = {
+  videosOnly: false,
+  limit: 50
+}
+
 export const generateSeed = () => Math.random() * 2 - 1
 
 class Container extends Component {
@@ -296,7 +301,7 @@ class Container extends Component {
   }
   render () {
     const {t, url: {query: {id}}, meta} = this.props
-    const {seed, query} = this.state
+    const {seed, query, videosOnly} = this.state
     return (
       <div>
         <RawHtml type={P} dangerouslySetInnerHTML={{
@@ -311,9 +316,18 @@ class Container extends Component {
               query: value
             }))
           }} />
+        <br />
+        <Checkbox
+          checked={!!videosOnly}
+          onChange={(_, checked) => {
+            this.setState(() => ({videosOnly: checked}))
+          }}>
+          {t('testimonial/search/videosOnly')}
+        </Checkbox>
         <br /><br />
         <ListWithQuery
           meta={meta}
+          videosOnly={!!videosOnly}
           firstId={query ? undefined : id || this.state.clearedFirstId}
           queryId={id}
           onSelect={() => {
