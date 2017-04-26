@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-26T00:35:53.381Z",
+  "updated": "2017-04-26T02:17:34.837Z",
   "title": "live",
   "data": [
     {
@@ -84,8 +84,7 @@
     },
     {
       "key": "package/DONATE/title/short",
-      "value": "Spende",
-      "undefined": "used in paymentslip export"
+      "value": "Spende"
     },
     {
       "key": "package/DONATE/description",
@@ -97,8 +96,7 @@
     },
     {
       "key": "package/ABO/title",
-      "value": "Für mich",
-      "undefined": "Abonnement für ein Jahr"
+      "value": "Für mich"
     },
     {
       "key": "package/ABO/description",
@@ -110,8 +108,7 @@
     },
     {
       "key": "package/ABO_GIVE/title",
-      "value": "Für andere",
-      "undefined": "Abonnements verschenken"
+      "value": "Für andere"
     },
     {
       "key": "package/ABO_GIVE/description",
@@ -119,8 +116,7 @@
     },
     {
       "key": "package/BENEFACTOR/title",
-      "value": "Für Gönner",
-      "undefined": "Gönner Abonnement"
+      "value": "Für Gönner"
     },
     {
       "key": "package/BENEFACTOR/description",
@@ -140,8 +136,7 @@
     },
     {
       "key": "option/NOTEBOOK/label/1",
-      "value": "Notizbuch",
-      "undefined": "used in paymentslip export"
+      "value": "Notizbuch"
     },
     {
       "key": "package/choose",
@@ -149,8 +144,7 @@
     },
     {
       "key": "merci/postpay/waiting",
-      "value": "Danke, Sie sind mit dem Wichtigsten durch. Jetzt müssen Sie noch Ihre Mailadresse bestätigen. Wir haben Ihnen ein kurzes Mail an die Adresse {email} geschickt. Dieses enthält fett gedruckt die drei seltsamen Wörter: <b>«{phrase}»</b>.<br /><br />Gehen Sie zu Ihrem Postfach, öffnen Sie das Mail, kontrollieren Sie, ob dort die drei gleichen seltsamen Wörter stehen. Sind es dieselben, klicken Sie den Link darunter. <br /><br /> (Die Sache mit den drei Wörtern ist leider nötig. Es ist eine Sicherheitsmassnahme, damit niemand mit Ihrer Mailadresse Unfug treiben kann.)",
-      "undefined": "clara"
+      "value": "Danke, Sie sind mit dem Wichtigsten durch. Jetzt müssen Sie noch Ihre Mailadresse bestätigen. Wir haben Ihnen ein kurzes Mail an die Adresse {email} geschickt. Dieses enthält fett gedruckt die drei seltsamen Wörter: <b>«{phrase}»</b>.<br /><br />Gehen Sie zu Ihrem Postfach, öffnen Sie das Mail, kontrollieren Sie, ob dort die drei gleichen seltsamen Wörter stehen. Sind es dieselben, klicken Sie den Link darunter. <br /><br /> (Die Sache mit den drei Wörtern ist leider nötig. Es ist eine Sicherheitsmassnahme, damit niemand mit Ihrer Mailadresse Unfug treiben kann.)"
     },
     {
       "key": "merci/postpay/reclaim",
@@ -594,8 +588,7 @@
     },
     {
       "key": "sidebar/investor",
-      "value": "Sie wollen Investor/Investorin werden?",
-      "undefined": "Sie wollen Investor bzw. Investorin der Republik AG werden?"
+      "value": "Sie wollen Investor/Investorin werden?"
     },
     {
       "key": "sidebar/investor/subject",
@@ -743,8 +736,7 @@
     },
     {
       "key": "api/pay/stripe/invalid_cvc",
-      "value": "The card’s security code is invalid.",
-      "undefined": "please translate, it happens"
+      "value": "Die Sicherheitsnummer der Karte ist ungültig."
     },
     {
       "key": "api/pay/stripe/invalid_swipe_data",
@@ -752,22 +744,19 @@
     },
     {
       "key": "api/pay/stripe/incorrect_number",
-      "value": "The card number is incorrect.",
-      "undefined": "please translate, it happens"
+      "value": "Die Kartennummer ist ungültig."
     },
     {
       "key": "api/pay/stripe/expired_card",
-      "value": "The card has expired.",
-      "undefined": "please translate, it happens"
+      "value": "Die Karte ist abgelaufen."
     },
     {
       "key": "api/pay/stripe/incorrect_cvc",
-      "value": "The card’s security code is incorrect.",
-      "undefined": "please translate, it happens"
+      "value": "Die Security Nummer ist falsch."
     },
     {
       "key": "api/pay/stripe/incorrect_zip",
-      "value": "The card’s zip code failed validation."
+      "value": "Die Postkeitzahl der Karte konnte nicht geprüft werden."
     },
     {
       "key": "api/pay/stripe/card_declined",
@@ -779,8 +768,7 @@
     },
     {
       "key": "api/pay/stripe/processing_error",
-      "value": "An error occurred while processing the card.",
-      "undefined": "please translate, it happens"
+      "value": "Während der Bearbeitung der Karte ist ein Fehler aufgetreten."
     },
     {
       "key": "api/paypal/deny",
@@ -788,8 +776,7 @@
     },
     {
       "key": "api/paypal/contactUs",
-      "value": "Während des Zahlungsverfahrens mit PayPal ist ein Problem aufgetreten, das zu einem nicht vorhersehbaren Resultat geführt hat. Bitte nehmen Sie Kontakt mit uns auf unter zahlungen@republik.ch. Sie sollten es nicht erneut versuchen da die Buchung möglicherweise bereits akzeptiert wurde.",
-      "undefined": "key angepasst, bitte beachten beim einpflegen der Korrekturen"
+      "value": "Während des Zahlungsverfahrens mit PayPal ist ein Problem aufgetreten, das zu einem nicht vorhersehbaren Resultat geführt hat. Bitte nehmen Sie Kontakt mit uns auf unter zahlungen@republik.ch. Sie sollten es nicht erneut versuchen da die Buchung möglicherweise bereits akzeptiert wurde."
     },
     {
       "key": "api/pay/pspPayload/parseFailed",
@@ -1073,13 +1060,11 @@
     },
     {
       "key": "api/testimonial/pledge/required",
-      "value": "Sie müssen uns zuerst unterstützen, bevor Sie ein Testimonial abgeben können.",
-      "undefined": "x"
+      "value": "Sie müssen uns zuerst unterstützen, bevor Sie ein Testimonial abgeben können."
     },
     {
       "key": "api/testimonial/mail/subject",
-      "value": "Vielen Dank für das Testimonial",
-      "undefined": "x"
+      "value": "Vielen Dank für das Testimonial"
     },
     {
       "key": "events/pageTitle",
