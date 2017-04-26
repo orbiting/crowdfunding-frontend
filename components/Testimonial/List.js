@@ -242,7 +242,7 @@ class List extends Component {
             title: t('testimonial/meta/title'),
             description: t('testimonial/meta/description'),
             url: `${PUBLIC_BASE_URL}/community`,
-            image: `${STATIC_BASE_URL}/static/social-media/community.png`
+            image: `${STATIC_BASE_URL}/static/social-media/community.jpg`
           })
 
         return (
