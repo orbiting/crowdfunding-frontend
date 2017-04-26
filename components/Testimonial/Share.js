@@ -82,15 +82,15 @@ const Item = ({loading, error, t, testimonial: {quote, image, name, video, seque
       </Head>
       <img {...styles.image} src={image} />
       <div {...styles.text}>
-        {quote && <P {...styles.quote}
-          style={{fontSize: 24 + fontSizeBoost(quote.length)}}>
-          «{quote}»
-        </P>}
         {video && (
           <Interaction.H2 {...styles.videoTitle}>
             {name}
           </Interaction.H2>
         )}
+        {quote && <P {...styles.quote}
+          style={{fontSize: 24 + fontSizeBoost(quote.length)}}>
+          «{quote}»
+        </P>}
         {!!sequenceNumber && (
           <div {...styles.number}>{t('memberships/sequenceNumber/label', {
             sequenceNumber
