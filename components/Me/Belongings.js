@@ -179,7 +179,7 @@ const Belongings = ({loading, error, pledges, hasMemberships, me, t, signOut, hi
         </div>)}
         <div style={{marginBottom: 80}} />
         <ClaimedMemberships />
-        {(hasPledges || hasMemberships) && false && (
+        {(hasPledges || hasMemberships) && (
           <div style={{marginTop: 80}}>
             <Testimonial />
           </div>
