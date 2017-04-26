@@ -160,7 +160,7 @@ const StatusWithQuery = graphql(query, {
     }
   },
   options: {
-    pollInterval: 3000
+    pollInterval: 10000
   }
 })(withT(Status))
 
