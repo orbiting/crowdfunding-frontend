@@ -147,7 +147,7 @@ class VideoCover extends Component {
           }}
           onProgress={(progress) => {
             if (
-              progress > 0.95 &&
+              progress > 0.97 &&
               !ended &&
               videoHeight &&
               !(this.player && this.player.scrubbing)
