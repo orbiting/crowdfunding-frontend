@@ -3,6 +3,7 @@ import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
 import {range} from 'd3-array'
 import {css} from 'glamor'
+import Link from 'next/link'
 
 import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
@@ -18,7 +19,7 @@ import {Item} from './List'
 import Detail from './Detail'
 
 import {
-  Interaction, Button, A
+  Interaction, Button, A, linkRule
 } from '@project-r/styleguide'
 
 const {H2, P} = Interaction
@@ -354,13 +355,28 @@ class Testimonial extends Component {
               )
             }
             {testimonial && testimonial.published && (
-              <A href='#' onClick={(e) => {
-                e.preventDefault()
-                this.props.unpublish()
-              }}>
-                <br />
-                {t('testimonial/unpublish/user')}
-              </A>
+              <div style={{marginTop: 20}}>
+                <Link href={`/community?id=${testimonial.id}`}>
+                  <a {...linkRule}>
+                    {t('testimonial/viewLive')}
+                  </a>
+                </Link>
+                {' — '}
+                {!!testimonial.smImage && (
+                  <span>
+                    <a {...linkRule} href={testimonial.smImage} target='_blank' download>
+                      {t('testimonial/download')}
+                    </a>
+                    {' — '}
+                  </span>
+                )}
+                <A href='#' onClick={(e) => {
+                  e.preventDefault()
+                  this.props.unpublish()
+                }}>
+                  {t('testimonial/unpublish/user')}
+                </A>
+              </div>
             )}
             {testimonial && !testimonial.published && (
               <ErrorMessage error={t('testimonial/unpublished/user')} />
@@ -390,6 +406,7 @@ const query = gql`query myTestimonial {
       role
       quote
       image
+      smImage
       published
       adminUnpublished
       video {

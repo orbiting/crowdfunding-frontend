@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-26T10:20:40.171Z",
+  "updated": "2017-04-26T10:30:04.406Z",
   "title": "live",
   "data": [
     {
@@ -1257,6 +1257,14 @@
     {
       "key": "testimonial/unpublish/user",
       "value": "Statement zurücknehmen"
+    },
+    {
+      "key": "testimonial/viewLive",
+      "value": "Ansehen"
+    },
+    {
+      "key": "testimonial/download",
+      "value": "Bild zum Teilen herunterladen"
     },
     {
       "key": "testimonial/unpublished/user",
