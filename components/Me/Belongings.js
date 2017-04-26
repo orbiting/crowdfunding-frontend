@@ -184,6 +184,12 @@ const Belongings = ({loading, error, pledges, hasMemberships, me, t, signOut, hi
             <Testimonial />
           </div>
         )}
+        <div>
+          <H2>Ein Statement abgeben</H2>
+          <P>
+            Leider sind im Moment zu viele Leute damit beschäftigt, ein Abonnement zu lösen. Deshalb ist es für kurze Zeit nicht möglich, Bilder hoch zu laden. Wir hoffen, das ändert sich. Und die Leute abonnieren etwas geduldiger.
+          </P>
+        </div>
         {(hasPledges || !hasMemberships) && (<H2 style={{marginTop: 80}}>{t.pluralize('merci/pledges/title', {
           count: displayablePledges.length
         })}</H2>)}
