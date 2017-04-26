@@ -263,6 +263,7 @@ const query = gql`query testimonials($seed: Float, $search: String, $firstId: ID
     role
     quote
     image
+    smImage
     video {
       hls
       mp4
