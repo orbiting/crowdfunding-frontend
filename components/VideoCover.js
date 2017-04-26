@@ -157,7 +157,7 @@ class VideoCover extends Component {
                   ? HEADER_HEIGHT_MOBILE + MENUBAR_HEIGHT
                   : HEADER_HEIGHT
                 scrollIt(
-                  videoHeight - topFixed + 5,
+                  videoHeight - topFixed + 10,
                   800
                 )
               })
