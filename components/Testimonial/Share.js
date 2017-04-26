@@ -110,7 +110,7 @@ const query = gql`query testimonials($firstId: ID) {
     name
     role
     quote
-    image
+    image(size: SHARE)
     sequenceNumber
     video {
       hls
