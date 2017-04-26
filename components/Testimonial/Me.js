@@ -104,7 +104,7 @@ class Testimonial extends Component {
     const {t} = this.props
     const file = e.target.files[0]
     if (file.type.indexOf('image/') === 0) {
-      if (file.size && file.size > 2200000) {
+      if (file.size && file.size > 4100000) {
         this.setState(() => ({
           imageError: t('testimonial/pickImage/tooBig')
         }))

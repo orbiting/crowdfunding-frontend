@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-26T02:17:34.837Z",
+  "updated": "2017-04-26T10:20:40.171Z",
   "title": "live",
   "data": [
     {
@@ -1212,7 +1212,7 @@
     },
     {
       "key": "testimonial/pickImage/tooBig",
-      "value": "Maximal 2 MB"
+      "value": "Maximal 4 MB"
     },
     {
       "key": "testimonial/pickImage/empty",
