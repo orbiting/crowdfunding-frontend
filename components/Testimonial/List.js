@@ -165,7 +165,21 @@ class List extends Component {
           this.setState(() => ({
             isFetchingMore: true
           }), () => {
+            const query = this.query = [
+              this.props.seed,
+              this.props.firstId,
+              this.props.query,
+              this.props.videosOnly
+            ].join('_')
             this.props.loadMore().then(({data}) => {
+              if (query !== this.query) {
+                this.setState(() => ({
+                  isFetchingMore: false
+                }), () => {
+                  this.onScroll()
+                })
+                return
+              }
               this.setState(() => ({
                 isFetchingMore: false,
                 hasReachEnd: !data.testimonials.length
@@ -181,6 +195,18 @@ class List extends Component {
     window.addEventListener('resize', this.measure)
     this.measure()
   }
+  componentWillReceiveProps (nextProps) {
+    if (
+      nextProps.seed !== this.props.seed ||
+      nextProps.firstId !== this.props.firstId ||
+      nextProps.search !== this.props.search ||
+      nextProps.videosOnly !== this.props.videosOnly
+    ) {
+      this.setState(() => ({
+        hasReachEnd: false
+      }))
+    }
+  }
   componentDidUpdate () {
     this.measure()
   }
@@ -191,9 +217,12 @@ class List extends Component {
   render () {
     const {
       loading, error, testimonials, t,
-      onSelect, queryId, isPage
+      onSelect, queryId, isPage,
+      videosOnly, search
     } = this.props
     const {columns, open} = this.state
+
+    const hasEndText = !videosOnly && !search
 
     return (
       <Loader loading={testimonials ? false : loading} error={error} render={() => {
@@ -298,7 +327,7 @@ class List extends Component {
                 })}
               </A>
             )}
-            {!!this.state.hasReachEnd && (
+            {!!this.state.hasReachEnd && hasEndText && (
               <P>{t.elements('testimonial/infinite/end', {
                 count: testimonials.length,
                 pledgeLink: (
