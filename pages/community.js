@@ -3,12 +3,17 @@ import withData from '../lib/withData'
 import Frame from '../components/Frame'
 import Content from '../components/Frame/Content'
 
-import List from '../components/Testimonial/List'
+import List, {generateSeed} from '../components/Testimonial/List'
 import Share from '../components/Testimonial/Share'
 
 class CommunityPage extends Component {
+  static async getInitialProps (ctx) {
+    return {
+      seed: generateSeed()
+    }
+  }
   render () {
-    const {url} = this.props
+    const {url, seed} = this.props
 
     if (url.query.share) {
       return <Share firstId={url.query.share} />
@@ -17,7 +22,7 @@ class CommunityPage extends Component {
     return (
       <Frame url={url}>
         <Content>
-          <List meta url={url} />
+          <List meta url={url} seed={seed} />
         </Content>
       </Frame>
     )
