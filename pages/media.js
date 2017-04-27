@@ -4,6 +4,10 @@ import Frame from '../components/Frame'
 import Content from '../components/Frame/Content'
 
 import {
+  STATIC_BASE_URL
+} from '../constants'
+
+import {
   A, Interaction
 } from '@project-r/styleguide'
 
@@ -31,8 +35,10 @@ export default withData(({url}) => {
           </A>
         </P>
         <P style={{margin: '20px 0'}}>
-          <A>Medienbilder und Logo herunterladen</A><br />
-          (Stand 27. April 17 Uhr)
+          <A download href={`${STATIC_BASE_URL}/static/media/170427_1841.zip`}>
+            Medienbilder und Logo herunterladen
+          </A><br />
+          (Stand 27. April 18 Uhr)
         </P>
         <P>
           Republik ist ein Projekt von Project R.
