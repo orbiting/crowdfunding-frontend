@@ -22,7 +22,7 @@ export default withData(({url}) => {
         </H1>
         <br />
         <P>
-          Für Auskünfte kontaktieren Sie Susanne Sugimoto.
+          Für Auskünfte kontaktieren Sie Susanne Sugimoto:
         </P>
         <P>
           <A href='tel:+41788977028'>+41 78 897 70 28</A><br />
