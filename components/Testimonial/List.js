@@ -151,7 +151,7 @@ class List extends Component {
     }
     this.ref = ref => { this.container = ref }
     this.onScroll = () => {
-      if (this.container) {
+      if (this.container && this.props.isPage) {
         const bbox = this.container.getBoundingClientRect()
         if (bbox.bottom < window.innerHeight * 2) {
           const {isFetchingMore, hasReachEnd, endless} = this.state
@@ -177,7 +177,7 @@ class List extends Component {
     }
   }
   componentDidMount () {
-    window.addEventListener('scroll', this.onScroll)
+    this.props.isPage && window.addEventListener('scroll', this.onScroll)
     window.addEventListener('resize', this.measure)
     this.measure()
   }
@@ -185,13 +185,13 @@ class List extends Component {
     this.measure()
   }
   componentWillUnmount () {
-    window.removeEventListener('scroll', this.onScroll)
+    this.props.isPage && window.removeEventListener('scroll', this.onScroll)
     window.removeEventListener('resize', this.measure)
   }
   render () {
     const {
       loading, error, testimonials, t,
-      onSelect, queryId, meta
+      onSelect, queryId, isPage
     } = this.props
     const {columns, open} = this.state
 
@@ -276,7 +276,7 @@ class List extends Component {
 
         return (
           <div {...styles.grid} ref={this.ref}>
-            {!!meta && <Meta data={metaData} />}
+            {!!isPage && <Meta data={metaData} />}
             {items}
             <div style={{clear: 'left', marginBottom: 20}} />
             {(
@@ -375,7 +375,7 @@ class Container extends Component {
     this.state = {}
   }
   render () {
-    const {t, url: {query: {id}}, meta} = this.props
+    const {t, url: {query: {id}}, isPage} = this.props
     const {query, videosOnly} = this.state
 
     const seed = this.state.seed || this.props.seed
@@ -410,7 +410,7 @@ class Container extends Component {
         </div>
         <br style={{clear: 'left'}} />
         <ListWithQuery
-          meta={meta}
+          isPage={isPage}
           videosOnly={!!videosOnly}
           firstId={query ? undefined : id || this.state.clearedFirstId}
           queryId={id}

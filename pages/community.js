@@ -22,7 +22,7 @@ class CommunityPage extends Component {
     return (
       <Frame url={url}>
         <Content>
-          <List meta url={url} seed={seed} />
+          <List url={url} seed={seed} isPage />
         </Content>
       </Frame>
     )

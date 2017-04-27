@@ -244,7 +244,7 @@ Willkommen an Bord!
 Die Republik kann nicht ein Projekt von wenigen sein. Ein neues Fundament für unabhängigen Journalismus bauen wir nur gemeinsam – oder gar nicht. Sehen Sie hier, wer schon an Bord ist:
   `}
         <div style={{margin: '20px 0'}}>
-          <TestimonialList limit={5} onSelect={(id) => {
+          <TestimonialList limit={10} onSelect={(id) => {
             Router.push(`/community?id=${id}`).then(() => {
               window.scrollTo(0, 0)
             })
