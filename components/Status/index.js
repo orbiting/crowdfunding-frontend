@@ -86,33 +86,35 @@ class Status extends Component {
       .sort((a, b) => ascending(a.people, b.people))
     const goal = goalsByPeople[goalsByPeople.length - 1]
 
+    const peopleLabel = t.elements('status/goal/people', {
+      count: (
+        <a key='count' {...styles.hoverGoal}
+          onTouchStart={(e) => {
+            e.preventDefault()
+            this.setState({
+              showGoal: true
+            })
+          }}
+          onTouchEnd={() => this.setState({
+            showGoal: false
+          })}
+          onMouseOver={() => this.setState({
+            showGoal: true
+          })}
+          onMouseOut={() => this.setState({
+            showGoal: false
+          })}>
+          {goal.people}
+        </a>
+      )
+    })
+
     if (this.props.compact) {
       return (
         <div style={{paddingTop: 10}}>
           <P>
             <span {...styles.smallNumber}>{status.people}</span>
-            <Label>{t.elements('status/goal/people', {
-              count: (
-                <a key='count' {...styles.hoverGoal}
-                  onTouchStart={(e) => {
-                    e.preventDefault()
-                    this.setState({
-                      showGoal: true
-                    })
-                  }}
-                  onTouchEnd={() => this.setState({
-                    showGoal: false
-                  })}
-                  onMouseOver={() => this.setState({
-                    showGoal: true
-                  })}
-                  onMouseOut={() => this.setState({
-                    showGoal: false
-                  })}>
-                  {goal.people}
-                </a>
-              )
-            })}</Label>
+            <Label>{peopleLabel}</Label>
           </P>
           <Bar goals={goalsByPeople}
             showLast={this.state.showGoal}
@@ -126,12 +128,10 @@ class Status extends Component {
       <div>
         <P>
           <span {...styles.primaryNumber}>{status.people}</span>
-          <Label>{t('status/goal/people', {
-            count: goal.people
-          })}</Label>
+          <Label>{peopleLabel}</Label>
         </P>
-        <Bar
-          goals={goalsByPeople}
+        <Bar goals={goalsByPeople}
+          showLast={this.state.showGoal}
           status={status}
           accessor='people'
           format={countFormat} />
