@@ -4,6 +4,7 @@ import {compose} from 'redux'
 import {css} from 'glamor'
 import {max} from 'd3-array'
 import Router from 'next/router'
+
 import Meta from '../Frame/Meta'
 
 import withT from '../../lib/withT'
@@ -277,12 +278,13 @@ class List extends Component {
           <div {...styles.grid} ref={this.ref}>
             {!!meta && <Meta data={metaData} />}
             {items}
+            <div style={{clear: 'left', marginBottom: 20}} />
             {(
               testimonials.length >= AUTO_INFINITE &&
-              !this.state.endless
+              !this.state.endless &&
+              !this.state.hasReachEnd
             ) && (
               <A href='#'
-                style={{display: 'block', marginTop: 20}}
                 onClick={(e) => {
                   e.preventDefault()
                   this.setState(() => ({
@@ -291,8 +293,20 @@ class List extends Component {
                     this.onScroll()
                   })
                 }}>
-                {t('testimonial/infinite/endless')}
+                {t('testimonial/infinite/endless', {
+                  count: AUTO_INFINITE
+                })}
               </A>
+            )}
+            {!!this.state.hasReachEnd && (
+              <P>{t.elements('testimonial/infinite/end', {
+                count: testimonials.length,
+                pledgeLink: (
+                  <A href='/pledge'>
+                    {t('testimonial/infinite/end/pledgeLink')}
+                  </A>
+                )
+              })}</P>
             )}
           </div>
         )

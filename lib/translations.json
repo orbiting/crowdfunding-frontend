@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-27T14:49:53.629Z",
+  "updated": "2017-04-27T15:19:47.878Z",
   "title": "live",
   "data": [
     {
@@ -1240,7 +1240,15 @@
     },
     {
       "key": "testimonial/infinite/endless",
-      "value": "Alle ansehen"
+      "value": "Das waren {count} Statements. Alle weiteren Statements anschauen?"
+    },
+    {
+      "key": "testimonial/infinite/end",
+      "value": "Sie haben gerade {count} Statements angeschaut. Sind Sie selber schon dabei? {pledgeLink}"
+    },
+    {
+      "key": "testimonial/infinite/end/pledgeLink",
+      "value": "Sonst jetzt Mitmachen!"
     },
     {
       "key": "testimonial/detail/share/emailSubject",
