@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-27T13:17:27.079Z",
+  "updated": "2017-04-27T14:49:53.629Z",
   "title": "live",
   "data": [
     {
@@ -875,6 +875,10 @@
       "value": "Impressum"
     },
     {
+      "key": "footer/media",
+      "value": "Medieninformationen"
+    },
+    {
       "key": "me/addressForm/title",
       "value": "Ihre Adresse"
     },
@@ -1232,7 +1236,7 @@
     },
     {
       "key": "testimonial/search/seed",
-      "value": "Mischen"
+      "value": "Neu Mischen"
     },
     {
       "key": "testimonial/infinite/endless",
