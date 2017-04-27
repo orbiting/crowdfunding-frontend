@@ -28,6 +28,10 @@ const styles = {
     fontSize: 17,
     fontFamily: fontFamilies.sansSerifRegular,
     color: colors.secondary
+  }),
+  number: css({
+    marginBottom: 20,
+    fontFamily: fontFamilies.sansSerifMedium
   })
 }
 
@@ -53,7 +57,7 @@ const Detail = ({t, share, data: {id, name, role, quote, image, smImage, sequenc
         : <SerifP>«{quote}»</SerifP>
       }
       {
-        !!sequenceNumber && <P style={{marginTop: 10}}>{t('memberships/sequenceNumber/label', {
+        !!sequenceNumber && <P {...styles.number}>{t('memberships/sequenceNumber/label', {
           sequenceNumber
         })}</P>
       }
