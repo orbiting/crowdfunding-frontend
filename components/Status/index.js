@@ -2,15 +2,16 @@ import React, {Component} from 'react'
 import {css} from 'glamor'
 import {gql, graphql} from 'react-apollo'
 import {ascending} from 'd3-array'
+import {timeMinute} from 'd3-time'
 
 import withT from '../../lib/withT'
 import {chfFormat, countFormat} from '../../lib/utils/formats'
 
+import {STATUS_POLL_INTERVAL_MS} from '../../constants'
+
 import {
   P, Label, fontFamilies
 } from '@project-r/styleguide'
-
-import {timeMinute} from 'd3-time'
 
 import Bar from './Bar'
 
@@ -192,7 +193,7 @@ const StatusWithQuery = graphql(query, {
     }
   },
   options: {
-    pollInterval: 10000
+    pollInterval: +STATUS_POLL_INTERVAL_MS
   }
 })(withT(Status))
 
