@@ -88,8 +88,7 @@ class GoalBar extends Component {
     this.state = {}
   }
   render () {
-    const {hover} = this.state
-    const {status, goals, accessor, format} = this.props
+    const {status, goals, accessor, format, showLast} = this.props
     const goal = goals[goals.length - 1]
 
     const uniqueGoals = goals
@@ -97,6 +96,10 @@ class GoalBar extends Component {
         i === goals.findIndex(g => g[accessor] === d[accessor])
       ))
       .reverse()
+
+    const hover = this.state.hover || (
+      showLast && uniqueGoals[0]
+    )
 
     return (
       <div {...styles.bar} style={{zIndex: hover ? 1 : 0}}>

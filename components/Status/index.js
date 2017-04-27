@@ -7,7 +7,7 @@ import withT from '../../lib/withT'
 import {chfFormat, countFormat} from '../../lib/utils/formats'
 
 import {
-  P, Label
+  P, Label, fontFamilies
 } from '@project-r/styleguide'
 
 import {timeMinute} from 'd3-time'
@@ -35,6 +35,10 @@ const styles = {
     fontSize: 22,
     fontFamily: 'sans-serif',
     lineHeight: 1
+  }),
+  hoverGoal: css({
+    cursor: 'default',
+    fontFamily: fontFamilies.sansSerifMedium
   })
 }
 
@@ -55,6 +59,11 @@ const query = gql`{
 }`
 
 class Status extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {}
+  }
   render () {
     if ((this.props.loading || this.props.error) && !this.props.crowdfunding) {
       return null
@@ -82,11 +91,33 @@ class Status extends Component {
         <div style={{paddingTop: 10}}>
           <P>
             <span {...styles.smallNumber}>{status.people}</span>
-            <Label>{t('status/goal/people', {
-              count: goal.people
+            <Label>{t.elements('status/goal/people', {
+              count: (
+                <a key='count' {...styles.hoverGoal}
+                  onTouchStart={(e) => {
+                    e.preventDefault()
+                    this.setState({
+                      showGoal: true
+                    })
+                  }}
+                  onTouchEnd={() => this.setState({
+                    showGoal: false
+                  })}
+                  onMouseOver={() => this.setState({
+                    showGoal: true
+                  })}
+                  onMouseOut={() => this.setState({
+                    showGoal: false
+                  })}>
+                  {goal.people}
+                </a>
+              )
             })}</Label>
           </P>
-          <Bar goals={goalsByPeople} status={status} accessor='people' />
+          <Bar goals={goalsByPeople}
+            showLast={this.state.showGoal}
+            status={status}
+            accessor='people' />
         </div>
       )
     }
@@ -160,7 +191,7 @@ const StatusWithQuery = graphql(query, {
     }
   },
   options: {
-    pollInterval: 30000
+    pollInterval: 10000
   }
 })(withT(Status))
 
