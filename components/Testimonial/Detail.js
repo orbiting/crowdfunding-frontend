@@ -13,7 +13,7 @@ import {
   P as SerifP, colors
 } from '@project-r/styleguide'
 
-const {H3} = Interaction
+const {H3, P} = Interaction
 
 const styles = {
   detail: css({
@@ -31,7 +31,7 @@ const styles = {
   })
 }
 
-const Detail = ({t, share, data: {id, name, role, quote, image, video}}) => (
+const Detail = ({t, share, data: {id, name, role, quote, image, smImage, sequenceNumber, video}}) => (
   <div {...styles.detail}>
     <div style={video ? {
       maxWidth: 400,
@@ -52,7 +52,13 @@ const Detail = ({t, share, data: {id, name, role, quote, image, video}}) => (
           )
         : <SerifP>«{quote}»</SerifP>
       }
+      {
+        !!sequenceNumber && <P style={{marginTop: 10}}>{t('memberships/sequenceNumber/label', {
+          sequenceNumber
+        })}</P>
+      }
       {share && <Share
+        download={smImage}
         url={`${PUBLIC_BASE_URL}/community?id=${id}`}
         emailSubject={t('testimonial/detail/share/emailSubject', {
           name,

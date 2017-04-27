@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-27T15:19:47.878Z",
+  "updated": "2017-04-27T16:09:06.139Z",
   "title": "live",
   "data": [
     {
@@ -1281,10 +1281,6 @@
     {
       "key": "testimonial/viewLive",
       "value": "Ansehen"
-    },
-    {
-      "key": "testimonial/download",
-      "value": "Bild zum Teilen herunterladen"
     },
     {
       "key": "testimonial/unpublished/user",

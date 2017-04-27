@@ -6,7 +6,12 @@ import {
   colors
 } from '@project-r/styleguide'
 
-const ShareButtons = ({url, tweet, emailSubject, emailBody, emailAttachUrl, fill}) => {
+const ShareButtons = ({
+  url, tweet,
+  emailSubject, emailBody, emailAttachUrl,
+  download,
+  fill
+}) => {
   const emailAttache = emailAttachUrl ? `\n\n${url}` : ''
   const shareOptions = [
     {
@@ -22,12 +27,18 @@ const ShareButtons = ({url, tweet, emailSubject, emailBody, emailAttachUrl, fill
     {
       href: `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody + emailAttache)}`,
       icon: 'email'
+    },
+    download && {
+      target: '_blank',
+      download: true,
+      href: download,
+      icon: 'download'
     }
   ]
 
   return (
     <span>
-      {shareOptions.map((props, i) => (
+      {shareOptions.filter(Boolean).map((props, i) => (
         <IconLink key={i} {...props} fill={fill} />
       ))}
     </span>

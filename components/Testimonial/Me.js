@@ -362,14 +362,6 @@ class Testimonial extends Component {
                   </a>
                 </Link>
                 {' — '}
-                {!!testimonial.smImage && (
-                  <span>
-                    <a {...linkRule} href={testimonial.smImage} target='_blank' download>
-                      {t('testimonial/download')}
-                    </a>
-                    {' — '}
-                  </span>
-                )}
                 <A href='#' onClick={(e) => {
                   e.preventDefault()
                   this.props.unpublish()

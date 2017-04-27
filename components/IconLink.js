@@ -4,6 +4,7 @@ import {css} from 'glamor'
 import FacebookIcon from './Icons/Facebook'
 import TwitterIcon from './Icons/Twitter'
 import EmailIcon from './Icons/Email'
+import DownloadIcon from './Icons/Download'
 
 const styles = {
   button: css({
@@ -23,13 +24,14 @@ const styles = {
 const ICONS = {
   facebook: FacebookIcon,
   twitter: TwitterIcon,
-  email: EmailIcon
+  email: EmailIcon,
+  download: DownloadIcon
 }
 
-const IconLink = ({href, target, fill, icon}) => {
+const IconLink = ({href, target, download, fill, icon}) => {
   const Icon = ICONS[icon]
   return (
-    <a href={href} {...styles.button} target={target}>
+    <a href={href} {...styles.button} download={!!download} target={target}>
       <Icon fill={fill} />
     </a>
   )
