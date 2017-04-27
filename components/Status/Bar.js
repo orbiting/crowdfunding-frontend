@@ -109,6 +109,15 @@ class GoalBar extends Component {
             style={{
               width: `${widthForGoal(goal, uniqueGoal, accessor)}%`
             }}
+            onTouchStart={(e) => {
+              e.preventDefault()
+              this.setState({
+                hover: uniqueGoal
+              })
+            }}
+            onTouchEnd={() => this.setState({
+              hover: undefined
+            })}
             onMouseOver={() => this.setState({
               hover: uniqueGoal
             })}
