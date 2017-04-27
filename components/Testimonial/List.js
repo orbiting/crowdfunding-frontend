@@ -120,6 +120,8 @@ export const Item = ({image, name, video, isActive, onClick, imageRenderer, styl
   </div>
 )
 
+const AUTO_INFINITE = 300
+
 class List extends Component {
   constructor (props) {
     super(props)
@@ -144,11 +146,37 @@ class List extends Component {
           }
         }))
       }
-      // this.onScroll()
+      this.onScroll()
+    }
+    this.ref = ref => { this.container = ref }
+    this.onScroll = () => {
+      if (this.container) {
+        const bbox = this.container.getBoundingClientRect()
+        if (bbox.bottom < window.innerHeight) {
+          const {isFetchingMore, hasReachEnd, endless} = this.state
+          const {testimonials} = this.props
+          if (
+            isFetchingMore || hasReachEnd ||
+            (testimonials.length >= AUTO_INFINITE && !endless)
+          ) {
+            return
+          }
+          this.setState(() => ({
+            isFetchingMore: true
+          }), () => {
+            this.props.loadMore().then(({data}) => {
+              this.setState(() => ({
+                isFetchingMore: false,
+                hasReachEnd: !data.testimonials.length
+              }))
+            })
+          })
+        }
+      }
     }
   }
   componentDidMount () {
-    // window.addEventListener('scroll', this.onScroll)
+    window.addEventListener('scroll', this.onScroll)
     window.addEventListener('resize', this.measure)
     this.measure()
   }
@@ -156,7 +184,7 @@ class List extends Component {
     this.measure()
   }
   componentWillUnmount () {
-    // window.removeEventListener('scroll', this.onScroll)
+    window.removeEventListener('scroll', this.onScroll)
     window.removeEventListener('resize', this.measure)
   }
   render () {
@@ -246,9 +274,22 @@ class List extends Component {
           })
 
         return (
-          <div {...styles.grid}>
+          <div {...styles.grid} ref={this.ref}>
             {!!meta && <Meta data={metaData} />}
             {items}
+            {(
+              testimonials.length >= AUTO_INFINITE &&
+              !this.state.endless
+            ) && (
+              <A href='#' onClick={(e) => {
+                e.preventDefault()
+                this.setState(() => ({
+                  endless: true
+                }), () => {
+                  this.onScroll()
+                })
+              }}>{t('testimonial/infinite/endless')}</A>
+            )}
           </div>
         )
       }} />
@@ -256,8 +297,8 @@ class List extends Component {
   }
 }
 
-const query = gql`query testimonials($seed: Float, $search: String, $firstId: ID, $limit: Int, $videosOnly: Boolean) {
-  testimonials(seed: $seed, search: $search, firstId: $firstId, limit: $limit, videosOnly: $videosOnly) {
+const query = gql`query testimonials($seed: Float, $search: String, $firstId: ID, $offset: Int, $limit: Int, $videosOnly: Boolean) {
+  testimonials(seed: $seed, search: $search, firstId: $firstId, offset: $offset, limit: $limit, videosOnly: $videosOnly) {
     id
     name
     role
@@ -280,7 +321,23 @@ export const ListWithQuery = compose(
       return ({
         loading: data.loading,
         error: data.error,
-        testimonials: data.testimonials
+        testimonials: data.testimonials,
+        loadMore: () => {
+          return data.fetchMore({
+            updateQuery: (previousResult, { fetchMoreResult, queryVariables }) => {
+              return {
+                ...previousResult,
+                testimonials: [
+                  ...previousResult.testimonials,
+                  ...fetchMoreResult.testimonials
+                ]
+              }
+            },
+            variables: {
+              offset: (data.testimonials || []).length
+            }
+          })
+        }
       })
     }
   })
@@ -288,7 +345,7 @@ export const ListWithQuery = compose(
 
 ListWithQuery.defaultProps = {
   videosOnly: false,
-  limit: 50
+  limit: 30
 }
 
 export const generateSeed = () => Math.random() * 2 - 1
