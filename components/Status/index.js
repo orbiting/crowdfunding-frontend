@@ -119,7 +119,8 @@ class Status extends Component {
           <Bar goals={goalsByPeople}
             showLast={this.state.showGoal}
             status={status}
-            accessor='people' />
+            accessor='people'
+            format={countFormat} />
         </div>
       )
     }
