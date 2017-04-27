@@ -91,23 +91,26 @@ PIWIK_SITE_ID=2
 
 #### Countdown Teaser
 
-You can configure a countdown date, before that date a teaser website 
+You can configure a countdown date, before that date a teaser website will be shown.
 
 ```
-COUNTDOWN=26.04.2017 07:00
+COUNTDOWN_UTC=2017-04-26T07:00:00.000Z
 COUNTDOWN_NOTE=
 ```
-
-`COUNTDOWN` follows following [d3-time-format](https://github.com/d3/d3-time-format): `%d.%m.%Y %H:%M` and is always parsed on the server and send as UTC to browsers around the world. The timezone of your server counts.
 
 `constants.js` will export a `COUNTDOWN_UTC` (`Date.toISOString()`) and `COUNTDOWN_DATE` from it, for usage in the application code.
 
 Additionally you can configure a backdoor URL. Opening that URL sets a cookie which allows to circumvent the countdown page.
+
 ```
-BACKDOOR_URL=/OpenSesame
+BACKDOOR_URL=/iftah-ya-simsim
 ```
 
-The newsletter sign up requires the following ENV variables:
+Shout-out to [Schmidsi](https://github.com/schmidsi) for building the countdown page.
+
+#### Newsletter
+
+Requires the following ENV variables:
 
 ```
 MANDRILL_API_KEY=
@@ -116,7 +119,13 @@ MAILCHIMP_LIST_ID=
 SUBSCRIBE_SECRET=
 ```
 
-Shout-out to [Schmidsi](https://github.com/schmidsi) for building the countdown page.
+#### Polling
+
+Polling can create considerable load. To help mitigate overloads the status polling interval can be configured via the environment.
+
+```
+STATUS_POLL_INTERVAL_MS=10000
+```
 
 ### Install and Run
 

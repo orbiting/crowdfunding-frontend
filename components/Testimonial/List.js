@@ -19,7 +19,7 @@ import {
 
 import {
   Interaction, mediaQueries, fontFamilies,
-  Field, Checkbox
+  Field, Checkbox, A
 } from '@project-r/styleguide'
 
 const {P} = Interaction
@@ -276,7 +276,7 @@ const query = gql`query testimonials($seed: Float, $search: String, $firstId: ID
 export const ListWithQuery = compose(
   withT,
   graphql(query, {
-    props: ({data, ownProps: {name}}) => {
+    props: ({data}) => {
       return ({
         loading: data.loading,
         error: data.error,
@@ -296,13 +296,15 @@ export const generateSeed = () => Math.random() * 2 - 1
 class Container extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      seed: props.seed || generateSeed()
-    }
+
+    this.state = {}
   }
   render () {
     const {t, url: {query: {id}}, meta} = this.props
-    const {seed, query, videosOnly} = this.state
+    const {query, videosOnly} = this.state
+
+    const seed = this.state.seed || this.props.seed
+
     return (
       <div>
         <RawHtml type={P} dangerouslySetInnerHTML={{
@@ -317,15 +319,21 @@ class Container extends Component {
               query: value
             }))
           }} />
-        <br />
-        <Checkbox
-          checked={!!videosOnly}
-          onChange={(_, checked) => {
-            this.setState(() => ({videosOnly: checked}))
-          }}>
-          {t('testimonial/search/videosOnly')}
-        </Checkbox>
-        <br /><br />
+        <div {...styles.options}>
+          <Checkbox
+            checked={!!videosOnly}
+            onChange={(_, checked) => {
+              this.setState(() => ({videosOnly: checked}))
+            }}>
+            {t('testimonial/search/videosOnly')}
+          </Checkbox>
+          <A style={{float: 'right', cursor: 'pointer'}} onClick={() => {
+            this.setState(() => ({
+              seed: generateSeed()
+            }))
+          }}>{t('testimonial/search/seed')}</A>
+        </div>
+        <br style={{clear: 'left'}} />
         <ListWithQuery
           meta={meta}
           videosOnly={!!videosOnly}

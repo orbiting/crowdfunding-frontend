@@ -2,15 +2,16 @@ import React, {Component} from 'react'
 import {css} from 'glamor'
 import {gql, graphql} from 'react-apollo'
 import {ascending} from 'd3-array'
+import {timeMinute} from 'd3-time'
 
 import withT from '../../lib/withT'
 import {chfFormat, countFormat} from '../../lib/utils/formats'
 
-import {
-  P, Label
-} from '@project-r/styleguide'
+import {STATUS_POLL_INTERVAL_MS} from '../../constants'
 
-import {timeMinute} from 'd3-time'
+import {
+  P, Label, fontFamilies
+} from '@project-r/styleguide'
 
 import Bar from './Bar'
 
@@ -35,6 +36,10 @@ const styles = {
     fontSize: 22,
     fontFamily: 'sans-serif',
     lineHeight: 1
+  }),
+  hoverGoal: css({
+    cursor: 'default',
+    fontFamily: fontFamilies.sansSerifMedium
   })
 }
 
@@ -55,6 +60,11 @@ const query = gql`{
 }`
 
 class Status extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {}
+  }
   render () {
     if ((this.props.loading || this.props.error) && !this.props.crowdfunding) {
       return null
@@ -77,16 +87,41 @@ class Status extends Component {
       .sort((a, b) => ascending(a.people, b.people))
     const goal = goalsByPeople[goalsByPeople.length - 1]
 
+    const peopleLabel = t.elements('status/goal/people', {
+      count: (
+        <a key='count' {...styles.hoverGoal}
+          onTouchStart={(e) => {
+            e.preventDefault()
+            this.setState({
+              showGoal: true
+            })
+          }}
+          onTouchEnd={() => this.setState({
+            showGoal: false
+          })}
+          onMouseOver={() => this.setState({
+            showGoal: true
+          })}
+          onMouseOut={() => this.setState({
+            showGoal: false
+          })}>
+          {goal.people}
+        </a>
+      )
+    })
+
     if (this.props.compact) {
       return (
         <div style={{paddingTop: 10}}>
           <P>
             <span {...styles.smallNumber}>{status.people}</span>
-            <Label>{t('status/goal/people', {
-              count: goal.people
-            })}</Label>
+            <Label>{peopleLabel}</Label>
           </P>
-          <Bar goals={goalsByPeople} status={status} accessor='people' />
+          <Bar goals={goalsByPeople}
+            showLast={this.state.showGoal}
+            status={status}
+            accessor='people'
+            format={countFormat} />
         </div>
       )
     }
@@ -95,12 +130,10 @@ class Status extends Component {
       <div>
         <P>
           <span {...styles.primaryNumber}>{status.people}</span>
-          <Label>{t('status/goal/people', {
-            count: goal.people
-          })}</Label>
+          <Label>{peopleLabel}</Label>
         </P>
-        <Bar
-          goals={goalsByPeople}
+        <Bar goals={goalsByPeople}
+          showLast={this.state.showGoal}
           status={status}
           accessor='people'
           format={countFormat} />
@@ -160,7 +193,7 @@ const StatusWithQuery = graphql(query, {
     }
   },
   options: {
-    pollInterval: 8000
+    pollInterval: +STATUS_POLL_INTERVAL_MS
   }
 })(withT(Status))
 
