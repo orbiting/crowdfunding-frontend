@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-27T08:18:09.708Z",
+  "updated": "2017-04-27T13:17:27.079Z",
   "title": "live",
   "data": [
     {
@@ -1233,6 +1233,10 @@
     {
       "key": "testimonial/search/seed",
       "value": "Mischen"
+    },
+    {
+      "key": "testimonial/infinite/endless",
+      "value": "Alle ansehen"
     },
     {
       "key": "testimonial/detail/share/emailSubject",

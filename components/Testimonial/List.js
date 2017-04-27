@@ -152,7 +152,7 @@ class List extends Component {
     this.onScroll = () => {
       if (this.container) {
         const bbox = this.container.getBoundingClientRect()
-        if (bbox.bottom < window.innerHeight) {
+        if (bbox.bottom < window.innerHeight * 2) {
           const {isFetchingMore, hasReachEnd, endless} = this.state
           const {testimonials} = this.props
           if (
@@ -281,14 +281,18 @@ class List extends Component {
               testimonials.length >= AUTO_INFINITE &&
               !this.state.endless
             ) && (
-              <A href='#' onClick={(e) => {
-                e.preventDefault()
-                this.setState(() => ({
-                  endless: true
-                }), () => {
-                  this.onScroll()
-                })
-              }}>{t('testimonial/infinite/endless')}</A>
+              <A href='#'
+                style={{display: 'block', marginTop: 20}}
+                onClick={(e) => {
+                  e.preventDefault()
+                  this.setState(() => ({
+                    endless: true
+                  }), () => {
+                    this.onScroll()
+                  })
+                }}>
+                {t('testimonial/infinite/endless')}
+              </A>
             )}
           </div>
         )
@@ -345,7 +349,7 @@ export const ListWithQuery = compose(
 
 ListWithQuery.defaultProps = {
   videosOnly: false,
-  limit: 30
+  limit: 50
 }
 
 export const generateSeed = () => Math.random() * 2 - 1
