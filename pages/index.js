@@ -38,6 +38,10 @@ const styles = {
     margin: '20px -10px 0',
     backgroundColor: colors.primaryBg,
     padding: 10
+  }),
+  stretchP: css({
+    fontSize: 17,
+    lineHeight: '25px'
   })
 }
 
@@ -91,10 +95,10 @@ Eine funktionierende Demokratie braucht funktionierende Medien. Und dafür brauc
         {/* Navi? */}
 
         <div {...styles.stretchLead}>
-          <Interaction.P style={{marginBottom: 10}}>
+          <Interaction.P {...styles.stretchP} style={{marginBottom: 10}}>
             Damit das digitale Magazin Republik an den Start gehen kann, haben wir 3000 Abonnentinnen und Abonnenten sowie 750{thousandSeparator}000 Franken gesucht. Dieses Ziel haben wir zusammen mit Ihnen am ersten Tag des Crowdfundings nach sieben Stunden und 49 Minuten erreicht. Herzlichen Dank!
           </Interaction.P>
-          <Interaction.P>
+          <Interaction.P {...styles.stretchP}>
             Republik will das Mediensystem entscheidend verändern — deshalb sammeln wir weiter!
             <List>
               <List.Item><Highlight>Bei 5000</Highlight> Unterstützerinnen und Unterstützern haben wir zwei weitere Ausbildungsplätze für junge Journalistinnen und Journalisten geschaffen.</List.Item>

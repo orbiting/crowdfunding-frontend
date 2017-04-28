@@ -9,7 +9,7 @@ import {
 const styles = {
   list: css({
     fontFamily: fontFamilies.sansSerifRegular,
-    fontSize: 16,
+    fontSize: 17,
     lineHeight: '25px',
     listStyle: 'none',
     margin: '10px 0',
