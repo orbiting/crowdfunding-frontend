@@ -28,7 +28,7 @@ const styles = {
   })
 }
 
-const Item = ({children}) => (
+export const Item = ({children}) => (
   <li {...styles.item}>
     {children}
   </li>

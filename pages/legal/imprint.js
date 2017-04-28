@@ -2,6 +2,7 @@ import React from 'react'
 import withData from '../../lib/withData'
 import Frame from '../../components/Frame'
 import Content from '../../components/Frame/Content'
+import List, {Item, Highlight} from '../../components/List'
 
 import {
   A, Interaction
@@ -45,59 +46,71 @@ export default withData(({url}) => {
 
         <br />
         <H2>Vorstand</H2>
-        <P>
-          Nadja Schnetzler, Präsidentin<br />
-          Susanne Sugimoto, Geschäftsführerin, +41 78 897 70 28<br />
-          Laurent Burst<br />
-          Clara Vuillemin
-        </P>
+        <List>
+          <Item>Nadja Schnetzler, Präsidentin</Item>
+          <Item>Susanne Sugimoto, Geschäftsführerin, +41 78 897 70 28</Item>
+          <Item>Laurent Burst</Item>
+          <Item>Clara Vuillemin</Item>
+        </List>
 
         <br />
         <H2>Redaktion</H2>
-        <P>
-          Christof Moser<br />
-          Constantin Seibt
-        </P>
+        <List>
+          <Item>Christof Moser</Item>
+          <Item>Constantin Seibt</Item>
+        </List>
 
         <br />
         <H2>IT-Entwicklung</H2>
-        <P>
-          Clara Vuillemin<br />
-          Thomas Preusse<br />
-          Patrick Recher
-        </P>
+        <List>
+          <Item>Clara Vuillemin</Item>
+          <Item>Thomas Preusse</Item>
+          <Item>Patrick Recher</Item>
+        </List>
 
         <br />
         <H2>Gestaltung</H2>
-        <P>
-          Bodara GmbH (Tobias Peier, Dominique Schmitz)<br />
-          Thomas Preusse
-        </P>
+        <List>
+          <Item>
+            <Highlight>Bodara GmbH</Highlight><br />
+            Tobias Peier<br />
+            Dominique Schmitz<br />
+            Bahar Büyükkavir<br />
+          </Item>
+          <Item>Thomas Preusse</Item>
+        </List>
 
         <br />
         <H2>Fotos</H2>
-        <P>
-          Simon Tanner<br />
-          Laurent Burst<br />
-          Jan Bolomey
-        </P>
+        <List>
+          <Item>Simon Tanner</Item>
+          <Item>Laurent Burst</Item>
+          <Item>Jan Bolomey</Item>
+        </List>
 
         <br />
         <H2>Videofilme</H2>
-        <P>
-          real Film GmbH (Stefan Jung)<br />
-          Regardez! Entertainment GmbH (Bart Wasem, Matthias Zurbriggen)<br />
-          Martin Skalsky<br />
-          Marco di Nardo<br />
-          Risa Chiappori<br />
-          Severin Bärenbold<br />
-          Christian Rösch<br />
-          Fabian Scheffold<br />
-          Richard Höchner<br />
-          Christof Moser<br />
-          Yvonne Kunz<br />
-          Clara Vuillemin
-        </P>
+        <List>
+          <Item>
+            <Highlight>real Film GmbH</Highlight><br />
+            Stefan Jung
+          </Item>
+          <Item>
+            <Highlight>Regardez! Entertainment GmbH</Highlight><br />
+            Bart Wasem<br />
+            Matthias Zurbriggen
+          </Item>
+          <Item>Martin Skalsky</Item>
+          <Item>Marco di Nardo</Item>
+          <Item>Risa Chiappori</Item>
+          <Item>Severin Bärenbold</Item>
+          <Item>Christian Rösch</Item>
+          <Item>Fabian Scheffold</Item>
+          <Item>Richard Höchner</Item>
+          <Item>Christof Moser</Item>
+          <Item>Yvonne Kunz</Item>
+          <Item>Clara Vuillemin</Item>
+        </List>
 
         <br />
         <H2>Copyright</H2>
