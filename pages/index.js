@@ -100,12 +100,12 @@ Eine funktionierende Demokratie braucht funktionierende Medien. Und dafür brauc
           </Interaction.P>
           <Interaction.P {...styles.stretchP}>
             Republik will das Mediensystem entscheidend verändern — deshalb sammeln wir weiter!
-            <List>
-              <List.Item><Highlight>Bei 5000</Highlight> Unterstützerinnen und Unterstützern haben wir zwei weitere Ausbildungsplätze für junge Journalistinnen und Journalisten geschaffen.</List.Item>
-              <List.Item><Highlight>Bei 7000</Highlight> Mitgliedern haben wir die Redaktion um einen zusätzlichen Kopf vergrössert.</List.Item>
-              <List.Item>Jetzt arbeiten wir mit euch am nächsten Ziel: <Highlight>bei 9000</Highlight> Unterstützerinnen und Unterstützern realisieren wir pro Jahr zusätzlich vier grosse und aufwändige Recherchen. Mit Ihrer Unterstützung schaffen wir das! Danke.</List.Item>
-            </List>
           </Interaction.P>
+          <List>
+            <List.Item><Highlight>Bei 5000</Highlight> Unterstützerinnen und Unterstützern haben wir zwei weitere Ausbildungsplätze für junge Journalistinnen und Journalisten geschaffen.</List.Item>
+            <List.Item><Highlight>Bei 7000</Highlight> Mitgliedern haben wir die Redaktion um einen zusätzlichen Kopf vergrössert.</List.Item>
+            <List.Item>Jetzt arbeiten wir mit euch am nächsten Ziel: <Highlight>bei 9000</Highlight> Unterstützerinnen und Unterstützern realisieren wir pro Jahr zusätzlich vier grosse und aufwändige Recherchen. Mit Ihrer Unterstützung schaffen wir das! Danke.</List.Item>
+          </List>
         </div>
 
         {md(mdComponents)`
