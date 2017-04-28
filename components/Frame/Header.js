@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {css, merge} from 'glamor'
-import Link from 'next/link'
 import Router from 'next/router'
 import Status from '../Status'
 import withT from '../../lib/withT'
@@ -184,17 +183,24 @@ class Header extends Component {
         <div {...barStyle}>
           <Container style={{position: 'relative'}}>
             {opaque && (
-              <Link href='/'>
-                <a {...styles.logo}>
-                  <span onClick={(e) => {
-                    if (mobile && expanded && url.pathname === '/') {
-                      this.setState({expanded: false})
-                    }
-                  }}>
-                    <Logo height={logoHeight} />
-                  </span>
-                </a>
-              </Link>
+              <a {...styles.logo} href='/' onClick={(e) => {
+                if (e.currentTarget.nodeName === 'A' &&
+                  (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2))) {
+                  // ignore click for new tab / new window behavior
+                  return
+                }
+                e.preventDefault()
+                if (url.pathname === '/') {
+                  if (mobile && expanded) {
+                    this.setState({expanded: false})
+                  }
+                  window.scrollTo(0, 0)
+                } else {
+                  Router.push('/').then(() => window.scrollTo(0, 0))
+                }
+              }}>
+                <Logo height={logoHeight} />
+              </a>
             )}
             <div {...styles.menu}>
               {(mobile || opaque) && <Menu expanded={expanded}
