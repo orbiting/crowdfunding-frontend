@@ -6,12 +6,14 @@ import {css} from 'glamor'
 
 import withData from '../lib/withData'
 import mdComponents from '../lib/utils/mdComponents'
+import {thousandSeparator} from '../lib/utils/formats'
 
 import Frame from '../components/Frame'
 import Content from '../components/Frame/Content'
 import VideoCover from '../components/VideoCover'
 import VideoPlayer from '../components/VideoPlayer'
 import Share from '../components/Share'
+import List, {Highlight} from '../components/List'
 import {ListWithQuery as TestimonialList} from '../components/Testimonial/List'
 
 import {
@@ -20,7 +22,7 @@ import {
 
 import {
   Label, Button, Lead, colors,
-  P, A, linkRule
+  P, A, linkRule, Interaction
 } from '@project-r/styleguide'
 
 const styles = {
@@ -31,6 +33,11 @@ const styles = {
       border: `1px solid ${colors.divider}`,
       margin: 5
     }
+  }),
+  stretchLead: css({
+    margin: '20px -10px 0',
+    backgroundColor: colors.primaryBg,
+    padding: 10
   })
 }
 
@@ -82,6 +89,20 @@ Eine funktionierende Demokratie braucht funktionierende Medien. Und dafür brauc
             emailSubject={'Es ist Zeit.'} />
         </div>
         {/* Navi? */}
+
+        <div {...styles.stretchLead}>
+          <Interaction.P style={{marginBottom: 10}}>
+            Damit das digitale Magazin Republik 2018 an den Start gehen kann, haben wir 3000 Abonnentinnen und Abonnenten sowie 750{thousandSeparator}000 Franken gesucht. Dieses Ziel haben wir mit Ihnen allen gemeinsam am ersten Tag des Crowdfundings nach sieben Stunden und 49 Minuten erreicht. Herzlichen Dank!
+          </Interaction.P>
+          <Interaction.P>
+            Republik will das Mediensystem entscheidend verändern — deshalb sammeln wir weiter!
+            <List>
+              <List.Item><Highlight>Bei 5000</Highlight> Unterstützerinnen und Unterstützern haben wir zwei weitere Ausbildungsplätze für junge Journalistinnen und Journalisten geschaffen.</List.Item>
+              <List.Item><Highlight>Bei 7000</Highlight> Mitgliedern haben wir die Redaktion um einen zusätzlichen Kopf vergrössert.</List.Item>
+              <List.Item>Jetzt arbeiten wir mit euch am nächsten Ziel: <Highlight>bei 9000</Highlight> Unterstützerinnen und Unterstützern realisieren wir pro Jahr zusätzlich vier grosse und aufwändige Recherchen.</List.Item>
+            </List>
+          </Interaction.P>
+        </div>
 
         {md(mdComponents)`
 <br />
