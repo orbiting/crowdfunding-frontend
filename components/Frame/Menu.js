@@ -89,15 +89,17 @@ const linkActiveStyle = css({
 const Menu = ({items, expanded, id, children, url}) => (
   <nav {...menuStyle} role='navigation' id={id} aria-expanded={expanded}>
     <ul {...listStyle}>
-      {items.map(({label, href}, i) => (
-        <li {...listItemStyle} key={i}>
-          <Link href={href}>
-            <a {...merge(linkStyle, url.pathname === href && linkActiveStyle)}>
-              {label}
-            </a>
-          </Link>
-        </li>
-      ))}
+      {items.map(({label, href, reload}, i) => {
+        const style = merge(linkStyle, url.pathname === href && linkActiveStyle)
+        return (
+          <li {...listItemStyle} key={i}>
+            {reload
+              ? <a href={href} {...style}>{label}</a>
+              : <Link href={href}><a {...style}>{label}</a></Link>
+            }
+          </li>
+        )
+      })}
     </ul>
     {children}
   </nav>
