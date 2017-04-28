@@ -92,14 +92,14 @@ Eine funktionierende Demokratie braucht funktionierende Medien. Und dafür brauc
 
         <div {...styles.stretchLead}>
           <Interaction.P style={{marginBottom: 10}}>
-            Damit das digitale Magazin Republik 2018 an den Start gehen kann, haben wir 3000 Abonnentinnen und Abonnenten sowie 750{thousandSeparator}000 Franken gesucht. Dieses Ziel haben wir mit Ihnen allen gemeinsam am ersten Tag des Crowdfundings nach sieben Stunden und 49 Minuten erreicht. Herzlichen Dank!
+            Damit das digitale Magazin Republik an den Start gehen kann, haben wir 3000 Abonnentinnen und Abonnenten sowie 750{thousandSeparator}000 Franken gesucht. Dieses Ziel haben wir zusammen mit Ihnen am ersten Tag des Crowdfundings nach sieben Stunden und 49 Minuten erreicht. Herzlichen Dank!
           </Interaction.P>
           <Interaction.P>
             Republik will das Mediensystem entscheidend verändern — deshalb sammeln wir weiter!
             <List>
               <List.Item><Highlight>Bei 5000</Highlight> Unterstützerinnen und Unterstützern haben wir zwei weitere Ausbildungsplätze für junge Journalistinnen und Journalisten geschaffen.</List.Item>
               <List.Item><Highlight>Bei 7000</Highlight> Mitgliedern haben wir die Redaktion um einen zusätzlichen Kopf vergrössert.</List.Item>
-              <List.Item>Jetzt arbeiten wir mit euch am nächsten Ziel: <Highlight>bei 9000</Highlight> Unterstützerinnen und Unterstützern realisieren wir pro Jahr zusätzlich vier grosse und aufwändige Recherchen.</List.Item>
+              <List.Item>Jetzt arbeiten wir mit euch am nächsten Ziel: <Highlight>bei 9000</Highlight> Unterstützerinnen und Unterstützern realisieren wir pro Jahr zusätzlich vier grosse und aufwändige Recherchen. Mit Ihrer Unterstützung schaffen wir das! Danke.</List.Item>
             </List>
           </Interaction.P>
         </div>
