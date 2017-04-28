@@ -392,6 +392,7 @@ export const ListWithQuery = compose(
 )(List)
 
 ListWithQuery.defaultProps = {
+  seed: null,
   videosOnly: false,
   limit: 50
 }
@@ -401,7 +402,6 @@ export const generateSeed = () => Math.random() * 2 - 1
 class Container extends Component {
   constructor (props) {
     super(props)
-
     this.state = {}
   }
   render () {
