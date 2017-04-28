@@ -58,7 +58,7 @@ const styles = {
     padding: '7px 15px'
   }),
   logo: css({
-    paddingTop: 20,
+    paddingTop: 15,
     [mediaQueries.mUp]: {
       paddingTop: 25
     },
@@ -214,9 +214,13 @@ class Header extends Component {
             {opaque && <div {...styles.side}>
               {
                 mobile && (
-                  <Button block primary onClick={() => {
-                    Router.push('/pledge').then(() => window.scrollTo(0, 0))
-                  }}>{t('header/button')}</Button>
+                  <Button block primary
+                    onClick={() => {
+                      Router.push('/pledge').then(() => window.scrollTo(0, 0))
+                    }}
+                    style={{height: HEADER_HEIGHT_MOBILE}}>
+                    {t('header/button')}
+                  </Button>
                 )
               }
               {
