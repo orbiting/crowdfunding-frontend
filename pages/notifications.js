@@ -59,7 +59,7 @@ export default withData(withT(({url: {query: {type, context, email}}, t}) => {
       </Head>
       <NarrowContainer>
         <div {...styles.logo}>
-          <Logo />
+          <a href='/'><Logo /></a>
         </div>
         <div {...styles.text}>
           <H1>
