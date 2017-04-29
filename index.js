@@ -92,6 +92,16 @@ app.prepare()
       slug: req.params.slug
     })
   })
+  server.get('/notifications/:type', (req, res) => {
+    return app.render(
+      req,
+      res,
+      '/notifications',
+      Object.assign({}, req.query, {
+        type: req.params.type
+      })
+    )
+  })
   server.get('*', (req, res) => {
     return handle(req, res)
   })
