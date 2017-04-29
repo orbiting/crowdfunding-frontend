@@ -105,7 +105,7 @@ class Status extends Component {
           onMouseOut={() => this.setState({
             showGoal: false
           })}>
-          {goal.people}
+          {countFormat(goal.people)}
         </a>
       )
     })

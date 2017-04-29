@@ -104,7 +104,8 @@ Eine funktionierende Demokratie braucht funktionierende Medien. Und dafür brauc
           <List>
             <List.Item><Highlight>Bei 5000</Highlight> Unterstützerinnen und Unterstützern haben wir zwei weitere Ausbildungsplätze für junge Journalistinnen und Journalisten geschaffen.</List.Item>
             <List.Item><Highlight>Bei 7000</Highlight> Mitgliedern haben wir die Redaktion um einen zusätzlichen Kopf vergrössert.</List.Item>
-            <List.Item>Jetzt arbeiten wir mit euch am nächsten Ziel: <Highlight>bei 9000</Highlight> Unterstützerinnen und Unterstützern realisieren wir pro Jahr zusätzlich vier grosse und aufwändige Recherchen. Mit Ihrer Unterstützung schaffen wir das! Danke.</List.Item>
+            <List.Item><Highlight>Bei 9000</Highlight> Unterstützerinnen und Unterstützern realisieren wir pro Jahr zusätzlich vier grosse und aufwändige Recherchen. Gemeinsam mit euch haben wir das geschafft. Danke!</List.Item>
+            <List.Item>Jetzt liegt das nächste Ziel in Reichweite: Bei 10{thousandSeparator}000 Abonnentinnen und Verlegern richten wir ein fixes Budget ein, um herausragende internationale Autorinnen und Autoren für die Republik zu gewinnen. Und los gehts! Danke für eure Unterstützung!</List.Item>
           </List>
         </div>
 
