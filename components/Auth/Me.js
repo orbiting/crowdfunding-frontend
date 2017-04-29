@@ -1,18 +1,29 @@
 import React from 'react'
+import {compose} from 'redux'
+
 import withMe from '../../lib/withMe'
+import withT from '../../lib/withT'
 
 import SignIn from './SignIn'
 import SignOut from './SignOut'
 
-export default withMe(({me}) => (
+const Me = ({me, t, email}) => (
   <div>
     {me ? (
       <div>
-        Hallo {me.name || me.email}<br />
+        {t('me/signedinAs', {
+          nameOrEmail: me.name || me.email
+        })}
+        <br />
         <SignOut />
       </div>
     ) : (
-      <SignIn />
+      <SignIn email={email} />
     )}
   </div>
-))
+)
+
+export default compose(
+  withMe,
+  withT
+)(Me)

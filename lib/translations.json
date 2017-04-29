@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-27T16:09:06.139Z",
+  "updated": "2017-04-29T22:56:09.529Z",
   "title": "live",
   "data": [
     {
@@ -335,16 +335,16 @@
       "value": "E-Mail ungültig"
     },
     {
-      "key": "signIn/loading",
-      "value": "Lädt"
-    },
-    {
-      "key": "signOut/loading",
-      "value": "Lädt"
+      "key": "signOut/label",
+      "value": "abmelden"
     },
     {
       "key": "signOut/error",
       "value": "Unbekannter Fehler"
+    },
+    {
+      "key": "me/signedinAs",
+      "value": "Sie sind angemeldet als: {nameOrEmail}"
     },
     {
       "key": "pledge/title",
@@ -693,6 +693,10 @@
     {
       "key": "api/auth/error",
       "value": "Leider hat etwas nicht ganz geklappt. Bitte versuchen Sie, den Link zur Anmeldung erneut zu klicken. Klappt das ein zweites Mal nicht, stehen wir Ihnen gerne mit Rat zur Verfügung. Schreiben Sie uns Ihr Problem an kontakt@republik.ch."
+    },
+    {
+      "key": "api/auth/errorSavingSession",
+      "value": "Ups, da ist was schiefgelaufen. Sorry!"
     },
     {
       "key": "api/email/invalid",
@@ -1349,6 +1353,42 @@
     {
       "key": "TODO",
       "value": "Wollen Sie nochmal mitmachen? Sie können Abos und Mitgliedschaften verschenken oder auch einfach spenden."
+    },
+    {
+      "key": "notifications/pageTitle",
+      "value": "Mitteilung — Republik"
+    },
+    {
+      "key": "notifications/email-confirmed/title",
+      "value": "E-Mail-Adresse ist bestätigt"
+    },
+    {
+      "key": "notifications/email-confirmed/text",
+      "value": "Perfekt! Ihre E-Mail-Adresse ist somit bestätigt. Sie können dieses Fenster wieder schliessen."
+    },
+    {
+      "key": "notifications/invalid-token/title",
+      "value": "Ungültiger Link"
+    },
+    {
+      "key": "notifications/invalid-token/text",
+      "value": "Der von Ihnen aufgerufene Link ist nicht gültig. Links zur Anmeldung sind nur einmal gültig."
+    },
+    {
+      "key": "notifications/unavailable/title",
+      "value": "System unverfügbar"
+    },
+    {
+      "key": "notifications/unavailable/text",
+      "value": "Leider konnte das System Ihre Anfrage zur Zeit nicht bearbeiten. Versuchen Sie es in 10 Minuten erneut. Klappt das ein zweites Mal nicht, stehen wir Ihnen gerne mit Rat zur Verfügung. Schreiben Sie uns Ihr Problem an <a href=\"mailto:kontakt@republik.ch?subject=Anmeldung%20unverf%C3%BCgbar\">kontakt@republik.ch</a>."
+    },
+    {
+      "key": "notifications/links/home",
+      "value": "Startseite"
+    },
+    {
+      "key": "notifications/links/merci",
+      "value": "Ihre persönliche Übersicht"
     }
   ]
 }

@@ -4,9 +4,10 @@ import {compose} from 'redux'
 import withT from '../../lib/withT'
 import {errorToString} from '../../lib/utils/errors'
 import {meQuery} from '../../lib/withMe'
+import {InlineSpinner} from '../Spinner'
 
 import {
-  Button
+  A
 } from '@project-r/styleguide'
 
 class SignOut extends Component {
@@ -21,10 +22,10 @@ class SignOut extends Component {
     const {loading, error} = this.state
 
     return (
-      <div>
-        <Button
-          disabled={loading}
-          onClick={() => {
+      <span>
+        <A href='#'
+          onClick={(e) => {
+            e.preventDefault()
             if (loading) {
               return
             }
@@ -50,11 +51,10 @@ class SignOut extends Component {
                   loading: false
                 }))
               })
-          }}>abmelden</Button>
-        <br />
-        {loading ? t('signOut/loading') : ''}
-        {!!error && error}
-      </div>
+          }}>{t('signOut/label')}</A>
+        {loading && <InlineSpinner size={25} />}
+        {!!error && ` — ${error}`}
+      </span>
     )
   }
 }
