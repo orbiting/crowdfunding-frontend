@@ -151,11 +151,12 @@ class List extends Component {
     }
     this.ref = ref => { this.container = ref }
     this.onScroll = () => {
-      if (this.container && this.props.isPage) {
+      const {testimonials, isPage} = this.props
+
+      if (this.container && isPage && testimonials) {
         const bbox = this.container.getBoundingClientRect()
         if (bbox.bottom < window.innerHeight * 2) {
           const {isFetchingMore, hasReachEnd, endless} = this.state
-          const {testimonials} = this.props
           if (
             isFetchingMore || hasReachEnd ||
             (testimonials.length >= AUTO_INFINITE && !endless)
@@ -225,7 +226,7 @@ class List extends Component {
     const hasEndText = !videosOnly && !search
 
     return (
-      <Loader loading={testimonials ? false : loading} error={error} render={() => {
+      <Loader loading={!testimonials || loading} error={error} render={() => {
         const items = []
         const lastIndex = testimonials.length - 1
         const requestedTestimonial = (
@@ -331,7 +332,7 @@ class List extends Component {
               <P>{t.elements('testimonial/infinite/end', {
                 count: testimonials.length,
                 pledgeLink: (
-                  <A href='/pledge'>
+                  <A key='pledgeLink' href='/pledge'>
                     {t('testimonial/infinite/end/pledgeLink')}
                   </A>
                 )
@@ -370,15 +371,21 @@ export const ListWithQuery = compose(
         loading: data.loading,
         error: data.error,
         testimonials: data.testimonials,
-        loadMore: () => {
+        loadMore () {
           return data.fetchMore({
             updateQuery: (previousResult, { fetchMoreResult, queryVariables }) => {
+              const testimonials = [
+                ...previousResult.testimonials,
+                ...fetchMoreResult.testimonials
+              ]
               return {
                 ...previousResult,
-                testimonials: [
-                  ...previousResult.testimonials,
-                  ...fetchMoreResult.testimonials
-                ]
+                testimonials: testimonials
+                  .filter(Boolean)
+                  .filter(({id}, i) => {
+                    return i === testimonials
+                      .findIndex(testimonial => testimonial.id === id)
+                  })
               }
             },
             variables: {
