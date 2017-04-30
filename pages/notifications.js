@@ -35,10 +35,6 @@ const styles = {
 
 const {H1, P} = Interaction
 
-// email-confirmed
-// invalidToken
-// unavailable
-
 export default withData(withT(({url: {query: {type, context, email}}, t}) => {
   const links = [
     {

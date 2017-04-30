@@ -342,7 +342,7 @@ class Submit extends Component {
     this.props.pay(data)
       .then(({data: {payPledge}}) => {
         if (!me) {
-          this.props.signIn(user.email)
+          this.props.signIn(user.email, 'pledge')
             .then(({data: {signIn}}) => gotoMerci({
               id: payPledge.pledgeId,
               email: user.email,

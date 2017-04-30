@@ -234,7 +234,7 @@ class PledgeReceivePayment extends Component {
     })
       .then(({data: {payPledge}}) => {
         if (!me) {
-          this.props.signIn(pledge.user.email)
+          this.props.signIn(pledge.user.email, 'pledge')
             .then(({data: {signIn}}) => gotoMerci({
               id: payPledge.pledgeId,
               email: pledge.user.email,
