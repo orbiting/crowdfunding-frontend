@@ -151,11 +151,12 @@ class List extends Component {
     }
     this.ref = ref => { this.container = ref }
     this.onScroll = () => {
-      if (this.container && this.props.isPage) {
+      const {testimonials, isPage} = this.props
+
+      if (this.container && isPage && testimonials) {
         const bbox = this.container.getBoundingClientRect()
         if (bbox.bottom < window.innerHeight * 2) {
           const {isFetchingMore, hasReachEnd, endless} = this.state
-          const {testimonials} = this.props
           if (
             isFetchingMore || hasReachEnd ||
             (testimonials.length >= AUTO_INFINITE && !endless)
@@ -331,7 +332,7 @@ class List extends Component {
               <P>{t.elements('testimonial/infinite/end', {
                 count: testimonials.length,
                 pledgeLink: (
-                  <A href='/pledge'>
+                  <A key='pledgeLink' href='/pledge'>
                     {t('testimonial/infinite/end/pledgeLink')}
                   </A>
                 )
@@ -370,7 +371,7 @@ export const ListWithQuery = compose(
         loading: data.loading,
         error: data.error,
         testimonials: data.testimonials,
-        loadMore: () => {
+        loadMore () {
           return data.fetchMore({
             updateQuery: (previousResult, { fetchMoreResult, queryVariables }) => {
               return {
