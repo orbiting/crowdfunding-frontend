@@ -21,6 +21,13 @@ import {
 const BLOCK_PADDING_TOP = 10
 
 const styles = {
+  title: css({
+    marginBottom: 15,
+    [mediaQueries.onlyS]: {
+      fontSize: 36,
+      lineHeight: '39px'
+    }
+  }),
   content: css({
     color: colors.text,
     fontFamily: fontFamilies.serifRegular,
@@ -75,7 +82,7 @@ const Update = withT(({
 
   return (
     <div {...styles.container}>
-      <H1 style={{marginBottom: 15}}>{title}</H1>
+      <H1 {...styles.title}>{title}</H1>
       <div {...styles.label}>
         {publishedDateTimeFormat(date)}
       </div>
