@@ -7,12 +7,14 @@ import {SPACE} from '../../components/Frame/PureFooter'
 import Head from 'next/head'
 
 import {
-  H1, P, NarrowContainer, Logo, mediaQueries
+  NarrowContainer, Logo, mediaQueries, Interaction
 } from '@project-r/styleguide'
 
 import {
   COUNTDOWN_DATE
 } from '../../constants'
+
+const {H1, P} = Interaction
 
 const styles = {
   logoContainer: css({

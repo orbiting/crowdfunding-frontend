@@ -94,7 +94,7 @@ PIWIK_SITE_ID=2
 You can configure a countdown date, before that date a teaser website will be shown.
 
 ```
-COUNTDOWN_UTC=2017-04-26T07:00:00.000Z
+COUNTDOWN_UTC=2017-04-26T05:00:00.000Z
 COUNTDOWN_NOTE=
 ```
 
