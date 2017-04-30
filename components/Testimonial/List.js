@@ -226,7 +226,7 @@ class List extends Component {
     const hasEndText = !videosOnly && !search
 
     return (
-      <Loader loading={testimonials ? false : loading} error={error} render={() => {
+      <Loader loading={!testimonials || loading} error={error} render={() => {
         const items = []
         const lastIndex = testimonials.length - 1
         const requestedTestimonial = (
@@ -374,12 +374,18 @@ export const ListWithQuery = compose(
         loadMore () {
           return data.fetchMore({
             updateQuery: (previousResult, { fetchMoreResult, queryVariables }) => {
+              const testimonials = [
+                ...previousResult.testimonials,
+                ...fetchMoreResult.testimonials
+              ]
               return {
                 ...previousResult,
-                testimonials: [
-                  ...previousResult.testimonials,
-                  ...fetchMoreResult.testimonials
-                ]
+                testimonials: testimonials
+                  .filter(Boolean)
+                  .filter(({id}, i) => {
+                    return i === testimonials
+                      .findIndex(testimonial => testimonial.id === id)
+                  })
               }
             },
             variables: {
