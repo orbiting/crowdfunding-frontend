@@ -7,6 +7,7 @@ import withT from '../lib/withT'
 import {intersperse} from '../lib/utils/helpers'
 
 import Me from '../components/Auth/Me'
+import RawHtml from '../components/RawHtml'
 
 import {
   Interaction, NarrowContainer, Logo, A
@@ -57,9 +58,9 @@ export default withData(withT(({url: {query: {type, context, email}}, t}) => {
           <H1>
             {t(`notifications/${type}/title`, undefined, '')}
           </H1>
-          <P>
-            {t(`notifications/${type}/text`, undefined, '')}
-          </P>
+          <RawHtml type={P} dangerouslySetInnerHTML={{
+            __html: t(`notifications/${type}/text`, undefined, '')
+          }} />
           {(
             type === 'invalid-token' &&
             (
