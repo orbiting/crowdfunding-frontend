@@ -340,23 +340,22 @@ class Submit extends Component {
       loading: t('pledge/submit/loading/pay')
     }))
     this.props.pay(data)
-      .then(({data}) => {
+      .then(({data: {payPledge}}) => {
         if (!me) {
           this.props.signIn(user.email)
             .then(({data: {signIn}}) => gotoMerci({
-              id: data.payPledge.pledgeId,
+              id: payPledge.pledgeId,
               email: user.email,
               phrase: signIn.phrase
             }))
-            .catch(error => {
-              this.setState(() => ({
-                loading: false,
-                signInError: errorToString(error)
-              }))
-            })
+            .catch(error => gotoMerci({
+              id: data.pledgeId,
+              email: user.email,
+              signInError: errorToString(error)
+            }))
         } else {
           gotoMerci({
-            id: data.payPledge.pledgeId
+            id: payPledge.pledgeId
           })
         }
       })

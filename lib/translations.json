@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-29T22:56:09.529Z",
+  "updated": "2017-04-30T13:05:29.188Z",
   "title": "live",
   "data": [
     {
@@ -29,6 +29,10 @@
     {
       "key": "menu/pledge",
       "value": "Mitmachen"
+    },
+    {
+      "key": "menu/merci",
+      "value": "Merci"
     },
     {
       "key": "header/button",
@@ -1389,6 +1393,26 @@
     {
       "key": "notifications/links/merci",
       "value": "Ihre persönliche Übersicht"
+    },
+    {
+      "key": "merci/postpay/signInError/title",
+      "value": "E-Mail-Verifizierung fehlgeschlagen"
+    },
+    {
+      "key": "merci/postpay/signInError/text",
+      "value": "Ihre Zahlungsinformationen wurden gespeichert. Leider konnte das System aber Ihre E-Mail-Adresse «{email}» zur Zeit nicht verifizieren. Versuchen Sie es in 10 Minuten erneut. Klappt das ein zweites Mal nicht, stehen wir Ihnen gerne mit Rat zur Verfügung. Schreiben Sie uns Ihr Problem an <a href=\"{mailto}\">kontakt@republik.ch</a>."
+    },
+    {
+      "key": "merci/postpay/signInError/email/subject",
+      "value": "E-Mail-Verifizierung fehlgeschlagen nach dem Bezahlen"
+    },
+    {
+      "key": "merci/postpay/signInError/email/body",
+      "value": "E-Mail-Adresse:\n{email}\n\nBuchungsreferenz:\n{pledgeId}\n\nFehler:\n{error}"
+    },
+    {
+      "key": "merci/postpay/signInError/retry",
+      "value": "erneut versuchen"
     }
   ]
 }
