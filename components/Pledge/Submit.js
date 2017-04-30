@@ -723,8 +723,15 @@ class Submit extends Component {
         <br /><br />
         {(emailVerify && !me) && (
           <div style={{marginBottom: 40}}>
-            <P>{t('pledge/submit/emailVerify/note')}</P>
+            <P style={{marginBottom: 10}}>
+              {t('pledge/submit/emailVerify/note')}
+            </P>
             <SignIn email={user.email} />
+          </div>
+        )}
+        {(emailVerify && me) && (
+          <div style={{marginBottom: 40}}>
+            <P>{t('pledge/submit/emailVerify/done')}</P>
           </div>
         )}
         {!!submitError && (

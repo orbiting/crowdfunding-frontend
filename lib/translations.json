@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-30T13:05:29.188Z",
+  "updated": "2017-04-30T13:25:47.203Z",
   "title": "live",
   "data": [
     {
@@ -492,7 +492,11 @@
     },
     {
       "key": "pledge/submit/emailVerify/note",
-      "value": "Diese Mailadresse wurde schon einmal verwendet. Wir haben ein Mail geschickt. Falls das Ihre Mailadresse ist, klicken Sie bitte auf «anmelden»."
+      "value": "Diese E-Mail-Adresse wurde schon einmal verwendet. Falls das Ihre Adresse ist, klicken Sie bitte auf «anmelden»."
+    },
+    {
+      "key": "pledge/submit/emailVerify/done",
+      "value": "Vielen Dank für das Verifizieren Ihrer E-Mail-Adresse."
     },
     {
       "key": "pledge/submit/error/title",

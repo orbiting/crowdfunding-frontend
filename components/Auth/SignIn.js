@@ -9,11 +9,13 @@ import {InlineSpinner} from '../Spinner'
 import RawHtml from '../RawHtml'
 
 import {
-  Button, P,
+  Button, Interaction,
   Field
 } from '@project-r/styleguide'
 
 import Poller from './Poller'
+
+const {P} = Interaction
 
 const styles = {
   form: css({
