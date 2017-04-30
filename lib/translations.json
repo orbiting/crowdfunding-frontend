@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-30T13:25:47.203Z",
+  "updated": "2017-04-30T22:07:30.654Z",
   "title": "live",
   "data": [
     {
@@ -1384,11 +1384,11 @@
     },
     {
       "key": "notifications/unavailable/title",
-      "value": "System unverfügbar"
+      "value": "System nicht verfügbar"
     },
     {
       "key": "notifications/unavailable/text",
-      "value": "Leider konnte das System Ihre Anfrage zur Zeit nicht bearbeiten. Versuchen Sie es in 10 Minuten erneut. Klappt das ein zweites Mal nicht, stehen wir Ihnen gerne mit Rat zur Verfügung. Schreiben Sie uns Ihr Problem an <a href=\"mailto:kontakt@republik.ch?subject=Anmeldung%20unverf%C3%BCgbar\">kontakt@republik.ch</a>."
+      "value": "Leider konnte das System Ihre Anfrage zur Zeit nicht bearbeiten. Versuchen Sie es in 10 Minuten erneut. Klappt es ein zweites Mal nicht, stehen wir Ihnen gerne mit Rat zur Verfügung. Schreiben Sie uns an <a href=\"mailto:kontakt@republik.ch?subject=Anmeldung%20unverf%C3%BCgbar\">kontakt@republik.ch</a>."
     },
     {
       "key": "notifications/links/home",
