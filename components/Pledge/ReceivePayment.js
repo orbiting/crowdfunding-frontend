@@ -232,23 +232,22 @@ class PledgeReceivePayment extends Component {
       pspPayload,
       sourceId
     })
-      .then(({data}) => {
+      .then(({data: {payPledge}}) => {
         if (!me) {
-          this.props.signIn(pledge.user.email)
+          this.props.signIn(pledge.user.email, 'pledge')
             .then(({data: {signIn}}) => gotoMerci({
-              id: data.payPledge.pledgeId,
+              id: payPledge.pledgeId,
               email: pledge.user.email,
               phrase: signIn.phrase
             }))
-            .catch(error => {
-              this.setState(() => ({
-                processing: false,
-                receiveError: errorToString(error)
-              }))
-            })
+            .catch(error => gotoMerci({
+              id: payPledge.pledgeId,
+              email: pledge.user.email,
+              signInError: errorToString(error)
+            }))
         } else {
           gotoMerci({
-            id: data.payPledge.pledgeId
+            id: payPledge.pledgeId
           })
         }
       })

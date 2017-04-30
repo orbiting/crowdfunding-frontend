@@ -9,11 +9,13 @@ import {InlineSpinner} from '../Spinner'
 import RawHtml from '../RawHtml'
 
 import {
-  Button, P,
+  Button, Interaction,
   Field
 } from '@project-r/styleguide'
 
 import Poller from './Poller'
+
+const {P} = Interaction
 
 const styles = {
   form: css({
@@ -150,7 +152,8 @@ mutation signIn($email: String!) {
 
 export const withSignIn = graphql(signInMutation, {
   props: ({mutate}) => ({
-    signIn: email => mutate({variables: {email}})
+    signIn: (email, context = 'signIn') =>
+      mutate({variables: {email}}) // tmp disabled for old backend
   })
 })
 

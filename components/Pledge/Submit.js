@@ -340,23 +340,22 @@ class Submit extends Component {
       loading: t('pledge/submit/loading/pay')
     }))
     this.props.pay(data)
-      .then(({data}) => {
+      .then(({data: {payPledge}}) => {
         if (!me) {
-          this.props.signIn(user.email)
+          this.props.signIn(user.email, 'pledge')
             .then(({data: {signIn}}) => gotoMerci({
-              id: data.payPledge.pledgeId,
+              id: payPledge.pledgeId,
               email: user.email,
               phrase: signIn.phrase
             }))
-            .catch(error => {
-              this.setState(() => ({
-                loading: false,
-                signInError: errorToString(error)
-              }))
-            })
+            .catch(error => gotoMerci({
+              id: data.pledgeId,
+              email: user.email,
+              signInError: errorToString(error)
+            }))
         } else {
           gotoMerci({
-            id: data.payPledge.pledgeId
+            id: payPledge.pledgeId
           })
         }
       })
@@ -724,8 +723,15 @@ class Submit extends Component {
         <br /><br />
         {(emailVerify && !me) && (
           <div style={{marginBottom: 40}}>
-            <P>{t('pledge/submit/emailVerify/note')}</P>
+            <P style={{marginBottom: 10}}>
+              {t('pledge/submit/emailVerify/note')}
+            </P>
             <SignIn email={user.email} />
+          </div>
+        )}
+        {(emailVerify && me) && (
+          <div style={{marginBottom: 40}}>
+            <P>{t('pledge/submit/emailVerify/done')}</P>
           </div>
         )}
         {!!submitError && (

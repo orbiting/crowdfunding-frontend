@@ -42,8 +42,6 @@ class Poller extends Component {
     clearTimeout(this.tickTimeout)
   }
   render () {
-    const elapsedMs = this.state.now - this.state.start
-
     const {data: {error, me}} = this.props
     if (me) {
       return null
@@ -51,7 +49,6 @@ class Poller extends Component {
 
     return (
       <span>
-        {Math.round(elapsedMs / 1000)}s
         {!!error && <span><br />{error.toString()}</span>}
       </span>
     )

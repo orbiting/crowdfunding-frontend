@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-27T16:09:06.139Z",
+  "updated": "2017-04-30T22:10:22.062Z",
   "title": "live",
   "data": [
     {
@@ -29,6 +29,10 @@
     {
       "key": "menu/pledge",
       "value": "Mitmachen"
+    },
+    {
+      "key": "menu/merci",
+      "value": "Merci"
     },
     {
       "key": "header/button",
@@ -335,16 +339,16 @@
       "value": "E-Mail ungültig"
     },
     {
-      "key": "signIn/loading",
-      "value": "Lädt"
-    },
-    {
-      "key": "signOut/loading",
-      "value": "Lädt"
+      "key": "signOut/label",
+      "value": "abmelden"
     },
     {
       "key": "signOut/error",
       "value": "Unbekannter Fehler"
+    },
+    {
+      "key": "me/signedinAs",
+      "value": "Sie sind angemeldet als: {nameOrEmail}"
     },
     {
       "key": "pledge/title",
@@ -488,7 +492,11 @@
     },
     {
       "key": "pledge/submit/emailVerify/note",
-      "value": "Diese Mailadresse wurde schon einmal verwendet. Wir haben ein Mail geschickt. Falls das Ihre Mailadresse ist, klicken Sie bitte auf «anmelden»."
+      "value": "Diese E-Mail-Adresse wurde schon einmal verwendet. Falls das Ihre Adresse ist, klicken Sie bitte auf «anmelden»."
+    },
+    {
+      "key": "pledge/submit/emailVerify/done",
+      "value": "Vielen Dank für das Verifizieren Ihrer E-Mail-Adresse."
     },
     {
       "key": "pledge/submit/error/title",
@@ -693,6 +701,10 @@
     {
       "key": "api/auth/error",
       "value": "Leider hat etwas nicht ganz geklappt. Bitte versuchen Sie, den Link zur Anmeldung erneut zu klicken. Klappt das ein zweites Mal nicht, stehen wir Ihnen gerne mit Rat zur Verfügung. Schreiben Sie uns Ihr Problem an kontakt@republik.ch."
+    },
+    {
+      "key": "api/auth/errorSavingSession",
+      "value": "Ups, da ist was schiefgelaufen. Sorry!"
     },
     {
       "key": "api/email/invalid",
@@ -1349,6 +1361,62 @@
     {
       "key": "TODO",
       "value": "Wollen Sie nochmal mitmachen? Sie können Abos und Mitgliedschaften verschenken oder auch einfach spenden."
+    },
+    {
+      "key": "notifications/pageTitle",
+      "value": "Mitteilung — Republik"
+    },
+    {
+      "key": "notifications/email-confirmed/title",
+      "value": "E-Mail-Adresse ist bestätigt"
+    },
+    {
+      "key": "notifications/email-confirmed/text",
+      "value": "Perfekt! Ihre E-Mail-Adresse ist somit bestätigt. Sie können dieses Fenster wieder schliessen."
+    },
+    {
+      "key": "notifications/invalid-token/title",
+      "value": "Ungültiger Link"
+    },
+    {
+      "key": "notifications/invalid-token/text",
+      "value": "Der von Ihnen aufgerufene Link ist nicht gültig. Links zur Anmeldung sind nur einmal gültig."
+    },
+    {
+      "key": "notifications/unavailable/title",
+      "value": "System nicht verfügbar"
+    },
+    {
+      "key": "notifications/unavailable/text",
+      "value": "Leider kann unser System Ihre Anfrage zur Zeit nicht bearbeiten. Versuchen Sie es in 10 Minuten erneut. Klappt es ein zweites Mal nicht, stehen wir Ihnen gerne mit Rat zur Verfügung. Schreiben Sie uns an <a href=\"mailto:kontakt@republik.ch?subject=Anmeldung%20nicht%20verf%C3%BCgbar\">kontakt@republik.ch</a>."
+    },
+    {
+      "key": "notifications/links/home",
+      "value": "Startseite"
+    },
+    {
+      "key": "notifications/links/merci",
+      "value": "Ihre persönliche Übersicht"
+    },
+    {
+      "key": "merci/postpay/signInError/title",
+      "value": "E-Mail-Verifizierung fehlgeschlagen"
+    },
+    {
+      "key": "merci/postpay/signInError/text",
+      "value": "Ihre Zahlungsinformationen wurden gespeichert. Leider konnte das System aber Ihre E-Mail-Adresse «{email}» zur Zeit nicht verifizieren. Versuchen Sie es in 10 Minuten erneut. Klappt das ein zweites Mal nicht, stehen wir Ihnen gerne mit Rat zur Verfügung. Schreiben Sie uns Ihr Problem an <a href=\"{mailto}\">kontakt@republik.ch</a>."
+    },
+    {
+      "key": "merci/postpay/signInError/email/subject",
+      "value": "E-Mail-Verifizierung fehlgeschlagen nach dem Bezahlen"
+    },
+    {
+      "key": "merci/postpay/signInError/email/body",
+      "value": "E-Mail-Adresse:\n{email}\n\nBuchungsreferenz:\n{pledgeId}\n\nFehler:\n{error}"
+    },
+    {
+      "key": "merci/postpay/signInError/retry",
+      "value": "erneut versuchen"
     }
   ]
 }
