@@ -37,10 +37,6 @@ const {H1, P} = Interaction
 
 export default withData(withT(({url: {query: {type, context, email}}, t}) => {
   const links = [
-    {
-      href: '/',
-      label: t('notifications/links/home')
-    },
     context === 'pledge' && {
       href: '/merci',
       label: t('notifications/links/merci')
@@ -75,13 +71,13 @@ export default withData(withT(({url: {query: {type, context, email}}, t}) => {
               <Me email={email} />
             </div>
           )}
-          <P {...styles.link}>
+          {links.length > 0 && <P {...styles.link}>
             {intersperse(links.map((link, i) => (
               <A key={i} href={link.href}>
                 {link.label}
               </A>
             )), () => ' — ')}
-          </P>
+          </P>}
         </div>
       </NarrowContainer>
     </div>
