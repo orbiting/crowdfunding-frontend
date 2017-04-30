@@ -80,7 +80,7 @@ export default withData(withT(({url: {query: {type, context, email}}, t}) => {
               <A key={i} href={link.href}>
                 {link.label}
               </A>
-            )), ' — ')}
+            )), () => ' — ')}
           </P>
         </div>
       </NarrowContainer>
