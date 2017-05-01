@@ -114,7 +114,7 @@ class Status extends Component {
       return (
         <div style={{paddingTop: 10}}>
           <P>
-            <span {...styles.smallNumber}>{status.people}</span>
+            <span {...styles.smallNumber}>{countFormat(status.people)}</span>
             <Label>{peopleLabel}</Label>
           </P>
           <Bar goals={goalsByPeople}
@@ -129,7 +129,7 @@ class Status extends Component {
     return (
       <div>
         <P>
-          <span {...styles.primaryNumber}>{status.people}</span>
+          <span {...styles.primaryNumber}>{countFormat(status.people)}</span>
           <Label>{peopleLabel}</Label>
         </P>
         <Bar goals={goalsByPeople}
