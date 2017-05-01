@@ -1,6 +1,10 @@
 import React, {PropTypes} from 'react'
 import {css} from 'glamor'
 
+import {
+  fontFamilies
+} from '@project-r/styleguide'
+
 const mqMedium = '@media (min-width: 600px)'
 const mqLarge = '@media (min-width: 900px)'
 const coverStyle = css({
@@ -23,7 +27,7 @@ const coverImageStyle = css({
 const creditStyle = css({
   position: 'absolute',
   fontSize: 10,
-  fontFamily: 'sans-serif',
+  fontFamily: fontFamilies.sansSerifRegular,
   color: '#000',
   right: 10,
   top: 5,

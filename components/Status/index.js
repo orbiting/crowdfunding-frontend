@@ -20,21 +20,21 @@ const styles = {
     display: 'block',
     marginBottom: -10,
     fontSize: 80,
-    fontFamily: 'sans-serif',
+    fontFamily: fontFamilies.sansSerifRegular,
     lineHeight: 1
   }),
   secondaryNumber: css({
     display: 'block',
     marginBottom: -5,
     fontSize: 43,
-    fontFamily: 'sans-serif',
+    fontFamily: fontFamilies.sansSerifRegular,
     lineHeight: 1
   }),
   smallNumber: css({
     display: 'block',
     marginBottom: -5,
     fontSize: 22,
-    fontFamily: 'sans-serif',
+    fontFamily: fontFamilies.sansSerifRegular,
     lineHeight: 1
   }),
   hoverGoal: css({
