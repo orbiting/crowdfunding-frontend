@@ -22,9 +22,9 @@ import {
 const {H2, P: IP} = Interaction
 
 const enVideo = {
-  hls: 'https://player.vimeo.com/external/213080233.m3u8?s=40bdb9917fa47b39119a9fe34b9d0fb13a10a92e',
-  mp4: 'https://player.vimeo.com/external/213080233.hd.mp4?s=ab84df0ac9134c86bb68bd9ea7ac6b9df0c35774&profile_id=119',
-  subtitles: '/static/subtitles/main.vtt',
+  hls: 'https://player.vimeo.com/external/215798102.m3u8?s=b3730f7f6332985771865f3b85c13aeae93223b1',
+  mp4: 'https://player.vimeo.com/external/215798102.hd.mp4?s=bdc8421b7d1c2a04fcf9521655332e54c7c4c039&profile_id=119',
+  subtitles: '/static/subtitles/main_en.vtt',
   poster: `${STATIC_BASE_URL}/static/video/main.jpg`
 }
 
@@ -135,10 +135,10 @@ ${meta.url}
         <R />
 
         <div {...styles.text}>
-          <Highlight>Ohne Journalismus keine Demokratie.</Highlight><br />
-          Und ohne Demokratie keine Freiheit. Wenn der Journalismus stirbt, stirbt auch die <Strong>offene Gesellschaft, das freie Wort, der Wettbewerb der besten Argumente. Freier Journalismus</Strong> war die erste Forderung der <Strong>liberalen Revolution.</Strong> Und das Erste, was jede Diktatur wieder abschafft. Journalismus ist ein Kind <Strong>der Aufklärung.</Strong> Seine Aufgabe ist die <Strong>Kritik der Macht.</Strong> Deshalb ist Journalismus mehr als nur ein Geschäft für irgendwelche Konzerne. Wer Journalismus macht, übernimmt <Strong>Verantwortung für die Öffentlichkeit.</Strong>
+          <Highlight>Without journalism, no democracy.</Highlight><br />
+          And without democracy, freedom disappears. If journalism dies, it is the end of an <Strong>open society</Strong>, of <Strong>freedom of expression</Strong>, of the right to <Strong>choose between competing arguments. Freedom of the press</Strong> was a battle cry of the <Strong>liberal revolution</Strong> – and it is the  rst victim of every dictatorship. Journalism was born out of <Strong>the Enlightenment.</Strong> Its purpose is to <Strong>criticize the powers</Strong> that be. That is why journalism is more than just a business to be run by corporate executives. Journalism is <Strong>responsible only to the public</Strong> – for in a democracy it is the same as in all of life: making <Strong>sound decisions</Strong> depends on getting <Strong>sound information</Strong>. Good journalism sends out teams to <Strong>explore reality</Strong>. The mission of journalists is to bring back the <Strong>facts and context</Strong> that citizens in a democracy need – and to report them as they are, <Strong>independently</Strong>, conscientiously, and <Strong>fearing no one</Strong> but boredom. Journalism seeks <Strong>clarity</Strong>, waging a constant battle <Strong>against the primordial fear of the new.</Strong> Good journalism needs <Strong>passion</Strong>, skill and commitment. And it needs a thoughtful, curious and <Strong>fearless public.</Strong>
           {' '}
-          Denn in der Demokratie gilt das Gleiche wie überall im Leben: Menschen brauchen <Strong>vernünftige Informationen, um vernünftige Entscheidungen zu treffen.</Strong> Guter Journalismus schickt <Strong>Expeditionsteams in die Wirklichkeit.</Strong> Seine Aufgabe ist, den Bürgerinnen und Bürgern die <Strong>Fakten und Zusammenhänge</Strong> zu liefern, pur, <Strong>unabhängig,</Strong> nach bestem Gewissen, <Strong>ohne Furcht</Strong> vor niemandem als der Langweile. Journalismus strebt nach <Strong>Klarheit</Strong>, er ist <Strong>der Feind der uralten Angst vor dem Neuen.</Strong> Journalismus braucht <Strong>Leidenschaft,</Strong> Können und Ernsthaftigkeit. Und ein aufmerksames, neugieriges, <Strong>furchtloses Publikum.</Strong> <Highlight style={{verticalAlign: 'top'}}>Sie!</Highlight>
+          <Highlight style={{verticalAlign: 'top'}}>You!</Highlight>
         </div>
       </div>
 
