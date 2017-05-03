@@ -208,6 +208,7 @@ const Belongings = ({loading, error, pledges, hasMemberships, me, t, signOut, hi
           </div>
         )}
         <br /><br />
+        {me.email}<br />
         <A href='#' onClick={(e) => {
           e.preventDefault()
           signOut()
