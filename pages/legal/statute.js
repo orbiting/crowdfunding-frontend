@@ -43,29 +43,31 @@ Unter der Firma Project R Genossenschaft (Project R Cooperative; Project R Soci�
 **Artikel 2 – Zweck**
 
 1. Die gemeinnützige Genossenschaft und ihre Mitglieder bezwecken die Förderung der Demokratie durch Stärkung, Erhalt und Weiterentwicklung des Journalismus als vierte Gewalt; mutig, neugierig, der Wahrhaftigkeit und Unabhängigkeit verpflichtet. 
-
 2. Die Genossenschaft setzt sich für die Vermittlung aller relevanter Informationen ein, die Bürgerinnen und Bürgern eine kritische Wissens- und Meinungsbildung und fundierte Entscheidungen ermöglichen.
-
 3. Der öffentlichen Sache und dem Gemeinwohl verpflichtet, fördert die Genossenschaft die Teilnahme am konstruktiven Diskurs; zur Stärkung des gegenseitigen Verständnisses, diskriminierungsfrei und vielfältig.
-
 4. Die Genossenschaft ist frei in der Wahl ihrer Mittel zur Erfüllung ihres Zwecks. Sie kann dazu unter anderem in folgenden Bereichen tätig werden: im Verlagswesen, in der Informatik, in der Rechts- und sonstigen Beratung, in der Ausbildung und in Finanzierungsaktivitäten, wie auch in allen anderen Bereichen, welche zur Erreichung ihres Zwecks dienlich sind.
-
 5. Die Genossenschaft ist konfessionell neutral und politisch unabhängig.
-
 6. Die Mitglieder der Genossenschaft sind bereit, die Genossenschaft und sich gegenseitig in konstruktiver Weise bei der Erreichung ihrer Ziele zu unterstützen. 
-
 7. Die Genossenschaft will mit ihrer Tätigkeit eine positive Wirkung auf das Gemeinwohl erzielen.
-
 8. Die Genossenschaft kann Zweigniederlassungen und Tochtergesellschaften errichten und sich an anderen Unternehmen beteiligen sowie alle Geschäfte tätigen, die direkt oder indirekt mit ihrem Zweck in Zusammenhang stehen.
 
 **Artikel 3 – Zielerreichung**
 
-1. Die Genossenschaft erfüllt ihren Zweck insbesondere durch:  die Entwicklung und Lancierung von neuen journalistischen Formaten; Unterstützung von Projekten, die dem Genossenschaftszweck entsprechen; Mittelbeschaffung; Entwicklung von IT-Applikationen, bevorzugt Open Source; Zurverfügungstellung und Finanzierung von Infrastruktur; Übersetzung und Verbreitung von journalistischen Inhalten; Erbringung und Ermöglichung von Rechts- und anderer Beratung, wie auch der Durchsetzung von rechtlichen und anderen Ansprüchen; Ausbildung von journalistischem Nachwuchs; Entwicklung von neuen Verbreitungskanälen für journalistische Inhalte, sei dies als Eigenentwicklung oder durch Unterstützen von Drittentwicklungen; Unterstützung hervorragender Recherchen und journalistischer Projekte; Anschubfinanzierung von Projekten, die dem Zweck der Genossenschaft dienen; und Durchführung von Ausbildungs-, Informations- und Debattenveranstaltungen, insbesondere auch an Schulen und in der Öffentlichkeit.
-
+1. Die Genossenschaft erfüllt ihren Zweck insbesondere durch:
+    - a. die Entwicklung und Lancierung von neuen journalistischen Formaten;
+    - b. Unterstützung von Projekten, die dem Genossenschaftszweck entsprechen;
+    - c. Mittelbeschaffung;
+    - d. Entwicklung von IT-Applikationen, bevorzugt Open Source;
+    - e. Zurverfügungstellung und Finanzierung von Infrastruktur;
+    - f. Übersetzung und Verbreitung von journalistischen Inhalten;
+    - g. Erbringung und Ermöglichung von Rechts- und anderer Beratung, wie auch der Durchsetzung von rechtlichen und anderen Ansprüchen;
+    - h. Ausbildung von journalistischem Nachwuchs;
+    - i. Entwicklung von neuen Verbreitungskanälen für journalistische Inhalte, sei dies als Eigenentwicklung oder durch Unterstützen von Drittentwicklungen;
+    - j. Unterstützung hervorragender Recherchen und journalistischer Projekte;
+    - k. Anschubfinanzierung von Projekten, die dem Zweck der Genossenschaft dienen;
+    - l. und Durchführung von Ausbildungs-, Informations- und Debattenveranstaltungen, insbesondere auch an Schulen und in der Öffentlichkeit.
 2. Die Genossenschaft kann ihre Leistungen entgeltlich oder unentgeltlich erbringen, wobei sie die wirtschaftlichen Verhältnisse des Empfängers der Leistungen gebührend berücksichtigt. 
-
 3. Die Genossenschaft strebt ein ausgewogenes finanzielles Resultat an, ist aber nicht gewinnstrebend. Ein allfälliger Überschuss fällt vollumfänglich in das Genossenschaftsvermögen und ist im Rahmen der Weiterentwicklung der genossenschaftlichen Aktivitäten und deren Zweckbestimmung zu verwenden. 
-
 4. Die Genossenschaft kann sich auch über Spenden, Subventionen, Leistungsvereinbarungen und Zuwendungen finanzieren.
 
 ## II. Mitgliedschaft
@@ -96,7 +98,7 @@ Die Genossenschaft hat nur eine Mitgliederkategorie (ordentliche Mitglieder).
 
 4. Der Vorstand führt ein Mitgliederverzeichnis, das zwingend die für Zustellungen im Rahmen des Mitgliedschaftsverhältnisses gültige E-Mail-Adresse des Mitglieds (gemäss Artikel 39 Absatz 2) enthalten muss. Als Mitglied der Genossenschaft wird nur anerkannt, wer darin eingetragen ist.
 
-Artikel 8 – Mitgliedschaftsdauer
+**Artikel 8 – Mitgliedschaftsdauer**
 
 1. Die Mitgliedschaft dauert genau ein Jahr ab dem Tag des Beitrittszeitpunkts (Artikel 7 Absatz 2). 
 
@@ -136,16 +138,15 @@ Artikel 8 – Mitgliedschaftsdauer
 
 **Artikel 11 – Erlöschen der Mitgliedschaft**
 
-1. Die Mitgliedschaft erlischt:
-durch Austritt des Mitglieds (Artikel 8 Absatz 4);
-durch Nichterneuerung der Mitgliedschaft (Artikel 8 Absatz 2) oder bei Nichtbezahlen der Mitgliedschaftsbeiträge;
-durch Streichung aus dem Mitgliederregister (Artikel 8 Absatz 5);
-durch Widerruf der Mitgliedschaft durch den Vorstand bei Neueintritt (Artikel 7 Absatz 3) oder Erneuerung der Mitgliedschaft (Artikel 8 Absatz 2 i.V.m. Artikel 7 Absatz 3);
-durch Ausschluss gemäss Artikel 12;
-durch Auflösung oder Umwandlung der Genossenschaft;
-durch Liquidation oder Konkurs (anwendbar bei Mitgliedern, die juristische Personen sind); oder
-durch Tod (anwendbar bei Mitgliedern, die natürliche Personen sind).
-
+1. Die Mitgliedschaft erlischt:  
+    * a. durch Austritt des Mitglieds (Artikel 8 Absatz 4);  
+    * b. durch Nichterneuerung der Mitgliedschaft (Artikel 8 Absatz 2) oder bei Nichtbezahlen der Mitgliedschaftsbeiträge;  
+    * c. durch Streichung aus dem Mitgliederregister (Artikel 8 Absatz 5);  
+    * d. durch Widerruf der Mitgliedschaft durch den Vorstand bei Neueintritt (Artikel 7 Absatz 3) oder Erneuerung der Mitgliedschaft (Artikel 8 Absatz 2 i.V.m. Artikel 7 Absatz 3);  
+    * e. durch Ausschluss gemäss Artikel 12;  
+    * f. durch Auflösung oder Umwandlung der Genossenschaft;  
+    * g. durch Liquidation oder Konkurs (anwendbar bei Mitgliedern, die juristische Personen sind); oder  
+    * h. durch Tod (anwendbar bei Mitgliedern, die natürliche Personen sind).
 2. In den Fällen von vorstehend Litera f und g wird der anteilige Mitgliederbeitrag zurückerstattet, der dem nicht genutzten Anteil des laufenden Mitgliedschaftsjahres des betroffenen Mitglieds entspricht. Im Falle von Litera d findet Artikel 7 Absatz 3 (letzter Satz) Anwendung. In allen übrigen Fällen verfällt ein bezahlter Mitgliederbeitrag der Genossenschaft vollumfänglich und ohne Ersatzanspruch.
 
 **Artikel 12 – Ausschluss**
@@ -321,7 +322,7 @@ Die Organe der Genossenschaft sind:
 
 ## C. Genossenschaftsrat
 
-**Artikel 26 – Zusammensetzung*
+**Artikel 26 – Zusammensetzung**
 
 1. Der Genossenschaftsrat setzt sich aus mindestens zehn (10) und maximal dreissig (30) Abgeordneten zusammen, die durch die Gesamtheit der Mitglieder aus dem Kreis der Mitglieder gewählt werden. Pro fünfhundert (500) Mitglieder ist ein Abgeordneter/eine Abgeordnete zu wählen; sobald die Genossenschaft mehr als sechstausend (6000) Mitglieder hat, wird die Anzahl Abgeordneter auf dem vorgenannten Maximum von dreissig (30) Abgeordneten festgelegt.
 
@@ -342,75 +343,42 @@ Die Organe der Genossenschaft sind:
 **Artikel 27 – Befugnisse**
 
 1. Der Genossenschaftsrat hat folgende selbständige Befugnisse:
-
-- Vorberatung der zur Urabstimmung gelangenden Gegenstände und Beschlussfassung über Anträge an die Gesamtheit der Mitglieder, inklusive konsultativer Abstimmungen und Antragstellen zu Mitgliederinitiativen;
-
-- Abnahme des jährlichen Berichts des Vorstands über die Geschäftstätigkeit;
-
-- Aktivitäten im Rahmen seines eigenen Budgets; und
-
-- Beschlussfassung über die ihm vom Vorstand im Rahmen seiner Kompetenzen unterbreiteten Gegenstände.
-
+    * a. Vorberatung der zur Urabstimmung gelangenden Gegenstände und Beschlussfassung über Anträge an die Gesamtheit der Mitglieder, inklusive konsultativer Abstimmungen und Antragstellen zu Mitgliederinitiativen;
+    * b. Abnahme des jährlichen Berichts des Vorstands über die Geschäftstätigkeit;
+    * c. Aktivitäten im Rahmen seines eigenen Budgets; und
+    * d. Beschlussfassung über die ihm vom Vorstand im Rahmen seiner Kompetenzen unterbreiteten Gegenstände.
 2. Übereinstimmende Beschlüsse des Genossenschaftsrats und des Vorstands sind in folgenden Fällen erforderlich, wobei betreffend Geschäften in der alleinigen Kompetenz der Gesamtheit der Mitglieder (Artikel 18) die nachfolgenden Befugnisse nur das Recht zur Antragstellung an die Gesamtheit der Mitglieder umfasst:
-
-- Unter Vorbehalt von nachstehend Absatz 3: Einberufung von Urabstimmungen und Festlegung der Traktanden und Wahlvorschläge für den Genossenschaftsrat und für die Präsidentin/den Präsidenten des Genossenschaftsrats. 
-
-- Fusionen und Abspaltungen;
-
-- Grundsätzliche Änderungen der Geschäftspolitik;
-
-- Statutenänderungen (unter Vorbehalt von Artikel 18 Absatz 1 Litera b);
-
-- Abnahme der Jahresrechnung und des Revisionsstellenberichts und des Budgets der Genossenschaft;
-
-- Ausschluss von Abgeordneten;
-
-- Wahl oder Abberufung der Revisionsstelle; 
-
-- Festlegung der Mitgliederbeiträge und Erstreckung der Mitgliedschaftsdauer (Artikel 8 Absatz 3);
-
-- Bestimmen von Kommissionen oder Beizug von Externen (Artikel 28 Absatz 1);
-
-- Bestimmung der Anzahl der Mitglieder des Vorstands und Wahl der Mitglieder des Vorstands;
-
-- Beschlüsse über Liegenschaftengeschäfte, soweit nicht der Vorstand zuständig ist; und
-
-- Entscheidungen über Rekurse gemäss Artikel 12 Absatz 2 (Ausschluss von Mitgliedern). 
-
+    - a. Unter Vorbehalt von nachstehend Absatz 3: Einberufung von Urabstimmungen und Festlegung der Traktanden und Wahlvorschläge für den Genossenschaftsrat und für die Präsidentin/den Präsidenten des Genossenschaftsrats. 
+    - b. Fusionen und Abspaltungen;
+    - c. Grundsätzliche Änderungen der Geschäftspolitik;
+    - d. Statutenänderungen (unter Vorbehalt von Artikel 18 Absatz 1 Litera b);
+    - e. Abnahme der Jahresrechnung und des Revisionsstellenberichts und des Budgets der Genossenschaft;
+    - f. Ausschluss von Abgeordneten;
+    - g. Wahl oder Abberufung der Revisionsstelle; 
+    - h. Festlegung der Mitgliederbeiträge und Erstreckung der Mitgliedschaftsdauer (Artikel 8 Absatz 3);
+    - i. Bestimmen von Kommissionen oder Beizug von Externen (Artikel 28 Absatz 1);
+    - e. Bestimmung der Anzahl der Mitglieder des Vorstands und Wahl der Mitglieder des Vorstands;
+    - j. Beschlüsse über Liegenschaftengeschäfte, soweit nicht der Vorstand zuständig ist; und
+    - k. Entscheidungen über Rekurse gemäss Artikel 12 Absatz 2 (Ausschluss von Mitgliedern). 
 3. Können sich Genossenschaftsrat und Vorstand bei Traktanden oder Wahlvorschlägen nicht einigen, sind die Abstimmung auf jeden Fall gemäss den Weisungen des Vorstands anzusetzen. Bei der Einladung ist auf die Differenz in der Auffassung zwischen Genossenschaftsrat und Vorstand ausdrücklich hinzuweisen, und jedem dieser Organe ist angemessen Gelegenheit zum schriftlichen Darlegen seines Standpunktes in der Einladung zur Urabstimmung zu geben.
-
 4. Der Genossenschaftsrat soll konsultativ zu wichtigen Fragen der Geschäftstätigkeit der Genossenschaft Stellung nehmen, insbesondere soll er:
-
-- den Vorstand unterstützen, ihm Anregungen geben und ihm neue Betätigungsfelder für die Genossenschaft aufzeigen und aktiv ermöglichen;
-
-- dem Vorstand Anregungen zur Mittelbeschaffung und zum Mitteleinsatz geben;
-
-- mindestens jährlich einen Bericht des Vorstands über die Tätigkeit der Genossenschaft beraten; und
-
-- jährlich einen Bericht über seine eigenen Aktivitäten zur Unterstützung der Genossenschaft verfassen.
-
+    - a. den Vorstand unterstützen, ihm Anregungen geben und ihm neue Betätigungsfelder für die Genossenschaft aufzeigen und aktiv ermöglichen;
+    - b. dem Vorstand Anregungen zur Mittelbeschaffung und zum Mitteleinsatz geben;
+    - c. mindestens jährlich einen Bericht des Vorstands über die Tätigkeit der Genossenschaft beraten; und
+    - d. jährlich einen Bericht über seine eigenen Aktivitäten zur Unterstützung der Genossenschaft verfassen.
 5. Überdies fasst der Genossenschaftsrat Beschluss im Rahmen des gesetzlich Zulässigen über alle sonstigen Gegenstände, die der Vorstand, die Revisionsstelle oder die Liquidatoren/Liquidatorinnen ihm zur Beschlussfassung oder konsultativ unterbreiten.
-
 6. Der Vorstand und die Geschäftsleitung beantworten in den Sitzungen des Genossenschaftsrats alle Fragen über den Stand der Angelegenheiten der Genossenschaft, sofern nicht höherstehende Vertraulichkeitsverpflichtungen bestehen. Der Vorstand darf bestimmte Informationen als vertraulich bezeichnen oder andere Massnahmen zur Wahrung von Vertraulichkeitsverpflichtungen treffen.
-
 7. Die Mitglieder des Genossenschaftsrats haben auch nach ihrem Austritt aus dem Genossenschaftsrat das Sitzungsgeheimnis zu wahren.
-
 8. Dem Genossenschaftsrat wird im Budget der Genossenschaft ein angemessener Betrag zur freien Verwendung zugesprochen, um ihm eigene Aktivitäten zu ermöglichen. Der Ausschuss entscheidet über deren Verwendung.
 
 **Artikel 28 – Konstituierung, Einberufung und Beschlussfassung**
 
 1. Nach einer Erneuerungswahl beruft der Vorstand den Genossenschaftsrat innert drei (3) Monaten nach seiner Wahl zu einer ersten Sitzung ein. Bis auf die Präsidentin/den Präsidenten, die/der von der Gesamtheit der Mitglieder gewählt wird (Artikel 18 Absatz 1 Litera c), konstituiert sich der Genossenschaftsrat selbst. Er wählt mindestens einen Vizepräsidenten/eine Vizepräsidentin, und er kann einen Ausschuss bezeichnen, der sich aus drei (3) bis fünf (5) Abgeordneten zusammensetzt. Die Präsidentin/der Präsident und der Vizepräsident/die Vizepräsidentin dürfen dem Ausschuss angehören. Unter Vorbehalt der Zustimmung des Vorstands und des erforderlichen Budgets kann der Genossenschaftsrat für bestimmte Aufgaben Kommissionen ernennen oder Externe beiziehen.
-
 2. Jeweils nach Rücksprache mit dem Vorstand und dem Ausschuss beruft die Präsidentin/der Präsident des Genossenschaftsrats diesen periodisch zu Sitzungen ein; der Vorstand unterstützt ihn. Es sollen mindestens zwei Sitzungen im Jahr physisch stattfinden, die übrigen Sitzungen können über geeignete elektronische Medien stattfinden, die eine aktive Teilnahme an der Meinungsbildung durch die Teilnehmenden ermöglichen. Vor einer Urabstimmung oder Mitgliederversammlung ist in jedem Fall eine Sitzung durchzuführen. Die Mitglieder des Vorstands und die Vertreter der Revisionsstelle sind grundsätzlich berechtigt, an Sitzungen des Genossenschaftsrats mit beratender Stimme teilzunehmen. In begründeten Ausnahmefällen können auch Sitzungen ganz oder teilweise ohne Teilnahme des Vorstands oder der Revisionsstelle stattfinden; dem Vorstand ist das Protokoll dieser Sitzungen zuzustellen.
-
 3. Die Präsidentin/der Präsident führt den Vorsitz und leitet die Verhandlungen. Der Vorstand orientiert sie/ihn laufend über wichtige Aktivitäten der Genossenschaft und Entwicklungen, welche die Genossenschaft betreffen. Der Vorstand lädt die Präsidentin/den Präsidenten des Genossenschaftsrats nach seinem eigenen Gutdünken an Sitzungen des Vorstands ein, wo sie/er mit beratender Stimme teilnimmt.
-
 4. Der Ausschuss vertritt den Genossenschaftsrat und bereitet gemeinsam mit dem Vorstand die Sitzungen vor. Dabei stehen dem Ausschuss die administrativen Ressourcen der Genossenschaft kostenlos zur Verfügung.
-
 5. In der Regel werden die Mitglieder des Genossenschaftsrats in der Form gemäss Artikel 39 Absatz 2 zehn (10) Tage vor einer Sitzung eingeladen; in dringenden Fällen ausnahmsweise fünf (5) Tage vor der Sitzung.
-
 6. Der Genossenschaftsrat ist beschlussfähig, wenn mindestens die Hälfte seiner Mitglieder anwesend ist. Beschlüsse werden mit der einfachen Mehrheit der abgegebenen Stimmen gefasst; bei Stimmengleichheit hat die Präsidentin/der Präsident den Stichentscheid. Jede/jeder Abgeordnete hat eine Stimme. Stellvertretung oder Stimmen aufgrund von Instruktionen ist nicht zulässig.
-
 7. Lehnt der Genossenschaftsrat Anträge des Vorstands gemäss Artikel 27 Absatz 1 Litera h ab, so kann der Vorstand diese Anträge der Urabstimmung unterbreiten.
 
 ## D. Vorstand
@@ -418,77 +386,51 @@ Die Organe der Genossenschaft sind:
 **Artikel 29 – Zusammensetzung, Konstitution und Amtsdauer**
 
 1. Der Vorstand übt die Funktionen der Verwaltung gemäss Art. 894 OR aus und besteht aus mindestens drei (3) Mitgliedern der Genossenschaft. Der Vorstand konstituiert sich selbst, bezeichnet aber mindestens eine Vorsitzende/einen Vorsitzenden des Vorstands.
-
 2. Vorbehältlich der Amtsdauer des ersten Vorstands (siehe Absatz 3) werden die Mitglieder des Vorstands vom Genossenschaftsrat für eine Amtsdauer von einem Geschäftsjahr gewählt, die mit dem Tag ihrer Wahl beginnt; sie verbleiben, sofern sie nicht ausscheiden, bis zur Ernennung ihres Nachfolgers/ihrer Nachfolgerin oder bis zu ihrer Wiederwahl im Amt. Wird ein Mitglied vor Ablauf seiner Amtsdauer ersetzt, so tritt sein Nachfolger/seine Nachfolgerin in dessen Amtsdauer ein. Wiederwahl ist unbeschränkt möglich.
-
 3. Die Amtsdauer der Mitglieder des ersten Vorstands der Genossenschaft beträgt drei (3) Geschäftsjahre; die übrigen Bestimmungen Absatzes 2 gelten analog.
 
 **Artikel 30 – Aufgaben**
 
 1. Dem Vorstand obliegt die oberste Leitung der Geschäfte der Genossenschaft und die Aufsicht und Kontrolle über die Geschäftsführung. Der Vorstand ist für die Behandlung aller Geschäfte zuständig, die nicht durch Gesetz oder diese Statuten einem anderen Organ vorbehalten sind. Der Vorstand vertritt die Genossenschaft gegen aussen.
-
 2. Der Vorstand ist berechtigt, die Geschäftsführung und Vertretung durch Erlass eines Organisationsreglements ganz oder zum Teil an einzelne Mitglieder (Delegierte) oder an Dritte (Direktoren/Direktorinnen) zu übertragen.
-
 3. Der Vorstand kann alle erforderlichen Reglemente und Weisungen erlassen.
 
 **Artikel 31 – Kompetenzen**
 
 Der Vorstand hat folgende unübertragbaren und unentziehbaren Aufgaben:
 
-- die Ausgestaltung des Rechnungswesens, der Finanzkontrolle sowie der Oberleitung der Genossenschaft und die Erteilung der nötigen Weisungen;
-
-- die Festlegung der Organisation der Geschäftsleitung;
-
-- Finanzplanung, sofern diese für die Führung der Genossenschaft notwendig ist, insbesondere auch Genehmigung und Überwachung der für die Geschäftstätigkeit erforderlichen Budgets im Rahmen des jährlich durch den Genossenschaftsrat genehmigten Budgets;
-
-- Finanzführung, inklusive des Festlegens der anwendbaren Rechnungslegungsstandards und der Rechnungslegungsgrundsätze, wie auch der Verantwortlichkeit für eine allfällige Fondsbuchhaltung;
-
-- die Ernennung und Abberufung der mit der Geschäftsführung und der Vertretung betrauten Personen und die Regelung ihrer Zeichnungsberechtigung;
-
-- die Oberaufsicht über und die personelle Führung der mit der Geschäftsführung betrauten Personen, namentlich im Hinblick auf die Befolgung der Gesetze, Statuten, Reglemente und Weisungen; 
-
-- die Erstellung des Geschäftsberichts sowie die Vorbereitung der Urabstimmungen, Mitgliederversammlungen und Sitzungen des Genossenschaftsrats, wie auch Ausführung ihrer Beschlüsse;
-
-- die Führung des Mitgliederregisters;
-
-- Beschlüsse über Miete von Geschäftsräumlichkeiten und beweglichen Geräten;
-
-- Beschlüsse über Beteiligungen und Zweigniederlassungen, insbesondere auch das Ausüben von Aktionärs- oder Gesellschafterrechten bei Beteiligungen;
-
-- die Festlegung der geschäftlichen und ideellen Ziele der Genossenschaft unter Berücksichtigung der Interessen der Genossenschaft, unter Vorbehalt der diesbezüglichen Befugnisse des Genossenschaftsrats;
-
-- die Beschlüsse über Unterstützungsleistungen und besondere Leistungen an Mitglieder; 
-
-- Beschlussfassung über bzw. im Zusammenhang mit der Durchführung von Urabstimmungen; 
-
-- Genehmigung von Reglementen (insbesondere Personal- und Spesenreglement); 
-
-- Abschluss und Anpassungen von Vereinbarungen mit Organisationen der Arbeitnehmer/Arbeitnehmerinnen, Versicherungs- und Vorsorgeeinrichtungen; und
-
-- die Benachrichtigung des Richters/der Richterin im Falle der Überschuldung.
+- a. die Ausgestaltung des Rechnungswesens, der Finanzkontrolle sowie der Oberleitung der Genossenschaft und die Erteilung der nötigen Weisungen;
+- b. die Festlegung der Organisation der Geschäftsleitung;
+- c. Finanzplanung, sofern diese für die Führung der Genossenschaft notwendig ist, insbesondere auch Genehmigung und Überwachung der für die Geschäftstätigkeit erforderlichen Budgets im Rahmen des jährlich durch den Genossenschaftsrat genehmigten Budgets;
+- d. Finanzführung, inklusive des Festlegens der anwendbaren Rechnungslegungsstandards und der Rechnungslegungsgrundsätze, wie auch der Verantwortlichkeit für eine allfällige Fondsbuchhaltung;
+- e. die Ernennung und Abberufung der mit der Geschäftsführung und der Vertretung betrauten Personen und die Regelung ihrer Zeichnungsberechtigung;
+- f. die Oberaufsicht über und die personelle Führung der mit der Geschäftsführung betrauten Personen, namentlich im Hinblick auf die Befolgung der Gesetze, Statuten, Reglemente und Weisungen; 
+- g. die Erstellung des Geschäftsberichts sowie die Vorbereitung der Urabstimmungen, Mitgliederversammlungen und Sitzungen des Genossenschaftsrats, wie auch Ausführung ihrer Beschlüsse;
+- h. die Führung des Mitgliederregisters;
+- i. Beschlüsse über Miete von Geschäftsräumlichkeiten und beweglichen Geräten;
+- j. Beschlüsse über Beteiligungen und Zweigniederlassungen, insbesondere auch das Ausüben von Aktionärs- oder Gesellschafterrechten bei Beteiligungen;
+- k. die Festlegung der geschäftlichen und ideellen Ziele der Genossenschaft unter Berücksichtigung der Interessen der Genossenschaft, unter Vorbehalt der diesbezüglichen Befugnisse des Genossenschaftsrats;
+- l. die Beschlüsse über Unterstützungsleistungen und besondere Leistungen an Mitglieder; 
+- m. Beschlussfassung über bzw. im Zusammenhang mit der Durchführung von Urabstimmungen; 
+- n. Genehmigung von Reglementen (insbesondere Personal- und Spesenreglement); 
+- o. Abschluss und Anpassungen von Vereinbarungen mit Organisationen der Arbeitnehmer/Arbeitnehmerinnen, Versicherungs- und Vorsorgeeinrichtungen; und
+- p. die Benachrichtigung des Richters/der Richterin im Falle der Überschuldung.
 
 **Artikel 32 – Einberufung**
 
 
 1. Die Sitzungen des Vorstands werden von der/dem Vorsitzenden oder, im Falle seiner/ihrer Verhinderung, von einem anderen Mitglied des Vorstands einberufen, sooft dies als notwendig erscheint. Eine Sitzung ist auch einzuberufen, wenn ein Mitglied des Vorstands dies schriftlich und unter Angabe der Gründe verlangt. 
-
 2. Über die Verhandlungen und Beschlüsse des Vorstands ist ein Protokoll zu führen, das durch die Vorsitzende/den Vorsitzenden und den Sekretär/die Sekretärin zu unterzeichnen ist.
-
 3. Mitglieder der Geschäftsleitung haben auf Aufforderung des Vorstands an den Sitzungen des Vorstands mit beratender Stimme teilzunehmen.
 
 **Artikel 33 – Beschlussfassung**
 
 
 1. Der Vorstand ist beschlussfähig, wenn wenigstens die Hälfte der Vorstandsmitglieder anwesend ist. Als anwesend gilt ein Vorstandsmitglied auch, wenn es in anderer Weise (z.B. über Video-, Web- oder Telefonkonferenz) aktiv an den Verhandlungen, der Meinungsbildung und der Beschlussfassung teilnehmen kann.
-
 2. Beschlüsse werden durch die Mehrheit der stimmenden Vorstandsmitglieder gefasst. Stellvertretung ist ausgeschlossen, ebenso Stimmenthaltung, ausser in Fällen von Interessenkollisionen. Falls Vorstandsmitglieder abwesend sind, sind ihnen (zur Wahrung der Rechte gemäss Absatz 6) durch die/den Vorsitzende/n die Beschlüsse innert längstens vierundzwanzig (24) Stunden nach Abschluss der Sitzung zur Kenntnis zu bringen.
-
 3. Beschlüsse des Vorstands können auch auf schriftlichem Wege (einschliesslich Post, E-Mail oder anderen Kommunikationssystemen, die eine schriftliche Dokumentation zulassen) getroffen werden, sofern nicht ein Vorstandsmitglied mündliche Beratung oder Beratung in einer Sitzung mit physischer Anwesenheit verlangt; jeder so gefasste Beschluss hat die gleiche Gültigkeit wie die an einer Sitzung gefassten Beschlüsse und muss gemäss Artikel 25 Absatz 2 protokolliert werden.
-
 4. Die/der Vorsitzende des Vorstands hat bei Stimmengleichheit den Stichentscheid.
-
 5. Beschlüsse über Gegenstände, die nicht auf der Traktandenliste verzeichnet sind, dürfen nur gefasst werden, wenn kein Vorstandsmitglied dagegen Einsprache erhebt.
-
 6. Falls Beschlüsse in Abwesenheit eines oder mehrerer Vorstandsmitglieder gefasst wurden, kann jedes Vorstandsmitglied, das bei der Beschlussfassung abwesend war, innert vierundzwanzig (24) Stunden, nachdem ihm das Ergebnis der Beschlussfassung gemäss Absatz 2 bekannt gegeben wurde, bei der/dem Vorsitzenden verlangen, dass dieser Beschluss suspendiert wird und dem Vorstand im Sinne einer Wiedererwägung zur neuerlichen Beschlussfassung vorgelegt wird. Eine Wiedererwägungsbeschlussfassung hat innert kürzestmöglicher Frist in einer Sitzung unter Anwesenheit des entsprechenden Vorstandsmitglieds stattzufinden. Der Beschluss in dieser Sitzung ist endgültig. Das Analoge gilt für Beschlüsse, die durch Stichentscheid der/des Vorsitzenden zustande gekommen sind; diesfalls sind die in der Beschlussfassung durch den Stichentscheid überstimmten Vorstandsmitglieder berechtigt, den Antrag auf eine Wiedererwägungsbeschlussfassung zu stellen.
 
 ## E.  Geschäftsleitung
@@ -497,11 +439,8 @@ Der Vorstand hat folgende unübertragbaren und unentziehbaren Aufgaben:
 
 
 1. Zur Leitung der Tagesgeschäfte der Genossenschaft kann der Vorstand eine Geschäftsleitung einsetzen, die als geschäftsführendes Organ in eigener Verantwortlichkeit handelt.
-
 2. Der Vorstand legt die Zahl der Mitglieder der Geschäftsleitung fest und bezeichnet deren Vorsitzenden/Vorsitzende und die Organisation der Geschäftsleitung.
-
 3. Die Geschäftsleitung vertritt die Geschäfte der Genossenschaft unter Vorbehalt der Befugnisse des Vorstands nach Artikel 31. Im Rahmen ihrer Befugnisse trifft die Geschäftsleitung alle Massnahmen, die die geschäftlichen und ideellen Ziele der Genossenschaft fördern.
-
 4. Die Mitglieder der Geschäftsleitung müssen nicht Mitglieder der Genossenschaft sein.
 
 ## F.  Revisionsstelle
@@ -509,11 +448,8 @@ Der Vorstand hat folgende unübertragbaren und unentziehbaren Aufgaben:
 **Artikel 35 – Anforderungen und Aufgaben**
 
 1. Die Gesamtheit der Mitglieder wählt eine Revisionsstelle. Als Revisionsstelle können eine oder mehrere natürliche oder juristische Personen oder Personengesellschaften gewählt werden. Die Revisionsstelle muss ihren Wohnsitz, ihren Sitz oder eine eingetragene Zweigniederlassung in der Schweiz haben. 
-
 2. Muss die Genossenschaft ihre Jahresrechnung durch eine Revisionsstelle ordentlich prüfen lassen oder ist sie zur eingeschränkten Revision verpflichtet, wählt der Genossenschaftsrat einen zugelassenen Revisionsexperten nach den Vorschriften des Revisionsaufsichtsgesetzes vom 16. Dezember 2005 als Revisionsstelle. Vorbehalten bleibt der Verzicht auf die Wahl einer Revisionsstelle.
-
 3. Die Revisionsstelle wird für eine Amtsdauer von einem Geschäftsjahr gewählt. Letztere endet mit der Versammlung (bzw. Urabstimmung) der Gesamtheit der Mitglieder, welcher der Revisionsbericht zu erstatten ist. Eine Wiederwahl ist möglich; eine Abberufung ist jederzeit und fristlos möglich. 
-
 4. Der Revisionsstelle obliegt die Prüfung gemäss Art. 728 bis 729c OR.
 
 ## V. Geschäftsjahr und Gewinnverwendung
@@ -522,9 +458,7 @@ Der Vorstand hat folgende unübertragbaren und unentziehbaren Aufgaben:
 
 
 1. Das Geschäftsjahr der Genossenschaft wird vom Vorstand festgelegt.
-
 2. Die Bücher müssen je auf das Ende eines Geschäftsjahres abgeschlossen und die Jahresrechnung innert vier (4) Monaten nach Abschluss des Geschäftsjahres der Revisionsstelle zur Prüfung vorgelegt werden.
-
 3. Ein allfälliger Reinertrag fällt vollumfänglich in das Genossenschaftsvermögen und ist im Rahmen der Weiterentwicklung der genossenschaftlichen Aktivität und deren Zweckbestimmung zu verwenden. 
 
 ## VI. Übergangsbestimmungen
@@ -533,11 +467,8 @@ Der Vorstand hat folgende unübertragbaren und unentziehbaren Aufgaben:
 
 
 1. Bis die Genossenschaft mindestens 300 Mitglieder hat, bildet die Mitgliederversammlung das oberste Organ und vereinigt die Befugnisse der Gesamtheit der Mitglieder und des Genossenschaftsrats auf sich. 
-
 2. Sobald die Genossenschaft mehr als 300 Mitglieder hat, bildet die Gesamtheit der Mitglieder gemäss den statutarischen Bestimmungen das oberste Organ. Bis zur Konstituierung des ersten Genossenschaftsrats vereinigt der Vorstand die Befugnisse des Genossenschaftsrats und des Vorstands auf sich. Ausgenommen davon sind die Befugnisse gemäss Artikel 27 Absatz 1 Litera c und Artikel 27 Absatz 2 Literae b, d, e, f und k, über welche vorübergehend auf Antrag des Vorstands die Gesamtheit der Mitglieder mittels Urabstimmung oder Mitgliederversammlung entscheidet.
-
 3. Der erste Genossenschaftsrat muss bis spätestens 30. Juni 2018 konstituiert sein.
-
 4. Die Amtsdauer des ersten Vorstands dauert fort; er wird nicht neu gewählt.
 
 ## VII. Auflösung und Liquidation
@@ -546,9 +477,7 @@ Der Vorstand hat folgende unübertragbaren und unentziehbaren Aufgaben:
 
 
 1. Die Genossenschaft wird in den vom Gesetz vorgesehenen Fällen oder durch Beschluss der Gesamtheit der Mitglieder in einer Urabstimmung oder in einer Mitgliederversammlung mit einer Mehrheit von zwei Dritteln der abgegebenen Stimmen aufgelöst.
-
 2. Die Liquidation erfolgt nach den gesetzlichen Vorschriften.
-
 3. Ein allfälliger Liquidationserlös wird vollumfänglich einer steuerbefreiten Organisation mit ähnlicher Zwecksetzung überwiesen; den Mitgliedern steht kein Anteil am Liquidationserlös zu.
 
 ## VIII. Schlussbestimmungen
@@ -557,20 +486,15 @@ Der Vorstand hat folgende unübertragbaren und unentziehbaren Aufgaben:
 
 
 1. Alle Mitteilungen der Genossenschaft an die Mitglieder erfolgen schriftlich (einschliesslich Telefax oder E-Mail) unter Vorbehalt abweichender gesetzlicher oder statutarischer Bestimmungen.
-
 2. Der schriftlichen Kommunikation ist die elektronische Kommunikation gleichgestellt; Zustellungen an Mitglieder über die im Mitgliederregister verzeichnete E-Mail-Adresse gelten als gültig vorgenommen.
-
 3. Beschlussfassungen aller Organe (auch bei Urabstimmungen) wie auch rechtlich relevante Erklärungen der Mitglieder (z.B. Beitritts- oder Austrittserklärungen, Erklärungen über Verlängerung oder Nichtverlängerung der Mitgliedschaft etc.) können auch über geeignete Online-Plattformen oder Apps erfolgen, solange der Vorstand angemessene Massnahmen trifft, um die Identität der Abstimmenden und das Ergebnis festzustellen und sicherzustellen, dass es nicht zu mehrfacher Stimmabgabe oder anderen Missbräuchen kommt. Der Vorstand darf auch E-Mail-Nachrichten akzeptieren. Die Identifikation über die bei der Genossenschaft vom Mitglied hinterlegte E-Mail-Adresse, auch ohne dass die E-Mail zertifiziert ist, genügt als Mittel zur Feststellung der Identität des/der Erklärenden oder des Absenders/der Absenderin einer Willensäusserung oder Nachricht.
-
 4. Der Vorstand stellt über die Website der Genossenschaft ein Instrument für Mitgliederinitiativen, Petitionen und Wahlvorschläge zur Verfügung, das die Partizipation zwischen den Mitgliedern ermöglicht und insbesondere auch die Sicherung der Identifikation der betreffenden Mitglieder entsprechend vorstehend Absatz 3 sicherstellt.
-
 5. Publikationsorgan der Genossenschaft ist das Schweizerische Handelsamtsblatt.
 
 **Artikel 40 – Mediationsvorbehalt und Gerichtsstand**
 
 
-1. Die Mitglieder der Genossenschaft unterwerfen sich für den Fall von Konflikten, die das Gesellschafts- und/oder Mitgliedschaftsverhältnis betreffen, der Verpflichtung, anstelle des Schlichtungsverfahrens eine Mediation gemäss Art. 213 ff. ZPO durchzuführen. Falls sich die Konfliktparteien nicht innert dreissig (30) Kalendertagen nach Stellen eines Mediationsgesuchs durch die klagende Partei einigen können, wird der Mediator/die Mediatorin durch die Schweizerische Kammer für Wirtschaftsmediation (SKWM), Sektion Zürich, bestimmt. Der Mediator/die Mediatorin ist frei, einen Co-Mediator/eine Co-Mediatorin zu bestimmen. 
-
+1. Die Mitglieder der Genossenschaft unterwerfen sich für den Fall von Konflikten, die das Gesellschafts- und/oder Mitgliedschaftsverhältnis betreffen, der Verpflichtung, anstelle des Schlichtungsverfahrens eine Mediation gemäss Art. 213 ff. ZPO durchzuführen. Falls sich die Konfliktparteien nicht innert dreissig (30) Kalendertagen nach Stellen eines Mediationsgesuchs durch die klagende Partei einigen können, wird der Mediator/die Mediatorin durch die Schweizerische Kammer für Wirtschaftsmediation (SKWM), Sektion Zürich, bestimmt. Der Mediator/die Mediatorin ist frei, einen Co-Mediator/eine Co-Mediatorin zu bestimmen.
 2. Der Gerichtsstand für sämtliche aus dem Gesellschafts- und/oder Mitgliedschaftsverhältnis entstehenden Streitigkeiten befindet sich am Sitz der Genossenschaft.
         `}
       </Content>
