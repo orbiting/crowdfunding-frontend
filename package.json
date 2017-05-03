@@ -58,9 +58,8 @@
     "prop-types": "^15.5.7",
     "react": "^15.5.4",
     "react-apollo": "^1.1.3",
-    "react-input-autosize": "^1.1.0",
     "react-maskedinput": "^3.3.4",
-    "react-textarea-autosize": "^4.0.5",
+    "react-textarea-autosize": "^4.3.0",
     "redux": "^3.6.0",
     "unfetch": "^2.1.2"
   },
