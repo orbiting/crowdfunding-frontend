@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "dependencies": {
     "@project-r/styleguide": {
-      "version": "0.4.8",
-      "from": "@project-r/styleguide@>=0.4.8 <0.5.0",
-      "resolved": "https://registry.npmjs.org/@project-r/styleguide/-/styleguide-0.4.8.tgz"
+      "version": "0.4.9",
+      "from": "@project-r/styleguide@0.4.9",
+      "resolved": "https://registry.npmjs.org/@project-r/styleguide/-/styleguide-0.4.9.tgz"
     },
     "@types/async": {
       "version": "2.0.40",
@@ -3995,7 +3995,7 @@
     },
     "prop-types": {
       "version": "15.5.7",
-      "from": "prop-types@15.5.7",
+      "from": "https://registry.npmjs.org/prop-types/-/prop-types-15.5.7.tgz",
       "resolved": "https://registry.npmjs.org/prop-types/-/prop-types-15.5.7.tgz"
     },
     "proxy-addr": {
