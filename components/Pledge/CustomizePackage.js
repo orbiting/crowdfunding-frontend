@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import Router from 'next/router'
 import {css} from 'glamor'
 import AutosizeInput from 'react-textarea-autosize'
