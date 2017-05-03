@@ -170,8 +170,7 @@ class Header extends Component {
       },
       {
         label: t('menu/community'),
-        href: '/community',
-        reload: true
+        href: '/community'
       },
       {
         label: t('menu/faq'),
