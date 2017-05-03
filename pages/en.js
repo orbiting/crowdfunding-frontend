@@ -182,10 +182,9 @@ ${meta.url}
         </IP>
 
         <H2>Donate</H2>
-        <IP>
+        <IP style={{marginBottom: 10}}>
           Donate to support the independent journalism of the future.
         </IP>
-        <IP style={{margin: '10px 0'}}><A>Donate with PayPal</A></IP>
         <Label>Banking Account</Label><br />
         <table style={{borderSpacing: '10px 5px', marginLeft: -10}}>
           <tbody>
