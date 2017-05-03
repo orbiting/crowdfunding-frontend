@@ -201,6 +201,10 @@ ${meta.url}
               <td>8004 Zürich</td>
             </tr>
             <tr>
+              <td><Label>Country</Label></td>
+              <td>Switzerland</td>
+            </tr>
+            <tr>
               <td><Label>Bank</Label></td>
               <td>Raiffeisenbank Winterthur</td>
             </tr>
@@ -213,7 +217,7 @@ ${meta.url}
       </div>
 
       <div style={{textAlign: 'center', marginBottom: SPACE}}>
-        <PureFooter url={url} />
+        <PureFooter en url={url} />
       </div>
     </NarrowContainer>
   )

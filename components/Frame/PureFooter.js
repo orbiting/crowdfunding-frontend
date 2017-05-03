@@ -10,7 +10,7 @@ import IconLink from '../IconLink'
 import Newsletter from './PureNewsletter'
 
 import {
-  mediaQueries, fontFamilies
+  mediaQueries, fontFamilies, Label
 } from '@project-r/styleguide'
 
 import {
@@ -76,7 +76,7 @@ class Footer extends Component {
     Router.onRouteChangeComplete = null
   }
   render () {
-    const {url, inverted} = this.props
+    const {url, inverted, en} = this.props
     const crowdfundingLive = (new Date()) > COUNTDOWN_DATE
 
     return (
@@ -84,6 +84,9 @@ class Footer extends Component {
         <Newsletter inverted={inverted} />
 
         <div {...styles.nav}>
+          {!!en && (
+            <Label>Read more in German</Label>
+          )}
           <div {...styles.mainNav}>
             {url.pathname === '/' || url.pathname === '/countdown' ? (
               <Link href='/manifest'>
@@ -112,6 +115,9 @@ class Footer extends Component {
             c/o Hotel Rothaus<br />
             Sihlhallenstrasse 1<br />
             8004 Zürich<br />
+            {!!en && (
+              <span>Switzerland<br /></span>
+            )}
           </A>
           <A href={`mailto:${EMAIL}`}>
             {EMAIL}
