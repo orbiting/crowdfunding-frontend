@@ -279,9 +279,9 @@ Die Republik kann nicht ein Projekt von wenigen sein. Ein neues Fundament für u
           }} />
         </div>
 
-        {md(mdComponents)`
-[Alle ansehen](/community)
-  `}
+        <Link href='/community'>
+          <a {...linkRule}>Alle ansehen</a>
+        </Link>
       </Content>
     </div>
   </Frame>

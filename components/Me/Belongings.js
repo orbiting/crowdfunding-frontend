@@ -11,6 +11,7 @@ import track from '../../lib/piwik'
 
 import {withSignOut} from '../Auth/SignOut'
 
+import List, {Item} from '../List'
 import Loader from '../Loader'
 import Share from '../Share'
 import UpdateMe from './Update'
@@ -96,23 +97,19 @@ class PledgeList extends Component {
                   formattedDateTime: dateTimeFormat(createdAt)
                 })}
               </Label>
-              {!!options.length && (
-                <ul style={{marginBottom: 0}}>
-                  {options.map((option, i) => (
-                    <li key={i}>
-                      {option.amount}
-                      {' '}
-                      {t.pluralize(`option/${option.reward.name}/label`, {
-                        count: option.amount
-                      }, option.reward.name)}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <ul>
+              <List>
+                {!!options.length && options.map((option, i) => (
+                  <Item key={`option-${i}`}>
+                    {option.amount}
+                    {' '}
+                    {t.pluralize(`option/${option.reward.name}/label`, {
+                      count: option.amount
+                    }, option.reward.name)}
+                  </Item>
+                ))}
                 {
                   pledge.payments.map((payment, i) => (
-                    <li key={i}>
+                    <Item key={`payment-${i}`}>
                       {payment.method === 'PAYMENTSLIP' && payment.status === 'WAITING' && (
                         <span>
                           <RawHtml dangerouslySetInnerHTML={{
@@ -131,10 +128,10 @@ class PledgeList extends Component {
                           method: t(`merci/payment/method/${payment.method}`)
                         })
                       }} />
-                    </li>
+                    </Item>
                   ))
                 }
-              </ul>
+              </List>
               <GiveMemberships
                 memberships={pledge.memberships}
                 isGivePackage={pledge.package.name === 'ABO_GIVE'} />
@@ -208,6 +205,7 @@ const Belongings = ({loading, error, pledges, hasMemberships, me, t, signOut, hi
           </div>
         )}
         <br /><br />
+        {me.email}<br />
         <A href='#' onClick={(e) => {
           e.preventDefault()
           signOut()

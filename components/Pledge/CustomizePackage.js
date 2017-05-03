@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import Router from 'next/router'
 import {css} from 'glamor'
 import AutosizeInput from 'react-textarea-autosize'
@@ -6,6 +7,8 @@ import AutosizeInput from 'react-textarea-autosize'
 import withT from '../../lib/withT'
 import {fieldsState} from '../../lib/utils/fieldState'
 import {chfFormat} from '../../lib/utils/formats'
+
+import {styles as fieldSetStyles} from '../FieldSet'
 
 import {
   Field, A, Interaction,
@@ -259,7 +262,7 @@ class CustomizePackage extends Component {
               error={dirty.reason && errors.reason}
               value={values.reason}
               renderInput={(props) => (
-                <AutosizeInput style={{paddingBottom: 9}}
+                <AutosizeInput {...fieldSetStyles.autoSize}
                   {...props} />
               )}
               onChange={(_, value, shouldValidate) => {

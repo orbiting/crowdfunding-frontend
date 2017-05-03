@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {css, merge} from 'glamor'
 import {gql, graphql} from 'react-apollo'
 import Link from 'next/link'

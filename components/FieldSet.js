@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {css} from 'glamor'
 import AutosizeInput from 'react-textarea-autosize'
 
@@ -8,7 +9,7 @@ import {
 
 import MaskedInput from 'react-maskedinput'
 
-const styles = {
+export const styles = {
   mask: css({
     '::placeholder': {
       color: 'transparent'
@@ -18,6 +19,11 @@ const styles = {
         color: '#ccc'
       }
     }
+  }),
+  autoSize: css({
+    minHeight: 40,
+    paddingTop: 7,
+    paddingBottom: 6
   })
 }
 
@@ -64,7 +70,7 @@ class FieldSet extends Component {
           let additionalProps = {}
           if (autoSize) {
             additionalProps.renderInput = (props) => (
-              <AutosizeInput style={{paddingBottom: 9}}
+              <AutosizeInput {...styles.autoSize}
                 {...props} />
             )
           }

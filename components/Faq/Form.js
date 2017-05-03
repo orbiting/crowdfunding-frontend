@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
 import {validate as isEmail} from 'email-validator'
+import AutosizeInput from 'react-textarea-autosize'
 
 import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
@@ -11,6 +12,7 @@ import {withSignOut} from '../Auth/SignOut'
 import {withSignIn} from '../Auth/SignIn'
 import ErrorMessage from '../ErrorMessage'
 import {InlineSpinner} from '../Spinner'
+import {styles as fieldSetStyles} from '../FieldSet'
 import RawHtml from '../RawHtml'
 
 import Poller from '../Auth/Poller'
@@ -181,6 +183,10 @@ class QuestionForm extends Component {
           <br />
           <Field label={t('faq/form/question/label')}
             name='question'
+            renderInput={(props) => (
+              <AutosizeInput {...fieldSetStyles.autoSize}
+                {...props} />
+            )}
             error={dirty.question && errors.question}
             value={values.question}
             onChange={(_, value, shouldValidate) => {

@@ -201,9 +201,11 @@ class Update extends Component {
                   this.setState(mergeFields(fields))
                 }}
                 fields={fields(t)} />
-              <Label>{t('merci/updateMe/birthday/hint')}</Label><br />
+              <Label style={{marginTop: -8, display: 'block'}}>
+                {t('merci/updateMe/birthday/hint')}
+              </Label>
               <br /><br />
-              <Label>{t('merci/updateMe/address/label')}</Label><br />
+              <br />
               <AddressForm
                 values={values}
                 errors={errors}
