@@ -8,6 +8,7 @@ import withT from '../../lib/withT'
 import {myThingsQuery} from './queries'
 import Loader from '../Loader'
 import RawHtml from '../RawHtml'
+import List, {Item} from '../List'
 
 import {
   Interaction, Label, linkRule, fontFamilies
@@ -72,14 +73,14 @@ class MembershipGiver extends Component {
                   count: giveable.length
                 })
             }} />
-            <ul>
+            <List>
               {giveable.map((membership, i) => (
-                <li key={i}>
+                <Item key={i}>
                   <code>{membership.voucherCode}</code>
                   {' '}({t('memberships/sequenceNumber/label', membership)})
-                </li>
+                </Item>
               ))}
-            </ul>
+            </List>
             <RawHtml type={P} dangerouslySetInnerHTML={{
               __html: t('memberships/give/description/after')
             }} />
@@ -103,14 +104,14 @@ class MembershipGiver extends Component {
             <RawHtml type={P} dangerouslySetInnerHTML={{
               __html: t('memberships/giver/description')
             }} />
-            <ul>
+            <List>
               {given.map((membership, i) => (
-                <li key={i}>
+                <Item key={i}>
                   {membership.claimerName}
                   {' '}({t('memberships/sequenceNumber/label', membership)})
-                </li>
+                </Item>
               ))}
-            </ul>
+            </List>
           </div>
         )}
       </div>
@@ -143,12 +144,12 @@ class MembershipsList extends Component {
             <H2>{t.pluralize('memberships/title', {
               count: memberships.length
             })}</H2>
-            <ul>
+            <List>
               {memberships.map(membership => {
                 const createdAt = new Date(membership.createdAt)
 
                 return (
-                  <li key={membership.id}>
+                  <Item key={membership.id}>
                     {t(
                       `memberships/type/${membership.type.name}`,
                       {},
@@ -160,10 +161,10 @@ class MembershipsList extends Component {
                         formattedDateTime: dateTimeFormat(createdAt)
                       })}
                     </Label>
-                  </li>
+                  </Item>
                 )
               })}
-            </ul>
+            </List>
           </div>
         )
       }} />
