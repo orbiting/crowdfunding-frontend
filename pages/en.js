@@ -91,7 +91,7 @@ export default ({url}) => {
   const meta = {
     title: 'We are Republik',
     description: '',
-    image: `${STATIC_BASE_URL}/static/social-media/manifest.png`,
+    image: `${STATIC_BASE_URL}/static/social-media/en.png`,
     url: `${PUBLIC_BASE_URL}${url.pathname}`
   }
   const share = {
