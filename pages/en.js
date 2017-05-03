@@ -174,7 +174,7 @@ ${meta.url}
 
         <div {...styles.credits}>
           <Label>
-            Thank you for your support in translating the English Manifesto:
+            Thank you for your support in translating the English manifesto:
             {' '}<br {...styles.mBr} />
             Simon Froehling, Anna Wendel, Hal Wyner, Rafaël Newman
           </Label>
@@ -190,7 +190,7 @@ ${meta.url}
       <VideoPlayer subtitles src={enVideo} />
       <div {...styles.column}>
         <IP style={{marginBottom: 40}}>
-          If you read German you might want to consider becoming a member of the cooperative behind Republik and to read our magazine for a whole year from January 2018 on:
+          If you read German, you might want to consider becoming a member of the cooperative behind Republik and read our magazine for a whole year from January 2018 on:
           {' '}
           <A href='/pledge'>Jetzt mitmachen</A>.
         </IP>
