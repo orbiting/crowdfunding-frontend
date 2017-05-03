@@ -81,6 +81,19 @@ const styles = {
   address: css({
     lineHeight: 1.6,
     fontStyle: 'normal'
+  }),
+  mBr: css({
+    display: 'none',
+    [mediaQueries.mUp]: {
+      display: 'inline'
+    }
+  }),
+  credits: css({
+    marginBottom: SPACE * 2,
+    marginTop: SPACE,
+    maxWidth: 500,
+    marginLeft: 'auto',
+    marginRight: 'auto'
   })
 }
 
@@ -159,9 +172,10 @@ ${meta.url}
           </A>
         </P>
 
-        <div style={{marginBottom: SPACE * 2, marginTop: SPACE}}>
+        <div {...styles.credits}>
           <Label>
-            Thank you for your support in translating the English Manifesto:<br />
+            Thank you for your support in translating the English Manifesto:
+            {' '}<br {...styles.mBr} />
             Simon Froehling, Anna Wendel, Hal Wyner, Rafaël Newman
           </Label>
         </div>
