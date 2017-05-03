@@ -91,49 +91,33 @@ Die Genossenschaft hat nur eine Mitgliederkategorie (ordentliche Mitglieder).
 **Artikel 7 – Aufnahme und Eintritt**
 
 1. Die Aufnahme als Mitglied erfolgt durch Abgabe einer Beitrittserklärung auf elektronischem Weg über die Website der Genossenschaft. Alternativ kann ein Beitrittsgesuch auch auf schriftlichem Weg an den Vorstand gerichtet werden. 
-
 2. Erfolgt die Beitrittserklärung auf elektronischem Weg, so wird der Beitritt unter der (auflösenden) Bedingung der Zahlung des Mitgliederbeitrags (elektronisch über Kreditkarte oder andere Zahlungsmethoden) sofort wirksam. Bei schriftlichem Aufnahmegesuch wird die Mitgliedschaft mit Zahlung des Mitgliederbeitrags (Valuta der Gutschrift auf dem Bankkonto der Genossenschaft) wirksam.
-
 3. Während sechzig (60) Tagen nach dem Termin der Wirksamkeit des Beitritts (vorstehend Absatz 2) kann der Vorstand einen Beitritt ohne Angabe von Gründen rückwirkend auf den Beitrittszeitpunkt für ungültig erklären. Dies erfolgt durch E-Mail (bei elektronisch erklärtem Beitritt) oder durch Brief mit Zustellbestätigung (bei schriftlichem Beitritt). Das Datum des Versands der entsprechenden Mitteilung ist für die Wahrung der Frist gemäss dieser Ziffer massgeblich. Ein bereits geleisteter Mitgliederbeitrag wird in der Regel vollumfänglich zurückerstattet.
-
 4. Der Vorstand führt ein Mitgliederverzeichnis, das zwingend die für Zustellungen im Rahmen des Mitgliedschaftsverhältnisses gültige E-Mail-Adresse des Mitglieds (gemäss Artikel 39 Absatz 2) enthalten muss. Als Mitglied der Genossenschaft wird nur anerkannt, wer darin eingetragen ist.
 
 **Artikel 8 – Mitgliedschaftsdauer**
 
 1. Die Mitgliedschaft dauert genau ein Jahr ab dem Tag des Beitrittszeitpunkts (Artikel 7 Absatz 2). 
-
 2. Vorbehältlich einer ausdrücklichen Erklärung des Mitglieds, dass die Mitgliedschaft nicht fortgesetzt werden soll, verlängert sich die Mitgliedschaft jeweils um ein weiteres Jahr. Eine Verlängerung erfolgt vorbehältlich der Zahlung des Mitgliedschaftsbeitrags (Kreditkartenbelastung zum Zeitpunkt der Verlängerung oder Zahlung des Mitgliedschaftsbeitrags mit Valuta vor dem Erneuerungsdatum); bei einer Verlängerung gilt Artikel 7 Absatz 3 analog. Die Nichtverlängerung der Mitgliedschaft ist vom betreffenden Mitglied elektronisch (E-Mail oder über das Mitgliedschaftsportal) bis spätestens zwei (2) Arbeitstage vor der Erneuerung der Genossenschaft zu übermitteln.
-
 3. Die Dauer der Mitgliedschaft (vorstehend Absatz 1) kann vom Genossenschaftsrat einmalig oder für bestimmte Gruppen von Mitgliedern (z.B. für Mitglieder, die der Genossenschaft als Erste beigetreten sind) erstreckt werden. Dem Vorstand obliegt es, die Modalitäten festzulegen.
-
 4. Ein Mitglied kann jederzeit elektronisch (E-Mail oder über das Mitgliedschaftsportal) den Austritt erklären.
-
 5. Der Vorstand kann Mitglieder im Mitgliederregister streichen, denen Korrespondenz der Genossenschaft mehrmals an die im Mitgliederregister verzeichnete E-Mail-Adresse nicht zugestellt und deren Adresse mit vernünftigem Aufwand nicht ermittelt werden kann. Die Streichung tritt am Ende des laufenden Geschäftsjahrs in Rechtskraft und fällt ohne weiteres dahin, wenn die neue E-Mail-Adresse des Mitglieds bis zu diesem Zeitpunkt bekannt wird.
 
 **Artikel 9 – Rechte der Mitglieder**
 
 1. Die Mitglieder erwerben mit der Mitgliedschaft die ihnen als Genossenschafter/Genossenschafterinnen nach Gesetz und Statuten zustehenden Rechte. 
-
 2. Massgeblich für das Recht zur Teilnahme an einer Urabstimmung oder Mitgliederversammlung (ordentliche oder ausserordentliche) oder für die Ausübung eines anderen Rechts ist, dass das Mitglied zum Zeitpunkt der Ankündigung der Urabstimmung bzw. der Ausübung eines anderen Rechts im Mitgliederregister aufgeführt ist. Als Mitglied wird nur anerkannt, wer darin eingetragen ist.
-
 3. Die Mitglieder geniessen unter gleichen Bedingungen grundsätzlich die gleichen Rechte und Vorteile, welche die Genossenschaft bietet. 
-
 4. Der Vorstand ist befugt, mit den Mitgliedern schriftliche Vereinbarungen zur Konkretisierung der individuellen Bedingungen der Nutzung der Dienstleistungen der Genossenschaft (Rechte und Pflichten) abzuschliessen. Dabei darf sie die individuellen Rahmenbedingungen und die wirtschaftliche und sonstige Leistungsfähigkeit der Mitglieder gebührend berücksichtigen. Die Fördervereinbarungen stehen den Abgeordneten des Genossenschaftsrats zur Einsicht offen.
-
 5. Den Mitgliedern steht kein Anspruch auf Anteil am Reingewinn zu.
-
 6. Allfällige Darlehen der Mitglieder an die Genossenschaft oder andere finanzielle Beiträge werden in der Regel nicht verzinst.
-
 7. Die Genossenschaft leistet keine Bürgschaften.
-
 8. Das Mitgliederregister ist nicht öffentlich, und es besteht für die Mitglieder und Dritte kein Einsichtsrecht. Der Vorstand trifft alle für den Schutz dieser Daten erforderlichen Vorkehrungen. Die Mitglieder können allerdings jederzeit erklären, dass ihre Mitgliedschaft in einem öffentlich einsehbaren Auszug aus dem Register der Mitglieder auf der Website der Genossenschaft aufgeführt wird. Diese Zustimmung kann jederzeit widerrufen werden.
 
 **Artikel 10 – Pflichten der Mitglieder**
 
 1. Die Mitglieder sind verpflichtet, die Zwecke der Genossenschaft aktiv zu verfolgen, ihre Interessen in guten Treuen zu wahren, eine konstruktive Debatten- und Gesprächskultur zu fördern und die Ziele der Genossenschaft zu unterstützen. Sofern abgeschlossen, haben sich die Mitglieder an individuelle Vereinbarungen mit der Genossenschaft auch bei ihrer übrigen Tätigkeit zu halten.
-
 2. Werden den Mitgliedern ausnahmsweise Darlehen gewährt, so verpflichten sich die Mitglieder, diese entsprechend den Bestimmungen des jeweiligen Darlehensvertrags zu tilgen oder, wenn dies so vereinbart ist, durch Leisten von Arbeitstätigkeit zu amortisieren.
-
 3. Die Mitglieder sind verpflichtet, dem Vorstand alle für die Wahrung der Genossenschaftsinteressen nötigen Angaben zu machen und im Streitfall die entsprechenden Belege und Unterlagen vorzulegen. 
 
 **Artikel 11 – Erlöschen der Mitgliedschaft**
@@ -152,9 +136,7 @@ Die Genossenschaft hat nur eine Mitgliederkategorie (ordentliche Mitglieder).
 **Artikel 12 – Ausschluss**
 
 1. Der Vorstand kann ein Mitglied mit sofortiger Wirkung aus der Genossenschaft ausschliessen, wenn vom betreffenden Mitglied oder von dessen Organen statutarische Verpflichtungen missachtet oder sonst gegen die Genossenschaftsinteressen oder die Statuten verstossen wird. Dasselbe gilt beim Wegfall der Mitgliedschaftsvoraussetzungen nach Artikel 4 oder beim Nichterbringen der Beitragsverpflichtungen gemäss Artikel 6. Der Vorstand wahrt das rechtliche Gehör.
-
 2. Gegen den Ausschluss kann das betroffene Mitglied innert dreissig (30) Kalendertagen an die nächste Sitzung des Genossenschaftsrats rekurrieren, die endgültig entscheidet. Der Vorstand bestimmt im Übrigen das Verfahren.
-
 3. Der begründete Rekurs, zusammen mit allen erforderlichen Belegen und sonstigen Beweismitteln, ist dem Vorstand innert der in Absatz 2 genannten Frist schriftlich einzureichen und hat aufschiebende Wirkung. 
 
 **Artikel 13 – Auslösungssumme**
@@ -180,40 +162,28 @@ die kurz-, mittel- und langfristigen Interessen der Genossenschaft.
 
 Die Organe der Genossenschaft sind:
 
-- die Gesamtheit der Mitglieder (Urabstimmung);
-
-- die Mitgliederversammlung;
-
-- der Genossenschaftsrat;
-
-- der Vorstand (Verwaltung);
-
-- die Geschäftsleitung (sofern eingesetzt); und
-
-- die Revisionsstelle.
+- a. die Gesamtheit der Mitglieder (Urabstimmung);
+- b. die Mitgliederversammlung;
+- c. der Genossenschaftsrat;
+- d. der Vorstand (Verwaltung);
+- e. die Geschäftsleitung (sofern eingesetzt); und
+- f. die Revisionsstelle.
 
 ## A. Gesamtheit der Mitglieder; Urabstimmung
 
 **Artikel 16 – Oberstes Organ**
 
 1. Die Gesamtheit der Mitglieder ist das oberste Organ der Genossenschaft. 
-
 2. Sofern die Genossenschaft über mehr als 300 Mitglieder verfügt, fasst die Gesamtheit der Mitglieder ihre Beschlüsse in der Regel durch schriftliche Stimmabgabe (Urabstimmung). Das Ansetzen einer Mitgliederversammlung anstelle einer Urabstimmung bleibt jedoch auch dann zulässig, und sämtliche Bestimmungen, die für Urabstimmungen gelten, gelten analog auch für die Durchführung einer Mitgliederversammlung. 
-
 3. Der schriftlich durchgeführten Urabstimmung ist die elektronische Beschlussfassung gemäss Artikel 39 Absatz 3 gleichgestellt.
-
 4. Das Recht zur Stimmabgabe sowie zur Wahrnehmung der übrigen Rechte, die der Gesamtheit der Mitglieder zustehen, besitzen alle Mitglieder, die am Tag der ersten Einladung zur entsprechenden Urabstimmung im Mitgliederregister eingetragen sind. 
-
 5. Jedes Mitglied hat eine Stimme.
 
 **Artikel 17 – Einberufung**
 
 1. Urabstimmungen finden bei Bedarf statt.
-
 2. Urabstimmungen können durch den Vorstand, den Genossenschaftsrat, die Revisionsstelle oder die Liquidatoren/Liquidatorinnen angesetzt werden. 
-
 3. Die Ankündigung einer Urabstimmung erfolgt gemäss Artikel 39 Absatz 2 unter Angabe der Abstimmungstraktanden und der gestellten Anträge an alle im Mitgliederverzeichnis aufgeführten Mitglieder mindestens zehn (10) Tage vor dem Datum der Urabstimmung. Die Einladung kann für zusätzliche Dokumente auf Downloads auf der Website der Genossenschaft (öffentlich zugänglicher Bereich oder geschützter Bereich, der nur den Mitgliedern zugänglich ist) verweisen.
-
 4. Der Vorstand ist für die ordnungsgemässe Durchführung der Urabstimmung verantwortlich.
 
 
@@ -221,67 +191,42 @@ Die Organe der Genossenschaft sind:
 
 
 1. Der Gesamtheit der Mitglieder stehen folgende unübertragbaren Befugnisse zu:
-
-  - Auflösung der Genossenschaft;
-
-  - Statutenänderungen
-
-  - Wahl der Mitglieder des Genossenschaftsrats (Artikel 26) und dessen Präsidentin/Präsidenten;
-
-  - Wahl der Mitglieder des Vorstands;
-
-  - Wahl der Revisionsstelle; 
-
-  - Abnahme der Jahresrechnung, des Revisionsberichts und des Budgets;
-
-  - Beschlussfassung über Mitgliederinitiativen (Artikel 19); und
-
-  - Beschlussfassung über alle Gegenstände, die der Gesamtheit der Mitglieder durch das Gesetz oder die Statuten vorbehalten sind. 
-
+    - Auflösung der Genossenschaft;
+    - Statutenänderungen
+    - Wahl der Mitglieder des Genossenschaftsrats (Artikel 26) und dessen Präsidentin/Präsidenten;
+    - Wahl der Mitglieder des Vorstands;
+    - Wahl der Revisionsstelle; 
+    - Abnahme der Jahresrechnung, des Revisionsberichts und des Budgets;
+    - Beschlussfassung über Mitgliederinitiativen (Artikel 19); und
+    - Beschlussfassung über alle Gegenstände, die der Gesamtheit der Mitglieder durch das Gesetz oder die Statuten vorbehalten sind. 
 2. Überdies fasst die Gesamtheit der Mitglieder Beschluss über alle sonstigen Gegenstände, die der Vorstand, der Genossenschaftsrat, die Revisionsstelle oder die Liquidatoren/Liquidatorinnen ihr unterbreiten.
-
 3. Der Gesamtheit der Mitglieder können auch konsultative Fragen unterbereitet werden (konsultative Urabstimmung).
-
 4. Die Traktanden von Urabstimmungen dürfen öffentlich bekannt gegeben werden.
 
 **Artikel 19 – Mitgliederinitiativen und Petitionen**
 
 1. Fünf Prozent (5%) der Mitglieder, aber mindestens hundert (100) Mitglieder, können gemeinsam verlangen, dass der Gesamtheit der Mitglieder ein in ihre Kompetenz fallender Gegenstand oder eine konsultative Fragestellung unterbreitet wird («Mitgliederinitiative»). 
-
 2. Zwei Prozent (2%) der Mitglieder, aber mindestens zwanzig (20) Mitglieder, können gemeinsam dem Vorstand ein Anliegen vortragen, mit dem Ersuchen, dieses zu prüfen, allenfalls die ihm richtig erscheinenden Schritte zu treffen oder Entscheidungsprozesse in Gang zu setzen und darüber Bericht zu erstatten («Petition»). Sofern Petitionen die Befugnisse des Genossenschaftsrats betreffen, hört der Vorstand dazu den Genossenschaftsrat an. 
-
 3. Der Vorstand und/oder der Genossenschaftsrat können zu Mitgliederinitiativen und Petitionen zusätzliche Informationen abgeben, Annahme oder Verwerfung einer Mitgliederinitiative empfehlen oder Gegenvorschläge unterbreiten. Allfällige Gegenvorschläge gelangen zugleich mit der entsprechenden Mitgliederinitiative zur Abstimmung.
-
 4. Der Vorstand kann den Zeitpunkt einer Abstimmung über eine Mitgliederinitiative frei bestimmen; sie hat innert zwölf (12) Monaten nach der gültigen Einreichung stattzufinden. Petitionen sind durch den Vorstand zeitnah zu behandeln. Auf offensichtlich nicht konstruktive Mitgliederinitiativen und Petitionen muss nicht eingetreten werden.
-
 5. Mitgliederinitiativen und Petitionen sind über die zu diesem Zweck eingerichteten Interaktionsplattformen der Genossenschaft abzuwickeln (Artikel 39 Absatz 4). 
 
 **Artikel 20 – Wahlvorschläge**
 
 1. Ein Prozent (1%) der Mitglieder, aber mindestens zehn (10) Mitglieder, können bei Erneuerungswahlen für den Genossenschaftsrat Wahlvorschläge einreichen. 
-
 2. Wahlvorschläge sind gültig, wenn sie acht (8) Wochen vor Ablauf der Amtsdauer des Genossenschaftsrats (Artikel 26 Absatz 2) eingereicht werden, von der erforderlichen Anzahl Mitglieder unterstützt werden und die/der Vorgeschlagene gleichzeitig bestätigt, dass sie/er dem Wahlvorschlag zustimmt. Vorgeschlagene können ihre eigene Wahl nicht unterstützen; niemand darf gleichzeitig mehr als einen Wahlvorschlag unterstützen.
-
 3. Wahlvorschläge sind über die zu diesem Zweck eingerichteten Interaktionsplattformen der Genossenschaft einzureichen (Artikel 39 Absatz 4).
-
 4. Unabhängig voneinander können zudem der Genossenschaftsrat und der Vorstand Wahlvorschläge machen. Sie hören sich gegenseitig zu ihren Wahlvorschlägen vorgängig an, sind aber in ihren Wahlvorschlägen frei.
-
 5. Der Vorstand ist für die Gestaltung der Wahllisten verantwortlich. Er darf gegenüber den Mitgliedern zu den Wahlvorschlägen Empfehlungen abgeben.
 
 **Artikel 21 – Beschlussfassung**
 
 1. Jedes Mitglied hat eine Stimme. Bei Wahlen kann jedes Mitglied für so viele Kandidaten/Kandidatinnen stimmen, als Mandate zu vergeben sind; Kumulation ist nicht zulässig.
-
 2. Bei der Urabstimmung sind Stellvertretung oder das Wahrnehmen von Stimmrechten für andere Mitglieder ausgeschlossen.
-
 3. Sofern nicht das Gesetz oder diese Statuten etwas anderes bestimmen, ist eine Urabstimmung unabhängig von der Anzahl der abgegebenen Mitgliederstimmen gültig.
-
 4. Beschlüsse werden durch die absolute Stimmenmehrheit der stimmenden Mitglieder gefasst; leere Stimmabgaben werden dabei für die Ermittlung der Stimmbeteiligung, nicht aber bei der Ermittlung der abgegebenen Stimmen oder des Stimmergebnisses mitgezählt. Zwingende gesetzliche Vorschriften oder abweichende Bestimmungen der Statuten bleiben vorbehalten. 
-
 5. Bei Wahlen gilt das relative Mehr.
-
 6. Beschlüsse über eine Änderung der Statuten sind mit zwei Dritteln (2/3) der abgegebenen Stimmen zu fassen.
-
 7. Der Vorstand dokumentiert die Durchführung einer Urabstimmung in einer Weise, welche eine Überprüfung des Einhaltens der gesetzlichen und statutarischen Bestimmungen über deren Durchführung durch die Revisionsstelle möglich macht.
 
 ## B. Mitgliederversammlung
@@ -289,35 +234,26 @@ Die Organe der Genossenschaft sind:
 **Artikel 22 – Mitgliederversammlung anstelle einer Urabstimmung**
 
 1. Das Ansetzen einer Mitgliederversammlung anstelle einer Urabstimmung ist zulässig, und sämtliche Bestimmungen, die für Einberufung, Befugnisse und Durchführung von Urabstimmungen gelten, gelten in diesem Fall analog, sofern anwendbar und sofern nachstehend keine besonderen Bestimmungen bestehen, auch im Falle der Durchführung einer Mitgliederversammlung. 
-
 2. Zu Mitgliederversammlungen ist analog zu Artikel 17 Absatz 3 einzuladen, allerdings unter Einhaltung einer Einladungsfrist von mindestens zwanzig (20) Tagen (ab Versand der Einladung).
 
 **Artikel 23 – Durchführung und Beschlussfassung**
 
 1. Bei Durchführung einer Mitgliederversammlung können sich die Mitglieder an der Mitgliederversammlung mittels schriftlicher Vollmacht durch ein anderes Mitglied vertreten lassen. Solange die Genossenschaft nicht mehr als hundert (100) Mitglieder hat, kann ein Bevollmächtigter/eine Bevollmächtigte nicht mehr als ein Mitglied vertreten; bei mehr als hundert (100) Mitgliedern darf sich ein Mitglied nicht von mehr als zehn (10) Mitgliedern bevollmächtigen lassen.
-
 2. Sofern nicht das Gesetz oder diese Statuten etwas anderes bestimmen, ist eine Mitgliederversammlung unabhängig von der Anzahl der vertretenen Mitgliederstimmen beschlussfähig.
-
 3. Beschlüsse werden durch die absolute Stimmenmehrheit der vertretenen Mitglieder gefasst; jedes Mitglied hat eine Stimme. Enthaltungen werden dabei für die Ermittlung der Stimmbeteiligung, nicht aber bei der Ermittlung der abgegebenen Stimmen oder des Stimmergebnisses mitgezählt. Zwingende gesetzliche Vorschriften oder abweichende Bestimmungen der Statuten bleiben vorenthalten. 
-
 4. Über Geschäfte, die nicht auf der Traktandenliste angekündigt worden sind, können keine Beschlüsse gefasst werden, ausser über den Antrag auf Einberufung einer ausserordentlichen Mitgliederversammlung oder Ansetzung einer Urabstimmung.
-
 5. Bei Stimmengleichheit hat der/die Vorsitzende in der Mitgliederversammlung den Stichentscheid.
-
 6. Im Falle der Durchführung einer Mitgliederversammlung als Universalversammlung im Sinne von Art. 884 OR kann auf die Beachtung der Formvorschriften verzichtet werden.
 
 **Artikel 24 – Antragsrecht**
 
 1. Jedes Mitglied hat das Recht, Anträge an die Mitgliederversammlung zu stellen. Anträge müssen zehn (10) Tage vor der Mitgliederversammlung begründet an den Vorstand eingereicht werden.
-
 2. Über Anträge und Geschäfte, die nicht auf der Traktandenliste stehen, kann nicht Beschluss gefasst werden. 
 
 **Artikel 25 – Tagesordnung**
 
 1. Den Vorsitz in der Mitgliederversammlung führt die/der Vorsitzende des Vorstands, bei deren/dessen Verhinderung ein anderes Mitglied des Vorstands oder ein/eine von der Versammlung gewählter Tagespräsident/gewählte Tagespräsidentin (Versammlungsleiter/Versammlungsleiterin). Er/sie ist für die Versammlungsleitung verantwortlich und darf sämtliche Massnahmen ergreifen, die für einen geordneten Versammlungsablauf und für eine zweckmässige Verhandlung und Entscheidungsfindung erforderlich sind.
-
 2. Der Versammlungsleiter/die Versammlungsleiterin bezeichnet einen Protokollführer/eine Protokollführerin, der/die nicht Mitglied sein muss. Über die Verhandlung und Beschlüsse der Mitgliederversammlung ist ein Protokoll zu führen, das durch den Versammlungsleiter/die Versammlungsleiterin und den Protokollführer/die Protokollführerin zu unterzeichnen ist. 
-
 3. Die Mitglieder der Geschäftsleitung nehmen an der Mitgliederversammlung mit beratender Stimme teil. Sofern aufgrund der Tagesordnung erforderlich, soll eine Vertretung der Revisionsstelle anwesend sein.
 
 ## C. Genossenschaftsrat
@@ -325,19 +261,12 @@ Die Organe der Genossenschaft sind:
 **Artikel 26 – Zusammensetzung**
 
 1. Der Genossenschaftsrat setzt sich aus mindestens zehn (10) und maximal dreissig (30) Abgeordneten zusammen, die durch die Gesamtheit der Mitglieder aus dem Kreis der Mitglieder gewählt werden. Pro fünfhundert (500) Mitglieder ist ein Abgeordneter/eine Abgeordnete zu wählen; sobald die Genossenschaft mehr als sechstausend (6000) Mitglieder hat, wird die Anzahl Abgeordneter auf dem vorgenannten Maximum von dreissig (30) Abgeordneten festgelegt.
-
 2. Bei der Zusammensetzung des Genossenschaftsrats sind die Geschlechter, Altersgruppen, Sprachregionen und übrigen wesentlichen Kennzeichen der Mitgliederstruktur in der Zusammensetzung des Genossenschaftsrats angemessen zu berücksichtigen.
-
 3. Die Amtsdauer des gesamten Genossenschaftsrats beträgt drei (3) Jahre; es werden jeweils Gesamterneuerungswahlen durchgeführt. Scheiden im Laufe der Amtsdauer mehr als zwanzig Prozent (20%) der Abgeordneten aus, so sind für die laufende Amtsdauer Nachwahlen durchzuführen, sofern nicht innert zwölf (12) Monaten sowieso eine Gesamterneuerung ansteht. 
-
 4. Ein Abgeordneter/eine Abgeordnete scheidet aus dem Genossenschaftsrat aus, wenn er/sie die Mitgliedschaft in der Genossenschaft verliert. Bei Pflichtverletzungen können Abgeordnete durch den Genossenschaftsrat mittels Beschluss mit einfacher Mehrheit ausgeschlossen werden Ein Rekurs gegen einen Ausschlussbeschluss besteht nicht. Der Genossenschaftsrat wahrt das rechtliche Gehör.
-
 5. Abgeordnete sind für maximal drei (3) aufeinanderfolgende Amtsdauern wählbar. Nach einer Amtsdauer ist mindestens ein Drittel (1/3) des Genossenschaftsrats für die nächste Amtsdauer nicht wiederwählbar. Während der Amtsdauer ausgeschiedene Abgeordnete werden diesem Drittel zugerechnet; im Übrigen entscheidet das Los. Ausgeschiedene Abgeordnete können nach einer Wartefrist von einer ganzen Amtsdauer wieder neu gewählt werden.
-
 6. Abgeordnete dürfen nicht zugleich Mitglieder des Vorstands sein.
-
 7. Abgeordnete erhalten kein Zeichnungsrecht für die Genossenschaft und werden nicht im Handelsregister eingetragen. 
-
 8. Abgeordnete sind ehrenamtlich für die Genossenschaft tätig; sie erhalten Sitzungsgelder und Spesenentschädigung. Der Vorstand kann der Präsidentin/dem Präsidenten des Genossenschaftsrats zudem für ihre/seine Tätigkeit eine angemessene Aufwandentschädigung ausrichten. Der Vorstand erlässt ein Reglement über die Entschädigung des Genossenschaftsrats.
 
 **Artikel 27 – Befugnisse**
