@@ -95,7 +95,7 @@ class VideoPlayer extends Component {
       playing: false,
       progress: 0,
       muted: globalState.muted,
-      subtitles: globalState.subtitles,
+      subtitles: props.subtitles || globalState.subtitles,
       loading: false
     }
 

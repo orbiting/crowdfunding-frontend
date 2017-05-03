@@ -173,7 +173,7 @@ ${meta.url}
           Our crowdfunding video with English subtitles tells you why it is time for a new model in journalism.
         </IP>
       </div>
-      <VideoPlayer src={enVideo} />
+      <VideoPlayer subtitles src={enVideo} />
       <div {...styles.column}>
         <IP style={{marginBottom: 40}}>
           If you read German you might want to consider becoming a member of the cooperative behind Republik and to read our magazine for a whole year from January 2018 on:
