@@ -2,7 +2,7 @@ import React from 'react'
 import {css} from 'glamor'
 
 import {
-  P, Interaction, H2, A, Label, mediaQueries
+  P, Interaction, A, Label, mediaQueries
 } from '@project-r/styleguide'
 
 const portraitStyle = css({
@@ -36,7 +36,9 @@ const portraitImageRightStyle = css({
 
 const Portrait = ({odd, image, description, name, age, title, email}) => (
   <div {...portraitStyle}>
-    <H2 style={{marginBottom: 0}}>{name},&nbsp;{age}</H2>
+    <Interaction.H3 style={{marginBottom: 0}}>
+      {name},&nbsp;{age}
+    </Interaction.H3>
     <Label>{title}</Label><br /><br />
     <img className={odd ? portraitImageLeftStyle : portraitImageRightStyle} src={image} alt='' />
     <P style={{marginTop: 0, marginBottom: 10}}>
