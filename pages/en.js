@@ -153,6 +153,11 @@ ${meta.url}
         <P style={{marginBottom: SPACE / 2}}>
           <Share fill='#000' {...share} />
         </P>
+        <P>
+          <A href={`${STATIC_BASE_URL}/static/manifesto_en.pdf`}>
+            Download PDF
+          </A>
+        </P>
 
         <div style={{marginBottom: SPACE * 2, marginTop: SPACE}}>
           <Label>
