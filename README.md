@@ -68,6 +68,7 @@ PF_FORM_ACTION=https://e-payment.postfinance.ch/ncol/test/orderstandard.asp
 
 PAYPAL_FORM_ACTION=https://www.sandbox.paypal.com/cgi-bin/webscr
 PAYPAL_BUSINESS=
+PAYPAL_DONATE_LINK=
 ```
 
 #### Basic Auth
