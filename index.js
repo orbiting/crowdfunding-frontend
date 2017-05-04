@@ -102,6 +102,9 @@ app.prepare()
       })
     )
   })
+  server.post('/en', (req, res) => {
+    return app.render(req, res, '/en', req.query)
+  })
   server.get('*', (req, res) => {
     return handle(req, res)
   })
