@@ -2,6 +2,8 @@ import React from 'react'
 import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
 import {range} from 'd3-array'
+import {nest} from 'd3-collection'
+import {css} from 'glamor'
 
 import withT from '../../lib/withT'
 
@@ -14,7 +16,44 @@ import {
   Interaction, A, Label, colors
 } from '@project-r/styleguide'
 
+import {swissTime} from '../../lib/utils/formats'
+
+const dateFormat = swissTime.format('%A %-d.%-m.')
+
 const {H1, H2, H3, P} = Interaction
+
+const styles = {
+  dateContainer: css({
+    marginTop: 40
+  }),
+  dateBox: css({
+    float: 'left',
+    width: '25%',
+    textAlign: 'center'
+  }),
+  dateCount: css({
+    paddingBottom: 20,
+    fontSize: 20
+  }),
+  dateLabel: css({
+    display: 'block',
+    paddingBottom: 0
+  })
+}
+
+const normalizeDateData = values => {
+  const hourIndex = values.reduce(
+    (index, {datetime, count}) => {
+      index[datetime.getHours()] = count
+      return index
+    },
+    {}
+  )
+  return range(0, 24).map(i => ({
+    hour: i,
+    count: hourIndex[i] || 0
+  }))
+}
 
 const agesZurich = require('./agesZurich.json')
 const agesCh = require('./agesCh.json')
@@ -24,7 +63,8 @@ const Memberships = ({loading, error, data}) => (
     const {
       membershipStats: {
         countries,
-        ages
+        ages,
+        createdAts
       },
       crowdfunding: {status}
     } = data
@@ -33,6 +73,19 @@ const Memberships = ({loading, error, data}) => (
       age,
       count: (ages.find(d => d.age === age) || {}).count || 0
     }))
+
+    const groupedCreatedAts = nest()
+      .key(({datetime}) => [
+        datetime.getMonth(),
+        datetime.getDate()
+      ].join('-'))
+      .entries(
+        createdAts
+          .map(({datetime, count}) => ({
+            datetime: new Date(datetime),
+            count
+          }))
+      )
 
     return (
       <div>
@@ -43,52 +96,20 @@ const Memberships = ({loading, error, data}) => (
         {countries.map(({name, count, postalCodes}) => (
           <div key={name}>
             <H3>{name || '(noch) Kein Angabe'} {count}</H3>
-            {name === 'Schweiz' && (
+            {(name === 'Schweiz' || name === 'Deutschland' || name === 'Österreich') && (
               <div>
-                Top 50 PLZ (Total: {postalCodes.length}):
-                <BarChart
-                  title={d => `${d.postalCode}: ${d.count}`}
-                  color={d => {
-                    if (d.postalCode.match(/^80/)) {
-                      return 'red'
-                    }
-                    if (d.postalCode.match(/^30/)) {
-                      return 'gold'
-                    }
-                    if (d.postalCode.match(/^5/)) {
-                      return 'green'
-                    }
-                    if (d.postalCode.match(/^40/)) {
-                      return 'black'
-                    }
-                  }}
-                  data={postalCodes.slice(0, 50)} />
-                <P>
-                  {postalCodes
-                    .filter(d => d.postalCode)
-                    .filter(d => d.postalCode.match(/^80/))
-                    .reduce((sum, d) => sum + d.count, 0)}
-                  {' '}Stadt Zürich
-                </P>
-                <P>
-                  {postalCodes
-                    .filter(d => d.postalCode)
-                    .filter(d => d.postalCode.match(/^30/))
-                    .reduce((sum, d) => sum + d.count, 0)}
-                  {' '}Stadt Bern
-                </P>
-                <P>
-                  {postalCodes
-                    .filter(d => d.postalCode)
-                    .filter(d => d.postalCode.match(/^40/))
-                    .reduce((sum, d) => sum + d.count, 0)}
-                  {' '}Basel Stadt
-                </P>
                 <PostalCodeMap data={postalCodes} />
               </div>
             )}
           </div>
         ))}
+        <PostalCodeMap
+          data={countries
+            .filter(({name}) => name === 'Schweiz' || name === 'Deutschland' || name === 'Österreich')
+            .reduce(
+              (all, country) => all.concat(country.postalCodes),
+              []
+            )} />
         <br /><br />
         <H2>Wie alt sind Sie?</H2>
         <P>
@@ -116,7 +137,6 @@ const Memberships = ({loading, error, data}) => (
         <BarChart
           title={d => `${d.age} Jahre: ${d.count}`}
           data={paddedAges}
-          color={() => colors.primary}
           referenceLines={[
             {label: 'Schweiz', color: 'red', data: agesCh},
             {label: 'Zürich', color: '#000', data: agesZurich}
@@ -129,6 +149,27 @@ const Memberships = ({loading, error, data}) => (
           <A href='https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung.assetdetail.80423.html'>
             <Label>Schweizer Bevölkerung 2015: BFS STATPOP</Label>
           </A>
+        </div>
+
+        <H2 style={{marginTop: 40}}>Wann kaufen Sie?</H2>
+        <div {...styles.dateContainer}>
+          {groupedCreatedAts.map(({key, values}) => (
+            <div {...styles.dateBox}>
+              <BarChart
+                height={120}
+                color={() => colors.secondary}
+                data={normalizeDateData(values)} />
+              <Label {...styles.dateLabel}>
+                {dateFormat(values[0].datetime)}
+              </Label>
+              <div {...styles.dateCount}>
+                {values.reduce(
+                  (sum, d) => sum + d.count,
+                  0
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     )

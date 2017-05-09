@@ -2,6 +2,10 @@ import React from 'react'
 import {css} from 'glamor'
 import {max} from 'd3-array'
 
+import {
+  colors
+} from '@project-r/styleguide'
+
 const styles = {
   datum: css({
     float: 'left',
@@ -11,7 +15,7 @@ const styles = {
     position: 'relative'
   }),
   bar: css({
-    backgroundColor: 'gray',
+    backgroundColor: colors.primary,
     position: 'absolute',
     left: 1,
     right: 1,
@@ -30,14 +34,14 @@ const styles = {
   })
 }
 
-export default ({data, title, color, referenceLines = []}) => {
+export default ({data, title, color, height = 200, referenceLines = []}) => {
   const maxCount = max(data, d => d.count)
   const datumWidth = `${100 / data.length}%`
   const refMax = referenceLines.map(line => (
     max(line.data, d => d.count)
   ))
   return (
-    <div style={{height: 200}}>
+    <div style={{height}}>
       {data.map((d, i) => (
         <div {...styles.datum}
           key={i}
