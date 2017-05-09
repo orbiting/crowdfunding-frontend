@@ -11,7 +11,7 @@ import BarChart from './BarChart'
 import PostalCodeMap from './Map'
 
 import {
-  Interaction, A
+  Interaction, A, Label, colors
 } from '@project-r/styleguide'
 
 const {H1, H2, H3, P} = Interaction
@@ -110,29 +110,26 @@ const Memberships = ({loading, error, data}) => (
           <br /><br />
           Einzig ein unverifizierter, 102 jähriger Rolf könnte unser ältester Leser sein. Wir vermuten aber eher das es eine verifizierte 92 jahrige Person ist.
         </P>
-        <H3>16 – 99</H3>
-        <P>Republik</P>
+        <H3 style={{marginBottom: 20}}>
+          Republik von 16 bis 92 jährige Mitglieder
+        </H3>
         <BarChart
           title={d => `${d.age} Jahre: ${d.count}`}
-          data={paddedAges} />
-        <P>Zürcher Bevölkerung 2016</P>
-        <BarChart
-          title={d => `${d.age} Jahre: ${d.count}`}
-          data={agesZurich} />
-        <P>
+          data={paddedAges}
+          color={() => colors.primary}
+          referenceLines={[
+            {label: 'Schweiz', color: 'red', data: agesCh},
+            {label: 'Zürich', color: '#000', data: agesZurich}
+          ]} />
+        <div style={{paddingTop: 10, textAlign: 'right'}}>
           <A href='https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht'>
-            Quelle: Statistik Stadt Zürich, Präsidialdepartement
+            <Label>Zürcher Bevölkerung 2016: Statistik Stadt Zürich, Präsidialdepartement</Label>
           </A>
-        </P>
-        <P>Schweizer Bevölkerung 2015</P>
-        <BarChart
-          title={d => `${d.age} Jahre: ${d.count}`}
-          data={agesCh} />
-        <P>
+          <br />
           <A href='https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung.assetdetail.80423.html'>
-            Quelle: BFS STATPOP
+            <Label>Schweizer Bevölkerung 2015: BFS STATPOP</Label>
           </A>
-        </P>
+        </div>
       </div>
     )
   }} />
