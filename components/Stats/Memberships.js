@@ -1,7 +1,7 @@
 import React from 'react'
 import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
-import {range} from 'd3-array'
+import {range, descending} from 'd3-array'
 import {nest} from 'd3-collection'
 import {css} from 'glamor'
 import md from 'markdown-in-js'
@@ -44,6 +44,10 @@ const styles = {
   dateLabel: css({
     display: 'block',
     paddingBottom: 0
+  }),
+  keyMetric: css({
+    float: 'left',
+    width: '25%'
   })
 }
 
@@ -64,6 +68,13 @@ const normalizeDateData = values => {
 const agesZurich = require('./agesZurich.json')
 const agesCh = require('./agesCh.json')
 
+const paymentMethodNames = {
+  STRIPE: 'Visa/Mastercard',
+  PAYMENTSLIP: 'Einzahlungsschein',
+  PAYPAL: 'PayPal',
+  POSTFINANCECARD: 'PostFinance Card'
+}
+
 const Memberships = ({loading, error, data}) => (
   <Loader loading={loading} error={error} render={() => {
     const {
@@ -72,8 +83,13 @@ const Memberships = ({loading, error, data}) => (
         ages,
         createdAts
       },
+      paymentStats,
       crowdfunding: {status}
     } = data
+
+    const paymentMethods = []
+      .concat(paymentStats.paymentMethods)
+      .sort((a, b) => descending(a.count, b.count))
 
     const paddedAges = range(16, 100).map(age => ({
       age,
@@ -284,6 +300,23 @@ const Memberships = ({loading, error, data}) => (
           Diese Statistik veröffentlichen wir, weil das sonst kaum eine andere Firma macht - Zahlungsdaten gelten als Geschäftsgeheimnis. Wir folgen dieser Praxis nicht - und hoffen, dass irgendwer irgendetwas aus unserer Statistik lernt.
         </P>
 
+        {paymentMethods
+          .map(({method, count, details}) => {
+            return (
+              <div key={method} {...styles.keyMetric}>
+                {paymentMethodNames[method]}<br />
+                {count}<br />
+                {details.map(({detail, count}) => (
+                  <span>
+                    {detail} {count}
+                    <br />
+                  </span>
+                ))}
+              </div>
+            )
+          })}
+        <br style={{clear: 'left'}} />
+
         <P>
           Was uns übrigens verblüffte: Paypal schlug als Zahlungsmethose die Postfinance. (Vielleicht ein Hinweis, dass Postfinance ihre verblüffend unschöne und kundenunfreundliche Zahlungs-Website überarbeiten sollte.)
         </P>
@@ -342,6 +375,16 @@ query {
     ages {
       age
       count
+    }
+  }
+  paymentStats {
+    paymentMethods {
+      method
+      count
+      details {
+        detail
+        count
+      }
     }
   }
 }
