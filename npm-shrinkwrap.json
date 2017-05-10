@@ -1096,6 +1096,11 @@
       "from": "d3-format@>=1.1.1 <2.0.0",
       "resolved": "https://registry.npmjs.org/d3-format/-/d3-format-1.2.0.tgz"
     },
+    "d3-geo": {
+      "version": "1.6.3",
+      "from": "d3-geo@>=1.6.3 <2.0.0",
+      "resolved": "https://registry.npmjs.org/d3-geo/-/d3-geo-1.6.3.tgz"
+    },
     "d3-time": {
       "version": "1.0.6",
       "from": "d3-time@>=1.0.6 <2.0.0",
