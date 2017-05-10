@@ -65,6 +65,7 @@
     "unfetch": "^2.1.2"
   },
   "devDependencies": {
+    "d3-dsv": "https://registry.npmjs.org/d3-dsv/-/d3-dsv-1.0.5.tgz",
     "dotenv": "^4.0.0",
     "gsheets": "^2.0.0",
     "husky": "^0.13.2",

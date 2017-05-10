@@ -1,7 +1,7 @@
 import React from 'react'
 import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
-import {range, descending} from 'd3-array'
+import {range, descending, mean, median} from 'd3-array'
 import {nest} from 'd3-collection'
 import {css} from 'glamor'
 import md from 'markdown-in-js'
@@ -66,8 +66,9 @@ const normalizeDateData = values => {
   }))
 }
 
-const agesZurich = require('./agesZurich.json')
-const agesCh = require('./agesCh.json')
+const agesZurich = require('./data/agesZurich.json')
+const agesCh = require('./data/agesCh.json')
+const staticStats = require('./data/staticStats.json')
 
 const paymentMethodNames = {
   STRIPE: 'Visa/Mastercard',
@@ -122,6 +123,13 @@ const Memberships = ({loading, error, data}) => (
       .concat(countryIndex.Deutschland.postalCodes)
       .concat(countryIndex['Österreich'].postalCodes)
       .concat(countryIndex.Schweiz.postalCodes)
+
+    const paddedAgesIndividuals = ages.reduce(
+      (all, {count, age}) => all.concat(
+        range(count).map(() => age)
+      ),
+      []
+    )
 
     return (
       <div>
@@ -249,6 +257,23 @@ const Memberships = ({loading, error, data}) => (
             <Label>Schweizer Bevölkerung 2015: BFS STATPOP</Label>
           </A>
         </div>
+
+        <P>
+          Mittelwert:{' '}<br />
+          Republik: {median(
+            paddedAgesIndividuals
+          )}<br />
+          Zürich: {staticStats.zurich.median}<br />
+          Schweiz: {staticStats.ch.median}
+        </P>
+        <P>
+          Durchschnittsalter:{' '}<br />
+          Republik: {mean(
+            paddedAgesIndividuals
+          )}<br />
+          Zürich: {staticStats.zurich.mean}<br />
+          Schweiz: {staticStats.ch.mean}
+        </P>
 
         <H2 style={{marginTop: 40}}>Wie schnell waren Sie?</H2>
 
