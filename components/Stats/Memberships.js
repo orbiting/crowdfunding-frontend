@@ -10,6 +10,7 @@ import withT from '../../lib/withT'
 import mdComponents from '../../lib/utils/mdComponents'
 
 import Loader from '../Loader'
+import {ListWithQuery as TestimonialList} from '../Testimonial/List'
 
 import BarChart from './BarChart'
 import PostalCodeMap from './Map'
@@ -327,7 +328,9 @@ const Memberships = ({loading, error, data}) => (
           Danke dafür! Für die über 3000 Fotos, die Unterstützung, die Begründungen und die Ratschläge! Stellvertretend für alle wollen wir nur eine Stimme zitieren – das vermutlich geographisch (und mental) am weitesten entfernte Mitglied, direkt aus seinem Wohnort auf dem Todesstern:
         </P>
 
-        <P>(( Bild Stormtrooper ))</P>
+        <TestimonialList
+          limit={0}
+          firstId='bbaf5f0d-3be0-4886-bd24-544f64d518ab' />
 
         {md(mdComponents)`
 Das war alles, was wir über Sie wissen. Ausser, natürlich, noch zwei Dinge:
