@@ -58,14 +58,6 @@ class PostalCodeMap extends Component {
     const {projection} = this
     return (
       <div ref={this.containerRef}>
-        {allowFilter && <Field
-          label='Postleitzahl'
-          value={filter || ''}
-          onChange={(_, value) => {
-            this.setState({
-              filter: value
-            })
-          }} />}
         <svg width={width || '100%'} height={height || 300}>
           {
             data.map((d, i) => {
@@ -86,6 +78,14 @@ class PostalCodeMap extends Component {
             })
           }
         </svg>
+        {allowFilter && <Field
+          label='Postleitzahl'
+          value={filter || ''}
+          onChange={(_, value) => {
+            this.setState({
+              filter: value
+            })
+          }} />}
       </div>
     )
   }
