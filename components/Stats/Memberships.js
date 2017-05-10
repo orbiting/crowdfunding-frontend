@@ -264,10 +264,6 @@ const Memberships = ({loading, error, data}) => (
 
         <P>(( Bild Stormtrooper ))</P>
 
-        <P>
-          Das war alles, was wir über Sie wissen. Ausser, natürlich, noch zwei Dinge:
-        </P>
-
         {md(mdComponents)`
 Das war alles, was wir über Sie wissen. Ausser, natürlich, noch zwei Dinge:
 
