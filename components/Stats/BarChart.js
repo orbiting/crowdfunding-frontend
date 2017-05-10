@@ -1,6 +1,6 @@
 import React from 'react'
 import {css} from 'glamor'
-import {max} from 'd3-array'
+import {max, sum as sumOfArray} from 'd3-array'
 
 import {
   colors
@@ -36,11 +36,21 @@ const styles = {
 }
 
 export default ({data, title, color, height = 200, referenceLines = []}) => {
-  const maxCount = max(data, d => d.count)
+  const sum = sumOfArray(data, d => d.count)
+  const maxRatio = max(data, d => d.count / sum)
   const datumWidth = `${100 / data.length}%`
-  const refMax = referenceLines.map(line => (
-    max(line.data, d => d.count)
-  ))
+  const refMax = referenceLines.map(line => {
+    const sum = sumOfArray(line.data, d => d.count)
+    return {
+      sum,
+      maxRatio: max(line.data, d => d.count / sum)
+    }
+  })
+  const overallMaxRatio = max(
+    [maxRatio]
+      .concat(refMax.map(m => m.maxRatio))
+  )
+
   return (
     <div style={{height}}>
       {data.map((d, i) => (
@@ -52,7 +62,7 @@ export default ({data, title, color, height = 200, referenceLines = []}) => {
           <div {...styles.bar}
             title={title ? title(d) : undefined}
             style={{
-              height: `${d.count / maxCount * 100}%`,
+              height: `${d.count / sum / overallMaxRatio * 100}%`,
               backgroundColor: color ? color(d) : undefined
             }} />
           {referenceLines.map((line, lineI) => (
@@ -60,7 +70,7 @@ export default ({data, title, color, height = 200, referenceLines = []}) => {
               key={`ref${lineI}`}
               style={{
                 borderTopColor: line.color,
-                height: `${line.data[i].count / refMax[lineI] * 100}%`
+                height: `${line.data[i].count / refMax[lineI].sum / overallMaxRatio * 100}%`
               }}>
               {i === 0 && (
                 <div {...styles.lineLabel} style={{color: line.color}}>
