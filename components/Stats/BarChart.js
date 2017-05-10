@@ -22,6 +22,7 @@ const styles = {
     bottom: 0
   }),
   line: css({
+    pointerEvents: 'none',
     position: 'absolute',
     left: 1,
     right: 1,

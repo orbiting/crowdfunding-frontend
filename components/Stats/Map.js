@@ -54,18 +54,18 @@ class PostalCodeMap extends Component {
   }
   render () {
     const {width, height, filter} = this.state
-    const {data} = this.props
+    const {data, allowFilter = false} = this.props
     const {projection} = this
     return (
       <div ref={this.containerRef}>
-        <Field
+        {allowFilter && <Field
           label='Postleitzahl'
           value={filter || ''}
           onChange={(_, value) => {
             this.setState({
               filter: value
             })
-          }} />
+          }} />}
         <svg width={width || '100%'} height={height || 300}>
           {
             data.map((d, i) => {

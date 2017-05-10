@@ -34,6 +34,9 @@ const styles = {
     width: '25%',
     textAlign: 'center'
   }),
+  dateBoxBig: css({
+    width: '50%'
+  }),
   dateCount: css({
     paddingBottom: 20,
     fontSize: 20
@@ -90,6 +93,19 @@ const Memberships = ({loading, error, data}) => (
           }))
       )
 
+    const countryIndex = countries.reduce(
+      (index, country) => {
+        index[country.name] = country
+        return index
+      },
+      {}
+    )
+
+    const dachData = []
+      .concat(countryIndex.Deutschland.postalCodes)
+      .concat(countryIndex['Österreich'].postalCodes)
+      .concat(countryIndex.Schweiz.postalCodes)
+
     return (
       <div>
         <H1>Wer sind Sie?</H1>
@@ -123,20 +139,33 @@ const Memberships = ({loading, error, data}) => (
           Jeder Punkt auf der Karte repräsentiert eine Postleitzahl. Je fetter der Punkt, desto mehr von Ihnen leben dort. (Die Summe entspricht nicht ganz {countFormat(status.people)} - da nur knapp {Math.ceil(countries.filter(d => d.name).reduce((sum, d) => sum + d.count, 0) / status.people * 100)} Prozent ihre Postadresse angaben.)
         </P>
 
-        <PostalCodeMap
-          data={countries
-            .filter(({name}) => name === 'Schweiz' || name === 'Deutschland' || name === 'Österreich')
-            .reduce(
-              (all, country) => all.concat(country.postalCodes),
-              []
-            )} />
-
         <P>Ein paar Fakten dazu.</P>
 
         <P>Zürich ist zwar eine Hochburg für die Republik. Aber bei weitem nicht das alleinige Verbreitungsgebiet. 3216 von Ihnen wohnen dort - also fast exakt ein Drittel.</P>
+        <PostalCodeMap
+          data={
+            countryIndex.Schweiz
+              .postalCodes.filter(c => (
+                c.postalCode &&
+                c.postalCode.startsWith('80')
+              ))
+          } />
         <P>In Zürich ist der Kreis 4 am dichtesten mit Republik-Abonnements gepflastert. Statistisch gesehen müssen wir auf unserem Arbeitsweg zum Hotel Rothaus jeden hundertsten mit „Guten Morgen, Verleger!“ oder „Guten Morgen, Verlegerin!“ begrüssen.</P>
         <P>Auf Zürich folgen die Konkurrenzstädte Bern (965 Abonnentinnen), Basel (438), Winterthur (206) und - leicht abgeschlagen - Luzern (85).</P>
+        <PostalCodeMap
+          allowFilter
+          data={
+            countryIndex.Schweiz.postalCodes
+          } />
         <P>Was uns besonders freut, ist die relative Stärke der Republik am Geburtsort der Helvetischen Republik, in Aarau, mit 87 Abonnenten, verstärkt durch Baden (69) und die Agglomeration von Baden (44).</P>
+        <PostalCodeMap
+          data={
+            countryIndex.Schweiz
+              .postalCodes.filter(c => (
+                c.postalCode &&
+                c.postalCode.startsWith('5')
+              ))
+          } />
         <P>Das restliche Drittel von Ihnen verstreut sich über die ganze Schweiz.</P>
 
         {countries.map(({name, count, postalCodes}) => (
@@ -144,6 +173,9 @@ const Memberships = ({loading, error, data}) => (
             <H3>{name || '(noch) Kein Angabe'} {count}</H3>
           </div>
         ))}
+
+        <PostalCodeMap
+          data={dachData} />
 
         <P>Im Ausland führt Deutschland mit 102 Republik-Mitgliedern, vor Lichtenstein mit 17, Österreich mit 12, der USA mit 11, Belgien und Italien mit 4, Spanien und Norwegen mit 3, Austalien, Dänemark, Griechenland, Hong Kong, Japan, Holland, Thailand, Grossbritannien und China mit 2 Abonnements.</P>
 
@@ -207,8 +239,8 @@ const Memberships = ({loading, error, data}) => (
           Laut Theorie verlaufen Crowdfundings gern dramatisch: Am Anfang gibt es einen Höhepunkt, am Ende gibt es einen Höhepunkt, dazwischen dümpelt es vor sich hin. Die Republik machte dabei bisher keine Ausnahme. Hier die Abonnementskurve vom 26. April bis 1. Mai:
         </P>
         <div {...styles.dateContainer}>
-          {groupedCreatedAts.map(({key, values}) => (
-            <div {...styles.dateBox}>
+          {groupedCreatedAts.map(({key, values}, i) => (
+            <div {...styles.dateBox} className={i < 2 ? styles.dateBoxBig : ''}>
               <BarChart
                 height={120}
                 color={() => colors.secondary}
