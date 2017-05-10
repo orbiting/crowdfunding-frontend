@@ -330,6 +330,7 @@ const Memberships = ({loading, error, data}) => (
 
         <TestimonialList
           limit={0}
+          onSelect={() => {}}
           firstId='bbaf5f0d-3be0-4886-bd24-544f64d518ab' />
 
         {md(mdComponents)`
