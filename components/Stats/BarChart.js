@@ -35,9 +35,11 @@ const styles = {
   })
 }
 
-export default ({data, title, color, height = 200, referenceLines = []}) => {
+export default ({data, title, max: maxValue, color, height = 200, referenceLines = []}) => {
   const sum = sumOfArray(data, d => d.count)
-  const maxRatio = max(data, d => d.count / sum)
+  const maxRatio = maxValue
+    ? maxValue / sum
+    : max(data, d => d.count / sum)
   const datumWidth = `${100 / data.length}%`
   const refMax = referenceLines.map(line => {
     const sum = sumOfArray(line.data, d => d.count)

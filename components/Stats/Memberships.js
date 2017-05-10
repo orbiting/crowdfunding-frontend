@@ -1,7 +1,7 @@
 import React from 'react'
 import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
-import {range, descending, mean, median} from 'd3-array'
+import {range, descending, mean, median, max} from 'd3-array'
 import {nest} from 'd3-collection'
 import {css} from 'glamor'
 import md from 'markdown-in-js'
@@ -98,6 +98,10 @@ const Memberships = ({loading, error, data}) => (
       count: (ages.find(d => d.age === age) || {}).count || 0
     }))
 
+    const maxHourCount = max(
+      createdAts,
+      d => d.count
+    )
     const groupedCreatedAts = nest()
       .key(({datetime}) => [
         datetime.getMonth(),
@@ -279,6 +283,7 @@ const Memberships = ({loading, error, data}) => (
           {groupedCreatedAts.map(({key, values}, i) => (
             <div {...styles.dateBox} className={i < 2 ? styles.dateBoxBig : ''}>
               <BarChart
+                max={maxHourCount}
                 height={120}
                 color={() => colors.secondary}
                 data={normalizeDateData(values)} />
