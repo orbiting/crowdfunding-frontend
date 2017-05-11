@@ -17,7 +17,8 @@ import PostalCodeMap from './Map'
 
 import {
   Interaction, A, Label, colors,
-  H1, H2, P, NarrowContainer
+  H1, H2, P, NarrowContainer,
+  fontFamilies
 } from '@project-r/styleguide'
 
 import {swissTime, countFormat} from '../../lib/utils/formats'
@@ -46,11 +47,67 @@ const styles = {
     display: 'block',
     paddingBottom: 0
   }),
+  keyMetricContainer: css({
+    margin: '20px 0'
+  }),
   keyMetric: css({
     float: 'left',
-    width: '25%'
+    width: '50%',
+    height: 110,
+    paddingTop: 10,
+    textAlign: 'center'
+  }),
+  keyMetricNumber: css({
+    fontFamily: fontFamilies.sansSerifMedium,
+    fontSize: 44
+  }),
+  keyMetricLabel: css({
+    fontFamily: fontFamilies.sansSerifRegular,
+    fontSize: 22
+  }),
+  keyMetricDetail: css({
+    fontFamily: fontFamilies.sansSerifRegular,
+    fontSize: 12
+  }),
+  mapStory: css({
+    position: 'relative'
+  }),
+  mapFixed: css({
+    position: 'fixed',
+    top: 100,
+    left: 0,
+    right: 0
+  }),
+  mapTop: css({
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0
+  }),
+  mapBottom: css({
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0
+  }),
+  scrollBlock: css({
+    position: 'relative',
+    marginLeft: -5,
+    marginRight: -5,
+    padding: '20px 5px',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)'
   })
 }
+
+const Spacer = () => (
+  <div style={{height: '50vh'}} />
+)
+
+const ScrollBlock = ({children}) => (
+  <div {...styles.scrollBlock}>
+    {children}
+  </div>
+)
 
 const normalizeDateData = values => {
   const hourIndex = values.reduce(
@@ -77,7 +134,16 @@ const paymentMethodNames = {
   POSTFINANCECARD: 'PostFinance Card'
 }
 
+const paymentMethodDetails = {
+  paperInvoice: 'Rechnung per Post'
+}
+
 class Story extends Component {
+  constructor (...args) {
+    super(...args)
+
+    this.state = {}
+  }
   render () {
     const {
       countryIndex,
@@ -86,84 +152,80 @@ class Story extends Component {
       groupedCreatedAts,
       status,
       countries,
-      paymentMethods
+      paymentMethods,
+      allPostalCodes
     } = this.props
 
-    const dachData = []
-      .concat(countryIndex.Deutschland.postalCodes)
-      .concat(countryIndex['Österreich'].postalCodes)
-      .concat(countryIndex.Schweiz.postalCodes)
+    const {mapExtend} = this.state
+
     return (
       <div>
-        <PostalCodeMap
-          allowFilter
-          data={
-            countryIndex.Schweiz.postalCodes
-          } />
+        <div {...styles.mapStory}>
+          <div {...styles.mapTop}>
+            <PostalCodeMap
+              extentData={mapExtend || countryIndex.Schweiz.postalCodes}
+              data={allPostalCodes} />
+          </div>
+          <NarrowContainer>
+            <Spacer />
+            <ScrollBlock>
+              <H1>Wer sind Sie?</H1>
+              <P>Ladies and Gentlemen,</P>
+
+              <P>
+                wir haben zum Start der Republik einiges darüber geschrieben, wer wir sind. Nun ist ein Drittel der Kampagne Geschichte. Und wir können endlich über ein noch interessanteres Thema reden: Wer Sie sind.
+              </P>
+
+              <P>
+                Hier also das vorläufige Zwischenergebnis, erhoben beim Stand von {countFormat(status.people)} Mitgliedern. Sie erhalten nun die Antworten zu den Fragen, wo Sie wohnen, wie alt Sie sind, wie schnell Sie an Bord kamen und wie seriös Ihre Zahlungsmoral war.
+              </P>
+            </ScrollBlock>
+
+            { /* <P>{status.people} gelöste Abos gehören zur Zeit {countries.reduce((sum, d) => sum + d.count, 0)} Personen</P> */ }
+
+            <ScrollBlock>
+              <H2>Wo wohnen Sie?</H2>
+
+              <P>
+                Jeder Punkt auf der Karte repräsentiert eine Postleitzahl. Je fetter der Punkt, desto mehr von Ihnen leben dort. (Die Summe entspricht nicht ganz {countFormat(status.people)} — da nur knapp {Math.ceil(countries.filter(d => d.name).reduce((sum, d) => sum + d.count, 0) / status.people * 100)} Prozent ihre Postadresse angaben.)
+              </P>
+            </ScrollBlock>
+
+            <ScrollBlock>
+              <P>Ein paar Fakten dazu.</P>
+
+              <P>Zürich ist zwar eine Hochburg für die Republik. Aber bei weitem nicht das alleinige Verbreitungsgebiet. 3216 von Ihnen wohnen dort — also fast exakt ein Drittel.</P>
+              <P>In Zürich ist der Kreis 4 am dichtesten mit Republik-Abonnements gepflastert. Statistisch gesehen müssen wir auf unserem Arbeitsweg zum Hotel Rothaus jeden hundertsten mit „Guten Morgen, Verleger!“ oder „Guten Morgen, Verlegerin!“ begrüssen.</P>
+            </ScrollBlock>
+
+            <ScrollBlock>
+              <P>Auf Zürich folgen die Konkurrenzstädte Bern (965 Abonnentinnen), Basel (438), Winterthur (206) und — leicht abgeschlagen — Luzern (85).</P>
+            </ScrollBlock>
+
+            <ScrollBlock>
+              <P>Was uns besonders freut, ist die relative Stärke der Republik am Geburtsort der Helvetischen Republik, in Aarau, mit 87 Abonnenten, verstärkt durch Baden (69) und die Agglomeration von Baden (44).</P>
+            </ScrollBlock>
+
+            <ScrollBlock>
+              <P>Das restliche Drittel von Ihnen verstreut sich über die ganze Schweiz.</P>
+            </ScrollBlock>
+
+            <ScrollBlock>
+              <P>Im Ausland führt Deutschland mit 102 Republik-Mitgliedern, vor Lichtenstein mit 17, Österreich mit 12, der USA mit 11, Belgien und Italien mit 4, Spanien und Norwegen mit 3, Austalien, Dänemark, Griechenland, Hong Kong, Japan, Holland, Thailand, Grossbritannien und China mit 2 Abonnements.</P>
+
+              <ul>
+                {countries.map(({name, count, postalCodes}) => (
+                  <li key={name}>
+                    {name || '(noch) Kein Angabe'} {count}
+                  </li>
+                ))}
+              </ul>
+
+              <P>Einen einziges Mitglied der Republik finden wir in Georgien, Uruguay, Ägypten, Kanada, Kolumbien, Korea, Mexiko, Puerto Rico, Singapur, Taiwan, Myanmar und Malawi. Ein Gruss Ihnen allen in Ihre Exklusivität und Einsamkeit!</P>
+            </ScrollBlock>
+          </NarrowContainer>
+        </div>
         <NarrowContainer>
-          <H1>Wer sind Sie?</H1>
-          <P>Ladies and Gentlemen,</P>
-
-          <P>
-            wir haben zum Start der Republik einiges darüber geschrieben, wer wir sind. Nun ist ein Drittel der Kampagne Geschichte. Und wir können endlich über ein noch interessanteres Thema reden: Wer Sie sind.
-          </P>
-
-          <P>
-            Hier also das vorläufige Zwischenergebnis, erhoben beim Stand von {countFormat(status.people)} Mitgliedern. Sie erhalten nun die Antworten zu den Fragen, wo Sie wohnen, wie alt Sie sind, wie schnell Sie an Bord kamen und wie seriös Ihre Zahlungsmoral war.
-          </P>
-
-          { /* <P>{status.people} gelöste Abos gehören zur Zeit {countries.reduce((sum, d) => sum + d.count, 0)} Personen</P> */ }
-
-          <H2>Wo wohnen Sie?</H2>
-
-          <P>
-            Jeder Punkt auf der Karte repräsentiert eine Postleitzahl. Je fetter der Punkt, desto mehr von Ihnen leben dort. (Die Summe entspricht nicht ganz {countFormat(status.people)} — da nur knapp {Math.ceil(countries.filter(d => d.name).reduce((sum, d) => sum + d.count, 0) / status.people * 100)} Prozent ihre Postadresse angaben.)
-          </P>
-
-          <P>Ein paar Fakten dazu.</P>
-
-          <P>Zürich ist zwar eine Hochburg für die Republik. Aber bei weitem nicht das alleinige Verbreitungsgebiet. 3216 von Ihnen wohnen dort — also fast exakt ein Drittel.</P>
-          <PostalCodeMap
-            data={
-              countryIndex.Schweiz
-                .postalCodes.filter(c => (
-                  c.postalCode &&
-                  c.postalCode.startsWith('80')
-                ))
-            } />
-          <P>In Zürich ist der Kreis 4 am dichtesten mit Republik-Abonnements gepflastert. Statistisch gesehen müssen wir auf unserem Arbeitsweg zum Hotel Rothaus jeden hundertsten mit „Guten Morgen, Verleger!“ oder „Guten Morgen, Verlegerin!“ begrüssen.</P>
-          <P>Auf Zürich folgen die Konkurrenzstädte Bern (965 Abonnentinnen), Basel (438), Winterthur (206) und — leicht abgeschlagen — Luzern (85).</P>
-          <PostalCodeMap
-            data={
-              countryIndex.Schweiz.postalCodes
-            } />
-          <P>Was uns besonders freut, ist die relative Stärke der Republik am Geburtsort der Helvetischen Republik, in Aarau, mit 87 Abonnenten, verstärkt durch Baden (69) und die Agglomeration von Baden (44).</P>
-          <PostalCodeMap
-            data={
-              countryIndex.Schweiz
-                .postalCodes.filter(c => (
-                  c.postalCode &&
-                  c.postalCode.startsWith('5')
-                ))
-            } />
-          <P>Das restliche Drittel von Ihnen verstreut sich über die ganze Schweiz.</P>
-
-          <PostalCodeMap
-            data={dachData} />
-
-          <P>Im Ausland führt Deutschland mit 102 Republik-Mitgliedern, vor Lichtenstein mit 17, Österreich mit 12, der USA mit 11, Belgien und Italien mit 4, Spanien und Norwegen mit 3, Austalien, Dänemark, Griechenland, Hong Kong, Japan, Holland, Thailand, Grossbritannien und China mit 2 Abonnements.</P>
-
-          <ul>
-            {countries.map(({name, count, postalCodes}) => (
-              <li key={name}>
-                {name || '(noch) Kein Angabe'} {count}
-              </li>
-            ))}
-          </ul>
-
-          <P>Einen einziges Mitglied der Republik finden wir in Georgien, Uruguay, Ägypten, Kanada, Kolumbien, Korea, Mexiko, Puerto Rico, Singapur, Taiwan, Myanmar und Malawi. Ein Gruss Ihnen allen in Ihre Exklusivität und Einsamkeit!</P>
-
-          <br /><br />
           <H2>Wie alt sind Sie?</H2>
           <P>
             Bei dieser Frage machten {countFormat(ageStats.noValue)} Personen (noch) keine Angabe. Von den restlichen {countFormat(ageStats.hasValue)} sind:
@@ -269,22 +331,37 @@ class Story extends Component {
             Diese Statistik veröffentlichen wir, weil das sonst kaum eine andere Firma macht — Zahlungsdaten gelten als Geschäftsgeheimnis. Wir folgen dieser Praxis nicht — und hoffen, dass irgendwer irgendetwas aus unserer Statistik lernt.
           </P>
 
-          {paymentMethods
-            .map(({method, count, details}) => {
-              return (
-                <div key={method} {...styles.keyMetric}>
-                  {paymentMethodNames[method]}<br />
-                  {count}<br />
-                  {details.map(({detail, count}) => (
-                    <span key={detail}>
-                      {detail} {count}
-                      <br />
-                    </span>
-                  ))}
-                </div>
-              )
-            })}
-          <br style={{clear: 'left'}} />
+          <Interaction.H3>
+            Zahlungsmittel der Unterstützter
+          </Interaction.H3>
+          <Interaction.P>
+            Mit diesen Zahlungsmittel haben Sie bezahlt.
+          </Interaction.P>
+
+          <div {...styles.keyMetricContainer}>
+            {paymentMethods
+              .map(({method, count, details}) => {
+                return (
+                  <div key={method} {...styles.keyMetric}>
+                    <div {...styles.keyMetricLabel}>
+                      {paymentMethodNames[method]}
+                    </div>
+                    <div {...styles.keyMetricNumber}>
+                      {count}
+                    </div>
+                    {details
+                      .filter(({detail}) => paymentMethodDetails[detail])
+                      .map(({detail, count}) => (
+                        <div key={detail} {...styles.keyMetricDetail}>
+                          {count} {paymentMethodDetails[detail]}
+                        </div>
+                      ))
+                    }
+                  </div>
+                )
+              })}
+            <br style={{clear: 'left'}} />
+          </div>
 
           <P>
             Was uns übrigens verblüffte: Paypal schlug als Zahlungsmethose die Postfinance.
@@ -365,6 +442,16 @@ const DataWrapper = ({loading, error, data}) => (
       {}
     )
 
+    const allPostalCodes = countries.reduce(
+      (all, country) => {
+        if (!country.name) {
+          return all
+        }
+        return all.concat(country.postalCodes)
+      },
+      []
+    )
+
     const paddedAgesIndividuals = ages.reduce(
       (all, {count, age}) => all.concat(
         range(count).map(() => age)
@@ -406,6 +493,7 @@ const DataWrapper = ({loading, error, data}) => (
       <Story
         countries={countries}
         countryIndex={countryIndex}
+        allPostalCodes={allPostalCodes}
         paddedAges={paddedAges}
         status={status}
         paymentMethods={paymentMethods}

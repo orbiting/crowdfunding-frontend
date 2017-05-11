@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {geoAlbers} from 'd3-geo'
+import {css} from 'glamor'
 
 import {
   colors
@@ -15,6 +16,12 @@ const toGeoJson = data => ({
     }
   }))
 })
+
+const styles = {
+  circlePos: css({
+    transition: 'transform 400ms'
+  })
+}
 
 class PostalCodeMap extends Component {
   constructor (...args) {
@@ -32,20 +39,28 @@ class PostalCodeMap extends Component {
       const width = this.container.getBoundingClientRect().width
       const height = Math.min(width / 1.5, window.innerHeight * 0.65)
 
-      if (width !== this.state.width) {
+      const extentData = this.props.extentData || this.props.data
+      if (
+        width !== this.state.width ||
+        extentData !== this.state.extentData
+      ) {
         this.projection.fitExtent(
-          [[10, 10], [width - 10, height - 20]],
-          toGeoJson(this.props.data)
+          [[10, 10], [width - 10, height - 10]],
+          toGeoJson(extentData)
         )
         this.setState({
           width,
-          height
+          height,
+          extentData
         })
       }
     }
   }
   componentDidMount () {
     window.addEventListener('resize', this.measure)
+    this.measure()
+  }
+  componentDidUpdate () {
     this.measure()
   }
   componentWillUnmount () {
@@ -61,18 +76,18 @@ class PostalCodeMap extends Component {
           {
             data.map((d, i) => {
               return (
-                <g key={`bubble${i}`} transform={`translate(${projection([d.lon, d.lat]).join(' ')})`}>
-                  <circle
-                    fill={colors.primary}
-                    fillOpacity={0.1}
-                    stroke={colors.primary}
-                    strokeOpacity={(
-                      filter
-                        ? (d.postalCode && d.postalCode.startsWith(filter) ? 1 : 0)
-                        : 1
-                    )}
-                    r={Math.sqrt(d.count) / 3} />
-                </g>
+                <circle
+                  key={`bubble${i}`} {...styles.circlePos}
+                  transform={`translate(${projection([d.lon, d.lat]).join(' ')})`}
+                  fill={colors.primary}
+                  fillOpacity={0.1}
+                  stroke={colors.primary}
+                  strokeOpacity={(
+                    filter
+                      ? (d.postalCode && d.postalCode.startsWith(filter) ? 1 : 0)
+                      : 1
+                  )}
+                  r={Math.sqrt(d.count) / 3} />
               )
             })
           }
