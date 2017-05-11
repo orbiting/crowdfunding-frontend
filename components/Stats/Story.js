@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
-import {range, descending, mean, median} from 'd3-array'
+import {range, descending, mean, median, max} from 'd3-array'
 import {nest} from 'd3-collection'
 import {css} from 'glamor'
 import md from 'markdown-in-js'
@@ -169,6 +169,7 @@ class Story extends Component {
       paddedAges,
       ageStats,
       groupedCreatedAts,
+      maxCreatedAt,
       status,
       paymentMethods,
       allPostalCodes,
@@ -261,25 +262,26 @@ class Story extends Component {
           <H2 style={{marginTop: 40}}>Wie alt sind Sie?</H2>
 
           <H3>
-            16 bis 92 jährige Mitglieder
+            16 bis 92 jährige Republik-Mitglieder
           </H3>
-          <Interaction.P style={{marginBottom: 20}}>
-            Altersverteilung der Republik-Abonnenten im Vergleich zur Bervölkerung von Zürich und der Schweiz.
+          <Interaction.P style={{marginBottom: 20, color: colors.secondary}}>
+            Altersverteilung der <span style={{color: colors.primary}}>Republik-Mitglieder</span> im Vergleich zur Bervölkerung von <span style={{color: '#000'}}>Zürich</span> und der <span style={{color: '#9F2500'}}>Schweiz</span>.
           </Interaction.P>
           <BarChart
-            title={d => `${d.age} Jahre: ${d.count}`}
+            title={d => `${d.age} Jahre: ${d.count} Republik-Mitgliede(r)`}
             data={paddedAges}
+            color={() => '#00B400'}
             paddingLeft={40}
             xLabel='Alter'
             xTick={(d, i) => {
-              if (d.age % 10 === 0) {
+              if (i === 0 || d.age % 10 === 0) {
                 return d.age
               }
               return ''
             }}
             referenceLines={[
-              {label: 'Schweiz', color: '#9F2500', data: agesCh},
-              {label: 'Zürich', color: '#000', data: agesZurich}
+              {color: 'red', data: agesCh},
+              {color: '#000', data: agesZurich}
             ]} />
           <div style={{paddingTop: 10, textAlign: 'right'}}>
             <A href='https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht'>
@@ -314,8 +316,8 @@ class Story extends Component {
           </P>
 
           <P>
-            {ageStats.above99}
-            {' '}Abonnentinnen älter als 99 Jahre. Wir vermuten allerdings bei den meisten Eingabefehler. Oder einen symbolischen Wink. Etwa beim Geburtsjahr 1848 - dem Gründungsjahr des Schweizerischen Bundesstaates. Oder beim 8. Dezember 1873, dem Geburtstag des <A href='https://de.wikipedia.org/wiki/Anton_Afritsch_(Journalist)'>Journalisten Anton Afritsch</A> – oder beim 19. Dezember 1878, an dem der <A href='https://de.wikipedia.org/wiki/Bayard_Taylor'>Reiseschriftsteller Bayard Taylor</A> geboren wurde.
+            {ageStats.above100}
+            {' '}Abonnentinnen älter als 100 Jahre. Wir vermuten allerdings bei den meisten Eingabefehler. Oder einen symbolischen Wink. Etwa beim Geburtsjahr 1848 - dem Gründungsjahr des Schweizerischen Bundesstaates. Oder beim 8. Dezember 1873, dem Geburtstag des <A href='https://de.wikipedia.org/wiki/Anton_Afritsch_(Journalist)'>Journalisten Anton Afritsch</A> – oder beim 19. Dezember 1878, an dem der <A href='https://de.wikipedia.org/wiki/Bayard_Taylor'>Reiseschriftsteller Bayard Taylor</A> geboren wurde.
           </P>
 
           <H2 style={{marginTop: 40}}>Wie schnell waren Sie?</H2>
@@ -327,6 +329,7 @@ class Story extends Component {
             {groupedCreatedAts.map(({key, values}, i) => (
               <div key={key} {...styles.dateBox} className={i < 2 ? styles.dateBoxBig : ''}>
                 <BarChart
+                  max={maxCreatedAt}
                   xLabel={i === 0 ? 'Zeit' : ''}
                   xTick={i < 2 && ((d) => {
                     if ((i !== 0 || d.hour) && d.hour % 6 === 0) {
@@ -439,7 +442,7 @@ const DataWrapper = ({loading, error, data}) => (
       .concat(paymentStats.paymentMethods)
       .sort((a, b) => descending(a.count, b.count))
 
-    const paddedAges = range(16, 100).map(age => ({
+    const paddedAges = range(16, 101).map(age => ({
       age,
       count: (ages.find(d => d.age === age) || {}).count || 0
     }))
@@ -456,6 +459,7 @@ const DataWrapper = ({loading, error, data}) => (
             count
           }))
       )
+    const maxCreatedAt = max(createdAts, d => d.count)
 
     const countryIndex = countries.reduce(
       (index, country) => {
@@ -590,9 +594,9 @@ const DataWrapper = ({loading, error, data}) => (
         ),
         0
       ),
-      above99: ages.reduce(
+      above100: ages.reduce(
         (sum, d) => sum + (
-          d.age > 99 ? d.count : 0
+          d.age > 100 ? d.count : 0
         ),
         0
       ),
@@ -618,6 +622,7 @@ const DataWrapper = ({loading, error, data}) => (
         status={status}
         paymentMethods={paymentMethods}
         groupedCreatedAts={groupedCreatedAts}
+        maxCreatedAt={maxCreatedAt}
         ageStats={ageStats}
         testimonialStats={testimonialStats} />
     )

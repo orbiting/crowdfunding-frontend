@@ -34,8 +34,10 @@ const styles = {
     borderTop: '1px solid'
   }),
   lineLabel: css({
-    fontSize: 12,
-    paddingTop: 5
+    position: 'absolute',
+    top: 5,
+    left: 0,
+    fontSize: 12
   }),
   xTick: css({
     position: 'absolute',
@@ -49,10 +51,8 @@ const styles = {
     opacity: 0.4
   }),
   baseLine: css({
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: -1,
+    clear: 'left',
+    width: '100%',
     height: 1,
     backgroundColor: colors.divider
   })
@@ -113,7 +113,11 @@ export default ({
                 height: `${line.data[i].count / refMax[lineI].sum / overallMaxRatio * 100}%`
               }}>
               {i === 0 && (
-                <div {...styles.lineLabel} style={{color: line.color}}>
+                <div {...styles.lineLabel} style={{
+                  color: line.color,
+                  left: -paddingLeft,
+                  top: line.top
+                }}>
                   {line.label}
                 </div>
               )}
