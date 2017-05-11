@@ -14,6 +14,7 @@ import {ListWithQuery as TestimonialList} from '../Testimonial/List'
 
 import BarChart from './BarChart'
 import PostalCodeMap from './Map'
+import List, {Item, Highlight} from '../List'
 
 import {
   Interaction, A, Label, colors,
@@ -123,9 +124,27 @@ const normalizeDateData = values => {
   }))
 }
 
+const naturalWordJoin = words => {
+  if (words.length <= 1) {
+    return words[0]
+  }
+  return [
+    words.slice(0, -2).join(', '),
+    words.slice(-2).join(' und ')
+  ].filter(Boolean).join(', ')
+}
+const countryNames = values => {
+  const names = values.map(d => (
+    d.name === 'USA'
+      ? 'der USA'
+      : d.name
+  ))
+  return naturalWordJoin(names)
+}
+
 const agesZurich = require('./data/agesZurich.json')
 const agesCh = require('./data/agesCh.json')
-const staticStats = require('./data/staticStats.json')
+// const staticStats = require('./data/staticStats.json')
 
 const paymentMethodNames = {
   STRIPE: 'Visa/Mastercard',
@@ -151,9 +170,11 @@ class Story extends Component {
       ageStats,
       groupedCreatedAts,
       status,
-      countries,
       paymentMethods,
-      allPostalCodes
+      allPostalCodes,
+      geoStats,
+      testimonialStats,
+      foreignCountries
     } = this.props
 
     const {mapExtend} = this.state
@@ -173,11 +194,7 @@ class Story extends Component {
               <P>Ladies and Gentlemen,</P>
 
               <P>
-                wir haben zum Start der Republik einiges darüber geschrieben, wer wir sind. Nun ist ein Drittel der Kampagne Geschichte. Und wir können endlich über ein noch interessanteres Thema reden: Wer Sie sind.
-              </P>
-
-              <P>
-                Hier also das vorläufige Zwischenergebnis, erhoben beim Stand von {countFormat(status.people)} Mitgliedern. Sie erhalten nun die Antworten zu den Fragen, wo Sie wohnen, wie alt Sie sind, wie schnell Sie an Bord kamen und wie seriös Ihre Zahlungsmoral war.
+                wir haben zum Start der Republik einiges darüber geschrieben, wer wir sind. Nun ist ein Drittel der Kampagne vorbei. Und wir können endlich über ein wirklich interessantes Thema reden: Wer Sie sind.
               </P>
             </ScrollBlock>
 
@@ -187,23 +204,23 @@ class Story extends Component {
               <H2>Wo wohnen Sie?</H2>
 
               <P>
-                Jeder Punkt auf der Karte repräsentiert eine Postleitzahl. Je fetter der Punkt, desto mehr von Ihnen leben dort. (Die Summe entspricht nicht ganz {countFormat(status.people)} — da nur knapp {Math.ceil(countries.filter(d => d.name).reduce((sum, d) => sum + d.count, 0) / status.people * 100)} Prozent ihre Postadresse angaben.)
+                Hier also die Verteilung der Republik-Mitglieder in der Schweiz. Jeder Punkt auf der Karte repräsentiert eine Postleitzahl. Je fetter der Punkt, desto mehr von Ihnen leben dort. (Die Summe entspricht nicht ganz {countFormat(status.people)} — da nur knapp {Math.ceil(geoStats.hasValuePercent)} Prozent ihre Postadresse angaben.)
               </P>
             </ScrollBlock>
 
             <ScrollBlock>
               <P>Ein paar Fakten dazu.</P>
 
-              <P>Zürich ist zwar eine Hochburg für die Republik. Aber bei weitem nicht das alleinige Verbreitungsgebiet. 3216 von Ihnen wohnen dort — also fast exakt ein Drittel.</P>
-              <P>In Zürich ist der Kreis 4 am dichtesten mit Republik-Abonnements gepflastert. Statistisch gesehen müssen wir auf unserem Arbeitsweg zum Hotel Rothaus jeden hundertsten mit „Guten Morgen, Verleger!“ oder „Guten Morgen, Verlegerin!“ begrüssen.</P>
+              <P>Zürich ist zwar eine Hochburg für die Republik. Aber bei weitem nicht das alleinige Verbreitungsgebiet. {countFormat(geoStats.zurich)} von Ihnen wohnen dort — {Math.ceil(geoStats.zurich / geoStats.hasValue * 100)} Prozent.</P>
+              <P>In Zürich ist der Kreis 4 am dichtesten mit Republik-Abonnements gepflastert. Statistisch gesehen müssen wir auf unserem Arbeitsweg zum Hotel Rothaus jeden hundertsten mit «Guten Morgen, Verleger!» oder «Guten Morgen, Verlegerin!» begrüssen.</P>
             </ScrollBlock>
 
             <ScrollBlock>
-              <P>Auf Zürich folgen die Konkurrenzstädte Bern (965 Abonnentinnen), Basel (438), Winterthur (206) und — leicht abgeschlagen — Luzern (85).</P>
+              <P>Auf Zürich folgen die Konkurrenzstädte Bern ({geoStats.bern} Abonnentinnen), Basel ({geoStats.basel}), Winterthur ({geoStats.winterthur}) und Luzern ({geoStats.luzern}).</P>
             </ScrollBlock>
 
             <ScrollBlock>
-              <P>Was uns besonders freut, ist die relative Stärke der Republik am Geburtsort der Helvetischen Republik, in Aarau, mit 87 Abonnenten, verstärkt durch Baden (69) und die Agglomeration von Baden (44).</P>
+              <P>Was uns besonders freut, ist die relative Stärke der Republik am Geburtsort der Helvetischen Republik, in Aarau, mit {geoStats.aarau} Abonnenten, verstärkt durch Baden ({geoStats.baden}) und die Agglomeration von Baden ({geoStats.badenAgglo}).</P>
             </ScrollBlock>
 
             <ScrollBlock>
@@ -211,39 +228,53 @@ class Story extends Component {
             </ScrollBlock>
 
             <ScrollBlock>
-              <P>Im Ausland führt Deutschland mit 102 Republik-Mitgliedern, vor Lichtenstein mit 17, Österreich mit 12, der USA mit 11, Belgien und Italien mit 4, Spanien und Norwegen mit 3, Austalien, Dänemark, Griechenland, Hong Kong, Japan, Holland, Thailand, Grossbritannien und China mit 2 Abonnements.</P>
-
-              <ul>
-                {countries.map(({name, count, postalCodes}) => (
-                  <li key={name}>
-                    {name || '(noch) Kein Angabe'} {count}
-                  </li>
+              <H3>Top 10 Postleitzahlen</H3>
+              <List>
+                {allPostalCodes.slice(0, 10).map(({postalCode, name, count}) => (
+                  <Item key={postalCode}>
+                    {postalCode} {name} — <Highlight>{count}</Highlight>
+                  </Item>
                 ))}
-              </ul>
+              </List>
+            </ScrollBlock>
 
-              <P>Einen einziges Mitglied der Republik finden wir in Georgien, Uruguay, Ägypten, Kanada, Kolumbien, Korea, Mexiko, Puerto Rico, Singapur, Taiwan, Myanmar und Malawi. Ein Gruss Ihnen allen in Ihre Exklusivität und Einsamkeit!</P>
+            <ScrollBlock>
+              <P>
+                Im Ausland führt {countryNames(foreignCountries.top.values)} mit {countFormat(+foreignCountries.top.key)} Republik-Mitgliedern, vor
+                {' '}
+                {
+                  foreignCountries.list.map(group => [
+                    countryNames(group.values),
+                    ' mit ',
+                    countFormat(+group.key)
+                  ].join('')).join(', ')
+                }
+                {' '}Abonnements.
+              </P>
+
+              <P>Einen einziges Mitglied der Republik finden wir in {countryNames(foreignCountries.single.values)}. Ein Gruss Ihnen allen in Ihre Exklusivität und Einsamkeit!</P>
             </ScrollBlock>
           </NarrowContainer>
         </div>
         <NarrowContainer>
           <H2>Wie alt sind Sie?</H2>
-          <P>
-            Bei dieser Frage machten {countFormat(ageStats.noValue)} Personen (noch) keine Angabe. Von den restlichen {countFormat(ageStats.hasValue)} sind:
-          </P>
 
-          <H3 style={{marginBottom: 20}}>
-            Republik von 16 bis 92 jährige Mitglieder
+          <H3>
+            16 bis 92 jährige Mitglieder
           </H3>
+          <Interaction.P style={{marginBottom: 20}}>
+            Altersverteilung der Republik-Abonnenten im Vergleich zur Bervölkerung von Zürich und der Schweiz.
+          </Interaction.P>
           <BarChart
             title={d => `${d.age} Jahre: ${d.count}`}
             data={paddedAges}
             referenceLines={[
-              {label: 'Schweiz', color: 'red', data: agesCh},
+              {label: 'Schweiz', color: '#9F2500', data: agesCh},
               {label: 'Zürich', color: '#000', data: agesZurich}
             ]} />
           <div style={{paddingTop: 10, textAlign: 'right'}}>
             <A href='https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht'>
-              <Label>Zürcher Bevölkerung 2016: Statistik Stadt Zürich, Präsidialdepartement</Label>
+              <Label>Zürcher Bevölkerung 2016: Statistik Stadt Zürich</Label>
             </A>
             <br />
             <A href='https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung.assetdetail.80423.html'>
@@ -252,6 +283,10 @@ class Story extends Component {
           </div>
 
           <P>
+            Bei dieser Frage machten {countFormat(ageStats.noValue)} Personen (noch) keine Angabe. Von den restlichen {countFormat(ageStats.hasValue)} sind:
+          </P>
+
+          { /* <P>
             Mittelwert:{' '}<br />
             Republik: {ageStats.median}<br />
             Zürich: {staticStats.zurich.median}<br />
@@ -262,7 +297,7 @@ class Story extends Component {
             Republik: {ageStats.mean}<br />
             Zürich: {staticStats.zurich.mean}<br />
             Schweiz: {staticStats.ch.mean}
-          </P>
+          </P> */ }
 
           <P>
             {ageStats.below16}
@@ -271,13 +306,7 @@ class Story extends Component {
 
           <P>
             {ageStats.above99}
-            {' '}Abonnentinnen älter als 99 Jahre. Wir vermuten allerdings bei den meisten Eingabefehler. Oder einen symbolischen Wink. Etwa beim Geburtsjahr 1848 — dem Gründungsjahr des Schweizerischen Bundesstaates. Oder beim 8. Dezember 1873, dem Geburtstag des <A href='https://de.wikipedia.org/wiki/Anton_Afritsch_(Journalist)'>Journalisten Anton Afritsch</A> – oder beim 19. Dezember 1878, an dem der <A href='https://de.wikipedia.org/wiki/Bayard_Taylor'>Reiseschriftsteller Bayard Taylor</A> geboren wurde.
-          </P>
-
-          <P>Am stärksten gefragt ist die Republik in der Altersgruppe um 33 Jahre. Das Durchschnittsalter unserer Leser und Leserinnen beträgt 44. Exakt bei diesem Alter folgt in der Statistik übrigens — für ein Internet-Medium nicht unerwartet — ein deutlicher Knick.
-          </P>
-
-          <P>Im Ganzen ist die Leserschaft der Republik einen Hauch reifer als die Bevölkerung von Zürich — aber einiges jünger als die Gesamtbevölkerung der Schweiz.
+            {' '}Abonnentinnen älter als 99 Jahre. Wir vermuten allerdings bei den meisten Eingabefehler. Oder einen symbolischen Wink. Etwa beim Geburtsjahr 1848 - dem Gründungsjahr des Schweizerischen Bundesstaates. Oder beim 8. Dezember 1873, dem Geburtstag des <A href='https://de.wikipedia.org/wiki/Anton_Afritsch_(Journalist)'>Journalisten Anton Afritsch</A> – oder beim 19. Dezember 1878, an dem der <A href='https://de.wikipedia.org/wiki/Bayard_Taylor'>Reiseschriftsteller Bayard Taylor</A> geboren wurde.
           </P>
 
           <H2 style={{marginTop: 40}}>Wie schnell waren Sie?</H2>
@@ -305,24 +334,6 @@ class Story extends Component {
             ))}
           </div>
           <br style={{clear: 'left'}} />
-
-          <P>
-            Hier noch ein paar bemerkenswerte Momente:
-            Das offizielle Ziel von 3000 Mitgliedern und 750000 Franken erreichte die Republik: Nach 7 Stunden 49 Minuten.
-            Der Schweizer Rekord für Crowdfundings fiel nach: xxxxxxxx
-            Den Weltrekord für Medien-Crowdfundings erreichten wir um: xxxxxxxx
-            Mitglied Nummer 10’000 registrierte sich etwa um:
-          </P>
-
-          <H2>
-            Wie zuverlässig zahlten Sie?
-          </H2>
-
-          <P>
-            Der irische Dichter, Trinker (und IRA-Anhänger) Brendan Behan sagte einmal: „Möge die gebende Hand nie zittern!“
-            Behan wäre stolz auf Sie gewesen. Von 2,8 Millionen Franken sind bis jetzt, noch mitten im Crowdfunding, nur 200’000 Franken ausstehend. Das ist, laut Experten, ein verblüffend kleiner Betrag.
-            Danke für Ihre Schnelligkeit – wir werden versuchen, uns daran ab Januar 2018 beim Einhalten von Redaktionsschlüssen zu erinnern!
-          </P>
 
           <H2>
             Wie zahlten Sie?
@@ -364,13 +375,13 @@ class Story extends Component {
           </div>
 
           <P>
-            Was uns übrigens verblüffte: Paypal schlug als Zahlungsmethose die Postfinance.
+            Was uns übrigens verblüffte: PayPal schlug als Zahlungsmethode die PostFinance.
           </P>
 
           <H2>Wieviel von Ihnen sind auf der Community-Seite dabei?</H2>
           <P>
-            Enorm viel. Fast ein Drittel von Ihnen — über 3000 Leute — schalteten ein Foto und einen Slogan auf Ihrer persönlichen Seite hoch.
-            Danke dafür! Für die über 3000 Fotos, die Unterstützung, die Begründungen und die Ratschläge! Stellvertretend für alle wollen wir nur eine Stimme zitieren – das vermutlich geographisch (und mental) am weitesten entfernte Mitglied, direkt aus seinem Wohnort auf dem Todesstern:
+            Enorm viel. {Math.round(testimonialStats.count / status.people * 100)} Prozent von Ihnen — {testimonialStats.count} Leute — schalteten ein Foto und einen Slogan auf Ihrer persönlichen Seite hoch.
+            Danke dafür! Für die {testimonialStats.count} Fotos, die Unterstützung, die Begründungen und die Ratschläge! Stellvertretend für alle wollen wir nur eine Stimme zitieren – das vermutlich geographisch (und mental) am weitesten entfernte Mitglied, direkt aus seinem Wohnort auf dem Todesstern:
           </P>
 
           <TestimonialList
@@ -387,13 +398,9 @@ Das war alles, was wir über Sie wissen. Ausser, natürlich, noch zwei Dinge:
 Mit Dank für Ihre Kühnheit und unsere Verantwortung,
 
 Ihre Crew von der Republik und von Project R
-
-((( Namen )))
-
-PS: Falls Ihnen noch jemand einfällt, der Ihre Vorliebe für Mut, Vertrauen oder Verrücktheit teilt (Unzutreffendes — Sie wissen schon!), weisen Sie die Person auf folgende Website hin: [www.republik.ch](https://www.republik.ch/)
-
-Denn eine Republik wird nie von wenigen gegründet, sondern von vielen.
           `}
+          <br /><br />
+          <Label>Geometrische Grundlage: <A href='http://www.geonames.org/postal-codes/' target='_blank'>geonames.org</A></Label>
         </NarrowContainer>
       </div>
     )
@@ -409,6 +416,7 @@ const DataWrapper = ({loading, error, data}) => (
         createdAts
       },
       paymentStats,
+      testimonialStats,
       crowdfunding: {status}
     } = data
 
@@ -442,6 +450,19 @@ const DataWrapper = ({loading, error, data}) => (
       {}
     )
 
+    const groupedForeignCountries = nest()
+      .key(d => d.count)
+      .entries(
+        countries
+          .filter(d => d.name && d.name !== 'Schweiz')
+      )
+    const foreignCountries = {
+      top: groupedForeignCountries[0],
+      list: groupedForeignCountries
+        .slice(1, groupedForeignCountries.length - 1),
+      single: groupedForeignCountries[groupedForeignCountries.length - 1]
+    }
+
     const allPostalCodes = countries.reduce(
       (all, country) => {
         if (!country.name) {
@@ -450,7 +471,89 @@ const DataWrapper = ({loading, error, data}) => (
         return all.concat(country.postalCodes)
       },
       []
-    )
+    ).sort((a, b) => descending(a.count, b.count))
+
+    const sumCount = (sum, d) => sum + d.count
+    const geoStats = {
+      hasValue: countries.filter(d => d.name)
+        .reduce(sumCount, 0),
+      hasValuePercent: countries.filter(d => d.name)
+        .reduce(sumCount, 0) / status.people * 100,
+      zurich: countryIndex.Schweiz.postalCodes
+        .filter(d => (
+          d.postalCode &&
+          d.postalCode.startsWith('80')
+        ))
+        .reduce(sumCount, 0),
+      bern: countryIndex.Schweiz.postalCodes
+        .filter(d => (
+          d.postalCode &&
+          +d.postalCode >= 3000 &&
+          +d.postalCode <= 3030
+        ))
+        .reduce(sumCount, 0),
+      basel: countryIndex.Schweiz.postalCodes
+        .filter(d => (
+          d.postalCode &&
+          +d.postalCode >= 4000 &&
+          +d.postalCode <= 4059
+        ))
+        .reduce(sumCount, 0),
+      luzern: countryIndex.Schweiz.postalCodes
+        .filter(d => (
+          d.postalCode &&
+          (
+            +d.postalCode === 6000 ||
+            +d.postalCode === 6009 ||
+            +d.postalCode === 6014 ||
+            +d.postalCode === 6015 ||
+            (
+              +d.postalCode >= 6002 &&
+              +d.postalCode <= 6007
+            )
+          )
+        ))
+        .reduce(sumCount, 0),
+      winterthur: countryIndex.Schweiz.postalCodes
+        .filter(d => (
+          d.postalCode &&
+          (
+            +d.postalCode === 8310 ||
+            +d.postalCode === 8352 ||
+            +d.postalCode === 8482 ||
+            (
+              +d.postalCode >= 8400 &&
+              +d.postalCode <= 8411
+            )
+          )
+        ))
+        .reduce(sumCount, 0),
+      aarau: countryIndex.Schweiz.postalCodes
+        .filter(d => (
+          d.postalCode &&
+          +d.postalCode === 5000
+        ))
+        .reduce(sumCount, 0),
+      baden: countryIndex.Schweiz.postalCodes
+        .filter(d => (
+          d.postalCode &&
+          (
+            +d.postalCode === 5400 ||
+            +d.postalCode === 5405 ||
+            +d.postalCode === 5406
+          )
+        ))
+        .reduce(sumCount, 0),
+      badenAgglo: countryIndex.Schweiz.postalCodes
+        .filter(d => (
+          d.postalCode &&
+          (
+            +d.postalCode === 5430 ||
+            +d.postalCode === 5408
+          )
+        ))
+        .reduce(sumCount, 0)
+    }
 
     const paddedAgesIndividuals = ages.reduce(
       (all, {count, age}) => all.concat(
@@ -493,12 +596,15 @@ const DataWrapper = ({loading, error, data}) => (
       <Story
         countries={countries}
         countryIndex={countryIndex}
+        foreignCountries={foreignCountries}
         allPostalCodes={allPostalCodes}
+        geoStats={geoStats}
         paddedAges={paddedAges}
         status={status}
         paymentMethods={paymentMethods}
         groupedCreatedAts={groupedCreatedAts}
-        ageStats={ageStats} />
+        ageStats={ageStats}
+        testimonialStats={testimonialStats} />
     )
   }} />
 )
@@ -520,6 +626,7 @@ query {
       count
       postalCodes {
         postalCode
+        name
         lat
         lon
         count
@@ -539,6 +646,9 @@ query {
         count
       }
     }
+  }
+  testimonialStats {
+    count
   }
 }
 `
