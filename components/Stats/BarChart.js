@@ -1,12 +1,16 @@
 import React from 'react'
-import {css} from 'glamor'
+import {css, merge} from 'glamor'
 import {max, sum as sumOfArray} from 'd3-array'
 
 import {
-  colors
+  colors, fontFamilies
 } from '@project-r/styleguide'
 
+const X_LABEL_HEIGHT = 20
 const styles = {
+  container: css({
+    position: 'relative'
+  }),
   datum: css({
     float: 'left',
     paddingLeft: 1,
@@ -32,10 +36,40 @@ const styles = {
   lineLabel: css({
     fontSize: 12,
     paddingTop: 5
+  }),
+  xTick: css({
+    position: 'absolute',
+    bottom: -X_LABEL_HEIGHT,
+    fontFamily: fontFamilies.sansSerifRegular,
+    fontSize: 14,
+    left: -10,
+    right: -10,
+    textAlign: 'center',
+    color: colors.secondary,
+    opacity: 0.4
+  }),
+  baseLine: css({
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: -1,
+    height: 1,
+    backgroundColor: colors.divider
   })
 }
+styles.xLabel = merge(styles.xTick, {
+  left: 0,
+  textAlign: 'left'
+})
 
-export default ({data, title, max: maxValue, color, height = 200, referenceLines = []}) => {
+export default ({
+  data, title,
+  max: maxValue,
+  xTick, xLabel,
+  color,
+  height = 200, paddingLeft,
+  referenceLines = []
+}) => {
   const sum = sumOfArray(data, d => d.count)
   const maxRatio = maxValue
     ? maxValue / sum
@@ -54,7 +88,11 @@ export default ({data, title, max: maxValue, color, height = 200, referenceLines
   )
 
   return (
-    <div style={{height}}>
+    <div {...styles.container} style={{
+      height,
+      marginBottom: xTick ? X_LABEL_HEIGHT : 0,
+      paddingLeft
+    }}>
       {data.map((d, i) => (
         <div {...styles.datum}
           key={i}
@@ -81,8 +119,19 @@ export default ({data, title, max: maxValue, color, height = 200, referenceLines
               )}
             </div>
           ))}
+          {!!xTick && (
+            <div {...styles.xTick}>
+              {xTick(d, i)}
+            </div>
+          )}
         </div>
       ))}
+      {!!xLabel && (
+        <div {...styles.xLabel}>
+          {xLabel}
+        </div>
+      )}
+      <div {...styles.baseLine} />
     </div>
   )
 }

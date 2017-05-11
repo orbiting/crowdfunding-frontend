@@ -252,12 +252,13 @@ class Story extends Component {
                 {' '}Abonnements.
               </P>
 
-              <P>Einen einziges Mitglied der Republik finden wir in {countryNames(foreignCountries.single.values)}. Ein Gruss Ihnen allen in Ihre Exklusivität und Einsamkeit!</P>
+              <P>Ein einziges Mitglied der Republik finden wir in {countryNames(foreignCountries.single.values)}. Ein Gruss Ihnen allen in Ihre Exklusivität und Einsamkeit!</P>
+              <Label>Geometrische Grundlage: <A href='http://www.geonames.org/postal-codes/' target='_blank'>geonames.org</A></Label>
             </ScrollBlock>
           </NarrowContainer>
         </div>
         <NarrowContainer>
-          <H2>Wie alt sind Sie?</H2>
+          <H2 style={{marginTop: 40}}>Wie alt sind Sie?</H2>
 
           <H3>
             16 bis 92 jährige Mitglieder
@@ -268,6 +269,14 @@ class Story extends Component {
           <BarChart
             title={d => `${d.age} Jahre: ${d.count}`}
             data={paddedAges}
+            paddingLeft={40}
+            xLabel='Alter'
+            xTick={(d, i) => {
+              if (d.age % 10 === 0) {
+                return d.age
+              }
+              return ''
+            }}
             referenceLines={[
               {label: 'Schweiz', color: '#9F2500', data: agesCh},
               {label: 'Zürich', color: '#000', data: agesZurich}
@@ -318,6 +327,14 @@ class Story extends Component {
             {groupedCreatedAts.map(({key, values}, i) => (
               <div key={key} {...styles.dateBox} className={i < 2 ? styles.dateBoxBig : ''}>
                 <BarChart
+                  xLabel={i === 0 ? 'Zeit' : ''}
+                  xTick={i < 2 && ((d) => {
+                    if ((i !== 0 || d.hour) && d.hour % 6 === 0) {
+                      return `${d.hour}h`
+                    }
+                    return ''
+                  })}
+                  title={d => `${d.hour}h: ${d.count}`}
                   height={120}
                   color={() => colors.secondary}
                   data={normalizeDateData(values)} />
@@ -399,8 +416,6 @@ Mit Dank für Ihre Kühnheit und unsere Verantwortung,
 
 Ihre Crew von der Republik und von Project R
           `}
-          <br /><br />
-          <Label>Geometrische Grundlage: <A href='http://www.geonames.org/postal-codes/' target='_blank'>geonames.org</A></Label>
         </NarrowContainer>
       </div>
     )
