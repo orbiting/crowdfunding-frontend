@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {geoAlbers} from 'd3-geo'
 
 import {
-  colors, Field
+  colors
 } from '@project-r/styleguide'
 
 const toGeoJson = data => ({
@@ -30,10 +30,9 @@ class PostalCodeMap extends Component {
     }
     this.measure = () => {
       const width = this.container.getBoundingClientRect().width
-      const height = width / 1.5
+      const height = Math.min(width / 1.5, window.innerHeight * 0.65)
 
       if (width !== this.state.width) {
-        console.log(toGeoJson(this.props.data))
         this.projection.fitExtent(
           [[10, 10], [width - 10, height - 20]],
           toGeoJson(this.props.data)
@@ -53,8 +52,8 @@ class PostalCodeMap extends Component {
     window.removeEventListener('resize', this.measure)
   }
   render () {
-    const {width, height, filter} = this.state
-    const {data, allowFilter = false} = this.props
+    const {width, height} = this.state
+    const {data, filter} = this.props
     const {projection} = this
     return (
       <div ref={this.containerRef}>
@@ -78,14 +77,6 @@ class PostalCodeMap extends Component {
             })
           }
         </svg>
-        {allowFilter && <Field
-          label='Postleitzahl'
-          value={filter || ''}
-          onChange={(_, value) => {
-            this.setState({
-              filter: value
-            })
-          }} />}
       </div>
     )
   }

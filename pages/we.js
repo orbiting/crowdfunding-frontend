@@ -1,17 +1,11 @@
 import React from 'react'
 import withData from '../lib/withData'
 import Frame from '../components/Frame'
-import Memberships from '../components/Stats/Memberships'
-
-import {
-  NarrowContainer
-} from '@project-r/styleguide'
+import Story from '../components/Stats/Story'
 
 const WePage = ({url}) => (
   <Frame url={url} meta={{title: 'Wer sind Sie?'}} sidebar={false}>
-    <NarrowContainer>
-      <Memberships />
-    </NarrowContainer>
+    <Story />
   </Frame>
 )
 
