@@ -19,7 +19,7 @@ const toGeoJson = data => ({
 
 const styles = {
   circlePos: css({
-    transition: 'transform 400ms'
+    transition: 'transform 1s ease-in-out'
   })
 }
 

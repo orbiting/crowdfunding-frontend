@@ -98,17 +98,18 @@ const styles = {
     marginRight: -5,
     padding: '20px 5px',
     backgroundColor: 'rgba(255, 255, 255, 0.8)'
+  }),
+  opaqueContainer: css({
+    position: 'relative',
+    backgroundColor: '#fff',
+    paddingTop: 40,
+    paddingBottom: 100,
+    marginBottom: -100
   })
 }
 
 const Spacer = () => (
   <div style={{height: '50vh'}} />
-)
-
-const ScrollBlock = ({children}) => (
-  <div {...styles.scrollBlock}>
-    {children}
-  </div>
 )
 
 const normalizeDateData = values => {
@@ -163,6 +164,67 @@ class Story extends Component {
     super(...args)
 
     this.state = {}
+    this.refs = {}
+    this.blocks = {}
+
+    this.refKeys = 'start zh ag cities plz dach'
+      .split(' ')
+
+    this.refKeys.map(key => {
+      this.blocks[key] = {
+        key,
+        setRef: (ref) => {
+          this.blocks[key].ref = ref
+        }
+      }
+    })
+
+    this.onScroll = () => {
+      const y = window.pageYOffset
+      const cx = y + window.innerHeight / 2
+      const calcDistance = block => Math.min(
+        Math.abs(block.y0 - cx),
+        Math.abs(block.y1 - cx)
+      )
+      const activeBlock = this.refKeys
+        .reduce(
+          (active, key) => {
+            if (calcDistance(this.blocks[key]) < calcDistance(this.blocks[active])) {
+              return key
+            }
+            return active
+          }
+        )
+
+      if (this.state.activeBlock !== activeBlock) {
+        this.setState({
+          activeBlock
+        })
+      }
+    }
+    this.measure = () => {
+      const y = window.pageYOffset
+      this.refKeys.forEach(key => {
+        const block = this.blocks[key]
+        const {top, height} = block.ref
+          .getBoundingClientRect()
+        block.y0 = y + top
+        block.y1 = block.y0 + height
+      })
+      this.onScroll()
+    }
+  }
+  componentDidMount () {
+    window.addEventListener('scroll', this.onScroll)
+    window.addEventListener('resize', this.measure)
+    this.measure()
+  }
+  componentDidUpdate () {
+    this.measure()
+  }
+  componentWillUnmount () {
+    window.removeEventListener('scroll', this.onScroll)
+    window.removeEventListener('resize', this.measure)
   }
   render () {
     const {
@@ -179,53 +241,99 @@ class Story extends Component {
       foreignCountries
     } = this.props
 
-    const {mapExtend, filter} = this.state
+    const {filter, activeBlock} = this.state
+
+    let mapExtend = countryIndex.Schweiz.postalCodes
+    switch (activeBlock) {
+      case 'zh':
+        mapExtend = countryIndex.Schweiz.postalCodes
+          .filter(d => (
+            d.postalCode &&
+            d.postalCode.startsWith('80')
+          ))
+        break
+      case 'cities':
+        mapExtend = countryIndex.Schweiz.postalCodes
+          .filter(d => (
+            d.postalCode &&
+            (
+              d.name === 'Bern' ||
+              d.name === 'Basel' ||
+              d.name === 'Winterthur' ||
+              d.name === 'Luzern'
+            )
+          ))
+        break
+      case 'ag':
+        mapExtend = countryIndex.Schweiz.postalCodes
+          .filter(d => (
+            d.postalCode &&
+            d.postalCode.startsWith('5')
+          ))
+        break
+      case 'dach':
+        mapExtend = []
+          .concat(countryIndex.Deutschland.postalCodes)
+          .concat(countryIndex['Österreich'].postalCodes)
+          .concat(countryIndex.Schweiz.postalCodes)
+        break
+    }
 
     return (
       <div>
         <div {...styles.mapStory}>
-          <div {...styles.mapTop}>
+          <div {...styles.mapFixed}>
             <PostalCodeMap
-              extentData={mapExtend || countryIndex.Schweiz.postalCodes}
+              extentData={mapExtend}
               data={allPostalCodes} />
           </div>
           <NarrowContainer>
             <Spacer />
-            <ScrollBlock>
+            <div {...styles.scrollBlock}>
               <H1>Wer sind Sie?</H1>
               <P>Ladies and Gentlemen,</P>
 
               <P>
                 wir haben zum Start der Republik einiges darüber geschrieben, wer wir sind. Nun ist ein Drittel der Kampagne vorbei. Und wir können endlich über ein wirklich interessantes Thema reden: Wer Sie sind.
               </P>
-            </ScrollBlock>
+            </div>
 
             { /* <P>{status.people} gelöste Abos gehören zur Zeit {countries.reduce((sum, d) => sum + d.count, 0)} Personen</P> */ }
 
-            <ScrollBlock>
+            <div {...styles.scrollBlock}
+              ref={this.blocks.start.setRef}>
               <H2>Wo wohnen Sie?</H2>
 
               <P>
                 Hier also die Verteilung der Republik-Mitglieder in der Schweiz. Jeder Punkt auf der Karte repräsentiert eine Postleitzahl. Je fetter der Punkt, desto mehr von Ihnen leben dort. (Die Summe entspricht nicht ganz {countFormat(status.people)} — da nur knapp {Math.ceil(geoStats.hasValuePercent)} Prozent ihre Postadresse angaben.)
               </P>
-            </ScrollBlock>
+            </div>
 
-            <ScrollBlock>
+            <Spacer />
+
+            <div {...styles.scrollBlock}
+              ref={this.blocks.zh.setRef}>
               <P>Ein paar Fakten dazu.</P>
 
               <P>Zürich ist zwar eine Hochburg für die Republik. Aber bei weitem nicht das alleinige Verbreitungsgebiet. {countFormat(geoStats.zurich)} von Ihnen wohnen dort — {Math.ceil(geoStats.zurich / geoStats.hasValue * 100)} Prozent.</P>
-              <P>In Zürich ist der Kreis 4 am dichtesten mit Republik-Abonnements gepflastert. Statistisch gesehen müssen wir auf unserem Arbeitsweg zum Hotel Rothaus jeden hundertsten mit «Guten Morgen, Verleger!» oder «Guten Morgen, Verlegerin!» begrüssen.</P>
-            </ScrollBlock>
+            </div>
 
-            <ScrollBlock>
+            <Spacer />
+
+            <div {...styles.scrollBlock}
+              ref={this.blocks.cities.setRef}>
               <P>Auf Zürich folgen die Konkurrenzstädte Bern ({geoStats.bern} Abonnentinnen), Basel ({geoStats.basel}), Winterthur ({geoStats.winterthur}) und Luzern ({geoStats.luzern}).</P>
-            </ScrollBlock>
+            </div>
 
-            <ScrollBlock>
+            <Spacer />
+
+            <div {...styles.scrollBlock}
+              ref={this.blocks.ag.setRef}>
               <P>Was uns besonders freut, ist die relative Stärke der Republik am Geburtsort der Helvetischen Republik, in Aarau, mit {geoStats.aarau} Abonnenten, verstärkt durch Baden ({geoStats.baden}) und die Agglomeration von Baden ({geoStats.badenAgglo}).</P>
-            </ScrollBlock>
+            </div>
 
-            <ScrollBlock>
+            <div {...styles.scrollBlock}
+              ref={this.blocks.plz.setRef}>
               <P>
                 Weitere {countFormat(
                   countryIndex.Schweiz.count -
@@ -237,9 +345,7 @@ class Story extends Component {
                   geoStats.baden -
                   geoStats.badenAgglo
                 )} von Ihnen verstreut sich über die ganze Schweiz.</P>
-            </ScrollBlock>
 
-            <ScrollBlock>
               <H3>Ihre Postleitzahlen nachschlagen</H3>
               <Field
                 label='Postleitzahl'
@@ -262,9 +368,12 @@ class Story extends Component {
                     ))}
                 </List>}
               </div>
-            </ScrollBlock>
+            </div>
 
-            <ScrollBlock>
+            <Spacer />
+
+            <div {...styles.scrollBlock}
+              ref={this.blocks.dach.setRef}>
               <P>
                 Im Ausland führt {countryNames(foreignCountries.top.values)} mit {countFormat(+foreignCountries.top.key)} Republik-Mitgliedern, vor
                 {' '}
@@ -280,161 +389,162 @@ class Story extends Component {
 
               <P>Ein einziges Mitglied der Republik finden wir in {countryNames(foreignCountries.single.values)}. Ein Gruss Ihnen allen in Ihre Exklusivität und Einsamkeit!</P>
               <Label>Geometrische Grundlage: <A href='http://www.geonames.org/postal-codes/' target='_blank'>geonames.org</A></Label>
-            </ScrollBlock>
+            </div>
           </NarrowContainer>
         </div>
-        <NarrowContainer>
-          <H2 style={{marginTop: 40}}>Wie alt sind Sie?</H2>
+        <div {...styles.opaqueContainer}>
+          <NarrowContainer>
+            <H2 style={{marginTop: 40}}>Wie alt sind Sie?</H2>
 
-          <H3>
-            16 bis 92 jährige Republik-Mitglieder
-          </H3>
-          <Interaction.P style={{marginBottom: 20, color: colors.secondary}}>
-            Altersverteilung der <span style={{color: colors.primary}}>Republik-Mitglieder</span> im Vergleich zur Bervölkerung von <span style={{color: '#000'}}>Zürich</span> und der <span style={{color: '#9F2500'}}>Schweiz</span>.
-          </Interaction.P>
-          <BarChart
-            title={d => `${d.age} Jahre: ${d.count} Republik-Mitgliede(r)`}
-            data={paddedAges}
-            color={() => '#00B400'}
-            paddingLeft={40}
-            xLabel='Alter'
-            xTick={(d, i) => {
-              if (i === 0 || d.age % 10 === 0) {
-                return d.age
-              }
-              return ''
-            }}
-            referenceLines={[
-              {color: 'red', data: agesCh},
-              {color: '#000', data: agesZurich}
-            ]} />
-          <div style={{paddingTop: 10, textAlign: 'right'}}>
-            <A href='https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht'>
-              <Label>Zürcher Bevölkerung 2016: Statistik Stadt Zürich</Label>
-            </A>
-            <br />
-            <A href='https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung.assetdetail.80423.html'>
-              <Label>Schweizer Bevölkerung 2015: BFS STATPOP</Label>
-            </A>
-          </div>
+            <H3>
+              16 bis 92 jährige Republik-Mitglieder
+            </H3>
+            <Interaction.P style={{marginBottom: 20, color: colors.secondary}}>
+              Altersverteilung der <span style={{color: colors.primary}}>Republik-Mitglieder</span> im Vergleich zur Bervölkerung von <span style={{color: '#000'}}>Zürich</span> und der <span style={{color: '#9F2500'}}>Schweiz</span>.
+            </Interaction.P>
+            <BarChart
+              title={d => `${d.age} Jahre: ${d.count} Republik-Mitgliede(r)`}
+              data={paddedAges}
+              color={() => '#00B400'}
+              paddingLeft={40}
+              xLabel='Alter'
+              xTick={(d, i) => {
+                if (i === 0 || d.age % 10 === 0) {
+                  return d.age
+                }
+                return ''
+              }}
+              referenceLines={[
+                {color: 'red', data: agesCh},
+                {color: '#000', data: agesZurich}
+              ]} />
+            <div style={{paddingTop: 10, textAlign: 'right'}}>
+              <A href='https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht'>
+                <Label>Zürcher Bevölkerung 2016: Statistik Stadt Zürich</Label>
+              </A>
+              <br />
+              <A href='https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung.assetdetail.80423.html'>
+                <Label>Schweizer Bevölkerung 2015: BFS STATPOP</Label>
+              </A>
+            </div>
 
-          <P>
-            Bei dieser Frage machten {countFormat(ageStats.noValue)} Personen (noch) keine Angabe. Von den restlichen {countFormat(ageStats.hasValue)} sind:
-          </P>
+            <P>
+              Bei dieser Frage machten {countFormat(ageStats.noValue)} Personen (noch) keine Angabe. Von den restlichen {countFormat(ageStats.hasValue)} sind:
+            </P>
 
-          { /* <P>
-            Mittelwert:{' '}<br />
-            Republik: {ageStats.median}<br />
-            Zürich: {staticStats.zurich.median}<br />
-            Schweiz: {staticStats.ch.median}
-          </P>
-          <P>
-            Durchschnittsalter:{' '}<br />
-            Republik: {ageStats.mean}<br />
-            Zürich: {staticStats.zurich.mean}<br />
-            Schweiz: {staticStats.ch.mean}
-          </P> */ }
+            { /* <P>
+              Mittelwert:{' '}<br />
+              Republik: {ageStats.median}<br />
+              Zürich: {staticStats.zurich.median}<br />
+              Schweiz: {staticStats.ch.median}
+            </P>
+            <P>
+              Durchschnittsalter:{' '}<br />
+              Republik: {ageStats.mean}<br />
+              Zürich: {staticStats.zurich.mean}<br />
+              Schweiz: {staticStats.ch.mean}
+            </P> */ }
 
-          <P>
-            {ageStats.below16}
-            {' '}Abonnenten jünger als 16 Jahre. Bei den der Mehrheit handelt es sich allerdings nicht um frühreife Kinder, sondern um Firmenabonnements. Diese gaben ihr Gründungsjahr an.
-          </P>
+            <P>
+              {ageStats.below16}
+              {' '}Abonnenten jünger als 16 Jahre. Bei den der Mehrheit handelt es sich allerdings nicht um frühreife Kinder, sondern um Firmenabonnements. Diese gaben ihr Gründungsjahr an.
+            </P>
 
-          <P>
-            {ageStats.above100}
-            {' '}Abonnentinnen älter als 100 Jahre. Wir vermuten allerdings bei den meisten Eingabefehler. Oder einen symbolischen Wink. Etwa beim Geburtsjahr 1848 - dem Gründungsjahr des Schweizerischen Bundesstaates. Oder beim 8. Dezember 1873, dem Geburtstag des <A href='https://de.wikipedia.org/wiki/Anton_Afritsch_(Journalist)'>Journalisten Anton Afritsch</A> – oder beim 19. Dezember 1878, an dem der <A href='https://de.wikipedia.org/wiki/Bayard_Taylor'>Reiseschriftsteller Bayard Taylor</A> geboren wurde.
-          </P>
+            <P>
+              {ageStats.above100}
+              {' '}Abonnentinnen älter als 100 Jahre. Wir vermuten allerdings bei den meisten Eingabefehler. Oder einen symbolischen Wink. Etwa beim Geburtsjahr 1848 - dem Gründungsjahr des Schweizerischen Bundesstaates. Oder beim 8. Dezember 1873, dem Geburtstag des <A href='https://de.wikipedia.org/wiki/Anton_Afritsch_(Journalist)'>Journalisten Anton Afritsch</A> – oder beim 19. Dezember 1878, an dem der <A href='https://de.wikipedia.org/wiki/Bayard_Taylor'>Reiseschriftsteller Bayard Taylor</A> geboren wurde.
+            </P>
 
-          <H2 style={{marginTop: 40}}>Wie schnell waren Sie?</H2>
+            <H2 style={{marginTop: 40}}>Wie schnell waren Sie?</H2>
 
-          <P>
-            Laut Theorie verlaufen Crowdfundings gern dramatisch: Am Anfang gibt es einen Höhepunkt, am Ende gibt es einen Höhepunkt, dazwischen dümpelt es vor sich hin. Die Republik machte dabei bisher keine Ausnahme.
-          </P>
-          <div {...styles.dateContainer}>
-            {groupedCreatedAts.map(({key, values}, i) => (
-              <div key={key} {...styles.dateBox} className={i < 2 ? styles.dateBoxBig : ''}>
-                <BarChart
-                  max={maxCreatedAt}
-                  xLabel={i === 0 ? 'Zeit' : ''}
-                  xTick={i < 2 && ((d) => {
-                    if ((i !== 0 || d.hour) && d.hour % 6 === 0) {
-                      return `${d.hour}h`
-                    }
-                    return ''
-                  })}
-                  title={d => `${d.hour}h: ${d.count}`}
-                  height={120}
-                  color={() => colors.secondary}
-                  data={normalizeDateData(values)} />
-                <Label {...styles.dateLabel}>
-                  {dateFormat(values[0].datetime)}
-                </Label>
-                <div {...styles.dateCount}>
-                  {values.reduce(
-                    (sum, d) => sum + d.count,
-                    0
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-          <br style={{clear: 'left'}} />
-
-          <H2>
-            Wie zahlten Sie?
-          </H2>
-          <P>
-            Diese Statistik veröffentlichen wir, weil das sonst kaum eine andere Firma macht — Zahlungsdaten gelten als Geschäftsgeheimnis. Wir folgen dieser Praxis nicht — und hoffen, dass irgendwer irgendetwas aus unserer Statistik lernt.
-          </P>
-
-          <Interaction.H3>
-            Zahlungsmittel der Unterstützter
-          </Interaction.H3>
-          <Interaction.P>
-            Mit diesen Zahlungsmittel haben Sie bezahlt.
-          </Interaction.P>
-
-          <div {...styles.keyMetricContainer}>
-            {paymentMethods
-              .map(({method, count, details}) => {
-                return (
-                  <div key={method} {...styles.keyMetric}>
-                    <div {...styles.keyMetricLabel}>
-                      {paymentMethodNames[method]}
-                    </div>
-                    <div {...styles.keyMetricNumber}>
-                      {count}
-                    </div>
-                    {details
-                      .filter(({detail}) => paymentMethodDetails[detail])
-                      .map(({detail, count}) => (
-                        <div key={detail} {...styles.keyMetricDetail}>
-                          {count} {paymentMethodDetails[detail]}
-                        </div>
-                      ))
-                    }
+            <P>
+              Laut Theorie verlaufen Crowdfundings gern dramatisch: Am Anfang gibt es einen Höhepunkt, am Ende gibt es einen Höhepunkt, dazwischen dümpelt es vor sich hin. Die Republik machte dabei bisher keine Ausnahme.
+            </P>
+            <div {...styles.dateContainer}>
+              {groupedCreatedAts.map(({key, values}, i) => (
+                <div key={key} {...styles.dateBox} className={i < 2 ? styles.dateBoxBig : ''}>
+                  <BarChart
+                    max={maxCreatedAt}
+                    xLabel={i === 0 ? 'Zeit' : ''}
+                    xTick={i < 2 && ((d) => {
+                      if ((i !== 0 || d.hour) && d.hour % 6 === 0) {
+                        return `${d.hour}h`
+                      }
+                      return ''
+                    })}
+                    title={d => `${d.hour}h: ${d.count}`}
+                    height={120}
+                    color={() => colors.secondary}
+                    data={normalizeDateData(values)} />
+                  <Label {...styles.dateLabel}>
+                    {dateFormat(values[0].datetime)}
+                  </Label>
+                  <div {...styles.dateCount}>
+                    {values.reduce(
+                      (sum, d) => sum + d.count,
+                      0
+                    )}
                   </div>
-                )
-              })}
+                </div>
+              ))}
+            </div>
             <br style={{clear: 'left'}} />
-          </div>
 
-          <P>
-            Was uns übrigens verblüffte: PayPal schlug als Zahlungsmethode die PostFinance.
-          </P>
+            <H2>
+              Wie zahlten Sie?
+            </H2>
+            <P>
+              Diese Statistik veröffentlichen wir, weil das sonst kaum eine andere Firma macht — Zahlungsdaten gelten als Geschäftsgeheimnis. Wir folgen dieser Praxis nicht — und hoffen, dass irgendwer irgendetwas aus unserer Statistik lernt.
+            </P>
 
-          <H2>Wieviel von Ihnen sind auf der Community-Seite dabei?</H2>
-          <P>
-            Enorm viel. {Math.round(testimonialStats.count / status.people * 100)} Prozent von Ihnen — {testimonialStats.count} Leute — schalteten ein Foto und einen Slogan auf Ihrer persönlichen Seite hoch.
-            Danke dafür! Für die {testimonialStats.count} Fotos, die Unterstützung, die Begründungen und die Ratschläge! Stellvertretend für alle wollen wir nur eine Stimme zitieren – das vermutlich geographisch (und mental) am weitesten entfernte Mitglied, direkt aus seinem Wohnort auf dem Todesstern:
-          </P>
+            <Interaction.H3>
+              Zahlungsmittel der Unterstützter
+            </Interaction.H3>
+            <Interaction.P>
+              Mit diesen Zahlungsmittel haben Sie bezahlt.
+            </Interaction.P>
 
-          <TestimonialList
-            limit={0}
-            onSelect={() => {}}
-            firstId='bbaf5f0d-3be0-4886-bd24-544f64d518ab' />
+            <div {...styles.keyMetricContainer}>
+              {paymentMethods
+                .map(({method, count, details}) => {
+                  return (
+                    <div key={method} {...styles.keyMetric}>
+                      <div {...styles.keyMetricLabel}>
+                        {paymentMethodNames[method]}
+                      </div>
+                      <div {...styles.keyMetricNumber}>
+                        {count}
+                      </div>
+                      {details
+                        .filter(({detail}) => paymentMethodDetails[detail])
+                        .map(({detail, count}) => (
+                          <div key={detail} {...styles.keyMetricDetail}>
+                            {count} {paymentMethodDetails[detail]}
+                          </div>
+                        ))
+                      }
+                    </div>
+                  )
+                })}
+              <br style={{clear: 'left'}} />
+            </div>
 
-          {md(mdComponents)`
+            <P>
+              Was uns übrigens verblüffte: PayPal schlug als Zahlungsmethode die PostFinance.
+            </P>
+
+            <H2>Wieviel von Ihnen sind auf der Community-Seite dabei?</H2>
+            <P>
+              Enorm viel. {Math.round(testimonialStats.count / status.people * 100)} Prozent von Ihnen — {testimonialStats.count} Leute — schalteten ein Foto und einen Slogan auf Ihrer persönlichen Seite hoch.
+              Danke dafür! Für die {testimonialStats.count} Fotos, die Unterstützung, die Begründungen und die Ratschläge! Stellvertretend für alle wollen wir nur eine Stimme zitieren – das vermutlich geographisch (und mental) am weitesten entfernte Mitglied, direkt aus seinem Wohnort auf dem Todesstern:
+            </P>
+
+            <TestimonialList
+              limit={0}
+              onSelect={() => {}}
+              firstId='bbaf5f0d-3be0-4886-bd24-544f64d518ab' />
+
+            {md(mdComponents)`
 Das war alles, was wir über Sie wissen. Ausser, natürlich, noch zwei Dinge:
 
 1. Dass Sie (Unzutreffendes streichen) entweder reich an Mut, an Vertrauen oder an Verrücktheit sind. Weil Sie Verlegerin und zukünftiger Leser eines Magazins geworden sind, von dem noch nichts existiert als ein ehrgeiziger Plan.
@@ -443,8 +553,9 @@ Das war alles, was wir über Sie wissen. Ausser, natürlich, noch zwei Dinge:
 Mit Dank für Ihre Kühnheit und unsere Verantwortung,
 
 Ihre Crew von der Republik und von Project R
-          `}
-        </NarrowContainer>
+            `}
+          </NarrowContainer>
+        </div>
       </div>
     )
   }
