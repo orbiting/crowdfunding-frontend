@@ -332,6 +332,8 @@ class Story extends Component {
               <P>Was uns besonders freut, ist die relative Stärke der Republik am Geburtsort der Helvetischen Republik, in Aarau, mit {geoStats.aarau} Abonnenten, verstärkt durch Baden ({geoStats.baden}) und die Agglomeration von Baden ({geoStats.badenAgglo}).</P>
             </div>
 
+            <Spacer />
+
             <div {...styles.scrollBlock}
               ref={this.blocks.plz.setRef}>
               <P>
