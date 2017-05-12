@@ -19,7 +19,7 @@ const toGeoJson = data => ({
 
 const styles = {
   circlePos: css({
-    transition: 'transform 1s ease-in-out'
+    transition: 'cx 1s ease-in-out, cy 1s ease-in-out'
   })
 }
 
@@ -75,10 +75,12 @@ class PostalCodeMap extends Component {
         <svg width={width || '100%'} height={height || 300}>
           {
             data.map((d, i) => {
+              const [x, y] = projection([d.lon, d.lat])
               return (
                 <circle
                   key={`bubble${i}`} {...styles.circlePos}
-                  transform={`translate(${projection([d.lon, d.lat]).join(' ')})`}
+                  cx={x}
+                  cy={y}
                   fill={colors.primary}
                   fillOpacity={0.1}
                   stroke={colors.primary}
