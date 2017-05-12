@@ -323,7 +323,7 @@ class Story extends Component {
           <H2 style={{marginTop: 40}}>Wie schnell waren Sie?</H2>
 
           <P>
-            Laut Theorie verlaufen Crowdfundings gern dramatisch: Am Anfang gibt es einen Höhepunkt, am Ende gibt es einen Höhepunkt, dazwischen dümpelt es vor sich hin. Die Republik machte dabei bisher keine Ausnahme. Hier die Abonnementskurve vom 26. April bis 1. Mai:
+            Laut Theorie verlaufen Crowdfundings gern dramatisch: Am Anfang gibt es einen Höhepunkt, am Ende gibt es einen Höhepunkt, dazwischen dümpelt es vor sich hin. Die Republik machte dabei bisher keine Ausnahme.
           </P>
           <div {...styles.dateContainer}>
             {groupedCreatedAts.map(({key, values}, i) => (
