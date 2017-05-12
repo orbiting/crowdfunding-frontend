@@ -154,7 +154,7 @@ const paymentMethodNames = {
 }
 
 const paymentMethodDetails = {
-  paperInvoice: 'Rechnung per Post'
+  paperInvoice: 'Rechnungen per Post'
 }
 
 class Story extends Component {
