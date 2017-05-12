@@ -225,7 +225,17 @@ class Story extends Component {
             </ScrollBlock>
 
             <ScrollBlock>
-              <P>Das restliche Drittel von Ihnen verstreut sich über die ganze Schweiz.</P>
+              <P>
+                Weitere {countFormat(
+                  countryIndex.Schweiz.count -
+                  geoStats.zurich -
+                  geoStats.bern -
+                  geoStats.basel -
+                  geoStats.winterthur -
+                  geoStats.luzern -
+                  geoStats.baden -
+                  geoStats.badenAgglo
+                )} von Ihnen verstreut sich über die ganze Schweiz.</P>
             </ScrollBlock>
 
             <ScrollBlock>
