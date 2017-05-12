@@ -17,9 +17,10 @@ import PostalCodeMap from './Map'
 import List, {Item, Highlight} from '../List'
 
 import {
-  Interaction, A, Label, colors,
+  Interaction, A, Label,
   H1, H2, P, NarrowContainer,
-  fontFamilies
+  Field,
+  fontFamilies, colors
 } from '@project-r/styleguide'
 
 import {swissTime, countFormat} from '../../lib/utils/formats'
@@ -178,7 +179,7 @@ class Story extends Component {
       foreignCountries
     } = this.props
 
-    const {mapExtend} = this.state
+    const {mapExtend, filter} = this.state
 
     return (
       <div>
@@ -239,14 +240,28 @@ class Story extends Component {
             </ScrollBlock>
 
             <ScrollBlock>
-              <H3>Top 10 Postleitzahlen</H3>
-              <List>
-                {allPostalCodes.slice(0, 10).map(({postalCode, name, count}) => (
-                  <Item key={postalCode}>
-                    {postalCode} {name} — <Highlight>{count}</Highlight>
-                  </Item>
-                ))}
-              </List>
+              <H3>Ihre Postleitzahlen nachschlagen</H3>
+              <Field
+                label='Postleitzahl'
+                value={filter || ''}
+                onChange={(_, value) => {
+                  this.setState({
+                    filter: value
+                  })
+                }} />
+              <div style={{minHeight: 230, padding: '10px 0'}}>
+                {!!filter && <List>
+                  {allPostalCodes
+                    .filter(({postalCode}) => postalCode && postalCode.startsWith(filter))
+                    .sort((a, b) => descending(a.count, b.count))
+                    .slice(0, 5)
+                    .map(({postalCode, name, count}) => (
+                      <Item key={postalCode}>
+                        {postalCode} {name} — <Highlight>{count}</Highlight>
+                      </Item>
+                    ))}
+                </List>}
+              </div>
             </ScrollBlock>
 
             <ScrollBlock>
