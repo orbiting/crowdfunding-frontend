@@ -1,5 +1,5 @@
 {
-  "updated": "2017-04-30T22:10:22.062Z",
+  "updated": "2017-05-13T20:51:23.939Z",
   "title": "live",
   "data": [
     {
@@ -12,6 +12,10 @@
     },
     {
       "key": "menu/updates",
+      "value": "Neues"
+    },
+    {
+      "key": "menu/updates/wer-sind-sie",
       "value": "Neues"
     },
     {
