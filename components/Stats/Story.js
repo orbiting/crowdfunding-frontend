@@ -262,7 +262,8 @@ class Story extends Component {
         mapLabels = mapExtend
         break
       case 'cities':
-        mapLabels = ['3006', '4058', '8400', '6005']
+        mapLabels = ['2502', '3006', '4058', '8400', '6005', '8032', '4600']
+        mapLabelOptions.xOffset = 2
         mapExtend = countryIndex.Schweiz.postalCodes
           .filter(d => (
             d.postalCode &&
