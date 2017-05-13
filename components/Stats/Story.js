@@ -319,7 +319,7 @@ class Story extends Component {
               ref={this.blocks.zh.setRef}>
               <P>Ein paar Fakten dazu.</P>
 
-              <P>Zürich ist zwar eine Hochburg für die Republik. Aber bei weitem nicht das alleinige Verbreitungsgebiet. {countFormat(geoStats.zurich)} von Ihnen wohnen dort — {Math.ceil(geoStats.zurich / geoStats.hasValue * 100)} Prozent.</P>
+              <P>Zürich ist zwar eine Hochburg für die Republik. Aber bei weitem nicht das alleinige Verbreitungsgebiet. {countFormat(geoStats.zurich)} von Ihnen wohnen dort — rund {Math.round(geoStats.zurich / geoStats.hasValue * 100)} Prozent.</P>
             </div>
 
             <Spacer />
@@ -549,7 +549,7 @@ class Story extends Component {
 
             <H2 style={{marginTop: 80}}>Wieviel von Ihnen sind auf der Community-Seite dabei?</H2>
             <P>
-              Enorm viele. {Math.round(testimonialStats.count / status.people * 100)} Prozent von Ihnen — {testimonialStats.count} Leute — luden ein Foto und einen Slogan auf unsere Seite hoch.
+              Enorm viele. Rund {Math.round(testimonialStats.count / status.people * 100)} Prozent von Ihnen — {testimonialStats.count} Leute — luden ein Foto und einen Slogan auf unsere Seite hoch.
               Danke dafür! Für die {testimonialStats.count} Fotos, die Unterstützung, die Begründungen und die Ratschläge! Stellvertretend für alle wollen wir nur eine Stimme zitieren — das vermutlich geografisch (und mental) am weitesten entfernte Mitglied, direkt aus seinem Bunker auf dem Todesstern:
             </P>
 
