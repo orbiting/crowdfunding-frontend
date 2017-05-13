@@ -3,7 +3,7 @@ import {geoAlbers} from 'd3-geo'
 import {css} from 'glamor'
 
 import {
-  colors
+  colors, fontFamilies
 } from '@project-r/styleguide'
 
 const toGeoJson = data => ({
@@ -20,6 +20,18 @@ const toGeoJson = data => ({
 const styles = {
   circlePos: css({
     transition: 'cx 1s ease-in-out, cy 1s ease-in-out, r 1s ease-in-out'
+  }),
+  labelOutline: css({
+    fill: '#fff',
+    fontFamily: fontFamilies.sansSerifRegular,
+    fontSize: 12,
+    stroke: '#fff',
+    strokeWidth: 2
+  }),
+  label: css({
+    fill: colors.primary,
+    fontFamily: fontFamilies.sansSerifRegular,
+    fontSize: 12
   })
 }
 
@@ -68,9 +80,12 @@ class PostalCodeMap extends Component {
   }
   render () {
     const {width, height} = this.state
-    const {data, filter} = this.props
+    const {data, labels, labelOptions, filter} = this.props
     const {projection} = this
     const scale = projection.scale()
+    const radius = d => (
+      Math.max(0.3, Math.sqrt(d.count) * scale * 0.00001)
+    )
 
     return (
       <div ref={this.containerRef}>
@@ -91,9 +106,36 @@ class PostalCodeMap extends Component {
                       ? (d.postalCode && d.postalCode.startsWith(filter) ? 1 : 0)
                       : 1
                   )}
-                  r={Math.max(0.3, Math.sqrt(d.count) * scale * 0.00001)}>
+                  r={radius(d)}>
                   <title>{`${d.postalCode} ${d.name}: ${d.count}`}</title>
                 </circle>
+              )
+            })
+          }
+          {
+            labels.map((d, i) => {
+              let [x, y] = projection([d.lon, d.lat])
+              if (!labelOptions.center) {
+                x += radius(d)
+              }
+              if (labelOptions.xOffset) {
+                x += labelOptions.xOffset
+              }
+              const textStyle = {
+                textAnchor: labelOptions.center ? 'middle' : 'start'
+              }
+              const text = labelOptions.postalCode
+                ? d.postalCode : d.name
+              return (
+                <g key={`label${i}`}
+                  transform={`translate(${x} ${y})`}>
+                  <text dy='0.3em' {...styles.labelOutline} style={textStyle}>
+                    {text}
+                  </text>
+                  <text dy='0.3em' {...styles.label} style={textStyle}>
+                    {text}
+                  </text>
+                </g>
               )
             })
           }

@@ -247,16 +247,22 @@ class Story extends Component {
 
     const {filter, activeBlock} = this.state
 
+    let mapLabels = []
+    let mapLabelOptions = {}
     let mapExtend = countryIndex.Schweiz.postalCodes
     switch (activeBlock) {
       case 'zh':
+        mapLabelOptions.center = true
+        mapLabelOptions.postalCode = true
         mapExtend = countryIndex.Schweiz.postalCodes
           .filter(d => (
             d.postalCode &&
             d.postalCode.startsWith('80')
           ))
+        mapLabels = mapExtend
         break
       case 'cities':
+        mapLabels = ['3006', '4058', '8400', '6005']
         mapExtend = countryIndex.Schweiz.postalCodes
           .filter(d => (
             d.postalCode &&
@@ -269,6 +275,7 @@ class Story extends Component {
           ))
         break
       case 'ag':
+        mapLabels = ['5000', '5400']
         mapExtend = countryIndex.Schweiz.postalCodes
           .filter(d => (
             d.postalCode &&
@@ -276,11 +283,34 @@ class Story extends Component {
           ))
         break
       case 'dach':
+        mapLabels = countryIndex.Deutschland.postalCodes
+          .filter(d => ['10435', '80339', '20359', '60594'].indexOf(d.postalCode) !== -1)
+        const wien = countryIndex['Österreich'].postalCodes
+          .find(d => d.postalCode === '1020')
+        mapLabels = mapLabels.concat(
+          {
+            ...wien,
+            name: 'Wien'
+          }
+        )
+        const bruxelles = countryIndex['Königreich Belgien'].postalCodes
+          .find(d => d.postalCode === '1000')
+        mapLabels = mapLabels.concat(
+          {
+            ...bruxelles,
+            name: 'Brüssel'
+          }
+        )
+        mapLabelOptions.xOffset = 5
         mapExtend = []
           .concat(countryIndex.Deutschland.postalCodes)
           .concat(countryIndex['Österreich'].postalCodes)
           .concat(countryIndex.Schweiz.postalCodes)
         break
+    }
+    if (mapLabels.length && typeof mapLabels[0] === 'string') {
+      mapLabels = allPostalCodes
+        .filter(d => mapLabels.indexOf(d.postalCode) !== -1)
     }
 
     return (
@@ -288,6 +318,8 @@ class Story extends Component {
         <div {...styles.mapStory}>
           <div {...styles.mapFixed}>
             <PostalCodeMap
+              labels={mapLabels}
+              labelOptions={mapLabelOptions}
               extentData={mapExtend}
               data={allPostalCodes} />
           </div>
