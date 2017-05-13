@@ -3,6 +3,7 @@ const ENV = typeof window !== 'undefined' ? window.__NEXT_DATA__.env : process.e
 // ENV variables exported here are sent to the client via pages/_document.js
 
 exports.API_BASE_URL = ENV.API_BASE_URL || 'https://api.satellit.online'
+exports.API_WS_BASE_URL = ENV.API_WS_BASE_URL || 'https://api.satellit.online'
 exports.API_AUTHORIZATION_HEADER = ENV.API_AUTHORIZATION_HEADER
 
 exports.PUBLIC_BASE_URL = ENV.PUBLIC_BASE_URL
