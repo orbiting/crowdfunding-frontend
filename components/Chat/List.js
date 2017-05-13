@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {gql, graphql} from 'react-apollo'
+import {gql, graphql, withApollo} from 'react-apollo'
 import {css} from 'glamor'
 import {compose} from 'redux'
 
@@ -16,16 +16,42 @@ const styles = {
   })
 }
 
+const COMMENTS_SUBSCRIPTION = gql`
+  subscription onCommentAdded($feedName: String!){
+    commentAdded(feedName: $feedName){
+      id
+      content
+    }
+  }
+`
+
 class ChatList extends Component {
   constructor (...args) {
     super(...args)
     this.state = {}
   }
+
+  componentDidMount () {
+    this.subscribe('chat', this.props.data.refetch)
+  }
+
+  subscribe (feedName, refetch) {
+    this.subscriptionObserver = this.props.client.subscribe({
+      query: COMMENTS_SUBSCRIPTION,
+      variables: { feedName: feedName }
+    }).subscribe({
+      next (data) {
+        console.log('real time update!')
+        refetch()
+      },
+      error (err) { console.error('err', err) }
+    })
+  }
+
   render () {
     const {data: {loading, error, feed}} = this.props
-    console.log(feed)
     return (
-      <Loader loading={loading} error={error} render={() => {
+      <Loader loading={!feed || loading} error={error} render={() => {
         return (
           <div>
             <H2>Feed</H2>
@@ -66,5 +92,6 @@ query {
 
 export default compose(
   withT,
-  graphql(chatFeed)
+  graphql(chatFeed),
+  withApollo
 )(ChatList)
