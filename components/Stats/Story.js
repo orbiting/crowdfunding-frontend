@@ -419,7 +419,7 @@ class Story extends Component {
                 {
                   foreignCountries.list.map(group => [
                     countryNames(group.values),
-                    ' mit je ',
+                    ` mit ${group.values.length > 1 ? 'je ' : ''}`,
                     countFormat(+group.key)
                   ].join('')).join(', ')
                 }
