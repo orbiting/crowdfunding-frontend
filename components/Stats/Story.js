@@ -109,7 +109,7 @@ const styles = {
 }
 
 const Spacer = () => (
-  <div style={{height: '50vh'}} />
+  <div style={{height: '50vh', pointerEvents: 'none'}} />
 )
 
 const normalizeDateData = values => {

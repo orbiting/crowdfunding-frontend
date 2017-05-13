@@ -19,7 +19,7 @@ const toGeoJson = data => ({
 
 const styles = {
   circlePos: css({
-    transition: 'cx 1s ease-in-out, cy 1s ease-in-out'
+    transition: 'cx 1s ease-in-out, cy 1s ease-in-out, r 1s ease-in-out'
   })
 }
 
@@ -70,6 +70,8 @@ class PostalCodeMap extends Component {
     const {width, height} = this.state
     const {data, filter} = this.props
     const {projection} = this
+    const scale = projection.scale()
+
     return (
       <div ref={this.containerRef}>
         <svg width={width || '100%'} height={height || 300}>
@@ -89,7 +91,9 @@ class PostalCodeMap extends Component {
                       ? (d.postalCode && d.postalCode.startsWith(filter) ? 1 : 0)
                       : 1
                   )}
-                  r={Math.sqrt(d.count) / 3} />
+                  r={Math.max(0.3, Math.sqrt(d.count) * scale * 0.00001)}>
+                  <title>{`${d.postalCode} ${d.name}: ${d.count}`}</title>
+                </circle>
               )
             })
           }
