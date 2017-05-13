@@ -16,12 +16,18 @@ import BarChart from './BarChart'
 import PostalCodeMap from './Map'
 import List, {Item, Highlight} from '../List'
 
+import Share from '../Share'
+
 import {
   Interaction, A, Label,
   H1, H2, P, NarrowContainer,
   Field,
   fontFamilies, colors
 } from '@project-r/styleguide'
+
+import {
+  PUBLIC_BASE_URL
+} from '../../constants'
 
 import {swissTime, countFormat} from '../../lib/utils/formats'
 
@@ -161,6 +167,13 @@ const paymentMethodNames = {
 
 const paymentMethodDetails = {
   paperInvoice: 'Rechnungen per Post'
+}
+
+export const metaData = {
+  url: `${PUBLIC_BASE_URL}/updates/wer-sind-sie`,
+  title: 'Wer sind Sie?',
+  emailSubject: 'Republik: Wer sind Sie?',
+  tweet: 'Republik: Wer sind Sie?'
 }
 
 class Story extends Component {
@@ -601,6 +614,12 @@ Mit Dank für Ihre Kühnheit und unsere Verantwortung,
 
 Ihre Crew der Republik und von Project R
             `}
+            <P>
+              <Share
+                url={metaData.url}
+                emailSubject={metaData.emailSubject}
+                tweet={metaData.tweet} />
+            </P>
           </NarrowContainer>
         </div>
       </div>

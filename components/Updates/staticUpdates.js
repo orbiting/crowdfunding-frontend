@@ -19,7 +19,7 @@ const WerSindSie = {
         Wir haben zum Start der Republik einiges darüber geschrieben, wer wir sind. Nun ist ein Drittel der Kampagne vorbei. Und wir können endlich über ein wirklich interessantes Thema reden: wer Sie sind.
       </p>
       <p>
-        <Link href='/updates/wer-sind-sie'><a {...linkRule}>Jetzt in Echtzeit aufdatierten Bericht lesen und Visualisierungen ansehen</a></Link>
+        <Link href='/updates/wer-sind-sie'><a {...linkRule}>Bericht lesen und Visualisierungen ansehen</a></Link>
       </p>
       <Link href='/updates/wer-sind-sie'>
         <a>

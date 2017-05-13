@@ -1,10 +1,10 @@
 import React from 'react'
 import withData from '../../lib/withData'
 import Frame from '../../components/Frame'
-import Story from '../../components/Stats/Story'
+import Story, {metaData} from '../../components/Stats/Story'
 
 const WePage = ({url}) => (
-  <Frame url={url} meta={{title: 'Wer sind Sie?'}} sidebar={false}>
+  <Frame url={url} meta={metaData} sidebar={false}>
     <Story />
   </Frame>
 )
