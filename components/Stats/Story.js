@@ -135,11 +135,15 @@ const naturalWordJoin = words => {
     words.slice(-2).join(' und ')
   ].filter(Boolean).join(', ')
 }
+const countryWithArticle = {
+  USA: 'den USA',
+  'Königreich Belgien': 'dem Königreich Belgien',
+  'Niederlande': 'den Niederlanden',
+  'Volksrepublik China': 'der Volksrepublik China'
+}
 const countryNames = values => {
   const names = values.map(d => (
-    d.name === 'USA'
-      ? 'der USA'
-      : d.name
+    countryWithArticle[d.name] || d.name
   ))
   return naturalWordJoin(names)
 }
@@ -291,10 +295,10 @@ class Story extends Component {
             <Spacer />
             <div {...styles.scrollBlock}>
               <H1>Wer sind Sie?</H1>
-              <P>Ladies and Gentlemen,</P>
+              <P>Ladies and Gentlemen</P>
 
               <P>
-                wir haben zum Start der Republik einiges darüber geschrieben, wer wir sind. Nun ist ein Drittel der Kampagne vorbei. Und wir können endlich über ein wirklich interessantes Thema reden: Wer Sie sind.
+                Wir haben zum Start der Republik einiges darüber geschrieben, wer wir sind. Nun ist ein Drittel der Kampagne vorbei. Und wir können endlich über ein wirklich interessantes Thema reden: wer Sie sind.
               </P>
             </div>
 
@@ -322,7 +326,7 @@ class Story extends Component {
 
             <div {...styles.scrollBlock}
               ref={this.blocks.cities.setRef}>
-              <P>Auf Zürich folgen die Konkurrenzstädte Bern ({geoStats.bern} Abonnentinnen), Basel ({geoStats.basel}), Winterthur ({geoStats.winterthur}) und Luzern ({geoStats.luzern}).</P>
+              <P>Auf Zürich folgen die Städte Bern ({geoStats.bern} Abonnentinnen), Basel ({geoStats.basel}), Winterthur ({geoStats.winterthur}) und Luzern ({geoStats.luzern}).</P>
             </div>
 
             <Spacer />
@@ -365,7 +369,7 @@ class Story extends Component {
                     .slice(0, 5)
                     .map(({postalCode, name, count}) => (
                       <Item key={postalCode}>
-                        {postalCode} {name} — <Highlight>{count}</Highlight>
+                        {postalCode} {name}: <Highlight>{count}</Highlight>
                       </Item>
                     ))}
                 </List>}
@@ -382,14 +386,14 @@ class Story extends Component {
                 {
                   foreignCountries.list.map(group => [
                     countryNames(group.values),
-                    ' mit ',
+                    ' mit je ',
                     countFormat(+group.key)
                   ].join('')).join(', ')
                 }
                 {' '}Abonnements.
               </P>
 
-              <P>Ein einziges Mitglied der Republik finden wir in {countryNames(foreignCountries.single.values)}. Ein Gruss Ihnen allen in Ihre Exklusivität und Einsamkeit!</P>
+              <P>Ein einziges Mitglied der Republik finden wir jeweils in {countryNames(foreignCountries.single.values)}. Einen Gruss Ihnen allen in Ihre Exklusivität und Einsamkeit!</P>
               <Label>Geometrische Grundlage: <A href='http://www.geonames.org/postal-codes/' target='_blank'>geonames.org</A></Label>
             </div>
           </NarrowContainer>
@@ -399,7 +403,7 @@ class Story extends Component {
             <H2 style={{marginTop: 40}}>Wie alt sind Sie?</H2>
 
             <H3>
-              16 bis 92 jährige Republik-Mitglieder
+              16- bis 92-jährige Republik-Mitglieder
             </H3>
             <Interaction.P style={{marginBottom: 20, color: colors.secondary}}>
               Altersverteilung der <span style={{color: colors.primary}}>Republik-Mitglieder</span> im Vergleich zur Bervölkerung von <span style={{color: '#000'}}>Zürich</span> und der <span style={{color: '#9F2500'}}>Schweiz</span>.
@@ -449,18 +453,26 @@ class Story extends Component {
 
             <P>
               {ageStats.below16}
-              {' '}Abonnenten jünger als 16 Jahre. Bei den der Mehrheit handelt es sich allerdings nicht um frühreife Kinder, sondern um Firmenabonnements. Diese gaben ihr Gründungsjahr an.
+              {' '}Abonnenten jünger als 16 Jahre. Bei der Mehrheit handelt es sich allerdings nicht um frühreife Kinder, sondern um Firmenabonnements. Diese gaben ihr Gründungsjahr an.
             </P>
 
             <P>
               {ageStats.above100}
-              {' '}Abonnentinnen älter als 100 Jahre. Wir vermuten allerdings bei den meisten Eingabefehler. Oder einen symbolischen Wink. Etwa beim Geburtsjahr 1848 - dem Gründungsjahr des Schweizerischen Bundesstaates. Oder beim 8. Dezember 1873, dem Geburtstag des <A href='https://de.wikipedia.org/wiki/Anton_Afritsch_(Journalist)'>Journalisten Anton Afritsch</A> – oder beim 19. Dezember 1878, an dem der <A href='https://de.wikipedia.org/wiki/Bayard_Taylor'>Reiseschriftsteller Bayard Taylor</A> geboren wurde.
+              {' '}Abonnentinnen älter als 100 Jahre. Wir vermuten allerdings bei den meisten Eingabefehler. Oder einen symbolischen Wink. Etwa beim Geburtsjahr 1848 - dem Gründungsjahr des schweizerischen Bundesstaates. Oder beim 8. Dezember 1873, dem Geburtstag des <A href='https://de.wikipedia.org/wiki/Anton_Afritsch_(Journalist)'>Journalisten Anton Afritsch</A> — oder beim 19. Dezember 1878, an dem der <A href='https://de.wikipedia.org/wiki/Bayard_Taylor'>Reiseschriftsteller Bayard Taylor</A> gestorben ist.
             </P>
 
-            <H2 style={{marginTop: 40}}>Wie schnell waren Sie?</H2>
+            <H2 style={{marginTop: 80}}>
+              Welches Geschlecht haben Sie?
+            </H2>
 
             <P>
-              Laut Theorie verlaufen Crowdfundings gern dramatisch: Am Anfang gibt es einen Höhepunkt, am Ende gibt es einen Höhepunkt, dazwischen dümpelt es vor sich hin. Die Republik machte dabei bisher keine Ausnahme.
+              Wir haben uns bei anderen Anbietern immer gefragt, was das soll, wenn das m/w-Kästchen angeklickt werden muss. Und haben überdies den ehrgeizigen Plan, für Ladies wie für Gentlemen zu schreiben. Deshalb haben wir diese Frage nicht gestellt.
+            </P>
+
+            <H2 style={{marginTop: 80}}>Wie schnell waren Sie?</H2>
+
+            <P>
+              Laut Theorie verlaufen Crowdfundings gern dramatisch: Am Anfang gibt es einen Höhepunkt, am Ende gibt es einen Höhepunkt, dazwischen dümpelt es vor sich hin. Die Republik machte mit ihrem Raketenstart keine Ausnahme.
             </P>
             <div {...styles.dateContainer}>
               {groupedCreatedAts.map(({key, values}, i) => (
@@ -492,7 +504,7 @@ class Story extends Component {
             </div>
             <br style={{clear: 'left'}} />
 
-            <H2>
+            <H2 style={{marginTop: 80}}>
               Wie zahlten Sie?
             </H2>
             <P>
@@ -535,10 +547,10 @@ class Story extends Component {
               Was uns übrigens verblüffte: PayPal schlug als Zahlungsmethode die PostFinance.
             </P>
 
-            <H2>Wieviel von Ihnen sind auf der Community-Seite dabei?</H2>
+            <H2 style={{marginTop: 80}}>Wieviel von Ihnen sind auf der Community-Seite dabei?</H2>
             <P>
-              Enorm viel. {Math.round(testimonialStats.count / status.people * 100)} Prozent von Ihnen — {testimonialStats.count} Leute — schalteten ein Foto und einen Slogan auf Ihrer persönlichen Seite hoch.
-              Danke dafür! Für die {testimonialStats.count} Fotos, die Unterstützung, die Begründungen und die Ratschläge! Stellvertretend für alle wollen wir nur eine Stimme zitieren – das vermutlich geographisch (und mental) am weitesten entfernte Mitglied, direkt aus seinem Wohnort auf dem Todesstern:
+              Enorm viele. {Math.round(testimonialStats.count / status.people * 100)} Prozent von Ihnen — {testimonialStats.count} Leute — luden ein Foto und einen Slogan auf unsere Seite hoch.
+              Danke dafür! Für die {testimonialStats.count} Fotos, die Unterstützung, die Begründungen und die Ratschläge! Stellvertretend für alle wollen wir nur eine Stimme zitieren — das vermutlich geografisch (und mental) am weitesten entfernte Mitglied, direkt aus seinem Bunker auf dem Todesstern:
             </P>
 
             <TestimonialList
@@ -550,11 +562,11 @@ class Story extends Component {
 Das war alles, was wir über Sie wissen. Ausser, natürlich, noch zwei Dinge:
 
 1. Dass Sie (Unzutreffendes streichen) entweder reich an Mut, an Vertrauen oder an Verrücktheit sind. Weil Sie Verlegerin und zukünftiger Leser eines Magazins geworden sind, von dem noch nichts existiert als ein ehrgeiziger Plan.
-2. Dass wir Ihnen für Ihren Mut, Ihr Vertrauen, Ihre Verrücktheit (Unzutreffendes streichen) verpflichtet sind — jedem und jeder einzelnen von Ihnen. Wir werden hart daran arbeiten, ein Internet-Magazin zu bauen, das Sie (nicht bei jedem Artikel, aber in der Bilanz) stolz macht, das Risiko eingegangen zu sein.
+2. Dass wir Ihnen für Ihren Mut, Ihr Vertrauen, Ihre Verrücktheit (Unzutreffendes streichen) verpflichtet sind — jedem und jeder Einzelnen von Ihnen. Wir werden hart daran arbeiten, ein Internet-Magazin zu bauen, das Sie (nicht bei jedem Artikel, aber in der Bilanz) stolz macht, das Risiko eingegangen zu sein.
 
 Mit Dank für Ihre Kühnheit und unsere Verantwortung,
 
-Ihre Crew von der Republik und von Project R
+Ihre Crew der Republik und von Project R
             `}
           </NarrowContainer>
         </div>
