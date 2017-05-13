@@ -12,7 +12,7 @@ import {InlineSpinner} from '../Spinner'
 import {styles as fieldSetStyles} from '../FieldSet'
 
 import {
-  Field, Button, H2, P
+  Field, Button, H2
 } from '@project-r/styleguide'
 
 const submitComment = gql`
@@ -27,7 +27,6 @@ class CommentForm extends Component {
     this.state = {
       loading: false,
       serverError: undefined,
-      success: false,
       values: {},
       errors: {},
       dirty: {}
@@ -48,7 +47,6 @@ class CommentForm extends Component {
 
     this.setState(() => ({
       loading: true,
-      success: false,
       serverError: undefined
     }))
 
@@ -57,7 +55,6 @@ class CommentForm extends Component {
       .then(() => {
         this.setState((state) => ({
           loading: false,
-          success: true,
           values: {
             ...state.values,
             comment: ''
@@ -76,7 +73,6 @@ class CommentForm extends Component {
 
     const {
       dirty, values, errors,
-      success,
       loading, serverError
     } = this.state
 
@@ -123,11 +119,6 @@ class CommentForm extends Component {
           }
 
           {!!serverError && <ErrorMessage error={serverError} />}
-          {!!success && <div style={{marginTop: 20}}>
-            <P>
-              Submited!
-            </P>
-          </div>}
         </form>
       </div>
     )
