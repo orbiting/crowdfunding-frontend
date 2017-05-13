@@ -608,8 +608,8 @@ Ihre Crew der Republik und von Project R
   }
 }
 
-const DataWrapper = ({loading, error, data}) => (
-  <Loader loading={loading} error={error} render={() => {
+const DataWrapper = ({data}) => (
+  <Loader loading={data.loading} error={data.error} render={() => {
     const {
       membershipStats: {
         countries,
@@ -815,6 +815,7 @@ const DataWrapper = ({loading, error, data}) => (
 const membershipStats = gql`
 query {
   crowdfunding(name: "REPUBLIK") {
+    id
     status {
       people
     }
