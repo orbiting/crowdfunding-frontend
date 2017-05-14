@@ -381,7 +381,7 @@ class Story extends Component {
               <H2>Wo wohnen Sie?</H2>
 
               <P>
-                Hier also die Verteilung der Republik-Mitglieder in der Schweiz. Jeder Punkt auf der Karte repräsentiert eine Postleitzahl. Je fetter der Punkt, desto mehr von Ihnen leben dort. (Die Summe entspricht nicht ganz {countFormat(status.people)} — da nur knapp {Math.ceil(geoStats.hasValuePercent)} Prozent ihre Postadresse angaben.)
+                Hier also die Verteilung der Republik-Mitglieder in der Schweiz. Jeder Punkt auf der Karte repräsentiert eine Postleitzahl. Je fetter der Punkt, desto mehr von Ihnen leben dort. (Die Summe entspricht nicht ganz {countFormat(status.people)} – da nur knapp {Math.ceil(geoStats.hasValuePercent)} Prozent ihre Postadresse angaben.)
               </P>
             </div>
 
@@ -391,7 +391,7 @@ class Story extends Component {
               ref={this.blocks.zh.setRef}>
               <P>Ein paar Fakten dazu.</P>
 
-              <P>Zürich ist zwar eine Hochburg für die Republik. Aber bei weitem nicht das alleinige Verbreitungsgebiet. {countFormat(geoStats.zurich)} von Ihnen wohnen dort — rund {Math.round(geoStats.zurich / status.people * 100)} Prozent.</P>
+              <P>Zürich ist zwar eine Hochburg für die Republik. Aber bei weitem nicht das alleinige Verbreitungsgebiet. {countFormat(geoStats.zurich)} von Ihnen wohnen dort – rund {Math.round(geoStats.zurich / status.people * 100)} Prozent.</P>
             </div>
 
             <Spacer />
@@ -530,7 +530,7 @@ class Story extends Component {
 
             <P>
               {ageStats.above100}
-              {' '}Abonnentinnen älter als 100 Jahre. Wir vermuten allerdings bei den meisten Eingabefehler. Oder einen symbolischen Wink. Etwa beim Geburtsjahr 1848 — dem Gründungsjahr des schweizerischen Bundesstaates. Oder beim 8. Dezember 1873, dem Geburtstag des <A href='https://de.wikipedia.org/wiki/Anton_Afritsch_(Journalist)'>Journalisten Anton Afritsch</A> — oder beim 19. Dezember 1878, an dem der <A href='https://de.wikipedia.org/wiki/Bayard_Taylor'>Reiseschriftsteller Bayard Taylor</A> gestorben ist.
+              {' '}Abonnentinnen älter als 100 Jahre. Wir vermuten allerdings bei den meisten Eingabefehler. Oder einen symbolischen Wink. Etwa beim Geburtsjahr 1848 – dem Gründungsjahr des schweizerischen Bundesstaates. Oder beim 8. Dezember 1873, dem Geburtstag des <A href='https://de.wikipedia.org/wiki/Anton_Afritsch_(Journalist)'>Journalisten Anton Afritsch</A> – oder beim 19. Dezember 1878, an dem der <A href='https://de.wikipedia.org/wiki/Bayard_Taylor'>Reiseschriftsteller Bayard Taylor</A> gestorben ist.
             </P>
 
             <H2 style={{marginTop: 80}}>
@@ -580,7 +580,7 @@ class Story extends Component {
               Wie zahlten Sie?
             </H2>
             <P>
-              Diese Statistik veröffentlichen wir, weil das sonst kaum eine andere Firma macht — Zahlungsdaten gelten als Geschäftsgeheimnis. Wir folgen dieser Praxis nicht — und hoffen, dass irgendwer irgendetwas aus unserer Statistik lernt.
+              Diese Statistik veröffentlichen wir, weil das sonst kaum eine andere Firma macht – Zahlungsdaten gelten als Geschäftsgeheimnis. Wir folgen dieser Praxis nicht – und hoffen, dass irgendwer irgendetwas aus unserer Statistik lernt.
             </P>
 
             <Interaction.H3>
@@ -623,8 +623,8 @@ class Story extends Component {
               Wie viele von Ihnen sind auf der Community-Seite dabei?
             </H2>
             <P>
-              Enorm viele. Rund {Math.round(testimonialStats.count / status.people * 100)} Prozent von Ihnen — {testimonialStats.count} Leute — luden ein Foto und einen Slogan auf unsere Seite hoch.
-              Danke dafür! Für die {testimonialStats.count} Fotos, die Unterstützung, die Begründungen und die Ratschläge! Stellvertretend für alle wollen wir nur eine Stimme zitieren — das vermutlich geografisch (und mental) am weitesten entfernte Mitglied, direkt aus seinem Bunker auf dem Todesstern:
+              Enorm viele. Rund {Math.round(testimonialStats.count / status.people * 100)} Prozent von Ihnen – {testimonialStats.count} Leute – luden ein Foto und einen Slogan auf unsere Seite hoch.
+              Danke dafür! Für die {testimonialStats.count} Fotos, die Unterstützung, die Begründungen und die Ratschläge! Stellvertretend für alle wollen wir nur eine Stimme zitieren – das vermutlich geografisch (und mental) am weitesten entfernte Mitglied, direkt aus seinem Bunker auf dem Todesstern:
             </P>
 
             <TestimonialList
@@ -636,7 +636,7 @@ class Story extends Component {
 Das war alles, was wir über Sie wissen. Ausser, natürlich, noch zwei Dinge:
 
 1. Dass Sie (Unzutreffendes streichen) entweder reich an Mut, an Vertrauen oder an Verrücktheit sind. Weil Sie Verlegerin und zukünftiger Leser eines Magazins geworden sind, von dem noch nichts existiert als ein ehrgeiziger Plan.
-2. Dass wir Ihnen für Ihren Mut, Ihr Vertrauen, Ihre Verrücktheit (Unzutreffendes streichen) verpflichtet sind — jedem und jeder Einzelnen von Ihnen. Wir werden hart daran arbeiten, ein Internet-Magazin zu bauen, das Sie (nicht bei jedem Artikel, aber in der Bilanz) stolz macht, das Risiko eingegangen zu sein.
+2. Dass wir Ihnen für Ihren Mut, Ihr Vertrauen, Ihre Verrücktheit (Unzutreffendes streichen) verpflichtet sind – jedem und jeder Einzelnen von Ihnen. Wir werden hart daran arbeiten, ein Internet-Magazin zu bauen, das Sie (nicht bei jedem Artikel, aber in der Bilanz) stolz macht, das Risiko eingegangen zu sein.
 
 Mit Dank für Ihre Kühnheit und unsere Verantwortung,
 
