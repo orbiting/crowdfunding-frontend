@@ -34,7 +34,10 @@ const styles = {
     pointerEvents: 'none',
     position: 'absolute',
     left: 1,
-    right: 1,
+    right: 0,
+    [mediaQueries.mUp]: {
+      right: 1
+    },
     bottom: 0,
     borderTop: '1px solid'
   }),
