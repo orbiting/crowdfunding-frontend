@@ -13,8 +13,8 @@ const styles = {
   }),
   datum: css({
     float: 'left',
-    paddingLeft: 1,
     [mediaQueries.mUp]: {
+      paddingLeft: 1,
       paddingRight: 1
     },
     height: '100%',
@@ -23,9 +23,10 @@ const styles = {
   bar: css({
     backgroundColor: colors.primary,
     position: 'absolute',
-    left: 1,
+    left: 0,
     right: 0,
     [mediaQueries.mUp]: {
+      left: 1,
       right: 1
     },
     bottom: 0
@@ -33,9 +34,10 @@ const styles = {
   line: css({
     pointerEvents: 'none',
     position: 'absolute',
-    left: 1,
+    left: 0,
     right: 0,
     [mediaQueries.mUp]: {
+      left: 1,
       right: 1
     },
     bottom: 0,
