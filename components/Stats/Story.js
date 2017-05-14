@@ -202,7 +202,6 @@ const countryNames = values => {
 
 const agesZurich = require('./data/agesZurich.json')
 const agesCh = require('./data/agesCh.json')
-// const staticStats = require('./data/staticStats.json')
 
 const paymentMethodNames = {
   STRIPE: 'Visa/Mastercard',
@@ -555,19 +554,6 @@ class Story extends Component {
             <P>
               Bei dieser Frage machten {countFormat(ageStats.noValue)} Personen (noch) keine Angabe. Von den restlichen {countFormat(ageStats.hasValue)} sind:
             </P>
-
-            { /* <P>
-              Mittelwert:{' '}<br />
-              Republik: {ageStats.median}<br />
-              Zürich: {staticStats.zurich.median}<br />
-              Schweiz: {staticStats.ch.median}
-            </P>
-            <P>
-              Durchschnittsalter:{' '}<br />
-              Republik: {ageStats.mean}<br />
-              Zürich: {staticStats.zurich.mean}<br />
-              Schweiz: {staticStats.ch.mean}
-            </P> */ }
 
             <P>
               {ageStats.below16}
