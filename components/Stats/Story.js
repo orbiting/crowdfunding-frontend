@@ -29,7 +29,8 @@ import {
 } from '@project-r/styleguide'
 
 import {
-  PUBLIC_BASE_URL, STATIC_BASE_URL
+  PUBLIC_BASE_URL, STATIC_BASE_URL,
+  STATS_POLL_INTERVAL_MS
 } from '../../constants'
 
 import {swissTime, countFormat} from '../../lib/utils/formats'
@@ -721,7 +722,7 @@ Ihre Crew der Republik und von Project&nbsp;R
 }
 
 const DataWrapper = ({data}) => (
-  <Loader loading={data.loading} error={data.error} render={() => {
+  <Loader loading={data.loading || !data.membershipStats} error={data.error} render={() => {
     const {
       membershipStats: {
         countries,
@@ -983,5 +984,9 @@ query {
 
 export default compose(
   withT,
-  graphql(membershipStats)
+  graphql(membershipStats, {
+    options: {
+      pollInterval: +STATS_POLL_INTERVAL_MS
+    }
+  })
 )(DataWrapper)
