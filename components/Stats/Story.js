@@ -385,7 +385,9 @@ class Story extends Component {
               ref={this.blocks.zh.setRef}>
               <P>Ein paar Fakten dazu.</P>
 
-              <P>Zürich ist zwar eine Hochburg für die Republik. Aber bei weitem nicht das alleinige Verbreitungsgebiet. {countFormat(geoStats.zurich)} von Ihnen wohnen dort – rund {Math.round(geoStats.zurich / status.people * 100)} Prozent.</P>
+              <P>
+                Zürich ist zwar eine Hochburg für die Republik. Aber bei weitem nicht das alleinige Verbreitungsgebiet.<br />
+                {countFormat(geoStats.zurich)} von Ihnen wohnen dort – rund {Math.round(geoStats.zurich / status.people * 100)} Prozent.</P>
             </div>
 
             <Spacer />

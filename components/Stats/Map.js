@@ -1,10 +1,13 @@
 import React, {Component} from 'react'
 import {geoAlbers} from 'd3-geo'
 import {timer} from 'd3-timer'
-import {HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, MENUBAR_HEIGHT} from '../Frame/constants'
+import {ascending} from 'd3-array'
+
+import ContextBox, {ContextBoxValue} from './ContextBox'
+import {countFormat} from '../../lib/utils/formats'
 
 import {
-  colors, fontFamilies, mediaQueries
+  colors, fontFamilies
 } from '@project-r/styleguide'
 
 const toGeoJson = data => ({
@@ -32,12 +35,8 @@ class PostalCodeMap extends Component {
       this.canvas = ref
     }
     this.measure = () => {
-      const mobile = window.innerWidth < mediaQueries.mBreakPoint
-      const width = this.container.getBoundingClientRect().width
-      const height = window.innerHeight - (mobile
-        ? HEADER_HEIGHT_MOBILE + MENUBAR_HEIGHT
-        : HEADER_HEIGHT
-      )
+      const {width, top} = this.container.getBoundingClientRect()
+      const height = window.innerHeight - top
 
       const extentData = this.props.extentData || this.props.data
       if (
@@ -86,6 +85,7 @@ class PostalCodeMap extends Component {
         }
 
         this.setState({
+          top,
           width,
           height,
           extentData
@@ -95,6 +95,38 @@ class PostalCodeMap extends Component {
       } else {
         this.draw()
       }
+    }
+    this.focus = (event) => {
+      const {top} = this.state
+      if (top === undefined || !this.circles) {
+        return
+      }
+
+      let currentEvent = event
+      if (currentEvent.nativeEvent) {
+        currentEvent = event.nativeEvent
+      }
+      while (currentEvent.sourceEvent) {
+        currentEvent = currentEvent.sourceEvent
+      }
+      if (currentEvent.changedTouches) {
+        currentEvent = currentEvent.changedTouches[0]
+      }
+
+      const focusX = currentEvent.clientX
+      const focusY = currentEvent.clientY - top
+
+      const hover = this.circles.filter(({cx, cy, r}) => (
+        Math.sqrt(
+          Math.pow(cx - focusX, 2) +
+          Math.pow(cy - focusY, 2)
+        ) <= r + 3
+      ))
+
+      this.setState(() => ({hover}))
+    }
+    this.blur = () => {
+      this.setState(() => ({hover: null}))
     }
   }
   componentDidMount () {
@@ -111,6 +143,9 @@ class PostalCodeMap extends Component {
     const {width, height} = this.state
     const {projection} = this
     const {data, labels, labelOptions} = this.props
+    if (!this.canvas) {
+      return
+    }
 
     const devicePixelRatio = window.devicePixelRatio || 1
     this.canvas.width = width * devicePixelRatio
@@ -177,13 +212,39 @@ class PostalCodeMap extends Component {
 
     ctx.restore()
   }
+  renderHover () {
+    const {hover, width} = this.state
+
+    if (!hover || !hover.length) {
+      return null
+    }
+
+    const {cx, cy, r} = hover.sort((a, b) => ascending(a.cy, b.cy))[0]
+    return (
+      <ContextBox x={cx} y={cy - r - 12} contextWidth={width}>
+        {hover.map(({d}) => (
+          <ContextBoxValue key={d.postalCode}
+            label={`${d.postalCode} ${d.name}`}>
+            {countFormat(d.count)}
+          </ContextBoxValue>
+        ))}
+      </ContextBox>
+    )
+  }
   render () {
     const {width, height} = this.state
 
     return (
-      <div ref={this.containerRef}>
+      <div ref={this.containerRef} style={{position: 'relative'}}>
         <canvas ref={this.canvasRef}
+          onTouchStart={this.focus}
+          onTouchMove={this.focus}
+          onTouchEnd={this.blur}
+          onMouseEnter={this.focus}
+          onMouseMove={this.focus}
+          onMouseLeave={this.blur}
           style={{width, height}} />
+        {this.renderHover()}
       </div>
     )
   }
