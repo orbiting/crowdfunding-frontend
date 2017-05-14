@@ -40,8 +40,9 @@ const styles = {
     [mediaQueries.mUp]: {
       right: 1
     },
-    bottom: 0,
-    borderTop: '1px solid'
+    height: 0,
+    borderTop: '1px solid',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.8)'
   }),
   lineLabel: css({
     position: 'absolute',
@@ -230,7 +231,7 @@ class BarChart extends Component {
                 style={{
                   left,
                   borderTopColor: line.color,
-                  height: `${line.data[i].count / refMax[lineI].sum / overallMaxRatio * 100}%`
+                  bottom: `${line.data[i].count / refMax[lineI].sum / overallMaxRatio * 100}%`
                 }}>
                 {i === 0 && (
                   <div {...styles.lineLabel} style={{

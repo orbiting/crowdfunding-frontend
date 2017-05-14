@@ -538,8 +538,8 @@ class Story extends Component {
                 return ''
               }}
               referenceLines={[
-                {color: 'red', data: agesCh},
-                {color: '#000', data: agesZurich}
+                {color: '#000', data: agesZurich},
+                {color: 'red', data: agesCh}
               ]} />
             <div style={{paddingTop: 10, textAlign: 'right'}}>
               <A href='https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht'>
