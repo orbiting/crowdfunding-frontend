@@ -44,11 +44,17 @@ const styles = {
   }),
   dateBox: css({
     float: 'left',
-    width: '25%',
+    width: '50%',
+    [mediaQueries.mUp]: {
+      width: '25%'
+    },
     textAlign: 'center'
   }),
   dateBoxBig: css({
-    width: '50%'
+    width: '100%',
+    [mediaQueries.mUp]: {
+      width: '50%'
+    }
   }),
   dateCount: css({
     paddingBottom: 20,
@@ -64,21 +70,33 @@ const styles = {
   keyMetric: css({
     float: 'left',
     width: '50%',
-    height: 110,
+    height: 95,
+    [mediaQueries.mUp]: {
+      height: 110
+    },
     paddingTop: 10,
     textAlign: 'center'
   }),
   keyMetricNumber: css({
     fontFamily: fontFamilies.sansSerifMedium,
-    fontSize: 44
+    fontSize: 36,
+    [mediaQueries.mUp]: {
+      fontSize: 44
+    }
   }),
   keyMetricLabel: css({
     fontFamily: fontFamilies.sansSerifRegular,
-    fontSize: 22
+    fontSize: 16,
+    [mediaQueries.mUp]: {
+      fontSize: 22
+    }
   }),
   keyMetricDetail: css({
     fontFamily: fontFamilies.sansSerifRegular,
-    fontSize: 12
+    fontSize: 10,
+    [mediaQueries.mUp]: {
+      fontSize: 12
+    }
   }),
   mapStory: css({
     position: 'relative'
@@ -112,6 +130,10 @@ const styles = {
     lineHeight: '25px',
     letterSpacing: -0.19
   }),
+  dateText: css({
+    display: 'inline-block',
+    marginRight: 10
+  }),
   dateData: css({
     fontFamily: fontFamilies.sansSerifRegular,
     padding: '1px 6px',
@@ -122,8 +144,8 @@ const styles = {
   })
 }
 
-const Spacer = () => (
-  <div style={{height: '50vh', pointerEvents: 'none'}} />
+const Spacer = ({height = '50vh'}) => (
+  <div style={{height: height, pointerEvents: 'none'}} />
 )
 
 const normalizeDateData = values => {
@@ -351,11 +373,11 @@ class Story extends Component {
               data={allPostalCodes} />
           </div>
           <NarrowContainer>
-            <Spacer />
+            <Spacer height='40vh' />
             <div {...styles.scrollBlock}>
               <H1>Wer sind Sie?</H1>
               <div {...styles.date}>
-                15. Mai 2017 07 Uhr
+                <span {...styles.dateText}>15. Mai 2017 07 Uhr</span>
                 {' '}
                 <span {...styles.dateData}>
                   in Echtzeit aufdatiert
@@ -494,11 +516,11 @@ class Story extends Component {
               ]} />
             <div style={{paddingTop: 10, textAlign: 'right'}}>
               <A href='https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht'>
-                <Label>Zürcher Bevölkerung 2016: Statistik Stadt Zürich</Label>
+                <Label>Zürcher Bevölkerung 2016: Statistik&nbsp;Stadt&nbsp;Zürich</Label>
               </A>
               <br />
               <A href='https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung.assetdetail.80423.html'>
-                <Label>Schweizer Bevölkerung 2015: BFS STATPOP</Label>
+                <Label>Schweizer Bevölkerung 2015: BFS&nbsp;STATPOP</Label>
               </A>
             </div>
 
@@ -713,7 +735,10 @@ const DataWrapper = ({data}) => (
         if (!country.name) {
           return all
         }
-        return all.concat(country.postalCodes)
+        return all.concat(country.postalCodes.map(d => ({
+          ...d,
+          name: d.name || country.name
+        })))
       },
       []
     ).sort((a, b) => descending(a.count, b.count))
@@ -774,7 +799,10 @@ const DataWrapper = ({data}) => (
       aarau: countryIndex.Schweiz.postalCodes
         .filter(d => (
           d.postalCode &&
-          +d.postalCode === 5000
+          (
+            +d.postalCode === 5000 ||
+            +d.postalCode === 5001
+          )
         ))
         .reduce(sumCount, 0),
       baden: countryIndex.Schweiz.postalCodes

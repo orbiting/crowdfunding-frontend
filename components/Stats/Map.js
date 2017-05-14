@@ -229,8 +229,8 @@ class PostalCodeMap extends Component {
         y={cy + (top ? -yOffset : yOffset)}
         contextWidth={width}>
         {hover.map(({d}) => (
-          <ContextBoxValue key={d.postalCode}
-            label={`${d.postalCode} ${d.name}`}>
+          <ContextBoxValue key={d.postalCode || d.name}
+            label={`${d.postalCode || 'Unbekannt / '} ${d.name}`}>
             {countFormat(d.count)}
           </ContextBoxValue>
         ))}

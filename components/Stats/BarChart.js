@@ -3,7 +3,7 @@ import {css, merge} from 'glamor'
 import {max, sum as sumOfArray} from 'd3-array'
 
 import {
-  colors, fontFamilies
+  colors, fontFamilies, mediaQueries
 } from '@project-r/styleguide'
 
 const X_LABEL_HEIGHT = 20
@@ -43,7 +43,10 @@ const styles = {
     position: 'absolute',
     bottom: -X_LABEL_HEIGHT,
     fontFamily: fontFamilies.sansSerifRegular,
-    fontSize: 14,
+    fontSize: 12,
+    [mediaQueries.mUp]: {
+      fontSize: 14
+    },
     left: -10,
     right: -10,
     textAlign: 'center',
