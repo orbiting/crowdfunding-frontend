@@ -306,6 +306,7 @@ class Story extends Component {
         break
       case 'ag':
         mapLabels = ['5000', '5400']
+        mapLabelOptions.xOffset = 2
         mapExtend = countryIndex.Schweiz.postalCodes
           .filter(d => (
             d.postalCode &&

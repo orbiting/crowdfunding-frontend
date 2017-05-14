@@ -24,8 +24,6 @@ class PostalCodeMap extends Component {
     this.state = {}
     this.projection = geoAlbers()
       .rotate([0, 0])
-      .center([8.23, 46.8])
-      .scale(13000)
     this.containerRef = ref => {
       this.container = ref
     }
@@ -41,39 +39,46 @@ class PostalCodeMap extends Component {
         width !== this.state.width ||
         extentData !== this.state.extentData
       ) {
-        const targetProjection = geoAlbers()
-          .rotate([0, 0])
-          .center([8.23, 46.8])
-          .fitExtent(
+        if (!this.state.extentData) {
+          this.projection.fitExtent(
             [[10, 10], [width - 10, height - 10]],
             toGeoJson(extentData)
           )
-
-        const currentScale = this.projection.scale()
-        const targetScale = targetProjection.scale()
-        const currentTranslate = this.projection.translate()
-        const targetTranslate = targetProjection.translate()
-
-        const duration = 1000
-        if (this.timer) {
-          this.timer.stop()
-        }
-        this.timer = timer(elapsed => {
-          const t = Math.min(elapsed / duration, 1)
-          this.projection.scale(
-            currentScale * (1 - t) + targetScale * t
-          )
-          this.projection.translate(
-            [
-              currentTranslate[0] * (1 - t) + targetTranslate[0] * t,
-              currentTranslate[1] * (1 - t) + targetTranslate[1] * t
-            ]
-          )
           this.draw()
-          if (t >= 1) {
+        } else {
+          const targetProjection = geoAlbers()
+            .rotate([0, 0])
+            .fitExtent(
+              [[10, 10], [width - 10, height - 10]],
+              toGeoJson(extentData)
+            )
+
+          const currentScale = this.projection.scale()
+          const targetScale = targetProjection.scale()
+          const currentTranslate = this.projection.translate()
+          const targetTranslate = targetProjection.translate()
+
+          const duration = 1000
+          if (this.timer) {
             this.timer.stop()
           }
-        })
+          this.timer = timer(elapsed => {
+            const t = Math.min(elapsed / duration, 1)
+            this.projection.scale(
+              currentScale * (1 - t) + targetScale * t
+            )
+            this.projection.translate(
+              [
+                currentTranslate[0] * (1 - t) + targetTranslate[0] * t,
+                currentTranslate[1] * (1 - t) + targetTranslate[1] * t
+              ]
+            )
+            this.draw()
+            if (t >= 1) {
+              this.timer.stop()
+            }
+          })
+        }
 
         this.setState({
           width,
@@ -142,13 +147,14 @@ class PostalCodeMap extends Component {
     if (labels.length) {
       ctx.font = `12px ${fontFamilies.sansSerifRegular}`
 
-      ctx.textAlign = labelOptions.center ? 'middle' : 'start'
+      ctx.textAlign = labelOptions.center ? 'center' : 'start'
       ctx.textBaseline = 'middle'
       ctx.fillStyle = colors.primary
       ctx.strokeStyle = '#fff'
 
       labels.forEach((d, i) => {
         let [x, y] = projection([d.lon, d.lat])
+        y -= 1
         if (!labelOptions.center) {
           x += radius(d)
         }
