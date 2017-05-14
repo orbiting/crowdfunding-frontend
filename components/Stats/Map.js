@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {geoAlbers} from 'd3-geo'
 import {css} from 'glamor'
+import {timer} from 'd3-timer'
 
 import {
   colors, fontFamilies
@@ -19,7 +20,7 @@ const toGeoJson = data => ({
 
 const styles = {
   circlePos: css({
-    transition: 'cx 1s ease-in-out, cy 1s ease-in-out, r 1s ease-in-out'
+    // transition: 'cx 1s ease-in-out, cy 1s ease-in-out, r 1s ease-in-out'
   }),
   labelOutline: css({
     fill: '#fff',
@@ -56,10 +57,44 @@ class PostalCodeMap extends Component {
         width !== this.state.width ||
         extentData !== this.state.extentData
       ) {
-        this.projection.fitExtent(
-          [[10, 10], [width - 10, height - 10]],
-          toGeoJson(extentData)
-        )
+        const targetProjection = geoAlbers()
+          .rotate([0, 0])
+          .center([8.23, 46.8])
+          .fitExtent(
+            [[10, 10], [width - 10, height - 10]],
+            toGeoJson(extentData)
+          )
+
+        const currentScale = this.projection.scale()
+        const targetScale = targetProjection.scale()
+        const currentTranslate = this.projection.translate()
+        const targetTranslate = targetProjection.translate()
+
+        const duration = 1000
+        if (this.timer) {
+          this.timer.stop()
+        }
+        this.timer = timer(elapsed => {
+          const t = Math.min(elapsed / duration, 1)
+          this.projection.scale(
+            currentScale * (1 - t) + targetScale * t
+          )
+          this.projection.translate(
+            [
+              currentTranslate[0] * (1 - t) + targetTranslate[0] * t,
+              currentTranslate[1] * (1 - t) + targetTranslate[1] * t
+            ]
+          )
+          this.setState({t})
+          if (t >= 1) {
+            this.timer.stop()
+          }
+        })
+
+        // this.projection.fitExtent(
+        //   [[10, 10], [width - 10, height - 10]],
+        //   toGeoJson(extentData)
+        // )
         this.setState({
           width,
           height,
