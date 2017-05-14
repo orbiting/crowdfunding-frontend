@@ -253,7 +253,9 @@ class BarChart extends Component {
         ))}
         <div {...styles.yLines} style={{
           left: Math.max(paddingLeft, yLinePadding),
-          width: baseWidth - yLinePadding
+          width: baseWidth
+            ? (baseWidth - yLinePadding)
+            : undefined
         }}>
           <div {...styles.yLine} style={{top: 0}} />
           <div {...styles.yLine} style={{top: '50%'}} />
