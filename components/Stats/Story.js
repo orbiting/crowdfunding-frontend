@@ -117,6 +117,13 @@ const styles = {
     padding: '20px 5px',
     backgroundColor: 'rgba(255, 255, 255, 0.8)'
   }),
+  spacer: css({
+    pointerEvents: 'none',
+    height: '75vh',
+    '@media (max-height: 450px)': {
+      height: '65vh'
+    }
+  }),
   opaqueContainer: css({
     position: 'relative',
     backgroundColor: '#fff',
@@ -144,8 +151,8 @@ const styles = {
   })
 }
 
-const Spacer = ({height = '50vh'}) => (
-  <div style={{height: height, pointerEvents: 'none'}} />
+const Spacer = ({height}) => (
+  <div {...styles.spacer} style={{height: height}} />
 )
 
 const normalizeDateData = values => {
