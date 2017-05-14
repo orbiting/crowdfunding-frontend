@@ -1080,9 +1080,14 @@
       "from": "d3-collection@>=1.0.3 <2.0.0",
       "resolved": "https://registry.npmjs.org/d3-collection/-/d3-collection-1.0.3.tgz"
     },
+    "d3-color": {
+      "version": "1.0.3",
+      "from": "d3-color@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/d3-color/-/d3-color-1.0.3.tgz"
+    },
     "d3-dsv": {
       "version": "1.0.5",
-      "from": "d3-dsv@>=1.0.3 <2.0.0",
+      "from": "https://registry.npmjs.org/d3-dsv/-/d3-dsv-1.0.5.tgz",
       "resolved": "https://registry.npmjs.org/d3-dsv/-/d3-dsv-1.0.5.tgz",
       "dev": true
     },
@@ -1096,6 +1101,16 @@
       "from": "d3-format@>=1.1.1 <2.0.0",
       "resolved": "https://registry.npmjs.org/d3-format/-/d3-format-1.2.0.tgz"
     },
+    "d3-geo": {
+      "version": "1.6.3",
+      "from": "d3-geo@>=1.6.3 <2.0.0",
+      "resolved": "https://registry.npmjs.org/d3-geo/-/d3-geo-1.6.3.tgz"
+    },
+    "d3-interpolate": {
+      "version": "1.1.4",
+      "from": "d3-interpolate@latest",
+      "resolved": "https://registry.npmjs.org/d3-interpolate/-/d3-interpolate-1.1.4.tgz"
+    },
     "d3-time": {
       "version": "1.0.6",
       "from": "d3-time@>=1.0.6 <2.0.0",
@@ -1105,6 +1120,11 @@
       "version": "2.0.5",
       "from": "d3-time-format@>=2.0.5 <3.0.0",
       "resolved": "https://registry.npmjs.org/d3-time-format/-/d3-time-format-2.0.5.tgz"
+    },
+    "d3-timer": {
+      "version": "1.0.5",
+      "from": "d3-timer@latest",
+      "resolved": "https://registry.npmjs.org/d3-timer/-/d3-timer-1.0.5.tgz"
     },
     "dashdash": {
       "version": "1.14.1",

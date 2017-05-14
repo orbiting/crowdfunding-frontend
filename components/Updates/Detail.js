@@ -64,7 +64,7 @@ const styles = {
 }
 
 const Content = ({children, ...props}) => (
-  <div {...props} {...styles.content} />
+  <div {...props} {...styles.content}>{children}</div>
 )
 
 const publishedDateTimeFormat = swissTime.format('%e. %B %Y %H Uhr')
@@ -75,6 +75,7 @@ const Update = withT(({
     slug,
     title,
     text,
+    children,
     publishedDateTime
   }
 }) => {
@@ -86,9 +87,19 @@ const Update = withT(({
       <div {...styles.label}>
         {publishedDateTimeFormat(date)}
       </div>
-      <RawHtml style='serif' type={Content} dangerouslySetInnerHTML={{
-        __html: text || ''
-      }} />
+      {
+        children
+        ? (
+          <Content>
+            {children}
+          </Content>
+        )
+        : (
+          <RawHtml style='serif' type={Content} dangerouslySetInnerHTML={{
+            __html: text || ''
+          }} />
+        )
+      }
 
       <P>
         <Share

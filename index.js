@@ -87,6 +87,9 @@ app.prepare()
       slug: req.params.slug
     })
   })
+  server.get('/updates/wer-sind-sie', (req, res) => {
+    return app.render(req, res, '/updates/wer-sind-sie', req.query)
+  })
   server.get('/updates/:slug', (req, res) => {
     return app.render(req, res, '/updates', {
       slug: req.params.slug
