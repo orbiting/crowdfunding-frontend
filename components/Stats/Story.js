@@ -497,7 +497,7 @@ class Story extends Component {
             <div {...styles.scrollBlock}
               ref={this.blocks.dach.setRef}>
               <P>
-                Im Ausland führt {countryNames(foreignCountries.top.values)} mit {countFormat(+foreignCountries.top.key)} Republik-Mitgliedern vor
+                Damit zum Rest des Planeten. Dort {countryNames(foreignCountries.top.values)} mit {countFormat(+foreignCountries.top.key)} Republik-Mitgliedern vor
                 {' '}
                 {
                   foreignCountries.list.map(group => [
