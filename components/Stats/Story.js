@@ -12,6 +12,7 @@ import mdComponents from '../../lib/utils/mdComponents'
 import Loader from '../Loader'
 import {ListWithQuery as TestimonialList} from '../Testimonial/List'
 import Meta from '../Frame/Meta'
+import {HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, MENUBAR_HEIGHT} from '../Frame/constants'
 
 import BarChart from './BarChart'
 import PostalCodeMap from './Map'
@@ -23,7 +24,8 @@ import {
   Interaction, A, Label,
   H1, H2, P, NarrowContainer,
   Field,
-  fontFamilies, colors
+  fontFamilies, colors,
+  mediaQueries
 } from '@project-r/styleguide'
 
 import {
@@ -83,19 +85,10 @@ const styles = {
   }),
   mapFixed: css({
     position: 'fixed',
-    top: 100,
-    left: 0,
-    right: 0
-  }),
-  mapTop: css({
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0
-  }),
-  mapBottom: css({
-    position: 'absolute',
-    bottom: 0,
+    top: HEADER_HEIGHT_MOBILE + MENUBAR_HEIGHT,
+    [mediaQueries.mUp]: {
+      top: HEADER_HEIGHT
+    },
     left: 0,
     right: 0
   }),

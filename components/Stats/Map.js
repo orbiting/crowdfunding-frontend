@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import {geoAlbers} from 'd3-geo'
 import {timer} from 'd3-timer'
+import {HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, MENUBAR_HEIGHT} from '../Frame/constants'
 
 import {
-  colors, fontFamilies
+  colors, fontFamilies, mediaQueries
 } from '@project-r/styleguide'
 
 const toGeoJson = data => ({
@@ -31,8 +32,12 @@ class PostalCodeMap extends Component {
       this.canvas = ref
     }
     this.measure = () => {
+      const mobile = window.innerWidth < mediaQueries.mBreakPoint
       const width = this.container.getBoundingClientRect().width
-      const height = Math.min(width / 1.5, window.innerHeight * 0.65)
+      const height = window.innerHeight - (mobile
+        ? HEADER_HEIGHT_MOBILE + MENUBAR_HEIGHT
+        : HEADER_HEIGHT
+      )
 
       const extentData = this.props.extentData || this.props.data
       if (
@@ -41,7 +46,7 @@ class PostalCodeMap extends Component {
       ) {
         if (!this.state.extentData) {
           this.projection.fitExtent(
-            [[10, 10], [width - 10, height - 10]],
+            [[10, 20], [width - 10, height - window.innerHeight * 0.15]],
             toGeoJson(extentData)
           )
           this.draw()
@@ -49,7 +54,7 @@ class PostalCodeMap extends Component {
           const targetProjection = geoAlbers()
             .rotate([0, 0])
             .fitExtent(
-              [[10, 10], [width - 10, height - 10]],
+              [[10, 20], [width - 10, height - window.innerHeight * 0.15]],
               toGeoJson(extentData)
             )
 
