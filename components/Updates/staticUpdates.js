@@ -16,7 +16,7 @@ const WerSindSie = {
   children: (
     <div>
       <p>
-        Wir haben zum Start der Republik einiges darüber geschrieben, wer wir sind. Nun ist die Hälfte der Kampagne vorbei. Und wir können endlich über ein wirklich interessantes Thema reden: wer Sie sind.
+        Wir haben zum Start der Republik einiges darüber geschrieben, wer wir sind. Nun ist mehr als die Hälfte der Kampagne vorbei. Und wir können endlich über ein wirklich interessantes Thema reden: wer Sie sind.
       </p>
       <p>
         <Link href='/updates/wer-sind-sie'><a {...linkRule}>Bericht lesen und Visualisierungen ansehen</a></Link>

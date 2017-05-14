@@ -21,7 +21,7 @@ const toGeoJson = data => ({
   }))
 })
 
-const ROTATION = [-10, 0]
+const ROTATION = [-8.33, 0]
 
 class PostalCodeMap extends Component {
   constructor (...args) {

@@ -29,7 +29,7 @@ import {
 } from '@project-r/styleguide'
 
 import {
-  PUBLIC_BASE_URL
+  PUBLIC_BASE_URL, STATIC_BASE_URL
 } from '../../constants'
 
 import {swissTime, countFormat} from '../../lib/utils/formats'
@@ -219,7 +219,8 @@ export const metaData = {
   pageTitle: 'Wer sind Sie? Republik',
   title: 'Datenvisualisierung Republik-Mitglieder',
   emailSubject: 'Republik: Wer sind Sie?',
-  tweet: 'Republik: Wer sind Sie?'
+  tweet: 'Republik: Wer sind Sie?',
+  image: `${STATIC_BASE_URL}/static/social-media/wer-sind-sie.png`
 }
 
 class Story extends Component {
@@ -405,13 +406,13 @@ class Story extends Component {
                 <span {...styles.dateText}>15. Mai 2017 07 Uhr</span>
                 {' '}
                 <span {...styles.dateData}>
-                  in Echtzeit aufdatiert
+                  laufend aktualisiert
                 </span>
               </div>
               <P>Ladies and Gentlemen</P>
 
               <P>
-                Wir haben zum Start der Republik einiges darüber geschrieben, wer wir sind. Nun ist die Hälfte der Kampagne vorbei. Und wir können endlich über ein wirklich interessantes Thema reden: wer Sie sind.
+                Wir haben zum Start der Republik einiges darüber geschrieben, wer wir sind. Nun ist mehr als die Hälfte der Kampagne vorbei. Und wir können endlich über ein wirklich interessantes Thema reden: wer Sie sind.
               </P>
             </div>
 
