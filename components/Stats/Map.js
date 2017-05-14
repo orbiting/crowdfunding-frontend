@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {geoAlbers} from 'd3-geo'
-import {css} from 'glamor'
 import {timer} from 'd3-timer'
 
 import {
@@ -18,24 +17,6 @@ const toGeoJson = data => ({
   }))
 })
 
-const styles = {
-  circlePos: css({
-    // transition: 'cx 1s ease-in-out, cy 1s ease-in-out, r 1s ease-in-out'
-  }),
-  labelOutline: css({
-    fill: '#fff',
-    fontFamily: fontFamilies.sansSerifRegular,
-    fontSize: 12,
-    stroke: '#fff',
-    strokeWidth: 2
-  }),
-  label: css({
-    fill: colors.primary,
-    fontFamily: fontFamilies.sansSerifRegular,
-    fontSize: 12
-  })
-}
-
 class PostalCodeMap extends Component {
   constructor (...args) {
     super(...args)
@@ -47,6 +28,9 @@ class PostalCodeMap extends Component {
       .scale(13000)
     this.containerRef = ref => {
       this.container = ref
+    }
+    this.canvasRef = ref => {
+      this.canvas = ref
     }
     this.measure = () => {
       const width = this.container.getBoundingClientRect().width
@@ -85,21 +69,21 @@ class PostalCodeMap extends Component {
               currentTranslate[1] * (1 - t) + targetTranslate[1] * t
             ]
           )
-          this.setState({t})
+          this.draw()
           if (t >= 1) {
             this.timer.stop()
           }
         })
 
-        // this.projection.fitExtent(
-        //   [[10, 10], [width - 10, height - 10]],
-        //   toGeoJson(extentData)
-        // )
         this.setState({
           width,
           height,
           extentData
+        }, () => {
+          this.draw()
         })
+      } else {
+        this.draw()
       }
     }
   }
@@ -113,68 +97,82 @@ class PostalCodeMap extends Component {
   componentWillUnmount () {
     window.removeEventListener('resize', this.measure)
   }
-  render () {
+  draw () {
     const {width, height} = this.state
-    const {data, labels, labelOptions, filter} = this.props
     const {projection} = this
+    const {data, labels, labelOptions} = this.props
+
+    const devicePixelRatio = window.devicePixelRatio || 1
+    this.canvas.width = width * devicePixelRatio
+    this.canvas.height = height * devicePixelRatio
+
+    const ctx = this.canvas.getContext('2d')
+
+    ctx.scale(devicePixelRatio, devicePixelRatio)
+    ctx.clearRect(0, 0, width, height)
+    ctx.save()
+
     const scale = projection.scale()
     const radius = d => (
-      Math.max(0.3, Math.sqrt(d.count) * scale * 0.00001)
+      Math.max(0.5, Math.sqrt(d.count) * scale * 0.00001)
     )
+
+    ctx.beginPath()
+    this.circles = data.map((d, i) => {
+      const [cx, cy] = projection([d.lon, d.lat])
+      const r = radius(d)
+
+      ctx.moveTo(cx + r, cy)
+      ctx.arc(cx, cy, r, 0, 2 * Math.PI)
+
+      return {
+        cx,
+        cy,
+        r,
+        d
+      }
+    })
+    ctx.globalAlpha = 0.1
+    ctx.fillStyle = colors.primary
+    ctx.fill()
+    ctx.globalAlpha = 1
+    ctx.strokeStyle = colors.primary
+    ctx.stroke()
+
+    if (labels.length) {
+      ctx.font = `12px ${fontFamilies.sansSerifRegular}`
+
+      ctx.textAlign = labelOptions.center ? 'middle' : 'start'
+      ctx.textBaseline = 'middle'
+      ctx.fillStyle = colors.primary
+      ctx.strokeStyle = '#fff'
+
+      labels.forEach((d, i) => {
+        let [x, y] = projection([d.lon, d.lat])
+        if (!labelOptions.center) {
+          x += radius(d)
+        }
+        if (labelOptions.xOffset) {
+          x += labelOptions.xOffset
+        }
+        const text = labelOptions.postalCode
+          ? d.postalCode : d.name
+
+        ctx.lineWidth = 2
+        ctx.strokeText(text, x, y)
+        ctx.fillText(text, x, y)
+      })
+    }
+
+    ctx.restore()
+  }
+  render () {
+    const {width, height} = this.state
 
     return (
       <div ref={this.containerRef}>
-        <svg width={width || '100%'} height={height || 300}>
-          {
-            data.map((d, i) => {
-              const [x, y] = projection([d.lon, d.lat])
-              return (
-                <circle
-                  key={`bubble${i}`} {...styles.circlePos}
-                  cx={x}
-                  cy={y}
-                  fill={colors.primary}
-                  fillOpacity={0.1}
-                  stroke={colors.primary}
-                  strokeOpacity={(
-                    filter
-                      ? (d.postalCode && d.postalCode.startsWith(filter) ? 1 : 0)
-                      : 1
-                  )}
-                  r={radius(d)}>
-                  <title>{`${d.postalCode} ${d.name}: ${d.count}`}</title>
-                </circle>
-              )
-            })
-          }
-          {
-            labels.map((d, i) => {
-              let [x, y] = projection([d.lon, d.lat])
-              if (!labelOptions.center) {
-                x += radius(d)
-              }
-              if (labelOptions.xOffset) {
-                x += labelOptions.xOffset
-              }
-              const textStyle = {
-                textAnchor: labelOptions.center ? 'middle' : 'start'
-              }
-              const text = labelOptions.postalCode
-                ? d.postalCode : d.name
-              return (
-                <g key={`label${i}`}
-                  transform={`translate(${x} ${y})`}>
-                  <text dy='0.3em' {...styles.labelOutline} style={textStyle}>
-                    {text}
-                  </text>
-                  <text dy='0.3em' {...styles.label} style={textStyle}>
-                    {text}
-                  </text>
-                </g>
-              )
-            })
-          }
-        </svg>
+        <canvas ref={this.canvasRef}
+          style={{width, height}} />
       </div>
     )
   }
