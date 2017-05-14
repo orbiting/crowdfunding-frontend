@@ -13,8 +13,8 @@ const styles = {
   }),
   datum: css({
     float: 'left',
+    paddingLeft: 1,
     [mediaQueries.mUp]: {
-      paddingLeft: 1,
       paddingRight: 1
     },
     height: '100%',
@@ -23,10 +23,9 @@ const styles = {
   bar: css({
     backgroundColor: colors.primary,
     position: 'absolute',
-    left: 0,
+    left: 1,
     right: 0,
     [mediaQueries.mUp]: {
-      left: 1,
       right: 1
     },
     bottom: 0
@@ -34,10 +33,9 @@ const styles = {
   line: css({
     pointerEvents: 'none',
     position: 'absolute',
-    left: 0,
+    left: 1,
     right: 0,
     [mediaQueries.mUp]: {
-      left: 1,
       right: 1
     },
     bottom: 0,
@@ -64,6 +62,9 @@ const styles = {
     opacity: 0.4
   }),
   baseLine: css({
+    position: 'absolute',
+    bottom: -1,
+    left: 0,
     clear: 'left',
     width: '100%',
     height: 1,
@@ -120,9 +121,22 @@ class BarChart extends Component {
     const maxRatio = maxValue
       ? maxValue / sum
       : max(data, d => d.count / sum)
-    const datumWidth = width
+    let datumWidth = width
      ? Math.floor(innerWidth / data.length)
      : `${100 / data.length}%`
+
+    const compress = width && datumWidth <= 3
+    const left = compress ? 0 : undefined
+    const datumStyle = {
+      width: datumWidth,
+      paddingLeft: left
+    }
+    if (compress) {
+      datumWidth = innerWidth / data.length
+      datumStyle.width = Math.ceil(datumWidth)
+      datumStyle.position = 'absolute'
+    }
+
     let baseWidth
     if (width) {
       baseWidth = datumWidth * data.length
@@ -154,11 +168,15 @@ class BarChart extends Component {
           <div {...styles.datum}
             key={i}
             style={{
-              width: datumWidth
+              ...datumStyle,
+              left: compress
+                ? paddingLeft + i * datumWidth
+                : undefined
             }}>
             <div {...styles.bar}
               title={title ? title(d) : undefined}
               style={{
+                left,
                 height: `${d.count / sum / overallMaxRatio * 100}%`,
                 backgroundColor: color ? color(d) : undefined
               }} />
@@ -166,6 +184,7 @@ class BarChart extends Component {
               <div {...styles.line}
                 key={`ref${lineI}`}
                 style={{
+                  left,
                   borderTopColor: line.color,
                   height: `${line.data[i].count / refMax[lineI].sum / overallMaxRatio * 100}%`
                 }}>
@@ -192,7 +211,10 @@ class BarChart extends Component {
             {xLabel}
           </div>
         )}
-        <div {...styles.baseLine} style={{width: baseWidth}} />
+        <div {...styles.baseLine} style={{
+          width: baseWidth,
+          left: paddingLeft
+        }} />
       </div>
     )
   }
