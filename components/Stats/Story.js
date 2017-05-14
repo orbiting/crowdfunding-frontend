@@ -252,9 +252,9 @@ class Story extends Component {
         )
 
       if (this.state.activeBlock !== activeBlock) {
-        this.setState({
+        this.setState(() => ({
           activeBlock
-        })
+        }))
       }
     }
     this.measure = () => {
@@ -266,6 +266,12 @@ class Story extends Component {
         block.y0 = y + top
         block.y1 = block.y0 + height
       })
+      const width = window.innerWidth
+      if (this.state.width !== width) {
+        this.setState(() => ({
+          width
+        }))
+      }
       this.onScroll()
     }
   }
@@ -295,6 +301,9 @@ class Story extends Component {
       testimonialStats,
       foreignCountries
     } = this.props
+    const {
+      width
+    } = this.state
 
     const {filter, activeBlock} = this.state
 
@@ -512,7 +521,7 @@ class Story extends Component {
               paddingLeft={40}
               xLabel='Alter'
               xTick={(d, i) => {
-                if (i === 0 || d.age % 10 === 0) {
+                if ((i === 0 && width > 500) || d.age % 10 === 0) {
                   return d.age
                 }
                 return ''
