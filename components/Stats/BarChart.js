@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import {css, merge} from 'glamor'
 import {max, sum as sumOfArray} from 'd3-array'
+import {countFormat} from '../../lib/utils/formats'
 
 import {
   colors, fontFamilies, mediaQueries
 } from '@project-r/styleguide'
 
 const X_LABEL_HEIGHT = 20
+const Y_LABEL_HEIGTH = 20
 const styles = {
   container: css({
     position: 'relative'
@@ -69,6 +71,39 @@ const styles = {
     width: '100%',
     height: 1,
     backgroundColor: colors.divider
+  }),
+  yLines: css({
+    position: 'absolute',
+    top: 0,
+    height: '100%',
+    opacity: 0.3
+  }),
+  yLine: css({
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    height: 1,
+    backgroundColor: colors.divider
+  }),
+  yLabels: css({
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: '100%'
+  }),
+  yLabel: css({
+    position: 'absolute',
+    left: 0,
+    color: colors.secondary,
+    opacity: 0.4,
+    lineHeight: 1,
+    fontFamily: fontFamilies.sansSerifRegular,
+    fontSize: 12,
+    marginTop: -6,
+    [mediaQueries.mUp]: {
+      marginTop: -7,
+      fontSize: 14
+    }
   })
 }
 styles.xLabel = merge(styles.xTick, {
@@ -102,13 +137,15 @@ class BarChart extends Component {
   render () {
     const {
       data, title,
-      max: maxValue,
       xTick, xLabel,
       color,
       height = 200,
-      referenceLines = []
+      referenceLines = [],
+      yLabel,
+      yLinePadding = 0
     } = this.props
     let {
+      max: maxValue,
       paddingLeft = 0
     } = this.props
 
@@ -117,10 +154,14 @@ class BarChart extends Component {
     } = this.state
 
     const innerWidth = width - paddingLeft
+
+    if (!maxValue) {
+      maxValue = max(data, d => d.count)
+    }
+    maxValue = Math.ceil(maxValue / 100) * 100
+
     const sum = sumOfArray(data, d => d.count)
-    const maxRatio = maxValue
-      ? maxValue / sum
-      : max(data, d => d.count / sum)
+    const maxRatio = maxValue / sum
     let datumWidth = width
      ? Math.floor(innerWidth / data.length)
      : `${100 / data.length}%`
@@ -157,10 +198,13 @@ class BarChart extends Component {
         .concat(refMax.map(m => m.maxRatio))
     )
 
+    const hasYLabel = !!yLabel
+
     return (
       <div ref={this.containerRef} {...styles.container}
         style={{
           height,
+          marginTop: Y_LABEL_HEIGTH * 2,
           marginBottom: xTick ? X_LABEL_HEIGHT : 0,
           paddingLeft
         }}>
@@ -206,6 +250,27 @@ class BarChart extends Component {
             )}
           </div>
         ))}
+        <div {...styles.yLines} style={{
+          left: Math.max(paddingLeft, yLinePadding),
+          width: baseWidth - yLinePadding
+        }}>
+          <div {...styles.yLine} style={{top: 0}} />
+          <div {...styles.yLine} style={{top: '50%'}} />
+        </div>
+        {hasYLabel && <div {...styles.yLabels}>
+          <div {...styles.yLabel} style={{
+            top: -Y_LABEL_HEIGTH,
+            whiteSpace: 'nowrap'
+          }}>
+            {yLabel}
+          </div>
+          <div {...styles.yLabel} style={{top: 0}}>
+            {countFormat(maxValue)}
+          </div>
+          <div {...styles.yLabel} style={{top: '50%'}}>
+            {countFormat(maxValue / 2)}
+          </div>
+        </div>}
         {!!xLabel && (
           <div {...styles.xLabel}>
             {xLabel}

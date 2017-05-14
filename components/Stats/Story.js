@@ -40,7 +40,6 @@ const {H3} = Interaction
 
 const styles = {
   dateContainer: css({
-    marginTop: 40
   }),
   dateBox: css({
     float: 'left',
@@ -52,17 +51,26 @@ const styles = {
   }),
   dateBoxBig: css({
     width: '100%',
+    marginBottom: 20,
     [mediaQueries.mUp]: {
       width: '50%'
     }
   }),
   dateCount: css({
-    paddingBottom: 20,
+    paddingBottom: 0,
     fontSize: 20
   }),
   dateLabel: css({
     display: 'block',
     paddingBottom: 0
+  }),
+  dateLabelBig: css({
+    textAlign: 'left'
+  }),
+  dateCountBig: css({
+    textAlign: 'left',
+    paddingBottom: 0,
+    fontSize: 20
   }),
   keyMetricContainer: css({
     margin: '20px 0'
@@ -294,6 +302,7 @@ class Story extends Component {
       ageStats,
       groupedCreatedAts,
       maxCreatedAt,
+      maxCreatedAtI2,
       status,
       paymentMethods,
       allPostalCodes,
@@ -511,10 +520,11 @@ class Story extends Component {
             <H3>
               16- bis 92-jährige Republik-Mitglieder
             </H3>
-            <Interaction.P style={{marginBottom: 20, color: colors.secondary}}>
+            <Interaction.P style={{marginBottom: 20, color: colors.secondary, lineHeight: 1.25}}>
               Altersverteilung der <span style={{color: colors.primary}}>Republik-Mitglieder</span> im Vergleich zur Bevölkerung von <span style={{color: '#000'}}>Zürich</span> und der <span style={{color: '#9F2500'}}>Schweiz</span>.
             </Interaction.P>
             <BarChart
+              yLabel='Republik-Mitglieder'
               title={d => `${d.age} Jahre: ${d.count} Republik-Mitgliede(r)`}
               data={paddedAges}
               color={() => '#00B400'}
@@ -583,8 +593,29 @@ class Story extends Component {
             <div {...styles.dateContainer}>
               {groupedCreatedAts.map(({key, values}, i) => (
                 <div key={key} {...styles.dateBox} className={i < 2 ? styles.dateBoxBig : ''}>
+                  {i < 2 && (
+                    <div>
+                      <div {...styles.dateLabelBig}>
+                        {dateFormat(values[0].datetime)}
+                      </div>
+                      <div {...styles.dateCountBig}>
+                        {values.reduce(
+                          (sum, d) => sum + d.count,
+                          0
+                        )}
+                      </div>
+                    </div>
+                  )}
                   <BarChart
-                    max={maxCreatedAt}
+                    height={i < 2 ? 160 : 80}
+                    max={i < 2 ? maxCreatedAt : maxCreatedAtI2}
+                    yLabel={
+                      (
+                        (i === 0 && 'Republik-Mitglieder') ||
+                        (i === 2 && ' ')
+                      )
+                    }
+                    yLinePadding={(i === 0 || i === 2) ? 30 : 0}
                     xLabel={i === 0 ? 'Zeit' : ''}
                     xTick={i < 2 && ((d) => {
                       if ((i !== 0 || d.hour) && d.hour % 6 === 0) {
@@ -593,18 +624,17 @@ class Story extends Component {
                       return ''
                     })}
                     title={d => `${d.hour}h: ${d.count}`}
-                    height={120}
                     color={() => colors.secondary}
                     data={normalizeDateData(values)} />
-                  <Label {...styles.dateLabel}>
+                  {i >= 2 && (<Label {...styles.dateLabel}>
                     {dateFormat(values[0].datetime)}
-                  </Label>
-                  <div {...styles.dateCount}>
+                  </Label>)}
+                  {i >= 2 && (<div {...styles.dateCount}>
                     {values.reduce(
                       (sum, d) => sum + d.count,
                       0
                     )}
-                  </div>
+                  </div>)}
                 </div>
               ))}
             </div>
@@ -674,7 +704,7 @@ Das war alles, was wir über Sie wissen. Ausser, natürlich, noch zwei Dinge:
 
 Mit Dank für Ihre Kühnheit und unsere Verantwortung,
 
-Ihre Crew der Republik und von Project R
+Ihre Crew der Republik und von Project&nbsp;R
             `}
             <P>
               <Share
@@ -724,6 +754,13 @@ const DataWrapper = ({data}) => (
           }))
       )
     const maxCreatedAt = max(createdAts, d => d.count)
+    const maxCreatedAtI2 = max(
+      groupedCreatedAts.slice(2).reduce(
+        (i2, {values}) => i2.concat(values),
+        []
+      ),
+      d => d.count
+    )
 
     const countryIndex = countries.reduce(
       (index, country) => {
@@ -891,6 +928,7 @@ const DataWrapper = ({data}) => (
         paymentMethods={paymentMethods}
         groupedCreatedAts={groupedCreatedAts}
         maxCreatedAt={maxCreatedAt}
+        maxCreatedAtI2={maxCreatedAtI2}
         ageStats={ageStats}
         testimonialStats={testimonialStats} />
     )
