@@ -344,7 +344,7 @@ class Story extends Component {
               <P>Ladies and Gentlemen</P>
 
               <P>
-                Wir haben zum Start der Republik einiges darüber geschrieben, wer wir sind. Nun ist ein Drittel der Kampagne vorbei. Und wir können endlich über ein wirklich interessantes Thema reden: wer Sie sind.
+                Wir haben zum Start der Republik einiges darüber geschrieben, wer wir sind. Nun ist die Hälfte der Kampagne vorbei. Und wir können endlich über ein wirklich interessantes Thema reden: wer Sie sind.
               </P>
             </div>
 
@@ -396,7 +396,7 @@ class Story extends Component {
                   geoStats.luzern -
                   geoStats.baden -
                   geoStats.badenAgglo
-                )} von Ihnen verstreut sich über die ganze Schweiz.</P>
+                )} von Ihnen verstreuen sich über die ganze Schweiz.</P>
 
               <H3>Ihre Postleitzahlen nachschlagen</H3>
               <Field
@@ -427,7 +427,7 @@ class Story extends Component {
             <div {...styles.scrollBlock}
               ref={this.blocks.dach.setRef}>
               <P>
-                Im Ausland führt {countryNames(foreignCountries.top.values)} mit {countFormat(+foreignCountries.top.key)} Republik-Mitgliedern, vor
+                Im Ausland führt {countryNames(foreignCountries.top.values)} mit {countFormat(+foreignCountries.top.key)} Republik-Mitgliedern vor
                 {' '}
                 {
                   foreignCountries.list.map(group => [
@@ -452,7 +452,7 @@ class Story extends Component {
               16- bis 92-jährige Republik-Mitglieder
             </H3>
             <Interaction.P style={{marginBottom: 20, color: colors.secondary}}>
-              Altersverteilung der <span style={{color: colors.primary}}>Republik-Mitglieder</span> im Vergleich zur Bervölkerung von <span style={{color: '#000'}}>Zürich</span> und der <span style={{color: '#9F2500'}}>Schweiz</span>.
+              Altersverteilung der <span style={{color: colors.primary}}>Republik-Mitglieder</span> im Vergleich zur Bevölkerung von <span style={{color: '#000'}}>Zürich</span> und der <span style={{color: '#9F2500'}}>Schweiz</span>.
             </Interaction.P>
             <BarChart
               title={d => `${d.age} Jahre: ${d.count} Republik-Mitgliede(r)`}
@@ -499,12 +499,12 @@ class Story extends Component {
 
             <P>
               {ageStats.below16}
-              {' '}Abonnenten jünger als 16 Jahre. Bei der Mehrheit handelt es sich allerdings nicht um frühreife Kinder, sondern um Firmenabonnements. Diese gaben ihr Gründungsjahr an.
+              {' '}Abonnenten jünger als 16 Jahre. Bei der Mehrheit handelt es sich allerdings nicht um frühreife Kinder, sondern um Abonnements von Firmen. Diese gaben ihr Gründungsjahr an.
             </P>
 
             <P>
               {ageStats.above100}
-              {' '}Abonnentinnen älter als 100 Jahre. Wir vermuten allerdings bei den meisten Eingabefehler. Oder einen symbolischen Wink. Etwa beim Geburtsjahr 1848 - dem Gründungsjahr des schweizerischen Bundesstaates. Oder beim 8. Dezember 1873, dem Geburtstag des <A href='https://de.wikipedia.org/wiki/Anton_Afritsch_(Journalist)'>Journalisten Anton Afritsch</A> — oder beim 19. Dezember 1878, an dem der <A href='https://de.wikipedia.org/wiki/Bayard_Taylor'>Reiseschriftsteller Bayard Taylor</A> gestorben ist.
+              {' '}Abonnentinnen älter als 100 Jahre. Wir vermuten allerdings bei den meisten Eingabefehler. Oder einen symbolischen Wink. Etwa beim Geburtsjahr 1848 — dem Gründungsjahr des schweizerischen Bundesstaates. Oder beim 8. Dezember 1873, dem Geburtstag des <A href='https://de.wikipedia.org/wiki/Anton_Afritsch_(Journalist)'>Journalisten Anton Afritsch</A> — oder beim 19. Dezember 1878, an dem der <A href='https://de.wikipedia.org/wiki/Bayard_Taylor'>Reiseschriftsteller Bayard Taylor</A> gestorben ist.
             </P>
 
             <H2 style={{marginTop: 80}}>
@@ -558,7 +558,7 @@ class Story extends Component {
             </P>
 
             <Interaction.H3>
-              Zahlungsmittel der Unterstützter
+              Zahlungsmittel der Unterstützer
             </Interaction.H3>
             <Interaction.P>
               Mit diesen Zahlungsmittel haben Sie bezahlt.
@@ -593,7 +593,9 @@ class Story extends Component {
               Was uns übrigens verblüffte: PayPal schlug als Zahlungsmethode die PostFinance.
             </P>
 
-            <H2 style={{marginTop: 80}}>Wieviel von Ihnen sind auf der Community-Seite dabei?</H2>
+            <H2 style={{marginTop: 80}}>
+              Wie viele von Ihnen sind auf der Community-Seite dabei?
+            </H2>
             <P>
               Enorm viele. Rund {Math.round(testimonialStats.count / status.people * 100)} Prozent von Ihnen — {testimonialStats.count} Leute — luden ein Foto und einen Slogan auf unsere Seite hoch.
               Danke dafür! Für die {testimonialStats.count} Fotos, die Unterstützung, die Begründungen und die Ratschläge! Stellvertretend für alle wollen wir nur eine Stimme zitieren — das vermutlich geografisch (und mental) am weitesten entfernte Mitglied, direkt aus seinem Bunker auf dem Todesstern:
