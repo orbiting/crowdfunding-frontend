@@ -11,6 +11,7 @@ import mdComponents from '../../lib/utils/mdComponents'
 
 import Loader from '../Loader'
 import {ListWithQuery as TestimonialList} from '../Testimonial/List'
+import Meta from '../Frame/Meta'
 
 import BarChart from './BarChart'
 import PostalCodeMap from './Map'
@@ -111,6 +112,20 @@ const styles = {
     paddingTop: 40,
     paddingBottom: 100,
     marginBottom: -100
+  }),
+  date: css({
+    fontFamily: fontFamilies.sansSerifMedium,
+    fontSize: 17,
+    lineHeight: '25px',
+    letterSpacing: -0.19
+  }),
+  dateData: css({
+    fontFamily: fontFamilies.sansSerifRegular,
+    padding: '1px 6px',
+    display: 'inline-block',
+    borderRadius: 4,
+    backgroundColor: colors.primary,
+    color: '#fff'
   })
 }
 
@@ -171,7 +186,8 @@ const paymentMethodDetails = {
 
 export const metaData = {
   url: `${PUBLIC_BASE_URL}/updates/wer-sind-sie`,
-  title: 'Wer sind Sie?',
+  pageTitle: 'Wer sind Sie? Republik',
+  title: 'Datenvisualisierung Republik-Mitglieder',
   emailSubject: 'Republik: Wer sind Sie?',
   tweet: 'Republik: Wer sind Sie?'
 }
@@ -327,8 +343,11 @@ class Story extends Component {
         .filter(d => mapLabels.indexOf(d.postalCode) !== -1)
     }
 
+    metaData.description = `Wer sind Sie? ${status.people} Mitglieder der Republik in Grafiken. Jetzt auch Mitmachen? Unterstützen Sie unser Crowdfunding auf www.republik.ch.`
+
     return (
       <div>
+        <Meta data={metaData} />
         <div {...styles.mapStory}>
           <div {...styles.mapFixed}>
             <PostalCodeMap
@@ -341,6 +360,13 @@ class Story extends Component {
             <Spacer />
             <div {...styles.scrollBlock}>
               <H1>Wer sind Sie?</H1>
+              <div {...styles.date}>
+                15. Mai 2017 07 Uhr
+                {' '}
+                <span {...styles.dateData}>
+                  in Echtzeit aufdatiert
+                </span>
+              </div>
               <P>Ladies and Gentlemen</P>
 
               <P>
