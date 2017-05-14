@@ -120,7 +120,7 @@ class PostalCodeMap extends Component {
         Math.sqrt(
           Math.pow(cx - focusX, 2) +
           Math.pow(cy - focusY, 2)
-        ) <= r + 3
+        ) <= Math.max(r, 3)
       ))
 
       this.setState(() => ({hover}))
@@ -143,7 +143,7 @@ class PostalCodeMap extends Component {
     const {width, height} = this.state
     const {projection} = this
     const {data, labels, labelOptions} = this.props
-    if (!this.canvas) {
+    if (!this.canvas || !width) {
       return
     }
 
@@ -213,15 +213,21 @@ class PostalCodeMap extends Component {
     ctx.restore()
   }
   renderHover () {
-    const {hover, width} = this.state
+    const {hover, width, height} = this.state
 
     if (!hover || !hover.length) {
       return null
     }
 
     const {cx, cy, r} = hover.sort((a, b) => ascending(a.cy, b.cy))[0]
+    const top = cy > height / 3
+    const yOffset = r + 12
     return (
-      <ContextBox x={cx} y={cy - r - 12} contextWidth={width}>
+      <ContextBox
+        orientation={top ? 'top' : 'below'}
+        x={cx}
+        y={cy + (top ? -yOffset : yOffset)}
+        contextWidth={width}>
         {hover.map(({d}) => (
           <ContextBoxValue key={d.postalCode}
             label={`${d.postalCode} ${d.name}`}>
