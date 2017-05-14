@@ -21,13 +21,15 @@ const toGeoJson = data => ({
   }))
 })
 
+const ROTATION = [-10, 0]
+
 class PostalCodeMap extends Component {
   constructor (...args) {
     super(...args)
 
     this.state = {}
     this.projection = geoAlbers()
-      .rotate([0, 0])
+      .rotate(ROTATION)
     this.containerRef = ref => {
       this.container = ref
     }
@@ -51,7 +53,7 @@ class PostalCodeMap extends Component {
           this.draw()
         } else {
           const targetProjection = geoAlbers()
-            .rotate([0, 0])
+            .rotate(ROTATION)
             .fitExtent(
               [[10, 20], [width - 10, height - window.innerHeight * 0.15]],
               toGeoJson(extentData)
