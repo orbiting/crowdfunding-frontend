@@ -40,14 +40,26 @@ class PostalCodeMap extends Component {
       const {width, top} = this.container.getBoundingClientRect()
       const height = window.innerHeight - top
 
+      const {extentPadding} = this.props
+
       const extentData = this.props.extentData || this.props.data
       if (
         width !== this.state.width ||
         extentData !== this.state.extentData
       ) {
+        const extent = [
+          [
+            extentPadding.left || 10,
+            extentPadding.top || 20
+          ],
+          [
+            width - (extentPadding.right || 10),
+            height - (extentPadding.bottom || window.innerHeight * 0.15)
+          ]
+        ]
         if (!this.state.extentData) {
           this.projection.fitExtent(
-            [[10, 20], [width - 10, height - window.innerHeight * 0.15]],
+            extent,
             toGeoJson(extentData)
           )
           this.draw()
@@ -55,7 +67,7 @@ class PostalCodeMap extends Component {
           const targetProjection = geoAlbers()
             .rotate(ROTATION)
             .fitExtent(
-              [[10, 20], [width - 10, height - window.innerHeight * 0.15]],
+              extent,
               toGeoJson(extentData)
             )
 

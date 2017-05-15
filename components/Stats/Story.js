@@ -220,7 +220,7 @@ export const metaData = {
   title: 'Datenvisualisierung Republik-Mitglieder',
   emailSubject: 'Wer sind Sie?',
   tweet: 'Wer sind Sie?',
-  image: `${STATIC_BASE_URL}/static/social-media/wer-sind-sie.png`
+  image: `${STATIC_BASE_URL}/static/social-media/wer-sind-sie.png?1`
 }
 
 class Story extends Component {
@@ -317,9 +317,14 @@ class Story extends Component {
 
     const {filter, activeBlock} = this.state
 
+    let filteredPlz = []
     let mapLabels = []
     let mapLabelOptions = {}
     let mapExtend = countryIndex.Schweiz.postalCodes
+    let mapExtendPadding = {
+      left: 10,
+      right: 10
+    }
     switch (activeBlock) {
       case 'zh':
         mapLabelOptions.center = true
@@ -334,6 +339,8 @@ class Story extends Component {
       case 'cities':
         mapLabels = ['2502', '3006', '4058', '8400', '6005', '8032', '4600']
         mapLabelOptions.xOffset = 2
+        mapExtendPadding.left = 50
+        mapExtendPadding.right = 70
         mapExtend = countryIndex.Schweiz.postalCodes
           .filter(d => (
             d.postalCode &&
@@ -353,6 +360,38 @@ class Story extends Component {
             d.postalCode &&
             d.postalCode.startsWith('5')
           ))
+        break
+      case 'plz':
+        if (!filter || !filter.trim()) {
+          break
+        }
+        filteredPlz = allPostalCodes
+          .filter(({postalCode}) => postalCode && postalCode.startsWith(filter))
+          .sort((a, b) => descending(a.count, b.count))
+        if (filteredPlz.length) {
+          mapLabelOptions.center = true
+          mapLabelOptions.postalCode = true
+          const firstMatch = filteredPlz[0]
+          const countryName = firstMatch.country.name
+          mapExtend = filteredPlz
+            .filter(d => d.country.name === countryName)
+          mapLabels = mapExtend.slice(0, 10)
+          mapExtend = [
+            {
+              ...firstMatch,
+              lon: firstMatch.lon - 0.1,
+              lat: firstMatch.lat - 0.1
+            },
+            ...mapExtend,
+            {
+              ...firstMatch,
+              lon: firstMatch.lon + 0.1,
+              lat: firstMatch.lat + 0.1
+            }
+          ]
+          mapExtendPadding.left = 100
+          mapExtendPadding.right = 100
+        }
         break
       case 'dach':
         mapLabels = countryIndex.Deutschland.postalCodes
@@ -396,6 +435,7 @@ class Story extends Component {
               labels={mapLabels}
               labelOptions={mapLabelOptions}
               extentData={mapExtend}
+              extentPadding={mapExtendPadding}
               data={allPostalCodes} />
           </div>
           <NarrowContainer>
@@ -454,41 +494,41 @@ class Story extends Component {
 
             <Spacer />
 
-            <div {...styles.scrollBlock}
-              ref={this.blocks.plz.setRef}>
-              <P>
-                Weitere {countFormat(
-                  countryIndex.Schweiz.count -
-                  geoStats.zurich -
-                  geoStats.bern -
-                  geoStats.basel -
-                  geoStats.winterthur -
-                  geoStats.luzern -
-                  geoStats.baden -
-                  geoStats.badenAgglo
-                )} von Ihnen verstreuen sich über die ganze Schweiz.</P>
+            <div style={{minHeight: 230}}>
+              <div {...styles.scrollBlock}
+                ref={this.blocks.plz.setRef}>
+                <P>
+                  Weitere {countFormat(
+                    countryIndex.Schweiz.count -
+                    geoStats.zurich -
+                    geoStats.bern -
+                    geoStats.basel -
+                    geoStats.winterthur -
+                    geoStats.luzern -
+                    geoStats.baden -
+                    geoStats.badenAgglo
+                  )} von Ihnen verstreuen sich über die ganze Schweiz.</P>
 
-              <H3>Ihre Postleitzahlen nachschlagen</H3>
-              <Field
-                label='Postleitzahl'
-                value={filter || ''}
-                onChange={(_, value) => {
-                  this.setState({
-                    filter: value
-                  })
-                }} />
-              <div style={{minHeight: 230, padding: '10px 0'}}>
-                {!!filter && <List>
-                  {allPostalCodes
-                    .filter(({postalCode}) => postalCode && postalCode.startsWith(filter))
-                    .sort((a, b) => descending(a.count, b.count))
-                    .slice(0, 5)
-                    .map(({postalCode, name, count}) => (
-                      <Item key={postalCode}>
-                        {postalCode} {name}: <Highlight>{count}</Highlight>
-                      </Item>
-                    ))}
-                </List>}
+                <H3>Ihre Postleitzahlen nachschlagen</H3>
+                <Field
+                  label='Postleitzahl'
+                  value={filter || ''}
+                  onChange={(_, value) => {
+                    this.setState({
+                      filter: value
+                    })
+                  }} />
+                <div style={{padding: '10px 0'}}>
+                  {filteredPlz.length > 0 && <List>
+                    {filteredPlz
+                      .slice(0, 5)
+                      .map(({postalCode, name, count}) => (
+                        <Item key={postalCode}>
+                          {postalCode} {name}: <Highlight>{count}</Highlight>
+                        </Item>
+                      ))}
+                  </List>}
+                </div>
               </div>
             </div>
 
@@ -778,7 +818,8 @@ const DataWrapper = ({data}) => (
         }
         return all.concat(country.postalCodes.map(d => ({
           ...d,
-          name: d.name || country.name
+          name: d.name || country.name,
+          country
         })))
       },
       []
