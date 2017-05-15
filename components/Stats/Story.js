@@ -218,8 +218,8 @@ export const metaData = {
   url: `${PUBLIC_BASE_URL}/updates/wer-sind-sie`,
   pageTitle: 'Wer sind Sie? Republik',
   title: 'Datenvisualisierung Republik-Mitglieder',
-  emailSubject: 'Republik: Wer sind Sie?',
-  tweet: 'Republik: Wer sind Sie?',
+  emailSubject: 'Wer sind Sie?',
+  tweet: 'Wer sind Sie?',
   image: `${STATIC_BASE_URL}/static/social-media/wer-sind-sie.png`
 }
 
