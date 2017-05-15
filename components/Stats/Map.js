@@ -46,6 +46,7 @@ class PostalCodeMap extends Component {
       const extentData = this.props.extentData || this.props.data
       if (
         width !== this.state.width ||
+        height !== this.state.height ||
         extentData !== this.state.extentData
       ) {
         const extent = [
@@ -99,6 +100,9 @@ class PostalCodeMap extends Component {
           })
         }
 
+        const devicePixelRatio = window.devicePixelRatio || 1
+        this.canvas.width = width * devicePixelRatio
+        this.canvas.height = height * devicePixelRatio
         this.setState({
           top,
           width,
@@ -137,6 +141,9 @@ class PostalCodeMap extends Component {
           Math.pow(cy - focusY, 2)
         ) <= Math.max(r, 3)
       ))
+      if (hover.length) {
+        event.preventDefault()
+      }
 
       this.setState(() => ({hover}))
     }
@@ -162,15 +169,14 @@ class PostalCodeMap extends Component {
       return
     }
 
-    const devicePixelRatio = window.devicePixelRatio || 1
-    this.canvas.width = width * devicePixelRatio
-    this.canvas.height = height * devicePixelRatio
-
     const ctx = this.canvas.getContext('2d')
 
+    const devicePixelRatio = window.devicePixelRatio || 1
+    ctx.clearRect(0, 0, width * devicePixelRatio, height * devicePixelRatio)
+
+    ctx.save()
     ctx.scale(devicePixelRatio, devicePixelRatio)
     ctx.clearRect(0, 0, width, height)
-    ctx.save()
 
     const scale = projection.scale()
     const radius = d => (
