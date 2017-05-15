@@ -153,9 +153,6 @@ class PostalCodeMap extends Component {
           Math.pow(cy - focusY, 2)
         ) <= Math.max(r, 3)
       ))
-      if (hover.length) {
-        event.preventDefault()
-      }
 
       this.setState(() => ({hover}))
     }
@@ -300,7 +297,7 @@ class PostalCodeMap extends Component {
           onMouseEnter={this.focus}
           onMouseMove={this.focus}
           onMouseLeave={this.blur}
-          style={{width, height}} />
+          style={{width, height, userSelect: 'none'}} />
         {this.renderHover()}
       </div>
     )

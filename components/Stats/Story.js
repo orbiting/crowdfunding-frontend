@@ -132,6 +132,9 @@ const styles = {
     height: '75vh',
     '@media (max-height: 450px)': {
       height: '65vh'
+    },
+    '@media (max-height: 670px)': {
+      height: '70vh'
     }
   }),
   opaqueContainer: css({
