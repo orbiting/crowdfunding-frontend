@@ -6,6 +6,7 @@ import {nest} from 'd3-collection'
 import {css} from 'glamor'
 import md from 'markdown-in-js'
 
+import withMe from '../../lib/withMe'
 import withT from '../../lib/withT'
 import mdComponents from '../../lib/utils/mdComponents'
 
@@ -314,7 +315,8 @@ class Story extends Component {
       allPostalCodes,
       geoStats,
       testimonialStats,
-      foreignCountries
+      foreignCountries,
+      me
     } = this.props
     const {
       width, windowHeight
@@ -741,6 +743,18 @@ Mit Dank für Ihre Kühnheit und unsere Verantwortung,
 
 Ihre Crew der Republik und von Project&nbsp;R
             `}
+            {me ? [
+              <P>
+                PS: Falls Ihnen noch jemand einfällt, der Ihre Vorliebe für Mut, Vertrauen oder Verrücktheit teilt (Unzutreffendes – Sie wissen schon!), weisen Sie die Person auf unsere Website hin.
+              </P>,
+              <P>
+                PPS: Zögert die Person, können Sie dieser auch ein Abonnement schenken. Denn eine Republik wird nie von wenigen gegründet, sondern von vielen: <A href='/pledge?package=ABO_GIVE'>Abonnement verschenken</A>
+              </P>
+            ] : (
+              <P>
+                PS: Noch nicht Mitglied? Jetzt <A href='/pledge'>mitmachen</A> und Mitglied werden!
+              </P>
+            )}
             <P>
               <Share
                 url={metaData.url}
@@ -754,7 +768,7 @@ Ihre Crew der Republik und von Project&nbsp;R
   }
 }
 
-const DataWrapper = ({data}) => (
+const DataWrapper = ({data, me}) => (
   <Loader loading={data.loading || !data.membershipStats} error={data.error} render={() => {
     const {
       membershipStats: {
@@ -954,6 +968,7 @@ const DataWrapper = ({data}) => (
 
     return (
       <Story
+        me={me}
         countries={countries}
         countryIndex={countryIndex}
         foreignCountries={foreignCountries}
@@ -1018,6 +1033,7 @@ query {
 
 export default compose(
   withT,
+  withMe,
   graphql(membershipStats, {
     options: {
       pollInterval: +STATS_POLL_INTERVAL_MS
