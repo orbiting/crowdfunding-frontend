@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {geoAlbers} from 'd3-geo'
 import {timer} from 'd3-timer'
 import {ascending} from 'd3-array'
+import {easeCubicInOut} from 'd3-ease'
 
 import ContextBox, {ContextBoxValue} from './ContextBox'
 import {countFormat} from '../../lib/utils/formats'
@@ -81,7 +82,7 @@ class PostalCodeMap extends Component {
             this.timer.stop()
           }
           this.timer = timer(elapsed => {
-            const t = Math.min(elapsed / duration, 1)
+            const t = easeCubicInOut(Math.min(elapsed / duration, 1))
             this.projection.scale(
               currentScale * (1 - t) + targetScale * t
             )
