@@ -134,6 +134,7 @@ class SidebarInner extends Component {
               <form onSubmit={submitReminder}>
                 <Field label={t('pledge/contact/email/label')}
                   name='email'
+                  type='email'
                   error={emailDirty && emailError}
                   value={email}
                   ref={ref => { this.field = ref }}
