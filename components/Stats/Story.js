@@ -691,7 +691,7 @@ class Story extends Component {
               Zahlungsmittel der Unterstützer
             </Interaction.H3>
             <Interaction.P>
-              Mit diesen Zahlungsmittel haben Sie bezahlt.
+              Mit diesen Zahlungsmitteln haben Sie bezahlt.
             </Interaction.P>
 
             <div {...styles.keyMetricContainer}>
