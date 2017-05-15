@@ -35,9 +35,7 @@ const styles = {
     }
   }),
   stretchLead: css({
-    margin: '20px -10px 0',
-    backgroundColor: colors.primaryBg,
-    padding: 10
+    margin: '20px 0 0'
   }),
   stretchP: css({
     fontSize: 17,
