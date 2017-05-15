@@ -276,9 +276,14 @@ class Story extends Component {
         block.y1 = block.y0 + height
       })
       const width = window.innerWidth
-      if (this.state.width !== width) {
+      const windowHeight = window.innerHeight
+      if (
+        this.state.width !== width ||
+        this.state.windowHeight !== windowHeight
+      ) {
         this.setState(() => ({
-          width
+          width,
+          windowHeight
         }))
       }
       this.onScroll()
@@ -312,7 +317,7 @@ class Story extends Component {
       foreignCountries
     } = this.props
     const {
-      width
+      width, windowHeight
     } = this.state
 
     const {filter, activeBlock} = this.state
@@ -329,6 +334,10 @@ class Story extends Component {
       case 'zh':
         mapLabelOptions.center = true
         mapLabelOptions.postalCode = true
+        mapExtendPadding.top = 50
+        mapExtendPadding.bottom = windowHeight
+          ? windowHeight * 0.3
+          : undefined
         mapExtend = countryIndex.Schweiz.postalCodes
           .filter(d => (
             d.postalCode &&
