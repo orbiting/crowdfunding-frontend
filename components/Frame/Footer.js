@@ -132,6 +132,9 @@ class Footer extends Component {
               <a href='/manifest' target='_blank'>
                 {t('footer/about/manifest')}
               </a><br />
+              <a href='/en' target='_blank'>
+                {t('footer/about/en')}
+              </a><br />
               <a href='https://project-r.construction/' target='_blank'>
                 {t('footer/about/projecR')}
               </a>
