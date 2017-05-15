@@ -456,8 +456,6 @@ class Story extends Component {
               </P>
             </div>
 
-            { /* <P>{status.people} gelöste Abos gehören zur Zeit {countries.reduce((sum, d) => sum + d.count, 0)} Personen</P> */ }
-
             <div {...styles.scrollBlock}
               ref={this.blocks.start.setRef}>
               <H2>Wo wohnen Sie?</H2>
