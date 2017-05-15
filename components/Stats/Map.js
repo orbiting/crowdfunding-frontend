@@ -6,9 +6,10 @@ import {easeCubicInOut} from 'd3-ease'
 
 import ContextBox, {ContextBoxValue} from './ContextBox'
 import {countFormat} from '../../lib/utils/formats'
+import {HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, MENUBAR_HEIGHT} from '../Frame/constants'
 
 import {
-  colors, fontFamilies
+  colors, fontFamilies, mediaQueries
 } from '@project-r/styleguide'
 
 const toGeoJson = data => ({
@@ -38,8 +39,22 @@ class PostalCodeMap extends Component {
       this.canvas = ref
     }
     this.measure = () => {
-      const {width, top} = this.container.getBoundingClientRect()
-      const height = window.innerHeight - top
+      const {width} = this.container.getBoundingClientRect()
+      const mobile = window.innerWidth < mediaQueries.mBreakPoint
+      const top = mobile
+        ? HEADER_HEIGHT_MOBILE + MENUBAR_HEIGHT
+        : HEADER_HEIGHT
+
+      let stableInnerHeight = window.innerHeight
+
+      const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+      if (iOS) {
+        stableInnerHeight = window.orientation === 90 || window.orientation === -90
+          ? window.screen.width
+          : window.screen.height
+      }
+
+      const height = stableInnerHeight - top
 
       const {extentPadding} = this.props
 
@@ -100,9 +115,6 @@ class PostalCodeMap extends Component {
           })
         }
 
-        const devicePixelRatio = window.devicePixelRatio || 1
-        this.canvas.width = width * devicePixelRatio
-        this.canvas.height = height * devicePixelRatio
         this.setState({
           top,
           width,
@@ -169,10 +181,11 @@ class PostalCodeMap extends Component {
       return
     }
 
-    const ctx = this.canvas.getContext('2d')
-
     const devicePixelRatio = window.devicePixelRatio || 1
-    ctx.clearRect(0, 0, width * devicePixelRatio, height * devicePixelRatio)
+    this.canvas.width = width * devicePixelRatio
+    this.canvas.height = height * devicePixelRatio
+
+    const ctx = this.canvas.getContext('2d')
 
     ctx.save()
     ctx.scale(devicePixelRatio, devicePixelRatio)
