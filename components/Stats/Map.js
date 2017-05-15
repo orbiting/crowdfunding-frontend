@@ -155,7 +155,7 @@ class PostalCodeMap extends Component {
     window.removeEventListener('resize', this.measure)
   }
   draw () {
-    const {width, height} = this.state
+    const {width, height, hover} = this.state
     const {projection} = this
     const {data, labels, labelOptions} = this.props
     if (!this.canvas || !width) {
@@ -198,6 +198,23 @@ class PostalCodeMap extends Component {
     ctx.globalAlpha = 1
     ctx.strokeStyle = colors.primary
     ctx.stroke()
+
+    if (hover && hover.length) {
+      ctx.beginPath()
+      hover.forEach(({d}, i) => {
+        const [cx, cy] = projection([d.lon, d.lat])
+        const r = radius(d)
+
+        ctx.moveTo(cx + r, cy)
+        ctx.arc(cx, cy, r, 0, 2 * Math.PI)
+      })
+      ctx.globalAlpha = 0.1
+      ctx.fillStyle = colors.secondary
+      ctx.fill()
+      ctx.globalAlpha = 1
+      ctx.strokeStyle = colors.secondary
+      ctx.stroke()
+    }
 
     if (labels.length) {
       ctx.font = `12px ${fontFamilies.sansSerifRegular}`
