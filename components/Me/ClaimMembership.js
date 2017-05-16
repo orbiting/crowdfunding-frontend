@@ -217,6 +217,7 @@ class ClaimMembership extends Component {
         <br />
         <Field label={t('pledge/contact/email/label')}
           name='email'
+          type='email'
           error={dirty.email && errors.email}
           value={values.email}
           onChange={(_, value, shouldValidate) => {

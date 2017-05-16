@@ -111,6 +111,7 @@ class Newsletter extends Component {
               white={inverted}
               label='Ihre E-Mail'
               name='EMAIL'
+              type='email'
               value={email}
               onChange={(_, value, shouldValidate) => {
                 this.handleEmail(value, shouldValidate)

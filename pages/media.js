@@ -26,7 +26,7 @@ export default withData(({url}) => {
         </H1>
         <br />
         <P>
-          Für Auskünfte kontaktieren Sie Susanne Sugimoto:
+          Für Auskünfte kontaktieren Sie Susanne&nbsp;Sugimoto, Geschäftsführung und Kommunikation:
         </P>
         <P>
           <A href='tel:+41788977028'>+41 78 897 70 28</A><br />
@@ -50,16 +50,13 @@ export default withData(({url}) => {
           Die Project R Genossenschaft nimmt sich der Weiterentwicklung und Stärkung des Journalismus an. Dazu gehören Projekte wie der Bau einer digitalen Open-Source-Infrastruktur, das Durchführen von Veranstaltungen und Debatten, das Entwickeln neuer journalistischer Formate sowie die Ausbildung von jungen Journalistinnen und Journalisten.
         </P>
         <H2 style={{marginTop: 20}}>
-          Allgemeiner Kontakt
+          Anschrift
         </H2>
         <P>
           Republik<br />
           c/o Hotel Rothaus<br />
           Sihlhallenstrasse 1<br />
-          8004 Zürich<br />
-          <A href='mailto:kontakt@republik.ch'>
-            kontakt@republik.ch
-          </A>
+          8004 Zürich
         </P>
       </Content>
     </Frame>

@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-13T20:51:23.939Z",
+  "updated": "2017-05-15T18:36:20.267Z",
   "title": "live",
   "data": [
     {
@@ -871,6 +871,10 @@
       "value": "Manifest"
     },
     {
+      "key": "footer/about/en",
+      "value": "English Manifesto"
+    },
+    {
       "key": "footer/legal/title",
       "value": "Rechtliches"
     },
@@ -1421,6 +1425,30 @@
     {
       "key": "merci/postpay/signInError/retry",
       "value": "erneut versuchen"
+    },
+    {
+      "key": "api/comment/commentNotFound",
+      "value": "Der Kommentar konnte nicht gefunden werden."
+    },
+    {
+      "key": "api/comment/notYours",
+      "value": "Sie können nur ihre eigenen Kommentare bearbeiten."
+    },
+    {
+      "key": "api/comment/tooLong",
+      "value": "Ihr Kommentar darf höchstens {commentMaxLength} Zeichen lang sein."
+    },
+    {
+      "key": "api/comment/feedNotFound",
+      "value": "Der Feed konnte nicht gefunden werden."
+    },
+    {
+      "key": "api/comment/membershipRequired",
+      "value": "Sie müssen Mitglied sein um zu kommentieren."
+    },
+    {
+      "key": "api/comment/tooEarly",
+      "value": "Sie sind zu früh. Bitte warten sie {waitFor} bevor sie wieder kommentieren."
     }
   ]
 }

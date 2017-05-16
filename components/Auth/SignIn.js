@@ -85,6 +85,7 @@ class SignIn extends Component {
           <div {...styles.input}>
             <Field
               name='email'
+              type='email'
               label={t('signIn/email/label')}
               error={dirty && error}
               onChange={(_, value, shouldValidate) => {

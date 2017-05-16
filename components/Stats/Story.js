@@ -6,11 +6,14 @@ import {nest} from 'd3-collection'
 import {css} from 'glamor'
 import md from 'markdown-in-js'
 
+import withMe from '../../lib/withMe'
 import withT from '../../lib/withT'
 import mdComponents from '../../lib/utils/mdComponents'
 
 import Loader from '../Loader'
 import {ListWithQuery as TestimonialList} from '../Testimonial/List'
+import Meta from '../Frame/Meta'
+import {HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, MENUBAR_HEIGHT} from '../Frame/constants'
 
 import BarChart from './BarChart'
 import PostalCodeMap from './Map'
@@ -22,11 +25,13 @@ import {
   Interaction, A, Label,
   H1, H2, P, NarrowContainer,
   Field,
-  fontFamilies, colors
+  fontFamilies, colors,
+  mediaQueries
 } from '@project-r/styleguide'
 
 import {
-  PUBLIC_BASE_URL
+  PUBLIC_BASE_URL, STATIC_BASE_URL,
+  STATS_POLL_INTERVAL_MS
 } from '../../constants'
 
 import {swissTime, countFormat} from '../../lib/utils/formats'
@@ -37,23 +42,37 @@ const {H3} = Interaction
 
 const styles = {
   dateContainer: css({
-    marginTop: 40
   }),
   dateBox: css({
     float: 'left',
-    width: '25%',
+    width: '50%',
+    [mediaQueries.mUp]: {
+      width: '25%'
+    },
     textAlign: 'center'
   }),
   dateBoxBig: css({
-    width: '50%'
+    width: '100%',
+    marginBottom: 20,
+    [mediaQueries.mUp]: {
+      width: '50%'
+    }
   }),
   dateCount: css({
-    paddingBottom: 20,
+    paddingBottom: 0,
     fontSize: 20
   }),
   dateLabel: css({
     display: 'block',
     paddingBottom: 0
+  }),
+  dateLabelBig: css({
+    textAlign: 'left'
+  }),
+  dateCountBig: css({
+    textAlign: 'left',
+    paddingBottom: 0,
+    fontSize: 20
   }),
   keyMetricContainer: css({
     margin: '20px 0'
@@ -61,40 +80,43 @@ const styles = {
   keyMetric: css({
     float: 'left',
     width: '50%',
-    height: 110,
+    height: 95,
+    [mediaQueries.mUp]: {
+      height: 110
+    },
     paddingTop: 10,
     textAlign: 'center'
   }),
   keyMetricNumber: css({
     fontFamily: fontFamilies.sansSerifMedium,
-    fontSize: 44
+    fontSize: 36,
+    [mediaQueries.mUp]: {
+      fontSize: 44
+    }
   }),
   keyMetricLabel: css({
     fontFamily: fontFamilies.sansSerifRegular,
-    fontSize: 22
+    fontSize: 16,
+    [mediaQueries.mUp]: {
+      fontSize: 22
+    }
   }),
   keyMetricDetail: css({
     fontFamily: fontFamilies.sansSerifRegular,
-    fontSize: 12
+    fontSize: 10,
+    [mediaQueries.mUp]: {
+      fontSize: 12
+    }
   }),
   mapStory: css({
     position: 'relative'
   }),
   mapFixed: css({
     position: 'fixed',
-    top: 100,
-    left: 0,
-    right: 0
-  }),
-  mapTop: css({
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0
-  }),
-  mapBottom: css({
-    position: 'absolute',
-    bottom: 0,
+    top: HEADER_HEIGHT_MOBILE + MENUBAR_HEIGHT,
+    [mediaQueries.mUp]: {
+      top: HEADER_HEIGHT
+    },
     left: 0,
     right: 0
   }),
@@ -105,17 +127,45 @@ const styles = {
     padding: '20px 5px',
     backgroundColor: 'rgba(255, 255, 255, 0.8)'
   }),
+  spacer: css({
+    pointerEvents: 'none',
+    height: '75vh',
+    '@media (max-height: 450px)': {
+      height: '65vh'
+    },
+    '@media (max-height: 670px)': {
+      height: '70vh'
+    }
+  }),
   opaqueContainer: css({
     position: 'relative',
     backgroundColor: '#fff',
     paddingTop: 40,
     paddingBottom: 100,
     marginBottom: -100
+  }),
+  date: css({
+    fontFamily: fontFamilies.sansSerifMedium,
+    fontSize: 17,
+    lineHeight: '25px',
+    letterSpacing: -0.19
+  }),
+  dateText: css({
+    display: 'inline-block',
+    marginRight: 10
+  }),
+  dateData: css({
+    fontFamily: fontFamilies.sansSerifRegular,
+    padding: '1px 6px',
+    display: 'inline-block',
+    borderRadius: 4,
+    backgroundColor: colors.primary,
+    color: '#fff'
   })
 }
 
-const Spacer = () => (
-  <div style={{height: '50vh', pointerEvents: 'none'}} />
+const Spacer = ({height}) => (
+  <div {...styles.spacer} style={{height: height}} />
 )
 
 const normalizeDateData = values => {
@@ -156,7 +206,6 @@ const countryNames = values => {
 
 const agesZurich = require('./data/agesZurich.json')
 const agesCh = require('./data/agesCh.json')
-// const staticStats = require('./data/staticStats.json')
 
 const paymentMethodNames = {
   STRIPE: 'Visa/Mastercard',
@@ -171,9 +220,11 @@ const paymentMethodDetails = {
 
 export const metaData = {
   url: `${PUBLIC_BASE_URL}/updates/wer-sind-sie`,
-  title: 'Wer sind Sie?',
-  emailSubject: 'Republik: Wer sind Sie?',
-  tweet: 'Republik: Wer sind Sie?'
+  pageTitle: 'Wer sind Sie? Republik',
+  title: 'Datenvisualisierung Republik-Mitglieder',
+  emailSubject: 'Wer sind Sie?',
+  tweet: 'Wer sind Sie?',
+  image: `${STATIC_BASE_URL}/static/social-media/wer-sind-sie.png?1`
 }
 
 class Story extends Component {
@@ -214,9 +265,9 @@ class Story extends Component {
         )
 
       if (this.state.activeBlock !== activeBlock) {
-        this.setState({
+        this.setState(() => ({
           activeBlock
-        })
+        }))
       }
     }
     this.measure = () => {
@@ -228,6 +279,17 @@ class Story extends Component {
         block.y0 = y + top
         block.y1 = block.y0 + height
       })
+      const width = window.innerWidth
+      const windowHeight = window.innerHeight
+      if (
+        this.state.width !== width ||
+        this.state.windowHeight !== windowHeight
+      ) {
+        this.setState(() => ({
+          width,
+          windowHeight
+        }))
+      }
       this.onScroll()
     }
   }
@@ -250,23 +312,37 @@ class Story extends Component {
       ageStats,
       groupedCreatedAts,
       maxCreatedAt,
+      maxCreatedAtI2,
       status,
       paymentMethods,
       allPostalCodes,
       geoStats,
       testimonialStats,
-      foreignCountries
+      foreignCountries,
+      me
     } = this.props
+    const {
+      width, windowHeight
+    } = this.state
 
     const {filter, activeBlock} = this.state
 
+    let filteredPlz = []
     let mapLabels = []
     let mapLabelOptions = {}
     let mapExtend = countryIndex.Schweiz.postalCodes
+    let mapExtendPadding = {
+      left: 10,
+      right: 10
+    }
     switch (activeBlock) {
       case 'zh':
         mapLabelOptions.center = true
         mapLabelOptions.postalCode = true
+        mapExtendPadding.top = 50
+        mapExtendPadding.bottom = windowHeight
+          ? windowHeight * 0.3
+          : undefined
         mapExtend = countryIndex.Schweiz.postalCodes
           .filter(d => (
             d.postalCode &&
@@ -275,8 +351,10 @@ class Story extends Component {
         mapLabels = mapExtend
         break
       case 'cities':
-        mapLabels = ['2502', '3006', '4058', '8400', '6005', '8032', '4600']
+        mapLabels = ['2502', '3006', '4058', '8400', '6006', '8032', '4600']
         mapLabelOptions.xOffset = 2
+        mapExtendPadding.left = 50
+        mapExtendPadding.right = 70
         mapExtend = countryIndex.Schweiz.postalCodes
           .filter(d => (
             d.postalCode &&
@@ -290,30 +368,85 @@ class Story extends Component {
         break
       case 'ag':
         mapLabels = ['5000', '5400']
+        mapLabelOptions.xOffset = 2
         mapExtend = countryIndex.Schweiz.postalCodes
           .filter(d => (
             d.postalCode &&
             d.postalCode.startsWith('5')
           ))
         break
+      case 'plz':
+        if (!filter || !filter.trim()) {
+          break
+        }
+        filteredPlz = allPostalCodes
+          .filter(({postalCode}) => postalCode && postalCode.startsWith(filter))
+          .sort((a, b) => descending(a.count, b.count))
+        if (filteredPlz.length) {
+          mapLabelOptions.center = true
+          mapLabelOptions.postalCode = true
+          const firstMatch = filteredPlz[0]
+          const countryName = firstMatch.country.name
+          mapExtend = filteredPlz
+            .filter(d => d.country.name === countryName)
+          mapLabels = mapExtend.slice(0, 10)
+          mapExtend = [
+            {
+              ...firstMatch,
+              lon: firstMatch.lon - 0.1,
+              lat: firstMatch.lat - 0.1
+            },
+            ...mapExtend,
+            {
+              ...firstMatch,
+              lon: firstMatch.lon + 0.1,
+              lat: firstMatch.lat + 0.1
+            }
+          ]
+          mapExtendPadding.left = 100
+          mapExtendPadding.right = 100
+        }
+        break
       case 'dach':
-        mapLabels = countryIndex.Deutschland.postalCodes
-          .filter(d => ['10435', '80339', '20359', '60594'].indexOf(d.postalCode) !== -1)
-        const wien = countryIndex['Österreich'].postalCodes
-          .find(d => d.postalCode === '1020')
-        mapLabels = mapLabels.concat(
+        mapLabels = [
           {
-            ...wien,
-            name: 'Wien'
-          }
-        )
-        const bruxelles = countryIndex['Königreich Belgien'].postalCodes
-          .find(d => d.postalCode === '1000')
-        mapLabels = mapLabels.concat(
+            name: 'Deutschland',
+            labels: [
+              ['10435', 'Berlin'],
+              ['80339', 'München'],
+              ['60594', 'Frankfurt am Main'],
+              ['20359', 'Hamburg']
+            ]
+          },
           {
-            ...bruxelles,
-            name: 'Brüssel'
+            name: 'Österreich',
+            labels: [
+              ['1020', 'Wien']
+            ]
+          },
+          {
+            name: 'Königreich Belgien',
+            labels: [
+              ['1000', 'Brüssel']
+            ]
           }
+        ].reduce(
+          (labels, country) => {
+            const data = countryIndex[country.name]
+            if (data && data.postalCodes) {
+              country.labels.forEach(([code, label]) => {
+                const d = data.postalCodes.find(p => p.postalCode === code)
+                if (d) {
+                  labels.push({
+                    ...d,
+                    name: label
+                  })
+                }
+              })
+            }
+            return labels
+          },
+          []
         )
         mapLabelOptions.xOffset = 5
         mapExtend = []
@@ -327,35 +460,44 @@ class Story extends Component {
         .filter(d => mapLabels.indexOf(d.postalCode) !== -1)
     }
 
+    metaData.description = `Wer sind Sie? ${status.people} Mitglieder der Republik in Grafiken. Jetzt auch Mitmachen? Unterstützen Sie unser Crowdfunding auf www.republik.ch.`
+
     return (
       <div>
+        <Meta data={metaData} />
         <div {...styles.mapStory}>
           <div {...styles.mapFixed}>
             <PostalCodeMap
               labels={mapLabels}
               labelOptions={mapLabelOptions}
               extentData={mapExtend}
+              extentPadding={mapExtendPadding}
               data={allPostalCodes} />
           </div>
           <NarrowContainer>
-            <Spacer />
+            <Spacer height='40vh' />
             <div {...styles.scrollBlock}>
               <H1>Wer sind Sie?</H1>
+              <div {...styles.date}>
+                <span {...styles.dateText}>15. Mai 2017 07 Uhr</span>
+                {' '}
+                <span {...styles.dateData}>
+                  laufend aktualisiert
+                </span>
+              </div>
               <P>Ladies and Gentlemen</P>
 
               <P>
-                Wir haben zum Start der Republik einiges darüber geschrieben, wer wir sind. Nun ist ein Drittel der Kampagne vorbei. Und wir können endlich über ein wirklich interessantes Thema reden: wer Sie sind.
+                Wir haben zum Start der Republik einiges darüber geschrieben, wer wir sind. Nun ist mehr als die Hälfte der Kampagne vorbei. Und wir können endlich über ein wirklich interessantes Thema reden: wer Sie sind.
               </P>
             </div>
-
-            { /* <P>{status.people} gelöste Abos gehören zur Zeit {countries.reduce((sum, d) => sum + d.count, 0)} Personen</P> */ }
 
             <div {...styles.scrollBlock}
               ref={this.blocks.start.setRef}>
               <H2>Wo wohnen Sie?</H2>
 
               <P>
-                Hier also die Verteilung der Republik-Mitglieder in der Schweiz. Jeder Punkt auf der Karte repräsentiert eine Postleitzahl. Je fetter der Punkt, desto mehr von Ihnen leben dort. (Die Summe entspricht nicht ganz {countFormat(status.people)} — da nur knapp {Math.ceil(geoStats.hasValuePercent)} Prozent ihre Postadresse angaben.)
+                Hier also die Verteilung der Republik-Mitglieder in der Schweiz. Jeder Punkt auf der Karte repräsentiert eine Postleitzahl. Je fetter der Punkt, desto mehr von Ihnen leben dort. (Die Summe entspricht nicht ganz {countFormat(status.people)} – da nur knapp {Math.ceil(geoStats.hasValuePercent)} Prozent ihre Postadresse angaben.)
               </P>
             </div>
 
@@ -365,7 +507,9 @@ class Story extends Component {
               ref={this.blocks.zh.setRef}>
               <P>Ein paar Fakten dazu.</P>
 
-              <P>Zürich ist zwar eine Hochburg für die Republik. Aber bei weitem nicht das alleinige Verbreitungsgebiet. {countFormat(geoStats.zurich)} von Ihnen wohnen dort — rund {Math.round(geoStats.zurich / geoStats.hasValue * 100)} Prozent.</P>
+              <P>
+                Zürich ist zwar eine Hochburg für die Republik. Aber bei weitem nicht das alleinige Verbreitungsgebiet.<br />
+                {countFormat(geoStats.zurich)} von Ihnen wohnen dort – rund {Math.round(geoStats.zurich / status.people * 100)} Prozent.</P>
             </div>
 
             <Spacer />
@@ -384,41 +528,41 @@ class Story extends Component {
 
             <Spacer />
 
-            <div {...styles.scrollBlock}
-              ref={this.blocks.plz.setRef}>
-              <P>
-                Weitere {countFormat(
-                  countryIndex.Schweiz.count -
-                  geoStats.zurich -
-                  geoStats.bern -
-                  geoStats.basel -
-                  geoStats.winterthur -
-                  geoStats.luzern -
-                  geoStats.baden -
-                  geoStats.badenAgglo
-                )} von Ihnen verstreut sich über die ganze Schweiz.</P>
+            <div style={{minHeight: 230}}>
+              <div {...styles.scrollBlock}
+                ref={this.blocks.plz.setRef}>
+                <P>
+                  Weitere {countFormat(
+                    countryIndex.Schweiz.count -
+                    geoStats.zurich -
+                    geoStats.bern -
+                    geoStats.basel -
+                    geoStats.winterthur -
+                    geoStats.luzern -
+                    geoStats.baden -
+                    geoStats.badenAgglo
+                  )} von Ihnen verstreuen sich über die ganze Schweiz.</P>
 
-              <H3>Ihre Postleitzahlen nachschlagen</H3>
-              <Field
-                label='Postleitzahl'
-                value={filter || ''}
-                onChange={(_, value) => {
-                  this.setState({
-                    filter: value
-                  })
-                }} />
-              <div style={{minHeight: 230, padding: '10px 0'}}>
-                {!!filter && <List>
-                  {allPostalCodes
-                    .filter(({postalCode}) => postalCode && postalCode.startsWith(filter))
-                    .sort((a, b) => descending(a.count, b.count))
-                    .slice(0, 5)
-                    .map(({postalCode, name, count}) => (
-                      <Item key={postalCode}>
-                        {postalCode} {name}: <Highlight>{count}</Highlight>
-                      </Item>
-                    ))}
-                </List>}
+                <H3>Ihre Postleitzahlen nachschlagen</H3>
+                <Field
+                  label='Postleitzahl'
+                  value={filter || ''}
+                  onChange={(_, value) => {
+                    this.setState({
+                      filter: value
+                    })
+                  }} />
+                <div style={{padding: '10px 0'}}>
+                  {filteredPlz.length > 0 && <List>
+                    {filteredPlz
+                      .slice(0, 5)
+                      .map(({postalCode, name, count}) => (
+                        <Item key={postalCode}>
+                          {postalCode} {name}: <Highlight>{count}</Highlight>
+                        </Item>
+                      ))}
+                  </List>}
+                </div>
               </div>
             </div>
 
@@ -427,7 +571,7 @@ class Story extends Component {
             <div {...styles.scrollBlock}
               ref={this.blocks.dach.setRef}>
               <P>
-                Im Ausland führt {countryNames(foreignCountries.top.values)} mit {countFormat(+foreignCountries.top.key)} Republik-Mitgliedern, vor
+                Im Ausland führt {countryNames(foreignCountries.top.values)} mit {countFormat(+foreignCountries.top.key)} Republik-Mitgliedern vor
                 {' '}
                 {
                   foreignCountries.list.map(group => [
@@ -451,32 +595,33 @@ class Story extends Component {
             <H3>
               16- bis 92-jährige Republik-Mitglieder
             </H3>
-            <Interaction.P style={{marginBottom: 20, color: colors.secondary}}>
-              Altersverteilung der <span style={{color: colors.primary}}>Republik-Mitglieder</span> im Vergleich zur Bervölkerung von <span style={{color: '#000'}}>Zürich</span> und der <span style={{color: '#9F2500'}}>Schweiz</span>.
+            <Interaction.P style={{marginBottom: 20, color: colors.secondary, lineHeight: 1.25}}>
+              Altersverteilung der <span style={{color: colors.primary}}>Republik-Mitglieder</span> im Vergleich zur Bevölkerung von <span style={{color: '#000'}}>Zürich</span> und der <span style={{color: '#9F2500'}}>Schweiz</span>.
             </Interaction.P>
             <BarChart
+              yLabel='Republik-Mitglieder'
               title={d => `${d.age} Jahre: ${d.count} Republik-Mitgliede(r)`}
               data={paddedAges}
               color={() => '#00B400'}
               paddingLeft={40}
               xLabel='Alter'
               xTick={(d, i) => {
-                if (i === 0 || d.age % 10 === 0) {
+                if ((i === 0 && width > 500) || d.age % 10 === 0) {
                   return d.age
                 }
                 return ''
               }}
               referenceLines={[
-                {color: 'red', data: agesCh},
-                {color: '#000', data: agesZurich}
+                {color: '#000', data: agesZurich},
+                {color: 'red', data: agesCh}
               ]} />
             <div style={{paddingTop: 10, textAlign: 'right'}}>
               <A href='https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht'>
-                <Label>Zürcher Bevölkerung 2016: Statistik Stadt Zürich</Label>
+                <Label>Zürcher Bevölkerung 2016: Statistik&nbsp;Stadt&nbsp;Zürich</Label>
               </A>
               <br />
               <A href='https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung.assetdetail.80423.html'>
-                <Label>Schweizer Bevölkerung 2015: BFS STATPOP</Label>
+                <Label>Schweizer Bevölkerung 2015: BFS&nbsp;STATPOP</Label>
               </A>
             </div>
 
@@ -484,27 +629,14 @@ class Story extends Component {
               Bei dieser Frage machten {countFormat(ageStats.noValue)} Personen (noch) keine Angabe. Von den restlichen {countFormat(ageStats.hasValue)} sind:
             </P>
 
-            { /* <P>
-              Mittelwert:{' '}<br />
-              Republik: {ageStats.median}<br />
-              Zürich: {staticStats.zurich.median}<br />
-              Schweiz: {staticStats.ch.median}
-            </P>
-            <P>
-              Durchschnittsalter:{' '}<br />
-              Republik: {ageStats.mean}<br />
-              Zürich: {staticStats.zurich.mean}<br />
-              Schweiz: {staticStats.ch.mean}
-            </P> */ }
-
             <P>
               {ageStats.below16}
-              {' '}Abonnenten jünger als 16 Jahre. Bei der Mehrheit handelt es sich allerdings nicht um frühreife Kinder, sondern um Firmenabonnements. Diese gaben ihr Gründungsjahr an.
+              {' '}Abonnenten jünger als 16 Jahre. Bei der Mehrheit handelt es sich allerdings nicht um frühreife Kinder, sondern um Abonnements von Firmen. Diese gaben ihr Gründungsjahr an.
             </P>
 
             <P>
               {ageStats.above100}
-              {' '}Abonnentinnen älter als 100 Jahre. Wir vermuten allerdings bei den meisten Eingabefehler. Oder einen symbolischen Wink. Etwa beim Geburtsjahr 1848 - dem Gründungsjahr des schweizerischen Bundesstaates. Oder beim 8. Dezember 1873, dem Geburtstag des <A href='https://de.wikipedia.org/wiki/Anton_Afritsch_(Journalist)'>Journalisten Anton Afritsch</A> — oder beim 19. Dezember 1878, an dem der <A href='https://de.wikipedia.org/wiki/Bayard_Taylor'>Reiseschriftsteller Bayard Taylor</A> gestorben ist.
+              {' '}Abonnentinnen älter als 100 Jahre. Wir vermuten allerdings bei den meisten Eingabefehler. Oder einen symbolischen Wink. Etwa beim Geburtsjahr 1848 – dem Gründungsjahr des schweizerischen Bundesstaates. Oder beim 8. Dezember 1873, dem Geburtstag des <A href='https://de.wikipedia.org/wiki/Anton_Afritsch_(Journalist)'>Journalisten Anton Afritsch</A> – oder beim 19. Dezember 1878, an dem der <A href='https://de.wikipedia.org/wiki/Bayard_Taylor'>Reiseschriftsteller Bayard Taylor</A> gestorben ist.
             </P>
 
             <H2 style={{marginTop: 80}}>
@@ -523,8 +655,29 @@ class Story extends Component {
             <div {...styles.dateContainer}>
               {groupedCreatedAts.map(({key, values}, i) => (
                 <div key={key} {...styles.dateBox} className={i < 2 ? styles.dateBoxBig : ''}>
+                  {i < 2 && (
+                    <div>
+                      <div {...styles.dateLabelBig}>
+                        {dateFormat(values[0].datetime)}
+                      </div>
+                      <div {...styles.dateCountBig}>
+                        {values.reduce(
+                          (sum, d) => sum + d.count,
+                          0
+                        )}
+                      </div>
+                    </div>
+                  )}
                   <BarChart
-                    max={maxCreatedAt}
+                    height={i < 2 ? 160 : 80}
+                    max={i < 2 ? maxCreatedAt : maxCreatedAtI2}
+                    yLabel={
+                      (
+                        (i === 0 && 'Republik-Mitglieder') ||
+                        (i === 2 && ' ')
+                      )
+                    }
+                    yLinePadding={(i === 0 || i === 2) ? 30 : 0}
                     xLabel={i === 0 ? 'Zeit' : ''}
                     xTick={i < 2 && ((d) => {
                       if ((i !== 0 || d.hour) && d.hour % 6 === 0) {
@@ -533,18 +686,17 @@ class Story extends Component {
                       return ''
                     })}
                     title={d => `${d.hour}h: ${d.count}`}
-                    height={120}
                     color={() => colors.secondary}
                     data={normalizeDateData(values)} />
-                  <Label {...styles.dateLabel}>
+                  {i >= 2 && (<Label {...styles.dateLabel}>
                     {dateFormat(values[0].datetime)}
-                  </Label>
-                  <div {...styles.dateCount}>
+                  </Label>)}
+                  {i >= 2 && (<div {...styles.dateCount}>
                     {values.reduce(
                       (sum, d) => sum + d.count,
                       0
                     )}
-                  </div>
+                  </div>)}
                 </div>
               ))}
             </div>
@@ -554,14 +706,14 @@ class Story extends Component {
               Wie zahlten Sie?
             </H2>
             <P>
-              Diese Statistik veröffentlichen wir, weil das sonst kaum eine andere Firma macht — Zahlungsdaten gelten als Geschäftsgeheimnis. Wir folgen dieser Praxis nicht — und hoffen, dass irgendwer irgendetwas aus unserer Statistik lernt.
+              Diese Statistik veröffentlichen wir, weil das sonst kaum eine andere Firma macht – Zahlungsdaten gelten als Geschäftsgeheimnis. Wir folgen dieser Praxis nicht – und hoffen, dass irgendwer irgendetwas aus unserer Statistik lernt.
             </P>
 
             <Interaction.H3>
-              Zahlungsmittel der Unterstützter
+              Zahlungsmittel der Unterstützer
             </Interaction.H3>
             <Interaction.P>
-              Mit diesen Zahlungsmittel haben Sie bezahlt.
+              Mit diesen Zahlungsmitteln haben Sie bezahlt.
             </Interaction.P>
 
             <div {...styles.keyMetricContainer}>
@@ -593,10 +745,12 @@ class Story extends Component {
               Was uns übrigens verblüffte: PayPal schlug als Zahlungsmethode die PostFinance.
             </P>
 
-            <H2 style={{marginTop: 80}}>Wieviel von Ihnen sind auf der Community-Seite dabei?</H2>
+            <H2 style={{marginTop: 80}}>
+              Wie viele von Ihnen sind auf der Community-Seite dabei?
+            </H2>
             <P>
-              Enorm viele. Rund {Math.round(testimonialStats.count / status.people * 100)} Prozent von Ihnen — {testimonialStats.count} Leute — luden ein Foto und einen Slogan auf unsere Seite hoch.
-              Danke dafür! Für die {testimonialStats.count} Fotos, die Unterstützung, die Begründungen und die Ratschläge! Stellvertretend für alle wollen wir nur eine Stimme zitieren — das vermutlich geografisch (und mental) am weitesten entfernte Mitglied, direkt aus seinem Bunker auf dem Todesstern:
+              Enorm viele. Rund {Math.round(testimonialStats.count / status.people * 100)} Prozent von Ihnen – {testimonialStats.count} Leute – luden ein Foto und einen Slogan auf unsere Seite hoch.
+              Danke dafür! Für die {testimonialStats.count} Fotos, die Unterstützung, die Begründungen und die Ratschläge! Stellvertretend für alle wollen wir nur eine Stimme zitieren – das vermutlich geografisch (und mental) am weitesten entfernte Mitglied, direkt aus seinem Bunker auf dem Todesstern:
             </P>
 
             <TestimonialList
@@ -608,12 +762,24 @@ class Story extends Component {
 Das war alles, was wir über Sie wissen. Ausser, natürlich, noch zwei Dinge:
 
 1. Dass Sie (Unzutreffendes streichen) entweder reich an Mut, an Vertrauen oder an Verrücktheit sind. Weil Sie Verlegerin und zukünftiger Leser eines Magazins geworden sind, von dem noch nichts existiert als ein ehrgeiziger Plan.
-2. Dass wir Ihnen für Ihren Mut, Ihr Vertrauen, Ihre Verrücktheit (Unzutreffendes streichen) verpflichtet sind — jedem und jeder Einzelnen von Ihnen. Wir werden hart daran arbeiten, ein Internet-Magazin zu bauen, das Sie (nicht bei jedem Artikel, aber in der Bilanz) stolz macht, das Risiko eingegangen zu sein.
+2. Dass wir Ihnen für Ihren Mut, Ihr Vertrauen, Ihre Verrücktheit (Unzutreffendes streichen) verpflichtet sind – jedem und jeder Einzelnen von Ihnen. Wir werden hart daran arbeiten, ein Internet-Magazin zu bauen, das Sie (nicht bei jedem Artikel, aber in der Bilanz) stolz macht, das Risiko eingegangen zu sein.
 
 Mit Dank für Ihre Kühnheit und unsere Verantwortung,
 
-Ihre Crew der Republik und von Project R
+Ihre Crew der Republik und von Project&nbsp;R
             `}
+            {me ? [
+              <P>
+                PS: Falls Ihnen noch jemand einfällt, der Ihre Vorliebe für Mut, Vertrauen oder Verrücktheit teilt (Unzutreffendes – Sie wissen schon!), weisen Sie die Person auf unsere Website hin.
+              </P>,
+              <P>
+                PPS: Zögert die Person, können Sie dieser auch ein Abonnement schenken. Denn eine Republik wird nie von wenigen gegründet, sondern von vielen: <A href='/pledge?package=ABO_GIVE'>Abonnement verschenken</A>
+              </P>
+            ] : (
+              <P>
+                PS: Noch nicht Mitglied? Jetzt <A href='/pledge'>mitmachen</A> und Mitglied werden!
+              </P>
+            )}
             <P>
               <Share
                 url={metaData.url}
@@ -627,8 +793,8 @@ Ihre Crew der Republik und von Project R
   }
 }
 
-const DataWrapper = ({data}) => (
-  <Loader loading={data.loading} error={data.error} render={() => {
+const DataWrapper = ({data, me}) => (
+  <Loader loading={data.loading && !data.membershipStats} error={data.error && !data.membershipStats} render={() => {
     const {
       membershipStats: {
         countries,
@@ -662,6 +828,13 @@ const DataWrapper = ({data}) => (
           }))
       )
     const maxCreatedAt = max(createdAts, d => d.count)
+    const maxCreatedAtI2 = max(
+      groupedCreatedAts.slice(2).reduce(
+        (i2, {values}) => i2.concat(values),
+        []
+      ),
+      d => d.count
+    )
 
     const countryIndex = countries.reduce(
       (index, country) => {
@@ -689,15 +862,17 @@ const DataWrapper = ({data}) => (
         if (!country.name) {
           return all
         }
-        return all.concat(country.postalCodes)
+        return all.concat(country.postalCodes.map(d => ({
+          ...d,
+          name: d.name || country.name,
+          country
+        })))
       },
       []
     ).sort((a, b) => descending(a.count, b.count))
 
     const sumCount = (sum, d) => sum + d.count
     const geoStats = {
-      hasValue: countries.filter(d => d.name)
-        .reduce(sumCount, 0),
       hasValuePercent: countries.filter(d => d.name)
         .reduce(sumCount, 0) / status.people * 100,
       zurich: countryIndex.Schweiz.postalCodes
@@ -752,7 +927,10 @@ const DataWrapper = ({data}) => (
       aarau: countryIndex.Schweiz.postalCodes
         .filter(d => (
           d.postalCode &&
-          +d.postalCode === 5000
+          (
+            +d.postalCode === 5000 ||
+            +d.postalCode === 5001
+          )
         ))
         .reduce(sumCount, 0),
       baden: countryIndex.Schweiz.postalCodes
@@ -815,6 +993,7 @@ const DataWrapper = ({data}) => (
 
     return (
       <Story
+        me={me}
         countries={countries}
         countryIndex={countryIndex}
         foreignCountries={foreignCountries}
@@ -825,6 +1004,7 @@ const DataWrapper = ({data}) => (
         paymentMethods={paymentMethods}
         groupedCreatedAts={groupedCreatedAts}
         maxCreatedAt={maxCreatedAt}
+        maxCreatedAtI2={maxCreatedAtI2}
         ageStats={ageStats}
         testimonialStats={testimonialStats} />
     )
@@ -878,5 +1058,10 @@ query {
 
 export default compose(
   withT,
-  graphql(membershipStats)
+  withMe,
+  graphql(membershipStats, {
+    options: {
+      pollInterval: +STATS_POLL_INTERVAL_MS
+    }
+  })
 )(DataWrapper)
