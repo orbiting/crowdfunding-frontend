@@ -351,7 +351,7 @@ class Story extends Component {
         mapLabels = mapExtend
         break
       case 'cities':
-        mapLabels = ['2502', '3006', '4058', '8400', '6005', '8032', '4600']
+        mapLabels = ['2502', '3006', '4058', '8400', '6006', '8032', '4600']
         mapLabelOptions.xOffset = 2
         mapExtendPadding.left = 50
         mapExtendPadding.right = 70
@@ -408,23 +408,45 @@ class Story extends Component {
         }
         break
       case 'dach':
-        mapLabels = countryIndex.Deutschland.postalCodes
-          .filter(d => ['10435', '80339', '20359', '60594'].indexOf(d.postalCode) !== -1)
-        const wien = countryIndex['Österreich'].postalCodes
-          .find(d => d.postalCode === '1020')
-        mapLabels = mapLabels.concat(
+        mapLabels = [
           {
-            ...wien,
-            name: 'Wien'
-          }
-        )
-        const bruxelles = countryIndex['Königreich Belgien'].postalCodes
-          .find(d => d.postalCode === '1000')
-        mapLabels = mapLabels.concat(
+            name: 'Deutschland',
+            labels: [
+              ['10435', 'Berlin'],
+              ['80339', 'München'],
+              ['60594', 'Frankfurt am Main'],
+              ['20359', 'Hamburg']
+            ]
+          },
           {
-            ...bruxelles,
-            name: 'Brüssel'
+            name: 'Österreich',
+            labels: [
+              ['1020', 'Wien']
+            ]
+          },
+          {
+            name: 'Königreich Belgien',
+            labels: [
+              ['1000', 'Brüssel']
+            ]
           }
+        ].reduce(
+          (labels, country) => {
+            const data = countryIndex[country.name]
+            if (data && data.postalCodes) {
+              country.labels.forEach(([code, label]) => {
+                const d = data.postalCodes.find(p => p.postalCode === code)
+                if (d) {
+                  labels.push({
+                    ...d,
+                    name: label
+                  })
+                }
+              })
+            }
+            return labels
+          },
+          []
         )
         mapLabelOptions.xOffset = 5
         mapExtend = []
