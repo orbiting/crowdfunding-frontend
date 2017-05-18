@@ -2,14 +2,18 @@ import React, {Component} from 'react'
 import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
 import {timeMinute} from 'd3-time'
+import {css} from 'glamor'
 
 import Loader from '../Loader'
+import SignIn from '../Auth/SignIn'
+import RawHtml from '../RawHtml'
+import ErrorMessage from '../ErrorMessage'
+import {InlineSpinner} from '../Spinner'
 
 import {swissTime} from '../../lib/utils/formats'
 
 import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
-import {css} from 'glamor'
 
 import {
   Interaction, Radio, Button, Label
@@ -42,8 +46,33 @@ class Poll extends Component {
 
     this.state = {}
   }
+  submit () {
+    this.setState({
+      submitting: true
+    })
+    this.props.submitBallot(this.state.selectedOption.id)
+      .then(({data}) => {
+        this.setState({
+          submitting: false,
+          hasSubmitted: data
+        })
+      })
+      .catch(error => {
+        this.setState({
+          submitting: false,
+          error
+        })
+      })
+  }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.me !== this.props.me) {
+      this.props.data && this.props.data.refetch({
+        name: this.props.name
+      })
+    }
+  }
   render () {
-    const {data: {loading, error, voting}, t} = this.props
+    const {data: {loading, error, voting}, t, me} = this.props
 
     return (
       <Loader loading={loading} error={error} render={() => {
@@ -67,13 +96,15 @@ class Poll extends Component {
           })
         }
 
-        const canVote = (
+        const canVote = !!(
+          me &&
           voting.userIsEligitable &&
           !voting.userHasSubmitted
         )
         const {
           selectedOption
         } = this.state
+        const safeSelectedOption = selectedOption || {}
 
         return (
           <div>
@@ -99,8 +130,8 @@ class Poll extends Component {
                 const content = (
                   <span style={{display: 'block', marginTop: 10}}>
                     {!!Icon && [
-                      <Icon />,
-                      <br />
+                      <Icon key='icon' />,
+                      <br key='br' />
                     ]}
                     {text}
                   </span>
@@ -110,10 +141,12 @@ class Poll extends Component {
                   <div key={option.id} {...styles.option}>
                     {canVote ? (
                       <Radio
-                        checked={selectedOption === option.id}
+                        checked={(
+                          safeSelectedOption.id === option.id
+                        )}
                         onChange={() => {
                           this.setState((state) => ({
-                            selectedOption: option.id
+                            selectedOption: option
                           }))
                         }}>
                         {content}
@@ -125,14 +158,71 @@ class Poll extends Component {
             </div>
             {canVote && (
               <div>
-                <Button primary block disabled={!selectedOption}>
-                  {t('vote/submit/text')}
-                </Button>
+                {this.state.submitting
+                  ? (
+                    <div style={{textAlign: 'center'}}>
+                      <InlineSpinner />
+                    </div>
+                  )
+                  : (
+                    <Button primary block
+                      disabled={!selectedOption}
+                      onClick={event => {
+                        event.preventDefault()
+                        this.submit()
+                      }}>
+                      {t.first([
+                        `vote/submit/${voting.name}/${safeSelectedOption.name}`,
+                        'vote/submit/text'
+                      ])}
+                    </Button>
+                  )
+                }
                 <Label>
                   {t('vote/submit/note')}
                 </Label>
               </div>
             )}
+            {
+              !!this.state.error && (
+                <ErrorMessage error={this.state.error} />
+              )
+            }
+            {
+              (!!this.state.hasSubmitted || (!canVote && voting.userHasSubmitted)) && (
+                this.state.hasSubmitted
+                ? (
+                  <RawHtml type={P} dangerouslySetInnerHTML={{
+                    __html: t('vote/submit/merci')
+                  }} />
+                )
+                : (
+                  <RawHtml type={P} dangerouslySetInnerHTML={{
+                    __html: t('vote/hasSubmitted')
+                  }} />
+                )
+              )
+            }
+            {
+              !!me && !voting.userIsEligitable && (
+                <RawHtml type={P} dangerouslySetInnerHTML={{
+                  __html: t('vote/notEligitable')
+                }} />
+              )
+            }
+            {
+              !me && (
+                <div>
+                  <RawHtml type={P} dangerouslySetInnerHTML={{
+                    __html: t('vote/signIn/before')
+                  }} />
+                  <SignIn />
+                  <RawHtml type={P} dangerouslySetInnerHTML={{
+                    __html: t('vote/signIn/after')
+                  }} />
+                </div>
+              )
+            }
           </div>
         )
       }} />
@@ -160,7 +250,27 @@ query($name: String!) {
 }
 `
 
+const submitBallot = gql`
+mutation submitBallot($optionId: ID!) {
+  submitBallot(optionId: $optionId)
+}
+`
 export default compose(
+  graphql(submitBallot, {
+    props: ({mutate, ownProps}) => ({
+      submitBallot: optionId => mutate({
+        variables: {
+          optionId
+        },
+        refetchQueries: [{
+          query: query,
+          variables: {
+            name: ownProps.name
+          }
+        }]
+      })
+    })
+  }),
   graphql(query),
   withMe,
   withT

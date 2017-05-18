@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-18T13:48:51.788Z",
+  "updated": "2017-05-18T15:57:15.246Z",
   "title": "live",
   "data": [
     {
@@ -1489,6 +1489,26 @@
     {
       "key": "vote/submit/note",
       "value": "Ihre Stimme kann nicht rückgängig gemacht werden."
+    },
+    {
+      "key": "vote/submit/merci",
+      "value": "Vielen Dank für Ihre Stimme!"
+    },
+    {
+      "key": "vote/hasSubmitted",
+      "value": "Sie haben bereits abgestimmt. Vielen Dank für Ihre Stimme!"
+    },
+    {
+      "key": "vote/notEligitable",
+      "value": "Sie müssen eine Mitgliedschaft kaufen um mitzubestimmen. <a href=\"/pledge?package=ABO\">Jetzt Mitglied werden</a>."
+    },
+    {
+      "key": "vote/signIn/before",
+      "value": "Sie müssen ein Mitglied sein und sich anmelden um abstimmen zu können:"
+    },
+    {
+      "key": "vote/signIn/after",
+      "value": "Noch nicht Mitglied? <a href=\"/pledge?package=ABO\">Jetzt mitmachen</a>."
     }
   ]
 }
