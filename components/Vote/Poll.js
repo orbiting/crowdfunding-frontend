@@ -19,7 +19,7 @@ import {
   Interaction, Radio, Button, Label
 } from '@project-r/styleguide'
 
-const {H1, P} = Interaction
+const {H1, H2, P} = Interaction
 
 const endDateFormat = swissTime.format('%d. %B %Y')
 const endHourFormat = swissTime.format('%H')
@@ -124,8 +124,10 @@ class Poll extends Component {
               {t(`vote/${voting.name}/title`)}
             </H1>
             <RawHtml type={P} dangerouslySetInnerHTML={{
+              __html: t(`vote/${voting.name}/lead`, undefined, '')
+            }} />
+            <RawHtml type={P} dangerouslySetInnerHTML={{
               __html: [
-                t(`vote/${voting.name}/lead`, undefined, ''),
                 t.pluralize(`vote/${voting.name}/time/${timeLeft.unit}`, {
                   count: timeLeft.count,
                   endDate: endDateFormat(endDate),
@@ -140,6 +142,9 @@ class Poll extends Component {
                 })
               ].join(' ')
             }} />
+            <H2 style={{marginTop: 20}}>
+              {t(`vote/${voting.name}/options/title/${canVote ? 'canVote' : 'generic'}`)}
+            </H2>
             <div {...styles.options}>
               {voting.options.map(option => {
                 const Icon = Icons[option.name]

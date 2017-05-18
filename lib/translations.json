@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-18T22:54:47.004Z",
+  "updated": "2017-05-18T23:07:28.756Z",
   "title": "live",
   "data": [
     {
@@ -1501,6 +1501,14 @@
     {
       "key": "vote/END_GOAL/turnout/other",
       "value": "{count} von {eligitable} (rund {roundTurnoutPercent} Prozent) haben bereits eine Wahl getroffen."
+    },
+    {
+      "key": "vote/END_GOAL/options/title/generic",
+      "value": "Die Wahl"
+    },
+    {
+      "key": "vote/END_GOAL/options/title/canVote",
+      "value": "Ihre Wahl"
     },
     {
       "key": "vote/END_GOAL/options/SATIRE",
