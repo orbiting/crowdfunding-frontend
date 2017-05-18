@@ -21,7 +21,8 @@ import {
 
 const {H1, P} = Interaction
 
-const endFormat = swissTime.format('%d. %B %Y')
+const endDateFormat = swissTime.format('%d. %B %Y')
+const endHourFormat = swissTime.format('%H')
 
 const Icons = {
   DATA: require('./Icons/D').default,
@@ -83,17 +84,20 @@ class Poll extends Component {
 
         let timeLeft
         if (minutes > 60 * 24) {
-          timeLeft = t.pluralize('status/time/days', {
+          timeLeft = {
+            unit: 'days',
             count: Math.floor(minutes / 60 / 24)
-          })
+          }
         } else if (minutes > 60) {
-          timeLeft = t.pluralize('status/time/hours', {
+          timeLeft = {
+            unit: 'hours',
             count: Math.floor(minutes / 60)
-          })
+          }
         } else {
-          timeLeft = t.pluralize('status/time/minutes', {
+          timeLeft = {
+            unit: 'minutes',
             count: minutes
-          })
+          }
         }
 
         const canVote = !!(
@@ -106,6 +110,14 @@ class Poll extends Component {
         } = this.state
         const safeSelectedOption = selectedOption || {}
 
+        if (voting.result) {
+          return (
+            <pre>
+              <code>{JSON.stringify(voting.result, null, 2)}</code>
+            </pre>
+          )
+        }
+
         return (
           <div>
             <H1>
@@ -113,12 +125,15 @@ class Poll extends Component {
             </H1>
             <RawHtml type={P} dangerouslySetInnerHTML={{
               __html: [
-                t(`vote/${voting.name}/lead`, {
-                  endDate: endFormat(endDate),
-                  timeLeft
-                }, ''),
+                t(`vote/${voting.name}/lead`, undefined, ''),
+                t.pluralize(`vote/${voting.name}/time/${timeLeft.unit}`, {
+                  count: timeLeft.count,
+                  endDate: endDateFormat(endDate),
+                  endHour: endHourFormat(endDate)
+                }),
                 t.pluralize(`vote/${voting.name}/turnout`, {
                   count: voting.turnout.submitted,
+                  eligitable: voting.turnout.eligitable,
                   roundTurnoutPercent: Math.round(
                     voting.turnout.submitted / voting.turnout.eligitable * 100
                   )

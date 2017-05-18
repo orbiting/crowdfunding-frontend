@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-18T18:08:20.183Z",
+  "updated": "2017-05-18T18:30:47.911Z",
   "title": "live",
   "data": [
     {
@@ -1472,7 +1472,31 @@
     },
     {
       "key": "vote/END_GOAL/lead",
-      "value": "Frau Verlegerin, Herr Verleger Sie müssen sich zwischen drei Möglichkeiten entscheiden. Ihnen verbleibt noch {timeLeft} – am {endDate} endet die Abstimmung."
+      "value": "Frau Verlegerin, Herr Verleger Sie müssen sich zwischen drei Möglichkeiten entscheiden."
+    },
+    {
+      "key": "vote/END_GOAL/time/days/1",
+      "value": "Ihnen verbleibt noch ein Tag – am {endDate} um {endHour} Uhr endet die Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/time/days/other",
+      "value": "Ihnen verbleiben noch {count} Tage – am {endDate} um {endHour} Uhr endet die Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/time/hours/1",
+      "value": "Ihnen verbleibt noch eine Stunde – um {endHour} Uhr endet die Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/time/hours/other",
+      "value": "Ihnen verbleiben noch {count} Stunden – am {endDate} um {endHour} Uhr endet die Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/time/minutes/1",
+      "value": "Schnell! Ihnen verbleibt noch eine Minute – gleich endet die Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/time/minutes/other",
+      "value": "Ihnen verbleiben noch {count} Minuten bis zum Ende der Abstimmung."
     },
     {
       "key": "vote/END_GOAL/turnout/0",
@@ -1480,15 +1504,15 @@
     },
     {
       "key": "vote/END_GOAL/turnout/1",
-      "value": "Werden Sie der zweite Wähler oder die zweite Wählerin der Republik!"
+      "value": "Eine Person hat bereits gewählt. Werden Sie der zweite Wähler oder die zweite Wählerin der Republik!"
     },
     {
       "key": "vote/END_GOAL/turnout/2",
-      "value": "Werden Sie die dritte Wählerin oder der dritte Wähler der Republik!"
+      "value": "Zwei Personen haben bereits gewählt. Werden Sie die dritte Wählerin oder der dritte Wähler der Republik!"
     },
     {
       "key": "vote/END_GOAL/turnout/999",
-      "value": "{count} (rund {roundTurnoutPercent} Prozent) haben bereits eine Wahl getroffen. Werden Sie 1000. Wähler!"
+      "value": "{count} von {eligitable} (rund {roundTurnoutPercent} Prozent) haben bereits eine Wahl getroffen. Werden Sie 1000. Wählerin oder Wähler!"
     },
     {
       "key": "vote/END_GOAL/turnout/other",
