@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-18T20:32:58.020Z",
+  "updated": "2017-05-18T22:54:47.004Z",
   "title": "live",
   "data": [
     {
@@ -1451,22 +1451,6 @@
       "value": "Sie sind zu früh. Bitte warten sie {waitFor} bevor sie wieder kommentieren."
     },
     {
-      "key": "vote/poll/submittedStatus/0",
-      "value": "Noch niemand hat abgestimmt."
-    },
-    {
-      "key": "vote/poll/submittedStatus/other",
-      "value": "{count} haben bereits abgestimmt."
-    },
-    {
-      "key": "vote/poll/submittedStatus/1",
-      "value": "Eine Person hat bereits abgestimmt."
-    },
-    {
-      "key": "vote/poll/timeStatus",
-      "value": "Abstimmung läuft noch bis am {endDate}. Noch {timeLeft} verbleibend."
-    },
-    {
       "key": "vote/END_GOAL/title",
       "value": "Abstimmung: Ziel zum Ende des Crowdfunding"
     },
@@ -1581,6 +1565,22 @@
     {
       "key": "discuss/form/preview",
       "value": "Vorschau"
+    },
+    {
+      "key": "discuss/comment/upVote",
+      "value": "up"
+    },
+    {
+      "key": "discuss/comment/downVote",
+      "value": "down"
+    },
+    {
+      "key": "discuss/comment/edit",
+      "value": "bearbeiten"
+    },
+    {
+      "key": "discuss/comment/unpublish",
+      "value": "entfernen"
     }
   ]
 }

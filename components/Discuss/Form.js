@@ -12,22 +12,24 @@ import {InlineSpinner} from '../Spinner'
 import {styles as fieldSetStyles} from '../FieldSet'
 import {query as testimonialQuery} from '../Testimonial/Me'
 
-import Comment from './Comment'
+import CommentView from './CommentView'
+import {feed as feedQuery} from './queries'
 
 import {
   Field, Button, Interaction
 } from '@project-r/styleguide'
 
-const {H2, P} = Interaction
+const {H2} = Interaction
 
 class CommentForm extends Component {
-  constructor (...args) {
-    super(...args)
+  constructor (props) {
+    super(props)
+    const {edit} = props
     this.state = {
       loading: false,
       serverError: undefined,
       values: {
-        comment: ''
+        comment: (edit && edit.content) || ''
       },
       errors: {},
       dirty: {}
@@ -45,7 +47,8 @@ class CommentForm extends Component {
     }))
   }
   componentWillMount () {
-    this.handleComment('', false, this.props.t)
+    const {values} = this.state
+    this.handleComment(values.comment, false, this.props.t)
   }
   send () {
     const {values} = this.state
@@ -55,8 +58,12 @@ class CommentForm extends Component {
       serverError: undefined
     }))
 
-    this.props
-      .submitComment(values.comment)
+    const {edit} = this.props
+    const method = edit && edit.id
+      ? 'editComment'
+      : 'submitComment'
+
+    this.props[method](values.comment)
       .then(() => {
         this.setState((state) => ({
           loading: false,
@@ -65,6 +72,9 @@ class CommentForm extends Component {
             comment: ''
           }
         }))
+        if (this.props.onSave) {
+          this.props.onSave()
+        }
       })
       .catch(error => {
         this.setState(() => ({
@@ -89,7 +99,6 @@ class CommentForm extends Component {
 
     return (
       <div>
-        <P>{t('discuss/form/lead')}</P>
         <form onSubmit={event => {
           event.preventDefault()
           if (errorMessages.length) {
@@ -117,7 +126,7 @@ class CommentForm extends Component {
           {!!values.comment.trim() && (
             <div>
               <H2>{t('discuss/form/preview')}</H2>
-              <Comment data={{
+              <CommentView {...{
                 content: values.comment,
                 authorName: me.name,
                 authorImage: (
@@ -150,6 +159,11 @@ mutation submitComment($feedName: String!, $content: String!) {
   submitComment(feedName: $feedName, content: $content)
 }
 `
+const editComment = gql`
+mutation editComment($commentId: ID!, $content: String!) {
+  editComment(commentId: $commentId, content: $content)
+}
+`
 
 export default compose(
   graphql(testimonialQuery),
@@ -159,7 +173,29 @@ export default compose(
         variables: {
           feedName: ownProps.feedName,
           content
-        }
+        },
+        refetchQueries: [{
+          query: feedQuery,
+          variables: {
+            name: ownProps.feedName
+          }
+        }]
+      })
+    })
+  }),
+  graphql(editComment, {
+    props: ({mutate, ownProps}) => ({
+      editComment: content => mutate({
+        variables: {
+          commentId: ownProps.edit.id,
+          content
+        },
+        refetchQueries: [{
+          query: feedQuery,
+          variables: {
+            name: ownProps.feedName
+          }
+        }]
       })
     })
   }),

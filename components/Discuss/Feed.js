@@ -14,7 +14,7 @@ import Comment from './Comment'
 
 import {feed as feedQuery} from './queries'
 
-const {H2} = Interaction
+const {H2, P} = Interaction
 
 const commentsSubscription = gql`
 subscription onCommentAdded($feedName: String!) {
@@ -65,7 +65,10 @@ class ChatList extends Component {
             <H2>{t('discuss/title')}</H2>
             <br />
             {feed.userCanComment && (
-              <Form feedName={name} maxLength={feed.commentMaxLength} />
+              <div>
+                <P>{t('discuss/form/lead')}</P>
+                <Form feedName={name} maxLength={feed.commentMaxLength} />
+              </div>
             )}
             {feed.comments.map(comment => (
               <Comment feedName={name} data={comment} key={comment.id} />

@@ -1,53 +1,100 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {css} from 'glamor'
 import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
 import withT from '../../lib/withT'
 
 import {feed as feedQuery} from './queries'
+import View from './CommentView'
+import Form from './Form'
 
 import {
-  Interaction, linkRule
+  Label, A, linkRule
 } from '@project-r/styleguide'
-
-const {H3, P} = Interaction
 
 const styles = {
   comment: css({
+    marginTop: 40,
     marginBottom: 40
   })
 }
 
-const Comment = ({
-  data: {
-    content, authorName, authorImage,
-    id, upVotes, downVotes, userVote
-  },
-  upVote, downVote
-}) => {
-  return (
-    <div {...styles.comment}>
-      {!!id && (
-        <div style={{float: 'right', textAlign: 'right'}}>
-          <a {...linkRule} href='#' onClick={event => {
-            event.preventDefault()
-            upVote()
-          }}>up</a><br />
-          {upVotes - downVotes}<br />
-          <a {...linkRule} href='#' onClick={event => {
-            event.preventDefault()
-            downVote()
-          }}>down</a>
+class Comment extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      isEditing: false
+    }
+  }
+  render () {
+    const {
+      data, data: {
+        id, upVotes, downVotes, userVote
+      },
+      t,
+      upVote, downVote,
+      feedName
+    } = this.props
+    const {
+      isEditing
+    } = this.state
+
+    if (isEditing) {
+      return (
+        <div {...styles.comment}>
+          <Form feedName={feedName} edit={data} onSave={() => {
+            this.setState({
+              isEditing: false
+            })
+          }} />
         </div>
-      )}
-      {!!authorImage && (
-        <img src={authorImage} style={{float: 'left', maxWidth: 100, marginBottom: 5, marginRight: 5}} />
-      )}
-      <H3>{authorName}</H3>
-      <P>{content}</P>
-      <br style={{clear: 'both'}} />
-    </div>
-  )
+      )
+    }
+
+    return (
+      <div {...styles.comment}>
+        {!!id && (
+          <div style={{float: 'right', textAlign: 'right'}}>
+            <a {...linkRule} href='#'
+              style={{opacity: userVote === 'DOWN' ? 0.3 : 1}}
+              onClick={event => {
+                event.preventDefault()
+                upVote()
+              }}>
+              {t('discuss/comment/upVote')}
+            </a><br />
+            {upVotes - downVotes}<br />
+            <a {...linkRule} href='#'
+              style={{opacity: userVote === 'UP' ? 0.3 : 1}}
+              onClick={event => {
+                event.preventDefault()
+                downVote()
+              }}>
+              {t('discuss/comment/downVote')}
+            </a>
+          </div>
+        )}
+        <View {...data} />
+        <Label>
+          <A href='#' onClick={event => {
+            event.preventDefault()
+            this.setState({
+              isEditing: true
+            })
+          }}>
+            {t('discuss/comment/edit')}
+          </A>
+          {' – '}
+          <A href='#' onClick={event => {
+            event.preventDefault()
+            this.props.unpublish()
+          }}>
+            {t('discuss/comment/unpublish')}
+          </A>
+        </Label>
+      </div>
+    )
+  }
 }
 
 const upvote = gql`
@@ -60,8 +107,28 @@ mutation downvoteComment($commentId: ID!) {
   downvoteComment(commentId: $commentId)
 }
 `
+const unpublish = gql`
+mutation unpublishComment($commentId: ID!) {
+  unpublishComment(commentId: $commentId)
+}
+`
 
 export default compose(
+  graphql(unpublish, {
+    props: ({mutate, ownProps}) => ({
+      unpublish: () => mutate({
+        variables: {
+          commentId: ownProps.data.id
+        },
+        refetchQueries: [{
+          query: feedQuery,
+          variables: {
+            name: ownProps.feedName
+          }
+        }]
+      })
+    })
+  }),
   graphql(upvote, {
     props: ({mutate, ownProps}) => ({
       upVote: () => mutate({
