@@ -78,7 +78,9 @@ const styles = {
 }
 
 const widthForGoal = (goal, status, accessor) => {
-  return Math.min(1, status[accessor] / goal[accessor]) * 100
+  return Math.ceil(
+    Math.min(1, status[accessor] / goal[accessor]) * 10000
+  ) / 100 + '%'
 }
 
 class GoalBar extends Component {
@@ -104,13 +106,13 @@ class GoalBar extends Component {
     return (
       <div {...styles.bar} style={{zIndex: hover ? 1 : 0}}>
         <div {...styles.barInner} style={{
-          width: `${Math.ceil(widthForGoal(goal, status, accessor))}%`
+          width: widthForGoal(goal, status, accessor)
         }} />
         {uniqueGoals.length > 1 && uniqueGoals.map((uniqueGoal, i) => (
           <div key={i}
             {...merge(styles.goal, i === 0 && styles.currentGoal)}
             style={{
-              width: `${widthForGoal(goal, uniqueGoal, accessor)}%`
+              width: widthForGoal(goal, uniqueGoal, accessor)
             }}
             onTouchStart={(e) => {
               e.preventDefault()
@@ -130,7 +132,7 @@ class GoalBar extends Component {
             {uniqueGoal === hover && (
               <div {...styles.noInteraction}>
                 <div {...styles.goalBar} style={{
-                  width: `${Math.ceil(widthForGoal(uniqueGoal, status, accessor))}%`
+                  width: widthForGoal(uniqueGoal, status, accessor)
                 }} />
                 <div {...styles.goalNumber}>
                   {format(uniqueGoal[accessor])}
