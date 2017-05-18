@@ -7,8 +7,12 @@ import Loader from '../Loader'
 import withT from '../../lib/withT'
 
 import {
-  H2
+  Interaction
 } from '@project-r/styleguide'
+
+import Form from './Form'
+
+const {H2} = Interaction
 
 const styles = {
   comment: css({
@@ -56,6 +60,9 @@ class ChatList extends Component {
           <div>
             <H2>Feed</H2>
             <br />
+            {feed.userCanComment && (
+              <Form />
+            )}
             {feed.comments.map(comment => (
               <div {...styles.comment} key={comment.id}>
                 {comment.content}
@@ -70,19 +77,19 @@ class ChatList extends Component {
 
 const chatFeed = gql`
 query {
-  feed(name: "chat") {
+  feed(name: "END_GOAL") {
     id
     name
-    commentMaxLength
-    newCommentWaitingTime
     createdAt
     updatedAt
+    userCanComment
+    userWaitingTime
+    commentMaxLength
     comments {
       id
       content
       score
-      usersVote
-      usersVote
+      userVote
       createdAt
       updatedAt
     }

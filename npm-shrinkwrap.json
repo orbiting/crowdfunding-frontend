@@ -25,6 +25,16 @@
       "resolved": "https://registry.npmjs.org/@types/isomorphic-fetch/-/isomorphic-fetch-0.0.33.tgz",
       "optional": true
     },
+    "@types/node": {
+      "version": "7.0.18",
+      "from": "@types/node@*",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-7.0.18.tgz"
+    },
+    "@types/ws": {
+      "version": "0.0.40",
+      "from": "@types/ws@0.0.40",
+      "resolved": "https://registry.npmjs.org/@types/ws/-/ws-0.0.40.tgz"
+    },
     "abbrev": {
       "version": "1.1.0",
       "from": "abbrev@>=1.0.0 <2.0.0",
@@ -634,6 +644,11 @@
       "version": "6.17.0",
       "from": "babylon@>=6.14.1 <7.0.0",
       "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.17.0.tgz"
+    },
+    "backo2": {
+      "version": "1.0.2",
+      "from": "backo2@>=1.0.2 <2.0.0",
+      "resolved": "https://registry.npmjs.org/backo2/-/backo2-1.0.2.tgz"
     },
     "balanced-match": {
       "version": "0.4.2",
@@ -1398,8 +1413,7 @@
     "es6-promise": {
       "version": "3.3.1",
       "from": "es6-promise@>=3.0.2 <4.0.0",
-      "resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-3.3.1.tgz",
-      "dev": true
+      "resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-3.3.1.tgz"
     },
     "es6-set": {
       "version": "0.1.5",
@@ -1552,6 +1566,11 @@
       "from": "event-stream@>=3.3.0 <3.4.0",
       "resolved": "https://registry.npmjs.org/event-stream/-/event-stream-3.3.4.tgz",
       "dev": true
+    },
+    "eventemitter3": {
+      "version": "2.0.3",
+      "from": "eventemitter3@>=2.0.3 <3.0.0",
+      "resolved": "https://registry.npmjs.org/eventemitter3/-/eventemitter3-2.0.3.tgz"
     },
     "events": {
       "version": "1.1.1",
@@ -2622,6 +2641,11 @@
       "from": "graphql-anywhere@>=3.0.0 <4.0.0",
       "resolved": "https://registry.npmjs.org/graphql-anywhere/-/graphql-anywhere-3.0.1.tgz"
     },
+    "graphql-subscriptions": {
+      "version": "0.3.1",
+      "from": "graphql-subscriptions@>=0.3.1 <0.4.0",
+      "resolved": "https://registry.npmjs.org/graphql-subscriptions/-/graphql-subscriptions-0.3.1.tgz"
+    },
     "graphql-tag": {
       "version": "2.0.0",
       "from": "graphql-tag@>=2.0.0 <3.0.0",
@@ -3351,6 +3375,11 @@
       "version": "3.0.2",
       "from": "lodash.isobject@>=3.0.2 <4.0.0",
       "resolved": "https://registry.npmjs.org/lodash.isobject/-/lodash.isobject-3.0.2.tgz"
+    },
+    "lodash.isstring": {
+      "version": "4.0.1",
+      "from": "lodash.isstring@>=4.0.1 <5.0.0",
+      "resolved": "https://registry.npmjs.org/lodash.isstring/-/lodash.isstring-4.0.1.tgz"
     },
     "lodash.keys": {
       "version": "3.1.2",
@@ -4404,8 +4433,7 @@
     "safe-buffer": {
       "version": "5.0.1",
       "from": "safe-buffer@>=5.0.1 <6.0.0",
-      "resolved": "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.0.1.tgz",
-      "dev": true
+      "resolved": "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.0.1.tgz"
     },
     "sauce-connect-launcher": {
       "version": "1.2.2",
@@ -4703,6 +4731,11 @@
         }
       }
     },
+    "subscriptions-transport-ws": {
+      "version": "0.6.0",
+      "from": "subscriptions-transport-ws@>=0.6.0 <0.7.0",
+      "resolved": "https://registry.npmjs.org/subscriptions-transport-ws/-/subscriptions-transport-ws-0.6.0.tgz"
+    },
     "supports-color": {
       "version": "2.0.0",
       "from": "supports-color@>=2.0.0 <3.0.0",
@@ -4880,6 +4913,11 @@
       "from": "uglify-to-browserify@>=1.0.0 <1.1.0",
       "resolved": "https://registry.npmjs.org/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz",
       "optional": true
+    },
+    "ultron": {
+      "version": "1.1.0",
+      "from": "ultron@>=1.1.0 <1.2.0",
+      "resolved": "https://registry.npmjs.org/ultron/-/ultron-1.1.0.tgz"
     },
     "undefsafe": {
       "version": "0.0.3",
@@ -5186,6 +5224,11 @@
       "version": "4.0.2",
       "from": "write-file-webpack-plugin@4.0.2",
       "resolved": "https://registry.npmjs.org/write-file-webpack-plugin/-/write-file-webpack-plugin-4.0.2.tgz"
+    },
+    "ws": {
+      "version": "2.3.1",
+      "from": "ws@>=2.3.1 <3.0.0",
+      "resolved": "https://registry.npmjs.org/ws/-/ws-2.3.1.tgz"
     },
     "xdg-basedir": {
       "version": "2.0.0",

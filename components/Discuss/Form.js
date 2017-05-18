@@ -12,8 +12,10 @@ import {InlineSpinner} from '../Spinner'
 import {styles as fieldSetStyles} from '../FieldSet'
 
 import {
-  Field, Button, H2
+  Field, Button, Interaction
 } from '@project-r/styleguide'
+
+const {H2} = Interaction
 
 const submitComment = gql`
 mutation submitComment($feedName: String!, $content: String!) {
