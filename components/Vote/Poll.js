@@ -12,7 +12,7 @@ import withMe from '../../lib/withMe'
 import {css} from 'glamor'
 
 import {
-  Interaction
+  Interaction, Radio, Button, Label
 } from '@project-r/styleguide'
 
 const {H1, P} = Interaction
@@ -37,6 +37,11 @@ const styles = {
 }
 
 class Poll extends Component {
+  constructor (...args) {
+    super(...args)
+
+    this.state = {}
+  }
   render () {
     const {data: {loading, error, voting}, t} = this.props
 
@@ -62,6 +67,14 @@ class Poll extends Component {
           })
         }
 
+        const canVote = (
+          voting.userIsEligitable &&
+          !voting.userHasSubmitted
+        )
+        const {
+          selectedOption
+        } = this.state
+
         return (
           <div>
             <H1>
@@ -81,18 +94,45 @@ class Poll extends Component {
             <div {...styles.options}>
               {voting.options.map(option => {
                 const Icon = Icons[option.name]
+                const text = t(`vote/${voting.name}/options/${option.name}`)
+
+                const content = (
+                  <span style={{display: 'block', marginTop: 10}}>
+                    {!!Icon && [
+                      <Icon />,
+                      <br />
+                    ]}
+                    {text}
+                  </span>
+                )
+
                 return (
                   <div key={option.id} {...styles.option}>
-                    {!!Icon && (
-                      <div>
-                        <Icon />
-                      </div>
-                    )}
-                    {t(`vote/${voting.name}/options/${option.name}`)}
+                    {canVote ? (
+                      <Radio
+                        checked={selectedOption === option.id}
+                        onChange={() => {
+                          this.setState((state) => ({
+                            selectedOption: option.id
+                          }))
+                        }}>
+                        {content}
+                      </Radio>
+                    ) : content}
                   </div>
                 )
               })}
             </div>
+            {canVote && (
+              <div>
+                <Button primary block disabled={!selectedOption}>
+                  {t('vote/submit/text')}
+                </Button>
+                <Label>
+                  {t('vote/submit/note')}
+                </Label>
+              </div>
+            )}
           </div>
         )
       }} />

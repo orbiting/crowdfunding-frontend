@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-18T12:59:39.376Z",
+  "updated": "2017-05-18T13:48:51.788Z",
   "title": "live",
   "data": [
     {
@@ -1481,6 +1481,14 @@
     {
       "key": "vote/END_GOAL/options/CORRESPONDENT",
       "value": "Die Anstellung einer Deutschlandkorrespondentin (oder eines Korrespondenten)."
+    },
+    {
+      "key": "vote/submit/text",
+      "value": "Jetzt stimmen"
+    },
+    {
+      "key": "vote/submit/note",
+      "value": "Ihre Stimme kann nicht rückgängig gemacht werden."
     }
   ]
 }
