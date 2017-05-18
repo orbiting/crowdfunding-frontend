@@ -58,12 +58,12 @@ class ChatList extends Component {
   }
 
   render () {
-    const {data: {loading, error, feed}} = this.props
+    const {data: {loading, error, feed}, t} = this.props
     return (
       <Loader loading={!feed || loading} error={error} render={() => {
         return (
           <div>
-            <H2>Feed</H2>
+            <H2>{t('discuss/title')}</H2>
             <br />
             {feed.userCanComment && (
               <Form />

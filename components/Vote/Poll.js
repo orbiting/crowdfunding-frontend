@@ -109,19 +109,22 @@ class Poll extends Component {
         return (
           <div>
             <H1>
-              {t(`vote/poll/title/${voting.name}`)}
+              {t(`vote/${voting.name}/title`)}
             </H1>
-            <P>
-              {t.pluralize('vote/poll/submittedStatus', {
-                count: voting.turnout.submitted
-              })}
-            </P>
-            <P>
-              {t('vote/poll/timeStatus', {
-                endDate: endFormat(endDate),
-                timeLeft
-              })}
-            </P>
+            <RawHtml type={P} dangerouslySetInnerHTML={{
+              __html: [
+                t(`vote/${voting.name}/lead`, {
+                  endDate: endFormat(endDate),
+                  timeLeft
+                }, ''),
+                t.pluralize(`vote/${voting.name}/turnout`, {
+                  count: voting.turnout.submitted,
+                  roundTurnoutPercent: Math.round(
+                    voting.turnout.submitted / voting.turnout.eligitable * 100
+                  )
+                })
+              ].join(' ')
+            }} />
             <div {...styles.options}>
               {voting.options.map(option => {
                 const Icon = Icons[option.name]

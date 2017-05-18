@@ -15,7 +15,7 @@ import {
   Field, Button, Interaction
 } from '@project-r/styleguide'
 
-const {H2} = Interaction
+const {P} = Interaction
 
 const submitComment = gql`
 mutation submitComment($feedName: String!, $content: String!) {
@@ -84,7 +84,7 @@ class CommentForm extends Component {
 
     return (
       <div>
-        <H2>Welcome to the Republik chat</H2>
+        <P>{t('discuss/form/lead')}</P>
         <form onSubmit={event => {
           event.preventDefault()
           if (errorMessages.length) {
