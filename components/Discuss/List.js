@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {gql, graphql, withApollo} from 'react-apollo'
-import {css} from 'glamor'
 import {compose} from 'redux'
 
 import Loader from '../Loader'
@@ -11,14 +10,9 @@ import {
 } from '@project-r/styleguide'
 
 import Form from './Form'
+import Comment from './Comment'
 
 const {H2} = Interaction
-
-const styles = {
-  comment: css({
-    marginBottom: 40
-  })
-}
 
 const commentsSubscription = gql`
 subscription onCommentAdded($feedName: String!) {
@@ -61,7 +55,7 @@ class ChatList extends Component {
   }
 
   render () {
-    const {data: {loading, error, feed}, t} = this.props
+    const {data: {loading, error, feed}, t, name} = this.props
     return (
       <Loader loading={!feed || loading} error={error} render={() => {
         return (
@@ -69,12 +63,10 @@ class ChatList extends Component {
             <H2>{t('discuss/title')}</H2>
             <br />
             {feed.userCanComment && (
-              <Form maxLength={feed.commentMaxLength} />
+              <Form name={name} maxLength={feed.commentMaxLength} />
             )}
             {feed.comments.map(comment => (
-              <div {...styles.comment} key={comment.id}>
-                {comment.content}
-              </div>
+              <Comment data={comment} key={comment.id} />
             ))}
           </div>
         )

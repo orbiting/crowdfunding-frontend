@@ -10,18 +10,15 @@ import {mergeField} from '../../lib/utils/fieldState'
 import ErrorMessage from '../ErrorMessage'
 import {InlineSpinner} from '../Spinner'
 import {styles as fieldSetStyles} from '../FieldSet'
+import {query as testimonialQuery} from '../Testimonial/Me'
+
+import Comment from './Comment'
 
 import {
   Field, Button, Interaction
 } from '@project-r/styleguide'
 
-const {P} = Interaction
-
-const submitComment = gql`
-mutation submitComment($feedName: String!, $content: String!) {
-  submitComment(feedName: $feedName, content: $content)
-}
-`
+const {H2, P} = Interaction
 
 class CommentForm extends Component {
   constructor (...args) {
@@ -29,7 +26,9 @@ class CommentForm extends Component {
     this.state = {
       loading: false,
       serverError: undefined,
-      values: {},
+      values: {
+        comment: ''
+      },
       errors: {},
       dirty: {}
     }
@@ -57,12 +56,7 @@ class CommentForm extends Component {
     }))
 
     this.props
-      .mutate({
-        variables: {
-          feedName: 'chat',
-          content: values.comment
-        }
-      })
+      .submitComment(values.comment)
       .then(() => {
         this.setState((state) => ({
           loading: false,
@@ -80,7 +74,9 @@ class CommentForm extends Component {
       })
   }
   render () {
-    const {t} = this.props
+    const {
+      t, me, data
+    } = this.props
 
     const {
       dirty, values, errors,
@@ -118,6 +114,20 @@ class CommentForm extends Component {
               this.handleComment(value, shouldValidate, t)
             }} />
           <br /><br />
+          {!!values.comment.trim() && (
+            <div>
+              <H2>{t('discuss/form/preview')}</H2>
+              <Comment data={{
+                content: values.comment,
+                authorName: me.name,
+                authorImage: (
+                  data.me &&
+                  data.me.testimonial &&
+                  data.me.testimonial.image
+                )
+              }} />
+            </div>
+          )}
           {loading
             ? <InlineSpinner />
             : (
@@ -135,8 +145,24 @@ class CommentForm extends Component {
   }
 }
 
+const submitComment = gql`
+mutation submitComment($feedName: String!, $content: String!) {
+  submitComment(feedName: $feedName, content: $content)
+}
+`
+
 export default compose(
-  graphql(submitComment),
+  graphql(testimonialQuery),
+  graphql(submitComment, {
+    props: ({mutate, ownProps}) => ({
+      submitComment: content => mutate({
+        variables: {
+          feedName: ownProps.name,
+          content
+        }
+      })
+    })
+  }),
   withMe,
   withT
 )(CommentForm)
