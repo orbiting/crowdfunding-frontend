@@ -7,13 +7,13 @@ import {
 } from '@project-r/styleguide'
 
 import Discussion from '../components/Discuss/List'
-import VoteDetail from '../components/Vote/Detail'
+import Poll from '../components/Vote/Poll'
 
 const WePage = ({url}) => (
   <Frame url={url} meta={{title: 'Abstimmung'}} sidebar={false}>
     <NarrowContainer>
-      <VoteDetail />
-      <Discussion />
+      <Poll name='END_GOAL' />
+      <Discussion name='END_GOAL' />
     </NarrowContainer>
   </Frame>
 )

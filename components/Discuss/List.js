@@ -20,13 +20,13 @@ const styles = {
   })
 }
 
-const COMMENTS_SUBSCRIPTION = gql`
-  subscription onCommentAdded($feedName: String!){
-    commentAdded(feedName: $feedName){
-      id
-      content
-    }
+const commentsSubscription = gql`
+subscription onCommentAdded($feedName: String!) {
+  commentAdded(feedName: $feedName){
+    id
+    content
   }
+}
 `
 
 class ChatList extends Component {
@@ -36,13 +36,18 @@ class ChatList extends Component {
   }
 
   componentDidMount () {
-    this.subscribe('chat', this.props.data.refetch)
+    this.subscribe(
+      this.props.name,
+      this.props.data.refetch
+    )
   }
 
   subscribe (feedName, refetch) {
     this.subscriptionObserver = this.props.client.subscribe({
-      query: COMMENTS_SUBSCRIPTION,
-      variables: { feedName: feedName }
+      query: commentsSubscription,
+      variables: {
+        feedName: feedName
+      }
     }).subscribe({
       next (data) {
         console.log('real time update!')
@@ -76,8 +81,8 @@ class ChatList extends Component {
 }
 
 const chatFeed = gql`
-query {
-  feed(name: "END_GOAL") {
+query($name: String!) {
+  feed(name: $name) {
     id
     name
     createdAt

@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-15T18:36:20.267Z",
+  "updated": "2017-05-18T12:59:39.376Z",
   "title": "live",
   "data": [
     {
@@ -1449,6 +1449,38 @@
     {
       "key": "api/comment/tooEarly",
       "value": "Sie sind zu früh. Bitte warten sie {waitFor} bevor sie wieder kommentieren."
+    },
+    {
+      "key": "vote/poll/submittedStatus/0",
+      "value": "Noch niemand hat abgestimmt."
+    },
+    {
+      "key": "vote/poll/submittedStatus/other",
+      "value": "{count} haben bereits abgestimmt."
+    },
+    {
+      "key": "vote/poll/submittedStatus/one",
+      "value": "Jemand hat bereits abgestimmt."
+    },
+    {
+      "key": "vote/poll/timeStatus",
+      "value": "Abstimmung läuft noch bis am {endDate}. Noch {timeLeft} verbleibend."
+    },
+    {
+      "key": "vote/poll/title/END_GOAL",
+      "value": "Jetzt abstimmen!"
+    },
+    {
+      "key": "vote/END_GOAL/options/SATIRE",
+      "value": "Ein Budget für die kompromisslosesten Satirikerinnen und Satiriker, die sich kaufen lassen."
+    },
+    {
+      "key": "vote/END_GOAL/options/DATA",
+      "value": "Die Anstellung eines Datenjournalisten (oder einer Datenjournalistin)."
+    },
+    {
+      "key": "vote/END_GOAL/options/CORRESPONDENT",
+      "value": "Die Anstellung einer Deutschlandkorrespondentin (oder eines Korrespondenten)."
     }
   ]
 }
