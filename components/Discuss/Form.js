@@ -157,7 +157,7 @@ export default compose(
     props: ({mutate, ownProps}) => ({
       submitComment: content => mutate({
         variables: {
-          feedName: ownProps.name,
+          feedName: ownProps.feedName,
           content
         }
       })

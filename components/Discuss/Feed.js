@@ -12,6 +12,8 @@ import {
 import Form from './Form'
 import Comment from './Comment'
 
+import {feed as feedQuery} from './queries'
+
 const {H2} = Interaction
 
 const commentsSubscription = gql`
@@ -63,10 +65,10 @@ class ChatList extends Component {
             <H2>{t('discuss/title')}</H2>
             <br />
             {feed.userCanComment && (
-              <Form name={name} maxLength={feed.commentMaxLength} />
+              <Form feedName={name} maxLength={feed.commentMaxLength} />
             )}
             {feed.comments.map(comment => (
-              <Comment data={comment} key={comment.id} />
+              <Comment feedName={name} data={comment} key={comment.id} />
             ))}
           </div>
         )
@@ -75,34 +77,8 @@ class ChatList extends Component {
   }
 }
 
-const chatFeed = gql`
-query($name: String!) {
-  feed(name: $name) {
-    id
-    name
-    createdAt
-    updatedAt
-    userCanComment
-    userWaitingTime
-    commentMaxLength
-    comments {
-      id
-      content
-      authorName
-      tags
-      score
-      upVotes
-      downVotes
-      userVote
-      createdAt
-      updatedAt
-    }
-  }
-}
-`
-
 export default compose(
   withT,
-  graphql(chatFeed),
+  graphql(feedQuery),
   withApollo
 )(ChatList)
