@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-18T18:30:47.911Z",
+  "updated": "2017-05-18T19:23:18.077Z",
   "title": "live",
   "data": [
     {
@@ -1565,6 +1565,18 @@
     {
       "key": "discuss/form/lead",
       "value": "Schreiben Sie ein Plädoyer für den Datenjournalismus, die Deutschland-Korrespondentin oder das Budget für Satirik."
+    },
+    {
+      "key": "discuss/form/comment/label",
+      "value": "Ihr Plädoyer"
+    },
+    {
+      "key": "discuss/form/comment/label/error",
+      "value": "Ihr Plädoyer, mind. 5 Zeichen"
+    },
+    {
+      "key": "discuss/form/submit",
+      "value": "veröffentlichen"
     }
   ]
 }

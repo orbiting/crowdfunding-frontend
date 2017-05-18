@@ -36,22 +36,25 @@ class ChatList extends Component {
   }
 
   componentDidMount () {
-    this.subscribe(
-      this.props.name,
-      this.props.data.refetch
-    )
+    this.subscribe()
   }
 
-  subscribe (feedName, refetch) {
+  subscribe () {
+    const {
+      name,
+      data: {refetch}
+    } = this.props
     this.subscriptionObserver = this.props.client.subscribe({
       query: commentsSubscription,
       variables: {
-        feedName: feedName
+        feedName: name
       }
     }).subscribe({
       next (data) {
         console.log('real time update!')
-        refetch()
+        refetch({
+          name
+        })
       },
       error (err) { console.error('err', err) }
     })
@@ -66,7 +69,7 @@ class ChatList extends Component {
             <H2>{t('discuss/title')}</H2>
             <br />
             {feed.userCanComment && (
-              <Form />
+              <Form maxLength={feed.commentMaxLength} />
             )}
             {feed.comments.map(comment => (
               <div {...styles.comment} key={comment.id}>
@@ -93,7 +96,11 @@ query($name: String!) {
     comments {
       id
       content
+      authorName
+      tags
       score
+      upVotes
+      downVotes
       userVote
       createdAt
       updatedAt

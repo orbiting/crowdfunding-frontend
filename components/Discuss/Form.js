@@ -39,10 +39,14 @@ class CommentForm extends Component {
       field: 'comment',
       value,
       error: (
-        value.trim().length <= 5 && t('faq/form/question/error')
+        value.trim().length < 5 &&
+        t('discuss/form/comment/label/error')
       ),
       dirty: shouldValidate
     }))
+  }
+  componentWillMount () {
+    this.handleComment('', false, this.props.t)
   }
   send () {
     const {values} = this.state
@@ -53,7 +57,12 @@ class CommentForm extends Component {
     }))
 
     this.props
-      .mutate({ variables: { feedName: 'chat', content: values.comment } })
+      .mutate({
+        variables: {
+          feedName: 'chat',
+          content: values.comment
+        }
+      })
       .then(() => {
         this.setState((state) => ({
           loading: false,
@@ -90,14 +99,14 @@ class CommentForm extends Component {
           if (errorMessages.length) {
             this.setState((state) => ({
               dirty: {
-                question: true
+                comment: true
               }
             }))
             return
           }
           this.send()
         }}>
-          <Field label='comment'
+          <Field label={t('discuss/form/comment/label')}
             name='comment'
             renderInput={(props) => (
               <AutosizeInput {...fieldSetStyles.autoSize}
@@ -114,12 +123,11 @@ class CommentForm extends Component {
             : (
               <div style={{opacity: errorMessages.length ? 0.5 : 1}}>
                 <Button type='submit'>
-                  Submit
+                  {t('discuss/form/submit')}
                 </Button>
               </div>
             )
           }
-
           {!!serverError && <ErrorMessage error={serverError} />}
         </form>
       </div>
