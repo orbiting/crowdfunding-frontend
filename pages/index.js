@@ -104,7 +104,13 @@ Eine funktionierende Demokratie braucht funktionierende Medien. Und dafür brauc
             <List.Item><Highlight>Bei 7000</Highlight> Mitgliedern haben wir die Redaktion um einen zusätzlichen Kopf vergrössert.</List.Item>
             <List.Item><Highlight>Bei 9000</Highlight> Unterstützerinnen und Unterstützern realisieren wir pro Jahr zusätzlich vier grosse und aufwändige Recherchen. Gemeinsam mit Ihnen haben wir das geschafft. Danke!</List.Item>
             <List.Item><Highlight>Bei 10{thousandSeparator}000</Highlight> Abonnenten und Verlegerinnen haben wir ein fixes Budget eingerichtet, um herausragende internationale Autorinnen und Autoren für die Republik zu gewinnen. Danke allen, die mitmachen!</List.Item>
-            <List.Item>Es ist überwältigend, was wir gemeinsam mit Ihnen in den letzten Tagen erreicht haben: Tatsächlich einen Unterschied zu machen! Genau dafür wird das digitale Magazin Republik von Project R entwickelt, daran arbeiten wir. Jetzt gerade tourt die Crew in alle Ecken des Landes, um bereits gewonnene Verlegerinnen persönlich kennenzulernen und neue Verleger zu gewinnen. Mehr hier: <Link href='/events'><a {...linkRule}>Veranstaltungen</a></Link>. Das Crowdfunding läuft noch bis am 31. Mai – das nächste Ziel sind 12{thousandSeparator}000 Unterstützerinnen. Unterdessen arbeitet die Republik-Crew an einer Idee. Danke fürs Mitmachen und Weitersagen!</List.Item>
+            <List.Item>
+              <Highlight>Bei 12{thousandSeparator}000</Highlight> Abonnentinnen haben wir eine echte Neuheit in der Geschichte des Crowdfundings versprochen: nichts Neues! Also das, was wir Ihnen seit dem Start dieses Crowdfundings versprechen: Journalismus – kompromisslos in der Qualität, leserfinanziert, ohne Werbung. Danke für Ihre Unterstützung!
+            </List.Item>
+
+            <List.Item>
+              Es ist überwältigend, was wir gemeinsam mit Ihnen in den letzten drei Wochen erreicht haben: tatsächlich einen Unterschied zu machen! Genau dafür wird das digitale Magazin Republik von Project R entwickelt, daran arbeiten wir. Jetzt gerade tourt die Crew in alle Ecken des Landes, um bereits gewonnene Verlegerinnen persönlich kennenzulernen und neue Verleger zu gewinnen. Mehr hier: <Link href='/events'><a {...linkRule}>Veranstaltungen</a></Link>. Das Crowdfunding läuft noch bis am 31. Mai – das nächste Ziel sind 14{thousandSeparator}000 Unterstützerinnen. Unterdessen arbeitet die Republik-Crew an einer Idee. Danke fürs Mitmachen und Weitersagen!
+            </List.Item>
           </List>
         </div>
 
