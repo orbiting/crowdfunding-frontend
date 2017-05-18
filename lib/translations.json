@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-18T20:00:22.183Z",
+  "updated": "2017-05-18T20:32:58.020Z",
   "title": "live",
   "data": [
     {
@@ -1472,7 +1472,7 @@
     },
     {
       "key": "vote/END_GOAL/lead",
-      "value": "Frau Verlegerin, Herr Verleger Sie müssen sich zwischen drei Möglichkeiten entscheiden."
+      "value": "Frau Verlegerin, Herr Verleger Sie müssen sich zwischen drei Möglichkeiten entscheiden. Newsletter nicht bekommen oder noch nicht gelesen? <a href=\"/updates/abstimmung\">Hintergrund Informationen zur Abstimmung</a>."
     },
     {
       "key": "vote/END_GOAL/time/days/1",
@@ -1520,15 +1520,15 @@
     },
     {
       "key": "vote/END_GOAL/options/SATIRE",
-      "value": "Ein Budget für die kompromisslosesten Satirikerinnen und Satiriker, die sich kaufen lassen."
+      "value": "Ein Budget für die kompromisslosesten Satirikerinnen und Satiriker, die sich kaufen lassen"
     },
     {
       "key": "vote/END_GOAL/options/DATA",
-      "value": "Die Anstellung eines Datenjournalisten (oder einer Datenjournalistin)."
+      "value": "Die Anstellung eines Datenjournalisten (oder einer Datenjournalistin)"
     },
     {
       "key": "vote/END_GOAL/options/CORRESPONDENT",
-      "value": "Die Anstellung einer Deutschlandkorrespondentin (oder eines Korrespondenten)."
+      "value": "Die Anstellung einer Deutschland-Korrespondentin (oder eines Deutschland-Korrespondenten)"
     },
     {
       "key": "vote/submit/text",
