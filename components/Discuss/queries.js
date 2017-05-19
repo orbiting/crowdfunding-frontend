@@ -20,6 +20,7 @@ query($name: String!) {
       upVotes
       downVotes
       userVote
+      userCanEdit
       createdAt
       updatedAt
     }

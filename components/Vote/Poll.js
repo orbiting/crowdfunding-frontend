@@ -269,6 +269,17 @@ query($name: String!) {
       eligitable
       submitted
     }
+    result {
+      options {
+        id
+        name
+        count
+        winner
+      }
+      message
+      createdAt
+      updatedAt
+    }
   }
 }
 `

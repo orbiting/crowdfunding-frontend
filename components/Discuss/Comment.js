@@ -95,22 +95,24 @@ class Comment extends Component {
             dateTimeFormat(createdAt),
             updateNote
           ].filter(Boolean).join(', ')}
-          <br />
-          <A href='#' onClick={event => {
-            event.preventDefault()
-            this.setState({
-              isEditing: true
-            })
-          }}>
-            {t('discuss/comment/edit')}
-          </A>
-          {' – '}
-          <A href='#' onClick={event => {
-            event.preventDefault()
-            this.props.unpublish()
-          }}>
-            {t('discuss/comment/unpublish')}
-          </A>
+          {!!data.userCanEdit && (<span>
+            <br />
+            <A href='#' onClick={event => {
+              event.preventDefault()
+              this.setState({
+                isEditing: true
+              })
+            }}>
+              {t('discuss/comment/edit')}
+            </A>
+            {' – '}
+            <A href='#' onClick={event => {
+              event.preventDefault()
+              this.props.unpublish()
+            }}>
+              {t('discuss/comment/unpublish')}
+            </A>
+          </span>)}
         </Label>
       </div>
     )

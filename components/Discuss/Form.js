@@ -6,6 +6,7 @@ import AutosizeInput from 'react-textarea-autosize'
 import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
 import {mergeField} from '../../lib/utils/fieldState'
+import {intersperse} from '../../lib/utils/helpers'
 
 import ErrorMessage from '../ErrorMessage'
 import {InlineSpinner} from '../Spinner'
@@ -19,7 +20,9 @@ import {
   Field, Button, Interaction
 } from '@project-r/styleguide'
 
-const {H2} = Interaction
+import pollColors from '../Vote/colors'
+
+const {H2, P} = Interaction
 
 class CommentForm extends Component {
   constructor (props) {
@@ -51,7 +54,7 @@ class CommentForm extends Component {
     this.handleComment(values.comment, false, this.props.t)
   }
   send () {
-    const {values} = this.state
+    const {values, tag} = this.state
 
     this.setState(() => ({
       loading: true,
@@ -59,11 +62,15 @@ class CommentForm extends Component {
     }))
 
     const {edit} = this.props
-    const method = edit && edit.id
-      ? 'editComment'
-      : 'submitComment'
+    const isNew = !(edit && edit.id)
+    const method = isNew
+      ? 'submitComment'
+      : 'editComment'
 
-    this.props[method](values.comment)
+    this.props[method]({
+      content: values.comment,
+      tags: [tag].filter(Boolean)
+    })
       .then(() => {
         this.setState((state) => ({
           loading: false,
@@ -85,7 +92,8 @@ class CommentForm extends Component {
   }
   render () {
     const {
-      t, me, data
+      t, me, data, edit,
+      feedName
     } = this.props
 
     const {
@@ -96,6 +104,7 @@ class CommentForm extends Component {
     const errorMessages = Object.keys(errors)
       .map(key => errors[key])
       .filter(Boolean)
+    const isNew = !(edit && edit.id)
 
     return (
       <div>
@@ -122,12 +131,36 @@ class CommentForm extends Component {
             onChange={(_, value, shouldValidate) => {
               this.handleComment(value, shouldValidate, t)
             }} />
+          {isNew && (
+            <P>
+              {t('discuss/comment/tag')}{' '}
+              {intersperse(Object.keys(pollColors).map(key => (
+                <span key={key}
+                  onClick={() => {
+                    this.setState({
+                      tag: this.state.tag === key
+                        ? undefined
+                        : key
+                    })
+                  }}
+                  style={{
+                    display: 'inline-block',
+                    cursor: 'pointer',
+                    color: key === this.state.tag ? '#fff' : undefined,
+                    backgroundColor: key === this.state.tag ? pollColors[key] : undefined
+                  }}>
+                  {t(`vote/${feedName}/options/${key}/title`, undefined, key)}
+                </span>
+              )), () => ' oder ')}
+            </P>
+          )}
           <br /><br />
           {!!values.comment.trim() && (
             <div>
               <H2>{t('discuss/form/preview')}</H2>
               <CommentView {...{
                 content: values.comment,
+                tags: [this.state.tag].filter(Boolean),
                 authorName: me.name,
                 authorImage: (
                   data.me &&
@@ -155,8 +188,8 @@ class CommentForm extends Component {
 }
 
 const submitComment = gql`
-mutation submitComment($feedName: String!, $content: String!) {
-  submitComment(feedName: $feedName, content: $content)
+mutation submitComment($feedName: String!, $content: String!, $tags: [String!]!) {
+  submitComment(feedName: $feedName, content: $content, tags: $tags)
 }
 `
 const editComment = gql`
@@ -169,10 +202,11 @@ export default compose(
   graphql(testimonialQuery),
   graphql(submitComment, {
     props: ({mutate, ownProps}) => ({
-      submitComment: content => mutate({
+      submitComment: ({content, tags}) => mutate({
         variables: {
           feedName: ownProps.feedName,
-          content
+          content,
+          tags
         },
         refetchQueries: [{
           query: feedQuery,
@@ -185,7 +219,7 @@ export default compose(
   }),
   graphql(editComment, {
     props: ({mutate, ownProps}) => ({
-      editComment: content => mutate({
+      editComment: ({content}) => mutate({
         variables: {
           commentId: ownProps.edit.id,
           content

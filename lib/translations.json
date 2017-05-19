@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-19T08:47:40.454Z",
+  "updated": "2017-05-19T09:47:01.914Z",
   "title": "live",
   "data": [
     {
@@ -1515,12 +1515,24 @@
       "value": "Ein Budget für die kompromisslosesten Satirikerinnen und Satiriker, die sich kaufen lassen"
     },
     {
+      "key": "vote/END_GOAL/options/SATIRE/title",
+      "value": "Satire"
+    },
+    {
       "key": "vote/END_GOAL/options/DATA",
       "value": "Die Anstellung eines Datenjournalisten (oder einer Datenjournalistin)"
     },
     {
+      "key": "vote/END_GOAL/options/DATA/title",
+      "value": "Datenjournalismus"
+    },
+    {
       "key": "vote/END_GOAL/options/CORRESPONDENT",
       "value": "Die Anstellung einer Deutschland-Korrespondentin (oder eines Deutschland-Korrespondenten)"
+    },
+    {
+      "key": "vote/END_GOAL/options/CORRESPONDENT/title",
+      "value": "Deutschland-Korrespondentin"
     },
     {
       "key": "vote/submit/text",
@@ -1556,7 +1568,7 @@
     },
     {
       "key": "discuss/form/lead",
-      "value": "Schreiben Sie ein Plädoyer für den Datenjournalismus, die Deutschland-Korrespondentin oder das Budget für Satirik."
+      "value": "Schreiben Sie ein Plädoyer:"
     },
     {
       "key": "discuss/form/comment/label",
@@ -1593,6 +1605,10 @@
     {
       "key": "discuss/comment/updateNote",
       "value": "aktualisiert am {updateDate}"
+    },
+    {
+      "key": "discuss/comment/tag",
+      "value": "Ich plädiere für:"
     }
   ]
 }
