@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-18T23:07:28.756Z",
+  "updated": "2017-05-19T08:47:40.454Z",
   "title": "live",
   "data": [
     {
@@ -1589,6 +1589,10 @@
     {
       "key": "discuss/comment/unpublish",
       "value": "entfernen"
+    },
+    {
+      "key": "discuss/comment/updateNote",
+      "value": "aktualisiert am {updateDate}"
     }
   ]
 }

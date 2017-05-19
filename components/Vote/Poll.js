@@ -161,7 +161,7 @@ class Poll extends Component {
                 )
 
                 return (
-                  <div key={option.id} {...styles.option}>
+                  <div key={option.id} {...styles.option} style={{textAlign: 'center'}}>
                     {canVote ? (
                       <Radio
                         checked={(

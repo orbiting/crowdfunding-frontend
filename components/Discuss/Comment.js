@@ -3,14 +3,19 @@ import {css} from 'glamor'
 import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
 import withT from '../../lib/withT'
+import {timeMinute} from 'd3-time'
 
 import {feed as feedQuery} from './queries'
 import View from './CommentView'
 import Form from './Form'
 
+import {swissTime} from '../../lib/utils/formats'
+
 import {
   Label, A, linkRule
 } from '@project-r/styleguide'
+
+const dateTimeFormat = swissTime.format('%e. %B %H.%M Uhr')
 
 const styles = {
   comment: css({
@@ -51,6 +56,16 @@ class Comment extends Component {
       )
     }
 
+    const createdAt = new Date(data.createdAt)
+    const updatedAt = new Date(data.updatedAt)
+    const updateOffset = timeMinute.count(createdAt, updatedAt)
+    let updateNote
+    if (updateOffset > 2) {
+      updateNote = t('discuss/comment/updateNote', {
+        updateDate: dateTimeFormat(updatedAt)
+      })
+    }
+
     return (
       <div {...styles.comment}>
         {!!id && (
@@ -76,6 +91,11 @@ class Comment extends Component {
         )}
         <View {...data} />
         <Label>
+          {[
+            dateTimeFormat(createdAt),
+            updateNote
+          ].filter(Boolean).join(', ')}
+          <br />
           <A href='#' onClick={event => {
             event.preventDefault()
             this.setState({
