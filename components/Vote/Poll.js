@@ -19,16 +19,12 @@ import {
   Interaction, Radio, Button, Label
 } from '@project-r/styleguide'
 
-const {H1, H2, P} = Interaction
+import colors from './colors'
+
+const {H1, H2, H3, P} = Interaction
 
 const endDateFormat = swissTime.format('%d. %B %Y')
 const endHourFormat = swissTime.format('%H')
-
-const Icons = {
-  DATA: require('./Icons/D').default,
-  CORRESPONDENT: require('./Icons/K').default,
-  SATIRE: require('./Icons/S').default
-}
 
 const styles = {
   options: css({
@@ -147,15 +143,15 @@ class Poll extends Component {
             </H2>
             <div {...styles.options}>
               {voting.options.map(option => {
-                const Icon = Icons[option.name]
+                const title = t(`vote/${voting.name}/options/${option.name}/title`)
                 const text = t(`vote/${voting.name}/options/${option.name}`)
 
                 const content = (
-                  <span style={{display: 'block', marginTop: 10}}>
-                    {!!Icon && [
-                      <Icon key='icon' />,
-                      <br key='br' />
-                    ]}
+                  <span style={{display: 'block', marginTop: 10, marginBottom: 10}}>
+                    <H3 style={{color: colors[option.name], minHeight: 60}}>
+                      {title}
+                    </H3>
+                    <br />
                     {text}
                   </span>
                 )
