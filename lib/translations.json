@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-19T09:52:42.975Z",
+  "updated": "2017-05-19T10:00:24.598Z",
   "title": "live",
   "data": [
     {
@@ -1452,7 +1452,7 @@
     },
     {
       "key": "vote/END_GOAL/title",
-      "value": "Abstimmung: Ziel zum Ende des Crowdfunding"
+      "value": "Abstimmung zum Ziel für den Crowdfunding-Schlussspurt"
     },
     {
       "key": "vote/END_GOAL/lead",
@@ -1609,6 +1609,10 @@
     {
       "key": "discuss/comment/tag",
       "value": "Ich plädiere für:"
+    },
+    {
+      "key": "discuss/comment/userWaitingTime",
+      "value": "Sie können nur einmal pro Tag ein Plädoyer schreiben."
     }
   ]
 }

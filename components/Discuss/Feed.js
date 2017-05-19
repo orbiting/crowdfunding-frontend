@@ -64,7 +64,10 @@ class ChatList extends Component {
           <div>
             <H2>{t('discuss/title')}</H2>
             <br />
-            {feed.userCanComment && (
+            {feed.userCanComment && !!feed.userWaitingTime && (
+              <P>{t('discuss/comment/userWaitingTime')}</P>
+            )}
+            {feed.userCanComment && !feed.userWaitingTime && (
               <div>
                 <P>{t('discuss/form/lead')}</P>
                 <Form feedName={name} maxLength={feed.commentMaxLength} />
