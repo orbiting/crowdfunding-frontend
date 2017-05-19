@@ -3,6 +3,7 @@ import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
 import {timeMinute} from 'd3-time'
 import {css} from 'glamor'
+import {color} from 'd3-color'
 
 import Loader from '../Loader'
 import SignIn from '../Auth/SignIn'
@@ -16,7 +17,7 @@ import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
 
 import {
-  Interaction, Radio, Button, Label
+  Interaction, Button, Label
 } from '@project-r/styleguide'
 
 import colors from './colors'
@@ -35,6 +36,18 @@ const styles = {
     padding: 10,
     width: '33.3%'
   })
+}
+
+class PollButton extends Component {
+  render () {
+    const backgroundColor = this.props.checked ? this.props.backgroundColor : ''
+    return (
+      <label style={{display: 'inline-block', backgroundColor: backgroundColor}}>
+        {this.props.content}
+        <input type='radio' checked={this.props.checked} onClick={this.props.onClick} hidden />
+      </label>
+    )
+  }
 }
 
 class Poll extends Component {
@@ -146,6 +159,9 @@ class Poll extends Component {
                 const title = t(`vote/${voting.name}/options/${option.name}/title`)
                 const text = t(`vote/${voting.name}/options/${option.name}`)
 
+                let backgroundColor = color(colors[option.name])
+                backgroundColor.opacity = 0.1
+
                 const content = (
                   <span style={{display: 'block', marginTop: 10, marginBottom: 10}}>
                     <H3 style={{color: colors[option.name], minHeight: 60}}>
@@ -159,17 +175,16 @@ class Poll extends Component {
                 return (
                   <div key={option.id} {...styles.option} style={{textAlign: 'center'}}>
                     {canVote ? (
-                      <Radio
+                      <PollButton content={content}
                         checked={(
-                          safeSelectedOption.id === option.id
-                        )}
-                        onChange={() => {
+                            safeSelectedOption.id === option.id
+                          )}
+                        onClick={() => {
                           this.setState((state) => ({
                             selectedOption: option
                           }))
-                        }}>
-                        {content}
-                      </Radio>
+                        }}
+                        backgroundColor={backgroundColor} />
                     ) : content}
                   </div>
                 )

@@ -42,6 +42,7 @@
     "cross-env": "^3.2.4",
     "d3-array": "^1.1.1",
     "d3-collection": "^1.0.3",
+    "d3-color": "https://registry.npmjs.org/d3-color/-/d3-color-1.0.3.tgz",
     "d3-ease": "^1.0.3",
     "d3-format": "^1.1.1",
     "d3-geo": "^1.6.3",
