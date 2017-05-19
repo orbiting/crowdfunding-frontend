@@ -1,11 +1,11 @@
 import React from 'react'
-// import {css} from 'glamor'
 
 import {
-  Interaction, P
+  Interaction
 } from '@project-r/styleguide'
 
 import pollColors from '../Vote/colors'
+import Markdown from '../Markdown'
 
 const {H3} = Interaction
 
@@ -22,7 +22,7 @@ export default ({t, feedName, authorImage, authorName, content, tags = []}) => (
         })
       )}
     </H3>
-    <P style={{marginTop: 0}}>{content}</P>
+    <Markdown content={content} />
     <br style={{clear: 'both'}} />
   </span>
 )
