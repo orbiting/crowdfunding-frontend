@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-19T10:00:24.598Z",
+  "updated": "2017-05-19T10:08:38.732Z",
   "title": "live",
   "data": [
     {
@@ -1599,6 +1599,10 @@
       "value": "bearbeiten"
     },
     {
+      "key": "discuss/comment/editCancel",
+      "value": "abbrechen"
+    },
+    {
       "key": "discuss/comment/unpublish",
       "value": "entfernen"
     },
@@ -1613,6 +1617,10 @@
     {
       "key": "discuss/comment/userWaitingTime",
       "value": "Sie können nur einmal pro Tag ein Plädoyer schreiben."
+    },
+    {
+      "key": "discuss/comment/for",
+      "value": "für {tagName}"
     }
   ]
 }

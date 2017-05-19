@@ -9,13 +9,18 @@ import pollColors from '../Vote/colors'
 
 const {H3} = Interaction
 
-export default ({authorImage, authorName, content, tags = []}) => (
+export default ({t, feedName, authorImage, authorName, content, tags = []}) => (
   <span>
     {!!authorImage && (
       <img src={authorImage} style={{float: 'left', maxWidth: 100, marginBottom: 5, marginRight: 5}} />
     )}
     <H3 style={{color: pollColors[tags[0]]}}>
       {authorName}
+      {!!tags[0] && (
+        ' ' + t('discuss/comment/for', {
+          tagName: t(`vote/${feedName}/options/${tags[0]}/title`, undefined, tags[0])
+        })
+      )}
     </H3>
     <P style={{marginTop: 0}}>{content}</P>
     <br style={{clear: 'both'}} />

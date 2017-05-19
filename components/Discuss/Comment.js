@@ -52,6 +52,12 @@ class Comment extends Component {
               isEditing: false
             })
           }} />
+          <A href='#' onClick={(e) => {
+            e.preventDefault()
+            this.setState({
+              isEditing: false
+            })
+          }}>{t('discuss/comment/editCancel')}</A>
         </div>
       )
     }
@@ -89,7 +95,7 @@ class Comment extends Component {
             </a>
           </div>
         )}
-        <View {...data} />
+        <View t={t} feedName={feedName} {...data} />
         <Label>
           {[
             dateTimeFormat(createdAt),

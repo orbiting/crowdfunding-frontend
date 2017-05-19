@@ -159,8 +159,12 @@ class CommentForm extends Component {
             <div>
               <H2>{t('discuss/form/preview')}</H2>
               <CommentView {...{
+                t: t,
+                feedName: feedName,
                 content: values.comment,
-                tags: [this.state.tag].filter(Boolean),
+                tags: this.state.tag
+                  ? [this.state.tag]
+                  : edit ? edit.tags || [] : [],
                 authorName: me.name,
                 authorImage: (
                   data.me &&
