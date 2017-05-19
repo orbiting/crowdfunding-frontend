@@ -389,7 +389,7 @@ const unpublishMutation = gql`mutation unpublishTestimonial {
   unpublishTestimonial
 }`
 
-const query = gql`query myTestimonial {
+export const query = gql`query myTestimonial {
   me {
     id
     testimonial {

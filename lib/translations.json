@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-13T20:51:23.939Z",
+  "updated": "2017-05-19T10:08:38.732Z",
   "title": "live",
   "data": [
     {
@@ -871,6 +871,10 @@
       "value": "Manifest"
     },
     {
+      "key": "footer/about/en",
+      "value": "English Manifesto"
+    },
+    {
       "key": "footer/legal/title",
       "value": "Rechtliches"
     },
@@ -1421,6 +1425,202 @@
     {
       "key": "merci/postpay/signInError/retry",
       "value": "erneut versuchen"
+    },
+    {
+      "key": "api/comment/commentNotFound",
+      "value": "Der Kommentar konnte nicht gefunden werden."
+    },
+    {
+      "key": "api/comment/notYours",
+      "value": "Sie können nur ihre eigenen Kommentare bearbeiten."
+    },
+    {
+      "key": "api/comment/tooLong",
+      "value": "Ihr Kommentar darf höchstens {commentMaxLength} Zeichen lang sein."
+    },
+    {
+      "key": "api/comment/feedNotFound",
+      "value": "Der Feed konnte nicht gefunden werden."
+    },
+    {
+      "key": "api/comment/membershipRequired",
+      "value": "Sie müssen Mitglied sein um zu kommentieren."
+    },
+    {
+      "key": "api/comment/tooEarly",
+      "value": "Sie sind zu früh. Bitte warten sie {waitFor} bevor sie wieder kommentieren."
+    },
+    {
+      "key": "vote/END_GOAL/title",
+      "value": "Abstimmung zum Ziel für den Crowdfunding-Schlussspurt"
+    },
+    {
+      "key": "vote/END_GOAL/lead",
+      "value": "Frau Verlegerin, Herr Verleger Sie müssen sich zwischen drei Möglichkeiten entscheiden. Newsletter nicht bekommen oder noch nicht gelesen? <a href=\"/updates/abstimmung\">Hintergrund Informationen zur Abstimmung</a>."
+    },
+    {
+      "key": "vote/END_GOAL/time/days/1",
+      "value": "Ihnen verbleibt noch ein Tag – am {endDate} um {endHour} Uhr endet die Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/time/days/other",
+      "value": "Ihnen verbleiben noch {count} Tage – am {endDate} um {endHour} Uhr endet die Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/time/hours/1",
+      "value": "Ihnen verbleibt noch eine Stunde – um {endHour} Uhr endet die Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/time/hours/other",
+      "value": "Ihnen verbleiben noch {count} Stunden – am {endDate} um {endHour} Uhr endet die Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/time/minutes/1",
+      "value": "Schnell! Ihnen verbleibt noch eine Minute – gleich endet die Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/time/minutes/other",
+      "value": "Ihnen verbleiben noch {count} Minuten bis zum Ende der Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/turnout/0",
+      "value": "Werden Sie die erste Wählerin oder der erste Wähler der Republik!"
+    },
+    {
+      "key": "vote/END_GOAL/turnout/1",
+      "value": "Eine Person hat bereits gewählt. Werden Sie der zweite Wähler oder die zweite Wählerin der Republik!"
+    },
+    {
+      "key": "vote/END_GOAL/turnout/2",
+      "value": "Zwei Personen haben bereits gewählt. Werden Sie die dritte Wählerin oder der dritte Wähler der Republik!"
+    },
+    {
+      "key": "vote/END_GOAL/turnout/999",
+      "value": "{count} von {eligitable} (rund {roundTurnoutPercent} Prozent) haben bereits eine Wahl getroffen. Werden Sie 1000. Wählerin oder Wähler!"
+    },
+    {
+      "key": "vote/END_GOAL/turnout/other",
+      "value": "{count} von {eligitable} (rund {roundTurnoutPercent} Prozent) haben bereits eine Wahl getroffen."
+    },
+    {
+      "key": "vote/END_GOAL/options/title/generic",
+      "value": "Die Wahl"
+    },
+    {
+      "key": "vote/END_GOAL/options/title/canVote",
+      "value": "Ihre Wahl"
+    },
+    {
+      "key": "vote/END_GOAL/options/SATIRE",
+      "value": "Ein Budget für die kompromisslosesten Satirikerinnen und Satiriker, die sich kaufen lassen"
+    },
+    {
+      "key": "vote/END_GOAL/options/SATIRE/title",
+      "value": "Satire"
+    },
+    {
+      "key": "vote/END_GOAL/options/DATA",
+      "value": "Die Anstellung eines Datenjournalisten (oder einer Datenjournalistin)"
+    },
+    {
+      "key": "vote/END_GOAL/options/DATA/title",
+      "value": "Daten­journalismus"
+    },
+    {
+      "key": "vote/END_GOAL/options/CORRESPONDENT",
+      "value": "Die Anstellung einer Deutschland-Korrespondentin (oder eines Deutschland-Korrespondenten)"
+    },
+    {
+      "key": "vote/END_GOAL/options/CORRESPONDENT/title",
+      "value": "Deutschland-Korrespondentin"
+    },
+    {
+      "key": "vote/submit/text",
+      "value": "Jetzt stimmen"
+    },
+    {
+      "key": "vote/submit/note",
+      "value": "Ihre Stimme kann nicht rückgängig gemacht werden."
+    },
+    {
+      "key": "vote/submit/merci",
+      "value": "Vielen Dank für Ihre Stimme!"
+    },
+    {
+      "key": "vote/hasSubmitted",
+      "value": "Sie haben bereits abgestimmt. Vielen Dank für Ihre Stimme!"
+    },
+    {
+      "key": "vote/notEligitable",
+      "value": "Sie müssen eine Mitgliedschaft kaufen um mitzubestimmen. <a href=\"/pledge?package=ABO\">Jetzt Mitglied werden</a>."
+    },
+    {
+      "key": "vote/signIn/before",
+      "value": "Sie müssen ein Mitglied sein und sich anmelden um abstimmen zu können:"
+    },
+    {
+      "key": "vote/signIn/after",
+      "value": "Noch nicht Mitglied? <a href=\"/pledge?package=ABO\">Jetzt mitmachen</a>."
+    },
+    {
+      "key": "discuss/title",
+      "value": "Plädoyers"
+    },
+    {
+      "key": "discuss/form/lead",
+      "value": "Schreiben Sie ein Plädoyer:"
+    },
+    {
+      "key": "discuss/form/comment/label",
+      "value": "Ihr Plädoyer"
+    },
+    {
+      "key": "discuss/form/comment/label/error",
+      "value": "Ihr Plädoyer, mind. 5 Zeichen"
+    },
+    {
+      "key": "discuss/form/submit",
+      "value": "veröffentlichen"
+    },
+    {
+      "key": "discuss/form/preview",
+      "value": "Vorschau"
+    },
+    {
+      "key": "discuss/comment/upVote",
+      "value": "up"
+    },
+    {
+      "key": "discuss/comment/downVote",
+      "value": "down"
+    },
+    {
+      "key": "discuss/comment/edit",
+      "value": "bearbeiten"
+    },
+    {
+      "key": "discuss/comment/editCancel",
+      "value": "abbrechen"
+    },
+    {
+      "key": "discuss/comment/unpublish",
+      "value": "entfernen"
+    },
+    {
+      "key": "discuss/comment/updateNote",
+      "value": "aktualisiert am {updateDate}"
+    },
+    {
+      "key": "discuss/comment/tag",
+      "value": "Ich plädiere für:"
+    },
+    {
+      "key": "discuss/comment/userWaitingTime",
+      "value": "Sie können nur einmal pro Tag ein Plädoyer schreiben."
+    },
+    {
+      "key": "discuss/comment/for",
+      "value": "für {tagName}"
     }
   ]
 }

@@ -175,6 +175,7 @@ class QuestionForm extends Component {
         }}>
           <Field label={t('pledge/contact/email/label')}
             name='email'
+            type='email'
             error={dirty.email && errors.email}
             value={values.email}
             onChange={(_, value, shouldValidate) => {

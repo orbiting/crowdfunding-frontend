@@ -2,7 +2,6 @@ import React from 'react'
 import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
 import Link from 'next/link'
-import {descending} from 'd3-array'
 
 import Loader from '../Loader'
 import Meta from '../Frame/Meta'
@@ -18,7 +17,6 @@ import {
 } from '../../constants'
 
 import Update from './Detail'
-import staticUpdates from './staticUpdates'
 
 const query = gql`
 query {
@@ -50,18 +48,9 @@ const Overview = compose(
           }
         }
       }
-      let updates = data.updates
-      if (updates) {
-        updates = updates
-          .concat(staticUpdates)
-          .sort((a, b) => descending(
-            new Date(a.publishedDateTime),
-            new Date(b.publishedDateTime)
-          ))
-      }
       return {
         loading: data.loading,
-        updates,
+        updates: data.updates,
         error,
         update
       }
