@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-19T10:08:38.732Z",
+  "updated": "2017-05-20T11:44:43.154Z",
   "title": "live",
   "data": [
     {
@@ -1533,6 +1533,14 @@
     {
       "key": "vote/END_GOAL/options/CORRESPONDENT/title",
       "value": "Deutschland-Korrespondentin"
+    },
+    {
+      "key": "vote/option/select",
+      "value": "auswählen"
+    },
+    {
+      "key": "vote/option/selected",
+      "value": "ausgewählt"
     },
     {
       "key": "vote/submit/text",

@@ -3,7 +3,7 @@ import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
 import {timeMinute} from 'd3-time'
 import {css} from 'glamor'
-import {color} from 'd3-color'
+import {color as d3Color} from 'd3-color'
 
 import Loader from '../Loader'
 import SignIn from '../Auth/SignIn'
@@ -17,7 +17,7 @@ import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
 
 import {
-  Interaction, Button, Label
+  Interaction, Button, Label, mediaQueries
 } from '@project-r/styleguide'
 
 import colors from './colors'
@@ -27,27 +27,67 @@ const {H1, H2, H3, P} = Interaction
 const endDateFormat = swissTime.format('%d. %B %Y')
 const endHourFormat = swissTime.format('%H')
 
+const OPTION_PADDING = 20
 const styles = {
   options: css({
-    margin: '0 -10px',
-    display: 'flex'
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center'
   }),
   option: css({
-    padding: 10,
-    width: '33.3%'
+    padding: OPTION_PADDING,
+    maxWidth: 320,
+    [mediaQueries.mUp]: {
+      maxWidth: '33.3%'
+    },
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column'
+  }),
+  optionTitle: css({
+    flexGrow: 1
+  }),
+  optionText: css({
+    marginTop: 10,
+    marginBottom: 10,
+    flexGrow: 1
+  }),
+  optionLabel: css({
+    cursor: 'pointer',
+    margin: -OPTION_PADDING,
+    padding: OPTION_PADDING,
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column'
   })
 }
 
-class PollButton extends Component {
-  render () {
-    const backgroundColor = this.props.checked ? this.props.backgroundColor : ''
-    return (
-      <label style={{display: 'inline-block', backgroundColor: backgroundColor}}>
-        {this.props.content}
-        <input type='radio' checked={this.props.checked} onClick={this.props.onClick} hidden />
-      </label>
-    )
+const Checked = ({fill}) => (
+  <svg fill={fill} height='24' width='24' viewBox='0 0 24 24'
+    style={{verticalAlign: 'middle'}}>
+    <path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' />
+  </svg>
+)
+
+const PollButton = ({t, children, optionColor, checked, onClick}) => {
+  let backgroundColor
+  if (checked) {
+    backgroundColor = d3Color(optionColor)
+    backgroundColor.opacity = 0.1
   }
+  return (
+    <label {...styles.optionLabel} style={{
+      backgroundColor
+    }}>
+      {children}
+      <P style={{color: optionColor, minHeight: 30}}>
+        {checked && <Checked fill={optionColor} />}
+        {' '}
+        {t(`vote/option/${checked ? 'selected' : 'select'}`)}
+      </P>
+      <input type='radio' checked={checked} onClick={onClick} hidden />
+    </label>
+  )
 }
 
 class Poll extends Component {
@@ -159,37 +199,38 @@ class Poll extends Component {
                 const title = t(`vote/${voting.name}/options/${option.name}/title`)
                 const text = t(`vote/${voting.name}/options/${option.name}`)
 
-                let backgroundColor = color(colors[option.name])
-                backgroundColor.opacity = 0.1
+                const optionColor = colors[option.name]
 
-                const content = (
-                  <span style={{display: 'block', marginTop: 10, marginBottom: 10}}>
-                    <H3 style={{color: colors[option.name], minHeight: 60}}>
-                      {title}
-                    </H3>
-                    <br />
+                const content = [
+                  <H3 key='title' {...styles.optionTitle} style={{color: optionColor}}>
+                    {title}
+                  </H3>,
+                  <div key='text' {...styles.optionText}>
                     {text}
-                  </span>
-                )
+                  </div>
+                ]
 
                 return (
                   <div key={option.id} {...styles.option} style={{textAlign: 'center'}}>
                     {canVote ? (
-                      <PollButton content={content}
+                      <PollButton t={t}
                         checked={(
-                            safeSelectedOption.id === option.id
-                          )}
+                          safeSelectedOption.id === option.id
+                        )}
                         onClick={() => {
                           this.setState((state) => ({
                             selectedOption: option
                           }))
                         }}
-                        backgroundColor={backgroundColor} />
+                        optionColor={optionColor}>
+                        {content}
+                      </PollButton>
                     ) : content}
                   </div>
                 )
               })}
             </div>
+            <br />
             {canVote && (
               <div>
                 {this.state.submitting
