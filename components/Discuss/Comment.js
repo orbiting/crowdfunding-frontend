@@ -69,11 +69,15 @@ class Comment extends Component {
     if (isEditing) {
       return (
         <div {...styles.comment}>
-          <Form feedName={feedName} maxLength={maxLength} edit={data} onSave={() => {
-            this.setState({
-              isEditing: false
-            })
-          }} />
+          <Form
+            feedName={feedName}
+            maxLength={maxLength}
+            edit={data}
+            onSave={() => {
+              this.setState({
+                isEditing: false
+              })
+            }} />
           <A href='#' onClick={(e) => {
             e.preventDefault()
             this.setState({

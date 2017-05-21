@@ -22,7 +22,7 @@ import {
 
 import pollColors from '../Vote/colors'
 
-const {H2, P} = Interaction
+const {H3, P} = Interaction
 
 class CommentForm extends Component {
   constructor (props) {
@@ -175,17 +175,9 @@ class CommentForm extends Component {
             </P>
           )}
           <br />
-          <RawHtml type={Label} dangerouslySetInnerHTML={{
-            __html: t(
-              hasPublicTestimonial
-              ? 'discuss/comment/hint/photo'
-              : 'discuss/comment/hint/noPhoto'
-            )
-          }} />
-          <br />
           {!!values.comment.trim() && (
             <div>
-              <H2>{t('discuss/form/preview')}</H2>
+              <H3>{t('discuss/form/preview')}</H3>
               <CommentView {...{
                 t: t,
                 feedName: feedName,
@@ -199,20 +191,29 @@ class CommentForm extends Component {
                   data.me.testimonial.image
                 )
               }} />
-              <br />
             </div>
           )}
           <br />
-          {loading
-            ? <InlineSpinner />
-            : (
-              <div style={{opacity: errorMessages.length ? 0.5 : 1}}>
-                <Button type='submit'>
-                  {t('discuss/form/submit')}
-                </Button>
-              </div>
+          <RawHtml type={Label} dangerouslySetInnerHTML={{
+            __html: t(
+              hasPublicTestimonial
+              ? 'discuss/comment/hint/photo'
+              : 'discuss/comment/hint/noPhoto'
             )
-          }
+          }} />
+          <br />
+          <div style={{margin: '10px 0'}}>
+            {loading
+              ? <InlineSpinner />
+              : (
+                <div style={{opacity: errorMessages.length ? 0.5 : 1}}>
+                  <Button type='submit'>
+                    {t(`discuss/form/${isNew ? 'submit' : 'edit'}`)}
+                  </Button>
+                </div>
+              )
+            }
+          </div>
           {!!serverError && <ErrorMessage error={serverError} />}
         </form>
       </div>

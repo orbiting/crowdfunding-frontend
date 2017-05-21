@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-21T15:08:05.581Z",
+  "updated": "2017-05-21T20:32:54.883Z",
   "title": "live",
   "data": [
     {
@@ -1605,6 +1605,10 @@
     {
       "key": "discuss/form/submit",
       "value": "veröffentlichen"
+    },
+    {
+      "key": "discuss/form/edit",
+      "value": "aktualisieren"
     },
     {
       "key": "discuss/form/preview",
