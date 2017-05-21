@@ -44,30 +44,29 @@ const styles = {
   }),
   option: css({
     padding: OPTION_PADDING,
-    maxWidth: 320,
+    width: 320,
     [mediaQueries.mUp]: {
-      maxWidth: '33.3%'
+      width: '33.3%'
     },
     flexGrow: 1,
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    textAlign: 'center'
   }),
   optionTitle: css({
-    fontSize: 20,
-    flexGrow: 1
+    fontSize: 20
   }),
   optionText: css({
     marginTop: 10,
     marginBottom: 10,
+    maxWidth: 320,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    lineHeight: 1.2,
     flexGrow: 1
   }),
   optionLabel: css({
-    cursor: 'pointer',
-    margin: -OPTION_PADDING,
-    padding: OPTION_PADDING,
-    flexGrow: 1,
-    display: 'flex',
-    flexDirection: 'column'
+    cursor: 'pointer'
   })
 }
 
@@ -85,7 +84,7 @@ const PollButton = ({t, children, optionColor, checked, onClick}) => {
     backgroundColor.opacity = 0.1
   }
   return (
-    <label {...styles.optionLabel} style={{
+    <label {...styles.option} {...styles.optionLabel} style={{
       backgroundColor
     }}>
       {children}
@@ -200,7 +199,7 @@ class Poll extends Component {
                 })
               ].join(' ')
             }} />
-            <H2 style={{marginTop: 40, textAlign: 'center', marginBottom: 10}}>
+            <H2 style={{marginTop: 40, marginBottom: 10}}>
               {t(`vote/${voting.name}/options/title/${canVote ? 'canVote' : 'generic'}`)}
             </H2>
             <div {...styles.options}>
@@ -219,22 +218,26 @@ class Poll extends Component {
                   </div>
                 ]
 
+                if (canVote) {
+                  return (
+                    <PollButton t={t} key={option.id}
+                      checked={(
+                        safeSelectedOption.id === option.id
+                      )}
+                      onClick={() => {
+                        this.setState((state) => ({
+                          selectedOption: option
+                        }))
+                      }}
+                      optionColor={optionColor}>
+                      {content}
+                    </PollButton>
+                  )
+                }
+
                 return (
-                  <div key={option.id} {...styles.option} style={{textAlign: 'center'}}>
-                    {canVote ? (
-                      <PollButton t={t}
-                        checked={(
-                          safeSelectedOption.id === option.id
-                        )}
-                        onClick={() => {
-                          this.setState((state) => ({
-                            selectedOption: option
-                          }))
-                        }}
-                        optionColor={optionColor}>
-                        {content}
-                      </PollButton>
-                    ) : content}
+                  <div key={option.id} {...styles.option}>
+                    {content}
                   </div>
                 )
               })}
