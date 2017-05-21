@@ -11,10 +11,15 @@ import Form from './Form'
 
 import {swissTime} from '../../lib/utils/formats'
 import pollColors from '../Vote/colors'
+import Share from '../Share'
 
 import {
-  Label, A, linkRule
+  Label, A, linkRule, mediaQueries
 } from '@project-r/styleguide'
+
+import {
+  PUBLIC_BASE_URL
+} from '../../constants'
 
 const dateTimeFormat = swissTime.format('%e. %B %H.%M Uhr')
 
@@ -27,6 +32,18 @@ const styles = {
     marginLeft: 10,
     float: 'right',
     textAlign: 'center'
+  }),
+  share: css({
+    marginTop: 10,
+    [mediaQueries.mUp]: {
+      marginTop: 0,
+      float: 'right',
+      opacity: 0,
+      transition: 'opacity 200ms 200ms',
+      '[data-comment]:hover &': {
+        opacity: 1
+      }
+    }
   })
 }
 
@@ -60,7 +77,8 @@ class Comment extends Component {
       },
       t,
       upVote, downVote,
-      feedName, maxLength
+      feedName, maxLength,
+      meta
     } = this.props
     const {
       isEditing
@@ -101,7 +119,7 @@ class Comment extends Component {
     const commentColor = pollColors[tags[0]]
 
     return (
-      <div {...styles.comment}>
+      <div {...styles.comment} data-comment>
         {!!id && (
           <div {...styles.voteBox}>
             <a {...linkRule} href='#'
@@ -148,6 +166,17 @@ class Comment extends Component {
             </A>
           </span>)}
         </Label>
+        {!!id && (
+          <div {...styles.share}>
+            <Share
+              fill={commentColor}
+              download={data.smImage}
+              url={`${PUBLIC_BASE_URL}/vote?id=${id}`}
+              emailSubject={meta.title}
+              emailBody={data.authorName + ':\n' + data.content} />
+          </div>
+        )}
+        <div style={{clear: 'both'}} />
       </div>
     )
   }

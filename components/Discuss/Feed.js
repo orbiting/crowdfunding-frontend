@@ -44,7 +44,7 @@ class Feed extends Component {
 
     return (
       <Loader loading={!feed || loading} error={error} render={() => {
-        let {metaData} = this.props
+        let {meta: metaData} = this.props
         if (metaData && firstId) {
           const first = feed.comments[0]
           if (first.smImage) {
@@ -72,7 +72,11 @@ class Feed extends Component {
               </div>
             )}
             {feed.comments.map(comment => (
-              <Comment feedName={name} maxLength={feed.commentMaxLength} data={comment} key={comment.id} />
+              <Comment key={comment.id}
+                feedName={name}
+                maxLength={feed.commentMaxLength}
+                data={comment}
+                meta={metaData} />
             ))}
           </div>
         )
