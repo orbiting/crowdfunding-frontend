@@ -48,22 +48,33 @@ const styles = {
 
 const fontSizeBoost = length => {
   if (length < 40) {
-    return 26
+    return 36
   }
   if (length < 50) {
-    return 17
+    return 34
   }
   if (length < 80) {
-    return 8
+    return 20
   }
   if (length < 100) {
-    return 4
+    return 16
+  }
+  if (length < 150) {
+    return 10
   }
   if (length < 200) {
+    return 5
+  }
+  if (length < 250) {
     return 2
   }
   return 0
 }
+
+const testContent = require('d3-array')
+  .range(39)
+  .map(() => 'W')
+  .join('')
 
 const Item = ({loading, error, t, name: feedName, comment: {authorImage, authorName, content, tags = []}}) => (
   <Loader loading={loading} error={error} render={() => (
@@ -80,9 +91,13 @@ const Item = ({loading, error, t, name: feedName, comment: {authorImage, authorN
             })
           )}
         </Interaction.H2>
-        {content && <div {...styles.content}
-          style={{fontSize: 24 + fontSizeBoost(content.length)}}>
-          <Markdown content={content} />
+        {content && <div {...styles.content} {...css({
+          '& > *': {
+            fontSize: 32 + fontSizeBoost(testContent.length),
+            lineHeight: 1.2
+          }
+        })}>
+          <Markdown content={testContent} />
         </div>}
       </div>
       <div {...styles.logo}>
