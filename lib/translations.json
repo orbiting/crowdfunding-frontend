@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-21T20:57:23.224Z",
+  "updated": "2017-05-21T22:25:33.363Z",
   "title": "live",
   "data": [
     {
@@ -1455,6 +1455,14 @@
       "value": "Sie sind zu früh. Bitte warten Sie, {waitFor} bevor Sie wieder kommentieren."
     },
     {
+      "key": "api/voting/membershipRequired",
+      "value": "Sie müssen Mitglied sein, um abzustimmen."
+    },
+    {
+      "key": "api/voting/alreadyVoted",
+      "value": "Sie können nur einmal abstimmen."
+    },
+    {
       "key": "vote/END_GOAL/title",
       "value": "Abstimmung zum Ziel für den Crowdfunding-Schlussspurt"
     },
@@ -1563,8 +1571,12 @@
       "value": "Vielen Dank für Ihre Stimme!"
     },
     {
-      "key": "vote/signedInAs",
-      "value": "Sie sind angemeldet als: {email}"
+      "key": "vote/signedIn/title",
+      "value": "Willkommen zur Abstimmung {name}"
+    },
+    {
+      "key": "vote/signedIn/email",
+      "value": "Angemeldet als: {email}"
     },
     {
       "key": "vote/hasSubmitted",
@@ -1573,6 +1585,10 @@
     {
       "key": "vote/notEligitable",
       "value": "Sie müssen eine Mitgliedschaft besitzen, um mitzubestimmen. <a href=\"/pledge?package=ABO\">Jetzt Mitglied werden</a>. Falls Sie bereits eine Mitgliedschaft haben, melden Sie sich mit der gleichen E-Mail-Adresse an wie beim Mitmachen."
+    },
+    {
+      "key": "vote/signIn/title",
+      "value": "Anmelden"
     },
     {
       "key": "vote/signIn/before",

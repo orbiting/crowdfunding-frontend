@@ -215,13 +215,52 @@ class Poll extends Component {
             {
               !me && (
                 <div>
+                  <H2 style={{marginTop: 40, marginBottom: 20}}>
+                    {t('vote/signIn/title')}
+                  </H2>
                   <RawHtml type={P} dangerouslySetInnerHTML={{
                     __html: t('vote/signIn/before')
                   }} />
-                  <SignIn />
-                  <RawHtml type={P} dangerouslySetInnerHTML={{
+                  <div>
+                    <SignIn />
+                  </div>
+                  <RawHtml type={Label} dangerouslySetInnerHTML={{
                     __html: t('vote/signIn/after')
                   }} />
+                </div>
+              )
+            }
+            {
+              !!me && (
+                <div>
+                  <H2 style={{marginTop: 40}}>
+                    {t('vote/signedIn/title', {
+                      name: me.name
+                    })}
+                  </H2>
+                  <Label>
+                    <RawHtml type='span' dangerouslySetInnerHTML={{
+                      __html: t('vote/signedIn/email', {
+                        email: me.email
+                      })
+                    }} />
+                    {' '}
+                    <SignOut />
+                  </Label>
+                  {
+                    !this.state.hasSubmitted && !canVote && voting.userHasSubmitted && (
+                      <RawHtml type={P} dangerouslySetInnerHTML={{
+                        __html: t('vote/hasSubmitted')
+                      }} />
+                    )
+                  }
+                  {
+                    !voting.userIsEligitable && (
+                      <RawHtml type={P} dangerouslySetInnerHTML={{
+                        __html: t('vote/notEligitable')
+                      }} />
+                    )
+                  }
                 </div>
               )
             }
@@ -270,7 +309,7 @@ class Poll extends Component {
             </div>
             <br />
             {canVote && (
-              <div>
+              <div style={{marginBottom: 10}}>
                 {this.state.submitting
                   ? (
                     <div style={{textAlign: 'center'}}>
@@ -311,38 +350,9 @@ class Poll extends Component {
               )
             }
             {
-              !!me && (
-                <Label>
-                  <br />
-                  <RawHtml type='span' dangerouslySetInnerHTML={{
-                    __html: t('vote/signedInAs', {
-                      email: me.email
-                    })
-                  }} />
-                  {' '}
-                  <SignOut />
-                </Label>
-              )
-            }
-            {
-              (!!(this.state.hasSubmitted && me) || (!canVote && voting.userHasSubmitted)) && (
-                this.state.hasSubmitted
-                ? (
-                  <RawHtml type={P} dangerouslySetInnerHTML={{
-                    __html: t('vote/submit/merci')
-                  }} />
-                )
-                : (
-                  <RawHtml type={P} dangerouslySetInnerHTML={{
-                    __html: t('vote/hasSubmitted')
-                  }} />
-                )
-              )
-            }
-            {
-              !!me && !voting.userIsEligitable && (
+              !!(this.state.hasSubmitted && me) && (
                 <RawHtml type={P} dangerouslySetInnerHTML={{
-                  __html: t('vote/notEligitable')
+                  __html: t('vote/submit/merci')
                 }} />
               )
             }
