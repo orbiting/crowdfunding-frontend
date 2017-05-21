@@ -43,7 +43,10 @@ const styles = {
     justifyContent: 'center'
   }),
   option: css({
-    padding: OPTION_PADDING,
+    paddingLeft: OPTION_PADDING,
+    paddingRight: OPTION_PADDING,
+    paddingTop: OPTION_PADDING / 2,
+    paddingBottom: OPTION_PADDING / 2,
     width: 320,
     [mediaQueries.mUp]: {
       width: '33.3%'
@@ -58,7 +61,9 @@ const styles = {
   }),
   optionTitle: css({
     fontSize: 20,
-    minHeight: 60
+    [mediaQueries.mUp]: {
+      minHeight: 60
+    }
   }),
   optionText: css({
     marginTop: 10,
@@ -83,15 +88,16 @@ const Checked = ({fill}) => (
 )
 
 const PollButton = ({t, children, optionColor, checked, onClick}) => {
-  let backgroundColor
-  if (checked) {
-    backgroundColor = d3Color(optionColor)
-    backgroundColor.opacity = 0.1
-  }
+  let backgroundColor = d3Color(optionColor)
+  backgroundColor.opacity = 0.1
+  backgroundColor = backgroundColor.toString()
   return (
-    <label {...styles.option} {...styles.optionLabel} style={{
-      backgroundColor
-    }}>
+    <label {...styles.option} {...styles.optionLabel} {...css({
+      backgroundColor: checked ? backgroundColor : undefined,
+      ':hover': {
+        backgroundColor
+      }
+    })}>
       {children}
       <span {...styles.optionSelect} style={{color: optionColor}}>
         {checked
