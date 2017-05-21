@@ -1,9 +1,5 @@
-import {
-  colors
-} from '@project-r/styleguide'
-
 export default {
-  DATA: colors.primary,
-  CORRESPONDENT: colors.error,
-  SATIRE: 'gray'
+  DATA: '#5050A0',
+  CORRESPONDENT: '#F0AA28',
+  SATIRE: '#3C9696'
 }
