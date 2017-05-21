@@ -23,7 +23,7 @@ export const styles = {
   autoSize: css({
     minHeight: 40,
     paddingTop: '7px !important',
-    paddingBottom: 6
+    paddingBottom: '6px !important'
   })
 }
 

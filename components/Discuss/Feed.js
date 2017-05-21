@@ -24,16 +24,23 @@ class ChatList extends Component {
 
   render () {
     const {data: {loading, error, feed}, t, name} = this.props
+
+    const userWaitUntil = feed.userWaitUntil
+      ? new Date(feed.userWaitUntil)
+      : null
+    const now = new Date()
+    const userHasToWait = userWaitUntil > now
+
     return (
       <Loader loading={!feed || loading} error={error} render={() => {
         return (
           <div>
             <H2 style={{marginTop: 80}}>{t('discuss/title')}</H2>
             <br />
-            {feed.userCanComment && !!feed.userWaitingTime && (
+            {feed.userIsEligitable && !!userHasToWait && (
               <P>{t('discuss/comment/userWaitingTime')}</P>
             )}
-            {feed.userCanComment && !feed.userWaitingTime && (
+            {feed.userIsEligitable && !userHasToWait && (
               <div>
                 <P>{t('discuss/form/lead')}</P>
                 <Form feedName={name} maxLength={feed.commentMaxLength} />

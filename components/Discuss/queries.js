@@ -7,8 +7,8 @@ query($name: String!) {
     name
     createdAt
     updatedAt
-    userCanComment
-    userWaitingTime
+    userIsEligitable
+    userWaitUntil
     commentMaxLength
     comments {
       id
