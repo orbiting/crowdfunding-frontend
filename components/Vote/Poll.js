@@ -199,7 +199,7 @@ class Poll extends Component {
                 })
               ].join(' ')
             }} />
-            <H2 style={{marginTop: 40}}>
+            <H2 style={{marginTop: 40, textAlign: 'center', marginBottom: 10}}>
               {t(`vote/${voting.name}/options/title/${canVote ? 'canVote' : 'generic'}`)}
             </H2>
             <div {...styles.options}>
