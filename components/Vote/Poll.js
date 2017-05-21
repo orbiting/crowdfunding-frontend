@@ -53,6 +53,7 @@ const styles = {
     flexDirection: 'column'
   }),
   optionTitle: css({
+    fontSize: 20,
     flexGrow: 1
   }),
   optionText: css({

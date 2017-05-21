@@ -39,12 +39,18 @@ class CommentForm extends Component {
     }
   }
   handleComment (value, shouldValidate, t) {
+    const {maxLength} = this.props
     this.setState(mergeField({
       field: 'comment',
       value,
       error: (
         value.trim().length < 5 &&
-        t('discuss/form/comment/label/error')
+        t('discuss/form/comment/label/errorMin')
+      ) || (
+        value.trim().length > maxLength &&
+        t('discuss/form/comment/label/errorMax', {
+          count: maxLength
+        })
       ),
       dirty: shouldValidate
     }))
