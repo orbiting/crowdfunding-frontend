@@ -54,7 +54,8 @@ const styles = {
     textAlign: 'center'
   }),
   optionTitle: css({
-    fontSize: 20
+    fontSize: 20,
+    minHeight: 60
   }),
   optionText: css({
     marginTop: 10,
@@ -62,7 +63,7 @@ const styles = {
     maxWidth: 320,
     marginLeft: 'auto',
     marginRight: 'auto',
-    lineHeight: 1.2,
+    lineHeight: 1.4,
     flexGrow: 1
   }),
   optionLabel: css({
