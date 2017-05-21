@@ -53,6 +53,9 @@ const styles = {
     flexDirection: 'column',
     textAlign: 'center'
   }),
+  optionLabel: css({
+    cursor: 'pointer'
+  }),
   optionTitle: css({
     fontSize: 20,
     minHeight: 60
@@ -66,8 +69,9 @@ const styles = {
     lineHeight: 1.4,
     flexGrow: 1
   }),
-  optionLabel: css({
-    cursor: 'pointer'
+  optionSelect: css({
+    display: 'block',
+    minHeight: 30
   })
 }
 
@@ -89,11 +93,12 @@ const PollButton = ({t, children, optionColor, checked, onClick}) => {
       backgroundColor
     }}>
       {children}
-      <P style={{color: optionColor, minHeight: 30}}>
-        {checked && <Checked fill={optionColor} />}
-        {' '}
-        {t(`vote/option/${checked ? 'selected' : 'select'}`)}
-      </P>
+      <span {...styles.optionSelect} style={{color: optionColor}}>
+        {checked
+          ? <Checked fill={optionColor} />
+          : t('vote/option/select')
+        }
+      </span>
       <input type='radio' checked={checked} onClick={onClick} hidden />
     </label>
   )
