@@ -172,6 +172,7 @@ class Poll extends Component {
           selectedOption
         } = this.state
         const safeSelectedOption = selectedOption || {}
+        const selectedOptionColor = colors[safeSelectedOption.name]
 
         if (voting.result) {
           return (
@@ -263,7 +264,9 @@ class Poll extends Component {
                       style={{
                         height: 'auto',
                         minHeight: 60,
-                        marginBottom: 10
+                        marginBottom: 10,
+                        backgroundColor: selectedOptionColor,
+                        borderColor: selectedOptionColor
                       }}
                       onClick={event => {
                         event.preventDefault()
