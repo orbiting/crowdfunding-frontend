@@ -11,6 +11,10 @@ import Markdown from '../Markdown'
 const {H3} = Interaction
 
 const styles = {
+  container: css({
+    overflow: 'hidden',
+    wordWrap: 'break-word'
+  }),
   img: css({
     display: 'block',
     float: 'left',
@@ -22,7 +26,7 @@ const styles = {
 }
 
 export default ({t, feedName, authorImage, authorName, content, tags = []}) => (
-  <div>
+  <div {...styles.container}>
     {!!authorImage && (
       <img src={authorImage} {...styles.img} />
     )}
