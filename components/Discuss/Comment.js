@@ -39,7 +39,7 @@ const styles = {
       marginTop: 0,
       float: 'right',
       opacity: 0,
-      transition: 'opacity 200ms 200ms',
+      transition: 'opacity 150ms 150ms',
       '[data-comment]:hover &': {
         opacity: 1
       }
@@ -169,7 +169,7 @@ class Comment extends Component {
         {!!id && (
           <div {...styles.share}>
             <Share
-              fill={commentColor}
+              fill={commentColor || '#000'}
               download={data.smImage}
               url={`${PUBLIC_BASE_URL}/vote?id=${id}`}
               emailSubject={meta.title}
