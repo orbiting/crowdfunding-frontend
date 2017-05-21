@@ -10,6 +10,7 @@ import View from './CommentView'
 import Form from './Form'
 
 import {swissTime} from '../../lib/utils/formats'
+import pollColors from '../Vote/colors'
 
 import {
   Label, A, linkRule
@@ -24,6 +25,21 @@ const styles = {
   })
 }
 
+const UpVote = ({fill, title}) => (
+  <svg fill={fill} height='24' viewBox='0 0 24 24' width='24'>
+    <title>{title}</title>
+    <path d='M7 14l5-5 5 5z' />
+    <path d='M0 0h24v24H0z' fill='none' />
+  </svg>
+)
+const DownVote = ({fill, title}) => (
+  <svg fill={fill} height='24' viewBox='0 0 24 24' width='24'>
+    <title>{title}</title>
+    <path d='M7 10l5 5 5-5z' />
+    <path d='M0 0h24v24H0z' fill='none' />
+  </svg>
+)
+
 class Comment extends Component {
   constructor (props) {
     super(props)
@@ -34,7 +50,8 @@ class Comment extends Component {
   render () {
     const {
       data, data: {
-        id, upVotes, downVotes, userVote
+        id, upVotes, downVotes, userVote,
+        tags = []
       },
       t,
       upVote, downVote,
@@ -72,17 +89,19 @@ class Comment extends Component {
       })
     }
 
+    const commentColor = pollColors[tags[0]]
+
     return (
       <div {...styles.comment}>
         {!!id && (
-          <div style={{float: 'right', textAlign: 'right'}}>
+          <div style={{float: 'right', textAlign: 'center'}}>
             <a {...linkRule} href='#'
               style={{opacity: userVote === 'DOWN' ? 0.3 : 1}}
               onClick={event => {
                 event.preventDefault()
                 upVote()
               }}>
-              {t('discuss/comment/upVote')}
+              <UpVote fill={commentColor} title={t('discuss/comment/upVote')} />
             </a><br />
             {upVotes - downVotes}<br />
             <a {...linkRule} href='#'
@@ -91,7 +110,7 @@ class Comment extends Component {
                 event.preventDefault()
                 downVote()
               }}>
-              {t('discuss/comment/downVote')}
+              <DownVote fill={commentColor} title={t('discuss/comment/downVote')} />
             </a>
           </div>
         )}

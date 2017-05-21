@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-21T02:21:59.342Z",
+  "updated": "2017-05-21T09:33:57.785Z",
   "title": "live",
   "data": [
     {
@@ -37,6 +37,10 @@
     {
       "key": "menu/merci",
       "value": "Merci"
+    },
+    {
+      "key": "menu/vote",
+      "value": "Abstimmung"
     },
     {
       "key": "header/button",
@@ -1456,8 +1460,7 @@
     },
     {
       "key": "vote/END_GOAL/lead",
-      "value": "Geehrter Verleger, geehrte Verlegerin, es ist Zeit, Ihre Entscheidung zu treffen. Welches Ziel halten Sie langfristig für das Beste zwecks Entwicklung der Republik sowie kurzfristig für das Elektrisierendste für den Crowdfunding-Schusspurt? Falls Sie den Newsletter nicht erhalten haben, klicken Sie <a href=\"/updates/abstimmung\">diesen Link</a>, um solidere Entscheidungsgrundlagen zu bekommen.",
-      "undefined": "Frau Verlegerin, Herr Verleger Sie müssen sich zwischen drei Möglichkeiten entscheiden. Newsletter nicht bekommen oder noch nicht gelesen? <a href=\"/updates/abstimmung\">Hintergrund Informationen zur Abstimmung</a>."
+      "value": "Geehrter Verleger, geehrte Verlegerin, es ist Zeit, Ihre Entscheidung zu treffen. Welches Ziel halten Sie langfristig für das Beste zwecks Entwicklung der Republik sowie kurzfristig für das Elektrisierendste für den Crowdfunding-Schusspurt? Falls Sie den Newsletter nicht erhalten haben, klicken Sie <a href=\"/updates/abstimmung\">diesen Link</a>, um solidere Entscheidungsgrundlagen zu bekommen."
     },
     {
       "key": "vote/END_GOAL/time/days/1",
@@ -1553,7 +1556,7 @@
     },
     {
       "key": "vote/submit/note",
-      "value": "Sie können nur einmal abstimmen und Ihre Wahl nicht rückgängig machen oder verändern. Ihre Stimmabgabe ist vertraulich aber nicht geheim. Anonyme Auswertungen sind vorgesehen."
+      "value": "Sie können nur einmal abstimmen und Ihre Wahl nicht rückgängig machen oder verändern. Es wird gespeichert wie Sie stimmen, die Daten werden vertraulich behandelt und nur anonym ausgewertet."
     },
     {
       "key": "vote/submit/merci",
@@ -1592,8 +1595,12 @@
       "value": "Ihr Plädoyer"
     },
     {
-      "key": "discuss/form/comment/label/error",
+      "key": "discuss/form/comment/label/errorMin",
       "value": "Ihr Plädoyer, mind. 5 Zeichen"
+    },
+    {
+      "key": "discuss/form/comment/label/errorMax",
+      "value": "Ihr Plädoyer, max. {count} Zeichen"
     },
     {
       "key": "discuss/form/submit",
@@ -1605,11 +1612,11 @@
     },
     {
       "key": "discuss/comment/upVote",
-      "value": "up"
+      "value": "Lesenswert: +1"
     },
     {
       "key": "discuss/comment/downVote",
-      "value": "down"
+      "value": "Zeitverschwendung: -1"
     },
     {
       "key": "discuss/comment/edit",
@@ -1630,6 +1637,10 @@
     {
       "key": "discuss/comment/tag",
       "value": "Ich plädiere für:"
+    },
+    {
+      "key": "discuss/comment/tag/error",
+      "value": "Bitte wählen Sie aus für was Sie plädieren."
     },
     {
       "key": "discuss/comment/userWaitingTime",
