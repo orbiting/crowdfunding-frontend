@@ -37,6 +37,9 @@ class CommentForm extends Component {
       errors: {},
       dirty: {}
     }
+    this.fieldRef = ref => {
+      this.field = ref
+    }
   }
   handleComment (value, shouldValidate, t) {
     const {maxLength} = this.props
@@ -58,6 +61,12 @@ class CommentForm extends Component {
   componentWillMount () {
     const {values} = this.state
     this.handleComment(values.comment, false, this.props.t)
+  }
+  componentDidMount () {
+    const {edit} = this.props
+    if (edit && edit.id && this.field && this.field.input) {
+      this.field.input.focus()
+    }
   }
   send () {
     const {values, tag} = this.state
@@ -136,6 +145,7 @@ class CommentForm extends Component {
         }}>
           <Field label={t('discuss/form/comment/label')}
             name='comment'
+            ref={this.fieldRef}
             renderInput={(props) => (
               <AutosizeInput {...fieldSetStyles.autoSize}
                 {...props} />
