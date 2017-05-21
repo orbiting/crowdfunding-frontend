@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-21T20:32:54.883Z",
+  "updated": "2017-05-21T20:57:23.224Z",
   "title": "live",
   "data": [
     {
@@ -1508,11 +1508,11 @@
     },
     {
       "key": "vote/END_GOAL/options/title/generic",
-      "value": "Die Wahl"
+      "value": "Die Entscheidung"
     },
     {
       "key": "vote/END_GOAL/options/title/canVote",
-      "value": "Ihre Wahl"
+      "value": "Ihre Entscheidung"
     },
     {
       "key": "vote/END_GOAL/options/SATIRE",

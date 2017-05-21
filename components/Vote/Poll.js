@@ -212,7 +212,20 @@ class Poll extends Component {
                 })
               ].join(' ')
             }} />
-            <H2 style={{marginTop: 40, marginBottom: 10}}>
+            {
+              !me && (
+                <div>
+                  <RawHtml type={P} dangerouslySetInnerHTML={{
+                    __html: t('vote/signIn/before')
+                  }} />
+                  <SignIn />
+                  <RawHtml type={P} dangerouslySetInnerHTML={{
+                    __html: t('vote/signIn/after')
+                  }} />
+                </div>
+              )
+            }
+            <H2 style={{marginTop: 40, marginBottom: 20, textAlign: 'center'}}>
               {t(`vote/${voting.name}/options/title/${canVote ? 'canVote' : 'generic'}`)}
             </H2>
             <div {...styles.options}>
@@ -312,7 +325,7 @@ class Poll extends Component {
               )
             }
             {
-              (!!this.state.hasSubmitted || (!canVote && voting.userHasSubmitted)) && (
+              (!!(this.state.hasSubmitted && me) || (!canVote && voting.userHasSubmitted)) && (
                 this.state.hasSubmitted
                 ? (
                   <RawHtml type={P} dangerouslySetInnerHTML={{
@@ -331,19 +344,6 @@ class Poll extends Component {
                 <RawHtml type={P} dangerouslySetInnerHTML={{
                   __html: t('vote/notEligitable')
                 }} />
-              )
-            }
-            {
-              !me && (
-                <div>
-                  <RawHtml type={P} dangerouslySetInnerHTML={{
-                    __html: t('vote/signIn/before')
-                  }} />
-                  <SignIn />
-                  <RawHtml type={P} dangerouslySetInnerHTML={{
-                    __html: t('vote/signIn/after')
-                  }} />
-                </div>
               )
             }
           </div>
