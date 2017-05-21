@@ -160,7 +160,19 @@ class CommentForm extends Component {
               ))}
             </P>
           )}
-          <br /><br />
+          <br />
+          <RawHtml type={Label} dangerouslySetInnerHTML={{
+            __html: t(
+              (
+                data.me &&
+                data.me.testimonial &&
+                data.me.testimonial.image
+              )
+              ? 'discuss/comment/hint/photo'
+              : 'discuss/comment/hint/noPhoto'
+            )
+          }} />
+          <br />
           {!!values.comment.trim() && (
             <div>
               <H2>{t('discuss/form/preview')}</H2>
@@ -178,8 +190,10 @@ class CommentForm extends Component {
                   data.me.testimonial.image
                 )
               }} />
+              <br />
             </div>
           )}
+          <br />
           {loading
             ? <InlineSpinner />
             : (

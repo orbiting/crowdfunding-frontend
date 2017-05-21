@@ -7,6 +7,7 @@ import {color as d3Color} from 'd3-color'
 
 import Loader from '../Loader'
 import SignIn from '../Auth/SignIn'
+import SignOut from '../Auth/SignOut'
 import RawHtml from '../RawHtml'
 import ErrorMessage from '../ErrorMessage'
 import {InlineSpinner} from '../Spinner'
@@ -275,6 +276,20 @@ class Poll extends Component {
             {
               !!this.state.error && (
                 <ErrorMessage error={this.state.error} />
+              )
+            }
+            {
+              !!me && (
+                <Label>
+                  <br />
+                  <RawHtml type='span' dangerouslySetInnerHTML={{
+                    __html: t('vote/signedInAs', {
+                      email: me.email
+                    })
+                  }} />
+                  {' '}
+                  <SignOut />
+                </Label>
               )
             }
             {

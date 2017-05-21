@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-21T01:27:47.690Z",
+  "updated": "2017-05-21T02:21:59.342Z",
   "title": "live",
   "data": [
     {
@@ -1560,12 +1560,16 @@
       "value": "Vielen Dank für Ihre Stimme!"
     },
     {
+      "key": "vote/signedInAs",
+      "value": "Sie sind angemeldet als: {email}"
+    },
+    {
       "key": "vote/hasSubmitted",
       "value": "Sie haben bereits abgestimmt. Vielen Dank für Ihre Stimme!"
     },
     {
       "key": "vote/notEligitable",
-      "value": "Sie müssen eine Mitgliedschaft kaufen um mitzubestimmen. <a href=\"/pledge?package=ABO\">Jetzt Mitglied werden</a>."
+      "value": "Sie müssen eine Mitgliedschaft besitzen um mitzubestimmen. <a href=\"/pledge?package=ABO\">Jetzt Mitglied werden</a>. Falls Sie bereits eine Mitgliedschaft haben, melden Sie sich mit der gleichen E-Mail-Adresse an wie beim Mitmachen."
     },
     {
       "key": "vote/signIn/before",
@@ -1637,7 +1641,15 @@
     },
     {
       "key": "discuss/comment/hint",
-      "value": "{count} Zeichen verbleibend, <a href=\"https://de.wikipedia.org/wiki/Markdown\" target=\"_blank\">Markdown</a> erlaubt"
+      "value": "<a href=\"https://de.wikipedia.org/wiki/Markdown\" target=\"_blank\">Markdown</a> erlaubt, {count} Zeichen verbleibend."
+    },
+    {
+      "key": "discuss/comment/hint/photo",
+      "value": "<a href=\"/merci\" target=\"_blank\">Ihr Porträtfoto</a> von der Community-Seite wird angezeigt."
+    },
+    {
+      "key": "discuss/comment/hint/noPhoto",
+      "value": "Geben Sie ein Statement ab um ein <a href=\"/merci\" target=\"_blank\">Porträtfoto hinzuzufügen</a>."
     }
   ]
 }
