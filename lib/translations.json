@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-21T22:25:33.363Z",
+  "updated": "2017-05-21T23:06:34.964Z",
   "title": "live",
   "data": [
     {
@@ -1468,7 +1468,7 @@
     },
     {
       "key": "vote/END_GOAL/lead",
-      "value": "Geehrter Verleger, geehrte Verlegerin, es ist Zeit, Ihre Entscheidung zu treffen. Welches Ziel halten Sie langfristig für das beste in Bezug auf die Entwicklung der «Republik» sowie kurzfristig für das Elektrisierendste für den Crowdfunding-Schlussspurt? Falls Sie den Newsletter nicht erhalten haben, klicken Sie auf <a href=\"/updates/abstimmung\">diesen Link</a>, um solidere Entscheidungsgrundlagen zu bekommen."
+      "value": "Geehrter Verleger, geehrte Verlegerin, es ist Zeit, Ihre Entscheidung zu treffen. Welches Ziel halten Sie langfristig für das beste in Bezug auf die Entwicklung der Republik sowie kurzfristig für das Elektrisierendste für den Crowdfunding-Schlussspurt? Falls Sie den Newsletter nicht erhalten haben, klicken Sie auf <a href=\"/updates/abstimmung\">diesen Link</a>, um solidere Entscheidungsgrundlagen zu bekommen."
     },
     {
       "key": "vote/END_GOAL/time/days/1",
@@ -1496,15 +1496,15 @@
     },
     {
       "key": "vote/END_GOAL/turnout/0",
-      "value": "Werden Sie die erste Wählerin oder der erste Wähler der «Republik»!"
+      "value": "Werden Sie die erste Wählerin oder der erste Wähler der Republik!"
     },
     {
       "key": "vote/END_GOAL/turnout/1",
-      "value": "Eine Person hat bereits gewählt. Werden Sie der zweite Wähler oder die zweite Wählerin der «Republik»!"
+      "value": "Eine Person hat bereits gewählt. Werden Sie der zweite Wähler oder die zweite Wählerin der Republik!"
     },
     {
       "key": "vote/END_GOAL/turnout/2",
-      "value": "Zwei Personen haben bereits gewählt. Werden Sie die dritte Wählerin oder der dritte Wähler der «Republik»!"
+      "value": "Zwei Personen haben bereits gewählt. Werden Sie die dritte Wählerin oder der dritte Wähler der Republik!"
     },
     {
       "key": "vote/END_GOAL/turnout/999",
