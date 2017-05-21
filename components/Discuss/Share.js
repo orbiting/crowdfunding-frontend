@@ -2,11 +2,9 @@ import React from 'react'
 import {css} from 'glamor'
 import {compose} from 'redux'
 import Head from 'next/head'
-import {graphql} from 'react-apollo'
+import {gql, graphql} from 'react-apollo'
 
 import withT from '../../lib/withT'
-
-import {feed as feedQuery} from './queries'
 
 import Loader from '../Loader'
 import pollColors from '../Vote/colors'
@@ -94,16 +92,30 @@ const Item = ({loading, error, t, name: feedName, comment: {authorImage, authorN
   )} />
 )
 
+const query = gql`
+query($name: String!, $firstId: ID) {
+  feed(name: $name) {
+    comments(firstId: $firstId, limit: 1) {
+      id
+      content
+      authorName
+      authorImage
+      tags
+    }
+  }
+}
+`
+
 export default compose(
   withT,
-  graphql(feedQuery, {
+  graphql(query, {
     props: ({data, ownProps: {firstId}}) => {
       return ({
         loading: data.loading,
         error: data.error,
         comment: (
           data.feed &&
-          data.feed.comments.find(d => d.id === firstId)
+          data.feed.comments[0]
         )
       })
     }

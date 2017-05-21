@@ -27,10 +27,10 @@ const VotePage = ({url}) => {
   }
 
   return (
-    <Frame url={url} meta={metaData} sidebar={false}>
+    <Frame url={url} sidebar={false}>
       <NarrowContainer>
         <Poll name='END_GOAL' />
-        <Feed name='END_GOAL' />
+        <Feed name='END_GOAL' firstId={url.query.id} meta={metaData} />
       </NarrowContainer>
     </Frame>
   )

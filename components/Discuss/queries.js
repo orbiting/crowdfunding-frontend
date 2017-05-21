@@ -1,7 +1,7 @@
 import {gql} from 'react-apollo'
 
 export const feed = gql`
-query($name: String!) {
+query($name: String!, $firstId: ID, $limit: Int, $offset: Int) {
   feed(name: $name) {
     id
     name
@@ -10,11 +10,12 @@ query($name: String!) {
     userIsEligitable
     userWaitUntil
     commentMaxLength
-    comments {
+    comments(firstId: $firstId, limit: $limit, offset: $offset) {
       id
       content
       authorName
       authorImage
+      smImage
       tags
       score
       upVotes
