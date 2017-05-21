@@ -7,15 +7,22 @@ import {
 } from '@project-r/styleguide'
 
 import Feed from '../components/Discuss/Feed'
+import Share from '../components/Discuss/Share'
 import Poll from '../components/Vote/Poll'
 
-const WePage = ({url}) => (
-  <Frame url={url} meta={{title: 'Abstimmung'}} sidebar={false}>
-    <NarrowContainer>
-      <Poll name='END_GOAL' />
-      <Feed name='END_GOAL' />
-    </NarrowContainer>
-  </Frame>
-)
+const VotePage = ({url}) => {
+  if (url.query.share) {
+    return <Share name='END_GOAL' firstId={url.query.share} />
+  }
 
-export default withData(WePage)
+  return (
+    <Frame url={url} meta={{title: 'Abstimmung'}} sidebar={false}>
+      <NarrowContainer>
+        <Poll name='END_GOAL' />
+        <Feed name='END_GOAL' />
+      </NarrowContainer>
+    </Frame>
+  )
+}
+
+export default withData(VotePage)
