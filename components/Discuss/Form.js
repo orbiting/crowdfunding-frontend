@@ -112,6 +112,14 @@ class CommentForm extends Component {
       .filter(Boolean)
     const isNew = !(edit && edit.id)
 
+    const hasPublicTestimonial = !!(
+      data.me &&
+      data.me.testimonial &&
+      data.me.testimonial.image &&
+      data.me.testimonial.published &&
+      !data.me.testimonial.adminUnpublished
+    )
+
     return (
       <div>
         <form onSubmit={event => {
@@ -169,11 +177,7 @@ class CommentForm extends Component {
           <br />
           <RawHtml type={Label} dangerouslySetInnerHTML={{
             __html: t(
-              (
-                data.me &&
-                data.me.testimonial &&
-                data.me.testimonial.image
-              )
+              hasPublicTestimonial
               ? 'discuss/comment/hint/photo'
               : 'discuss/comment/hint/noPhoto'
             )
@@ -191,8 +195,7 @@ class CommentForm extends Component {
                   : edit ? edit.tags || [] : [],
                 authorName: me.name,
                 authorImage: (
-                  data.me &&
-                  data.me.testimonial &&
+                  hasPublicTestimonial &&
                   data.me.testimonial.image
                 )
               }} />
