@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {gql, graphql, withApollo} from 'react-apollo'
+import {graphql} from 'react-apollo'
 import {compose} from 'redux'
 
 import Loader from '../Loader'
@@ -16,44 +16,10 @@ import {feed as feedQuery} from './queries'
 
 const {H2, P} = Interaction
 
-const commentsSubscription = gql`
-subscription onCommentAdded($feedName: String!) {
-  commentAdded(feedName: $feedName){
-    id
-    content
-  }
-}
-`
-
 class ChatList extends Component {
   constructor (...args) {
     super(...args)
     this.state = {}
-  }
-
-  componentDidMount () {
-    this.subscribe()
-  }
-
-  subscribe () {
-    const {
-      name,
-      data: {refetch}
-    } = this.props
-    this.subscriptionObserver = this.props.client.subscribe({
-      query: commentsSubscription,
-      variables: {
-        feedName: name
-      }
-    }).subscribe({
-      next (data) {
-        console.log('real time update!')
-        refetch({
-          name
-        })
-      },
-      error (err) { console.error('err', err) }
-    })
   }
 
   render () {
@@ -85,6 +51,5 @@ class ChatList extends Component {
 
 export default compose(
   withT,
-  graphql(feedQuery),
-  withApollo
+  graphql(feedQuery)
 )(ChatList)
