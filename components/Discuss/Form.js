@@ -6,8 +6,8 @@ import AutosizeInput from 'react-textarea-autosize'
 import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
 import {mergeField} from '../../lib/utils/fieldState'
-import {intersperse} from '../../lib/utils/helpers'
 
+import RawHtml from '../RawHtml'
 import ErrorMessage from '../ErrorMessage'
 import {InlineSpinner} from '../Spinner'
 import {styles as fieldSetStyles} from '../FieldSet'
@@ -17,7 +17,7 @@ import CommentView from './CommentView'
 import {feed as feedQuery} from './queries'
 
 import {
-  Field, Button, Interaction
+  Field, Button, Interaction, Radio, Label
 } from '@project-r/styleguide'
 
 import pollColors from '../Vote/colors'
@@ -93,7 +93,7 @@ class CommentForm extends Component {
   render () {
     const {
       t, me, data, edit,
-      feedName
+      feedName, maxLength
     } = this.props
 
     const {
@@ -131,27 +131,33 @@ class CommentForm extends Component {
             onChange={(_, value, shouldValidate) => {
               this.handleComment(value, shouldValidate, t)
             }} />
+          <RawHtml type={Label} dangerouslySetInnerHTML={{
+            __html: t('discuss/comment/hint', {
+              count: maxLength - values.comment.length
+            })
+          }} />
+          <br />
           {isNew && (
             <P>
-              {t('discuss/comment/tag')}{' '}
-              {intersperse(Object.keys(pollColors).map(key => (
-                <span key={key}
-                  onClick={() => {
-                    this.setState({
-                      tag: this.state.tag === key
-                        ? undefined
-                        : key
-                    })
-                  }}
-                  style={{
-                    display: 'inline-block',
-                    cursor: 'pointer',
-                    color: key === this.state.tag ? '#fff' : undefined,
-                    backgroundColor: key === this.state.tag ? pollColors[key] : undefined
-                  }}>
-                  {t(`vote/${feedName}/options/${key}/title`, undefined, key)}
+              <Label>{t('discuss/comment/tag')}</Label><br />
+              {Object.keys(pollColors).map(key => (
+                <span>
+                  <span style={{whiteSpace: 'nowrap'}}>
+                    <Radio
+                      checked={key === this.state.tag}
+                      onChange={() => {
+                        this.setState({
+                          tag: this.state.tag === key
+                            ? undefined
+                            : key
+                        })
+                      }}>
+                      {t(`vote/${feedName}/options/${key}/title`, undefined, key)}
+                    </Radio>
+                  </span>
+                  {' '}&nbsp;{' '}
                 </span>
-              )), () => ' oder ')}
+              ))}
             </P>
           )}
           <br /><br />

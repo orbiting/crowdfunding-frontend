@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-20T11:44:43.154Z",
+  "updated": "2017-05-21T01:27:47.690Z",
   "title": "live",
   "data": [
     {
@@ -1456,7 +1456,8 @@
     },
     {
       "key": "vote/END_GOAL/lead",
-      "value": "Frau Verlegerin, Herr Verleger Sie müssen sich zwischen drei Möglichkeiten entscheiden. Newsletter nicht bekommen oder noch nicht gelesen? <a href=\"/updates/abstimmung\">Hintergrund Informationen zur Abstimmung</a>."
+      "value": "Geehrter Verleger, geehrte Verlegerin, es ist Zeit, Ihre Entscheidung zu treffen. Welches Ziel halten Sie langfristig für das Beste zwecks Entwicklung der Republik sowie kurzfristig für das Elektrisierendste für den Crowdfunding-Schusspurt? Falls Sie den Newsletter nicht erhalten haben, klicken Sie <a href=\"/updates/abstimmung\">diesen Link</a>, um solidere Entscheidungsgrundlagen zu bekommen.",
+      "undefined": "Frau Verlegerin, Herr Verleger Sie müssen sich zwischen drei Möglichkeiten entscheiden. Newsletter nicht bekommen oder noch nicht gelesen? <a href=\"/updates/abstimmung\">Hintergrund Informationen zur Abstimmung</a>."
     },
     {
       "key": "vote/END_GOAL/time/days/1",
@@ -1544,11 +1545,15 @@
     },
     {
       "key": "vote/submit/text",
-      "value": "Jetzt stimmen"
+      "value": "Jetzt abstimmen"
+    },
+    {
+      "key": "vote/submit/text/title",
+      "value": "Jetzt für {title} stimmen"
     },
     {
       "key": "vote/submit/note",
-      "value": "Ihre Stimme kann nicht rückgängig gemacht werden."
+      "value": "Sie können nur einmal abstimmen und Ihre Wahl nicht rückgängig machen oder verändern. Ihre Stimmabgabe ist vertraulich aber nicht geheim. Anonyme Auswertungen sind vorgesehen."
     },
     {
       "key": "vote/submit/merci",
@@ -1629,6 +1634,10 @@
     {
       "key": "discuss/comment/for",
       "value": "für {tagName}"
+    },
+    {
+      "key": "discuss/comment/hint",
+      "value": "{count} Zeichen verbleibend, <a href=\"https://de.wikipedia.org/wiki/Markdown\" target=\"_blank\">Markdown</a> erlaubt"
     }
   ]
 }

@@ -38,7 +38,7 @@ class Comment extends Component {
       },
       t,
       upVote, downVote,
-      feedName
+      feedName, maxLength
     } = this.props
     const {
       isEditing
@@ -47,7 +47,7 @@ class Comment extends Component {
     if (isEditing) {
       return (
         <div {...styles.comment}>
-          <Form feedName={feedName} edit={data} onSave={() => {
+          <Form feedName={feedName} maxLength={maxLength} edit={data} onSave={() => {
             this.setState({
               isEditing: false
             })

@@ -17,18 +17,25 @@ import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
 
 import {
-  Interaction, Button, Label, mediaQueries
+  Interaction, Button, Label, mediaQueries,
+  H1, P as EP
 } from '@project-r/styleguide'
 
 import colors from './colors'
 
-const {H1, H2, H3, P} = Interaction
+const {H2, H3, P} = Interaction
 
 const endDateFormat = swissTime.format('%d. %B %Y')
 const endHourFormat = swissTime.format('%H')
 
 const OPTION_PADDING = 20
 const styles = {
+  title: css({
+    [mediaQueries.onlyS]: {
+      fontSize: 36,
+      lineHeight: '39px'
+    }
+  }),
   options: css({
     display: 'flex',
     flexWrap: 'wrap',
@@ -169,13 +176,13 @@ class Poll extends Component {
 
         return (
           <div>
-            <H1>
+            <H1 {...styles.title}>
               {t(`vote/${voting.name}/title`)}
             </H1>
-            <RawHtml type={P} dangerouslySetInnerHTML={{
+            <RawHtml type={EP} dangerouslySetInnerHTML={{
               __html: t(`vote/${voting.name}/lead`, undefined, '')
             }} />
-            <RawHtml type={P} dangerouslySetInnerHTML={{
+            <RawHtml type={EP} dangerouslySetInnerHTML={{
               __html: [
                 t.pluralize(`vote/${voting.name}/time/${timeLeft.unit}`, {
                   count: timeLeft.count,
@@ -191,7 +198,7 @@ class Poll extends Component {
                 })
               ].join(' ')
             }} />
-            <H2 style={{marginTop: 20}}>
+            <H2 style={{marginTop: 40}}>
               {t(`vote/${voting.name}/options/title/${canVote ? 'canVote' : 'generic'}`)}
             </H2>
             <div {...styles.options}>
@@ -242,14 +249,21 @@ class Poll extends Component {
                   : (
                     <Button primary block
                       disabled={!selectedOption}
+                      style={{
+                        height: 'auto',
+                        minHeight: 60,
+                        marginBottom: 10
+                      }}
                       onClick={event => {
                         event.preventDefault()
                         this.submit()
                       }}>
-                      {t.first([
-                        `vote/submit/${voting.name}/${safeSelectedOption.name}`,
-                        'vote/submit/text'
-                      ])}
+                      {t(
+                        `vote/submit/text${selectedOption ? '/title' : ''}`,
+                        {
+                          title: selectedOption && t(`vote/${voting.name}/options/${selectedOption.name}/title`)
+                        }
+                      )}
                     </Button>
                   )
                 }

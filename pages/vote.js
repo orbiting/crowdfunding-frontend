@@ -13,7 +13,6 @@ const WePage = ({url}) => (
   <Frame url={url} meta={{title: 'Abstimmung'}} sidebar={false}>
     <NarrowContainer>
       <Poll name='END_GOAL' />
-      <br /><br />
       <Feed name='END_GOAL' />
     </NarrowContainer>
   </Frame>

@@ -62,7 +62,7 @@ class ChatList extends Component {
       <Loader loading={!feed || loading} error={error} render={() => {
         return (
           <div>
-            <H2>{t('discuss/title')}</H2>
+            <H2 style={{marginTop: 80}}>{t('discuss/title')}</H2>
             <br />
             {feed.userCanComment && !!feed.userWaitingTime && (
               <P>{t('discuss/comment/userWaitingTime')}</P>
@@ -74,7 +74,7 @@ class ChatList extends Component {
               </div>
             )}
             {feed.comments.map(comment => (
-              <Comment feedName={name} data={comment} key={comment.id} />
+              <Comment feedName={name} maxLength={feed.commentMaxLength} data={comment} key={comment.id} />
             ))}
           </div>
         )
