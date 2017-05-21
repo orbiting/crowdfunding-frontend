@@ -6,6 +6,10 @@ import {
   NarrowContainer
 } from '@project-r/styleguide'
 
+import {
+  STATIC_BASE_URL
+} from '../constants'
+
 import Feed from '../components/Discuss/Feed'
 import Share from '../components/Discuss/Share'
 import Poll from '../components/Vote/Poll'
@@ -15,8 +19,14 @@ const VotePage = ({url}) => {
     return <Share name='END_GOAL' firstId={url.query.share} />
   }
 
+  const metaData = {
+    title: 'Die Republik führt die Demokratie ein',
+    description: 'Frau Verlegerin, Herr Verleger, Sie haben die Aufgabe, das letzte Ziel des Crowdfundings zu bestimmen.',
+    image: `${STATIC_BASE_URL}/static/social-media/vote.jpg`
+  }
+
   return (
-    <Frame url={url} meta={{title: 'Abstimmung'}} sidebar={false}>
+    <Frame url={url} meta={metaData} sidebar={false}>
       <NarrowContainer>
         <Poll name='END_GOAL' />
         <Feed name='END_GOAL' />
