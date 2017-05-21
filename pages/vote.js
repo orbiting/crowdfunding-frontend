@@ -20,6 +20,7 @@ const VotePage = ({url}) => {
   }
 
   const metaData = {
+    pageTitle: 'Abstimmung — Republik',
     title: 'Die Republik führt die Demokratie ein',
     description: 'Frau Verlegerin, Herr Verleger, Sie haben die Aufgabe, das letzte Ziel des Crowdfundings zu bestimmen.',
     image: `${STATIC_BASE_URL}/static/social-media/vote.jpg`
