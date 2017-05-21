@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-21T09:33:57.785Z",
+  "updated": "2017-05-21T15:08:05.581Z",
   "title": "live",
   "data": [
     {
@@ -1436,7 +1436,7 @@
     },
     {
       "key": "api/comment/notYours",
-      "value": "Sie können nur ihre eigenen Kommentare bearbeiten."
+      "value": "Sie können nur Ihre eigenen Kommentare bearbeiten."
     },
     {
       "key": "api/comment/tooLong",
@@ -1448,11 +1448,11 @@
     },
     {
       "key": "api/comment/membershipRequired",
-      "value": "Sie müssen Mitglied sein um zu kommentieren."
+      "value": "Sie müssen Mitglied sein, um zu kommentieren."
     },
     {
       "key": "api/comment/tooEarly",
-      "value": "Sie sind zu früh. Bitte warten sie {waitFor} bevor sie wieder kommentieren."
+      "value": "Sie sind zu früh. Bitte warten Sie, {waitFor} bevor Sie wieder kommentieren."
     },
     {
       "key": "vote/END_GOAL/title",
@@ -1460,7 +1460,7 @@
     },
     {
       "key": "vote/END_GOAL/lead",
-      "value": "Geehrter Verleger, geehrte Verlegerin, es ist Zeit, Ihre Entscheidung zu treffen. Welches Ziel halten Sie langfristig für das Beste zwecks Entwicklung der Republik sowie kurzfristig für das Elektrisierendste für den Crowdfunding-Schusspurt? Falls Sie den Newsletter nicht erhalten haben, klicken Sie <a href=\"/updates/abstimmung\">diesen Link</a>, um solidere Entscheidungsgrundlagen zu bekommen."
+      "value": "Geehrter Verleger, geehrte Verlegerin, es ist Zeit, Ihre Entscheidung zu treffen. Welches Ziel halten Sie langfristig für das beste in Bezug auf die Entwicklung der «Republik» sowie kurzfristig für das Elektrisierendste für den Crowdfunding-Schlussspurt? Falls Sie den Newsletter nicht erhalten haben, klicken Sie auf <a href=\"/updates/abstimmung\">diesen Link</a>, um solidere Entscheidungsgrundlagen zu bekommen."
     },
     {
       "key": "vote/END_GOAL/time/days/1",
@@ -1488,19 +1488,19 @@
     },
     {
       "key": "vote/END_GOAL/turnout/0",
-      "value": "Werden Sie die erste Wählerin oder der erste Wähler der Republik!"
+      "value": "Werden Sie die erste Wählerin oder der erste Wähler der «Republik»!"
     },
     {
       "key": "vote/END_GOAL/turnout/1",
-      "value": "Eine Person hat bereits gewählt. Werden Sie der zweite Wähler oder die zweite Wählerin der Republik!"
+      "value": "Eine Person hat bereits gewählt. Werden Sie der zweite Wähler oder die zweite Wählerin der «Republik»!"
     },
     {
       "key": "vote/END_GOAL/turnout/2",
-      "value": "Zwei Personen haben bereits gewählt. Werden Sie die dritte Wählerin oder der dritte Wähler der Republik!"
+      "value": "Zwei Personen haben bereits gewählt. Werden Sie die dritte Wählerin oder der dritte Wähler der «Republik»!"
     },
     {
       "key": "vote/END_GOAL/turnout/999",
-      "value": "{count} von {eligitable} (rund {roundTurnoutPercent} Prozent) haben bereits eine Wahl getroffen. Werden Sie 1000. Wählerin oder Wähler!"
+      "value": "{count} von {eligitable} (rund {roundTurnoutPercent} Prozent) haben bereits eine Wahl getroffen. Werden Sie die 1000. Wählerin oder der 1000. Wähler!"
     },
     {
       "key": "vote/END_GOAL/turnout/other",
@@ -1528,7 +1528,7 @@
     },
     {
       "key": "vote/END_GOAL/options/DATA/title",
-      "value": "Daten­journalismus"
+      "value": "Datenjournalismus"
     },
     {
       "key": "vote/END_GOAL/options/CORRESPONDENT",
@@ -1556,7 +1556,7 @@
     },
     {
       "key": "vote/submit/note",
-      "value": "Sie können nur einmal abstimmen und Ihre Wahl nicht rückgängig machen oder verändern. Es wird gespeichert wie Sie stimmen, die Daten werden vertraulich behandelt und nur anonym ausgewertet."
+      "value": "Sie können nur einmal abstimmen und Ihre Wahl nicht rückgängig machen oder verändern. Es wird gespeichert, wie Sie stimmen, die Daten werden vertraulich behandelt und nur anonym ausgewertet."
     },
     {
       "key": "vote/submit/merci",
@@ -1572,11 +1572,11 @@
     },
     {
       "key": "vote/notEligitable",
-      "value": "Sie müssen eine Mitgliedschaft besitzen um mitzubestimmen. <a href=\"/pledge?package=ABO\">Jetzt Mitglied werden</a>. Falls Sie bereits eine Mitgliedschaft haben, melden Sie sich mit der gleichen E-Mail-Adresse an wie beim Mitmachen."
+      "value": "Sie müssen eine Mitgliedschaft besitzen, um mitzubestimmen. <a href=\"/pledge?package=ABO\">Jetzt Mitglied werden</a>. Falls Sie bereits eine Mitgliedschaft haben, melden Sie sich mit der gleichen E-Mail-Adresse an wie beim Mitmachen."
     },
     {
       "key": "vote/signIn/before",
-      "value": "Sie müssen ein Mitglied sein und sich anmelden um abstimmen zu können:"
+      "value": "Sie müssen ein Mitglied sein und sich anmelden, um abstimmen zu können:"
     },
     {
       "key": "vote/signIn/after",
@@ -1596,11 +1596,11 @@
     },
     {
       "key": "discuss/form/comment/label/errorMin",
-      "value": "Ihr Plädoyer, mind. 5 Zeichen"
+      "value": "Ihr Plädoyer, mindestens 5 Zeichen"
     },
     {
       "key": "discuss/form/comment/label/errorMax",
-      "value": "Ihr Plädoyer, max. {count} Zeichen"
+      "value": "Ihr Plädoyer, maximal {count} Zeichen"
     },
     {
       "key": "discuss/form/submit",
@@ -1616,7 +1616,7 @@
     },
     {
       "key": "discuss/comment/downVote",
-      "value": "Zeitverschwendung: -1"
+      "value": "Zeitverschwendung: –1"
     },
     {
       "key": "discuss/comment/edit",
@@ -1640,7 +1640,7 @@
     },
     {
       "key": "discuss/comment/tag/error",
-      "value": "Bitte wählen Sie aus für was Sie plädieren."
+      "value": "Bitte wählen Sie aus, wofür Sie plädieren."
     },
     {
       "key": "discuss/comment/userWaitingTime",
@@ -1660,7 +1660,7 @@
     },
     {
       "key": "discuss/comment/hint/noPhoto",
-      "value": "Geben Sie ein Statement ab um ein <a href=\"/merci\" target=\"_blank\">Porträtfoto hinzuzufügen</a>."
+      "value": "Geben Sie ein Statement ab, um ein <a href=\"/merci\" target=\"_blank\">Porträtfoto hinzuzufügen</a>."
     }
   ]
 }
