@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-21T23:06:34.964Z",
+  "updated": "2017-05-21T23:53:14.296Z",
   "title": "live",
   "data": [
     {
@@ -1572,7 +1572,7 @@
     },
     {
       "key": "vote/signedIn/title",
-      "value": "Willkommen zur Abstimmung {name}"
+      "value": "Willkommen zur Abstimmung"
     },
     {
       "key": "vote/signedIn/email",

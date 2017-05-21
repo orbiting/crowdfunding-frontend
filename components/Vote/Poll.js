@@ -234,9 +234,10 @@ class Poll extends Component {
               !!me && (
                 <div>
                   <H2 style={{marginTop: 40}}>
-                    {t('vote/signedIn/title', {
-                      name: me.name
-                    })}
+                    {[
+                      t('vote/signedIn/title'),
+                      (me.name || '').trim()
+                    ].filter(Boolean).join(', ')}
                   </H2>
                   <Label>
                     <RawHtml type='span' dangerouslySetInnerHTML={{
