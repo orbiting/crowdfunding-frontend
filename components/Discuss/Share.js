@@ -71,11 +71,6 @@ const fontSizeBoost = length => {
   return 0
 }
 
-const testContent = require('d3-array')
-  .range(39)
-  .map(() => 'W')
-  .join('')
-
 const Item = ({loading, error, t, name: feedName, comment: {authorImage, authorName, content, tags = []}}) => (
   <Loader loading={loading} error={error} render={() => (
     <div {...styles.container}>
@@ -93,11 +88,11 @@ const Item = ({loading, error, t, name: feedName, comment: {authorImage, authorN
         </Interaction.H2>
         {content && <div {...styles.content} {...css({
           '& > *': {
-            fontSize: 32 + fontSizeBoost(testContent.length),
+            fontSize: 32 + fontSizeBoost(content.length),
             lineHeight: 1.2
           }
         })}>
-          <Markdown content={testContent} />
+          <Markdown content={content} />
         </div>}
       </div>
       <div {...styles.logo}>
