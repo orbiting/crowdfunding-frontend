@@ -1,4 +1,5 @@
 import React from 'react'
+import {css} from 'glamor'
 
 import {
   Interaction
@@ -9,12 +10,23 @@ import Markdown from '../Markdown'
 
 const {H3} = Interaction
 
+const styles = {
+  img: css({
+    display: 'block',
+    float: 'left',
+    maxWidth: 113,
+    marginTop: 5,
+    marginBottom: 8,
+    marginRight: 15
+  })
+}
+
 export default ({t, feedName, authorImage, authorName, content, tags = []}) => (
-  <span>
+  <div>
     {!!authorImage && (
-      <img src={authorImage} style={{float: 'left', maxWidth: 100, marginBottom: 5, marginRight: 5}} />
+      <img src={authorImage} {...styles.img} />
     )}
-    <H3 style={{color: pollColors[tags[0]]}}>
+    <H3 style={{color: pollColors[tags[0]], marginBottom: 2}}>
       {authorName}
       {!!tags[0] && (
         ' ' + t('discuss/comment/for', {
@@ -23,6 +35,6 @@ export default ({t, feedName, authorImage, authorName, content, tags = []}) => (
       )}
     </H3>
     <Markdown content={content} />
-    <br style={{clear: 'both'}} />
-  </span>
+    <div style={{clear: 'both'}} />
+  </div>
 )

@@ -22,6 +22,11 @@ const styles = {
   comment: css({
     marginTop: 40,
     marginBottom: 40
+  }),
+  voteBox: css({
+    marginLeft: 10,
+    float: 'right',
+    textAlign: 'center'
   })
 }
 
@@ -94,7 +99,7 @@ class Comment extends Component {
     return (
       <div {...styles.comment}>
         {!!id && (
-          <div style={{float: 'right', textAlign: 'center'}}>
+          <div {...styles.voteBox}>
             <a {...linkRule} href='#'
               style={{opacity: userVote === 'DOWN' ? 0.3 : 1}}
               onClick={event => {
