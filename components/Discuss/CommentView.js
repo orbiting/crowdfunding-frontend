@@ -18,20 +18,23 @@ const styles = {
   title: css({
     marginBottom: 2,
     fontSize: 18,
+    lineHeight: '24px',
     [mediaQueries.mUp]: {
-      fontSize: 22
+      fontSize: 22,
+      lineHeight: '28px'
     }
   }),
   img: css({
     display: 'block',
     float: 'left',
-    maxWidth: 72,
-    marginBottom: 5,
+    maxWidth: 66,
+    marginTop: 3,
+    marginBottom: 3,
     [mediaQueries.mUp]: {
+      marginTop: 5,
       marginBottom: 8,
       maxWidth: 113
     },
-    marginTop: 5,
     marginRight: 15
   })
 }
