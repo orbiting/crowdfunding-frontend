@@ -86,7 +86,7 @@ class CommentForm extends Component {
       content: values.comment,
       tags: [tag].filter(Boolean)
     })
-      .then(() => {
+      .then(({data}) => {
         this.setState((state) => ({
           loading: false,
           values: {
@@ -95,7 +95,7 @@ class CommentForm extends Component {
           }
         }))
         if (this.props.onSave) {
-          this.props.onSave()
+          this.props.onSave(data[method])
         }
       })
       .catch(error => {
@@ -165,7 +165,7 @@ class CommentForm extends Component {
             <P>
               <Label>{t('discuss/comment/tag')}</Label><br />
               {Object.keys(pollColors).map(key => (
-                <span>
+                <span key={key}>
                   <span style={{whiteSpace: 'nowrap'}}>
                     <Radio
                       checked={key === this.state.tag}
@@ -233,12 +233,16 @@ class CommentForm extends Component {
 
 const submitComment = gql`
 mutation submitComment($feedName: String!, $content: String!, $tags: [String!]!) {
-  submitComment(feedName: $feedName, content: $content, tags: $tags)
+  submitComment(feedName: $feedName, content: $content, tags: $tags) {
+    id
+  }
 }
 `
 const editComment = gql`
 mutation editComment($commentId: ID!, $content: String!) {
-  editComment(commentId: $commentId, content: $content)
+  editComment(commentId: $commentId, content: $content) {
+    id
+  }
 }
 `
 

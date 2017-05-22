@@ -187,12 +187,16 @@ class Comment extends Component {
 
 const upvote = gql`
 mutation upvoteComment($commentId: ID!) {
-  upvoteComment(commentId: $commentId)
+  upvoteComment(commentId: $commentId) {
+    id
+  }
 }
 `
 const downvote = gql`
 mutation downvoteComment($commentId: ID!) {
-  downvoteComment(commentId: $commentId)
+  downvoteComment(commentId: $commentId) {
+    id
+  }
 }
 `
 const unpublish = gql`

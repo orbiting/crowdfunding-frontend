@@ -5,6 +5,7 @@ import {compose} from 'redux'
 import Loader from '../Loader'
 import withT from '../../lib/withT'
 import Meta from '../Frame/Meta'
+import Router from 'next/router'
 
 import {
   Interaction
@@ -108,7 +109,12 @@ class Feed extends Component {
             {feed.userIsEligitable && !userHasToWait && (
               <div>
                 <P>{t('discuss/form/lead')}</P>
-                <Form feedName={name} maxLength={feed.commentMaxLength} />
+                <Form
+                  feedName={name}
+                  maxLength={feed.commentMaxLength}
+                  onSave={({id}) => {
+                    Router.push({pathname: '/vote', query: {id}}, '/vote')
+                  }} />
               </div>
             )}
             {feed.comments.map(comment => (
