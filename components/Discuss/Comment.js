@@ -163,7 +163,9 @@ class Comment extends Component {
             {' – '}
             <A href='#' onClick={event => {
               event.preventDefault()
-              this.props.unpublish()
+              this.props.unpublish().then(() => {
+                window.location = '/vote'
+              })
             }}>
               {t('discuss/comment/unpublish')}
             </A>
