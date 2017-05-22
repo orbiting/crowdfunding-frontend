@@ -72,6 +72,14 @@ class Feed extends Component {
     }
     window.addEventListener('scroll', this.onScroll)
   }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.me !== this.props.me) {
+      this.props.refetch && this.props.refetch({
+        name: this.props.name,
+        limit: this.props.limit
+      })
+    }
+  }
   componentWillUnmount () {
     window.removeEventListener('scroll', this.onScroll)
   }
@@ -142,6 +150,7 @@ export default compose(
         loading: data.loading,
         error: data.error,
         feed: data.feed,
+        refetch: data.refetch,
         loadMore () {
           return data.fetchMore({
             updateQuery: (previousResult, {fetchMoreResult, queryVariables}) => {
