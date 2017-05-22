@@ -5,7 +5,6 @@ import {compose} from 'redux'
 import withT from '../../lib/withT'
 import {timeMinute} from 'd3-time'
 
-import {feed as feedQuery} from './queries'
 import View from './CommentView'
 import Form from './Form'
 
@@ -77,7 +76,8 @@ class Comment extends Component {
       },
       t,
       upVote, downVote,
-      feedName, maxLength, userIsEligitable,
+      feedName, feedLimit,
+      maxLength, userIsEligitable,
       meta
     } = this.props
     const {
@@ -89,6 +89,7 @@ class Comment extends Component {
         <div {...styles.comment}>
           <Form
             feedName={feedName}
+            feedLimit={feedLimit}
             maxLength={maxLength}
             edit={data}
             onSave={() => {
@@ -197,6 +198,10 @@ const upvote = gql`
 mutation upvoteComment($commentId: ID!) {
   upvoteComment(commentId: $commentId) {
     id
+    score
+    upVotes
+    downVotes
+    userVote
   }
 }
 `
@@ -204,6 +209,10 @@ const downvote = gql`
 mutation downvoteComment($commentId: ID!) {
   downvoteComment(commentId: $commentId) {
     id
+    score
+    upVotes
+    downVotes
+    userVote
   }
 }
 `
@@ -219,13 +228,7 @@ export default compose(
       unpublish: () => mutate({
         variables: {
           commentId: ownProps.data.id
-        },
-        refetchQueries: [{
-          query: feedQuery,
-          variables: {
-            name: ownProps.feedName
-          }
-        }]
+        }
       })
     })
   }),
@@ -234,13 +237,7 @@ export default compose(
       upVote: () => mutate({
         variables: {
           commentId: ownProps.data.id
-        },
-        refetchQueries: [{
-          query: feedQuery,
-          variables: {
-            name: ownProps.feedName
-          }
-        }]
+        }
       })
     })
   }),
@@ -249,13 +246,7 @@ export default compose(
       downVote: () => mutate({
         variables: {
           commentId: ownProps.data.id
-        },
-        refetchQueries: [{
-          query: feedQuery,
-          variables: {
-            name: ownProps.feedName
-          }
-        }]
+        }
       })
     })
   }),

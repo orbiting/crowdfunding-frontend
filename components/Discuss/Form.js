@@ -259,7 +259,8 @@ export default compose(
         refetchQueries: [{
           query: feedQuery,
           variables: {
-            name: ownProps.feedName
+            name: ownProps.feedName,
+            limit: ownProps.feedLimit
           }
         }]
       })
@@ -275,7 +276,8 @@ export default compose(
         refetchQueries: [{
           query: feedQuery,
           variables: {
-            name: ownProps.feedName
+            name: ownProps.feedName,
+            limit: ownProps.feedLimit
           }
         }]
       })

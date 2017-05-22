@@ -84,7 +84,10 @@ class Feed extends Component {
     window.removeEventListener('scroll', this.onScroll)
   }
   render () {
-    const {loading, error, feed, t, name, firstId} = this.props
+    const {
+      loading, error, feed,
+      t, name, firstId, limit: feedLimit
+    } = this.props
 
     return (
       <Loader loading={!feed || loading} error={error} render={() => {
@@ -120,6 +123,7 @@ class Feed extends Component {
                 <P>{t('discuss/form/lead')}</P>
                 <Form
                   feedName={name}
+                  feedLimit={feedLimit}
                   maxLength={feed.commentMaxLength}
                   onSave={({id}) => {
                     Router.push({pathname: '/vote', query: {id}}, '/vote')
@@ -129,6 +133,7 @@ class Feed extends Component {
             {feed.comments.map(comment => (
               <Comment key={comment.id}
                 feedName={name}
+                feedLimit={feedLimit}
                 maxLength={feed.commentMaxLength}
                 userIsEligitable={feed.userIsEligitable}
                 data={comment}
