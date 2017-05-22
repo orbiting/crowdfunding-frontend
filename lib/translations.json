@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-15T18:36:20.267Z",
+  "updated": "2017-05-21T23:53:14.296Z",
   "title": "live",
   "data": [
     {
@@ -37,6 +37,10 @@
     {
       "key": "menu/merci",
       "value": "Merci"
+    },
+    {
+      "key": "menu/vote",
+      "value": "Abstimmung"
     },
     {
       "key": "header/button",
@@ -1432,7 +1436,7 @@
     },
     {
       "key": "api/comment/notYours",
-      "value": "Sie können nur ihre eigenen Kommentare bearbeiten."
+      "value": "Sie können nur Ihre eigenen Kommentare bearbeiten."
     },
     {
       "key": "api/comment/tooLong",
@@ -1444,11 +1448,239 @@
     },
     {
       "key": "api/comment/membershipRequired",
-      "value": "Sie müssen Mitglied sein um zu kommentieren."
+      "value": "Sie müssen Mitglied sein, um zu kommentieren."
     },
     {
       "key": "api/comment/tooEarly",
-      "value": "Sie sind zu früh. Bitte warten sie {waitFor} bevor sie wieder kommentieren."
+      "value": "Sie sind zu früh. Bitte warten Sie, {waitFor} bevor Sie wieder kommentieren."
+    },
+    {
+      "key": "api/voting/membershipRequired",
+      "value": "Sie müssen Mitglied sein, um abzustimmen."
+    },
+    {
+      "key": "api/voting/alreadyVoted",
+      "value": "Sie können nur einmal abstimmen."
+    },
+    {
+      "key": "vote/END_GOAL/title",
+      "value": "Abstimmung zum Ziel für den Crowdfunding-Schlussspurt"
+    },
+    {
+      "key": "vote/END_GOAL/lead",
+      "value": "Geehrter Verleger, geehrte Verlegerin, es ist Zeit, Ihre Entscheidung zu treffen. Welches Ziel halten Sie langfristig für das beste in Bezug auf die Entwicklung der Republik sowie kurzfristig für das Elektrisierendste für den Crowdfunding-Schlussspurt? Falls Sie den Newsletter nicht erhalten haben, klicken Sie auf <a href=\"/updates/abstimmung\">diesen Link</a>, um solidere Entscheidungsgrundlagen zu bekommen."
+    },
+    {
+      "key": "vote/END_GOAL/time/days/1",
+      "value": "Ihnen verbleibt noch ein Tag – am {endDate} um {endHour} Uhr endet die Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/time/days/other",
+      "value": "Ihnen verbleiben noch {count} Tage – am {endDate} um {endHour} Uhr endet die Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/time/hours/1",
+      "value": "Ihnen verbleibt noch eine Stunde – um {endHour} Uhr endet die Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/time/hours/other",
+      "value": "Ihnen verbleiben noch {count} Stunden – am {endDate} um {endHour} Uhr endet die Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/time/minutes/1",
+      "value": "Schnell! Ihnen verbleibt noch eine Minute – gleich endet die Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/time/minutes/other",
+      "value": "Ihnen verbleiben noch {count} Minuten bis zum Ende der Abstimmung."
+    },
+    {
+      "key": "vote/END_GOAL/turnout/0",
+      "value": "Werden Sie die erste Wählerin oder der erste Wähler der Republik!"
+    },
+    {
+      "key": "vote/END_GOAL/turnout/1",
+      "value": "Eine Person hat bereits gewählt. Werden Sie der zweite Wähler oder die zweite Wählerin der Republik!"
+    },
+    {
+      "key": "vote/END_GOAL/turnout/2",
+      "value": "Zwei Personen haben bereits gewählt. Werden Sie die dritte Wählerin oder der dritte Wähler der Republik!"
+    },
+    {
+      "key": "vote/END_GOAL/turnout/999",
+      "value": "{count} von {eligitable} (rund {roundTurnoutPercent} Prozent) haben bereits eine Wahl getroffen. Werden Sie die 1000. Wählerin oder der 1000. Wähler!"
+    },
+    {
+      "key": "vote/END_GOAL/turnout/other",
+      "value": "{count} von {eligitable} (rund {roundTurnoutPercent} Prozent) haben bereits eine Wahl getroffen."
+    },
+    {
+      "key": "vote/END_GOAL/options/title/generic",
+      "value": "Die Entscheidung"
+    },
+    {
+      "key": "vote/END_GOAL/options/title/canVote",
+      "value": "Ihre Entscheidung"
+    },
+    {
+      "key": "vote/END_GOAL/options/SATIRE",
+      "value": "Ein Budget für die kompromisslosesten Satirikerinnen und Satiriker, die sich kaufen lassen"
+    },
+    {
+      "key": "vote/END_GOAL/options/SATIRE/title",
+      "value": "Satire"
+    },
+    {
+      "key": "vote/END_GOAL/options/DATA",
+      "value": "Die Anstellung eines Datenjournalisten (oder einer Datenjournalistin)"
+    },
+    {
+      "key": "vote/END_GOAL/options/DATA/title",
+      "value": "Datenjournalismus"
+    },
+    {
+      "key": "vote/END_GOAL/options/CORRESPONDENT",
+      "value": "Die Anstellung einer Deutschland-Korrespondentin (oder eines Deutschland-Korrespondenten)"
+    },
+    {
+      "key": "vote/END_GOAL/options/CORRESPONDENT/title",
+      "value": "Deutschland-Korrespondentin"
+    },
+    {
+      "key": "vote/option/select",
+      "value": "auswählen"
+    },
+    {
+      "key": "vote/option/selected",
+      "value": "ausgewählt"
+    },
+    {
+      "key": "vote/submit/text",
+      "value": "Jetzt abstimmen"
+    },
+    {
+      "key": "vote/submit/text/title",
+      "value": "Jetzt für {title} stimmen"
+    },
+    {
+      "key": "vote/submit/note",
+      "value": "Sie können nur einmal abstimmen und Ihre Wahl nicht rückgängig machen oder verändern. Es wird gespeichert, wie Sie stimmen, die Daten werden vertraulich behandelt und nur anonym ausgewertet."
+    },
+    {
+      "key": "vote/submit/merci",
+      "value": "Vielen Dank für Ihre Stimme!"
+    },
+    {
+      "key": "vote/signedIn/title",
+      "value": "Willkommen zur Abstimmung"
+    },
+    {
+      "key": "vote/signedIn/email",
+      "value": "Angemeldet als: {email}"
+    },
+    {
+      "key": "vote/hasSubmitted",
+      "value": "Sie haben bereits abgestimmt. Vielen Dank für Ihre Stimme!"
+    },
+    {
+      "key": "vote/notEligitable",
+      "value": "Sie müssen eine Mitgliedschaft besitzen, um mitzubestimmen. <a href=\"/pledge?package=ABO\">Jetzt Mitglied werden</a>. Falls Sie bereits eine Mitgliedschaft haben, melden Sie sich mit der gleichen E-Mail-Adresse an wie beim Mitmachen."
+    },
+    {
+      "key": "vote/signIn/title",
+      "value": "Anmelden"
+    },
+    {
+      "key": "vote/signIn/before",
+      "value": "Sie müssen ein Mitglied sein und sich anmelden, um abstimmen zu können:"
+    },
+    {
+      "key": "vote/signIn/after",
+      "value": "Noch nicht Mitglied? <a href=\"/pledge?package=ABO\">Jetzt mitmachen</a>."
+    },
+    {
+      "key": "discuss/title",
+      "value": "Plädoyers"
+    },
+    {
+      "key": "discuss/form/lead",
+      "value": "Schreiben Sie ein Plädoyer:"
+    },
+    {
+      "key": "discuss/form/comment/label",
+      "value": "Ihr Plädoyer"
+    },
+    {
+      "key": "discuss/form/comment/label/errorMin",
+      "value": "Ihr Plädoyer, mindestens 5 Zeichen"
+    },
+    {
+      "key": "discuss/form/comment/label/errorMax",
+      "value": "Ihr Plädoyer, maximal {count} Zeichen"
+    },
+    {
+      "key": "discuss/form/submit",
+      "value": "veröffentlichen"
+    },
+    {
+      "key": "discuss/form/edit",
+      "value": "aktualisieren"
+    },
+    {
+      "key": "discuss/form/preview",
+      "value": "Vorschau"
+    },
+    {
+      "key": "discuss/comment/upVote",
+      "value": "Lesenswert: +1"
+    },
+    {
+      "key": "discuss/comment/downVote",
+      "value": "Zeitverschwendung: –1"
+    },
+    {
+      "key": "discuss/comment/edit",
+      "value": "bearbeiten"
+    },
+    {
+      "key": "discuss/comment/editCancel",
+      "value": "abbrechen"
+    },
+    {
+      "key": "discuss/comment/unpublish",
+      "value": "entfernen"
+    },
+    {
+      "key": "discuss/comment/updateNote",
+      "value": "aktualisiert am {updateDate}"
+    },
+    {
+      "key": "discuss/comment/tag",
+      "value": "Ich plädiere für:"
+    },
+    {
+      "key": "discuss/comment/tag/error",
+      "value": "Bitte wählen Sie aus, wofür Sie plädieren."
+    },
+    {
+      "key": "discuss/comment/userWaitingTime",
+      "value": "Sie können nur einmal pro Tag ein Plädoyer schreiben."
+    },
+    {
+      "key": "discuss/comment/for",
+      "value": "für {tagName}"
+    },
+    {
+      "key": "discuss/comment/hint",
+      "value": "<a href=\"https://de.wikipedia.org/wiki/Markdown\" target=\"_blank\">Markdown</a> erlaubt, {count} Zeichen verbleibend."
+    },
+    {
+      "key": "discuss/comment/hint/photo",
+      "value": "<a href=\"/merci\" target=\"_blank\">Ihr Porträtfoto</a> von der Community-Seite wird angezeigt."
+    },
+    {
+      "key": "discuss/comment/hint/noPhoto",
+      "value": "Geben Sie ein Statement ab, um ein <a href=\"/merci\" target=\"_blank\">Porträtfoto hinzuzufügen</a>."
     }
   ]
 }

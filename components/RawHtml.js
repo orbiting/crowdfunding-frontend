@@ -17,6 +17,9 @@ const styles = {
       ':hover': {
         color: colors.secondary
       }
+    },
+    '& ul, & ol': {
+      overflow: 'hidden'
     }
   }),
   sansSerif: css({
