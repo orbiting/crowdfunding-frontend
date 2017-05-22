@@ -25,6 +25,42 @@ class Feed extends Component {
     this.containerRef = ref => {
       this.container = ref
     }
+    this.onScroll = () => {
+      const {feed} = this.props
+
+      if (this.container && feed && feed.comments) {
+        const bbox = this.container.getBoundingClientRect()
+        if (bbox.bottom < window.innerHeight * 2) {
+          const {isFetchingMore, hasReachEnd} = this.state
+          if (
+            isFetchingMore || hasReachEnd
+          ) {
+            return
+          }
+          this.setState(() => ({
+            isFetchingMore: true
+          }), () => {
+            const query = this.query = [
+              this.props.name
+            ].join('_')
+            this.props.loadMore().then(({data}) => {
+              if (query !== this.query) {
+                this.setState(() => ({
+                  isFetchingMore: false
+                }), () => {
+                  this.onScroll()
+                })
+                return
+              }
+              this.setState(() => ({
+                isFetchingMore: false,
+                hasReachEnd: !data.feed.comments.length
+              }))
+            })
+          })
+        }
+      }
+    }
   }
   componentDidMount () {
     const {firstId} = this.props
@@ -32,9 +68,13 @@ class Feed extends Component {
       const {top} = this.container.getBoundingClientRect()
       window.scrollTo(0, window.pageYOffset + top - 100)
     }
+    window.addEventListener('scroll', this.onScroll)
+  }
+  componentWillUnmount () {
+    window.removeEventListener('scroll', this.onScroll)
   }
   render () {
-    const {data: {loading, error, feed}, t, name, firstId} = this.props
+    const {loading, error, feed, t, name, firstId} = this.props
 
     const userWaitUntil = feed.userWaitUntil
       ? new Date(feed.userWaitUntil)
@@ -87,5 +127,39 @@ class Feed extends Component {
 
 export default compose(
   withT,
-  graphql(feedQuery)
+  graphql(feedQuery, {
+    props: ({data, ownProps}) => {
+      return ({
+        loading: data.loading,
+        error: data.error,
+        feed: data.feed,
+        loadMore () {
+          return data.fetchMore({
+            updateQuery: (previousResult, {fetchMoreResult, queryVariables}) => {
+              let comments = [
+                ...previousResult.feed.comments,
+                ...fetchMoreResult.feed.comments
+              ]
+                .filter(Boolean)
+                .filter(({id}, i, array) => {
+                  return i === array.findIndex(d => d.id === id)
+                })
+              return {
+                ...previousResult,
+                feed: {
+                  ...previousResult.feed,
+                  ...fetchMoreResult.feed,
+                  comments
+                }
+              }
+            },
+            variables: {
+              name: ownProps.name,
+              limit: ((data.feed || {}).comments || []).length + ownProps.limit
+            }
+          })
+        }
+      })
+    }
+  })
 )(Feed)
