@@ -130,7 +130,10 @@ class Comment extends Component {
               }}>
               <UpVote fill={commentColor} title={t('discuss/comment/upVote')} />
             </a><br />
-            {upVotes - downVotes}<br />
+            <span title={`${upVotes} - ${downVotes}`}>
+              {upVotes - downVotes}
+            </span>
+            <br />
             <a {...linkRule} href='#'
               style={{opacity: userVote === 'UP' ? 0.3 : 1}}
               onClick={event => {
