@@ -3,6 +3,7 @@ import {graphql} from 'react-apollo'
 import {compose} from 'redux'
 
 import Loader from '../Loader'
+import withMe from '../../lib/withMe'
 import withT from '../../lib/withT'
 import Meta from '../Frame/Meta'
 import Router from 'next/router'
@@ -121,6 +122,7 @@ class Feed extends Component {
               <Comment key={comment.id}
                 feedName={name}
                 maxLength={feed.commentMaxLength}
+                userIsEligitable={feed.userIsEligitable}
                 data={comment}
                 meta={metaData} />
             ))}
@@ -132,6 +134,7 @@ class Feed extends Component {
 }
 
 export default compose(
+  withMe,
   withT,
   graphql(feedQuery, {
     props: ({data, ownProps}) => {

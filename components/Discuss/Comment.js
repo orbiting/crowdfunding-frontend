@@ -77,7 +77,7 @@ class Comment extends Component {
       },
       t,
       upVote, downVote,
-      feedName, maxLength,
+      feedName, maxLength, userIsEligitable,
       meta
     } = this.props
     const {
@@ -122,26 +122,32 @@ class Comment extends Component {
       <div {...styles.comment} data-comment>
         {!!id && (
           <div {...styles.voteBox}>
-            <a {...linkRule} href='#'
-              style={{opacity: userVote === 'DOWN' ? 0.3 : 1}}
+            <span {...linkRule}
+              style={{
+                opacity: !userIsEligitable || userVote === 'DOWN' ? 0.3 : 1,
+                cursor: userIsEligitable ? 'pointer' : undefined
+              }}
               onClick={event => {
                 event.preventDefault()
-                upVote()
+                userIsEligitable && upVote()
               }}>
               <UpVote fill={commentColor} title={t('discuss/comment/upVote')} />
-            </a><br />
+            </span><br />
             <span title={`${upVotes} - ${downVotes}`}>
               {upVotes - downVotes}
             </span>
             <br />
-            <a {...linkRule} href='#'
-              style={{opacity: userVote === 'UP' ? 0.3 : 1}}
+            <span {...linkRule}
+              style={{
+                opacity: !userIsEligitable || userVote === 'UP' ? 0.3 : 1,
+                cursor: userIsEligitable ? 'pointer' : undefined
+              }}
               onClick={event => {
                 event.preventDefault()
-                downVote()
+                userIsEligitable && downVote()
               }}>
               <DownVote fill={commentColor} title={t('discuss/comment/downVote')} />
-            </a>
+            </span>
           </div>
         )}
         <View t={t} feedName={feedName} {...data} />
