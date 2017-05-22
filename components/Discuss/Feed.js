@@ -76,12 +76,6 @@ class Feed extends Component {
   render () {
     const {loading, error, feed, t, name, firstId} = this.props
 
-    const userWaitUntil = feed.userWaitUntil
-      ? new Date(feed.userWaitUntil)
-      : null
-    const now = new Date()
-    const userHasToWait = userWaitUntil > now
-
     return (
       <Loader loading={!feed || loading} error={error} render={() => {
         let {meta: metaData} = this.props
@@ -94,6 +88,12 @@ class Feed extends Component {
             }
           }
         }
+
+        const userWaitUntil = feed.userWaitUntil
+          ? new Date(feed.userWaitUntil)
+          : null
+        const now = new Date()
+        const userHasToWait = userWaitUntil > now
 
         return (
           <div ref={this.containerRef}>
