@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-21T23:53:14.296Z",
+  "updated": "2017-05-23T13:47:07.823Z",
   "title": "live",
   "data": [
     {
@@ -1508,11 +1508,11 @@
     },
     {
       "key": "vote/END_GOAL/turnout/999",
-      "value": "{count} von {eligitable} (rund {roundTurnoutPercent} Prozent) haben bereits eine Wahl getroffen. Werden Sie die 1000. Wählerin oder der 1000. Wähler!"
+      "value": "{formattedCount} von {formattedEligitable} (rund {roundTurnoutPercent} Prozent) haben bereits eine Wahl getroffen. Werden Sie die 1000. Wählerin oder der 1000. Wähler!"
     },
     {
       "key": "vote/END_GOAL/turnout/other",
-      "value": "{count} von {eligitable} (rund {roundTurnoutPercent} Prozent) haben bereits eine Wahl getroffen."
+      "value": "{formattedCount} von {formattedEligitable} (rund {roundTurnoutPercent} Prozent) haben bereits eine Wahl getroffen."
     },
     {
       "key": "vote/END_GOAL/options/title/generic",

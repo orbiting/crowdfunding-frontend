@@ -12,7 +12,7 @@ import RawHtml from '../RawHtml'
 import ErrorMessage from '../ErrorMessage'
 import {InlineSpinner} from '../Spinner'
 
-import {swissTime} from '../../lib/utils/formats'
+import {swissTime, countFormat} from '../../lib/utils/formats'
 
 import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
@@ -205,7 +205,12 @@ class Poll extends Component {
                 }),
                 t.pluralize(`vote/${voting.name}/turnout`, {
                   count: voting.turnout.submitted,
-                  eligitable: voting.turnout.eligitable,
+                  formattedCount: countFormat(
+                    voting.turnout.submitted
+                  ),
+                  formattedEligitable: countFormat(
+                    voting.turnout.eligitable
+                  ),
                   roundTurnoutPercent: Math.round(
                     voting.turnout.submitted / voting.turnout.eligitable * 100
                   )
