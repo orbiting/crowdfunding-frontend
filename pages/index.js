@@ -109,7 +109,7 @@ Eine funktionierende Demokratie braucht funktionierende Medien. Und dafür brauc
             </List.Item>
 
             <List.Item>
-              Es ist überwältigend, was wir gemeinsam mit Ihnen in den letzten drei Wochen erreicht haben: tatsächlich einen Unterschied zu machen! Genau dafür wird das digitale Magazin Republik von Project R entwickelt, daran arbeiten wir. Jetzt gerade tourt die Crew in alle Ecken des Landes, um bereits gewonnene Verlegerinnen persönlich kennenzulernen und neue Verleger zu gewinnen. Mehr hier: <Link href='/events'><a {...linkRule}>Veranstaltungen</a></Link>. Das Crowdfunding läuft noch bis am 31. Mai – das nächste Ziel sind 14{thousandSeparator}000 Unterstützerinnen. Unterdessen führen wir die Demokratie in der Republik ein. Danke fürs Mitmachen und Weitersagen!
+              Es ist überwältigend, was wir gemeinsam mit Ihnen in den letzten drei Wochen erreicht haben: tatsächlich einen Unterschied zu machen! Genau dafür wird das digitale Magazin Republik von Project R entwickelt, daran arbeiten wir. Jetzt gerade tourt die Crew in alle Ecken des Landes, um bereits gewonnene Verlegerinnen persönlich kennenzulernen und neue Verleger zu gewinnen. Mehr hier: <Link href='/events'><a {...linkRule}>Veranstaltungen</a></Link>. Das Crowdfunding läuft noch bis am 31. Mai – das nächste Ziel sind 14{thousandSeparator}000 Unterstützerinnen. Unterdessen führen wir die <Link href='/updates?slug=abstimmung' as='/updates/abstimmung'><a {...linkRule}>Demokratie in der Republik</a></Link> ein. Danke fürs Mitmachen und Weitersagen!
             </List.Item>
           </List>
         </div>
