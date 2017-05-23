@@ -22,6 +22,10 @@ import {
   H1, P as EP
 } from '@project-r/styleguide'
 
+import {
+  VOTING_POLL_INTERVAL_MS
+} from '../../constants'
+
 import colors from './colors'
 
 const {H2, H3, P} = Interaction
@@ -421,7 +425,11 @@ export default compose(
       })
     })
   }),
-  graphql(query),
+  graphql(query, {
+    options: {
+      pollInterval: +VOTING_POLL_INTERVAL_MS
+    }
+  }),
   withMe,
   withT
 )(Poll)
