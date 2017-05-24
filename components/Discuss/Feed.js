@@ -249,7 +249,7 @@ class Feed extends Component {
                     )
                   }
                   if (count !== undefined) {
-                    label = `${count}${NBSP}${label}`
+                    label = `${label}${NBSP}(${count})`
                   }
                   if (tag === currentTag) {
                     return label
