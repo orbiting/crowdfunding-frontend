@@ -155,10 +155,12 @@ class Feed extends Component {
         const now = new Date()
         const userHasToWait = userWaitUntil > now
 
-        const tagFilters = feed.stats.tags
-          .concat({
+        const tagFilters = [
+          {
             tag: undefined
-          })
+          }
+        ].concat(feed.stats.tags)
+
         const currentTag = tags
           ? (tags[0] || null)
           : undefined

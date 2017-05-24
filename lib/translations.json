@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-24T15:55:05.441Z",
+  "updated": "2017-05-24T16:07:34.134Z",
   "title": "live",
   "data": [
     {
@@ -1704,11 +1704,11 @@
     },
     {
       "key": "discuss/tags/all",
-      "value": "alle anzeigen"
+      "value": "Alle"
     },
     {
       "key": "discuss/tags/none",
-      "value": "unbestimmt"
+      "value": "Unbestimmt"
     },
     {
       "key": "discuss/stats/other",
