@@ -3,13 +3,14 @@ import {graphql} from 'react-apollo'
 import {compose} from 'redux'
 import {format} from 'url'
 import {css} from 'glamor'
+import Router from 'next/router'
 
 import Loader from '../Loader'
 import withMe from '../../lib/withMe'
 import withT from '../../lib/withT'
 import {intersperse} from '../../lib/utils/helpers'
 import Meta from '../Frame/Meta'
-import Router from 'next/router'
+import {InlineSpinner} from '../Spinner'
 
 import {
   Interaction, Label, linkRule, mediaQueries
@@ -90,7 +91,7 @@ class Feed extends Component {
               }
               this.setState(() => ({
                 isFetchingMore: false,
-                hasReachEnd: !data.feed.comments.length
+                hasReachEnd: data.feed.comments.length === feed.comments.length
               }))
             })
           })
@@ -275,6 +276,11 @@ class Feed extends Component {
                 data={comment}
                 meta={metaData} />
             ))}
+            {!!this.state.isFetchingMore && (
+              <div style={{textAlign: 'center'}}>
+                <InlineSpinner />
+              </div>
+            )}
           </div>
         )
       }} />
