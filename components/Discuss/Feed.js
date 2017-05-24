@@ -102,7 +102,7 @@ class Feed extends Component {
   componentDidMount () {
     if (this.container && (
       this.props.firstId ||
-      this.props.order ||
+      this.props.order !== DEFAULT_ORDER ||
       this.props.tags
     )) {
       const {top} = this.container.getBoundingClientRect()
