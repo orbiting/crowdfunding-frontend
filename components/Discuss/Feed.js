@@ -213,7 +213,7 @@ class Feed extends Component {
                   }} />
               </div>
             )}
-            <div style={{marginTop: 40}}>
+            <div style={{marginTop: feed.userIsEligitable ? 40 : 0}}>
               <P>{t.pluralize('discuss/stats', {
                 count: feed.stats.count
               })}</P>
