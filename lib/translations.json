@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-23T13:47:07.823Z",
+  "updated": "2017-05-24T15:55:05.441Z",
   "title": "live",
   "data": [
     {
@@ -1681,6 +1681,42 @@
     {
       "key": "discuss/comment/hint/noPhoto",
       "value": "Geben Sie ein Statement ab, um ein <a href=\"/merci\" target=\"_blank\">Porträtfoto hinzuzufügen</a>."
+    },
+    {
+      "key": "discuss/order/title",
+      "value": "Reihenfolge"
+    },
+    {
+      "key": "discuss/order/HOT",
+      "value": "Gewichtet"
+    },
+    {
+      "key": "discuss/order/NEW",
+      "value": "Neuste"
+    },
+    {
+      "key": "discuss/order/TOP",
+      "value": "Beliebteste"
+    },
+    {
+      "key": "discuss/tags/title",
+      "value": "Plädoyer filtern"
+    },
+    {
+      "key": "discuss/tags/all",
+      "value": "alle anzeigen"
+    },
+    {
+      "key": "discuss/tags/none",
+      "value": "unbestimmt"
+    },
+    {
+      "key": "discuss/stats/other",
+      "value": "Es wurden bereits {count} Plädoyers veröffentlicht."
+    },
+    {
+      "key": "discuss/stats/1",
+      "value": "Es wurden bereits ein Plädoyer veröffentlicht."
     }
   ]
 }

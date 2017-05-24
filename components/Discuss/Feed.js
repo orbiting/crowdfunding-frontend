@@ -1,15 +1,18 @@
 import React, {Component} from 'react'
 import {graphql} from 'react-apollo'
 import {compose} from 'redux'
+import {format} from 'url'
+import {css} from 'glamor'
 
 import Loader from '../Loader'
 import withMe from '../../lib/withMe'
 import withT from '../../lib/withT'
+import {intersperse} from '../../lib/utils/helpers'
 import Meta from '../Frame/Meta'
 import Router from 'next/router'
 
 import {
-  Interaction
+  Interaction, Label, linkRule, mediaQueries
 } from '@project-r/styleguide'
 
 import Form from './Form'
@@ -17,7 +20,38 @@ import Comment from './Comment'
 
 import {feed as feedQuery} from './queries'
 
+const ORDERS = [
+  'HOT', 'NEW', 'TOP'
+]
+export const DEFAULT_ORDER = 'HOT'
+
+const NBSP = ' '
+
 const {H2, P} = Interaction
+
+const styles = {
+  statsFilter: css({
+    lineHeight: 1.3,
+    [mediaQueries.mUp]: {
+      float: 'left',
+      paddingRight: 10,
+      width: '50%'
+    }
+  }),
+  statsOrder: css({
+    lineHeight: 1.3,
+    [mediaQueries.mUp]: {
+      textAlign: 'right',
+      float: 'right',
+      paddingLeft: 10,
+      width: '50%',
+      marginBottom: 0,
+      marginTop: 0
+    },
+    marginTop: 10,
+    marginBottom: 10
+  })
+}
 
 class Feed extends Component {
   constructor (...args) {
@@ -65,8 +99,11 @@ class Feed extends Component {
     }
   }
   componentDidMount () {
-    const {firstId} = this.props
-    if (firstId && this.container) {
+    if (this.container && (
+      this.props.firstId ||
+      this.props.order ||
+      this.props.tags
+    )) {
       const {top} = this.container.getBoundingClientRect()
       window.scrollTo(0, window.pageYOffset + top - 100)
     }
@@ -79,6 +116,15 @@ class Feed extends Component {
         limit: this.props.limit
       })
     }
+    if (
+      nextProps.firstId !== this.props.firstId ||
+      nextProps.order !== this.props.order ||
+      String(nextProps.tags) !== String(this.props.tags)
+    ) {
+      this.setState(() => ({
+        hasReachEnd: false
+      }))
+    }
   }
   componentWillUnmount () {
     window.removeEventListener('scroll', this.onScroll)
@@ -86,7 +132,8 @@ class Feed extends Component {
   render () {
     const {
       loading, error, feed,
-      t, name, firstId, limit: feedLimit
+      t, name, firstId, limit: feedLimit,
+      order, tags
     } = this.props
 
     return (
@@ -107,6 +154,39 @@ class Feed extends Component {
           : null
         const now = new Date()
         const userHasToWait = userWaitUntil > now
+
+        const tagFilters = feed.stats.tags
+          .concat({
+            tag: undefined
+          })
+        const currentTag = tags
+          ? (tags[0] || null)
+          : undefined
+
+        const facetLink = facet => {
+          const to = {
+            pathname: '/vote',
+            query: {}
+          }
+          const toOrder = facet.order || order
+          if (toOrder !== DEFAULT_ORDER) {
+            to.query.order = toOrder
+          }
+          const toTag = facet.tag !== undefined
+            ? facet.tag
+            : currentTag
+          if (!facet.unsetTag && toTag !== undefined) {
+            to.query.tag = toTag
+          }
+
+          return {
+            href: format(to),
+            onClick: event => {
+              event.preventDefault()
+              Router.push(to, to, {shallow: true})
+            }
+          }
+        }
 
         return (
           <div ref={this.containerRef}>
@@ -130,6 +210,60 @@ class Feed extends Component {
                   }} />
               </div>
             )}
+            <div style={{marginTop: 40}}>
+              <P>{t.pluralize('discuss/stats', {
+                count: feed.stats.count
+              })}</P>
+              <div {...styles.statsOrder}>
+                <Label>{t('discuss/order/title')}</Label><br />
+                {intersperse(ORDERS.map(key => {
+                  const label = t(`discuss/order/${key}`)
+                  if (key === order) {
+                    return label
+                  }
+                  return (
+                    <a key={key} {...linkRule} {...facetLink({
+                      order: key
+                    })}>
+                      {label}
+                    </a>
+                  )
+                }), () => ', ')}
+              </div>
+              <div {...styles.statsFilter}>
+                <Label>{t('discuss/tags/title')}</Label><br />
+                {intersperse(tagFilters.map(({tag, count}) => {
+                  let label
+                  if (tag === undefined) {
+                    label = t('discuss/tags/all')
+                  } else if (tag === null) {
+                    label = t('discuss/tags/none')
+                  } else {
+                    label = t(
+                      `vote/${name}/options/${tag}/title`,
+                      undefined,
+                      tag
+                    )
+                  }
+                  if (count !== undefined) {
+                    label = `${count}${NBSP}${label}`
+                  }
+                  if (tag === currentTag) {
+                    return label
+                  }
+                  return (
+                    <a key={String(tag)} {...linkRule} {...facetLink({
+                      tag,
+                      unsetTag: tag === undefined
+                    })}>
+                      {label}
+                    </a>
+                  )
+                }), () => ', ')}
+              </div>
+              <div style={{clear: 'both'}} />
+            </div>
+
             {feed.comments.map(comment => (
               <Comment key={comment.id}
                 feedName={name}

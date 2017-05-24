@@ -10,7 +10,7 @@ import {
   STATIC_BASE_URL
 } from '../constants'
 
-import Feed from '../components/Discuss/Feed'
+import Feed, {DEFAULT_ORDER} from '../components/Discuss/Feed'
 import Share from '../components/Discuss/Share'
 import Poll from '../components/Vote/Poll'
 
@@ -30,7 +30,12 @@ const VotePage = ({url}) => {
     <Frame url={url} sidebar={false}>
       <NarrowContainer>
         <Poll name='END_GOAL' />
-        <Feed name='END_GOAL' firstId={url.query.id} meta={metaData} limit={20} />
+        <Feed name='END_GOAL'
+          firstId={url.query.id}
+          order={url.query.order || DEFAULT_ORDER}
+          tags={url.query.tag !== undefined ? [url.query.tag].filter(Boolean) : null}
+          meta={metaData}
+          limit={20} />
       </NarrowContainer>
     </Frame>
   )
