@@ -211,10 +211,10 @@ class Poll extends Component {
                   count: voting.turnout.submitted,
                   formattedCount: countFormat(
                     voting.turnout.submitted
-                  ),
+                  ).replace(/\u2009/g, '\u00a0'),
                   formattedEligitable: countFormat(
                     voting.turnout.eligitable
-                  ),
+                  ).replace(/\u2009/g, '\u00a0'),
                   roundTurnoutPercent: Math.round(
                     voting.turnout.submitted / voting.turnout.eligitable * 100
                   )
