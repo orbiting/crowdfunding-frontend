@@ -1,10 +1,11 @@
 import React from 'react'
 import {css} from 'glamor'
-import {feature} from 'topojson-client'
+import {feature, mesh} from 'topojson-client'
 import {geoPath} from 'd3-geo'
 
 const topology = require('./data/ch-cantons.json')
 const cantons = feature(topology, topology.objects.cantons).features
+const cantonMesh = mesh(topology)
 const path = geoPath(null)
 
 const WIDTH = 960
@@ -40,6 +41,7 @@ export default ({data, fill, fillOpacity}) => (
             fillOpacity={fillOpacity(d, canton)} />
         )
       })}
+      <path fill='none' stroke='#fff' strokeWidth='1.5' d={path(cantonMesh)} />
     </svg>
   </div>
 )
