@@ -66,6 +66,7 @@
     "react-maskedinput": "^3.3.4",
     "react-textarea-autosize": "^4.3.0",
     "redux": "^3.6.0",
+    "topojson-client": "^3.0.0",
     "unfetch": "^2.1.2"
   },
   "devDependencies": {

@@ -895,8 +895,7 @@
     "commander": {
       "version": "2.9.0",
       "from": "commander@>=2.9.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/commander/-/commander-2.9.0.tgz",
-      "dev": true
+      "resolved": "https://registry.npmjs.org/commander/-/commander-2.9.0.tgz"
     },
     "commondir": {
       "version": "1.0.1",
@@ -2609,8 +2608,7 @@
     "graceful-readlink": {
       "version": "1.0.1",
       "from": "graceful-readlink@>=1.0.0",
-      "resolved": "https://registry.npmjs.org/graceful-readlink/-/graceful-readlink-1.0.1.tgz",
-      "dev": true
+      "resolved": "https://registry.npmjs.org/graceful-readlink/-/graceful-readlink-1.0.1.tgz"
     },
     "graphql": {
       "version": "0.9.6",
@@ -4797,6 +4795,11 @@
       "version": "1.0.3",
       "from": "to-fast-properties@>=1.0.1 <2.0.0",
       "resolved": "https://registry.npmjs.org/to-fast-properties/-/to-fast-properties-1.0.3.tgz"
+    },
+    "topojson-client": {
+      "version": "3.0.0",
+      "from": "topojson-client@latest",
+      "resolved": "https://registry.npmjs.org/topojson-client/-/topojson-client-3.0.0.tgz"
     },
     "touch": {
       "version": "1.0.0",

@@ -8,6 +8,7 @@ import {
 
 import {countFormat} from '../../lib/utils/formats'
 
+import CantonMap from './CantonMap'
 import BarChart from './BarChart'
 import colors from './colors'
 
@@ -73,6 +74,37 @@ export default ({name, data, t}) => {
     }
   ]
 
+  const cantonResult = [
+    ['ZH', 'Kanton Zürich', 0.35 * totalVotes],
+    ['BE', 'Kanton Bern', 0.1 * totalVotes],
+    ['SG', 'Kanton St. Gallen', 0.05 * totalVotes],
+    ['LU', 'Kanton Luzern', 0.05 * totalVotes],
+    ['AG', 'Kanton Aargau', 0.05 * totalVotes],
+    ['BS', 'Kanton Basel-Stadt', 0.019 * totalVotes],
+    ['SO', 'Kanton Solothurn', 0.019 * totalVotes],
+    ['ZG', 'Kanton Zug', 0.019 * totalVotes],
+    ['GR', 'Kanton Graubünden', 0.019 * totalVotes],
+    ['SH', 'Kanton Schaffhausen', 0.019 * totalVotes],
+    ['TG', 'Kanton Thurgau', 0.019 * totalVotes],
+    ['FR', 'Canton de Fribourg', 0.019 * totalVotes],
+    ['BL', 'Kanton Basel-Landschaft', 0.019 * totalVotes],
+    ['UR', 'Kanton Uri', 0.019 * totalVotes],
+    ['AR', 'Kanton Appenzell Ausserrhoden', 0.019 * totalVotes],
+    ['SZ', 'Kanton Schwyz', 0.019 * totalVotes],
+    ['VD', 'Canton de Vaud', 0.019 * totalVotes],
+    ['NW', 'Kanton Nidwalden', 0.019 * totalVotes],
+    ['GE', 'Canton de Genève', 0.019 * totalVotes],
+    ['VS', 'Canton du Valais', 0.019 * totalVotes],
+    ['GL', 'Kanton Glarus', 0.019 * totalVotes],
+    ['OW', 'Kanton Obwalden', 0.019 * totalVotes],
+    ['TI', 'Cantone Ticino', 0.019 * totalVotes],
+    ['NE', 'Canton de Neuchâtel', 0.019 * totalVotes],
+    ['JU', 'Canton du Jura', 0.019 * totalVotes],
+    ['AI', 'Kanton Appenzell Innerrhoden', 0.019 * totalVotes]
+  ].map(([key, _, total]) => (
+    randomResult(key, data.options, total)
+  ))
+
   return (
     <div>
       <H2>Resultat</H2>
@@ -123,36 +155,24 @@ export default ({name, data, t}) => {
       <br />
 
       <H3>Nach Kanton</H3>
-      <BarChart compact data={[
-        ['Kanton Zürich', 0.35 * totalVotes],
-        ['Kanton Bern', 0.1 * totalVotes],
-        ['Kanton St. Gallen', 0.05 * totalVotes],
-        ['Kanton Luzern', 0.05 * totalVotes],
-        ['Kanton Aargau', 0.05 * totalVotes],
-        ['Kanton Basel-Stadt', 0.019 * totalVotes],
-        ['Kanton Solothurn', 0.019 * totalVotes],
-        ['Kanton Zug', 0.019 * totalVotes],
-        ['Kanton Graubünden', 0.019 * totalVotes],
-        ['Kanton Schaffhausen', 0.019 * totalVotes],
-        ['Kanton Thurgau', 0.019 * totalVotes],
-        ['Canton de Fribourg', 0.019 * totalVotes],
-        ['Kanton Basel-Landschaft', 0.019 * totalVotes],
-        ['Kanton Uri', 0.019 * totalVotes],
-        ['Kanton Appenzell Ausserrhoden', 0.019 * totalVotes],
-        ['Kanton Schwyz', 0.019 * totalVotes],
-        ['Canton de Vaud', 0.019 * totalVotes],
-        ['Kanton Nidwalden', 0.019 * totalVotes],
-        ['Canton de Genève', 0.019 * totalVotes],
-        ['Canton du Valais', 0.019 * totalVotes],
-        ['Kanton Glarus', 0.019 * totalVotes],
-        ['Kanton Obwalden', 0.019 * totalVotes],
-        ['Cantone Ticino', 0.019 * totalVotes],
-        ['Canton de Neuchâtel', 0.019 * totalVotes],
-        ['Canton du Jura', 0.019 * totalVotes],
-        ['Kanton Appenzell Innerrhoden', 0.019 * totalVotes]
-      ].map(([key, total]) => (
-        randomResult(key, data.options, total)
-      ))} />
+      <br />
+      {data.options.map(o => o.name).map(option => (
+        <div>
+          <span {...styles.badge} style={{
+            backgroundColor: colors[option]
+          }}>
+            {t(`vote/${name}/options/${option}/title`)}
+          </span>
+          <CantonMap
+            data={cantonResult}
+            fill={colors[option]}
+            fillOpacity={d => (
+              d.options.find(o => o.name === option).count / d.count
+            )} />
+          <br />
+          <br />
+        </div>
+      ))}
       <br />
       <Label>Geometrische Grundlage: <A href='https://www.cadastre.ch/de/services/service/plz.html' target='_blank'>swisstopo</A></Label>
 
