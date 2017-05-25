@@ -170,17 +170,7 @@ export default ({name, data, t}) => {
       <br />
 
       <H3>Nach Altersgruppen</H3>
-      <BarChart compact data={[
-        ['0 bis 20 Jahre', 0.05 * totalVotes],
-        ['20 bis 30', 0.1 * totalVotes],
-        ['30 bis 40', 0.2 * totalVotes],
-        ['40 bis 50', 0.2 * totalVotes],
-        ['50 bis 60', 0.05 * totalVotes],
-        ['70 bis 80', 0.05 * totalVotes],
-        ['80 und älter', 0.02 * totalVotes]
-      ].map(([key, total]) => (
-        randomResult(key, data.options, total)
-      ))} />
+      <BarChart compact data={data.stats.ages} />
     </div>
   )
 }

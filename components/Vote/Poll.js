@@ -395,6 +395,16 @@ query($name: String!) {
         count
         winner
       }
+      stats {
+        ages {
+          key
+          count
+          options {
+            name
+            count
+          }
+        }
+      }
       message
       createdAt
       updatedAt

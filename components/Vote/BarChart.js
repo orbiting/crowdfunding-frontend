@@ -51,7 +51,11 @@ export default ({data, compact}) => {
       {data.map((data) => (
         <div key={data.key}>
           <div>
-            <Label>{data.key} – {countFormat(data.count)} Stimmen</Label>
+            <Label>
+              {!data.key || data.key === 'null' ? 'Keine Angabe' : data.key}
+              {' – '}
+              {countFormat(data.count)} Stimmen
+            </Label>
           </div>
           <div {...styles.bar}>
             {data.options.map(option => {
