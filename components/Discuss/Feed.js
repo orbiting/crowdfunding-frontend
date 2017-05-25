@@ -138,7 +138,7 @@ class Feed extends Component {
     } = this.props
 
     return (
-      <Loader loading={!feed || loading} error={error} render={() => {
+      <Loader loading={loading && !feed} error={error} render={() => {
         let {meta: metaData} = this.props
         if (metaData && firstId) {
           const first = feed.comments[0]

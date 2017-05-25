@@ -149,7 +149,7 @@ class Poll extends Component {
     const {data: {loading, error, voting}, t, me} = this.props
 
     return (
-      <Loader loading={loading} error={error} render={() => {
+      <Loader loading={loading && !voting} error={!voting && error} render={() => {
         const endDate = new Date(voting.endDate)
 
         const now = new Date()

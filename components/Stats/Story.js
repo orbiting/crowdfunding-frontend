@@ -794,7 +794,7 @@ Ihre Crew der Republik und von Project&nbsp;R
 }
 
 const DataWrapper = ({data, me}) => (
-  <Loader loading={data.loading && !data.membershipStats} error={data.error && !data.membershipStats} render={() => {
+  <Loader loading={data.loading && !data.membershipStats} error={!data.membershipStats && data.error} render={() => {
     const {
       membershipStats: {
         countries,
