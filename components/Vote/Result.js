@@ -18,13 +18,18 @@ const styles = {
     marginTop: 20,
     marginBottom: 20
   }),
-  legendItem: css({
+  legendBadges: css({
+    lineHeight: '20px',
+    '& > *': {
+      marginBottom: 5,
+      marginRight: 5
+    }
+  }),
+  badge: css({
     display: 'inline-block',
     verticalAlign: 'bottom',
-    padding: '3px 6px',
-    borderRadius: 3,
-    marginRight: 5,
-    marginTop: 5,
+    padding: '1px 6px',
+    borderRadius: 4,
     color: '#fff'
   })
 }
@@ -45,20 +50,33 @@ export default ({name, data, t}) => {
     <div>
       <H2>Resultat</H2>
 
-      <P>Gewonnen hat {t(`vote/${name}/options/${winner.name}/title`)} mit {countFormat(winner.count)} Stimmen – rund {Math.round(winner.count / totalVotes * 1000) / 10} Prozent der Stimmen.</P>
+      <P>
+        Gewonnen hat
+        {' '}
+        <span {...styles.badge} style={{
+          backgroundColor: colors[winner.name]
+        }}>
+          {t(`vote/${name}/options/${winner.name}/title`)}
+        </span>
+        {' '}
+        mit {countFormat(winner.count)} Stimmen – rund {Math.round(winner.count / totalVotes * 1000) / 10} Prozent der Stimmen.
+      </P>
+
+      <br />
+      <BarChart data={bars} />
 
       <div {...styles.legend}>
-        <Label>Legende</Label><br />
-        {data.options.map(option => (
-          <span {...styles.legendItem} style={{
-            backgroundColor: colors[option.name]
-          }}>
-            {t(`vote/${name}/options/${option.name}/title`)}
-          </span>
-        ))}
+        <Label>Legende</Label>
+        <div {...styles.legendBadges}>
+          {data.options.map(option => (
+            <span {...styles.badge} style={{
+              backgroundColor: colors[option.name]
+            }}>
+              {t(`vote/${name}/options/${option.name}/title`)}
+            </span>
+          ))}
+        </div>
       </div>
-
-      <BarChart data={bars} />
     </div>
   )
 }

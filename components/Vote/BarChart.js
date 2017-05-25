@@ -61,6 +61,7 @@ export default ({data}) => {
                 </div>
               </div>
             )}
+            <br style={{clear: 'left'}} />
           </div>
         </div>
       ))}
