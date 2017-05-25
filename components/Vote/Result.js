@@ -3,7 +3,7 @@ import {sum} from 'd3-array'
 import {css} from 'glamor'
 
 import {
-  Interaction, Label
+  Interaction, Label, A
 } from '@project-r/styleguide'
 
 import {countFormat} from '../../lib/utils/formats'
@@ -115,6 +115,8 @@ export default ({name, data, t}) => {
       ].map(([key, total]) => (
         randomResult(key, data.options, total)
       ))} />
+      <br />
+      <Label>Geometrische Grundlage: <A href='http://www.geonames.org/countries/' target='_blank'>geonames.org</A></Label>
 
       <br />
       <br />
@@ -151,6 +153,8 @@ export default ({name, data, t}) => {
       ].map(([key, total]) => (
         randomResult(key, data.options, total)
       ))} />
+      <br />
+      <Label>Geometrische Grundlage: <A href='https://www.cadastre.ch/de/services/service/plz.html' target='_blank'>swisstopo</A></Label>
 
       <br />
       <br />
@@ -164,6 +168,8 @@ export default ({name, data, t}) => {
       ].map(([key, total]) => (
         randomResult(key, data.options, total)
       ))} />
+      <br />
+      <Label>Geometrische Grundlage: <A href='https://www.bfs.admin.ch/bfs/de/home/statistiken/querschnittsthemen/raeumliche-analysen.gnpdetail.2017-0593.html'>BFS</A>, <A href='https://www.cadastre.ch/de/services/service/plz.html' target='_blank'>swisstopo</A></Label>
 
       <br />
       <br />
