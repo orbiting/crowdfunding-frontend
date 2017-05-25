@@ -174,7 +174,7 @@ export default ({name, data, t}) => {
         </div>
       ))}
       <br />
-      <Label>Geometrische Grundlage: <A href='https://www.cadastre.ch/de/services/service/plz.html' target='_blank'>swisstopo</A></Label>
+      <Label>Geometrische Grundlage: <A href='https://shop.swisstopo.admin.ch/de/products/landscape/boundaries3D' target='_blank'>swisstopo</A></Label>
 
       <br />
       <br />
