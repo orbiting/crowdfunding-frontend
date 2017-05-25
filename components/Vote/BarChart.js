@@ -1,5 +1,5 @@
 import React from 'react'
-import {css} from 'glamor'
+import {css, merge} from 'glamor'
 
 import {countFormat} from '../../lib/utils/formats'
 
@@ -34,12 +34,18 @@ const styles = {
     color: '#fff',
     padding: 5
   }),
+  barNumbersCompact: css({
+    padding: '3px 5px',
+    lineHeight: '12px'
+  }),
   barNumberSmall: css({
     fontSize: 12
   })
 }
 
-export default ({data}) => {
+export default ({data, compact}) => {
+  const barHeight = compact ? 20 : undefined
+
   return (
     <div>
       {data.map((data) => (
@@ -48,21 +54,28 @@ export default ({data}) => {
             <Label>{data.key} – {countFormat(data.count)} Stimmen</Label>
           </div>
           <div {...styles.bar}>
-            {data.options.map(option =>
-              <div {...styles.barSegment} style={{
-                width: `${option.count / data.count * 100}%`,
-                backgroundColor: colors[option.name]
-              }}>
-                <div {...styles.barNumbers}>
-                  <span {...styles.barNumberSmall}>
-                    {countFormat(option.count)}
-                  </span><br />
-                  {Math.round(option.count / data.count * 1000) / 10}%
+            {data.options.map(option => {
+              const percent = `${Math.round(option.count / data.count * 1000) / 10}%`
+              return (
+                <div key={option.name} {...styles.barSegment} style={{
+                  width: `${option.count / data.count * 100}%`,
+                  backgroundColor: colors[option.name],
+                  height: barHeight
+                }}>
+                  <div {...merge(styles.barNumbers, compact && styles.barNumbersCompact)}>
+                    <span {...styles.barNumberSmall}>
+                      {compact
+                        ? percent
+                        : countFormat(option.count)
+                      }
+                    </span><br />
+                    {!compact && percent}
+                  </div>
                 </div>
-              </div>
-            )}
-            <br style={{clear: 'left'}} />
+              )
+            })}
           </div>
+          <br style={{clear: 'left'}} />
         </div>
       ))}
     </div>
