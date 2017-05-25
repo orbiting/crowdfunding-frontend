@@ -27,6 +27,7 @@ import {
 } from '../../constants'
 
 import colors from './colors'
+import Result from './Result'
 
 const {H2, H3, P} = Interaction
 
@@ -186,9 +187,7 @@ class Poll extends Component {
 
         if (voting.result) {
           return (
-            <pre>
-              <code>{JSON.stringify(voting.result, null, 2)}</code>
-            </pre>
+            <Result name={voting.name} data={voting.result} t={t} />
           )
         }
 
