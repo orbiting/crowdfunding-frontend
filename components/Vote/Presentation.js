@@ -164,6 +164,11 @@ const Slides = {
             <br />
           </div>
         ))}
+        <Label>
+          {t('vote/result/geoLegendLabel')}
+          {' '}
+          <A href='https://shop.swisstopo.admin.ch/de/products/landscape/boundaries3D' target='_blank'>swisstopo</A>
+        </Label>
       </div>
     )
   },
@@ -182,7 +187,8 @@ const Slides = {
         ))} />
         <Label>
           {t('vote/result/municipalityTypology/footnote')}
-        </Label><br />
+        </Label>
+        {' '}
         <Label>
           {t('vote/result/geoLegendLabel')}
           {' '}

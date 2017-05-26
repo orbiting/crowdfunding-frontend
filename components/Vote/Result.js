@@ -180,6 +180,8 @@ export default ({voting, t}) => {
           })
         }
       </P>
+      <br />
+      <br />
 
       <H3>{t('vote/result/byCountry')}</H3>
       <BarChart t={t} compact data={[
@@ -240,7 +242,8 @@ export default ({voting, t}) => {
       ))} />
       <Label>
         {t('vote/result/municipalityTypology/footnote')}
-      </Label><br />
+      </Label>
+      {' '}
       <Label>
         {t('vote/result/geoLegendLabel')}
         {' '}
