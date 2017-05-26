@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-26T22:04:43.258Z",
+  "updated": "2017-05-26T23:45:51.903Z",
   "title": "live",
   "data": [
     {
@@ -1810,6 +1810,30 @@
     {
       "key": "vote/result/presentation/noSlide",
       "value": "Ende"
+    },
+    {
+      "key": "vote/waiting/END_GOAL/lead",
+      "value": "Die Abstimmung ist zu Ende. Wir kommunizieren das Resultat heute Abend um 20 Uhr mit einer Videobotschaft."
+    },
+    {
+      "key": "vote/waiting/turnout/1",
+      "value": "Eine Person von {formattedEligitable} (rund {roundTurnoutPercent} Prozent) hat eine Wahl getroffen."
+    },
+    {
+      "key": "vote/waiting/turnout/other",
+      "value": "{formattedCount} von {formattedEligitable} (rund {roundTurnoutPercent} Prozent) haben eine Wahl getroffen."
+    },
+    {
+      "key": "vote/waiting/signedIn/title",
+      "value": "Willkommen"
+    },
+    {
+      "key": "vote/waiting/signedIn/email",
+      "value": "Angemeldet als: {email}"
+    },
+    {
+      "key": "vote/waiting/hasSubmitted",
+      "value": "Sie haben abgestimmt. Vielen Dank für Ihre Stimme!"
     }
   ]
 }

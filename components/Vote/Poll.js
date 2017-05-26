@@ -154,6 +154,9 @@ class Poll extends Component {
         const endDate = new Date(voting.endDate)
 
         const now = new Date()
+
+        const reachedEndDate = now > endDate
+
         const minutes = timeMinute.count(now, endDate)
 
         let timeLeft
@@ -177,7 +180,8 @@ class Poll extends Component {
         const canVote = !!(
           me &&
           voting.userIsEligitable &&
-          !voting.userHasSubmitted
+          !voting.userHasSubmitted &&
+          !reachedEndDate
         )
         const {
           selectedOption
@@ -196,32 +200,80 @@ class Poll extends Component {
             <H1 {...styles.title}>
               {t(`vote/${voting.name}/title`)}
             </H1>
-            <RawHtml type={EP} dangerouslySetInnerHTML={{
-              __html: t(`vote/${voting.name}/lead`, undefined, '')
-            }} />
-            <RawHtml type={EP} dangerouslySetInnerHTML={{
-              __html: [
-                t.pluralize(`vote/${voting.name}/time/${timeLeft.unit}`, {
-                  count: timeLeft.count,
-                  endDate: endDateFormat(endDate),
-                  endHour: endHourFormat(endDate)
-                }),
-                t.pluralize(`vote/${voting.name}/turnout`, {
-                  count: voting.turnout.submitted,
-                  formattedCount: countFormat(
-                    voting.turnout.submitted
-                  ).replace(/\u2009/g, '\u00a0'),
-                  formattedEligitable: countFormat(
-                    voting.turnout.eligitable
-                  ).replace(/\u2009/g, '\u00a0'),
-                  roundTurnoutPercent: Math.round(
-                    voting.turnout.submitted / voting.turnout.eligitable * 100
+            {reachedEndDate ? (
+              <div>
+                <RawHtml type={EP} dangerouslySetInnerHTML={{
+                  __html: t(`vote/waiting/${voting.name}/lead`, undefined, '')
+                }} />
+                <RawHtml type={EP} dangerouslySetInnerHTML={{
+                  __html: t.pluralize('vote/waiting/turnout', {
+                    count: voting.turnout.submitted,
+                    formattedCount: countFormat(
+                      voting.turnout.submitted
+                    ).replace(/\u2009/g, '\u00a0'),
+                    formattedEligitable: countFormat(
+                      voting.turnout.eligitable
+                    ).replace(/\u2009/g, '\u00a0'),
+                    roundTurnoutPercent: Math.round(
+                      voting.turnout.submitted / voting.turnout.eligitable * 100
+                    )
+                  })
+                }} />
+                {
+                  !!me && !this.state.hasSubmitted && !canVote && voting.userHasSubmitted && (
+                    <div>
+                      <H2 style={{marginTop: 40}}>
+                        {[
+                          t('vote/waiting/signedIn/title'),
+                          (me.name || '').trim()
+                        ].filter(Boolean).join(' ')}
+                      </H2>
+                      <Label>
+                        <RawHtml type='span' dangerouslySetInnerHTML={{
+                          __html: t('vote/waiting/signedIn/email', {
+                            email: me.email
+                          })
+                        }} />
+                        {' '}
+                        <SignOut />
+                      </Label>
+                      <RawHtml type={P} dangerouslySetInnerHTML={{
+                        __html: t('vote/waiting/hasSubmitted')
+                      }} />
+                    </div>
                   )
-                })
-              ].join(' ')
-            }} />
+                }
+              </div>
+            ) : (
+              <div>
+                <RawHtml type={EP} dangerouslySetInnerHTML={{
+                  __html: t(`vote/${voting.name}/lead`, undefined, '')
+                }} />
+                <RawHtml type={EP} dangerouslySetInnerHTML={{
+                  __html: [
+                    t.pluralize(`vote/${voting.name}/time/${timeLeft.unit}`, {
+                      count: timeLeft.count,
+                      endDate: endDateFormat(endDate),
+                      endHour: endHourFormat(endDate)
+                    }),
+                    t.pluralize(`vote/${voting.name}/turnout`, {
+                      count: voting.turnout.submitted,
+                      formattedCount: countFormat(
+                        voting.turnout.submitted
+                      ).replace(/\u2009/g, '\u00a0'),
+                      formattedEligitable: countFormat(
+                        voting.turnout.eligitable
+                      ).replace(/\u2009/g, '\u00a0'),
+                      roundTurnoutPercent: Math.round(
+                        voting.turnout.submitted / voting.turnout.eligitable * 100
+                      )
+                    })
+                  ].join(' ')
+                }} />
+              </div>
+            )}
             {
-              !me && (
+              !reachedEndDate && !me && (
                 <div>
                   <H2 style={{marginTop: 40, marginBottom: 20}}>
                     {t('vote/signIn/title')}
@@ -239,7 +291,7 @@ class Poll extends Component {
               )
             }
             {
-              !!me && (
+              !reachedEndDate && !!me && (
                 <div>
                   <H2 style={{marginTop: 40}}>
                     {[
