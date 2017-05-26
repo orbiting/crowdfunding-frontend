@@ -24,7 +24,8 @@ export const styles = {
   legendBadges: css({
     lineHeight: '20px',
     '& > *': {
-      marginBottom: 5,
+      marginTop: 1,
+      marginBottom: 4,
       marginRight: 5
     }
   }),
