@@ -7,6 +7,7 @@ import {
 } from '@project-r/styleguide'
 
 import {countFormat} from '../../lib/utils/formats'
+import RawHtml from '../RawHtml'
 
 import CantonMap from './CantonMap'
 import BarChart from './BarChart'
@@ -152,8 +153,14 @@ export default ({voting, t}) => {
           )
         })}
       </div>
+      <RawHtml type={Label} dangerouslySetInnerHTML={{
+        __html: t('vote/options/moreInfo')
+      }} />
 
       <H2 style={{marginTop: 20, marginBottom: 20}}>{t('vote/result/title')}</H2>
+      {!!voting.result.message && !!voting.result.message.trim() && <RawHtml type={P} dangerouslySetInnerHTML={{
+        __html: voting.result.message
+      }} />}
       <P>
         {t.elements('vote/result/winner', {
           winner: (

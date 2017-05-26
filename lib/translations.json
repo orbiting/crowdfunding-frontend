@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-26T20:31:20.368Z",
+  "updated": "2017-05-26T21:47:13.349Z",
   "title": "live",
   "data": [
     {
@@ -1717,6 +1717,10 @@
     {
       "key": "discuss/stats/1",
       "value": "Es wurde bereits ein Plädoyer veröffentlicht."
+    },
+    {
+      "key": "vote/options/moreInfo",
+      "value": "<a href=\"/updates/abstimmung\">Mehr Informationen</a>"
     },
     {
       "key": "vote/result/title",
