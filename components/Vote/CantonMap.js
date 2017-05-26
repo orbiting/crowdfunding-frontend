@@ -118,8 +118,12 @@ class CantonMap extends Component {
     const legendItems = scale.range().map(value => {
       const extent = scale.invertExtent(value)
       const safeExtent = [
-        extent[0] === undefined ? valuesExtent[0] : extent[0],
-        extent[1] === undefined ? valuesExtent[1] : extent[1]
+        extent[0] === undefined
+          ? valuesExtent[0]
+          : extent[0],
+        extent[1] === undefined
+          ? valuesExtent[1]
+          : (extent[1] - 0.001)
       ]
       return {
         value: scale(safeExtent[0]),
