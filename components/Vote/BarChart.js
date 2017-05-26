@@ -56,9 +56,8 @@ export default ({data, t, compact}) => {
         <div key={data.key}>
           <div {...styles.label}>
             <Label>
-              {!data.key || data.key === 'null'
-                ? t('vote/result/noValue')
-                : data.key
+              {
+                t(`vote/result/labels/${data.key}`, undefined, data.key)
               }
               {' – '}
               {t.pluralize('vote/result/votes', {

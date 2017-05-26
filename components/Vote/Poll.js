@@ -404,6 +404,14 @@ query($name: String!) {
             count
           }
         }
+        countries {
+          key
+          count
+          options {
+            name
+            count
+          }
+        }
       }
       message
       createdAt

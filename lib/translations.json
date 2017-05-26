@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-26T21:47:13.349Z",
+  "updated": "2017-05-26T22:04:43.258Z",
   "title": "live",
   "data": [
     {
@@ -1755,11 +1755,11 @@
       "value": "Eine Stimme"
     },
     {
-      "key": "vote/result/noValue",
+      "key": "vote/result/labels/null",
       "value": "Keine Angabe"
     },
     {
-      "key": "vote/result/otherValues",
+      "key": "vote/result/labels/others",
       "value": "Übrige"
     },
     {

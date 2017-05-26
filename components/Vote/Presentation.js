@@ -200,15 +200,7 @@ const Slides = {
         <br />
 
         <H3>{t('vote/result/byCountry')}</H3>
-        <BarChart t={t} compact data={[
-          ['Schweiz', totalVotes * 0.94],
-          ['Deutschland', totalVotes * 0.03],
-          ['Österreich', totalVotes * 0.01],
-          ['Lichtenstein', totalVotes * 0.009],
-          [t('vote/result/otherValues'), totalVotes * 0.011]
-        ].map(([key, total]) => (
-          randomResult(key, data.options, total)
-        ))} />
+        <BarChart t={t} compact data={data.stats.countries} />
         <Label>
           {t('vote/result/geoLegendLabel')}
           {' '}
@@ -293,6 +285,14 @@ query($name: String!) {
       }
       stats {
         ages {
+          key
+          count
+          options {
+            name
+            count
+          }
+        }
+        countries {
           key
           count
           options {
