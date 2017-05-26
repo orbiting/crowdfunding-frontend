@@ -35,7 +35,7 @@ const endDateFormat = swissTime.format('%d. %B %Y')
 const endHourFormat = swissTime.format('%H')
 
 const OPTION_PADDING = 20
-const styles = {
+export const styles = {
   title: css({
     [mediaQueries.onlyS]: {
       fontSize: 36,

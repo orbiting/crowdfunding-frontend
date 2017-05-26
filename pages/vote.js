@@ -13,10 +13,14 @@ import {
 import Feed, {DEFAULT_ORDER} from '../components/Discuss/Feed'
 import Share from '../components/Discuss/Share'
 import Poll from '../components/Vote/Poll'
+import Presentation from '../components/Vote/Presentation'
 
 const VotePage = ({url}) => {
   if (url.query.share) {
     return <Share name='END_GOAL' firstId={url.query.share} />
+  }
+  if (url.query.presentation) {
+    return <Presentation name='END_GOAL' slide={url.query.slide} />
   }
 
   const metaData = {

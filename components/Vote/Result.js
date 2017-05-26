@@ -14,7 +14,7 @@ import colors from './colors'
 
 const {H2, H3, P} = Interaction
 
-const styles = {
+export const styles = {
   legend: css({
     marginTop: 20,
     marginBottom: 20
@@ -35,7 +35,7 @@ const styles = {
   })
 }
 
-const randomResult = (key, options, total) => {
+export const randomResult = (key, options, total) => {
   let remaining = 1
 
   const optionsTotal = sum(options, o => o.count)
@@ -61,6 +61,21 @@ const randomResult = (key, options, total) => {
     options: optionResults
   }
 }
+
+export const LegendBlock = ({data, name, t}) => (
+  <div {...styles.legend}>
+    <Label>Legende</Label>
+    <div {...styles.legendBadges}>
+      {data.options.map(option => (
+        <span key={option.name} {...styles.badge} style={{
+          backgroundColor: colors[option.name]
+        }}>
+          {t(`vote/${name}/options/${option.name}/title`)}
+        </span>
+      ))}
+    </div>
+  </div>
+)
 
 export default ({name, data, t}) => {
   const winner = data.options.find(o => o.winner)
@@ -124,18 +139,7 @@ export default ({name, data, t}) => {
       <br />
       <BarChart data={bars} />
 
-      <div {...styles.legend}>
-        <Label>Legende</Label>
-        <div {...styles.legendBadges}>
-          {data.options.map(option => (
-            <span key={option.name} {...styles.badge} style={{
-              backgroundColor: colors[option.name]
-            }}>
-              {t(`vote/${name}/options/${option.name}/title`)}
-            </span>
-          ))}
-        </div>
-      </div>
+      <LegendBlock data={data} name={name} t={t} />
 
       <H3>Nach Land</H3>
       <BarChart compact data={[
