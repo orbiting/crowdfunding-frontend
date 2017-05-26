@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-26T17:34:13.108Z",
+  "updated": "2017-05-26T18:14:32.747Z",
   "title": "live",
   "data": [
     {
@@ -1764,7 +1764,7 @@
     },
     {
       "key": "vote/result/byMunicipalityTypology",
-      "value": "Schweiz: Stadt vs. Land?"
+      "value": "Nach Stadt/Land"
     },
     {
       "key": "vote/result/byAgeGroup",
@@ -1776,12 +1776,16 @@
     },
     {
       "key": "vote/result/municipalityTypology/intermediate",
-      "value": "Intermediär",
-      "undefined": "Agglomeration und ländliche Zentren"
+      "value": "Agglomeration und ländliche Zentren",
+      "undefined": "Intermediär"
     },
     {
       "key": "vote/result/municipalityTypology/countryside",
       "value": "Ländlich"
+    },
+    {
+      "key": "vote/result/municipalityTypology/footnote",
+      "value": "Nur Wohnsitze in der Schweiz berücksichtigt."
     },
     {
       "key": "vote/result/geoLegendLabel",

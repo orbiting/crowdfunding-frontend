@@ -10,7 +10,11 @@ import {
 import colors from './colors'
 
 const styles = {
+  label: css({
+    marginBottom: 1
+  }),
   bar: css({
+    marginBottom: 12
   }),
   barSegment: css({
     backgroundColor: 'gray',
@@ -50,7 +54,7 @@ export default ({data, t, compact}) => {
     <div>
       {data.map((data) => (
         <div key={data.key}>
-          <div>
+          <div {...styles.label}>
             <Label>
               {!data.key || data.key === 'null'
                 ? t('vote/result/noValue')

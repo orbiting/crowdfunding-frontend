@@ -180,7 +180,9 @@ const Slides = {
         ].map(([key, total]) => (
           randomResult(key, data.options, total)
         ))} />
-        <br />
+        <Label>
+          {t('vote/result/municipalityTypology/footnote')}
+        </Label><br />
         <Label>
           {t('vote/result/geoLegendLabel')}
           {' '}
@@ -200,7 +202,6 @@ const Slides = {
         ].map(([key, total]) => (
           randomResult(key, data.options, total)
         ))} />
-        <br />
         <Label>
           {t('vote/result/geoLegendLabel')}
           {' '}

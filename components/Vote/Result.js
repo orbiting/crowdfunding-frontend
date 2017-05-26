@@ -191,7 +191,6 @@ export default ({voting, t}) => {
       ].map(([key, total]) => (
         randomResult(key, voting.result.options, total)
       ))} />
-      <br />
       <Label>
         {t('vote/result/geoLegendLabel')}
         {' '}
@@ -221,7 +220,6 @@ export default ({voting, t}) => {
           <br />
         </div>
       ))}
-      <br />
       <Label>
         {t('vote/result/geoLegendLabel')}
         {' '}
@@ -240,7 +238,9 @@ export default ({voting, t}) => {
       ].map(([key, total]) => (
         randomResult(key, voting.result.options, total)
       ))} />
-      <br />
+      <Label>
+        {t('vote/result/municipalityTypology/footnote')}
+      </Label><br />
       <Label>
         {t('vote/result/geoLegendLabel')}
         {' '}
