@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-26T18:14:32.747Z",
+  "updated": "2017-05-26T19:17:13.608Z",
   "title": "live",
   "data": [
     {
@@ -1759,12 +1759,20 @@
       "value": "Nach Land"
     },
     {
+      "key": "vote/result/byCountry/first",
+      "value": "Stimmverhältnis nach Land"
+    },
+    {
       "key": "vote/result/byCanton",
       "value": "Nach Kanton"
     },
     {
       "key": "vote/result/byMunicipalityTypology",
       "value": "Nach Stadt/Land"
+    },
+    {
+      "key": "vote/result/byMunicipalityTypology/first",
+      "value": "Stimmverhältnis nach Stadt/Land"
     },
     {
       "key": "vote/result/byAgeGroup",

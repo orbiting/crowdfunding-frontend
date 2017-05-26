@@ -177,7 +177,7 @@ const Slides = {
 
     return (
       <div style={{marginTop: 60}}>
-        <H3>{t('vote/result/byMunicipalityTypology')}</H3>
+        <H3>{t('vote/result/byMunicipalityTypology/first')}</H3>
         <BarChart t={t} compact data={[
           [t('vote/result/municipalityTypology/city'), totalVotes * 0.8],
           [t('vote/result/municipalityTypology/intermediate'), totalVotes * 0.15],

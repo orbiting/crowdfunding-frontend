@@ -183,7 +183,7 @@ export default ({voting, t}) => {
       <br />
       <br />
 
-      <H3>{t('vote/result/byCountry')}</H3>
+      <H3>{t('vote/result/byCountry/first')}</H3>
       <BarChart t={t} compact data={[
         ['Schweiz', totalVotes * 0.94],
         ['Deutschland', totalVotes * 0.03],
