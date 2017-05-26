@@ -206,7 +206,7 @@ export default ({voting, t}) => {
       <H3>{t('vote/result/byCanton')}</H3>
       <br />
       {voting.result.options.map(o => o.name).map(option => (
-        <div>
+        <div key={option}>
           <span {...styles.badge} style={{
             backgroundColor: colors[option]
           }}>

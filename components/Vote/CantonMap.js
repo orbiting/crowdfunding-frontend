@@ -146,8 +146,8 @@ class CantonMap extends Component {
         </div>
         <div {...merge(styles.legendItems, legendBelow && styles.legendItemsBelow)}>
           <Label>{t('vote/result/mapLegend')}</Label><br />
-          {legendItems.map(legendItem => (
-            <span>
+          {legendItems.map((legendItem, i) => (
+            <span key={i}>
               <span {...styles.legendItem}>
                 <span {...styles.legendColor}
                   style={{backgroundColor: legendItem.value}} />

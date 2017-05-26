@@ -148,7 +148,7 @@ const Slides = {
     return (
       <div style={{marginTop: 70, 'width': '75%', marginLeft: 'auto', marginRight: 'auto'}}>
         {voting.result.options.map(o => o.name).map((option, i) => (
-          <div style={{width: i === 0 ? '100%' : '50%', float: 'left'}}>
+          <div key={option} style={{width: i === 0 ? '100%' : '50%', float: 'left'}}>
             <span {...resultStyles.badge} style={{
               backgroundColor: colors[option]
             }}>
