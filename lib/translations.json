@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-24T16:31:21.823Z",
+  "updated": "2017-05-26T17:34:13.108Z",
   "title": "live",
   "data": [
     {
@@ -1464,7 +1464,7 @@
     },
     {
       "key": "vote/END_GOAL/title",
-      "value": "Abstimmung zum Ziel für den Crowdfunding-Schlussspurt"
+      "value": "Abstimmung zum letzten Ziel des Crowdfundings"
     },
     {
       "key": "vote/END_GOAL/lead",
@@ -1716,7 +1716,80 @@
     },
     {
       "key": "discuss/stats/1",
-      "value": "Es wurden bereits ein Plädoyer veröffentlicht."
+      "value": "Es wurde bereits ein Plädoyer veröffentlicht."
+    },
+    {
+      "key": "vote/result/title",
+      "value": "Das Resultat"
+    },
+    {
+      "key": "vote/result/winner",
+      "value": "Gewonnen hat {winner} mit {count} Stimmen, {percentage} Prozent."
+    },
+    {
+      "key": "vote/result/total",
+      "value": "Total"
+    },
+    {
+      "key": "vote/result/turnout",
+      "value": "Wahlbeteiligung: Rund {percentage} Prozent"
+    },
+    {
+      "key": "vote/result/colorLegend",
+      "value": "Legende"
+    },
+    {
+      "key": "vote/result/votes/other",
+      "value": "{formattedCount} Stimmen"
+    },
+    {
+      "key": "vote/result/votes/1",
+      "value": "Eine Stimme"
+    },
+    {
+      "key": "vote/result/noValue",
+      "value": "Keine Angabe"
+    },
+    {
+      "key": "vote/result/otherValues",
+      "value": "Übrige"
+    },
+    {
+      "key": "vote/result/byCountry",
+      "value": "Nach Land"
+    },
+    {
+      "key": "vote/result/byCanton",
+      "value": "Nach Kanton"
+    },
+    {
+      "key": "vote/result/byMunicipalityTypology",
+      "value": "Schweiz: Stadt vs. Land?"
+    },
+    {
+      "key": "vote/result/byAgeGroup",
+      "value": "Nach Altersgruppen"
+    },
+    {
+      "key": "vote/result/municipalityTypology/city",
+      "value": "Städtisch"
+    },
+    {
+      "key": "vote/result/municipalityTypology/intermediate",
+      "value": "Intermediär",
+      "undefined": "Agglomeration und ländliche Zentren"
+    },
+    {
+      "key": "vote/result/municipalityTypology/countryside",
+      "value": "Ländlich"
+    },
+    {
+      "key": "vote/result/geoLegendLabel",
+      "value": "Geometrische Grundlage:"
+    },
+    {
+      "key": "vote/result/presentation/noSlide",
+      "value": "Ende"
     }
   ]
 }

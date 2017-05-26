@@ -7,7 +7,6 @@ import Router from 'next/router'
 
 import Loader from '../Loader'
 
-import {ListWithQuery as TestimonialList} from '../Testimonial/List'
 import {countFormat} from '../../lib/utils/formats'
 
 import withT from '../../lib/withT'
@@ -72,19 +71,11 @@ const Slides = {
       </div>
     </div>
   ),
-  2: () => (
-    <div style={{marginTop: 150}}>
-      <TestimonialList
-        limit={0}
-        onSelect={() => {}}
-        firstId='bbaf5f0d-3be0-4886-bd24-544f64d518ab' />
-    </div>
-  ),
-  3: ({t, voting, totalVotes}) => {
+  2: ({t, voting, totalVotes}) => {
     const winner = voting.result.options.find(o => o.winner)
     const bars = [
       {
-        key: 'Total',
+        key: t('vote/result/total'),
         count: totalVotes,
         options: voting.result.options
       }
@@ -93,28 +84,36 @@ const Slides = {
     return (
       <div style={{marginTop: 150}}>
         <P>
-          Gewonnen hat
-          {' '}
-          <span {...resultStyles.badge} style={{
-            backgroundColor: colors[winner.name]
-          }}>
-            {t(`vote/${voting.name}/options/${winner.name}/title`)}
-          </span>
-          {' '}
-          mit {countFormat(winner.count)} Stimmen – rund {Math.round(winner.count / totalVotes * 1000) / 10} Prozent der Stimmen.
+          {t.elements('vote/result/winner', {
+            winner: (
+              <span key='winner' {...resultStyles.badge} style={{
+                backgroundColor: colors[winner.name]
+              }}>
+                {t(`vote/${voting.name}/options/${winner.name}/title`)}
+              </span>
+            ),
+            count: countFormat(winner.count),
+            percentage: Math.round(winner.count / totalVotes * 1000) / 10
+          })}
         </P>
 
         <br />
-        <BarChart data={bars} />
+        <BarChart t={t} data={bars} />
         <LegendBlock data={voting.result} name={voting.name} t={t} />
 
         <P>
-          Wahlbeteiligung: Rund {Math.round(voting.turnout.submitted / voting.turnout.eligitable * 100)} Prozent
+          {
+            t('vote/result/turnout', {
+              percentage: Math.round(
+                voting.turnout.submitted / voting.turnout.eligitable * 100
+              )
+            })
+          }
         </P>
       </div>
     )
   },
-  4: ({t, voting, totalVotes}) => {
+  3: ({t, voting, totalVotes}) => {
     const cantonResult = [
       ['ZH', 'Kanton Zürich', 0.35 * totalVotes],
       ['BE', 'Kanton Bern', 0.1 * totalVotes],
@@ -168,47 +167,55 @@ const Slides = {
       </div>
     )
   },
+  4: ({t, voting, totalVotes}) => {
+    const data = voting.result
+
+    return (
+      <div style={{marginTop: 60}}>
+        <H3>{t('vote/result/byMunicipalityTypology')}</H3>
+        <BarChart t={t} compact data={[
+          [t('vote/result/municipalityTypology/city'), totalVotes * 0.8],
+          [t('vote/result/municipalityTypology/intermediate'), totalVotes * 0.15],
+          [t('vote/result/municipalityTypology/countryside'), totalVotes * 0.05]
+        ].map(([key, total]) => (
+          randomResult(key, data.options, total)
+        ))} />
+        <br />
+        <Label>
+          {t('vote/result/geoLegendLabel')}
+          {' '}
+          <A href='https://www.bfs.admin.ch/bfs/de/home/statistiken/querschnittsthemen/raeumliche-analysen.gnpdetail.2017-0593.html'>BFS</A>, <A href='https://www.cadastre.ch/de/services/service/plz.html' target='_blank'>swisstopo</A>
+        </Label>
+
+        <br />
+        <br />
+
+        <H3>{t('vote/result/byCountry')}</H3>
+        <BarChart t={t} compact data={[
+          ['Schweiz', totalVotes * 0.94],
+          ['Deutschland', totalVotes * 0.03],
+          ['Österreich', totalVotes * 0.01],
+          ['Lichtenstein', totalVotes * 0.009],
+          [t('vote/result/otherValues'), totalVotes * 0.011]
+        ].map(([key, total]) => (
+          randomResult(key, data.options, total)
+        ))} />
+        <br />
+        <Label>
+          {t('vote/result/geoLegendLabel')}
+          {' '}
+          <A href='http://www.geonames.org/countries/' target='_blank'>geonames.org</A>
+        </Label>
+      </div>
+    )
+  },
   5: ({t, voting, totalVotes}) => {
     const data = voting.result
 
     return (
       <div style={{marginTop: 60}}>
-        <H3>Schweiz: Stadt vs. Land?</H3>
-        <BarChart compact data={[
-          ['Stätisch', totalVotes * 0.8],
-          ['Intermediär', totalVotes * 0.15],
-          ['Ländlich', totalVotes * 0.05]
-        ].map(([key, total]) => (
-          randomResult(key, data.options, total)
-        ))} />
-        <br />
-        <Label>Geometrische Grundlage: <A href='https://www.bfs.admin.ch/bfs/de/home/statistiken/querschnittsthemen/raeumliche-analysen.gnpdetail.2017-0593.html'>BFS</A>, <A href='https://www.cadastre.ch/de/services/service/plz.html' target='_blank'>swisstopo</A></Label>
-
-        <br />
-        <br />
-
-        <H3>Nach Land</H3>
-        <BarChart compact data={[
-          ['Schweiz', totalVotes * 0.94],
-          ['Deutschland', totalVotes * 0.03],
-          ['Österreich', totalVotes * 0.01],
-          ['Lichtenstein', totalVotes * 0.009],
-          ['Übrige', totalVotes * 0.011]
-        ].map(([key, total]) => (
-          randomResult(key, data.options, total)
-        ))} />
-        <br />
-        <Label>Geometrische Grundlage: <A href='http://www.geonames.org/countries/' target='_blank'>geonames.org</A></Label>
-      </div>
-    )
-  },
-  6: ({t, voting, totalVotes}) => {
-    const data = voting.result
-
-    return (
-      <div style={{marginTop: 60}}>
-        <H3>Nach Altersgruppen</H3>
-        <BarChart compact data={data.stats.ages} />
+        <H3>{t('vote/result/byAgeGroup')}</H3>
+        <BarChart t={t} compact data={data.stats.ages} />
       </div>
     )
   }
@@ -243,7 +250,11 @@ class Presentation extends Component {
           return <div>Resultat noch nicht bereit.</div>
         }
 
-        const Slide = Slides[slide] || (() => <div style={{textAlign: 'center'}}>The End</div>)
+        const Slide = Slides[slide] || (() => (
+          <div style={{textAlign: 'center', marginTop: 300}}>
+            {t('vote/result/presentation/noSlide')}
+          </div>
+        ))
 
         const totalVotes = sum(voting.result.options, o => o.count)
 

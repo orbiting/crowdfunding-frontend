@@ -187,7 +187,7 @@ class Poll extends Component {
 
         if (voting.result) {
           return (
-            <Result name={voting.name} data={voting.result} t={t} />
+            <Result voting={voting} t={t} />
           )
         }
 

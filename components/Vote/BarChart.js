@@ -43,7 +43,7 @@ const styles = {
   })
 }
 
-export default ({data, compact}) => {
+export default ({data, t, compact}) => {
   const barHeight = compact ? 20 : undefined
 
   return (
@@ -52,9 +52,15 @@ export default ({data, compact}) => {
         <div key={data.key}>
           <div>
             <Label>
-              {!data.key || data.key === 'null' ? 'Keine Angabe' : data.key}
+              {!data.key || data.key === 'null'
+                ? t('vote/result/noValue')
+                : data.key
+              }
               {' – '}
-              {countFormat(data.count)} Stimmen
+              {t.pluralize('vote/result/votes', {
+                count: data.count,
+                formattedCount: countFormat(data.count)
+              })}
             </Label>
           </div>
           <div {...styles.bar}>

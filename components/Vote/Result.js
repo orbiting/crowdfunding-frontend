@@ -3,7 +3,7 @@ import {sum} from 'd3-array'
 import {css} from 'glamor'
 
 import {
-  Interaction, Label, A
+  Interaction, Label, H1, A
 } from '@project-r/styleguide'
 
 import {countFormat} from '../../lib/utils/formats'
@@ -11,6 +11,7 @@ import {countFormat} from '../../lib/utils/formats'
 import CantonMap from './CantonMap'
 import BarChart from './BarChart'
 import colors from './colors'
+import {styles as pollStyles} from './Poll'
 
 const {H2, H3, P} = Interaction
 
@@ -64,7 +65,7 @@ export const randomResult = (key, options, total) => {
 
 export const LegendBlock = ({data, name, t}) => (
   <div {...styles.legend}>
-    <Label>Legende</Label>
+    <Label>{t('vote/result/colorLegend')}</Label>
     <div {...styles.legendBadges}>
       {data.options.map(option => (
         <span key={option.name} {...styles.badge} style={{
@@ -77,15 +78,15 @@ export const LegendBlock = ({data, name, t}) => (
   </div>
 )
 
-export default ({name, data, t}) => {
-  const winner = data.options.find(o => o.winner)
-  const totalVotes = sum(data.options, o => o.count)
+export default ({voting, t}) => {
+  const winner = voting.result.options.find(o => o.winner)
+  const totalVotes = sum(voting.result.options, o => o.count)
 
   const bars = [
     {
-      key: 'Total',
+      key: t('vote/result/total'),
       count: totalVotes,
-      options: data.options
+      options: voting.result.options
     }
   ]
 
@@ -117,55 +118,98 @@ export default ({name, data, t}) => {
     ['JU', 'Canton du Jura', 0.019 * totalVotes],
     ['AI', 'Kanton Appenzell Innerrhoden', 0.019 * totalVotes]
   ].map(([key, _, total]) => (
-    randomResult(key, data.options, total)
+    randomResult(key, voting.result.options, total)
   ))
 
   return (
     <div>
-      <H2>Resultat</H2>
+      <H1 {...pollStyles.title}>
+        {t(`vote/${voting.name}/title`)}
+      </H1>
+      <H2 style={{marginTop: 20, marginBottom: 20}}>
+        {t(`vote/${voting.name}/options/title/generic`)}
+      </H2>
+      <div {...pollStyles.options}>
+        {voting.result.options.map(option => {
+          const title = t(`vote/${voting.name}/options/${option.name}/title`)
+          const text = t(`vote/${voting.name}/options/${option.name}`)
 
+          const optionColor = colors[option.name]
+
+          const content = [
+            <H3 key='title' {...pollStyles.optionTitle} style={{color: optionColor}}>
+              {title}
+            </H3>,
+            <div key='text' {...pollStyles.optionText}>
+              {text}
+            </div>
+          ]
+
+          return (
+            <div key={option.id} {...pollStyles.option}>
+              {content}
+            </div>
+          )
+        })}
+      </div>
+
+      <H2 style={{marginTop: 20, marginBottom: 20}}>{t('vote/result/title')}</H2>
       <P>
-        Gewonnen hat
-        {' '}
-        <span {...styles.badge} style={{
-          backgroundColor: colors[winner.name]
-        }}>
-          {t(`vote/${name}/options/${winner.name}/title`)}
-        </span>
-        {' '}
-        mit {countFormat(winner.count)} Stimmen – rund {Math.round(winner.count / totalVotes * 1000) / 10} Prozent der Stimmen.
+        {t.elements('vote/result/winner', {
+          winner: (
+            <span key='winner' {...styles.badge} style={{
+              backgroundColor: colors[winner.name]
+            }}>
+              {t(`vote/${voting.name}/options/${winner.name}/title`)}
+            </span>
+          ),
+          count: countFormat(winner.count),
+          percentage: Math.round(winner.count / totalVotes * 1000) / 10
+        })}
       </P>
 
       <br />
-      <BarChart data={bars} />
+      <BarChart t={t} data={bars} />
+      <LegendBlock data={voting.result} name={voting.name} t={t} />
+      <P>
+        {
+          t('vote/result/turnout', {
+            percentage: Math.round(
+              voting.turnout.submitted / voting.turnout.eligitable * 100
+            )
+          })
+        }
+      </P>
 
-      <LegendBlock data={data} name={name} t={t} />
-
-      <H3>Nach Land</H3>
-      <BarChart compact data={[
+      <H3>{t('vote/result/byCountry')}</H3>
+      <BarChart t={t} compact data={[
         ['Schweiz', totalVotes * 0.94],
         ['Deutschland', totalVotes * 0.03],
         ['Österreich', totalVotes * 0.01],
         ['Lichtenstein', totalVotes * 0.009],
-        ['Übrige', totalVotes * 0.011]
+        [t('vote/result/otherValues'), totalVotes * 0.011]
       ].map(([key, total]) => (
-        randomResult(key, data.options, total)
+        randomResult(key, voting.result.options, total)
       ))} />
       <br />
-      <Label>Geometrische Grundlage: <A href='http://www.geonames.org/countries/' target='_blank'>geonames.org</A></Label>
+      <Label>
+        {t('vote/result/geoLegendLabel')}
+        {' '}
+        <A href='http://www.geonames.org/countries/' target='_blank'>geonames.org</A>
+      </Label>
 
       <br />
       <br />
       <br />
 
-      <H3>Nach Kanton</H3>
+      <H3>{t('vote/result/byCanton')}</H3>
       <br />
-      {data.options.map(o => o.name).map(option => (
+      {voting.result.options.map(o => o.name).map(option => (
         <div>
           <span {...styles.badge} style={{
             backgroundColor: colors[option]
           }}>
-            {t(`vote/${name}/options/${option}/title`)}
+            {t(`vote/${voting.name}/options/${option}/title`)}
           </span>
           <CantonMap
             data={cantonResult}
@@ -178,29 +222,37 @@ export default ({name, data, t}) => {
         </div>
       ))}
       <br />
-      <Label>Geometrische Grundlage: <A href='https://shop.swisstopo.admin.ch/de/products/landscape/boundaries3D' target='_blank'>swisstopo</A></Label>
+      <Label>
+        {t('vote/result/geoLegendLabel')}
+        {' '}
+        <A href='https://shop.swisstopo.admin.ch/de/products/landscape/boundaries3D' target='_blank'>swisstopo</A>
+      </Label>
 
       <br />
       <br />
       <br />
 
-      <H3>Schweiz: Stadt vs. Land?</H3>
-      <BarChart compact data={[
-        ['Stätisch', totalVotes * 0.8],
-        ['Intermediär', totalVotes * 0.15],
-        ['Ländlich', totalVotes * 0.05]
+      <H3>{t('vote/result/byMunicipalityTypology')}</H3>
+      <BarChart t={t} compact data={[
+        [t('vote/result/municipalityTypology/city'), totalVotes * 0.8],
+        [t('vote/result/municipalityTypology/intermediate'), totalVotes * 0.15],
+        [t('vote/result/municipalityTypology/countryside'), totalVotes * 0.05]
       ].map(([key, total]) => (
-        randomResult(key, data.options, total)
+        randomResult(key, voting.result.options, total)
       ))} />
       <br />
-      <Label>Geometrische Grundlage: <A href='https://www.bfs.admin.ch/bfs/de/home/statistiken/querschnittsthemen/raeumliche-analysen.gnpdetail.2017-0593.html'>BFS</A>, <A href='https://www.cadastre.ch/de/services/service/plz.html' target='_blank'>swisstopo</A></Label>
+      <Label>
+        {t('vote/result/geoLegendLabel')}
+        {' '}
+        <A href='https://www.bfs.admin.ch/bfs/de/home/statistiken/querschnittsthemen/raeumliche-analysen.gnpdetail.2017-0593.html'>BFS</A>, <A href='https://www.cadastre.ch/de/services/service/plz.html' target='_blank'>swisstopo</A>
+      </Label>
 
       <br />
       <br />
       <br />
 
-      <H3>Nach Altersgruppen</H3>
-      <BarChart compact data={data.stats.ages} />
+      <H3>{t('vote/result/byAgeGroup')}</H3>
+      <BarChart t={t} compact data={voting.result.stats.ages} />
     </div>
   )
 }
