@@ -213,9 +213,10 @@ export default ({voting, t}) => {
             {t(`vote/${voting.name}/options/${option}/title`)}
           </span>
           <CantonMap
+            t={t}
             data={cantonResult}
             fill={colors[option]}
-            fillOpacity={d => (
+            accessor={d => (
               d.options.find(o => o.name === option).count / d.count
             )} />
           <br />

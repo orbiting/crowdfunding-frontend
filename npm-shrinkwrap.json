@@ -1110,6 +1110,11 @@
       "from": "d3-interpolate@latest",
       "resolved": "https://registry.npmjs.org/d3-interpolate/-/d3-interpolate-1.1.4.tgz"
     },
+    "d3-scale": {
+      "version": "1.0.6",
+      "from": "d3-scale@latest",
+      "resolved": "https://registry.npmjs.org/d3-scale/-/d3-scale-1.0.6.tgz"
+    },
     "d3-time": {
       "version": "1.0.6",
       "from": "d3-time@>=1.0.6 <2.0.0",

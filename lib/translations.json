@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-26T19:17:13.608Z",
+  "updated": "2017-05-26T20:31:20.368Z",
   "title": "live",
   "data": [
     {
@@ -1737,6 +1737,10 @@
     {
       "key": "vote/result/colorLegend",
       "value": "Legende"
+    },
+    {
+      "key": "vote/result/mapLegend",
+      "value": "Stimmenanteil"
     },
     {
       "key": "vote/result/votes/other",
