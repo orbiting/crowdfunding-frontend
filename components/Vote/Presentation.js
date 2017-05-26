@@ -240,7 +240,7 @@ class Presentation extends Component {
     return (
       <Loader loading={loading && !voting} error={!voting && error} render={() => {
         if (!voting.result) {
-          return 'Resultat noch nicht bereit.'
+          return <div>Resultat noch nicht bereit.</div>
         }
 
         const Slide = Slides[slide] || (() => <div style={{textAlign: 'center'}}>The End</div>)
