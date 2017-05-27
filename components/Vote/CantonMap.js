@@ -10,6 +10,8 @@ import {
   Label, fontFamilies, colors
 } from '@project-r/styleguide'
 
+import ContextBox, {ContextBoxValue} from '../Stats/ContextBox'
+
 import {swissNumbers, countFormat} from '../../lib/utils/formats'
 
 const topology = require('./data/ch-cantons.json')
@@ -67,6 +69,9 @@ const styles = {
     top: 4,
     width: 8,
     height: 8
+  }),
+  noInteraction: css({
+    pointerEvents: 'none'
   })
 }
 
@@ -86,12 +91,18 @@ class CantonMap extends Component {
       this.container = ref
     }
     this.measure = () => {
-      const {width} = this.container.getBoundingClientRect()
+      let {width, top, left} = this.container.getBoundingClientRect()
+      top += window.pageYOffset
 
-      const legendBelow = width < 520
-      if (legendBelow !== this.state.legendBelow) {
+      if (
+        width !== this.state.width ||
+        top !== this.state.top ||
+        left !== this.state.left
+      ) {
         this.setState(() => ({
-          legendBelow
+          width,
+          top,
+          left
         }))
       }
     }
@@ -105,7 +116,8 @@ class CantonMap extends Component {
   }
   render () {
     const {data, fill, accessor, t} = this.props
-    const {legendBelow} = this.state
+    const {width, top, left, hover} = this.state
+    const legendBelow = width < 520
 
     const fillColor = color(fill)
     const dataValues = data.map(d => accessor(d) / d.count)
@@ -116,11 +128,11 @@ class CantonMap extends Component {
     const scale = scaleQuantize()
       .domain(valuesExtent)
       .range([
-        fillColor.brighter(0.6),
-        fillColor.brighter(0.3),
+        fillColor.brighter(0.8),
+        fillColor.brighter(0.4),
         fillColor,
-        fillColor.darker(0.3),
-        fillColor.darker(0.6)
+        fillColor.darker(0.4),
+        fillColor.darker(0.8)
       ])
     const range = scale.range()
     const legendItems = range.map((value, i) => {
@@ -157,6 +169,12 @@ class CantonMap extends Component {
     }
     const others = data.find(d => d.key === 'others')
 
+    const blur = () => {
+      this.setState(() => ({
+        hover: undefined
+      }))
+    }
+
     return (
       <div {...styles.container} ref={this.containerRef}>
         <div {...styles.svgContainer}>
@@ -173,28 +191,46 @@ class CantonMap extends Component {
               } else {
                 fill = NA_COLOR
               }
+              const focus = (event) => {
+                const rect = event.target.getBoundingClientRect()
+                const x = rect.left + rect.width / 2 - left
+                const y = rect.top + window.pageYOffset - top
+
+                this.setState(() => ({
+                  hover: {
+                    canton,
+                    count,
+                    d,
+                    y,
+                    x
+                  }
+                }))
+              }
+
               return (
                 <path
                   key={canton.properties.abbr}
+                  onTouchStart={focus}
+                  onTouchEnd={blur}
+                  onMouseEnter={focus}
+                  onMouseLeave={blur}
                   d={path(canton)}
-                  fill={fill}>
-                  <title>
-                    {d
-                      ? [
-                        `${canton.properties.name}:`,
-                        `${numberFormat(count / d.count)}`,
-                        `(${t.pluralize('vote/result/votes', {
-                          count,
-                          formattedCount: countFormat(count)
-                        })})`
-                      ].join(' ')
-                      : canton.properties.name
-                    }
-                  </title>
-                </path>
+                  fill={fill} />
               )
             })}
-            <path fill='none' stroke='#fff' strokeWidth='1.5' d={path(cantonMesh)} />
+            <path {...styles.noInteraction}
+              fill='none'
+              stroke='#fff'
+              strokeWidth='1.5'
+              d={path(cantonMesh)} />
+            {!!hover && (
+              <path {...styles.noInteraction}
+                key={`hover-${hover.canton.properties.abbr}`}
+                fill='none'
+                stroke='#000'
+                strokeWidth='2'
+                d={path(hover.canton)} />
+            )}
           </svg>
         </div>
         <div {...merge(styles.legendItems, legendBelow && styles.legendItemsBelow)}>
@@ -214,6 +250,27 @@ class CantonMap extends Component {
           <div style={{marginTop: 5}}>
             <Label>{t('vote/result/unkownVotes', {count: accessor(others)})}</Label>
           </div>
+        )}
+        {!!hover && (
+          <ContextBox
+            orientation='top'
+            x={hover.x}
+            y={hover.y - 10}
+            contextWidth={width}>
+            <ContextBoxValue
+              label={hover.canton.properties.name}>
+              {hover.d
+                ? [
+                  `${numberFormat(hover.count / hover.d.count)}`,
+                  `(${t.pluralize('vote/result/votes', {
+                    count: hover.count,
+                    formattedCount: countFormat(hover.count)
+                  })})`
+                ].join(' ')
+                : t('vote/result/labels/null')
+              }
+            </ContextBoxValue>
+          </ContextBox>
         )}
       </div>
     )
