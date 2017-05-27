@@ -464,6 +464,14 @@ query($name: String!) {
             count
           }
         }
+        chCantons {
+          key
+          count
+          options {
+            name
+            count
+          }
+        }
       }
       message
       createdAt

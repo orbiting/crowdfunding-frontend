@@ -105,7 +105,10 @@ class CantonMap extends Component {
     const {legendBelow} = this.state
 
     const fillColor = color(fill)
-    const valuesExtent = extent(data.map(accessor))
+    const valuesExtent = extent(
+      data.map(accessor)
+        .filter(Boolean)
+    )
     const scale = scaleQuantize()
       .domain(valuesExtent)
       .range([
@@ -115,13 +118,14 @@ class CantonMap extends Component {
         fillColor.darker(0.3),
         fillColor.darker(0.6)
       ])
-    const legendItems = scale.range().map(value => {
+    const range = scale.range()
+    const legendItems = range.map((value, i) => {
       const extent = scale.invertExtent(value)
       const safeExtent = [
         extent[0] === undefined
           ? valuesExtent[0]
           : extent[0],
-        extent[1] === undefined
+        extent[1] === undefined || i === range.length - 1
           ? valuesExtent[1]
           : (extent[1] - 0.001)
       ]
@@ -137,12 +141,13 @@ class CantonMap extends Component {
           <svg {...styles.svg} viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
             {cantons.map(canton => {
               const d = data.find(d => d.key === canton.properties.abbr)
+              const value = d ? accessor(d) : 0
 
               return (
                 <path
                   key={canton.properties.abbr}
                   d={path(canton)}
-                  fill={scale(accessor(d))} />
+                  fill={value ? scale(value) : '#ccc'} />
               )
             })}
             <path fill='none' stroke='#fff' strokeWidth='1.5' d={path(cantonMesh)} />

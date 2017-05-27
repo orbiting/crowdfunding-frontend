@@ -114,37 +114,6 @@ const Slides = {
     )
   },
   3: ({t, voting, totalVotes}) => {
-    const cantonResult = [
-      ['ZH', 'Kanton Zürich', 0.35 * totalVotes],
-      ['BE', 'Kanton Bern', 0.1 * totalVotes],
-      ['SG', 'Kanton St. Gallen', 0.05 * totalVotes],
-      ['LU', 'Kanton Luzern', 0.05 * totalVotes],
-      ['AG', 'Kanton Aargau', 0.05 * totalVotes],
-      ['BS', 'Kanton Basel-Stadt', 0.019 * totalVotes],
-      ['SO', 'Kanton Solothurn', 0.019 * totalVotes],
-      ['ZG', 'Kanton Zug', 0.019 * totalVotes],
-      ['GR', 'Kanton Graubünden', 0.019 * totalVotes],
-      ['SH', 'Kanton Schaffhausen', 0.019 * totalVotes],
-      ['TG', 'Kanton Thurgau', 0.019 * totalVotes],
-      ['FR', 'Canton de Fribourg', 0.019 * totalVotes],
-      ['BL', 'Kanton Basel-Landschaft', 0.019 * totalVotes],
-      ['UR', 'Kanton Uri', 0.019 * totalVotes],
-      ['AR', 'Kanton Appenzell Ausserrhoden', 0.019 * totalVotes],
-      ['SZ', 'Kanton Schwyz', 0.019 * totalVotes],
-      ['VD', 'Canton de Vaud', 0.019 * totalVotes],
-      ['NW', 'Kanton Nidwalden', 0.019 * totalVotes],
-      ['GE', 'Canton de Genève', 0.019 * totalVotes],
-      ['VS', 'Canton du Valais', 0.019 * totalVotes],
-      ['GL', 'Kanton Glarus', 0.019 * totalVotes],
-      ['OW', 'Kanton Obwalden', 0.019 * totalVotes],
-      ['TI', 'Cantone Ticino', 0.019 * totalVotes],
-      ['NE', 'Canton de Neuchâtel', 0.019 * totalVotes],
-      ['JU', 'Canton du Jura', 0.019 * totalVotes],
-      ['AI', 'Kanton Appenzell Innerrhoden', 0.019 * totalVotes]
-    ].map(([key, _, total]) => (
-      randomResult(key, voting.result.options, total)
-    ))
-
     return (
       <div style={{marginTop: 70, 'width': '75%', marginLeft: 'auto', marginRight: 'auto'}}>
         {voting.result.options.map(o => o.name).map((option, i) => (
@@ -156,7 +125,7 @@ const Slides = {
             </span>
             <CantonMap
               t={t}
-              data={cantonResult}
+              data={voting.result.stats.chCantons}
               fill={colors[option]}
               accessor={d => (
                 d.options.find(o => o.name === option).count / d.count
@@ -293,6 +262,14 @@ query($name: String!) {
           }
         }
         countries {
+          key
+          count
+          options {
+            name
+            count
+          }
+        }
+        chCantons {
           key
           count
           options {
