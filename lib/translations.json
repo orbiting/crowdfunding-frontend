@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-27T01:35:59.104Z",
+  "updated": "2017-05-27T14:51:01.134Z",
   "title": "live",
   "data": [
     {
@@ -1736,7 +1736,7 @@
     },
     {
       "key": "vote/result/turnout",
-      "value": "Wahlbeteiligung: Rund {percentage} Prozent"
+      "value": "Stimmbeteiligung: rund {percentage} Prozent"
     },
     {
       "key": "vote/result/colorLegend",
@@ -1788,7 +1788,7 @@
     },
     {
       "key": "vote/result/byAgeGroup",
-      "value": "Nach Altersgruppen"
+      "value": "Nach Altersgruppe"
     },
     {
       "key": "vote/result/municipalityTypology/city",
@@ -1805,7 +1805,7 @@
     },
     {
       "key": "vote/result/municipalityTypology/footnote",
-      "value": "Nur Wohnsitze in der Schweiz berücksichtigt."
+      "value": "Nur Wohnsitze in der Schweiz berücksichtigt"
     },
     {
       "key": "vote/result/geoLegendLabel",
