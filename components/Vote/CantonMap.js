@@ -101,7 +101,7 @@ class CantonMap extends Component {
     window.removeEventListener('resize', this.measure)
   }
   render () {
-    const {data, fill, accessor, t} = this.props
+    const {data, fill, accessor, text, t} = this.props
     const {legendBelow} = this.state
 
     const fillColor = color(fill)
@@ -147,7 +147,11 @@ class CantonMap extends Component {
                 <path
                   key={canton.properties.abbr}
                   d={path(canton)}
-                  fill={value ? scale(value) : '#ccc'} />
+                  fill={value ? scale(value) : '#ccc'}>
+                  <title>
+                    {d ? text(d, canton, numberFormat) : canton.properties.name}
+                  </title>
+                </path>
               )
             })}
             <path fill='none' stroke='#fff' strokeWidth='1.5' d={path(cantonMesh)} />
