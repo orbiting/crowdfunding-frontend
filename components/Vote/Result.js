@@ -8,6 +8,7 @@ import {
 
 import {countFormat} from '../../lib/utils/formats'
 import RawHtml from '../RawHtml'
+import VideoPlayer from '../VideoPlayer'
 
 import CantonMap from './CantonMap'
 import BarChart from './BarChart'
@@ -60,7 +61,7 @@ export const LegendBlock = ({data, name, t}) => (
   </div>
 )
 
-export default ({voting, t}) => {
+export default ({voting, autoPlay, t}) => {
   const winner = voting.result.options.find(o => o.winner)
   const totalVotes = sum(voting.result.options, o => o.count)
 
@@ -79,12 +80,21 @@ export default ({voting, t}) => {
       options: voting.result.options
     }
   ]
+  const video = voting.result.video
 
   return (
     <div>
       <H1 {...pollStyles.title}>
         {t(`vote/${voting.name}/title`)}
       </H1>
+      {!!video && (
+        <div style={{
+          marginBottom: 30,
+          marginTop: 0
+        }}>
+          <VideoPlayer src={video} autoPlay={autoPlay} />
+        </div>
+      )}
       <H2 style={{marginTop: 20, marginBottom: 20}}>
         {t(`vote/${voting.name}/options/title/generic`)}
       </H2>

@@ -38,7 +38,7 @@ const OPTION_PADDING = 20
 export const styles = {
   title: css({
     [mediaQueries.onlyS]: {
-      fontSize: 36,
+      fontSize: 34,
       lineHeight: '39px'
     }
   }),
@@ -147,7 +147,7 @@ class Poll extends Component {
     }
   }
   render () {
-    const {data: {loading, error, voting}, t, me} = this.props
+    const {data: {loading, error, voting}, autoPlay, t, me} = this.props
 
     return (
       <Loader loading={loading && !voting} error={!voting && error} render={() => {
@@ -191,7 +191,7 @@ class Poll extends Component {
 
         if (voting.result) {
           return (
-            <Result voting={voting} t={t} />
+            <Result voting={voting} autoPlay={autoPlay} t={t} />
           )
         }
 
@@ -441,6 +441,11 @@ query($name: String!) {
       submitted
     }
     result {
+      video {
+        hls
+        mp4
+        subtitles
+      }
       options {
         id
         name
