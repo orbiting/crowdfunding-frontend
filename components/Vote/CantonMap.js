@@ -7,10 +7,10 @@ import {extent} from 'd3-array'
 import {color} from 'd3-color'
 
 import {
-  Label, fontFamilies
+  Label, fontFamilies, colors
 } from '@project-r/styleguide'
 
-import {swissNumbers} from '../../lib/utils/formats'
+import {swissNumbers, countFormat} from '../../lib/utils/formats'
 
 const topology = require('./data/ch-cantons.json')
 const cantons = feature(topology, topology.objects.cantons).features
@@ -70,6 +70,9 @@ const styles = {
   })
 }
 
+const ZERO_COLOR = '#ccc'
+const NA_COLOR = colors.error
+
 const numberFormat = swissNumbers.format('05.1%')
 
 class CantonMap extends Component {
@@ -101,12 +104,13 @@ class CantonMap extends Component {
     window.removeEventListener('resize', this.measure)
   }
   render () {
-    const {data, fill, accessor, text, t} = this.props
+    const {data, fill, accessor, t} = this.props
     const {legendBelow} = this.state
 
     const fillColor = color(fill)
+    const dataValues = data.map(d => accessor(d) / d.count)
     const valuesExtent = extent(
-      data.map(accessor)
+      dataValues
         .filter(Boolean)
     )
     const scale = scaleQuantize()
@@ -134,6 +138,24 @@ class CantonMap extends Component {
         label: `${numberFormat(safeExtent[0])} - ${numberFormat(safeExtent[1])}`
       }
     })
+    const hasZero = dataValues.find(value => value === 0) !== undefined
+    if (hasZero) {
+      legendItems.push({
+        value: ZERO_COLOR,
+        label: t.pluralize('vote/result/votes', {
+          count: 0,
+          formattedCount: '0'
+        })
+      })
+    }
+    const hasMissingCantons = cantons.find(canton => !data.find(d => d.key === canton.properties.abbr))
+    if (hasMissingCantons) {
+      legendItems.push({
+        value: NA_COLOR,
+        label: t('vote/result/labels/null')
+      })
+    }
+    const others = data.find(d => d.key === 'others')
 
     return (
       <div {...styles.container} ref={this.containerRef}>
@@ -141,15 +163,33 @@ class CantonMap extends Component {
           <svg {...styles.svg} viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
             {cantons.map(canton => {
               const d = data.find(d => d.key === canton.properties.abbr)
-              const value = d ? accessor(d) : 0
+              const count = d ? accessor(d) : undefined
 
+              let fill
+              if (count) {
+                fill = scale(count / d.count)
+              } else if (count === 0) {
+                fill = ZERO_COLOR
+              } else {
+                fill = NA_COLOR
+              }
               return (
                 <path
                   key={canton.properties.abbr}
                   d={path(canton)}
-                  fill={value ? scale(value) : '#ccc'}>
+                  fill={fill}>
                   <title>
-                    {d ? text(d, canton, numberFormat) : canton.properties.name}
+                    {d
+                      ? [
+                        `${canton.properties.name}:`,
+                        `${numberFormat(count / d.count)}`,
+                        `(${t.pluralize('vote/result/votes', {
+                          count,
+                          formattedCount: countFormat(count)
+                        })})`
+                      ].join(' ')
+                      : canton.properties.name
+                    }
                   </title>
                 </path>
               )
@@ -170,6 +210,11 @@ class CantonMap extends Component {
             </span>
           ))}
         </div>
+        {!!others && (
+          <div style={{marginTop: 5}}>
+            <Label>{t('vote/result/unkownVotes', {count: accessor(others)})}</Label>
+          </div>
+        )}
       </div>
     )
   }

@@ -193,19 +193,8 @@ export default ({voting, t}) => {
             data={voting.result.stats.chCantons}
             fill={colors[option]}
             accessor={d => (
-              d.options.find(o => o.name === option).count / d.count
-            )}
-            text={(d, canton, numberFormat) => {
-              const {count} = d.options.find(o => o.name === option)
-              return [
-                `${canton.properties.name}:`,
-                `${numberFormat(count / d.count)}`,
-                `(${t.pluralize('vote/result/votes', {
-                  count,
-                  formattedCount: countFormat(count)
-                })})`
-              ].join(' ')
-            }} />
+              (d.options.find(o => o.name === option) || {}).count
+            )} />
           <br />
         </div>
       ))}

@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-26T23:45:51.903Z",
+  "updated": "2017-05-27T01:35:59.104Z",
   "title": "live",
   "data": [
     {
@@ -1761,6 +1761,10 @@
     {
       "key": "vote/result/labels/others",
       "value": "Übrige"
+    },
+    {
+      "key": "vote/result/unkownVotes",
+      "value": "Nicht zuweisbare Stimmen: {count}"
     },
     {
       "key": "vote/result/byCountry",

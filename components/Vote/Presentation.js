@@ -128,7 +128,7 @@ const Slides = {
               data={voting.result.stats.chCantons}
               fill={colors[option]}
               accessor={d => (
-                d.options.find(o => o.name === option).count / d.count
+                (d.options.find(o => o.name === option) || {}).count
               )} />
             <br />
             <br />
