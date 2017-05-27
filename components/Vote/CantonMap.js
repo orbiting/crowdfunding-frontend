@@ -72,6 +72,9 @@ const styles = {
   }),
   noInteraction: css({
     pointerEvents: 'none'
+  }),
+  noSelect: css({
+    userSelect: 'none'
   })
 }
 
@@ -214,6 +217,7 @@ class CantonMap extends Component {
                   onTouchEnd={blur}
                   onMouseEnter={focus}
                   onMouseLeave={blur}
+                  {...styles.noSelect}
                   d={path(canton)}
                   fill={fill} />
               )
