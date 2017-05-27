@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-27T14:51:01.134Z",
+  "updated": "2017-05-27T19:35:40.305Z",
   "title": "live",
   "data": [
     {
@@ -867,6 +867,10 @@
       "value": "Crew"
     },
     {
+      "key": "footer/events",
+      "value": "Veranstaltungen"
+    },
+    {
       "key": "footer/about/projecR",
       "value": "Project R"
     },
@@ -1461,6 +1465,14 @@
     {
       "key": "api/voting/alreadyVoted",
       "value": "Sie können nur einmal abstimmen."
+    },
+    {
+      "key": "api/voting/tooEarly",
+      "value": "Die Abstimmung ist noch nicht eröffnet."
+    },
+    {
+      "key": "api/voting/tooLate",
+      "value": "Die Abstimmung ist bereits geschlossen."
     },
     {
       "key": "vote/END_GOAL/title",
