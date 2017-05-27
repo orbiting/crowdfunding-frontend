@@ -138,6 +138,8 @@ const Slides = {
           {t('vote/result/geoLegendLabel')}
           {' '}
           <A href='https://shop.swisstopo.admin.ch/de/products/landscape/boundaries3D' target='_blank'>swisstopo</A>
+          {', '}
+          <A href='http://www.geonames.org/countries/' target='_blank'>geonames.org</A>
         </Label>
       </div>
     )
