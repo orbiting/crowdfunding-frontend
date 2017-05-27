@@ -19,7 +19,7 @@ import CantonMap from './CantonMap'
 import BarChart from './BarChart'
 import colors from './colors'
 
-import {styles as resultStyles, randomResult, LegendBlock} from './Result'
+import {styles as resultStyles, LegendBlock} from './Result'
 import {styles as pollStyles} from './Poll'
 
 const {P, H2, H3} = Interaction
@@ -147,28 +147,7 @@ const Slides = {
 
     return (
       <div style={{marginTop: 60}}>
-        <H3>{t('vote/result/byMunicipalityTypology/first')}</H3>
-        <BarChart t={t} compact data={[
-          [t('vote/result/municipalityTypology/city'), totalVotes * 0.8],
-          [t('vote/result/municipalityTypology/intermediate'), totalVotes * 0.15],
-          [t('vote/result/municipalityTypology/countryside'), totalVotes * 0.05]
-        ].map(([key, total]) => (
-          randomResult(key, data.options, total)
-        ))} />
-        <Label>
-          {t('vote/result/municipalityTypology/footnote')}
-        </Label>
-        {' '}
-        <Label>
-          {t('vote/result/geoLegendLabel')}
-          {' '}
-          <A href='https://www.bfs.admin.ch/bfs/de/home/statistiken/querschnittsthemen/raeumliche-analysen.gnpdetail.2017-0593.html'>BFS</A>, <A href='https://www.cadastre.ch/de/services/service/plz.html' target='_blank'>swisstopo</A>
-        </Label>
-
-        <br />
-        <br />
-
-        <H3>{t('vote/result/byCountry')}</H3>
+        <H3>{t('vote/result/byCountry/first')}</H3>
         <BarChart t={t} compact data={data.stats.countries} />
         <Label>
           {t('vote/result/geoLegendLabel')}

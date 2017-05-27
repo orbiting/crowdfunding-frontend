@@ -45,33 +45,6 @@ export const styles = {
   })
 }
 
-export const randomResult = (key, options, total) => {
-  let remaining = 1
-
-  const optionsTotal = sum(options, o => o.count)
-
-  const optionResults = options.map((option, i) => {
-    const part = i === options.length - 1
-      ? remaining
-      : (
-        i === 0
-        ? option.count / optionsTotal * Math.min(Math.random() + 0.5, 1)
-        : Math.random() * remaining
-      )
-    remaining -= part
-    return {
-      count: Math.max(Math.max(1, total * 0.05), total * part),
-      name: option.name
-    }
-  })
-
-  return {
-    key,
-    count: sum(optionResults, o => o.count),
-    options: optionResults
-  }
-}
-
 export const LegendBlock = ({data, name, t}) => (
   <div {...styles.legend}>
     <Label>{t('vote/result/colorLegend')}</Label>
@@ -202,28 +175,6 @@ export default ({voting, t}) => {
         {t('vote/result/geoLegendLabel')}
         {' '}
         <A href='https://shop.swisstopo.admin.ch/de/products/landscape/boundaries3D' target='_blank'>swisstopo</A>
-      </Label>
-
-      <br />
-      <br />
-      <br />
-
-      <H3>{t('vote/result/byMunicipalityTypology')}</H3>
-      <BarChart t={t} compact data={[
-        [t('vote/result/municipalityTypology/city'), totalVotes * 0.8],
-        [t('vote/result/municipalityTypology/intermediate'), totalVotes * 0.15],
-        [t('vote/result/municipalityTypology/countryside'), totalVotes * 0.05]
-      ].map(([key, total]) => (
-        randomResult(key, voting.result.options, total)
-      ))} />
-      <Label>
-        {t('vote/result/municipalityTypology/footnote')}
-      </Label>
-      {' '}
-      <Label>
-        {t('vote/result/geoLegendLabel')}
-        {' '}
-        <A href='https://www.bfs.admin.ch/bfs/de/home/statistiken/querschnittsthemen/raeumliche-analysen.gnpdetail.2017-0593.html'>BFS</A>, <A href='https://www.cadastre.ch/de/services/service/plz.html' target='_blank'>swisstopo</A>
       </Label>
 
       <br />
