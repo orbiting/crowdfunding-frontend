@@ -1,5 +1,5 @@
 import React from 'react'
-import {sum} from 'd3-array'
+import {sum, descending} from 'd3-array'
 import {css} from 'glamor'
 
 import {
@@ -64,6 +64,14 @@ export default ({voting, t}) => {
   const winner = voting.result.options.find(o => o.winner)
   const totalVotes = sum(voting.result.options, o => o.count)
 
+  const orderedOptions = [].concat(voting.result.options)
+    .sort((a, b) => (
+      descending(a.winner, b.winner) ||
+      descending(a.count, b.count)
+    ))
+  const order = orderedOptions
+    .map(option => option.name)
+
   const bars = [
     {
       key: t('vote/result/total'),
@@ -81,7 +89,7 @@ export default ({voting, t}) => {
         {t(`vote/${voting.name}/options/title/generic`)}
       </H2>
       <div {...pollStyles.options}>
-        {voting.result.options.map(option => {
+        {voting.options.map(option => {
           const title = t(`vote/${voting.name}/options/${option.name}/title`)
           const text = t(`vote/${voting.name}/options/${option.name}`)
 
@@ -126,7 +134,7 @@ export default ({voting, t}) => {
       </P>
 
       <br />
-      <BarChart t={t} data={bars} />
+      <BarChart order={order} t={t} data={bars} />
       <LegendBlock data={voting.result} name={voting.name} t={t} />
       <P>
         {
@@ -141,7 +149,7 @@ export default ({voting, t}) => {
       <br />
 
       <H3>{t('vote/result/byCountry/first')}</H3>
-      <BarChart t={t} compact data={voting.result.stats.countries} />
+      <BarChart order={order} t={t} compact data={voting.result.stats.countries} />
       <Label>
         {t('vote/result/geoLegendLabel')}
         {' '}
@@ -154,7 +162,7 @@ export default ({voting, t}) => {
 
       <H3>{t('vote/result/byCanton')}</H3>
       <br />
-      {voting.result.options.map(o => o.name).map((option, i) => (
+      {orderedOptions.map(o => o.name).map((option, i) => (
         <div key={option} {...styles[i === 0 ? 'mapBig' : 'mapSmall']}>
           <span {...styles.badge} style={{
             backgroundColor: colors[option]
@@ -184,7 +192,7 @@ export default ({voting, t}) => {
       <br />
 
       <H3>{t('vote/result/byAgeGroup')}</H3>
-      <BarChart t={t} compact data={voting.result.stats.ages} />
+      <BarChart order={order} t={t} compact data={voting.result.stats.ages} />
     </div>
   )
 }

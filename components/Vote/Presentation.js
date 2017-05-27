@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
 import {css} from 'glamor'
-import {sum} from 'd3-array'
+import {sum, descending} from 'd3-array'
 import Router from 'next/router'
 
 import Loader from '../Loader'
@@ -80,6 +80,13 @@ const Slides = {
         options: voting.result.options
       }
     ]
+    const orderedOptions = [].concat(voting.result.options)
+      .sort((a, b) => (
+        descending(a.winner, b.winner) ||
+        descending(a.count, b.count)
+      ))
+    const order = orderedOptions
+      .map(option => option.name)
 
     return (
       <div style={{marginTop: 150}}>
@@ -98,7 +105,7 @@ const Slides = {
         </P>
 
         <br />
-        <BarChart t={t} data={bars} />
+        <BarChart order={order} t={t} data={bars} />
         <LegendBlock data={voting.result} name={voting.name} t={t} />
 
         <P>
@@ -114,9 +121,15 @@ const Slides = {
     )
   },
   3: ({t, voting, totalVotes}) => {
+    const orderedOptions = [].concat(voting.result.options)
+      .sort((a, b) => (
+        descending(a.winner, b.winner) ||
+        descending(a.count, b.count)
+      ))
+
     return (
       <div style={{marginTop: 70, 'width': '75%', marginLeft: 'auto', marginRight: 'auto'}}>
-        {voting.result.options.map(o => o.name).map((option, i) => (
+        {orderedOptions.map(o => o.name).map((option, i) => (
           <div key={option} style={{width: i === 0 ? '100%' : '50%', float: 'left'}}>
             <span {...resultStyles.badge} style={{
               backgroundColor: colors[option]
@@ -146,11 +159,18 @@ const Slides = {
   },
   4: ({t, voting, totalVotes}) => {
     const data = voting.result
+    const orderedOptions = [].concat(voting.result.options)
+      .sort((a, b) => (
+        descending(a.winner, b.winner) ||
+        descending(a.count, b.count)
+      ))
+    const order = orderedOptions
+      .map(option => option.name)
 
     return (
       <div style={{marginTop: 60}}>
         <H3>{t('vote/result/byCountry/first')}</H3>
-        <BarChart t={t} compact data={data.stats.countries} />
+        <BarChart order={order} t={t} compact data={data.stats.countries} />
         <Label>
           {t('vote/result/geoLegendLabel')}
           {' '}
@@ -161,11 +181,18 @@ const Slides = {
   },
   5: ({t, voting, totalVotes}) => {
     const data = voting.result
+    const orderedOptions = [].concat(voting.result.options)
+      .sort((a, b) => (
+        descending(a.winner, b.winner) ||
+        descending(a.count, b.count)
+      ))
+    const order = orderedOptions
+      .map(option => option.name)
 
     return (
       <div style={{marginTop: 60}}>
         <H3>{t('vote/result/byAgeGroup')}</H3>
-        <BarChart t={t} compact data={data.stats.ages} />
+        <BarChart order={order} t={t} compact data={data.stats.ages} />
       </div>
     )
   }

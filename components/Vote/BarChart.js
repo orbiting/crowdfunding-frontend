@@ -1,5 +1,6 @@
 import React from 'react'
 import {css, merge} from 'glamor'
+import {ascending} from 'd3-array'
 
 import {countFormat} from '../../lib/utils/formats'
 
@@ -47,50 +48,61 @@ const styles = {
   })
 }
 
-export default ({data, t, compact}) => {
+export default ({data, order, t, compact}) => {
   const barHeight = compact ? 20 : undefined
 
   return (
     <div>
-      {data.map((data) => (
-        <div key={data.key}>
-          <div {...styles.label}>
-            <Label>
-              {
-                t(`vote/result/labels/${data.key}`, undefined, data.key)
-              }
-              {' – '}
-              {t.pluralize('vote/result/votes', {
-                count: data.count,
-                formattedCount: countFormat(data.count)
-              })}
-            </Label>
-          </div>
-          <div {...styles.bar}>
-            {data.options.map(option => {
-              const percent = `${Math.round(option.count / data.count * 1000) / 10}%`
-              return (
-                <div key={option.name} {...styles.barSegment} style={{
-                  width: `${option.count / data.count * 100}%`,
-                  backgroundColor: colors[option.name],
-                  height: barHeight
-                }}>
-                  <div {...merge(styles.barNumbers, compact && styles.barNumbersCompact)}>
-                    <span {...styles.barNumberSmall}>
-                      {compact
-                        ? percent
-                        : countFormat(option.count)
-                      }
-                    </span><br />
-                    {!compact && percent}
+      {data.map(row => {
+        const orderedOptions = [].concat(row.options)
+        if (order) {
+          orderedOptions.sort((a, b) => (
+            ascending(
+              order.indexOf(a.name),
+              order.indexOf(b.name)
+            )
+          ))
+        }
+        return (
+          <div key={row.key}>
+            <div {...styles.label}>
+              <Label>
+                {
+                  t(`vote/result/labels/${row.key}`, undefined, row.key)
+                }
+                {' – '}
+                {t.pluralize('vote/result/votes', {
+                  count: row.count,
+                  formattedCount: countFormat(row.count)
+                })}
+              </Label>
+            </div>
+            <div {...styles.bar}>
+              {orderedOptions.map(option => {
+                const percent = `${Math.round(option.count / row.count * 1000) / 10}%`
+                return (
+                  <div key={option.name} {...styles.barSegment} style={{
+                    width: `${option.count / row.count * 100}%`,
+                    backgroundColor: colors[option.name],
+                    height: barHeight
+                  }}>
+                    <div {...merge(styles.barNumbers, compact && styles.barNumbersCompact)}>
+                      <span {...styles.barNumberSmall}>
+                        {compact
+                          ? percent
+                          : countFormat(option.count)
+                        }
+                      </span><br />
+                      {!compact && percent}
+                    </div>
                   </div>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
+            <br style={{clear: 'left'}} />
           </div>
-          <br style={{clear: 'left'}} />
-        </div>
-      ))}
+        )
+      })}
     </div>
   )
 }
