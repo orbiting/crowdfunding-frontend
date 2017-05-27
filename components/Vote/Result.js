@@ -3,7 +3,7 @@ import {sum} from 'd3-array'
 import {css} from 'glamor'
 
 import {
-  Interaction, Label, H1, A
+  Interaction, Label, H1, A, mediaQueries
 } from '@project-r/styleguide'
 
 import {countFormat} from '../../lib/utils/formats'
@@ -35,6 +35,13 @@ export const styles = {
     padding: '1px 6px',
     borderRadius: 4,
     color: '#fff'
+  }),
+  mapBig: css({}),
+  mapSmall: css({
+    [mediaQueries.mUp]: {
+      float: 'left',
+      width: '50%'
+    }
   })
 }
 
@@ -205,8 +212,8 @@ export default ({voting, t}) => {
 
       <H3>{t('vote/result/byCanton')}</H3>
       <br />
-      {voting.result.options.map(o => o.name).map(option => (
-        <div key={option}>
+      {voting.result.options.map(o => o.name).map((option, i) => (
+        <div key={option} {...styles[i === 0 ? 'mapBig' : 'mapSmall']}>
           <span {...styles.badge} style={{
             backgroundColor: colors[option]
           }}>
@@ -219,7 +226,6 @@ export default ({voting, t}) => {
             accessor={d => (
               d.options.find(o => o.name === option).count / d.count
             )} />
-          <br />
           <br />
         </div>
       ))}
