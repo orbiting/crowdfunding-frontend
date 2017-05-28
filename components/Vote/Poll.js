@@ -467,6 +467,7 @@ query($name: String!) {
         hls
         mp4
         subtitles
+        poster
       }
       options {
         id
