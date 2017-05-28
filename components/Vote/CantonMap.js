@@ -94,18 +94,13 @@ class CantonMap extends Component {
       this.container = ref
     }
     this.measure = () => {
-      let {width, top, left} = this.container.getBoundingClientRect()
-      top += window.pageYOffset
+      let {width} = this.container.getBoundingClientRect()
 
       if (
-        width !== this.state.width ||
-        top !== this.state.top ||
-        left !== this.state.left
+        width !== this.state.width
       ) {
         this.setState(() => ({
-          width,
-          top,
-          left
+          width
         }))
       }
     }
@@ -119,7 +114,7 @@ class CantonMap extends Component {
   }
   render () {
     const {data, fill, accessor, t} = this.props
-    const {width, top, left, hover} = this.state
+    const {width, hover} = this.state
     const legendBelow = width < 520
 
     const fillColor = color(fill)
@@ -195,9 +190,11 @@ class CantonMap extends Component {
                 fill = NA_COLOR
               }
               const focus = (event) => {
+                const {top, left} = this.container.getBoundingClientRect()
+
                 const rect = event.target.getBoundingClientRect()
                 const x = rect.left + rect.width / 2 - left
-                const y = rect.top + window.pageYOffset - top
+                const y = rect.top - top
 
                 this.setState(() => ({
                   hover: {
