@@ -4,7 +4,7 @@ import {feature, mesh} from 'topojson-client'
 import {geoPath} from 'd3-geo'
 import {scaleQuantize} from 'd3-scale'
 import {extent} from 'd3-array'
-import {color} from 'd3-color'
+import {lab} from 'd3-color'
 
 import {
   Label, fontFamilies, colors
@@ -117,7 +117,7 @@ class CantonMap extends Component {
     const {width, hover} = this.state
     const legendBelow = width < 520
 
-    const fillColor = color(fill)
+    const fillColor = lab(fill)
     const dataValues = data.map(d => accessor(d) / d.count)
     const valuesExtent = extent(
       dataValues
@@ -126,11 +126,11 @@ class CantonMap extends Component {
     const scale = scaleQuantize()
       .domain(valuesExtent)
       .range([
-        fillColor.brighter(0.8),
-        fillColor.brighter(0.4),
+        fillColor.brighter(1.2),
+        fillColor.brighter(0.6),
         fillColor,
-        fillColor.darker(0.4),
-        fillColor.darker(0.8)
+        fillColor.darker(0.6),
+        fillColor.darker(1.2)
       ])
     const range = scale.range()
     const legendItems = range.map((value, i) => {
