@@ -13,10 +13,14 @@ import {
 import Feed, {DEFAULT_ORDER} from '../components/Discuss/Feed'
 import Share from '../components/Discuss/Share'
 import Poll from '../components/Vote/Poll'
+import Presentation from '../components/Vote/Presentation'
 
 const VotePage = ({url}) => {
   if (url.query.share) {
     return <Share name='END_GOAL' firstId={url.query.share} />
+  }
+  if (url.query.presentation) {
+    return <Presentation name='END_GOAL' slide={url.query.slide} />
   }
 
   const metaData = {
@@ -29,7 +33,7 @@ const VotePage = ({url}) => {
   return (
     <Frame url={url} sidebar={false}>
       <NarrowContainer>
-        <Poll name='END_GOAL' />
+        <Poll name='END_GOAL' autoPlay={url.query.play} />
         <Feed name='END_GOAL'
           firstId={url.query.id}
           order={url.query.order || DEFAULT_ORDER}

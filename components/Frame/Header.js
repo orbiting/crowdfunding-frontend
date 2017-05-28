@@ -165,8 +165,8 @@ class Header extends Component {
         href: '/updates'
       },
       {
-        label: t('menu/events'),
-        href: '/events'
+        label: t('menu/vote'),
+        href: '/vote'
       },
       {
         label: t('menu/community'),

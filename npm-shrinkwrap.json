@@ -895,8 +895,7 @@
     "commander": {
       "version": "2.9.0",
       "from": "commander@>=2.9.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/commander/-/commander-2.9.0.tgz",
-      "dev": true
+      "resolved": "https://registry.npmjs.org/commander/-/commander-2.9.0.tgz"
     },
     "commondir": {
       "version": "1.0.1",
@@ -1110,6 +1109,11 @@
       "version": "1.1.4",
       "from": "d3-interpolate@latest",
       "resolved": "https://registry.npmjs.org/d3-interpolate/-/d3-interpolate-1.1.4.tgz"
+    },
+    "d3-scale": {
+      "version": "1.0.6",
+      "from": "d3-scale@latest",
+      "resolved": "https://registry.npmjs.org/d3-scale/-/d3-scale-1.0.6.tgz"
     },
     "d3-time": {
       "version": "1.0.6",
@@ -2609,8 +2613,7 @@
     "graceful-readlink": {
       "version": "1.0.1",
       "from": "graceful-readlink@>=1.0.0",
-      "resolved": "https://registry.npmjs.org/graceful-readlink/-/graceful-readlink-1.0.1.tgz",
-      "dev": true
+      "resolved": "https://registry.npmjs.org/graceful-readlink/-/graceful-readlink-1.0.1.tgz"
     },
     "graphql": {
       "version": "0.9.6",
@@ -4797,6 +4800,11 @@
       "version": "1.0.3",
       "from": "to-fast-properties@>=1.0.1 <2.0.0",
       "resolved": "https://registry.npmjs.org/to-fast-properties/-/to-fast-properties-1.0.3.tgz"
+    },
+    "topojson-client": {
+      "version": "3.0.0",
+      "from": "topojson-client@latest",
+      "resolved": "https://registry.npmjs.org/topojson-client/-/topojson-client-3.0.0.tgz"
     },
     "touch": {
       "version": "1.0.0",

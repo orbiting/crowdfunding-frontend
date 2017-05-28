@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-24T16:31:21.823Z",
+  "updated": "2017-05-27T19:35:40.305Z",
   "title": "live",
   "data": [
     {
@@ -867,6 +867,10 @@
       "value": "Crew"
     },
     {
+      "key": "footer/events",
+      "value": "Veranstaltungen"
+    },
+    {
       "key": "footer/about/projecR",
       "value": "Project R"
     },
@@ -1463,8 +1467,16 @@
       "value": "Sie können nur einmal abstimmen."
     },
     {
+      "key": "api/voting/tooEarly",
+      "value": "Die Abstimmung ist noch nicht eröffnet."
+    },
+    {
+      "key": "api/voting/tooLate",
+      "value": "Die Abstimmung ist bereits geschlossen."
+    },
+    {
       "key": "vote/END_GOAL/title",
-      "value": "Abstimmung zum Ziel für den Crowdfunding-Schlussspurt"
+      "value": "Abstimmung zum letzten Ziel des Crowdfundings"
     },
     {
       "key": "vote/END_GOAL/lead",
@@ -1716,7 +1728,128 @@
     },
     {
       "key": "discuss/stats/1",
-      "value": "Es wurden bereits ein Plädoyer veröffentlicht."
+      "value": "Es wurde bereits ein Plädoyer veröffentlicht."
+    },
+    {
+      "key": "vote/options/moreInfo",
+      "value": "<a href=\"/updates/abstimmung\">Mehr Informationen</a>"
+    },
+    {
+      "key": "vote/result/title",
+      "value": "Das Resultat"
+    },
+    {
+      "key": "vote/result/winner",
+      "value": "Gewonnen hat {winner} mit {count} Stimmen, {percentage} Prozent."
+    },
+    {
+      "key": "vote/result/total",
+      "value": "Total"
+    },
+    {
+      "key": "vote/result/turnout",
+      "value": "Stimmbeteiligung: rund {percentage} Prozent"
+    },
+    {
+      "key": "vote/result/colorLegend",
+      "value": "Legende"
+    },
+    {
+      "key": "vote/result/mapLegend",
+      "value": "Stimmenanteil"
+    },
+    {
+      "key": "vote/result/votes/other",
+      "value": "{formattedCount} Stimmen"
+    },
+    {
+      "key": "vote/result/votes/1",
+      "value": "Eine Stimme"
+    },
+    {
+      "key": "vote/result/labels/null",
+      "value": "Keine Angabe"
+    },
+    {
+      "key": "vote/result/labels/others",
+      "value": "Übrige"
+    },
+    {
+      "key": "vote/result/unkownVotes",
+      "value": "Nicht zuweisbare Stimmen: {count}"
+    },
+    {
+      "key": "vote/result/byCountry",
+      "value": "Nach Land"
+    },
+    {
+      "key": "vote/result/byCountry/first",
+      "value": "Stimmverhältnis nach Land"
+    },
+    {
+      "key": "vote/result/byCanton",
+      "value": "Nach Kanton"
+    },
+    {
+      "key": "vote/result/byMunicipalityTypology",
+      "value": "Nach Stadt/Land"
+    },
+    {
+      "key": "vote/result/byMunicipalityTypology/first",
+      "value": "Stimmverhältnis nach Stadt/Land"
+    },
+    {
+      "key": "vote/result/byAgeGroup",
+      "value": "Nach Altersgruppe"
+    },
+    {
+      "key": "vote/result/municipalityTypology/city",
+      "value": "Städtisch"
+    },
+    {
+      "key": "vote/result/municipalityTypology/intermediate",
+      "value": "Agglomeration und ländliche Zentren",
+      "undefined": "Intermediär"
+    },
+    {
+      "key": "vote/result/municipalityTypology/countryside",
+      "value": "Ländlich"
+    },
+    {
+      "key": "vote/result/municipalityTypology/footnote",
+      "value": "Nur Wohnsitze in der Schweiz berücksichtigt"
+    },
+    {
+      "key": "vote/result/geoLegendLabel",
+      "value": "Geometrische Grundlage:"
+    },
+    {
+      "key": "vote/result/presentation/noSlide",
+      "value": "Ende"
+    },
+    {
+      "key": "vote/waiting/END_GOAL/lead",
+      "value": "Die Abstimmung ist zu Ende. Wir kommunizieren das Resultat heute Abend um 20 Uhr mit einer Videobotschaft."
+    },
+    {
+      "key": "vote/waiting/turnout/1",
+      "value": "Eine Person von {formattedEligitable} (rund {roundTurnoutPercent} Prozent) hat eine Wahl getroffen."
+    },
+    {
+      "key": "vote/waiting/turnout/other",
+      "value": "{formattedCount} von {formattedEligitable} (rund {roundTurnoutPercent} Prozent) haben eine Wahl getroffen."
+    },
+    {
+      "key": "vote/waiting/signedIn/title",
+      "value": "Willkommen"
+    },
+    {
+      "key": "vote/waiting/signedIn/email",
+      "value": "Angemeldet als: {email}"
+    },
+    {
+      "key": "vote/waiting/hasSubmitted",
+      "value": "Sie haben abgestimmt. Vielen Dank für Ihre Stimme!"
     }
   ]
 }
