@@ -115,7 +115,7 @@ class CantonMap extends Component {
   render () {
     const {data, fill, accessor, t} = this.props
     const {width, hover} = this.state
-    const legendBelow = width < 520
+    const legendBelow = !width || width < 520
 
     const fillColor = lab(fill)
     const dataValues = data.map(d => accessor(d) / d.count)
@@ -177,7 +177,7 @@ class CantonMap extends Component {
       <div {...styles.container} ref={this.containerRef}>
         <div {...styles.svgContainer}>
           <svg {...styles.svg} viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
-            {cantons.map(canton => {
+            {!!width && cantons.map(canton => {
               const d = data.find(d => d.key === canton.properties.abbr)
               const count = d ? accessor(d) : undefined
 
