@@ -261,13 +261,16 @@ class CantonMap extends Component {
             <ContextBoxValue
               label={hover.canton.properties.name}>
               {hover.d
-                ? [
-                  `${numberFormat(hover.count / hover.d.count)}`,
-                  `(${t.pluralize('vote/result/votes', {
-                    count: hover.count,
-                    formattedCount: countFormat(hover.count)
-                  })})`
-                ].join(' ')
+                ? (
+                  <span>
+                    {numberFormat(hover.count / hover.d.count)}<br />
+                    {t.pluralize('vote/result/ofVotes', {
+                      count: hover.d.count,
+                      formattedCount: countFormat(hover.d.count),
+                      formattedN: countFormat(hover.count)
+                    })}
+                  </span>
+                )
                 : t('vote/result/labels/null')
               }
             </ContextBoxValue>
