@@ -119,7 +119,24 @@ class Poll extends Component {
   constructor (...args) {
     super(...args)
 
-    this.state = {}
+    this.state = {
+      now: new Date()
+    }
+  }
+  tick () {
+    const now = new Date()
+    const msToNextMinute = (61 - now.getSeconds()) * 1000 - now.getMilliseconds() + 50
+
+    clearTimeout(this.timeout)
+    this.timeout = setTimeout(
+      () => {
+        this.setState({
+          now: new Date()
+        })
+        this.tick()
+      },
+      msToNextMinute
+    )
   }
   submit () {
     this.setState({
@@ -146,14 +163,19 @@ class Poll extends Component {
       })
     }
   }
+  componentDidMount () {
+    this.tick()
+  }
+  componentWillUnmount () {
+    clearTimeout(this.timeout)
+  }
   render () {
     const {data: {loading, error, voting}, autoPlay, t, me} = this.props
+    const {now} = this.state
 
     return (
       <Loader loading={loading && !voting} error={!voting && error} render={() => {
         const endDate = new Date(voting.endDate)
-
-        const now = new Date()
 
         const reachedEndDate = now > endDate
 
