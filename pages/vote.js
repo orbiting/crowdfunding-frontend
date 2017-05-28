@@ -25,8 +25,8 @@ const VotePage = ({url}) => {
 
   const metaData = {
     pageTitle: 'Abstimmung — Republik',
-    title: 'Die Republik führt die Demokratie ein',
-    description: 'Frau Verlegerin, Herr Verleger, Sie haben die Aufgabe, das letzte Ziel des Crowdfundings zu bestimmen.',
+    title: 'Demokratie in der Republik – das Abstimmungsresultat',
+    description: 'Das letzte Ziel des Crowdfundings – Sie haben entschieden! Verlegerin oder Verleger der ersten Stunde können Sie noch bis Mittwoch, 31. Mai um 20 Uhr werden. Jetzt mitmachen und weitersagen: www.republik.ch',
     image: `${STATIC_BASE_URL}/static/social-media/vote.jpg`
   }
 
