@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-27T19:35:40.305Z",
+  "updated": "2017-05-28T10:18:45.605Z",
   "title": "live",
   "data": [
     {
@@ -1732,7 +1732,7 @@
     },
     {
       "key": "vote/options/moreInfo",
-      "value": "<a href=\"/updates/abstimmung\">Mehr Informationen</a>"
+      "value": "Demokratie in der Republik – <a href=\"/updates/abstimmung\">mehr Informationen</a>."
     },
     {
       "key": "vote/result/title",
