@@ -7,7 +7,6 @@ import withData from '../lib/withData'
 import withT from '../lib/withT'
 
 import Frame from '../components/Frame'
-import Content from '../components/Frame/Content'
 import VideoCover from '../components/VideoCover'
 import {withStatus} from '../components/Status'
 
@@ -19,7 +18,8 @@ import {
 
 import {
   Quote,
-  P, A, linkRule
+  P, A, linkRule,
+  NarrowContainer
 } from '@project-r/styleguide'
 
 import {Page as CrowdfundingPage} from './crowdfunding'
@@ -92,7 +92,7 @@ class Index extends Component {
     const {ended} = this.state
     if (ended) {
       return (
-        <Frame url={url} meta={{
+        <Frame url={url} sidebar={false} meta={{
           pageTitle: 'Republik — das digitale Magazin von Project R',
           title: 'Republik — das digitale Magazin von Project R',
           description: 'Vielen Danke.',
@@ -100,38 +100,35 @@ class Index extends Component {
         }} cover={(
           <VideoCover src={MERCI_VIDEO} />
         )}>
-          <div>
-            <Content indented>
-              <P>Ladies and Gentlemen,</P>
-              <P>Thomas Jefferson, der Autor der amerikanischen Unabhängigkeitserklärung, schrieb einmal:</P>
-              <Quote>Ich bin sicher, eine kleine Rebellion dann und wann ist eine gute Sache; sie ist in der Politik so notwendig, um die Dinge zu klären, wie ein Sturm für das Wetter.</Quote>
+          <NarrowContainer>
+            <P>Ladies and Gentlemen,</P>
+            <P>Thomas Jefferson, der Autor der amerikanischen Unabhängigkeitserklärung, schrieb einmal:</P>
+            <Quote>Ich bin sicher, eine kleine Rebellion dann und wann ist eine gute Sache; sie ist in der Politik so notwendig, um die Dinge zu klären, wie ein Sturm für das Wetter.</Quote>
 
-              <P>Wie es aussieht, war es auch im Journalismus Zeit für eine kleine Rebellion. Sie, unsere {countFormat(crowdfunding.status.people)} Verlegerinnen und Verleger, haben sie unterstützt.</P>
+            <P>Wie es aussieht, war es auch im Journalismus Zeit für eine kleine Rebellion. Sie, unsere {countFormat(crowdfunding.status.people)} Verlegerinnen und Verleger, haben sie unterstützt.</P>
 
-              <P>Wir danken Ihnen für Ihre Neugier, Ihre Entschlusskraft, Ihr Vertrauen. Und für den Mut, in ein neues Modell für Journalismus zu investieren.</P>
+            <P>Wir danken Ihnen für Ihre Neugier, Ihre Entschlusskraft, Ihr Vertrauen. Und für den Mut, in ein neues Modell für Journalismus zu investieren.</P>
 
-              <P>Wir arbeiten nun daran, die Republik zu bauen. Einerseits ein sturmfestes Unternehmen. Und andererseits ein Magazin, bei dem Sie stolz sein können, als Gründerin oder Gründer dabei gewesen zu sein.</P>
+            <P>Wir arbeiten nun daran, die Republik zu bauen. Einerseits ein sturmfestes Unternehmen. Und andererseits ein Magazin, bei dem Sie stolz sein können, als Gründerin oder Gründer dabei gewesen zu sein.</P>
 
-              <P>Im Januar 2018 geht es los.</P>
+            <P>Im Januar 2018 geht es los.</P>
 
-              <P>Mit Dank und Hochachtung,</P>
+            <P>Mit Dank und Hochachtung,</P>
 
-              <P>Ihre Crew von der Republik und von Project&nbsp;R</P>
+            <P>Ihre Crew von der Republik und von Project&nbsp;R</P>
 
-              <P>PS: Für die ersten Umbauarbeiten schliessen wir die Anmeldung für neue Mitglieder bis zum 1. Juli. Falls Sie ebenfalls an Bord kommen wollen, tragen Sie hier Ihre Mail-Adresse ein:</P>
+            <P>PS: Für die ersten Umbauarbeiten schliessen wir die Anmeldung für neue Mitglieder bis zum 1. Juli. Falls Sie ebenfalls an Bord kommen wollen, tragen Sie hier Ihre Mail-Adresse ein:</P>
 
-              <P>PPS: Auf dem Laufenden über den weiteren Aufbau des digitalen Magazins Republik von Project R bleiben Sie hier: <A href='https://project-r.construction/'>project-r.construction</A></P>
+            <P>PPS: Auf dem Laufenden über den weiteren Aufbau des digitalen Magazins Republik von Project R bleiben Sie hier: <A href='https://project-r.construction/'>project-r.construction</A></P>
 
-              <P>
-                PPPS:
-                {' '}
-                <Link href='/crowdfunding'>
-                  <a {...linkRule}>Das Crowdfunding-Archiv</a>
-                </Link>
-              </P>
-
-            </Content>
-          </div>
+            <P>
+              PPPS:
+              {' '}
+              <Link href='/crowdfunding'>
+                <a {...linkRule}>Das Crowdfunding-Archiv</a>
+              </Link>
+            </P>
+          </NarrowContainer>
         </Frame>
       )
     }
