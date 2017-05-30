@@ -6,6 +6,7 @@ import Content from '../components/Frame/Content'
 import List, {generateSeed} from '../components/Testimonial/List'
 import Share from '../components/Testimonial/Share'
 import Image from '../components/Testimonial/Image'
+import TV from '../components/Testimonial/TV'
 
 class CommunityPage extends Component {
   static async getInitialProps (ctx) {
@@ -18,6 +19,9 @@ class CommunityPage extends Component {
 
     if (url.query.share) {
       return <Share firstId={url.query.share} />
+    }
+    if (url.query.tv) {
+      return <TV />
     }
     if (url.query.img) {
       const order = url.query.order || 'ASC'
