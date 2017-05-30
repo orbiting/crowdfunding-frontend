@@ -3,6 +3,7 @@ import {css} from 'glamor'
 import {gql, graphql} from 'react-apollo'
 import {ascending} from 'd3-array'
 import {timeMinute} from 'd3-time'
+import {compose} from 'redux'
 
 import withT from '../../lib/withT'
 import {chfFormat, countFormat} from '../../lib/utils/formats'
@@ -43,22 +44,6 @@ const styles = {
   })
 }
 
-const query = gql`{
-  crowdfunding(name: "REPUBLIK") {
-    id
-    goals {
-      people
-      money
-      description
-    }
-    status {
-      people
-      money
-    }
-    endDate
-  }
-}`
-
 class Status extends Component {
   constructor (props) {
     super(props)
@@ -66,7 +51,7 @@ class Status extends Component {
     this.state = {}
   }
   render () {
-    if ((this.props.loading || this.props.error) && !this.props.crowdfunding) {
+    if (!this.props.crowdfunding) {
       return null
     }
 
@@ -184,17 +169,36 @@ class Status extends Component {
   }
 }
 
-const StatusWithQuery = graphql(query, {
-  props: ({ data }) => {
+const query = gql`{
+  crowdfunding(name: "REPUBLIK") {
+    id
+    goals {
+      people
+      money
+      description
+    }
+    status {
+      people
+      money
+    }
+    endDate
+  }
+}`
+
+export const withStatus = Component => graphql(query, {
+  props: ({data}) => {
     return {
-      loading: data.loading,
-      error: data.error,
-      crowdfunding: data.crowdfunding
+      crowdfunding: data.crowdfunding,
+      statusStopPolling: data.stopPolling,
+      statusStartPolling: data.startPolling
     }
   },
   options: {
     pollInterval: +STATUS_POLL_INTERVAL_MS
   }
-})(withT(Status))
+})(Component)
 
-export default StatusWithQuery
+export default compose(
+  withStatus,
+  withT
+)(Status)
