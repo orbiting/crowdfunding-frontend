@@ -20,6 +20,19 @@ const styles = {
     },
     '& ul, & ol': {
       overflow: 'hidden'
+    },
+    '& .container169': {
+      position: 'relative',
+      height: 0,
+      width: '100%',
+      paddingBottom: `${9 / 16 * 100}%`
+    },
+    '& .containedVideo': {
+      position: 'absolute',
+      height: '100%',
+      width: '100%',
+      left: 0,
+      top: 0
     }
   }),
   sansSerif: css({
