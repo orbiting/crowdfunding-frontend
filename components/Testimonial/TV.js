@@ -12,6 +12,10 @@ import {
   P, Interaction, Logo, fontFamilies
 } from '@project-r/styleguide'
 
+import {
+  TV_POLL_INTERVAL_MS
+} from '../../constants'
+
 const toViewport = px => `${px / 18}vw`
 
 const MIDDLE = 56.25
@@ -90,8 +94,8 @@ const fontSizeBoost = length => {
   return 0
 }
 
-const Item = ({loading, error, t, testimonial: {quote, image, name, role, video, sequenceNumber}}) => (
-  <Loader loading={loading} error={error} render={() => (
+const Item = ({loading, error, t, testimonial, testimonial: {quote, image, name, role, video, sequenceNumber}}) => (
+  <Loader loading={!testimonial && loading} error={!testimonial && error} render={() => (
     <div {...styles.container}>
       <div {...styles.screen}>
         <Head>
@@ -148,6 +152,9 @@ export default compose(
         error: data.error,
         testimonial: data.lastTestimonial
       })
+    },
+    options: {
+      pollInterval: +TV_POLL_INTERVAL_MS
     }
   })
 )(Item)
