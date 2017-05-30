@@ -58,63 +58,73 @@ const VIDEOS = {
   }
 }
 
-export const Page = ({url}) => (
-  <Frame url={url} meta={{
-    pageTitle: 'Republik — das digitale Magazin von Project R',
-    title: 'Republik — das digitale Magazin von Project R',
-    description: 'Das war unser Crowdfunding.',
-    image: `${STATIC_BASE_URL}/static/social-media/main.jpg`
-  }} cover={(
-    <VideoCover src={VIDEOS.main} />
-  )}>
-    <div>
-      <Content indented>
-        <Lead>
-          Willkommen zum Crowdfunding für das digitale Magazin Republik von Project&nbsp;R
-        </Lead>
-        {md(mdComponents)`
+export const Page = ({url, alive}) => {
+  const pledgeLink = alive
+    ? (
+      <Link href='/pledge'>
+        <a {...linkRule}>Jetzt mitmachen!</a>
+      </Link>
+    )
+    : null
+
+  return (
+    <Frame url={url} meta={{
+      pageTitle: 'Republik — das digitale Magazin von Project R',
+      title: 'Republik — das digitale Magazin von Project R',
+      description: alive
+        ? 'Jetzt unser Crowdfunding unterstützen.'
+        : 'Das war unser Crowdfunding.', // t('ended/crowdfunding/description')
+      image: `${STATIC_BASE_URL}/static/social-media/main.jpg`
+    }} cover={(
+      <VideoCover src={VIDEOS.main} />
+    )}>
+      <div>
+        <Content indented>
+          <Lead>
+            Willkommen zum Crowdfunding für das digitale Magazin Republik von Project&nbsp;R
+          </Lead>
+          {md(mdComponents)`
 Die Republik ist eine kleine Rebellion. Für den Journalismus. Und gegen die Medienkonzerne. Denn die grossen Verlage verlassen die Publizistik: Sie bauen sich in hohem Tempo in Internet-Handelshäuser um. Das ist eine schlechte Nachricht für den Journalismus. Aber auch für die Demokratie. Denn ohne vernünftige Informationen fällt man schlechte Entscheidungen.
 
 Eine funktionierende Demokratie braucht funktionierende Medien. Und dafür braucht es nicht nur Journalistinnen und Journalisten, sondern auch Sie. Als Leserinnen. Als Bürger. Als Menschen, die bereit sind, etwas Geld in unabhängigen Journalismus zu investieren.
 
-[Jetzt mitmachen!](/pledge)
-
+${pledgeLink}
 
   `}
 
-        <div style={{margin: '15px 0 0'}}>
-          <Label style={{display: 'block', marginBottom: 5}}>
-            Teilen Sie diese Seite mit Ihren Freunden:
-          </Label>
-          <Share
-            url={PUBLIC_BASE_URL + url.pathname}
-            emailSubject={'Es ist Zeit.'} />
-        </div>
-        {/* Navi? */}
+          <div style={{margin: '15px 0 0'}}>
+            <Label style={{display: 'block', marginBottom: 5}}>
+              Teilen Sie diese Seite mit Ihren Freunden:
+            </Label>
+            <Share
+              url={PUBLIC_BASE_URL + url.pathname}
+              emailSubject={'Es ist Zeit.'} />
+          </div>
+          {/* Navi? */}
 
-        <div {...styles.stretchLead}>
-          <Interaction.P {...styles.stretchP} style={{marginBottom: 10}}>
-            Damit das digitale Magazin Republik an den Start gehen kann, haben wir 3000 Abonnentinnen und Abonnenten sowie 750{thousandSeparator}000 Franken gesucht. Dieses Ziel haben wir zusammen mit Ihnen am ersten Tag des Crowdfundings nach sieben Stunden und 49 Minuten erreicht. Herzlichen Dank!
-          </Interaction.P>
-          <Interaction.P {...styles.stretchP}>
-            Republik will das Mediensystem entscheidend verändern — deshalb sammeln wir weiter!
-          </Interaction.P>
-          <List>
-            <List.Item><Highlight>Bei 5000</Highlight> Unterstützerinnen und Unterstützern haben wir zwei weitere Ausbildungsplätze für junge Journalistinnen und Journalisten geschaffen.</List.Item>
-            <List.Item><Highlight>Bei 7000</Highlight> Mitgliedern haben wir die Redaktion um einen zusätzlichen Kopf vergrössert.</List.Item>
-            <List.Item><Highlight>Bei 9000</Highlight> Unterstützerinnen und Unterstützern realisieren wir pro Jahr zusätzlich vier grosse und aufwändige Recherchen. Gemeinsam mit Ihnen haben wir das geschafft. Danke!</List.Item>
-            <List.Item><Highlight>Bei 10{thousandSeparator}000</Highlight> Abonnenten und Verlegerinnen haben wir ein fixes Budget eingerichtet, um herausragende internationale Autorinnen und Autoren für die Republik zu gewinnen. Danke allen, die mitmachen!</List.Item>
-            <List.Item>
-              <Highlight>Bei 12{thousandSeparator}000</Highlight> Abonnentinnen haben wir eine echte Neuheit in der Geschichte des Crowdfundings versprochen: nichts Neues! Also das, was wir Ihnen seit dem Start dieses Crowdfundings versprechen: Journalismus – kompromisslos in der Qualität, leserfinanziert, ohne Werbung. Danke für Ihre Unterstützung!
-            </List.Item>
+          <div {...styles.stretchLead}>
+            <Interaction.P {...styles.stretchP} style={{marginBottom: 10}}>
+              Damit das digitale Magazin Republik an den Start gehen kann, haben wir 3000 Abonnentinnen und Abonnenten sowie 750{thousandSeparator}000 Franken gesucht. Dieses Ziel haben wir zusammen mit Ihnen am ersten Tag des Crowdfundings nach sieben Stunden und 49 Minuten erreicht. Herzlichen Dank!
+            </Interaction.P>
+            <Interaction.P {...styles.stretchP}>
+              Republik will das Mediensystem entscheidend verändern — deshalb sammeln wir weiter!
+            </Interaction.P>
+            <List>
+              <List.Item><Highlight>Bei 5000</Highlight> Unterstützerinnen und Unterstützern haben wir zwei weitere Ausbildungsplätze für junge Journalistinnen und Journalisten geschaffen.</List.Item>
+              <List.Item><Highlight>Bei 7000</Highlight> Mitgliedern haben wir die Redaktion um einen zusätzlichen Kopf vergrössert.</List.Item>
+              <List.Item><Highlight>Bei 9000</Highlight> Unterstützerinnen und Unterstützern realisieren wir pro Jahr zusätzlich vier grosse und aufwändige Recherchen. Gemeinsam mit Ihnen haben wir das geschafft. Danke!</List.Item>
+              <List.Item><Highlight>Bei 10{thousandSeparator}000</Highlight> Abonnenten und Verlegerinnen haben wir ein fixes Budget eingerichtet, um herausragende internationale Autorinnen und Autoren für die Republik zu gewinnen. Danke allen, die mitmachen!</List.Item>
+              <List.Item>
+                <Highlight>Bei 12{thousandSeparator}000</Highlight> Abonnentinnen haben wir eine echte Neuheit in der Geschichte des Crowdfundings versprochen: nichts Neues! Also das, was wir Ihnen seit dem Start dieses Crowdfundings versprechen: Journalismus – kompromisslos in der Qualität, leserfinanziert, ohne Werbung. Danke für Ihre Unterstützung!
+              </List.Item>
 
-            <List.Item>
-              Es ist überwältigend, was wir gemeinsam mit Ihnen in den letzten drei Wochen erreicht haben: tatsächlich einen Unterschied zu machen! Genau dafür wird das digitale Magazin Republik von Project R entwickelt, daran arbeiten wir. Das Crowdfunding läuft noch bis am Mittwoch, 31. Mai um 20 Uhr. Das Ziel bei Erreichung von 14{thousandSeparator}000 Abonnentinnen haben unsere Verlegerinnen und Verleger in einer <Link href='/vote'><a {...linkRule}>Abstimmung</a></Link> bestimmt: den Ausbau des Datenjournalismus-Teams. Gemeinsam schaffen wir das! Danke fürs Mitmachen und Weitersagen!
-            </List.Item>
-          </List>
-        </div>
+              <List.Item>
+                Es ist überwältigend, was wir gemeinsam mit Ihnen in den letzten drei Wochen erreicht haben: tatsächlich einen Unterschied zu machen! Genau dafür wird das digitale Magazin Republik von Project R entwickelt, daran arbeiten wir. Das Crowdfunding läuft noch bis am Mittwoch, 31. Mai um 20 Uhr. Das Ziel bei Erreichung von 14{thousandSeparator}000 Abonnentinnen haben unsere Verlegerinnen und Verleger in einer <Link href='/vote'><a {...linkRule}>Abstimmung</a></Link> bestimmt: den Ausbau des Datenjournalismus-Teams. Gemeinsam schaffen wir das! Danke fürs Mitmachen und Weitersagen!
+              </List.Item>
+            </List>
+          </div>
 
-        {md(mdComponents)`
+          {md(mdComponents)`
 <br />
 
 # Worum es geht
@@ -131,27 +141,26 @@ Ihr Risiko beträgt dabei 240 Franken pro Jahr. Also der Preis, den man pro Jahr
 
 Mit diesem Betrag können Sie einen echten Unterschied machen. Denn es ist Zeit, dem Journalismus ein neues Fundament zu bauen. Und das schafft niemand allein. Sondern nur viele gemeinsam: wir mit Ihnen. Willkommen an Bord!
 
-[Jetzt mitmachen!](/pledge)
-
+${pledgeLink}
 
 # Wer wir sind
 
 Ihre Partnerin bei diesem Projekt ist die Aufbaucrew der Republik und von Project R. Wir sind seit drei Jahren an der Arbeit, zuerst lange in Nachtarbeit, seit Januar 2017 hauptberuflich. Mittlerweile besteht die Crew aus fast einem Dutzend Journalisten, Start-up-, Kommunikations-, Organisations- und IT-Spezialistinnen. (Und einigen Dutzend Komplizen und Beraterinnen im Hintergrund.)
   `}
 
-        <P>
-          Die Kurzporträts der Crew finden Sie
-          {' '}
-          <Link href='/crew'><a {...linkRule}>hier</a></Link>.
-          {' '}
-          Und dazu im Video die Lesung unseres <A href='/manifest' target='_blank'>Manifests</A> zur Gründung der Republik:
-        </P>
+          <P>
+            Die Kurzporträts der Crew finden Sie
+            {' '}
+            <Link href='/crew'><a {...linkRule}>hier</a></Link>.
+            {' '}
+            Und dazu im Video die Lesung unseres <A href='/manifest' target='_blank'>Manifests</A> zur Gründung der Republik:
+          </P>
 
-        <div style={{marginBottom: 40, marginTop: 10}}>
-          <VideoPlayer src={VIDEOS.team} />
-        </div>
+          <div style={{marginBottom: 40, marginTop: 10}}>
+            <VideoPlayer src={VIDEOS.team} />
+          </div>
 
-        {md(mdComponents)`
+          {md(mdComponents)`
 # Warum wir es&nbsp;tun
 
 Das Problem der traditionellen Medien ist, dass ihr Geschäftsmodell zusammengebrochen ist. Über ein Jahrhundert lang waren Zeitungsverlage praktisch Gelddruckmaschinen mit enormer Rendite: Man verkaufte Nachrichten an die Leserinnen und Leser – und die Leserinnen und Leser an die Werbung.
@@ -162,22 +171,22 @@ Bis es so weit ist, wird die sterbende Cashcow noch so lange wie möglich gemolk
 
 `}
 
-        <div {...styles.mediaDiversity}>
-          <img
-            alt='«Amokfahrer rast in Menschen in London» bazonline.ch am 22. März 2017 um 16 Uhr'
-            src={`${STATIC_BASE_URL}/static/index/baz.png`} />
-          <img
-            alt='«Amokfahrer rast in Menschen in London» tagesanzeiger.ch am 22. März 2017 um 16 Uhr'
-            src={`${STATIC_BASE_URL}/static/index/ta.png`} />
-          <img
-            alt='«Amokfahrer rast in Menschen in London» derbund.ch am 22. März 2017 um 16 Uhr'
-            src={`${STATIC_BASE_URL}/static/index/bund.png`} />
-          <img
-            alt='«Amokfahrer rast in Menschen in London» bernerzeitung.ch am 22. März 2017 um 16 Uhr'
-            src={`${STATIC_BASE_URL}/static/index/bz.png`} />
-        </div>
+          <div {...styles.mediaDiversity}>
+            <img
+              alt='«Amokfahrer rast in Menschen in London» bazonline.ch am 22. März 2017 um 16 Uhr'
+              src={`${STATIC_BASE_URL}/static/index/baz.png`} />
+            <img
+              alt='«Amokfahrer rast in Menschen in London» tagesanzeiger.ch am 22. März 2017 um 16 Uhr'
+              src={`${STATIC_BASE_URL}/static/index/ta.png`} />
+            <img
+              alt='«Amokfahrer rast in Menschen in London» derbund.ch am 22. März 2017 um 16 Uhr'
+              src={`${STATIC_BASE_URL}/static/index/bund.png`} />
+            <img
+              alt='«Amokfahrer rast in Menschen in London» bernerzeitung.ch am 22. März 2017 um 16 Uhr'
+              src={`${STATIC_BASE_URL}/static/index/bz.png`} />
+          </div>
 
-        {md(mdComponents)`
+          {md(mdComponents)`
 
 Auch ohne weitere Deals verflacht der Journalismus. Denn in der Krise fusionieren die grossen Verlage ihre Medien zu riesigen Klumpen. Beim «Tages-Anzeiger» etwa werden die schnellen News mit «20 Minuten» gemacht, die Bundeshaus-Berichterstattung kommt vom «Bund», Ausland, Wirtschaft und Kultur liefert zu immer grösseren Teilen die «Süddeutsche Zeitung», zu kleinen Teilen die «Basler Zeitung», die hinteren Bünde sind mit der «SonntagsZeitung» zusammengelegt worden. Und gedruckt wird mit der NZZ.
 
@@ -211,13 +220,8 @@ Das Resultat der kleinen Empörungsgeschichte ist mehr als nur Zeitverschwendung
 
 Der Job der Medien wäre, für freiere Köpfe und schlankere Lösungen zu sorgen. Die Doppelzange und die kleine Empörungsgeschichte bewirken das exakte Gegenteil. Ihr Produkt ist: mehr Angst. Und mehr Bürokratie.
 
-Kurz: Es ist Zeit für etwas Neues. Unsere Pläne für die Republik finden Sie gleich als Nächstes. Den Link zum Republik-Manifest von Project R [hier](/manifest). Und den Link, um sofort mitzumachen, hier: [Jetzt mitmachen!](/pledge)
+Kurz: Es ist Zeit für etwas Neues. Unsere Pläne für die Republik finden Sie gleich als Nächstes. Den Link zum Republik-Manifest von Project R [hier](/manifest). Und den Link, um sofort mitzumachen, hier: ${pledgeLink}
 
-  `}
-
-        {/* Manifest? */}
-
-        {md(mdComponents)`
 <br />
 
 ![Das Manifest hängt am Balkon des Hotel Rothaus](/static/index/rothaus_manifest.jpg)
@@ -254,41 +258,42 @@ Willkommen an Bord!
 
   `}
 
-        <Button primary onClick={() => {
-          Router.push('/pledge')
-        }} style={{minWidth: 300}}>
-          Jetzt mitmachen!
-        </Button>
+          {!!alive && <Button primary onClick={() => {
+            Router.push('/pledge')
+          }} style={{minWidth: 300}}>
+            Jetzt mitmachen!
+          </Button>}
 
-        <div style={{margin: '15px 0 40px'}}>
-          <Label style={{display: 'block', marginBottom: 5}}>
-            Jetzt andere auf die Republik aufmerksam machen:
-          </Label>
-          <Share
-            url={PUBLIC_BASE_URL + url.pathname}
-            emailSubject={'Es ist Zeit.'} />
-        </div>
+          <div style={{margin: '15px 0 40px'}}>
+            <Label style={{display: 'block', marginBottom: 5}}>
+              Jetzt andere auf die Republik aufmerksam machen:
+            </Label>
+            <Share
+              url={PUBLIC_BASE_URL + url.pathname}
+              emailSubject={'Es ist Zeit.'} />
+          </div>
 
-        {md(mdComponents)`
+          {md(mdComponents)`
 # Community
 
 Die Republik kann nicht ein Projekt von wenigen sein. Ein neues Fundament für unabhängigen Journalismus bauen wir nur gemeinsam – oder gar nicht. Sehen Sie hier, wer schon an Bord ist:
   `}
-        <div style={{margin: '20px 0'}}>
-          <TestimonialList limit={10} onSelect={(id) => {
-            Router.push(`/community?id=${id}`).then(() => {
-              window.scrollTo(0, 0)
-            })
-            return false
-          }} />
-        </div>
+          <div style={{margin: '20px 0'}}>
+            <TestimonialList limit={10} onSelect={(id) => {
+              Router.push(`/community?id=${id}`).then(() => {
+                window.scrollTo(0, 0)
+              })
+              return false
+            }} />
+          </div>
 
-        <Link href='/community'>
-          <a {...linkRule}>Alle ansehen</a>
-        </Link>
-      </Content>
-    </div>
-  </Frame>
-)
+          <Link href='/community'>
+            <a {...linkRule}>Alle ansehen</a>
+          </Link>
+        </Content>
+      </div>
+    </Frame>
+  )
+}
 
 export default withData(Page)
