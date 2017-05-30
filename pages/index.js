@@ -13,7 +13,8 @@ import {withStatus} from '../components/Status'
 import {countFormat} from '../lib/utils/formats'
 
 import {
-  STATIC_BASE_URL
+  STATIC_BASE_URL,
+  STATUS_POLL_INTERVAL_MS
 } from '../constants'
 
 import {
@@ -47,7 +48,6 @@ class Index extends Component {
     const now = new Date()
     const msToNextTick = ms || (61 - now.getSeconds()) * 1000 - now.getMilliseconds() + 50
 
-    console.log('tick', msToNextTick)
     this.timeout = setTimeout(
       () => {
         this.checkTime()
@@ -69,9 +69,9 @@ class Index extends Component {
         this.props.statusStopPolling()
         this.tick(1000 * 60 * 30)
       } else {
-        if (this.notPolling) {
+        if (this.notPolling && STATUS_POLL_INTERVAL_MS) {
           this.notPolling = false
-          this.props.statusStartPolling()
+          this.props.statusStartPolling(+STATUS_POLL_INTERVAL_MS)
         }
         if (now > endDate && !this.state.ended) {
           this.setState(() => ({

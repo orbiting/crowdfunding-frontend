@@ -169,6 +169,8 @@ class Status extends Component {
   }
 }
 
+export const RawStatus = Status
+
 const query = gql`{
   crowdfunding(name: "REPUBLIK") {
     id
