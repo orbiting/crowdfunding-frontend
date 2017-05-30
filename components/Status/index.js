@@ -184,6 +184,13 @@ const query = gql`{
       money
     }
     endDate
+    endVideo {
+      hls
+      mp4
+      subtitles
+      poster
+    }
+    hasEnded
   }
 }`
 
@@ -191,8 +198,9 @@ export const withStatus = Component => graphql(query, {
   props: ({data}) => {
     return {
       crowdfunding: data.crowdfunding,
-      statusStopPolling: data.stopPolling,
-      statusStartPolling: data.startPolling
+      statusRefetch: data.refetch,
+      statusStartPolling: data.startPolling,
+      statusStopPolling: data.stopPolling
     }
   },
   options: {

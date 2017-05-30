@@ -144,11 +144,8 @@ class Header extends Component {
     window.removeEventListener('resize', this.measure)
   }
   render () {
-    const {cover, sticky, sidebar, crowdfunding, url, t} = this.props
+    const {cover, sticky, sidebar, crowdfunding, crowdfunding: {hasEnded}, url, t} = this.props
     const {mobile, expanded, hasStatusSpace} = this.state
-
-    const now = new Date()
-    const ended = crowdfunding && now > (new Date(crowdfunding.endDate))
 
     const opaque = this.state.opaque || expanded
 
@@ -209,13 +206,13 @@ class Header extends Component {
               {(mobile || opaque) && <Menu expanded={expanded}
                 id='primary-menu' items={menuItems} url={url}>
                 {
-                  mobile && expanded && !ended && <RawStatus t={t} crowdfunding={crowdfunding} compact />
+                  mobile && expanded && !hasEnded && <RawStatus t={t} crowdfunding={crowdfunding} compact />
                 }
               </Menu>}
             </div>
             {opaque && <div {...styles.side}>
               {
-                mobile && !ended && (
+                mobile && !hasEnded && (
                   <Button block primary
                     onClick={() => {
                       Router.push('/pledge').then(() => window.scrollTo(0, 0))
@@ -226,7 +223,7 @@ class Header extends Component {
                 )
               }
               {
-                !mobile && !ended && !!hasStatusSpace && (!!sticky.status || !sidebar) && (
+                !mobile && !hasEnded && !!hasStatusSpace && (!!sticky.status || !sidebar) && (
                   <RawStatus t={t} crowdfunding={crowdfunding} compact />
                 )
               }

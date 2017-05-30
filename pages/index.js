@@ -13,8 +13,7 @@ import {withStatus} from '../components/Status'
 import {countFormat} from '../lib/utils/formats'
 
 import {
-  STATIC_BASE_URL,
-  STATUS_POLL_INTERVAL_MS
+  STATIC_BASE_URL
 } from '../constants'
 
 import {
@@ -25,23 +24,7 @@ import {
 
 import {Page as CrowdfundingPage} from './crowdfunding'
 
-const MERCI_VIDEO = {
-  hls: 'https://player.vimeo.com/external/213080233.m3u8?s=40bdb9917fa47b39119a9fe34b9d0fb13a10a92e',
-  mp4: 'https://player.vimeo.com/external/213080233.hd.mp4?s=ab84df0ac9134c86bb68bd9ea7ac6b9df0c35774&profile_id=119',
-  subtitles: '/static/subtitles/main.vtt',
-  poster: `${STATIC_BASE_URL}/static/video/main.jpg`
-}
-
 class Index extends Component {
-  constructor (...args) {
-    super(...args)
-
-    const {crowdfunding} = args[0]
-    const now = new Date()
-    this.state = {
-      ended: crowdfunding && now > (new Date(crowdfunding.endDate))
-    }
-  }
   tick (ms) {
     clearTimeout(this.timeout)
 
@@ -65,20 +48,16 @@ class Index extends Component {
       const endDate = new Date(crowdfunding.endDate)
       const minutesLeft = timeMinute.count(now, endDate)
       if (minutesLeft > 60) {
-        this.notPolling = true
-        this.props.statusStopPolling()
         this.tick(1000 * 60 * 30)
-      } else {
-        if (this.notPolling && STATUS_POLL_INTERVAL_MS) {
-          this.notPolling = false
-          this.props.statusStartPolling(+STATUS_POLL_INTERVAL_MS)
-        }
-        if (now > endDate && !this.state.ended) {
-          this.setState(() => ({
-            ended: true
-          }))
+      } else if (minutesLeft > 0) {
+        this.tick()
+      } else if (minutesLeft >= -5) {
+        if (!crowdfunding.hasEnded) {
+          this.props.statusRefetch()
         }
         this.tick()
+      } else if (minutesLeft < -20) {
+        this.props.statusStopPolling()
       }
     } else {
       this.tick()
@@ -88,17 +67,16 @@ class Index extends Component {
     this.checkTime()
   }
   render () {
-    const {url, crowdfunding} = this.props
-    const {ended} = this.state
-    if (ended) {
+    const {url, crowdfunding, crowdfunding: {hasEnded, endVideo}} = this.props
+    if (hasEnded) {
       return (
         <Frame url={url} sidebar={false} meta={{
           pageTitle: 'Republik — das digitale Magazin von Project R',
           title: 'Republik — das digitale Magazin von Project R',
           description: 'Vielen Danke.',
           image: `${STATIC_BASE_URL}/static/social-media/merci.jpg`
-        }} cover={(
-          <VideoCover src={MERCI_VIDEO} />
+        }} cover={!!endVideo && (
+          <VideoCover src={endVideo} />
         )}>
           <NarrowContainer>
             <P>Ladies and Gentlemen,</P>
