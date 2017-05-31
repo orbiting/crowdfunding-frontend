@@ -329,13 +329,8 @@ class List extends Component {
               </A>
             )}
             {!!this.state.hasReachEnd && hasEndText && (
-              <P>{t.elements('testimonial/infinite/end', {
-                count: testimonials.length,
-                pledgeLink: (
-                  <A key='pledgeLink' href='/pledge'>
-                    {t('testimonial/infinite/end/pledgeLink')}
-                  </A>
-                )
+              <P>{t('testimonial/infinite/end', {
+                count: testimonials.length
               })}</P>
             )}
           </div>
