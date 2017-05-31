@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {css, merge} from 'glamor'
 import Router from 'next/router'
-import {withStatus, RawStatus} from '../Status'
+import {RawStatus} from '../Status'
 import withT from '../../lib/withT'
 
 import {
@@ -144,7 +144,11 @@ class Header extends Component {
     window.removeEventListener('resize', this.measure)
   }
   render () {
-    const {cover, sticky, sidebar, crowdfunding, crowdfunding: {hasEnded}, url, t} = this.props
+    const {
+      cover, sticky, sidebar,
+      crowdfunding, crowdfunding: {hasEnded},
+      url, t
+    } = this.props
     const {mobile, expanded, hasStatusSpace} = this.state
 
     const opaque = this.state.opaque || expanded
@@ -251,4 +255,4 @@ class Header extends Component {
   }
 }
 
-export default withT(withStatus(Header))
+export default withT(Header)

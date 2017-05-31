@@ -70,7 +70,7 @@ class Index extends Component {
     const {url, crowdfunding, crowdfunding: {hasEnded, endVideo}} = this.props
     if (hasEnded) {
       return (
-        <Frame url={url} sidebar={false} meta={{
+        <Frame url={url} meta={{
           pageTitle: 'Republik — das digitale Magazin von Project R',
           title: 'Republik — das digitale Magazin von Project R',
           description: 'Vielen Danke.',

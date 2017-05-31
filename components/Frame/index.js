@@ -2,10 +2,14 @@ import React, {Component} from 'react'
 import {css} from 'glamor'
 
 import 'glamor/reset'
+
+import {withStatus} from '../Status'
+
 import Header from './Header'
 import Footer from './Footer'
 import Sidebar from './Sidebar'
 import Meta from './Meta'
+import Content from './Content'
 
 import {
   SIDEBAR_WIDTH, HEADER_HEIGHT
@@ -14,7 +18,8 @@ import {
 import {
   Container,
   mediaQueries,
-  fontFamilies
+  fontFamilies,
+  NarrowContainer
 } from '@project-r/styleguide'
 
 css.global('html', {boxSizing: 'border-box'})
@@ -65,7 +70,12 @@ class Frame extends Component {
     }
   }
   render () {
-    const {children, cover, sidebar, url, meta} = this.props
+    const {
+      children,
+      cover, indented, sidebar, forceSidebar,
+      crowdfunding, crowdfunding: {hasEnded},
+      url, meta
+    } = this.props
     const {sticky} = this.state
 
     const sidebarAdditionalStyle = url.pathname !== '/'
@@ -76,14 +86,17 @@ class Frame extends Component {
       <div {...styles.container}>
         {!!meta && <Meta data={meta} />}
         <div {...styles.bodyGrower} className={!cover ? styles.coverless : undefined}>
-          <Header url={url} cover={cover} sticky={sticky} sidebar={sidebar} />
+          <Header crowdfunding={crowdfunding} url={url} cover={cover} sticky={sticky} sidebar={sidebar} />
           {sidebar ? (
-            <Container>
-              <div {...styles.sidebar} {...sidebarAdditionalStyle}>
-                <Sidebar sticky={sticky} setSticky={this.setSticky} />
-              </div>
-              {children}
-            </Container>
+            !hasEnded || forceSidebar ? (
+              <Container>
+                <div {...styles.sidebar} {...sidebarAdditionalStyle}>
+                  <Sidebar sticky={sticky} setSticky={this.setSticky} />
+                </div>
+                <Content indented={indented}>{children}</Content>
+              </Container>
+            )
+            : <NarrowContainer>{children}</NarrowContainer>
           ) : children}
         </div>
         <Footer />
@@ -96,4 +109,4 @@ Frame.defaultProps = {
   sidebar: true
 }
 
-export default Frame
+export default withStatus(Frame)
