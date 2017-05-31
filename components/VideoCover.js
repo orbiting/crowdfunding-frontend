@@ -63,7 +63,7 @@ const styles = {
   }),
   play: css({
     position: 'absolute',
-    top: '45%',
+    top: '60%',
     left: '5%',
     right: '5%',
     textAlign: 'center'
@@ -127,7 +127,7 @@ class VideoCover extends Component {
           <div {...styles.maxWidth}>
             <img src={src.poster} {...styles.poster} style={heightStyle} />
             {!!cursor && <div {...styles.cursor} />}
-            <div {...styles.play} style={{top: cursor ? '60%' : undefined}}>
+            <div {...styles.play}>
               <Play />
             </div>
           </div>
