@@ -11,6 +11,8 @@ const subscribeText = (email, token) => `Ma'am, Sir,
 
 Herzlichen Dank für Ihr Interesse!
 
+Gerne kommen wir auf Sie zu, sobald die Anmeldung für neue Mitglieder wieder offen ist.
+
 Sie müssen nur noch auf folgenden Link klicken:
 ${process.env.PUBLIC_BASE_URL}/newsletter/subscribe?email=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}
 
