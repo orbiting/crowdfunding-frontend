@@ -75,7 +75,7 @@ export const Page = ({url, alive}) => {
         : 'Das war unser Crowdfunding.', // t('ended/crowdfunding/description')
       image: `${STATIC_BASE_URL}/static/social-media/main.jpg`
     }} cover={(
-      <VideoCover src={VIDEOS.main} cursor />
+      <VideoCover src={VIDEOS.main} cursor endScroll={0.97} />
     )}>
       <div>
         <Lead>
