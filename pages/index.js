@@ -8,7 +8,7 @@ import withT from '../lib/withT'
 
 import Frame from '../components/Frame'
 import VideoCover from '../components/VideoCover'
-import Status, {withStatus} from '../components/Status'
+import {withStatus} from '../components/Status'
 import Newsletter from '../components/Frame/Newsletter'
 
 import {countFormat} from '../lib/utils/formats'
@@ -86,9 +86,7 @@ class Index extends Component {
 
             <P>Wie es aussieht, war es auch im Journalismus Zeit für eine kleine Rebellion. Sie, unsere {countFormat(crowdfunding.status.people)} Verlegerinnen und Verleger, haben sie unterstützt.</P>
 
-            <Status compact />
-
-            <P style={{marginTop: 30}}>Wir danken Ihnen für Ihre Neugier, Ihre Entschlusskraft, Ihr Vertrauen. Und für den Mut, in ein neues Modell für Journalismus zu investieren.</P>
+            <P>Wir danken Ihnen für Ihre Neugier, Ihre Entschlusskraft, Ihr Vertrauen. Und für den Mut, in ein neues Modell für Journalismus zu investieren.</P>
 
             <P>Wir arbeiten nun daran, die Republik zu bauen. Einerseits ein sturmfestes Unternehmen. Und andererseits ein Magazin, bei dem Sie stolz sein können, als Gründerin oder Gründer dabei gewesen zu sein.</P>
 
