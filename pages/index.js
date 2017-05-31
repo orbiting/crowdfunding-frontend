@@ -30,8 +30,11 @@ class Index extends Component {
     clearTimeout(this.timeout)
 
     const now = new Date()
-    const msToNextTick = ms || ((61 - now.getSeconds()) * 1000 - now.getMilliseconds() + 50)
+    const msToNextTick = ms || (
+      (61 - now.getSeconds()) * 1000 - now.getMilliseconds() + 50
+    )
 
+    console.log('tick', msToNextTick)
     this.timeout = setTimeout(
       () => {
         this.checkTime()
@@ -48,13 +51,15 @@ class Index extends Component {
       const now = new Date()
       const endDate = new Date(crowdfunding.endDate)
       const minutesLeft = timeMinute.count(timeMinute.ceil(now), endDate)
+      console.log('minutesLeft', minutesLeft)
 
       if (minutesLeft > 60) {
         this.tick(1000 * 60 * 30)
       } else if (minutesLeft > 0) {
         this.tick()
-      } else if (minutesLeft >= -5) {
+      } else if (minutesLeft > -5) {
         if (!crowdfunding.hasEnded) {
+          console.log('statusRefetch')
           this.props.statusRefetch()
         }
         this.tick()
