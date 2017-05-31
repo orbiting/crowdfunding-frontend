@@ -47,7 +47,8 @@ class Index extends Component {
     if (crowdfunding) {
       const now = new Date()
       const endDate = new Date(crowdfunding.endDate)
-      const minutesLeft = timeMinute.count(now, endDate)
+      const minutesLeft = timeMinute.count(timeMinute.ceil(now), endDate)
+
       if (minutesLeft > 60) {
         this.tick(1000 * 60 * 30)
       } else if (minutesLeft > 0) {

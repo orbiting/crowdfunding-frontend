@@ -97,7 +97,7 @@ class Status extends Component {
     const now = new Date()
     const end = new Date(endDate)
 
-    const totalMinutes = timeMinute.count(now, end)
+    const totalMinutes = timeMinute.count(timeMinute.ceil(now), end)
     const minutes = totalMinutes % 60
     const hours = Math.floor(totalMinutes / 60) % 24
     const days = Math.floor(totalMinutes / 60 / 24)
