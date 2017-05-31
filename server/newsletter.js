@@ -69,11 +69,11 @@ const subscribeEmail = (email) => {
       if (data.status >= 400) {
         if (data.title === 'Member Exists') {
           return {
-            message: 'Sie sind bereits eingetragen.'
+            message: 'alreadySubscribed'
           }
         }
         return {
-          message: 'Anmeldung fehlgeschlagen.'
+          message: 'subscriptionFailed'
         }
       }
       return {}
@@ -99,13 +99,13 @@ server.get('/newsletter/subscribe', bodyParser.json(), async (req, res) => {
   } else {
     if (sha !== token) {
       return res.redirect(
-        `/newsletter/welcome?message=${encodeURIComponent('Ungültige Anfrage.')}`
+        `/newsletter/welcome?context=wait&message=invalidRequest`
       )
     }
     const response = await subscribeEmail(email)
     return res.redirect([
-      '/newsletter/welcome',
-      response.message ? `?message=${encodeURIComponent(response.message)}&context=wait` : ''
+      '/newsletter/welcome?context=wait',
+      response.message ? `&message=${encodeURIComponent(response.message)}` : ''
     ].join(''))
   }
 })
