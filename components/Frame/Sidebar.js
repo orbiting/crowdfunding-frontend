@@ -12,6 +12,9 @@ import Status from '../Status'
 import {css} from 'glamor'
 
 import {HEADER_HEIGHT, SIDEBAR_WIDTH} from './constants'
+import {
+  DISABLE_REMINDER
+} from '../../constants'
 
 import {
   Button, Field,
@@ -130,7 +133,7 @@ class SidebarInner extends Component {
                 Router.push('/pledge').then(() => window.scrollTo(0, 0))
               }}>{t('header/button')}</Button>
             </div>
-            {reminderOpen ? (
+            {!DISABLE_REMINDER && reminderOpen ? (
               <form onSubmit={submitReminder}>
                 <Field label={t('pledge/contact/email/label')}
                   name='email'
@@ -163,7 +166,7 @@ class SidebarInner extends Component {
                   </P>
                 )}
               </form>
-            ) : (
+            ) : !DISABLE_REMINDER && (
               reminderMessage ? (
                 <P style={{textAlign: 'center'}}>
                   {reminderMessage}
