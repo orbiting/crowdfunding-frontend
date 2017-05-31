@@ -50,6 +50,42 @@ class Status extends Component {
 
     this.state = {}
   }
+  tick () {
+    const now = new Date()
+
+    const msLeft = 1000 - now.getMilliseconds() + 50
+    let msToNextTick = (60 - now.getSeconds()) * 1000 + msLeft
+
+    const {crowdfunding: {endDate}} = this.props
+    if (endDate) {
+      const end = new Date(endDate)
+      if (end < now) {
+        return
+      }
+      const totalMinutes = timeMinute.count(now, end)
+      const hours = Math.floor(totalMinutes / 60) % 24
+      if (hours === 0) {
+        msToNextTick = msLeft
+      }
+    }
+
+    clearTimeout(this.timeout)
+    this.timeout = setTimeout(
+      () => {
+        this.setState({
+          now: new Date()
+        })
+        this.tick()
+      },
+      msToNextTick
+    )
+  }
+  componentDidMount () {
+    this.tick()
+  }
+  componentWillUnmount () {
+    clearTimeout(this.timeout)
+  }
   render () {
     if (!this.props.crowdfunding) {
       return null
@@ -139,13 +175,13 @@ class Status extends Component {
           <span {...styles.smallNumber}>
             {end > now ? (
               [
-                t.pluralize(
+                days > 0 && t.pluralize(
                   'status/time/days',
                   {
                     count: days
                   }
                 ),
-                t.pluralize(
+                (days !== 0 || hours > 0) && t.pluralize(
                   'status/time/hours',
                   {
                     count: hours
@@ -156,8 +192,14 @@ class Status extends Component {
                   {
                     count: minutes
                   }
+                ),
+                days === 0 && hours === 0 && this.state.now && t.pluralize(
+                  'status/time/seconds',
+                  {
+                    count: 60 - now.getSeconds()
+                  }
                 )
-              ].join(' ')
+              ].filter(Boolean).join(' ')
             ) : (
               t('status/time/ended')
             )}

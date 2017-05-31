@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-31T09:56:33.735Z",
+  "updated": "2017-05-31T10:27:23.481Z",
   "title": "live",
   "data": [
     {
@@ -1878,6 +1878,14 @@
     {
       "key": "ended/waitingList/defaultMessage",
       "value": "Wir werden auf Sie zukommen."
+    },
+    {
+      "key": "status/time/seconds/1",
+      "value": "1 Sekunde"
+    },
+    {
+      "key": "status/time/seconds/other",
+      "value": "{count} Sekunden"
     }
   ]
 }
