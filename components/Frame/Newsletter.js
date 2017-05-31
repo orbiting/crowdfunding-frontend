@@ -86,7 +86,7 @@ class Newsletter extends Component {
     this.handleEmail('')
   }
   render () {
-    const {title, maxWidth, black, white} = this.props
+    const {title, maxWidth, black, white, submitText} = this.props
     const {message, email, dirty, error} = this.state
 
     return (
@@ -111,7 +111,7 @@ class Newsletter extends Component {
             <Button block
               black={black}
               white={white}>
-              Registrieren
+              {submitText || 'Registrieren'}
             </Button>
           </div>
         </form>
