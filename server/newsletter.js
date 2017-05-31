@@ -3,9 +3,9 @@ const bodyParser = require('body-parser')
 const fetch = require('isomorphic-unfetch')
 const crypto = require('crypto')
 
-const SUBJECT = 'Bitte Anmeldung zum Republik-Newsletter bestätigen'
+const SUBJECT = 'Bitte Interesse an Republik-Mitgliedschaft bestätigen'
 const FROM_EMAIL = 'kontakt@republik.ch'
-const FROM_NAME = 'Republik Newsletter'
+const FROM_NAME = 'Republik'
 
 const subscribeText = (email, token) => `Ma'am, Sir,
 
