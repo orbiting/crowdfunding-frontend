@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-31T00:25:06.616Z",
+  "updated": "2017-05-31T01:04:59.764Z",
   "title": "live",
   "data": [
     {
@@ -1862,6 +1862,10 @@
     {
       "key": "vote/waiting/hasSubmitted",
       "value": "Sie haben abgestimmt. Vielen Dank für Ihre Stimme!"
+    },
+    {
+      "key": "ended/pledge/lead",
+      "value": "<a href=\"/\">Das Crowdfunding ist vorbei.</a>"
     },
     {
       "key": "ended/crowdfunding/description",
