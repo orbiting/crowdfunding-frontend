@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-31T08:15:09.614Z",
+  "updated": "2017-05-31T09:48:15.671Z",
   "title": "live",
   "data": [
     {
@@ -1870,6 +1870,14 @@
     {
       "key": "status/time/ended",
       "value": "Das Crowdfunding ist vorbei."
+    },
+    {
+      "key": "ended/waitingList/title",
+      "value": "Interesse an Republik-Mitgliedschaft"
+    },
+    {
+      "key": "ended/waitingList/defaultMessage",
+      "value": "Wir werden auf Sie zukommen."
     }
   ]
 }

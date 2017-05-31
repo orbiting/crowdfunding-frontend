@@ -105,7 +105,7 @@ server.get('/newsletter/subscribe', bodyParser.json(), async (req, res) => {
     const response = await subscribeEmail(email)
     return res.redirect([
       '/newsletter/welcome',
-      response.message ? `?message=${encodeURIComponent(response.message)}` : ''
+      response.message ? `?message=${encodeURIComponent(response.message)}&context=wait` : ''
     ].join(''))
   }
 })

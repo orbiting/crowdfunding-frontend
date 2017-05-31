@@ -33,17 +33,24 @@ export default withData(withT(({url, t}) => {
   const now = new Date()
 
   if (now > COUNTDOWN_DATE) {
+    const {context} = url.query
+    const title = context === 'wait'
+      ? t('ended/waitingList/title')
+      : t('newsletter/title')
     return (
       <Frame url={url} meta={{
         title: t('newsletter/title')
       }}>
         <H1>
-          {t('newsletter/title')}
+          {title}
         </H1>
         <P>
           {url.query.message
             ? url.query.message
-            : t('newsletter/defaultMessage')}
+            : t(context === 'wait'
+                ? 'ended/waitingList/defaultMessage'
+                : 'newsletter/defaultMessage'
+              )}
         </P>
       </Frame>
     )
