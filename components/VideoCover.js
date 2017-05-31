@@ -95,6 +95,14 @@ class VideoCover extends Component {
   componentDidMount () {
     window.addEventListener('resize', this.measure)
     this.measure()
+    if (this.props.autoPlay && this.player) {
+      this.setState(() => {
+        this.player.play()
+        return {
+          cover: false
+        }
+      })
+    }
   }
   componentWillUnmount () {
     window.removeEventListener('resize', this.measure)

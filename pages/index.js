@@ -77,7 +77,7 @@ class Index extends Component {
           description: 'Danke! Republik geht 2018 definitiv an den Start.',
           image: `${STATIC_BASE_URL}/static/social-media/merci.png`
         }} cover={!!endVideo && (
-          <VideoCover src={endVideo} endScroll={0.99} />
+          <VideoCover src={endVideo} endScroll={0.99} autoPlay={!!url.query.play} />
         )}>
           <NarrowContainer>
             <P>Ladies and Gentlemen,</P>
