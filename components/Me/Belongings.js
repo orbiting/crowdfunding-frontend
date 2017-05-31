@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {compose} from 'redux'
 import {graphql} from 'react-apollo'
-import Router from 'next/router'
 import {css, merge} from 'glamor'
 
 import withT from '../../lib/withT'
@@ -26,7 +25,7 @@ import {
 
 import {
   Interaction,
-  Button, Lead,
+  Lead,
   Label, A, H1,
   colors
 } from '@project-r/styleguide'
@@ -184,7 +183,7 @@ const Belongings = ({loading, error, pledges, hasMemberships, me, t, signOut, hi
         {(hasPledges || !hasMemberships) && (<H2 style={{marginTop: 80}}>{t.pluralize('merci/pledges/title', {
           count: displayablePledges.length
         })}</H2>)}
-        {!hasPledges && !hasMemberships && (
+        {/* !hasPledges && !hasMemberships && (
           <div>
             <P>
               {t('merci/empty/text')}
@@ -196,7 +195,7 @@ const Belongings = ({loading, error, pledges, hasMemberships, me, t, signOut, hi
               {t('merci/empty/button')}
             </Button>
           </div>
-        )}
+        ) */}
         <PledgeList pledges={displayablePledges} highlightId={highlightPledgeId} t={t} />
         <div />
         {(hasPledges || hasMemberships) && !!me.name && (

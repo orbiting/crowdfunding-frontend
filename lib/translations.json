@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-31T01:35:49.995Z",
+  "updated": "2017-05-31T01:44:03.715Z",
   "title": "live",
   "data": [
     {
@@ -1858,6 +1858,10 @@
     {
       "key": "vote/waiting/hasSubmitted",
       "value": "Sie haben abgestimmt. Vielen Dank für Ihre Stimme!"
+    },
+    {
+      "key": "merci/pledges/title/0",
+      "value": "Sie habe nicht mitgemacht"
     },
     {
       "key": "ended/pledge/lead",
