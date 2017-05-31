@@ -9,6 +9,7 @@ import withT from '../lib/withT'
 import Frame from '../components/Frame'
 import VideoCover from '../components/VideoCover'
 import {withStatus} from '../components/Status'
+import Newsletter from '../components/Frame/Newsletter'
 
 import {countFormat} from '../lib/utils/formats'
 
@@ -96,6 +97,8 @@ class Index extends Component {
             <P>Ihre Crew von der Republik und von Project&nbsp;R</P>
 
             <P>PS: Für die ersten Umbauarbeiten schliessen wir die Anmeldung für neue Mitglieder bis zum 1. Juli. Falls Sie ebenfalls an Bord kommen wollen, tragen Sie hier Ihre Mail-Adresse ein:</P>
+
+            <Newsletter />
 
             <P>PPS: Auf dem Laufenden über den weiteren Aufbau des digitalen Magazins Republik von Project R bleiben Sie hier: <A href='https://project-r.construction/'>project-r.construction</A></P>
 

@@ -7,7 +7,7 @@ import Router from 'next/router'
 import track from '../../lib/piwik'
 
 import IconLink from '../IconLink'
-import Newsletter from './PureNewsletter'
+import Newsletter from './Newsletter'
 
 import {
   mediaQueries, fontFamilies, Label
@@ -81,7 +81,11 @@ class Footer extends Component {
 
     return (
       <div {...styles.container}>
-        <Newsletter inverted={inverted} />
+        <Newsletter
+          title='Verpassen Sie nichts:'
+          maxWidth={500}
+          black={!inverted}
+          white={inverted} />
 
         <div {...styles.nav}>
           {!!en && (

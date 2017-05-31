@@ -11,15 +11,12 @@ const subscribeText = (email, token) => `Ma'am, Sir,
 
 Herzlichen Dank für Ihr Interesse!
 
-Sobald das Crowdfunding losgeht, werden wir uns bei Ihnen melden.
-
-Dafür müssen Sie nur noch auf folgenden Link klicken:
-
+Sie müssen nur noch auf folgenden Link klicken:
 ${process.env.PUBLIC_BASE_URL}/newsletter/subscribe?email=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}
 
 Danke!
 
-Ihre R-Crew`
+Die Crew von Project R und der Republik`
 
 const sendEmail = (email, text) => {
   return fetch(`https://mandrillapp.com/api/1.0/messages/send.json`, {

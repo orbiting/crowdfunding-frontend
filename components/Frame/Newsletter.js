@@ -7,10 +7,6 @@ import {
   Button, Field, mediaQueries, fontFamilies
 } from '@project-r/styleguide'
 
-import {
-  COUNTDOWN_DATE
-} from '../../constants'
-
 const pRule = css({
   fontFamily: fontFamilies.sansSerifRegular,
   fontSize: 18
@@ -25,8 +21,6 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     flexFlow: 'row wrap',
-    maxWidth: 500,
-    padding: '0 20px',
     margin: '0 auto'
   }),
   input: css({
@@ -92,23 +86,17 @@ class Newsletter extends Component {
     this.handleEmail('')
   }
   render () {
-    const {inverted} = this.props
+    const {title, maxWidth, black, white} = this.props
     const {message, email, dirty, error} = this.state
-
-    const now = new Date()
-
-    if (now > COUNTDOWN_DATE) {
-      return null
-    }
 
     return (
       <div>
-        <P>Verpassen Sie nichts:</P>
-        <form {...styles.form} onSubmit={e => this.onSubmit(e)}>
+        {!!title && <P>{title}</P>}
+        <form {...styles.form} style={{maxWidth}} onSubmit={e => this.onSubmit(e)}>
           <div {...styles.input}>
             <Field
-              black={!inverted}
-              white={inverted}
+              black={black}
+              white={white}
               label='Ihre E-Mail'
               name='EMAIL'
               type='email'
@@ -121,8 +109,8 @@ class Newsletter extends Component {
           </div>
           <div {...styles.button}>
             <Button block
-              black={!inverted}
-              white={inverted}>
+              black={black}
+              white={white}>
               Registrieren
             </Button>
           </div>
