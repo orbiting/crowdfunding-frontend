@@ -8,7 +8,6 @@ import Router from 'next/router'
 import Meta from '../Frame/Meta'
 
 import withT from '../../lib/withT'
-import RawHtml from '../RawHtml'
 import Loader from '../Loader'
 import Play from '../Icons/Play'
 
@@ -414,9 +413,6 @@ class Container extends Component {
 
     return (
       <div>
-        <RawHtml type={P} dangerouslySetInnerHTML={{
-          __html: t('testimonial/list/before')
-        }} />
         <Field label={t('testimonial/search/label')}
           name='search'
           value={query}

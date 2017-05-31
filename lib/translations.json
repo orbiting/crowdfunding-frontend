@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-31T01:44:03.715Z",
+  "updated": "2017-05-31T08:15:09.614Z",
   "title": "live",
   "data": [
     {
@@ -1245,10 +1245,6 @@
     {
       "key": "testimonial/pickImage/empty",
       "value": "Sie müssen ein Foto hochladen"
-    },
-    {
-      "key": "testimonial/list/before",
-      "value": "Noch nicht Mitglied? Jetzt <a href=\"/pledge\">mitmachen</a> und Mitglied werden!"
     },
     {
       "key": "testimonial/search/label",
