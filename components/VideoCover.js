@@ -63,7 +63,7 @@ const styles = {
   }),
   play: css({
     position: 'absolute',
-    top: '60%',
+    top: '45%',
     left: '5%',
     right: '5%',
     textAlign: 'center'
@@ -100,7 +100,7 @@ class VideoCover extends Component {
     window.removeEventListener('resize', this.measure)
   }
   render () {
-    const {src} = this.props
+    const {src, cursor} = this.props
     const {
       playing, ended,
       videoHeight, windowHeight,
@@ -126,8 +126,8 @@ class VideoCover extends Component {
           }}>
           <div {...styles.maxWidth}>
             <img src={src.poster} {...styles.poster} style={heightStyle} />
-            <div {...styles.cursor} />
-            <div {...styles.play}>
+            {!!cursor && <div {...styles.cursor} />}
+            <div {...styles.play} style={{top: cursor ? '60%' : undefined}}>
               <Play />
             </div>
           </div>
