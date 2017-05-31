@@ -81,7 +81,9 @@ class Status extends Component {
     )
   }
   componentDidMount () {
-    this.tick()
+    if (!this.props.compact) {
+      this.tick()
+    }
   }
   componentWillUnmount () {
     clearTimeout(this.timeout)
