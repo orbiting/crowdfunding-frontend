@@ -314,6 +314,7 @@ class Story extends Component {
       maxCreatedAt,
       maxCreatedAtI2,
       status,
+      hasEnded,
       paymentMethods,
       allPostalCodes,
       geoStats,
@@ -768,14 +769,14 @@ Mit Dank für Ihre Kühnheit und unsere Verantwortung,
 
 Ihre Crew der Republik und von Project&nbsp;R
             `}
-            {me ? [
+            {me && !hasEnded ? [
               <P>
                 PS: Falls Ihnen noch jemand einfällt, der Ihre Vorliebe für Mut, Vertrauen oder Verrücktheit teilt (Unzutreffendes – Sie wissen schon!), weisen Sie die Person auf unsere Website hin.
               </P>,
               <P>
                 PPS: Zögert die Person, können Sie dieser auch ein Abonnement schenken. Denn eine Republik wird nie von wenigen gegründet, sondern von vielen: <A href='/pledge?package=ABO_GIVE'>Abonnement verschenken</A>
               </P>
-            ] : (
+            ] : !hasEnded && (
               <P>
                 PS: Noch nicht Mitglied? Jetzt <A href='/pledge'>mitmachen</A> und Mitglied werden!
               </P>
@@ -803,7 +804,7 @@ const DataWrapper = ({data, me}) => (
       },
       paymentStats,
       testimonialStats,
-      crowdfunding: {status}
+      crowdfunding: {status, hasEnded}
     } = data
 
     const paymentMethods = []
@@ -1001,6 +1002,7 @@ const DataWrapper = ({data, me}) => (
         geoStats={geoStats}
         paddedAges={paddedAges}
         status={status}
+        hasEnded={hasEnded}
         paymentMethods={paymentMethods}
         groupedCreatedAts={groupedCreatedAts}
         maxCreatedAt={maxCreatedAt}
@@ -1015,6 +1017,7 @@ const membershipStats = gql`
 query {
   crowdfunding(name: "REPUBLIK") {
     id
+    hasEnded
     status {
       people
     }

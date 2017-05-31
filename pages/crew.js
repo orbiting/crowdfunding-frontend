@@ -3,7 +3,6 @@ import withData from '../lib/withData'
 import withT from '../lib/withT'
 
 import Frame from '../components/Frame'
-import Content from '../components/Frame/Content'
 import Portrait from '../components/Portrait'
 import ImageCover from '../components/ImageCover'
 
@@ -27,16 +26,14 @@ export default withData(withT(({url, t}) => {
   }
 
   return (
-    <Frame url={url} meta={meta} cover={(
+    <Frame indented url={url} meta={meta} cover={(
       <ImageCover image={{
         src: meta.image,
         alt: 'Taufe des Namen und Logo in Bern'
       }} />
     )}>
-      <Content indented>
-        <Lead>{t('crew/lead')}</Lead>
-        {team.map((person, i) => <Portrait key={i} {...person} odd={!(i % 2)} />)}
-      </Content>
+      <Lead>{t('crew/lead')}</Lead>
+      {team.map((person, i) => <Portrait key={i} {...person} odd={!(i % 2)} />)}
     </Frame>
   )
 }))

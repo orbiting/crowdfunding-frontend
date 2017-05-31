@@ -3,23 +3,22 @@ const bodyParser = require('body-parser')
 const fetch = require('isomorphic-unfetch')
 const crypto = require('crypto')
 
-const SUBJECT = 'Bitte Anmeldung zum Republik-Newsletter bestätigen'
+const SUBJECT = 'Bitte Interesse an der Republik-Mitgliedschaft bestätigen'
 const FROM_EMAIL = 'kontakt@republik.ch'
-const FROM_NAME = 'Republik Newsletter'
+const FROM_NAME = 'Republik'
 
-const subscribeText = (email, token) => `Ma'am, Sir,
+const subscribeText = (email, token) => `Ma’am, Sir,
 
-Herzlichen Dank für Ihr Interesse!
+herzlichen Dank für Ihr Interesse!
 
-Sobald das Crowdfunding losgeht, werden wir uns bei Ihnen melden.
+Gerne kommen wir auf Sie zu, sobald die Anmeldung für neue Mitglieder wieder offen ist.
 
-Dafür müssen Sie nur noch auf folgenden Link klicken:
-
+Sie müssen nur noch auf folgenden Link klicken:
 ${process.env.PUBLIC_BASE_URL}/newsletter/subscribe?email=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}
 
 Danke!
 
-Ihre R-Crew`
+Die Crew von Project R und der Republik`
 
 const sendEmail = (email, text) => {
   return fetch(`https://mandrillapp.com/api/1.0/messages/send.json`, {
@@ -70,11 +69,11 @@ const subscribeEmail = (email) => {
       if (data.status >= 400) {
         if (data.title === 'Member Exists') {
           return {
-            message: 'Sie sind bereits eingetragen.'
+            message: 'alreadySubscribed'
           }
         }
         return {
-          message: 'Anmeldung fehlgeschlagen.'
+          message: 'subscriptionFailed'
         }
       }
       return {}
@@ -100,13 +99,13 @@ server.get('/newsletter/subscribe', bodyParser.json(), async (req, res) => {
   } else {
     if (sha !== token) {
       return res.redirect(
-        `/newsletter/welcome?message=${encodeURIComponent('Ungültige Anfrage.')}`
+        `/newsletter/welcome?context=wait&message=invalidRequest`
       )
     }
     const response = await subscribeEmail(email)
     return res.redirect([
-      '/newsletter/welcome',
-      response.message ? `?message=${encodeURIComponent(response.message)}` : ''
+      '/newsletter/welcome?context=wait',
+      response.message ? `&message=${encodeURIComponent(response.message)}` : ''
     ].join(''))
   }
 })

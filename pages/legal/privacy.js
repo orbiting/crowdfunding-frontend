@@ -1,7 +1,6 @@
 import React from 'react'
 import withData from '../../lib/withData'
 import Frame from '../../components/Frame'
-import Content from '../../components/Frame/Content'
 
 import md from 'markdown-in-js'
 import mdComponents from '../../lib/utils/mdComponents'
@@ -14,8 +13,7 @@ export default withData(({url}) => {
 
   return (
     <Frame url={url} meta={meta}>
-      <Content>
-        {md(mdComponents)`
+      {md(mdComponents)`
 ## Datenschutzbestimmungen
 Stand April 2017
 
@@ -36,8 +34,7 @@ Gegenstand: Die Project R Genossenschaft, Sihlhallenstrasse 1, 8004 Zürich, erf
 7. republik.ch nutzt Cookies. Die Anwendung von Cookies kann in den Einstellungen eines Browserprogramms ausgeschaltet werden. Cookies können automatisch oder manuell gelöscht werden. Es ist möglich, dass die Website republik.ch ohne Cookies nicht korrekt funktioniert. Wer darauf verzichtet, die Cookies auszuschalten, erklärt sich damit einverstanden, dass die republik.ch Cookies nutzt.
 
 8. Angemeldete Personen können bei der Project R Genossenschaft, Sihlhallenstrasse 1, 8004 Zürich, per Brief oder E-Mail an office@project-r.construction Auskunft über die von ihrer Person gespeicherten persönlichen Daten verlangen und diese berichtigen lassen. Verlangt die angemeldete Person die Löschung ihrer Daten, wird dies nur umgesetzt, soweit diesem Ersuchen keine vertraglichen Abmachungen mit ihr entgegenstehen. Die Project R Genossenschaft kann diese Datenschutzbestimmungen jederzeit und ohne vorangehende Ankündigung ganz oder in Teilen ändern, ergänzen oder ersetzen. Es gelten die jeweils beim Besuch auf der Online-Plattform bzw. einer der zugehörigen Webseiten in Kraft stehende Version dieser Datenschutzbestimmungen.
-        `}
-      </Content>
+      `}
     </Frame>
   )
 })

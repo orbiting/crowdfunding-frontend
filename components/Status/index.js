@@ -3,6 +3,7 @@ import {css} from 'glamor'
 import {gql, graphql} from 'react-apollo'
 import {ascending} from 'd3-array'
 import {timeMinute} from 'd3-time'
+import {compose} from 'redux'
 
 import withT from '../../lib/withT'
 import {chfFormat, countFormat} from '../../lib/utils/formats'
@@ -43,30 +44,52 @@ const styles = {
   })
 }
 
-const query = gql`{
-  crowdfunding(name: "REPUBLIK") {
-    id
-    goals {
-      people
-      money
-      description
-    }
-    status {
-      people
-      money
-    }
-    endDate
-  }
-}`
-
 class Status extends Component {
   constructor (props) {
     super(props)
 
     this.state = {}
   }
+  tick () {
+    const now = new Date()
+
+    const msLeft = 1000 - now.getMilliseconds() + 50
+    let msToNextTick = (60 - now.getSeconds()) * 1000 + msLeft
+
+    const {crowdfunding: {endDate}} = this.props
+    if (endDate) {
+      const end = new Date(endDate)
+      if (end < now) {
+        return
+      }
+      const totalMinutes = timeMinute.count(now, end)
+      const hours = Math.floor(totalMinutes / 60) % 24
+      if (hours === 0) {
+        msToNextTick = msLeft
+      }
+    }
+
+    clearTimeout(this.timeout)
+    this.timeout = setTimeout(
+      () => {
+        this.setState({
+          now: new Date()
+        })
+        this.tick()
+      },
+      msToNextTick
+    )
+  }
+  componentDidMount () {
+    if (!this.props.compact) {
+      this.tick()
+    }
+  }
+  componentWillUnmount () {
+    clearTimeout(this.timeout)
+  }
   render () {
-    if ((this.props.loading || this.props.error) && !this.props.crowdfunding) {
+    if (!this.props.crowdfunding) {
       return null
     }
 
@@ -154,13 +177,13 @@ class Status extends Component {
           <span {...styles.smallNumber}>
             {end > now ? (
               [
-                t.pluralize(
+                days > 0 && t.pluralize(
                   'status/time/days',
                   {
                     count: days
                   }
                 ),
-                t.pluralize(
+                (days !== 0 || hours > 0) && t.pluralize(
                   'status/time/hours',
                   {
                     count: hours
@@ -171,8 +194,14 @@ class Status extends Component {
                   {
                     count: minutes
                   }
+                ),
+                days === 0 && hours === 0 && this.state.now && t.pluralize(
+                  'status/time/seconds',
+                  {
+                    count: 60 - now.getSeconds()
+                  }
                 )
-              ].join(' ')
+              ].filter(Boolean).join(' ')
             ) : (
               t('status/time/ended')
             )}
@@ -184,17 +213,46 @@ class Status extends Component {
   }
 }
 
-const StatusWithQuery = graphql(query, {
-  props: ({ data }) => {
+export const RawStatus = Status
+
+const query = gql`{
+  crowdfunding(name: "REPUBLIK") {
+    id
+    goals {
+      people
+      money
+      description
+    }
+    status {
+      people
+      money
+    }
+    endDate
+    endVideo {
+      hls
+      mp4
+      subtitles
+      poster
+    }
+    hasEnded
+  }
+}`
+
+export const withStatus = Component => graphql(query, {
+  props: ({data}) => {
     return {
-      loading: data.loading,
-      error: data.error,
-      crowdfunding: data.crowdfunding
+      crowdfunding: data.crowdfunding,
+      statusRefetch: data.refetch,
+      statusStartPolling: data.startPolling,
+      statusStopPolling: data.stopPolling
     }
   },
   options: {
     pollInterval: +STATUS_POLL_INTERVAL_MS
   }
-})(withT(Status))
+})(Component)
 
-export default StatusWithQuery
+export default compose(
+  withStatus,
+  withT
+)(Status)

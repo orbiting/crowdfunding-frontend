@@ -147,6 +147,18 @@ class Pledge extends Component {
           receiveError,
           pastPledges
         } = this.props
+
+        if (crowdfunding.hasEnded && !this.props.pledge) {
+          return (
+            <div>
+              <H1>{t('pledge/title')}</H1>
+              <RawHtml type={P} dangerouslySetInnerHTML={{
+                __html: t('ended/pledge/lead')
+              }} />
+            </div>
+          )
+        }
+
         const showSignIn = this.state.showSignIn && !me
 
         const pkg = query.package
@@ -293,6 +305,7 @@ const query = gql`
   crowdfunding(name: "REPUBLIK") {
     id
     name
+    hasEnded
     packages {
       id
       name

@@ -1,7 +1,6 @@
 import React from 'react'
 import withData from '../../lib/withData'
 import Frame from '../../components/Frame'
-import Content from '../../components/Frame/Content'
 
 import md from 'markdown-in-js'
 import mdComponents from '../../lib/utils/mdComponents'
@@ -14,8 +13,7 @@ export default withData(({url}) => {
 
   return (
     <Frame url={url} meta={meta}>
-      <Content>
-        {md(mdComponents)`
+      {md(mdComponents)`
 ## Allgemeine Geschäftsbedingungen 
 Stand April 2017
 
@@ -107,8 +105,7 @@ Ausschliesslicher Gerichtsstand ist Zürich.
 
 Die Betreiberin behält sich vor, die AGB jederzeit ohne Angabe von Gründen zu ändern. Die geänderten AGB gelten ab Datum der Publikation auf der Website der Betreiberin.
 
-        `}
-      </Content>
+      `}
     </Frame>
   )
 })

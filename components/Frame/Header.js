@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {css, merge} from 'glamor'
 import Router from 'next/router'
-import Status from '../Status'
+import {RawStatus} from '../Status'
 import withT from '../../lib/withT'
 
 import {
@@ -144,7 +144,11 @@ class Header extends Component {
     window.removeEventListener('resize', this.measure)
   }
   render () {
-    const {cover, sticky, sidebar, url, t} = this.props
+    const {
+      cover, sticky, sidebar, forceStatus,
+      crowdfunding, crowdfunding: {hasEnded},
+      url, t
+    } = this.props
     const {mobile, expanded, hasStatusSpace} = this.state
 
     const opaque = this.state.opaque || expanded
@@ -206,13 +210,13 @@ class Header extends Component {
               {(mobile || opaque) && <Menu expanded={expanded}
                 id='primary-menu' items={menuItems} url={url}>
                 {
-                  mobile && expanded && <Status compact />
+                  mobile && expanded && (!hasEnded || forceStatus) && <RawStatus t={t} crowdfunding={crowdfunding} compact />
                 }
               </Menu>}
             </div>
             {opaque && <div {...styles.side}>
               {
-                mobile && (
+                mobile && !hasEnded && (
                   <Button block primary
                     onClick={() => {
                       Router.push('/pledge').then(() => window.scrollTo(0, 0))
@@ -223,8 +227,8 @@ class Header extends Component {
                 )
               }
               {
-                !mobile && !!hasStatusSpace && (!!sticky.status || !sidebar) && (
-                  <Status compact />
+                !mobile && (!hasEnded || forceStatus) && !!hasStatusSpace && (!!sticky.status || !sidebar) && (
+                  <RawStatus t={t} crowdfunding={crowdfunding} compact />
                 )
               }
             </div>}

@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import withData from '../lib/withData'
 import Frame from '../components/Frame'
-import Content from '../components/Frame/Content'
 
 import List, {generateSeed} from '../components/Testimonial/List'
 import Share from '../components/Testimonial/Share'
@@ -34,9 +33,7 @@ class CommunityPage extends Component {
 
     return (
       <Frame url={url}>
-        <Content>
-          <List url={url} seed={seed} isPage />
-        </Content>
+        <List url={url} seed={seed} isPage />
       </Frame>
     )
   }

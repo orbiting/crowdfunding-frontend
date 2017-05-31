@@ -8,7 +8,6 @@ import Router from 'next/router'
 import Meta from '../Frame/Meta'
 
 import withT from '../../lib/withT'
-import RawHtml from '../RawHtml'
 import Loader from '../Loader'
 import Play from '../Icons/Play'
 
@@ -329,13 +328,8 @@ class List extends Component {
               </A>
             )}
             {!!this.state.hasReachEnd && hasEndText && (
-              <P>{t.elements('testimonial/infinite/end', {
-                count: testimonials.length,
-                pledgeLink: (
-                  <A key='pledgeLink' href='/pledge'>
-                    {t('testimonial/infinite/end/pledgeLink')}
-                  </A>
-                )
+              <P>{t('testimonial/infinite/end', {
+                count: testimonials.length
               })}</P>
             )}
           </div>
@@ -419,9 +413,6 @@ class Container extends Component {
 
     return (
       <div>
-        <RawHtml type={P} dangerouslySetInnerHTML={{
-          __html: t('testimonial/list/before')
-        }} />
         <Field label={t('testimonial/search/label')}
           name='search'
           value={query}

@@ -95,12 +95,20 @@ class VideoCover extends Component {
   componentDidMount () {
     window.addEventListener('resize', this.measure)
     this.measure()
+    if (this.props.autoPlay && this.player) {
+      this.setState(() => {
+        this.player.play()
+        return {
+          cover: false
+        }
+      })
+    }
   }
   componentWillUnmount () {
     window.removeEventListener('resize', this.measure)
   }
   render () {
-    const {src} = this.props
+    const {src, cursor} = this.props
     const {
       playing, ended,
       videoHeight, windowHeight,
@@ -126,7 +134,7 @@ class VideoCover extends Component {
           }}>
           <div {...styles.maxWidth}>
             <img src={src.poster} {...styles.poster} style={heightStyle} />
-            <div {...styles.cursor} />
+            {!!cursor && <div {...styles.cursor} />}
             <div {...styles.play}>
               <Play />
             </div>
@@ -147,7 +155,7 @@ class VideoCover extends Component {
           }}
           onProgress={(progress) => {
             if (
-              progress > 0.97 &&
+              progress > this.props.endScroll &&
               !ended &&
               videoHeight &&
               !(this.player && this.player.scrubbing)

@@ -1,7 +1,6 @@
 import React from 'react'
 import withData from '../../lib/withData'
 import Frame from '../../components/Frame'
-import Content from '../../components/Frame/Content'
 
 import md from 'markdown-in-js'
 import mdComponents from '../../lib/utils/mdComponents'
@@ -21,19 +20,18 @@ export default withData(({url}) => {
   }
 
   return (
-    <Frame url={url} meta={meta}>
-      <Content indented>
-        <H1>
-          {meta.title}
-        </H1>
+    <Frame url={url} meta={meta} indented>
+      <H1>
+        {meta.title}
+      </H1>
 
-        <P>
-          <A download href={`${STATIC_BASE_URL}/static/statuten_project_r_genossenschaft_unterschrieben.pdf`}>
-            PDF herunterladen
-          </A>
-        </P>
+      <P>
+        <A download href={`${STATIC_BASE_URL}/static/statuten_project_r_genossenschaft_unterschrieben.pdf`}>
+          PDF herunterladen
+        </A>
+      </P>
 
-        {md(mdComponents)`
+      {md(mdComponents)`
 ## I. Firma, Sitz und Zweck
 
 **Artikel 1 – Firma und Sitz**
@@ -425,8 +423,7 @@ Der Vorstand hat folgende unübertragbaren und unentziehbaren Aufgaben:
 
 1. Die Mitglieder der Genossenschaft unterwerfen sich für den Fall von Konflikten, die das Gesellschafts- und/oder Mitgliedschaftsverhältnis betreffen, der Verpflichtung, anstelle des Schlichtungsverfahrens eine Mediation gemäss Art. 213 ff. ZPO durchzuführen. Falls sich die Konfliktparteien nicht innert dreissig (30) Kalendertagen nach Stellen eines Mediationsgesuchs durch die klagende Partei einigen können, wird der Mediator/die Mediatorin durch die Schweizerische Kammer für Wirtschaftsmediation (SKWM), Sektion Zürich, bestimmt. Der Mediator/die Mediatorin ist frei, einen Co-Mediator/eine Co-Mediatorin zu bestimmen.
 2. Der Gerichtsstand für sämtliche aus dem Gesellschafts- und/oder Mitgliedschaftsverhältnis entstehenden Streitigkeiten befindet sich am Sitz der Genossenschaft.
-        `}
-      </Content>
+      `}
     </Frame>
   )
 })
