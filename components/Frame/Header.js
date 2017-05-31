@@ -145,7 +145,7 @@ class Header extends Component {
   }
   render () {
     const {
-      cover, sticky, sidebar,
+      cover, sticky, sidebar, forceStatus,
       crowdfunding, crowdfunding: {hasEnded},
       url, t
     } = this.props
@@ -210,7 +210,7 @@ class Header extends Component {
               {(mobile || opaque) && <Menu expanded={expanded}
                 id='primary-menu' items={menuItems} url={url}>
                 {
-                  mobile && expanded && !hasEnded && <RawStatus t={t} crowdfunding={crowdfunding} compact />
+                  mobile && expanded && (!hasEnded || forceStatus) && <RawStatus t={t} crowdfunding={crowdfunding} compact />
                 }
               </Menu>}
             </div>
@@ -227,7 +227,7 @@ class Header extends Component {
                 )
               }
               {
-                !mobile && !hasEnded && !!hasStatusSpace && (!!sticky.status || !sidebar) && (
+                !mobile && (!hasEnded || forceStatus) && !!hasStatusSpace && (!!sticky.status || !sidebar) && (
                   <RawStatus t={t} crowdfunding={crowdfunding} compact />
                 )
               }

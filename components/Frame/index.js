@@ -72,13 +72,13 @@ class Frame extends Component {
   render () {
     const {
       children,
-      cover, indented, sidebar, forceSidebar,
+      cover, indented, sidebar, forceStatus,
       crowdfunding, crowdfunding: {hasEnded},
       url, meta
     } = this.props
     const {sticky} = this.state
 
-    const sidebarAdditionalStyle = url.pathname !== '/'
+    const sidebarAdditionalStyle = url.pathname !== '/' && url.pathname !== '/crowdfunding'
       ? styles.hideOnMobile
       : {}
 
@@ -86,12 +86,15 @@ class Frame extends Component {
       <div {...styles.container}>
         {!!meta && <Meta data={meta} />}
         <div {...styles.bodyGrower} className={!cover ? styles.coverless : undefined}>
-          <Header crowdfunding={crowdfunding} url={url} cover={cover} sticky={sticky} sidebar={sidebar} />
+          <Header crowdfunding={crowdfunding} url={url} forceStatus={forceStatus} cover={cover} sticky={sticky} sidebar={sidebar} />
           {sidebar ? (
-            !hasEnded || forceSidebar ? (
+            !hasEnded || forceStatus ? (
               <Container>
                 <div {...styles.sidebar} {...sidebarAdditionalStyle}>
-                  <Sidebar sticky={sticky} setSticky={this.setSticky} />
+                  <Sidebar
+                    hasEnded={hasEnded}
+                    sticky={sticky}
+                    setSticky={this.setSticky} />
                 </div>
                 <Content indented={indented}>{children}</Content>
               </Container>

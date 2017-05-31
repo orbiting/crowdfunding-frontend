@@ -242,13 +242,22 @@ class Sidebar extends Component {
   }
   render () {
     const {right} = this.state
-    const {sticky, sendReminder, t} = this.props
+    const {sticky, sendReminder, t, hasEnded} = this.props
+
+    const endStyles = hasEnded
+      ? {
+        pointerEvents: 'none',
+        opacity: 0.5
+      }
+      : {}
+
     const onChange = state => this.setState(() => (state))
     return (
       <div>
         <Status />
 
         <div ref={this.innerRef} style={{
+          ...endStyles,
           visibility: sticky.sidebar ? 'hidden' : 'visible'
         }}>
           <SidebarInner t={t}
@@ -258,7 +267,7 @@ class Sidebar extends Component {
         </div>
 
         {!!sticky.sidebar && (
-          <div {...styles.sticky} style={{right: right}}>
+          <div {...styles.sticky} style={{...endStyles, right: right}}>
             <SidebarInner t={t}
               onChange={onChange}
               state={this.state}

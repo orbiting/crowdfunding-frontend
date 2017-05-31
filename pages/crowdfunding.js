@@ -67,14 +67,14 @@ export const Page = ({url, alive}) => {
     : null
 
   return (
-    <Frame url={url} indented meta={{
+    <Frame url={url} indented forceStatus meta={{
       pageTitle: 'Republik — das digitale Magazin von Project R',
       title: 'Republik — das digitale Magazin von Project R',
       description: alive
         ? 'Jetzt unser Crowdfunding unterstützen.'
         : 'Das war unser Crowdfunding.', // t('ended/crowdfunding/description')
       image: `${STATIC_BASE_URL}/static/social-media/main.jpg`
-    }} forceSidebar cover={(
+    }} cover={(
       <VideoCover src={VIDEOS.main} />
     )}>
       <div>

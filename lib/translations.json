@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-28T17:35:46.460Z",
+  "updated": "2017-05-31T00:25:06.616Z",
   "title": "live",
   "data": [
     {
@@ -573,10 +573,6 @@
     {
       "key": "status/time/label",
       "value": "bis Deadline"
-    },
-    {
-      "key": "status/time/ended",
-      "value": "Vorbei"
     },
     {
       "key": "status/time/days/1",
@@ -1475,6 +1471,14 @@
       "value": "Die Abstimmung ist bereits geschlossen."
     },
     {
+      "key": "api/crowdfunding/tooLate",
+      "value": "Es tut uns sehr leid, das Crowdfunding ist bereits beendet."
+    },
+    {
+      "key": "api/testimonial/notFound",
+      "value": "Es konnte kein Testimonial gefunden werden."
+    },
+    {
       "key": "vote/END_GOAL/title",
       "value": "Demokratie in der Republik – das Abstimmungsresultat"
     },
@@ -1858,6 +1862,14 @@
     {
       "key": "vote/waiting/hasSubmitted",
       "value": "Sie haben abgestimmt. Vielen Dank für Ihre Stimme!"
+    },
+    {
+      "key": "ended/crowdfunding/description",
+      "value": "Das war unser Crowdfunding."
+    },
+    {
+      "key": "status/time/ended",
+      "value": "Das Crowdfunding ist vorbei."
     }
   ]
 }
