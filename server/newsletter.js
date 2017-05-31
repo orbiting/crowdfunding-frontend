@@ -3,13 +3,13 @@ const bodyParser = require('body-parser')
 const fetch = require('isomorphic-unfetch')
 const crypto = require('crypto')
 
-const SUBJECT = 'Bitte Interesse an Republik-Mitgliedschaft bestätigen'
+const SUBJECT = 'Bitte Interesse an der Republik-Mitgliedschaft bestätigen'
 const FROM_EMAIL = 'kontakt@republik.ch'
 const FROM_NAME = 'Republik'
 
-const subscribeText = (email, token) => `Ma'am, Sir,
+const subscribeText = (email, token) => `Ma’am, Sir,
 
-Herzlichen Dank für Ihr Interesse!
+herzlichen Dank für Ihr Interesse!
 
 Gerne kommen wir auf Sie zu, sobald die Anmeldung für neue Mitglieder wieder offen ist.
 

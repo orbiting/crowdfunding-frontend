@@ -1,5 +1,5 @@
 {
-  "updated": "2017-05-31T10:27:23.481Z",
+  "updated": "2017-05-31T11:05:50.174Z",
   "title": "live",
   "data": [
     {
@@ -828,15 +828,15 @@
     },
     {
       "key": "api/newsletter/invalidRequest",
-      "value": "Ungültige Anfrage"
+      "value": "Ungültige Anfrage."
     },
     {
       "key": "api/newsletter/alreadySubscribed",
-      "value": "Sie sind bereits eingetragen"
+      "value": "Sie sind bereits eingetragen."
     },
     {
       "key": "api/newsletter/subscriptionFailed",
-      "value": "Anmeldung fehlgeschlagen"
+      "value": "Anmeldung fehlgeschlagen."
     },
     {
       "key": "footer/contact/title",
@@ -1176,7 +1176,7 @@
     },
     {
       "key": "faq/before/support/text",
-      "value": "Bei allen technischen Problemen beim Crowdfunding helfen wir Ihnen gerne so schnell wie möglich per Mail: <a href=\"mailto:kontakt@republik.ch\">kontakt@republik.ch</a>"
+      "value": "Bei allen technischen Problemen helfen wir Ihnen gerne so schnell wie möglich per Mail: <a href=\"mailto:kontakt@republik.ch\">kontakt@republik.ch</a>"
     },
     {
       "key": "faq/form/title",
@@ -1857,7 +1857,7 @@
     },
     {
       "key": "merci/pledges/title/0",
-      "value": "Sie habe nicht mitgemacht"
+      "value": "Sie haben nicht mitgemacht."
     },
     {
       "key": "ended/pledge/lead",
