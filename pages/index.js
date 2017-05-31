@@ -31,7 +31,9 @@ class Index extends Component {
 
     const now = new Date()
     const msToNextTick = ms || (
-      (61 - now.getSeconds()) * 1000 - now.getMilliseconds() + 250
+      (61 - now.getSeconds()) * 1000 -
+      now.getMilliseconds() +
+      250
     )
 
     this.timeout = setTimeout(
