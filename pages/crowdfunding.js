@@ -116,7 +116,7 @@ ${pledgeLink}
             </List.Item>
 
             <List.Item>
-              Es ist überwältigend, was wir gemeinsam mit Ihnen in den letzten drei Wochen erreicht haben: tatsächlich einen Unterschied zu machen! Genau dafür wird das digitale Magazin Republik von Project R entwickelt, daran arbeiten wir. Das Crowdfunding läuft noch bis am Mittwoch, 31. Mai um 20 Uhr. Das Ziel bei Erreichung von 14{thousandSeparator}000 Abonnentinnen haben unsere Verlegerinnen und Verleger in einer <Link href='/vote'><a {...linkRule}>Abstimmung</a></Link> bestimmt: den Ausbau des Datenjournalismus-Teams. Gemeinsam schaffen wir das! Danke fürs Mitmachen und Weitersagen!
+              Es ist überwältigend, was wir gemeinsam mit Ihnen in den letzten 5 Wochen erreicht haben: tatsächlich einen Unterschied zu machen! Genau dafür wird das digitale Magazin Republik von Project R entwickelt, daran arbeiten wir. Das Crowdfunding läuft noch bis am Mittwoch, 31. Mai um 20 Uhr. Das Ziel bei Erreichung von 14{thousandSeparator}000 Abonnentinnen haben unsere Verlegerinnen und Verleger in einer <Link href='/vote'><a {...linkRule}>Abstimmung</a></Link> bestimmt: den Ausbau des Datenjournalismus-Teams. Gemeinsam schaffen wir das! Danke fürs Mitmachen und Weitersagen!
             </List.Item>
           </List>
         </div>
