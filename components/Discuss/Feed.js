@@ -191,6 +191,8 @@ class Feed extends Component {
           }
         }
 
+        const canComment = false // feed.userIsEligitable
+
         return (
           <div ref={this.containerRef}>
             {!!metaData && (
@@ -198,10 +200,10 @@ class Feed extends Component {
             )}
             <H2 style={{marginTop: 80}}>{t('discuss/title')}</H2>
             <br />
-            {feed.userIsEligitable && !!userHasToWait && (
+            {canComment && !!userHasToWait && (
               <P>{t('discuss/comment/userWaitingTime')}</P>
             )}
-            {feed.userIsEligitable && !userHasToWait && (
+            {canComment && !userHasToWait && (
               <div>
                 <P>{t('discuss/form/lead')}</P>
                 <Form
@@ -213,7 +215,7 @@ class Feed extends Component {
                   }} />
               </div>
             )}
-            <div style={{marginTop: feed.userIsEligitable ? 40 : 0}}>
+            <div style={{marginTop: canComment ? 40 : 0}}>
               <P>{t.pluralize('discuss/stats', {
                 count: feed.stats.count
               })}</P>
