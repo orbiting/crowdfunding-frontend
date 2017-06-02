@@ -14,6 +14,6 @@ module.exports = {
   },
   onDemandEntries: {
     // wait 5 minutes before disposing entries
-    maxInactiveAge: 1000 * 60 * 5
+    // maxInactiveAge: 1000 * 60 * 5
   }
 }
