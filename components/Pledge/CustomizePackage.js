@@ -12,7 +12,7 @@ import {styles as fieldSetStyles} from '../FieldSet'
 
 import {
   Field, A, Interaction,
-  Grid, Span, fontFamilies,
+  fontFamilies,
   mediaQueries
 } from '@project-r/styleguide'
 
@@ -59,7 +59,25 @@ const reasonError = (value = '', t) => {
   return value.trim().length === 0 && t('package/customize/userPrice/reason/error')
 }
 
+const GUTTER = 42
 const styles = {
+  grid: css({
+    clear: 'both',
+    width: `calc(100% + ${GUTTER}px)`,
+    margin: `0 -${GUTTER / 2}px`,
+    ':after': {
+      content: '""',
+      display: 'table',
+      clear: 'both'
+    }
+  }),
+  span: css({
+    float: 'left',
+    paddingLeft: `${GUTTER / 2}px`,
+    paddingRight: `${GUTTER / 2}px`,
+    minHeight: 1,
+    width: '50%'
+  }),
   title: css({
     fontFamily: fontFamilies.sansSerifRegular,
     fontSize: 19,
@@ -174,7 +192,7 @@ class CustomizePackage extends Component {
           )}
           {t(`package/${pkg.name}/description`)}
         </P>
-        <Grid>
+        <div {...styles.grid}>
           {
             configurableOptions.map((option, i) => {
               const value = values[option.id] === undefined ? option.defaultAmount : values[option.id]
@@ -231,7 +249,7 @@ class CustomizePackage extends Component {
               }
 
               return (
-                <Span s='1/2' m='9/18' key={option.id}>
+                <div key={option.id} {...styles.span}>
                   <div style={{marginBottom: 20}}>
                     <Field
                       ref={i === 0 ? this.focusRefSetter : undefined}
@@ -247,11 +265,11 @@ class CustomizePackage extends Component {
                       onChange={onFieldChange}
                       />
                   </div>
-                </Span>
+                </div>
               )
             })
           }
-        </Grid>
+        </div>
         {!!userPrice && (<div>
           <P>
             {t('package/customize/userPrice/beforeReason')}
