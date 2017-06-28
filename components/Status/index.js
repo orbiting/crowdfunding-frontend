@@ -95,9 +95,14 @@ class Status extends Component {
 
     const {crowdfunding: {goals, status, endDate}, t} = this.props
     const now = new Date()
-    const end = new Date(endDate)
+    const nextMinute = timeMinute.ceil(new Date())
 
-    const totalMinutes = timeMinute.count(timeMinute.ceil(now), end)
+    // end date is expected to be an exact minute
+    // timeMinute.round is used to ensure that and
+    // support end dates like '2017-05-31 19:59:59.999+02'
+    const end = timeMinute.round(new Date(endDate))
+
+    const totalMinutes = timeMinute.count(nextMinute, end)
     const minutes = totalMinutes % 60
     const hours = Math.floor(totalMinutes / 60) % 24
     const days = Math.floor(totalMinutes / 60 / 24)
@@ -175,7 +180,7 @@ class Status extends Component {
           format={(value) => chfFormat(value / 100)} />
         <P>
           <span {...styles.smallNumber}>
-            {end > now ? (
+            {minutes >= 0 ? (
               [
                 days > 0 && t.pluralize(
                   'status/time/days',
