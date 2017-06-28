@@ -24,7 +24,8 @@ const blinkBg = css.keyframes({
   }
 })
 
-const MAX_HEIGHT_VH = 80
+const MAX_HEIGHT = 0.8
+const MAX_HEIGHT_VH = MAX_HEIGHT * 100
 
 const styles = {
   wrapper: css({
@@ -164,9 +165,18 @@ class VideoCover extends Component {
                 const topFixed = mobile
                   ? HEADER_HEIGHT_MOBILE + MENUBAR_HEIGHT
                   : HEADER_HEIGHT
+                const duration = 800
                 scrollIt(
-                  videoHeight - topFixed + 10,
-                  800
+                  (windowHeight * MAX_HEIGHT) - topFixed + 10,
+                  duration
+                )
+                setTimeout(
+                  () => {
+                    this.setState(() => ({
+                      playing: false
+                    }))
+                  },
+                  duration / 2
                 )
               })
             }
