@@ -10,6 +10,7 @@ import Frame from '../components/Frame'
 import VideoCover from '../components/VideoCover'
 import {withStatus} from '../components/Status'
 import Newsletter from '../components/Frame/Newsletter'
+import Loader from '../components/Loader'
 
 import {countFormat} from '../lib/utils/formats'
 
@@ -73,7 +74,11 @@ class Index extends Component {
     this.checkTime()
   }
   render () {
-    const {url, crowdfunding, crowdfunding: {hasEnded, endVideo}} = this.props
+    const {crowdfunding} = this.props
+    if (!crowdfunding) {
+      return <Loader loading />
+    }
+    const {url, crowdfunding: {hasEnded, endVideo}} = this.props
     if (hasEnded) {
       return (
         <Frame url={url} meta={{
