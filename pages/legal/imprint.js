@@ -46,7 +46,7 @@ export default withData(({url}) => {
       <H2>Vorstand</H2>
       <List>
         <Item>Nadja Schnetzler, Präsidentin</Item>
-        <Item>Susanne Sugimoto, Geschäftsführerin, +41 78 897 70 28</Item>
+        <Item>Susanne Sugimoto, Geschäftsführerin, +41 79 787 47 65</Item>
         <Item>Laurent Burst</Item>
         <Item>Clara Vuillemin</Item>
       </List>

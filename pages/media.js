@@ -27,7 +27,7 @@ export default withData(({url}) => {
         Für Auskünfte kontaktieren Sie Susanne&nbsp;Sugimoto, Geschäftsführung und Kommunikation:
       </P>
       <P>
-        <A href='tel:+41788977028'>+41 78 897 70 28</A><br />
+        <A href='tel:+41788977028'>+41 79 787 47 65</A><br />
         <A href='mailto:susanne.sugimoto@project-r.construction'>
           susanne.sugimoto@project-r.construction
         </A>
