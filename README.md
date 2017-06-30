@@ -122,10 +122,13 @@ SUBSCRIBE_SECRET=
 
 #### Polling
 
-Polling can create considerable load. To help mitigate overloads the status polling interval can be configured via the environment.
+Polling can create considerable load. To help mitigate overloads the various polling intervals can be configured via the environment.
 
 ```
 STATUS_POLL_INTERVAL_MS=10000
+STATS_POLL_INTERVAL_MS=10000
+VOTING_POLL_INTERVAL_MS=10000
+TV_POLL_INTERVAL_MS=10000
 ```
 
 ### Install and Run
