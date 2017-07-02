@@ -7,6 +7,12 @@ Related Repositories:
 - [Crowdfunding API Server](https://github.com/orbiting/crowdfunding-api)
 - [Styleguide](https://github.com/orbiting/styleguide)
 
+## License
+
+The content, logo and fonts are the property of their owners (content and logo—Project R, GT America—GrilliType and Rubis—Nootype), and may not be reproduced without permission.
+
+The source code is «BSD 3-clause» licensed.
+
 ## Development
 
 ### Install and Run
