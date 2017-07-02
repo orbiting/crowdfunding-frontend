@@ -1,4 +1,4 @@
-# Crowdfunding
+# Crowdfunding Frontend
 
 Based on [Next.js with Apollo](https://github.com/zeit/next.js/tree/master/examples/with-apollo).
 
@@ -20,7 +20,7 @@ API_BASE_URL=http://localhost:3001
 API_AUTHORIZATION_HEADER=
 ```
 
-`API_BASE_URL` defaults to `https://api.satellit.online`. If the API is HTTP basic-auth protected, you can generate a basic authorization header with ``Basic ${(new Buffer('user:password')).toString('base64')}`` in Node.js and use it with `API_AUTHORIZATION_HEADER`.
+If the API is HTTP basic-auth protected, you can generate a basic authorization header with ``Basic ${(new Buffer('user:password')).toString('base64')}`` in Node.js and use it with `API_AUTHORIZATION_HEADER`.
 
 #### Public Base Url
 
@@ -83,11 +83,11 @@ BASIC_AUTH_REALM=
 
 #### Piwik
 
-Defaults to track on the listed site, can be overwritten:
+You can enable tracking by setting a base url and site id:
 
 ```
-PIWIK_URL_BASE=https://piwik.project-r.construction
-PIWIK_SITE_ID=2
+PIWIK_URL_BASE=https://piwik.example.com
+PIWIK_SITE_ID=1
 ```
 
 #### Countdown Teaser
