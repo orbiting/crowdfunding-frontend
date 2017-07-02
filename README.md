@@ -1,8 +1,20 @@
 # Crowdfunding Frontend
 
-Based on [Next.js with Apollo](https://github.com/zeit/next.js/tree/master/examples/with-apollo).
+A crowdfunding front end written with [Next.js and Apollo](https://github.com/zeit/next.js/tree/master/examples/with-apollo). Developed and sucessfully used for [republik.ch](https://www.republik.ch/crowdfunding), generating over 13k paid subscribers and more than 3.4 million swiss francs.
+
+Related Repositories:
+
+- [Crowdfunding API Server](https://github.com/orbiting/crowdfunding-api)
+- [Styleguide](https://github.com/orbiting/styleguide)
 
 ## Development
+
+### Install and Run
+
+```bash
+npm install
+npm run dev
+```
 
 ### Environment
 
@@ -27,8 +39,6 @@ If the API is HTTP basic-auth protected, you can generate a basic authorization 
 ```
 PUBLIC_BASE_URL=https://example.com
 ```
-
-
 
 #### Static Assets
 
@@ -129,13 +139,6 @@ STATUS_POLL_INTERVAL_MS=10000
 STATS_POLL_INTERVAL_MS=10000
 VOTING_POLL_INTERVAL_MS=10000
 TV_POLL_INTERVAL_MS=10000
-```
-
-### Install and Run
-
-```bash
-npm install
-npm run dev
 ```
 
 ### Testing
