@@ -4,7 +4,7 @@ A crowdfunding front end written with [Next.js and Apollo](https://github.com/ze
 
 Related Repositories:
 
-- [Crowdfunding API Server](https://github.com/orbiting/crowdfunding-api)
+- [Crowdfunding Backend](https://github.com/orbiting/crowdfunding-backend)
 - [Styleguide](https://github.com/orbiting/styleguide)
 
 ## License
