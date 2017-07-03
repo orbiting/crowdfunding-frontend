@@ -31,7 +31,8 @@ import {
 
 import {
   PUBLIC_BASE_URL, STATIC_BASE_URL,
-  STATS_POLL_INTERVAL_MS
+  STATS_POLL_INTERVAL_MS,
+  CROWDFUNDING_NAME
 } from '../../constants'
 
 import {swissTime, countFormat} from '../../lib/utils/formats'
@@ -1015,7 +1016,7 @@ const DataWrapper = ({data, me}) => (
 
 const membershipStats = gql`
 query {
-  crowdfunding(name: "REPUBLIK") {
+  crowdfunding(name: "${CROWDFUNDING_NAME}") {
     id
     hasEnded
     status {

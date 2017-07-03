@@ -73,8 +73,8 @@ const styles = {
 }
 
 const query = gql`
-{
-  crowdfunding(name: "REPUBLIK") {
+query pledgeAccordion($crowdfundingName: String!) {
+  crowdfunding(name: $crowdfundingName) {
     id
     name
     packages {

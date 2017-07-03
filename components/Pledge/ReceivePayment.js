@@ -275,7 +275,7 @@ class PledgeReceivePayment extends Component {
     }
   }
   render () {
-    const {loading, error, pledge, query, t} = this.props
+    const {loading, error, pledge, crowdfundingName, query, t} = this.props
     const {processing, receiveError} = this.state
 
     if (processing) {
@@ -291,6 +291,7 @@ class PledgeReceivePayment extends Component {
 
         return (
           <PledgeForm
+            crowdfundingName={crowdfundingName}
             receiveError={receiveError}
             query={queryWithData}
             pledge={pledge} />

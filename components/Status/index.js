@@ -8,7 +8,10 @@ import {compose} from 'redux'
 import withT from '../../lib/withT'
 import {chfFormat, countFormat} from '../../lib/utils/formats'
 
-import {STATUS_POLL_INTERVAL_MS} from '../../constants'
+import {
+  STATUS_POLL_INTERVAL_MS,
+  CROWDFUNDING_NAME
+} from '../../constants'
 
 import {
   P, Label, fontFamilies
@@ -221,8 +224,9 @@ class Status extends Component {
 export const RawStatus = Status
 
 const query = gql`{
-  crowdfunding(name: "REPUBLIK") {
+  crowdfunding(name: "${CROWDFUNDING_NAME}") {
     id
+    name
     goals {
       people
       money

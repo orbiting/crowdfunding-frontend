@@ -145,7 +145,8 @@ class Pledge extends Component {
           query, me, t,
           crowdfunding,
           receiveError,
-          pastPledges
+          pastPledges,
+          crowdfundingName
         } = this.props
 
         if (crowdfunding.hasEnded && !this.props.pledge) {
@@ -192,7 +193,7 @@ class Pledge extends Component {
                     this.setState(mergeFields(fields))
                   }} />
               ) : (
-                <Accordion extended />
+                <Accordion crowdfundingName={crowdfundingName} extended />
               )}
             </div>
 
@@ -301,8 +302,8 @@ Pledge.propTypes = {
 }
 
 const query = gql`
-{
-  crowdfunding(name: "REPUBLIK") {
+query pledgeForm($crowdfundingName: String!) {
+  crowdfunding(name: $crowdfundingName) {
     id
     name
     hasEnded

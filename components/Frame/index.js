@@ -92,6 +92,7 @@ class Frame extends Component {
               <Container>
                 <div {...styles.sidebar} {...sidebarAdditionalStyle}>
                   <Sidebar
+                    crowdfunding={crowdfunding}
                     hasEnded={hasEnded}
                     sticky={sticky}
                     setSticky={this.setSticky} />

@@ -7,7 +7,7 @@ import {errorToString} from '../../lib/utils/errors'
 import Router from 'next/router'
 
 import Accordion from '../Pledge/Accordion'
-import Status from '../Status'
+import {RawStatus} from '../Status'
 
 import {css} from 'glamor'
 
@@ -95,7 +95,8 @@ class SidebarInner extends Component {
         email, emailError, emailDirty,
         reminderError, reminderMessage
       },
-      onChange, sendReminder
+      onChange, sendReminder,
+      crowdfunding
     } = this.props
 
     const submitReminder = (e) => {
@@ -121,7 +122,7 @@ class SidebarInner extends Component {
 
     return (
       <div {...styles.container}>
-        <Accordion links={[
+        <Accordion crowdfundingName={crowdfunding.name} links={[
           {
             href: `mailto:ir@republik.ch?subject=${encodeURIComponent(t('sidebar/investor/subject'))}`,
             text: t('sidebar/investor')
@@ -245,7 +246,7 @@ class Sidebar extends Component {
   }
   render () {
     const {right} = this.state
-    const {sticky, sendReminder, t, hasEnded} = this.props
+    const {sticky, sendReminder, t, hasEnded, crowdfunding} = this.props
 
     const endStyles = hasEnded
       ? {
@@ -257,13 +258,14 @@ class Sidebar extends Component {
     const onChange = state => this.setState(() => (state))
     return (
       <div>
-        <Status />
+        <RawStatus t={t} crowdfunding={crowdfunding} />
 
         <div ref={this.innerRef} style={{
           ...endStyles,
           visibility: sticky.sidebar ? 'hidden' : 'visible'
         }}>
           <SidebarInner t={t}
+            crowdfunding={crowdfunding}
             onChange={onChange}
             state={this.state}
             sendReminder={sendReminder} />
@@ -272,6 +274,7 @@ class Sidebar extends Component {
         {!!sticky.sidebar && (
           <div {...styles.sticky} style={{...endStyles, right: right}}>
             <SidebarInner t={t}
+              crowdfunding={crowdfunding}
               onChange={onChange}
               state={this.state}
               sendReminder={sendReminder} />
