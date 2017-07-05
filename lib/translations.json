@@ -1,5 +1,5 @@
 {
-  "updated": "2017-06-01T18:44:50.499Z",
+  "updated": "2017-07-05T08:11:50.145Z",
   "title": "live",
   "data": [
     {
@@ -97,10 +97,6 @@
     {
       "key": "package/DONATE/title",
       "value": "Spenden, sonst nichts"
-    },
-    {
-      "key": "package/DONATE/title/short",
-      "value": "Spende"
     },
     {
       "key": "package/DONATE/description",
@@ -719,7 +715,7 @@
       "value": "E-Mail ungültig"
     },
     {
-      "key": "api/unauthorized",
+      "key": "api/signIn",
       "value": "Sie müssen sich zuerst einloggen."
     },
     {
@@ -1890,6 +1886,42 @@
     {
       "key": "status/time/seconds/other",
       "value": "{count} Sekunden"
+    },
+    {
+      "key": "api/unauthorized",
+      "value": "Nicht genehmigt. Sie müssen die Rolle «{role}» besitzen um die gwünschte Aktion auszuführen."
+    },
+    {
+      "key": "package/PRESALE/DONATE/title",
+      "value": "Spenden, sonst nichts"
+    },
+    {
+      "key": "package/PRESALE/DONATE/description",
+      "value": "Sie wollen hervorragenden Journalismus unterstützen, ohne ihn zu lesen. Aber mit Geld. Denn Sie wissen: Guter Journalismus kostet."
+    },
+    {
+      "key": "package/PRESALE/ABO/title",
+      "value": "Für mich"
+    },
+    {
+      "key": "package/PRESALE/ABO/description",
+      "value": "Willkommen an Bord! Sie erhalten für ein Jahr unser Magazin. Und werden automatisch Mitglied der Project R Genossenschaft. Und damit zu einem kleinen Teil Verleger oder Verlegerin der Republik."
+    },
+    {
+      "key": "package/PRESALE/ABO_GIVE/title",
+      "value": "Für andere"
+    },
+    {
+      "key": "package/PRESALE/ABO_GIVE/description",
+      "value": "Sie wollen Ihren Freunden oder Feinden das heisseste Magazin für ein Jahr schenken."
+    },
+    {
+      "key": "package/PRESALE/BENEFACTOR/title",
+      "value": "Für Gönner"
+    },
+    {
+      "key": "package/PRESALE/BENEFACTOR/description",
+      "value": "Sie wollen nicht nur ein unabhängiges Magazin lesen, sondern Sie wollen sich auch energisch dafür einsetzen, dass dieses existiert. Wie alle werden Sie automatisch Mitglied der Project R Genossenschaft. Und damit Verleger oder Verlegerin der Republik. Um uns für Ihre Grosszügigkeit zu revanchieren, schicken wir Ihnen das Start-up-Verleger-Paket: ein Manifest, einen besonderen Anstecker und ein signiertes Manual für Journalismus im 21. Jahrhundert."
     }
   ]
 }

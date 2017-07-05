@@ -15,7 +15,8 @@ import Loader from '../components/Loader'
 import {countFormat} from '../lib/utils/formats'
 
 import {
-  STATIC_BASE_URL
+  STATIC_BASE_URL,
+  SALES_UP
 } from '../constants'
 
 import {
@@ -106,9 +107,21 @@ class Index extends Component {
 
             <P>Ihre Crew von der Republik und von Project&nbsp;R</P>
 
-            <P>PS: Für die ersten Umbauarbeiten schliessen wir die Anmeldung für neue Mitglieder vorerst. Falls Sie ebenfalls an Bord kommen wollen, tragen Sie hier Ihre Mail-Adresse ein:</P>
+            {SALES_UP ? (
+              <P>
+                PS:
+                {' '}
+                <Link href='/pledge'>
+                  <a {...linkRule}>Mitglied werden</a>
+                </Link>
+              </P>
+            ) : (
+              <div>
+                <P>PS: Für die ersten Umbauarbeiten schliessen wir die Anmeldung für neue Mitglieder vorerst. Falls Sie ebenfalls an Bord kommen wollen, tragen Sie hier Ihre Mail-Adresse ein:</P>
 
-            <Newsletter submitText='eintragen' />
+                <Newsletter submitText='eintragen' />
+              </div>
+            )}
 
             <P>PPS: Auf dem Laufenden über den weiteren Aufbau des digitalen Magazins Republik von Project R bleiben Sie hier: <A href='https://project-r.construction/'>project-r.construction</A></P>
 
