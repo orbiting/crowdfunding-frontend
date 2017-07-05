@@ -20,6 +20,10 @@ import {
   MENUBAR_HEIGHT
 } from './constants'
 
+import {
+  SALES_UP
+} from '../../constants'
+
 const styles = {
   bar: css({
     zIndex: 20, // goes over footer
@@ -160,17 +164,13 @@ class Header extends Component {
     const logoHeight = mobile ? 18 : 30
 
     const menuItems = [
+      !!SALES_UP && {
+        label: t('menu/join'),
+        href: '/pledge'
+      },
       {
         label: t('menu/crew'),
         href: '/crew'
-      },
-      {
-        label: t('menu/updates'),
-        href: '/updates'
-      },
-      {
-        label: t('menu/vote'),
-        href: '/vote'
       },
       {
         label: t('menu/community'),

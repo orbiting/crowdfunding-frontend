@@ -1,5 +1,5 @@
 {
-  "updated": "2017-07-05T08:11:50.145Z",
+  "updated": "2017-07-05T13:35:37.222Z",
   "title": "live",
   "data": [
     {
@@ -45,6 +45,10 @@
     {
       "key": "menu/vote",
       "value": "Abstimmung"
+    },
+    {
+      "key": "menu/join",
+      "value": "Mitglied werden"
     },
     {
       "key": "header/button",
@@ -865,6 +869,10 @@
     {
       "key": "footer/events",
       "value": "Veranstaltungen"
+    },
+    {
+      "key": "footer/updates",
+      "value": "Crowdfunding News"
     },
     {
       "key": "footer/about/projecR",
