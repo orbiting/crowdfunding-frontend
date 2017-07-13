@@ -2,7 +2,8 @@
   "name": "crowdfunding",
   "version": "0.0.1",
   "engines": {
-    "node": "7.7.4"
+    "node": "8.1.4",
+    "npm": "5.0.3"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon -w index.js -w constants.js -w server index.js",
