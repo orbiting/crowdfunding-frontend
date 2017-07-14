@@ -160,7 +160,7 @@ class Merci extends Component {
           <P>
             {t('merci/signedOut/signIn')}
           </P>
-          <SignIn />
+          <SignIn email={email} />
         </div>
       )
     }
