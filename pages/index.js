@@ -103,11 +103,11 @@ class Index extends Component {
 
             {!!SALES_UP && (
               <div>
-                <P>Nach einer kurzen Pause sind unsere Büros wieder geöffnet. Falls Sie ebenfalls noch bei uns Verleger oder Verlegerin werden wollen — willkommen an Bord!</P>
+                <P>Nach einer kurzen Pause sind unsere Büros wieder geöffnet. Falls Sie ebenfalls Mitglied der Project&nbsp;R Genossenschaft und damit Verlegerin oder Verleger der Republik werden wollen — willkommen an Bord!</P>
                 <Button primary onClick={() => {
                   Router.push('/pledge').then(() => window.scrollTo(0, 0))
-                }} style={{minWidth: 300}}>
-                  Jetzt&nbsp;beitreten
+                }} style={{minWidth: 250}}>
+                  Mitglied werden
                 </Button>
               </div>
             )}
@@ -127,7 +127,7 @@ class Index extends Component {
                 PS:{' '}
                 Noch einmal der Link, um noch an Bord zu kommen:{' '}
                 <Link href='/pledge'>
-                  <a {...linkRule}>jetzt&nbsp;beitreten</a>
+                  <a {...linkRule}>Mitglied&nbsp;werden</a>
                 </Link>
               </P>
             ) : (
