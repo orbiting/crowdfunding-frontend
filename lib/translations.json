@@ -1,5 +1,5 @@
 {
-  "updated": "2017-07-05T13:35:37.222Z",
+  "updated": "2017-07-18T14:49:16.711Z",
   "title": "live",
   "data": [
     {
@@ -48,7 +48,7 @@
     },
     {
       "key": "menu/join",
-      "value": "Mitglied werden"
+      "value": "Beitreten"
     },
     {
       "key": "header/button",
@@ -204,7 +204,7 @@
     },
     {
       "key": "merci/lead",
-      "value": "Vielen Dank für Ihre Unterstützung. Es ist uns eine Ehre, Sie als Teil unseres Unternehmens zu begrüssen. <br /> Auf dieser Seite finden Sie alles, was wir von Ihnen wissen: Ihre Einkäufe, Ihre Postadresse (brauchen wir leider) und Ihr Foto (brauchen wir nicht, würde uns aber freuen), Letzteres mit einem Slogan (würde uns ebenfalls freuen). <br /> Hier unser Slogan: Lang lebe die Republik!"
+      "value": "Vielen Dank für Ihre Unterstützung. Es ist uns eine Ehre, Sie bei uns als Verlegerin oder Verleger zu begrüssen. Also als Teil unseres Unternehmens.<br />\n<br />\nAuf dieser Seite finden Sie alles, was wir von Ihnen wissen: Ihre Einkäufe, Ihre Postadresse (brauchen wir leider) und Ihr Foto (brauchen wir nicht, würde uns aber freuen), Letzteres mit einem persönlichen Slogan (würde uns ebenfalls freuen).<br />\n<br />\nHier unser Slogan, in drei Worten: Lang lebe die Republik!"
     },
     {
       "key": "merci/share/tweetTemplate",
@@ -1929,7 +1929,43 @@
     },
     {
       "key": "package/PRESALE/BENEFACTOR/description",
-      "value": "Sie wollen nicht nur ein unabhängiges Magazin lesen, sondern Sie wollen sich auch energisch dafür einsetzen, dass dieses existiert. Wie alle werden Sie automatisch Mitglied der Project R Genossenschaft. Und damit Verleger oder Verlegerin der Republik. Um uns für Ihre Grosszügigkeit zu revanchieren, schicken wir Ihnen das Start-up-Verleger-Paket: ein Manifest, einen besonderen Anstecker und ein signiertes Manual für Journalismus im 21. Jahrhundert."
+      "value": "Sie wollen nicht nur ein unabhängiges Magazin lesen, sondern Sie wollen sich auch mit Nachdruck dafür einsetzen, dass dieses existiert. Wie alle werden Sie automatisch Mitglied der Project R Genossenschaft. Und damit Verleger oder Verlegerin der Republik. Um uns für Ihre Grosszügigkeit zu revanchieren, schicken wir Ihnen das Start-up-Verleger-Paket: ein Manifest, einen besonderen Anstecker und ein signiertes Manual für Journalismus im 21. Jahrhundert."
+    },
+    {
+      "key": "api/users/404",
+      "value": "Der User konnte nicht gefunden werden."
+    },
+    {
+      "key": "api/email/change/confirmation/subject",
+      "value": "Ihre E-Mail-Adresse wurde geändert"
+    },
+    {
+      "key": "api/email/change/exists",
+      "value": "Es existiert bereits jemand mit der gewünschten E-Mail-Adresse."
+    },
+    {
+      "key": "api/pledge/404",
+      "value": "Der Pledge konnte nicht gefunden werden."
+    },
+    {
+      "key": "api/pledge/resolve/status",
+      "value": "Der Pledge muss im status PAID_INVESTIGATE sein um gelöst werden zu können."
+    },
+    {
+      "key": "api/pledge/resolve/multiplePayments",
+      "value": "Dieser Pledge kann nicht editiert werden, da mehrere Zahlungen dazu vorliegen."
+    },
+    {
+      "key": "api/pledge/resolve/payment/status",
+      "value": "Die Zahlung dieses Pledges muss den status 'PAID' haben."
+    },
+    {
+      "key": "api/pledge/resolve/payment/notEnough",
+      "value": "Die Zahlung reicht nicht aus um den Pledge zu begleichen (min: {minTotal})."
+    },
+    {
+      "key": "api/payment/404",
+      "value": "Die Zahlung konnte nicht gefunden werden."
     }
   ]
 }

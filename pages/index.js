@@ -107,7 +107,7 @@ class Index extends Component {
                 <Button primary onClick={() => {
                   Router.push('/pledge').then(() => window.scrollTo(0, 0))
                 }} style={{minWidth: 300}}>
-                  Jetzt beitreten
+                  Jetzt&nbsp;beitreten
                 </Button>
               </div>
             )}
@@ -127,7 +127,7 @@ class Index extends Component {
                 PS:{' '}
                 Noch einmal der Link, um noch an Bord zu kommen:{' '}
                 <Link href='/pledge'>
-                  <a {...linkRule}>jetzt beitreten</a>
+                  <a {...linkRule}>jetzt&nbsp;beitreten</a>
                 </Link>
               </P>
             ) : (
