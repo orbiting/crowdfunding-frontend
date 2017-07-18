@@ -144,7 +144,6 @@ Polling can create considerable load. To help mitigate overloads the various pol
 STATUS_POLL_INTERVAL_MS=10000
 STATS_POLL_INTERVAL_MS=10000
 VOTING_POLL_INTERVAL_MS=10000
-TV_POLL_INTERVAL_MS=10000
 ```
 
 ### Testing

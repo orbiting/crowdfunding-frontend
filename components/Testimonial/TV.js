@@ -12,10 +12,6 @@ import {
   P, Interaction, Logo, fontFamilies
 } from '@project-r/styleguide'
 
-import {
-  TV_POLL_INTERVAL_MS
-} from '../../constants'
-
 const toViewport = px => `${px / 18}vw`
 
 const MIDDLE = 56.25
@@ -127,8 +123,8 @@ const Item = ({loading, error, t, testimonial, testimonial: {quote, image, name,
   )} />
 )
 
-const query = gql`query lastTestimonial {
-  lastTestimonial {
+const query = gql`query aTestimonial {
+  testimonials(limit: 1) {
     id
     name
     role
@@ -150,11 +146,14 @@ export default compose(
       return ({
         loading: data.loading,
         error: data.error,
-        testimonial: data.lastTestimonial
+        testimonial: (
+          data.testimonials &&
+          data.testimonials[0]
+        )
       })
     },
-    options: {
-      pollInterval: +TV_POLL_INTERVAL_MS
-    }
+    options: ({duration}) => ({
+      pollInterval: duration
+    })
   })
 )(Item)
