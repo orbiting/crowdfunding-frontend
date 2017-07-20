@@ -27,7 +27,7 @@ class CommunityPage extends Component {
       const defaultSequenceNumber = order === 'DESC' ? Math.pow(10, 6) : 0
       return <Image query={url.query}
         sequenceNumber={url.query.sequenceNumber || defaultSequenceNumber}
-        orderBy={order}
+        orderDirection={order}
         duration={+Math.max(1000, url.query.duration || 5000)} />
     }
 
