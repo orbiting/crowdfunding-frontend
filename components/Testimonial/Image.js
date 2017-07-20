@@ -77,8 +77,8 @@ class Image extends Component {
   }
 }
 
-const query = gql`query aTestimonial($sequenceNumber: Int!, $orderBy: OrderBy!) {
-  nextTestimonial(sequenceNumber: $sequenceNumber, orderBy: $orderBy) {
+const query = gql`query aTestimonial($sequenceNumber: Int!, $orderDirection: OrderDirection!) {
+  nextTestimonial(sequenceNumber: $sequenceNumber, orderDirection: $orderDirection) {
     id
     sequenceNumber
     name
