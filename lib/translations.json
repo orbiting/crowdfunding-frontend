@@ -1,5 +1,5 @@
 {
-  "updated": "2017-07-18T18:18:35.932Z",
+  "updated": "2017-07-21T10:12:09.672Z",
   "title": "live",
   "data": [
     {
@@ -204,7 +204,7 @@
     },
     {
       "key": "merci/lead",
-      "value": "Vielen Dank für Ihre Unterstützung. Es ist uns eine Ehre, Sie bei uns als Verlegerin oder Verleger zu begrüssen. Also als Teil unseres Unternehmens.<br />\n<br />\nAuf dieser Seite finden Sie alles, was wir von Ihnen wissen: Ihre Einkäufe, Ihre Postadresse (brauchen wir leider) und Ihr Foto (brauchen wir nicht, würde uns aber freuen), Letzteres mit einem persönlichen Slogan (würde uns ebenfalls freuen).<br />\n<br />\nHier unser Slogan, in drei Worten: Lang lebe die Republik!"
+      "value": "Vielen Dank für Ihre Unterstützung. Es ist uns eine Ehre, Sie bei uns als Verlegerin respektive Verleger zu begrüssen. Also als Teil unseres Unternehmens.<br />\n<br />\nAuf dieser Seite finden Sie alles, was wir von Ihnen wissen: Ihre Einkäufe, Ihre Postadresse (brauchen wir leider) und Ihr Foto (brauchen wir nicht, würde uns aber freuen), Letzteres mit einem persönlichen Slogan (würde uns ebenfalls freuen).<br />\n<br />\nHier unser Slogan, in vier Worten: Lang lebe die Republik!"
     },
     {
       "key": "merci/share/tweetTemplate",
@@ -1929,7 +1929,7 @@
     },
     {
       "key": "package/PRESALE/BENEFACTOR/description",
-      "value": "Sie wollen nicht nur ein unabhängiges Magazin lesen, sondern Sie wollen sich auch mit Nachdruck dafür einsetzen, dass dieses existiert. Wie alle werden Sie automatisch Mitglied der Project R Genossenschaft. Und damit Verleger oder Verlegerin der Republik. Um uns für Ihre Grosszügigkeit zu revanchieren, schicken wir Ihnen das Start-up-Verleger-Paket: ein Manifest, einen besonderen Anstecker und ein signiertes Manual für Journalismus im 21. Jahrhundert."
+      "value": "Sie wollen nicht nur ein unabhängiges Magazin lesen, sondern Sie wollen sich auch mit Nachdruck dafür einsetzen, dass dieses existiert. Wie alle werden Sie automatisch Mitglied der Project R Genossenschaft. Und damit Verleger oder Verlegerin der Republik. Um uns für Ihre Grosszügigkeit zu revanchieren, schicken wir Ihnen das Start-up-Verleger-Paket: ein Manifest, einen besonderen Anstecker und ein signiertes Manual für Journalismus im 21. Jahrhundert."
     },
     {
       "key": "api/users/404",

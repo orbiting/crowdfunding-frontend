@@ -103,7 +103,7 @@ class Index extends Component {
 
             {!!SALES_UP && (
               <div>
-                <P>Nach einer kurzen Pause sind unsere Büros wieder geöffnet. Falls Sie ebenfalls Mitglied der Project&nbsp;R Genossenschaft und damit Verlegerin oder Verleger der Republik werden wollen — willkommen an Bord!</P>
+                <P>Nach einer kurzen Pause sind unsere Büros wieder geöffnet. Falls Sie ebenfalls Mitglied der Project&nbsp;R Genossenschaft und damit Verlegerin oder Verleger der Republik werden wollen – willkommen an Bord!</P>
                 <Button primary onClick={() => {
                   Router.push('/pledge').then(() => window.scrollTo(0, 0))
                 }} style={{minWidth: 250}}>
@@ -112,11 +112,11 @@ class Index extends Component {
               </div>
             )}
 
-            <P>In der Zwischenzeit arbeiten wir daran, die Republik zu bauen. Einerseits ein sturmfestes Unternehmen. Und andererseits ein Magazin, bei dem Sie stolz sein können, als Gründerin oder Gründer dabei gewesen zu sein.</P>
+            <P>In der Zwischenzeit arbeiten wir daran, die Republik zu bauen. Einerseits soll sie ein sturmfestes Unternehmen sein. Und andererseits ein Magazin, bei dem Sie stolz sein können, als Gründerin oder Gründer dabei gewesen zu sein.</P>
 
-            <P>Und im Januar 2018 geht es dann los: von der Werft auf die hohe See.</P>
+            <P>Und im Januar 2018 geht es dann los: von der Werft auf hohe See.</P>
 
-            <P>Wir freuen uns auf die Arbeit und das Abenteuer.</P>
+            <P>Wir freuen uns auf die Arbeit und das Abenteuer!</P>
 
             <P>Mit Dank und Hochachtung,</P>
 
@@ -125,7 +125,7 @@ class Index extends Component {
             {SALES_UP ? (
               <P>
                 PS:{' '}
-                Noch einmal der Link, um noch an Bord zu kommen:{' '}
+                Ein weiteres Mal der Link, um noch an Bord zu kommen:{' '}
                 <Link href='/pledge'>
                   <a {...linkRule}>Mitglied&nbsp;werden</a>
                 </Link>
@@ -140,7 +140,7 @@ class Index extends Component {
             <P>PPS: Falls Sie über alle Aufbauarbeiten und Veranstaltungen auf dem Laufenden bleiben wollen, abonnieren Sie unseren Newsletter hier: <A href='https://project-r.construction/'>project-r.construction</A></P>
             <P>
               PPPS:{' '}
-              Und falls Sie alle Argumente und alle Nachrichten des aufregenden Frühling nachlesen wollen finden Sie das alles in
+              Und falls Sie alle Argumente und alle Nachrichten des aufregenden Frühlings nachlesen wollen, finden Sie das alles in
               {' '}
               <Link href='/crowdfunding'>
                 <a {...linkRule}>unserem Crowdfunding-Archiv</a>
