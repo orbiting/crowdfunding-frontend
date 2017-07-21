@@ -125,6 +125,20 @@ BACKDOOR_URL=/iftah-ya-simsim
 
 Shout-out to [Schmidsi](https://github.com/schmidsi) for building the countdown page.
 
+#### Crowdfunding Name(s)
+
+Crowdfundings have a dedicated name in the backend. You can configure the currently active one via the environment. You can only point the front end at one crowdfunding at a time.
+
+```
+CROWDFUNDING_NAME=REPUBLIK
+```
+
+Additionally you can configure a second `SALES_UP` crowdfunding. This can be used after the main crowdfunding has concluded and you wish to reopen sales until your launch.
+
+```
+SALES_UP=PRESALE
+```
+
 #### Newsletter
 
 Requires the following ENV variables:
