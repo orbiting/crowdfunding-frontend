@@ -149,6 +149,10 @@ class CustomizePackage extends Component {
 
     const minPrice = calculateMinPrice(pkg, values, userPrice)
 
+    const hasNotebook = pkg.options.find(option => (
+      option.reward && option.reward.name === 'NOTEBOOK'
+    ))
+
     const onPriceChange = (_, value, shouldValidate) => {
       const price = String(value).length
         ? (Math.round(parseInt(value, 10)) * 100) || 0
@@ -186,7 +190,7 @@ class CustomizePackage extends Component {
           </A>
         </div>
         <P style={{marginBottom: 10}}>
-          {pkg.name === 'ABO_GIVE' && (
+          {hasNotebook && (
             <img {...styles.packageImage}
               src={`${STATIC_BASE_URL}/static/packages/moleskine.jpg`} />
           )}
@@ -249,7 +253,9 @@ class CustomizePackage extends Component {
               }
 
               return (
-                <div key={option.id} {...styles.span}>
+                <div key={option.id} {...styles.span} style={{
+                  width: configurableOptions.length === 1 ? '100%' : '50%'
+                }}>
                   <div style={{marginBottom: 20}}>
                     <Field
                       ref={i === 0 ? this.focusRefSetter : undefined}

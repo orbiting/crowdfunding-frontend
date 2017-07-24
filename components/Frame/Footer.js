@@ -126,8 +126,14 @@ class Footer extends Component {
               <Link href='/crew'>
                 <a>{t('footer/crew')}</a>
               </Link><br />
+              <a href='https://project-r.construction/' target='_blank'>
+                {t('footer/about/projecR')}
+              </a><br />
               <Link href='/events'>
                 <a>{t('footer/events')}</a>
+              </Link><br />
+              <Link href='/updates'>
+                <a>{t('footer/updates')}</a>
               </Link><br />
               <Link href='/media'>
                 <a>{t('footer/media')}</a>
@@ -137,9 +143,6 @@ class Footer extends Component {
               </a><br />
               <a href='/en' target='_blank'>
                 {t('footer/about/en')}
-              </a><br />
-              <a href='https://project-r.construction/' target='_blank'>
-                {t('footer/about/projecR')}
               </a>
             </div>
             <div {...styles.column}>

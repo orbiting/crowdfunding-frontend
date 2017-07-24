@@ -20,7 +20,8 @@ class CommunityPage extends Component {
       return <Share firstId={url.query.share} />
     }
     if (url.query.tv) {
-      return <TV />
+      return <TV
+        duration={+Math.max(1000, url.query.duration || 30000)} />
     }
     if (url.query.img) {
       const order = url.query.order || 'ASC'

@@ -6,12 +6,14 @@ import {
 } from '@project-r/styleguide'
 
 import {
-  STATIC_BASE_URL, CROWDFUNDING_NAME
+  STATIC_BASE_URL, CROWDFUNDING_NAME, SALES_UP
 } from '../constants'
 
 import Frame from '../components/Frame'
 import PledgeForm from '../components/Pledge/Form'
 import PledgeReceivePayment from '../components/Pledge/ReceivePayment'
+
+const PLEDGE_CROWDFUNDING_NAME = SALES_UP || CROWDFUNDING_NAME
 
 class PledgePage extends Component {
   render () {
@@ -39,12 +41,12 @@ class PledgePage extends Component {
         <NarrowContainer>
           {pledgeId ? (
             <PledgeReceivePayment
-              crowdfundingName={CROWDFUNDING_NAME}
+              crowdfundingName={PLEDGE_CROWDFUNDING_NAME}
               pledgeId={pledgeId}
               query={url.query} />
           ) : (
             <PledgeForm
-              crowdfundingName={CROWDFUNDING_NAME}
+              crowdfundingName={PLEDGE_CROWDFUNDING_NAME}
               query={url.query} />
           )}
         </NarrowContainer>

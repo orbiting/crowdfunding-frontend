@@ -124,6 +124,7 @@ class Accordion extends Component {
     const {
       t,
       crowdfunding: {packages},
+      crowdfundingName,
       children,
       extended
     } = this.props
@@ -167,7 +168,14 @@ class Accordion extends Component {
                     activeIndex: undefined
                   })}>
                   <div {...styles.packageHeader}>
-                    <div {...styles.packageTitle}>{t(`package/${pkg.name}/title`)}</div>
+                    <div {...styles.packageTitle}>
+                      {t.first(
+                        [
+                          `package/${crowdfundingName}/${pkg.name}/title`,
+                          `package/${pkg.name}/title`
+                        ]
+                      )}
+                    </div>
                     {!!price && (<div {...styles.packagePrice}>
                       {t.first([
                         `package/${pkg.name}/price`,
@@ -181,7 +189,14 @@ class Accordion extends Component {
                     style={{
                       display: (isActive || extended) ? 'block' : 'none'
                     }}>
-                    <p>{t(`package/${pkg.name}/description`)}</p>
+                    <p>
+                      {t.first(
+                        [
+                          `package/${crowdfundingName}/${pkg.name}/description`,
+                          `package/${pkg.name}/description`
+                        ]
+                      )}
+                    </p>
                     <span {...linkRule}>{t('package/choose')}</span>
                   </div>
                 </a>

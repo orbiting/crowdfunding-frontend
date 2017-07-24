@@ -1,5 +1,5 @@
 {
-  "updated": "2017-06-01T18:44:50.499Z",
+  "updated": "2017-07-24T09:12:29.822Z",
   "title": "live",
   "data": [
     {
@@ -45,6 +45,10 @@
     {
       "key": "menu/vote",
       "value": "Abstimmung"
+    },
+    {
+      "key": "menu/join",
+      "value": "Mitglied werden"
     },
     {
       "key": "header/button",
@@ -97,10 +101,6 @@
     {
       "key": "package/DONATE/title",
       "value": "Spenden, sonst nichts"
-    },
-    {
-      "key": "package/DONATE/title/short",
-      "value": "Spende"
     },
     {
       "key": "package/DONATE/description",
@@ -204,7 +204,7 @@
     },
     {
       "key": "merci/lead",
-      "value": "Vielen Dank für Ihre Unterstützung. Es ist uns eine Ehre, Sie als Teil unseres Unternehmens zu begrüssen. <br /> Auf dieser Seite finden Sie alles, was wir von Ihnen wissen: Ihre Einkäufe, Ihre Postadresse (brauchen wir leider) und Ihr Foto (brauchen wir nicht, würde uns aber freuen), Letzteres mit einem Slogan (würde uns ebenfalls freuen). <br /> Hier unser Slogan: Lang lebe die Republik!"
+      "value": "Vielen Dank für Ihre Unterstützung. Es ist uns eine Ehre, Sie bei uns als Verlegerin respektive Verleger zu begrüssen. Also als Teil unseres Unternehmens.<br />\n<br />\nAuf dieser Seite finden Sie alles, was wir von Ihnen wissen: Ihre Einkäufe, Ihre Postadresse (brauchen wir leider) und Ihr Foto (brauchen wir nicht, würde uns aber freuen), Letzteres mit einem persönlichen Slogan (würde uns ebenfalls freuen).<br />\n<br />\nHier unser Slogan, in vier Worten: Lang lebe die Republik!"
     },
     {
       "key": "merci/share/tweetTemplate",
@@ -253,6 +253,10 @@
     {
       "key": "merci/payment/status/generic/PAID",
       "value": "{formattedTotal} bezahlt mit {method}"
+    },
+    {
+      "key": "merci/payment/status/generic/WAITING_FOR_REFUND",
+      "value": "{formattedTotal} wird zurückerstattet"
     },
     {
       "key": "merci/payment/status/generic/REFUNDED",
@@ -719,7 +723,7 @@
       "value": "E-Mail ungültig"
     },
     {
-      "key": "api/unauthorized",
+      "key": "api/signIn",
       "value": "Sie müssen sich zuerst einloggen."
     },
     {
@@ -869,6 +873,10 @@
     {
       "key": "footer/events",
       "value": "Veranstaltungen"
+    },
+    {
+      "key": "footer/updates",
+      "value": "Crowdfunding News"
     },
     {
       "key": "footer/about/projecR",
@@ -1890,6 +1898,82 @@
     {
       "key": "status/time/seconds/other",
       "value": "{count} Sekunden"
+    },
+    {
+      "key": "api/unauthorized",
+      "value": "Nicht genehmigt. Sie müssen die Rolle «{role}» besitzen um die gwünschte Aktion auszuführen."
+    },
+    {
+      "key": "package/PRESALE/DONATE/title",
+      "value": "Spenden, sonst nichts"
+    },
+    {
+      "key": "package/PRESALE/DONATE/description",
+      "value": "Sie wollen hervorragenden Journalismus unterstützen, ohne ihn zu lesen. Aber mit Geld. Denn Sie wissen: Guter Journalismus kostet."
+    },
+    {
+      "key": "package/PRESALE/ABO/title",
+      "value": "Für mich"
+    },
+    {
+      "key": "package/PRESALE/ABO/description",
+      "value": "Willkommen an Bord! Sie erhalten für ein Jahr unser Magazin. Und werden automatisch Mitglied der Project R Genossenschaft. Und damit zu einem kleinen Teil Verleger oder Verlegerin der Republik."
+    },
+    {
+      "key": "package/PRESALE/ABO_GIVE/title",
+      "value": "Für andere"
+    },
+    {
+      "key": "package/PRESALE/ABO_GIVE/description",
+      "value": "Sie wollen Ihren Freunden oder Feinden das heisseste Magazin für ein Jahr schenken."
+    },
+    {
+      "key": "package/PRESALE/BENEFACTOR/title",
+      "value": "Für Gönner"
+    },
+    {
+      "key": "package/PRESALE/BENEFACTOR/description",
+      "value": "Sie wollen nicht nur ein unabhängiges Magazin lesen, sondern Sie wollen sich auch mit Nachdruck dafür einsetzen, dass dieses existiert. Wie alle werden Sie automatisch Mitglied der Project R Genossenschaft. Und damit Verleger oder Verlegerin der Republik. Um uns für Ihre Grosszügigkeit zu revanchieren, schicken wir Ihnen das Start-up-Verleger-Paket: ein Manifest, einen besonderen Anstecker und ein signiertes Manual für Journalismus im 21. Jahrhundert."
+    },
+    {
+      "key": "api/users/404",
+      "value": "Der User konnte nicht gefunden werden."
+    },
+    {
+      "key": "api/email/change/confirmation/subject",
+      "value": "Ihre E-Mail-Adresse wurde geändert"
+    },
+    {
+      "key": "api/email/change/exists",
+      "value": "Es existiert bereits jemand mit der gewünschten E-Mail-Adresse."
+    },
+    {
+      "key": "api/email/payment/reminder/subject",
+      "value": "Erinnerung: Republik-Abonnement"
+    },
+    {
+      "key": "api/pledge/404",
+      "value": "Der Pledge konnte nicht gefunden werden."
+    },
+    {
+      "key": "api/pledge/resolve/status",
+      "value": "Der Pledge muss im status PAID_INVESTIGATE sein um gelöst werden zu können."
+    },
+    {
+      "key": "api/pledge/resolve/multiplePayments",
+      "value": "Dieser Pledge kann nicht editiert werden, da mehrere Zahlungen dazu vorliegen."
+    },
+    {
+      "key": "api/pledge/resolve/payment/status",
+      "value": "Die Zahlung dieses Pledges muss den status 'PAID' haben."
+    },
+    {
+      "key": "api/pledge/resolve/payment/notEnough",
+      "value": "Die Zahlung reicht nicht aus um den Pledge zu begleichen (min: {minTotal})."
+    },
+    {
+      "key": "api/payment/404",
+      "value": "Die Zahlung konnte nicht gefunden werden."
     }
   ]
 }
