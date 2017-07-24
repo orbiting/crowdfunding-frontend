@@ -87,8 +87,8 @@ class Index extends Component {
         <Frame url={url} meta={{
           pageTitle: 'Republik — das digitale Magazin von Project R',
           title: 'Republik — das digitale Magazin von Project R',
-          description: 'Danke! Republik geht 2018 definitiv an den Start.',
-          image: `${STATIC_BASE_URL}/static/social-media/merci.png`
+          description: 'Werden Sie jetzt Mitglied und Abonnentin.',
+          image: `${STATIC_BASE_URL}/static/social-media/logo.png`
         }} cover={!!endVideo && (
           <VideoCover src={endVideo} endScroll={0.99} autoPlay={!!url.query.play} />
         )}>
