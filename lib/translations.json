@@ -1,5 +1,5 @@
 {
-  "updated": "2017-07-21T10:12:09.672Z",
+  "updated": "2017-07-24T09:12:29.822Z",
   "title": "live",
   "data": [
     {
@@ -253,6 +253,10 @@
     {
       "key": "merci/payment/status/generic/PAID",
       "value": "{formattedTotal} bezahlt mit {method}"
+    },
+    {
+      "key": "merci/payment/status/generic/WAITING_FOR_REFUND",
+      "value": "{formattedTotal} wird zurückerstattet"
     },
     {
       "key": "merci/payment/status/generic/REFUNDED",
@@ -1942,6 +1946,10 @@
     {
       "key": "api/email/change/exists",
       "value": "Es existiert bereits jemand mit der gewünschten E-Mail-Adresse."
+    },
+    {
+      "key": "api/email/payment/reminder/subject",
+      "value": "Erinnerung: Republik-Abonnement"
     },
     {
       "key": "api/pledge/404",
