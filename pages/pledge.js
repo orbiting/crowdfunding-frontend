@@ -18,9 +18,9 @@ const PLEDGE_CROWDFUNDING_NAME = SALES_UP || CROWDFUNDING_NAME
 class PledgePage extends Component {
   render () {
     const meta = {
-      title: 'Jetzt mitmachen beim Crowdfunding',
+      title: 'Jetzt Mitglied und Abonnentin werden',
       description: 'Lasst uns gemeinsam ein neues Fundament für unabhängigen Journalismus bauen!',
-      image: `${STATIC_BASE_URL}/static/social-media/main.jpg`
+      image: `${STATIC_BASE_URL}/static/social-media/logo.jpg`
     }
 
     const {url} = this.props
