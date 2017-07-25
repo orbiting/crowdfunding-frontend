@@ -20,7 +20,7 @@ class PledgePage extends Component {
     const meta = {
       title: 'Jetzt Mitglied und Abonnentin werden',
       description: 'Lasst uns gemeinsam ein neues Fundament für unabhängigen Journalismus bauen!',
-      image: `${STATIC_BASE_URL}/static/social-media/logo.jpg`
+      image: `${STATIC_BASE_URL}/static/social-media/logo.png`
     }
 
     const {url} = this.props
