@@ -16,7 +16,7 @@ import {
 export default withData(({url}) => {
   const meta = {
     title: 'Statuten',
-    description: 'Jetzt unser Crowdfunding unterstützen.'
+    description: ''
   }
 
   return (

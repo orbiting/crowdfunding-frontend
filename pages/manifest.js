@@ -90,7 +90,7 @@ export default ({url}) => {
 Für diesen Journalismus steht Project R:
 ${meta.url}
 
-Unterstützen Sie unser Crowdfunding:
+Jetzt Mitglied und Abonnentin werden:
 ${PUBLIC_BASE_URL}
 `
   }

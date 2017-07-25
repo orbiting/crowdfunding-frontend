@@ -15,7 +15,7 @@ const {H1, H2, P} = Interaction
 export default withData(({url}) => {
   const meta = {
     title: 'Medien',
-    description: 'Jetzt unser Crowdfunding unterstützen.'
+    description: ''
   }
   return (
     <Frame url={url} meta={meta}>

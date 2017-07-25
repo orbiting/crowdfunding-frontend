@@ -8,7 +8,7 @@ import mdComponents from '../../lib/utils/mdComponents'
 export default withData(({url}) => {
   const meta = {
     title: 'Datenschutz',
-    description: 'Jetzt unser Crowdfunding unterstützen.'
+    description: ''
   }
 
   return (
