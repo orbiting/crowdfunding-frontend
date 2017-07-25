@@ -68,8 +68,8 @@ export const Page = ({url, alive}) => {
 
   return (
     <Frame url={url} indented forceStatus meta={{
-      pageTitle: 'Republik — das digitale Magazin von Project R',
-      title: 'Republik — das digitale Magazin von Project R',
+      pageTitle: 'Republik – das digitale Magazin von Project R',
+      title: 'Republik – das digitale Magazin von Project R',
       description: alive
         ? 'Jetzt unser Crowdfunding unterstützen.'
         : 'Das war unser Crowdfunding.', // t('ended/crowdfunding/description')
@@ -104,7 +104,7 @@ ${pledgeLink}
             Damit das digitale Magazin Republik an den Start gehen kann, haben wir 3000 Abonnentinnen und Abonnenten sowie 750{thousandSeparator}000 Franken gesucht. Dieses Ziel haben wir zusammen mit Ihnen am ersten Tag des Crowdfundings nach sieben Stunden und 49 Minuten erreicht. Herzlichen Dank!
           </Interaction.P>
           <Interaction.P {...styles.stretchP}>
-            Republik will das Mediensystem entscheidend verändern — deshalb sammeln wir weiter!
+            Republik will das Mediensystem entscheidend verändern – deshalb sammeln wir weiter!
           </Interaction.P>
           <List>
             <List.Item><Highlight>Bei 5000</Highlight> Unterstützerinnen und Unterstützern haben wir zwei weitere Ausbildungsplätze für junge Journalistinnen und Journalisten geschaffen.</List.Item>

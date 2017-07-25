@@ -54,7 +54,7 @@ class SignOut extends Component {
               })
           }}>{t('signOut/label')}</A>
         {loading && <InlineSpinner size={25} />}
-        {!!error && ` — ${error}`}
+        {!!error && ` – ${error}`}
       </span>
     )
   }

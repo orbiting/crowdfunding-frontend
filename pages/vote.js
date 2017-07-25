@@ -24,7 +24,7 @@ const VotePage = ({url}) => {
   }
 
   const metaData = {
-    pageTitle: 'Abstimmung — Republik',
+    pageTitle: 'Abstimmung – Republik',
     title: 'Demokratie in der Republik – das Abstimmungsresultat',
     description: 'Das letzte Ziel des Crowdfundings – Sie haben entschieden! Verlegerin oder Verleger der ersten Stunde können Sie noch bis Mittwoch, 31. Mai um 20 Uhr werden. Jetzt mitmachen und weitersagen: www.republik.ch',
     image: `${STATIC_BASE_URL}/static/social-media/vote-result.jpg`

@@ -361,7 +361,7 @@ class Testimonial extends Component {
                     {t('testimonial/viewLive')}
                   </a>
                 </Link>
-                {' — '}
+                {' – '}
                 <A href='#' onClick={(e) => {
                   e.preventDefault()
                   this.props.unpublish()

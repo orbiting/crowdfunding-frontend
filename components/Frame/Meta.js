@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 
 export default ({data, data: {image}}) => {
-  const title = data.pageTitle || `${data.title} — Republik`
+  const title = data.pageTitle || `${data.title} – Republik`
 
   return (
     <Head>

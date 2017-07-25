@@ -85,8 +85,8 @@ class Index extends Component {
     if (hasEnded) {
       return (
         <Frame url={url} meta={{
-          pageTitle: 'Republik — das digitale Magazin von Project R',
-          title: 'Republik — das digitale Magazin von Project R',
+          pageTitle: 'Republik – das digitale Magazin von Project R',
+          title: 'Republik – das digitale Magazin von Project R',
           description: 'Werden Sie jetzt Mitglied und Abonnentin.',
           image: `${STATIC_BASE_URL}/static/social-media/logo.png`
         }} cover={!!endVideo && (
