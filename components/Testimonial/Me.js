@@ -7,12 +7,11 @@ import Link from 'next/link'
 
 import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
-import {mergeFields} from '../../lib/utils/fieldState'
 
 import ErrorMessage from '../ErrorMessage'
 import {InlineSpinner} from '../Spinner'
 import Loader from '../Loader'
-import FieldSet, {getErrors} from '../FieldSet'
+import FieldSet from '../FieldSet'
 import RawHtml from '../RawHtml'
 
 import {Item} from './List'
@@ -182,7 +181,7 @@ class Testimonial extends Component {
         quote: testimonial.quote || '',
         role: testimonial.role || ''
       }
-      const errors = getErrors(
+      const errors = FieldSet.utils.getErrors(
         fields(props.t),
         values
       )
@@ -306,7 +305,7 @@ class Testimonial extends Component {
                     fields={fields(t)}
                     onChange={(fields) => {
                       this.setState((state) => {
-                        const next = mergeFields(fields)(state)
+                        const next = FieldSet.utils.mergeFields(fields)(state)
                         if (
                           next.values.quote &&
                           next.values.quote.trim().length

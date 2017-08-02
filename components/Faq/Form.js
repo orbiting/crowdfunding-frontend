@@ -6,13 +6,12 @@ import AutosizeInput from 'react-textarea-autosize'
 
 import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
-import {mergeField} from '../../lib/utils/fieldState'
 
 import {withSignOut} from '../Auth/SignOut'
 import {withSignIn} from '../Auth/SignIn'
 import ErrorMessage from '../ErrorMessage'
 import {InlineSpinner} from '../Spinner'
-import {styles as fieldSetStyles} from '../FieldSet'
+import FieldSet, {styles as fieldSetStyles} from '../FieldSet'
 import RawHtml from '../RawHtml'
 
 import Poller from '../Auth/Poller'
@@ -45,7 +44,7 @@ class QuestionForm extends Component {
     }
   }
   handleEmail (value, shouldValidate, t) {
-    this.setState(mergeField({
+    this.setState(FieldSet.utils.mergeField({
       field: 'email',
       value,
       error: (
@@ -56,7 +55,7 @@ class QuestionForm extends Component {
     }))
   }
   handleQuestion (value, shouldValidate, t) {
-    this.setState(mergeField({
+    this.setState(FieldSet.utils.mergeField({
       field: 'question',
       value,
       error: (

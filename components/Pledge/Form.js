@@ -8,9 +8,9 @@ import withMe from '../../lib/withMe'
 
 import RawHtml from '../RawHtml'
 import Loader from '../Loader'
+import FieldSet from '../FieldSet'
 import SignIn from '../Auth/SignIn'
 import {withSignOut} from '../Auth/SignOut'
-import {mergeField, mergeFields} from '../../lib/utils/fieldState'
 import {validate as isEmail} from 'email-validator'
 
 import {
@@ -87,7 +87,7 @@ class Pledge extends Component {
     }
   }
   handleFirstName (value, shouldValidate, t) {
-    this.setState(mergeField({
+    this.setState(FieldSet.utils.mergeField({
       field: 'firstName',
       value,
       error: (value.trim().length <= 0 && t('pledge/contact/firstName/error/empty')),
@@ -95,7 +95,7 @@ class Pledge extends Component {
     }))
   }
   handleLastName (value, shouldValidate, t) {
-    this.setState(mergeField({
+    this.setState(FieldSet.utils.mergeField({
       field: 'lastName',
       value,
       error: (value.trim().length <= 0 && t('pledge/contact/lastName/error/empty')),
@@ -103,7 +103,7 @@ class Pledge extends Component {
     }))
   }
   handleEmail (value, shouldValidate, t) {
-    this.setState(mergeField({
+    this.setState(FieldSet.utils.mergeField({
       field: 'email',
       value,
       error: (
@@ -190,7 +190,7 @@ class Pledge extends Component {
                   userPrice={userPrice}
                   pkg={pkg}
                   onChange={(fields) => {
-                    this.setState(mergeFields(fields))
+                    this.setState(FieldSet.utils.mergeFields(fields))
                   }} />
               ) : (
                 <Accordion crowdfundingName={crowdfundingName} extended />

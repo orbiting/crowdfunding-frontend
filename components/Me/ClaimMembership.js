@@ -8,8 +8,8 @@ import {compose} from 'redux'
 import withT from '../../lib/withT'
 import withMe, {meQuery} from '../../lib/withMe'
 import {validate as isEmail} from 'email-validator'
-import {mergeField} from '../../lib/utils/fieldState'
 import Poller from '../Auth/Poller'
+import FieldSet from '../FieldSet'
 import {withSignOut} from '../Auth/SignOut'
 import {withSignIn} from '../Auth/SignIn'
 import RawHtml from '../RawHtml'
@@ -34,7 +34,7 @@ class ClaimMembership extends Component {
     }
   }
   handleFirstName (value, shouldValidate, t) {
-    this.setState(mergeField({
+    this.setState(FieldSet.utils.mergeField({
       field: 'firstName',
       value,
       error: (value.trim().length <= 0 && t('pledge/contact/firstName/error/empty')),
@@ -42,7 +42,7 @@ class ClaimMembership extends Component {
     }))
   }
   handleLastName (value, shouldValidate, t) {
-    this.setState(mergeField({
+    this.setState(FieldSet.utils.mergeField({
       field: 'lastName',
       value,
       error: (value.trim().length <= 0 && t('pledge/contact/lastName/error/empty')),
@@ -50,7 +50,7 @@ class ClaimMembership extends Component {
     }))
   }
   handleEmail (value, shouldValidate, t) {
-    this.setState(mergeField({
+    this.setState(FieldSet.utils.mergeField({
       field: 'email',
       value,
       error: (
@@ -61,7 +61,7 @@ class ClaimMembership extends Component {
     }))
   }
   handleVoucherCode (value, shouldValidate, t) {
-    this.setState(mergeField({
+    this.setState(FieldSet.utils.mergeField({
       field: 'voucherCode',
       value,
       error: (

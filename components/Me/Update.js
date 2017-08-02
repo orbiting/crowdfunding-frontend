@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import {gql, graphql} from 'react-apollo'
 import {compose} from 'redux'
-import {mergeFields} from '../../lib/utils/fieldState'
-import FieldSet, {getErrors} from '../FieldSet'
+import FieldSet from '../FieldSet'
 import {InlineSpinner} from '../Spinner'
 import {intersperse} from '../../lib/utils/helpers'
 import Loader from '../Loader'
@@ -121,7 +120,7 @@ class Update extends Component {
       this.checked = true
       const {t} = this.props
 
-      const errors = getErrors(
+      const errors = FieldSet.utils.getErrors(
         fields(t).concat(addressFields(t)),
         getValues(this.props.me)
       )
@@ -198,7 +197,7 @@ class Update extends Component {
                 errors={errors}
                 dirty={dirty}
                 onChange={(fields) => {
-                  this.setState(mergeFields(fields))
+                  this.setState(FieldSet.utils.mergeFields(fields))
                 }}
                 fields={fields(t)} />
               <Label style={{marginTop: -8, display: 'block'}}>
@@ -211,7 +210,7 @@ class Update extends Component {
                 errors={errors}
                 dirty={dirty}
                 onChange={(fields) => {
-                  this.setState(mergeFields(fields))
+                  this.setState(FieldSet.utils.mergeFields(fields))
                 }} />
               <br />
               <br />

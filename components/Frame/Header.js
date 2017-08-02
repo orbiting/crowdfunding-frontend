@@ -7,9 +7,11 @@ import withT from '../../lib/withT'
 import {
   Logo,
   Button,
-  Container, CONTENT_PADDING as CONTAINER_PADDING,
+  Container,
   colors, mediaQueries
 } from '@project-r/styleguide'
+
+const CONTAINER_PADDING = 15
 
 import Menu from './Menu'
 import Toggle from './Toggle'

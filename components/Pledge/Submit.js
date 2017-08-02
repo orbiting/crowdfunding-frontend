@@ -7,7 +7,6 @@ import {compose} from 'redux'
 import SignIn, {withSignIn} from '../Auth/SignIn'
 import {withSignOut} from '../Auth/SignOut'
 
-import {mergeFields} from '../../lib/utils/fieldState'
 import {errorToString} from '../../lib/utils/errors'
 import withT from '../../lib/withT'
 import {meQuery} from '../../lib/withMe'
@@ -548,7 +547,7 @@ class Submit extends Component {
               errors={this.state.errors}
               dirty={this.state.dirty}
               onChange={(fields) => {
-                this.setState(mergeFields(fields))
+                this.setState(FieldSet.utils.mergeFields(fields))
               }} />
             <br />
             <div style={{marginBottom: 5}}>
@@ -659,7 +658,7 @@ class Submit extends Component {
                     })
                 }
                 this.setState((state) => {
-                  const nextState = mergeFields(fields)(state)
+                  const nextState = FieldSet.utils.mergeFields(fields)(state)
 
                   const month = nextState.values.cardMonth
                   const year = nextState.values.cardYear

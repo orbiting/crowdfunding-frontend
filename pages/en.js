@@ -11,7 +11,7 @@ import track from '../lib/piwik'
 
 import {
   NarrowContainer,
-  Logo, R,
+  Logo, BrandMark as R,
   fontFamilies,
   mediaQueries,
   P as EP, H1 as EH1,

@@ -5,10 +5,9 @@ import {css} from 'glamor'
 import AutosizeInput from 'react-textarea-autosize'
 
 import withT from '../../lib/withT'
-import {fieldsState} from '../../lib/utils/fieldState'
 import {chfFormat} from '../../lib/utils/formats'
 
-import {styles as fieldSetStyles} from '../FieldSet'
+import FieldSet, {styles as fieldSetStyles} from '../FieldSet'
 
 import {
   Field, A, Interaction,
@@ -161,7 +160,7 @@ class CustomizePackage extends Component {
       const error = priceError(price, minPrice, t)
 
       this.setState(() => ({customPrice: true}))
-      onChange(fieldsState({
+      onChange(FieldSet.utils.fieldsState({
         field: 'price',
         value: price,
         error,
@@ -222,7 +221,7 @@ class CustomizePackage extends Component {
                   })
                 }
 
-                const fields = fieldsState({
+                const fields = FieldSet.utils.fieldsState({
                   field: option.id,
                   value: parsedValue,
                   error,
@@ -290,7 +289,7 @@ class CustomizePackage extends Component {
                   {...props} />
               )}
               onChange={(_, value, shouldValidate) => {
-                onChange(fieldsState({
+                onChange(FieldSet.utils.fieldsState({
                   field: 'reason',
                   value,
                   error: reasonError(value, t),

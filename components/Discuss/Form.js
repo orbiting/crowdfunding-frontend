@@ -5,12 +5,11 @@ import AutosizeInput from 'react-textarea-autosize'
 
 import withT from '../../lib/withT'
 import withMe from '../../lib/withMe'
-import {mergeField} from '../../lib/utils/fieldState'
 
 import RawHtml from '../RawHtml'
 import ErrorMessage from '../ErrorMessage'
 import {InlineSpinner} from '../Spinner'
-import {styles as fieldSetStyles} from '../FieldSet'
+import FieldSet, {styles as fieldSetStyles} from '../FieldSet'
 import {query as testimonialQuery} from '../Testimonial/Me'
 
 import CommentView from './CommentView'
@@ -43,7 +42,7 @@ class CommentForm extends Component {
   }
   handleComment (value, shouldValidate, t) {
     const {maxLength} = this.props
-    this.setState(mergeField({
+    this.setState(FieldSet.utils.mergeField({
       field: 'comment',
       value,
       error: (

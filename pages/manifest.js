@@ -7,7 +7,7 @@ import PureFooter, {SPACE, A} from '../components/Frame/PureFooter'
 
 import {
   NarrowContainer,
-  Logo, R,
+  Logo, BrandMark as R,
   fontFamilies,
   mediaQueries
 } from '@project-r/styleguide'
