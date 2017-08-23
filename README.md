@@ -1,6 +1,6 @@
 # Crowdfunding Frontend
 
-A crowdfunding front end written with [Next.js and Apollo](https://github.com/zeit/next.js/tree/master/examples/with-apollo). Developed and sucessfully used for [republik.ch](https://www.republik.ch/crowdfunding), generating over 13k paid subscribers and more than 3.4 million swiss francs.
+A crowdfunding front end written with [Next.js and Apollo](https://github.com/zeit/next.js/tree/master/examples/with-apollo). Developed and sucessfully used for [republik.ch](https://www.republik.ch/crowdfunding).
 
 Related Repositories:
 
@@ -13,6 +13,28 @@ The content, logo and fonts are the property of their owners (content and logo�
 
 The source code is «BSD 3-clause» licensed.
 
+## Adaption Checklist
+
+You'd like do your own crowdfunding?
+
+Here a rough checklist of tasks:
+
+- Setup the [backend](https://github.com/orbiting/crowdfunding-backend), read the third party services section carefully
+- Fork this repository
+- Configure your environment, [see below](#Environment)
+    + Including your own colors, logo and fonts—see [styleguide theming](https://github.com/orbiting/styleguide#theming)
+- Customize `pages` directory
+    + write your own `crowdfunding.js`, add your own video and project description
+    + write your own `index.js`, this is the page shown after the end
+    + adapt or remove the following
+        - `legal/*`, `updates/*` (see `components/Stats/Story.js`), `crew.js` (see `lib/team.js`), `en.js`, `manifest.js`, `media.js`, `vote.js`
+- Adapt the header and footer in `components/Frame` for your pages. `menuItems` in `Header.js`, the whole component in `Footer.js` and `PureFooter.js` and `Meta.js` for the default page title
+- Write your own structure texts in `lib/translations.json`, can be done comfortably be forking this [gsheets](https://docs.google.com/spreadsheets/d/1OHoiENwJH-tqf9yXfXHOevAn17daO_CvB21Rym-oiqk) and adapting the `translations` task in `package.json`
+- Adapt the `static` folder
+    + add your own social media images and favicons
+    + purge our photos and assets like subtitles and fonts
+- Test, keep an eye out for hard-coded Republik texts and enjoy!
+
 ## Development
 
 ### Install and Run
@@ -24,12 +46,6 @@ npm run dev
 
 ### Environment
 
-You will need an `NPM_TOKEN` in your system environment to install our private @project-r npm packages. For example via `~/.bash_profile`:
-
-```
-export NPM_TOKEN="00000000-0000-0000-0000-000000000000"
-```
-
 You can use a git-excluded `.env` file in development:
 
 ```
@@ -39,6 +55,10 @@ API_AUTHORIZATION_HEADER=
 ```
 
 If the API is HTTP basic-auth protected, you can generate a basic authorization header with ``Basic ${(new Buffer('user:password')).toString('base64')}`` in Node.js and use it with `API_AUTHORIZATION_HEADER`.
+
+#### Style Guide Theming
+
+See [orbiting/styleguide](https://github.com/orbiting/styleguide#theming).
 
 #### Public Base Url
 
