@@ -21,7 +21,7 @@ Here a rough checklist of tasks:
 
 - Setup the [backend](https://github.com/orbiting/crowdfunding-backend), read the third party services section carefully
 - Fork this repository
-- Configure your environment, [see below](#Environment)
+- Configure your environment, [see below](#environment)
     + Including your own colors, logo and fonts—see [styleguide theming](https://github.com/orbiting/styleguide#theming)
 - Customize `pages` directory
     + write your own `crowdfunding.js`, add your own video and project description
@@ -29,7 +29,7 @@ Here a rough checklist of tasks:
     + adapt or remove the following
         - `legal/*`, `updates/*` (see `components/Stats/Story.js`), `crew.js` (see `lib/team.js`), `en.js`, `manifest.js`, `media.js`, `vote.js`
 - Adapt the header and footer in `components/Frame` for your pages. `menuItems` in `Header.js`, the whole component in `Footer.js` and `PureFooter.js` and `Meta.js` for the default page title
-- Write your own structure texts in `lib/translations.json`, can be done comfortably be forking this [gsheets](https://docs.google.com/spreadsheets/d/1OHoiENwJH-tqf9yXfXHOevAn17daO_CvB21Rym-oiqk) and adapting the `translations` task in `package.json`
+- Write your own structure texts in `lib/translations.json`, can be done comfortably by forking this [gsheets](https://docs.google.com/spreadsheets/d/1OHoiENwJH-tqf9yXfXHOevAn17daO_CvB21Rym-oiqk) and adapting the `translations` task in `package.json`
 - Adapt the `static` folder
     + add your own social media images and favicons
     + purge our photos and assets like subtitles and fonts
