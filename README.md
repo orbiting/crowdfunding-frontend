@@ -15,7 +15,7 @@ The source code is «BSD 3-clause» licensed.
 
 ## Adaption Checklist
 
-You'd like do your own crowdfunding?
+You'd like to use this software for your own crowdfunding?
 
 Here a rough checklist of tasks:
 
