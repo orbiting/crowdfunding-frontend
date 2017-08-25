@@ -284,9 +284,11 @@ class CustomizePackage extends Component {
               ref={this.focusRefSetter}
               error={dirty.reason && errors.reason}
               value={values.reason}
-              renderInput={(props) => (
-                <AutosizeInput {...fieldSetStyles.autoSize}
-                  {...props} />
+              renderInput={({ref, ...inputProps}) => (
+                <AutosizeInput
+                  {...inputProps}
+                  {...fieldSetStyles.autoSize}
+                  inputRef={ref} />
               )}
               onChange={(_, value, shouldValidate) => {
                 onChange(FieldSet.utils.fieldsState({

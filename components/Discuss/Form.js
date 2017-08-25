@@ -145,9 +145,11 @@ class CommentForm extends Component {
           <Field label={t('discuss/form/comment/label')}
             name='comment'
             ref={this.fieldRef}
-            renderInput={(props) => (
-              <AutosizeInput {...fieldSetStyles.autoSize}
-                {...props} />
+            renderInput={({ref, ...inputProps}) => (
+              <AutosizeInput
+                {...inputProps}
+                {...fieldSetStyles.autoSize}
+                inputRef={ref} />
             )}
             error={dirty.comment && errors.comment}
             value={values.comment}

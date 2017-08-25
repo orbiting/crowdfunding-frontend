@@ -183,9 +183,11 @@ class QuestionForm extends Component {
           <br />
           <Field label={t('faq/form/question/label')}
             name='question'
-            renderInput={(props) => (
-              <AutosizeInput {...fieldSetStyles.autoSize}
-                {...props} />
+            renderInput={({ref, ...inputProps}) => (
+              <AutosizeInput
+                {...inputProps}
+                {...fieldSetStyles.autoSize}
+                inputRef={ref} />
             )}
             error={dirty.question && errors.question}
             value={values.question}
