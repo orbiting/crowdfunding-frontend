@@ -16,6 +16,8 @@ import RawHtml from '../RawHtml'
 
 import ClaimPledge from './Claim'
 
+import {EMAIL_CONTACT} from '../../constants'
+
 import {
   linkRule,
   Interaction,
@@ -98,7 +100,7 @@ class Merci extends Component {
           <RawHtml type={P} dangerouslySetInnerHTML={{
             __html: t('merci/postpay/signInError/text', {
               email: query.email,
-              mailto: `mailto:kontakt@republik.ch?subject=${
+              mailto: `mailto:${EMAIL_CONTACT}?subject=${
                 encodeURIComponent(
                   t('merci/postpay/signInError/email/subject')
                 )}&body=${

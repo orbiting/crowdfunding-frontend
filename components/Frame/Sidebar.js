@@ -13,7 +13,7 @@ import {css} from 'glamor'
 
 import {HEADER_HEIGHT, SIDEBAR_WIDTH} from './constants'
 import {
-  DISABLE_REMINDER
+  DISABLE_REMINDER, EMAIL_IR
 } from '../../constants'
 
 import {
@@ -123,8 +123,8 @@ class SidebarInner extends Component {
     return (
       <div {...styles.container}>
         <Accordion crowdfundingName={crowdfunding.name} links={[
-          {
-            href: `mailto:ir@republik.ch?subject=${encodeURIComponent(t('sidebar/investor/subject'))}`,
+          !!EMAIL_IR && {
+            href: `mailto:${EMAIL_IR}?subject=${encodeURIComponent(t('sidebar/investor/subject'))}`,
             text: t('sidebar/investor')
           }
         ]}>

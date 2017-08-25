@@ -28,7 +28,8 @@ Here a rough checklist of tasks:
     + write your own `index.js`, this is the page shown after the end
     + adapt or remove the following
         - `legal/*`, `updates/*` (see `components/Stats/Story.js`), `crew.js` (see `lib/team.js`), `en.js`, `manifest.js`, `media.js`, `vote.js`
-- Adapt the header and footer in `components/Frame` for your pages. `menuItems` in `Header.js`, the whole component in `Footer.js` and `PureFooter.js` and `Meta.js` for the default page title
+- Adapt the header and footer in `components/Frame` for your pages. `menuItems` in `Header.js`, the whole component in `Footer.js` and `PureFooter.js` and `Meta.js` for meta tags including the page title
+- Adapt `server/newsletter.js` for the countdown sign up or post crowdfunding waiting list
 - Write your own structure texts in `lib/translations.json`, can be done comfortably by forking this [gsheets](https://docs.google.com/spreadsheets/d/1OHoiENwJH-tqf9yXfXHOevAn17daO_CvB21Rym-oiqk) and adapting the `translations` task in `package.json`
 - Adapt the `static` folder
     + add your own social media images and favicons
@@ -88,6 +89,16 @@ export default () => (
     Manifest als PDF herunterladen
   </A>
 )
+```
+
+#### Email
+
+Configure at which email address you're available for general questions, investor relations and payment issues:
+
+```
+EMAIL_CONTACT=contact@example.com
+EMAIL_IR=ir@example.com
+EMAIL_PAYMENT=payment@example.com
 ```
 
 #### Payment

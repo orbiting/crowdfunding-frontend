@@ -2,9 +2,10 @@ const server = require('express').Router()
 const bodyParser = require('body-parser')
 const fetch = require('isomorphic-unfetch')
 const crypto = require('crypto')
+const {EMAIL_CONTACT} = require('../constants')
 
 const SUBJECT = 'Bitte Interesse an der Republik-Mitgliedschaft bestätigen'
-const FROM_EMAIL = 'kontakt@republik.ch'
+const FROM_EMAIL = EMAIL_CONTACT
 const FROM_NAME = 'Republik'
 
 const subscribeText = (email, token) => `Ma’am, Sir,

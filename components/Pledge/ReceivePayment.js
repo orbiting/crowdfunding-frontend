@@ -12,6 +12,8 @@ import PledgeForm from './Form'
 import {gotoMerci} from './Merci'
 import loadStripe from './stripe'
 
+import {EMAIL_PAYMENT} from '../../constants'
+
 const pledgeQuery = gql`
 query($pledgeId: ID!) {
   pledge(id: $pledgeId) {
@@ -57,7 +59,7 @@ class PledgeReceivePayment extends Component {
         // https://e-payment-postfinance.v-psp.com/de/guides/integration%20guides/possible-errors
 
         const errorVariables = {
-          mailto: `mailto:zahlungen@republik.ch?subject=${
+          mailto: `mailto:${EMAIL_PAYMENT}?subject=${
             encodeURIComponent(
               t(
                 'pledge/recievePayment/pf/mailto/subject',
@@ -144,7 +146,7 @@ class PledgeReceivePayment extends Component {
           case 'Processed':
           case 'Pending':
             const errorVariables = {
-              mailto: `mailto:zahlungen@republik.ch?subject=${
+              mailto: `mailto:${EMAIL_PAYMENT}?subject=${
                 encodeURIComponent(
                   t(
                     'pledge/recievePayment/paypal/mailto/subject',

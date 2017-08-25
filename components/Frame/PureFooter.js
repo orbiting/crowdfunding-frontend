@@ -13,13 +13,11 @@ import {
 } from '@project-r/styleguide'
 
 import {
-  COUNTDOWN_DATE
+  COUNTDOWN_DATE, EMAIL_CONTACT
 } from '../../constants'
 
 css.global('html', {boxSizing: 'border-box'})
 css.global('*, *:before, *:after', {boxSizing: 'inherit'})
-
-const EMAIL = 'kontakt@republik.ch'
 
 export const SPACE = 60
 
@@ -122,8 +120,8 @@ class Footer extends Component {
               <span>Switzerland<br /></span>
             )}
           </A>
-          <A href={`mailto:${EMAIL}`}>
-            {EMAIL}
+          <A href={`mailto:${EMAIL_CONTACT}`}>
+            {EMAIL_CONTACT}
           </A>
         </address>
 
