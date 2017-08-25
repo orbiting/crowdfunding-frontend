@@ -1,5 +1,16 @@
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const { ANALYZE } = process.env
+
 module.exports = {
   webpack: (config, { dev }) => {
+    if (ANALYZE) {
+      config.plugins.push(new BundleAnalyzerPlugin({
+        analyzerMode: 'server',
+        analyzerPort: 8888,
+        openAnalyzer: true
+      }))
+    }
+
     const entryFactory = config.entry
     config.entry = () => (
       entryFactory()

@@ -18,7 +18,8 @@
     "upload-assets": "s3cmd sync --exclude=static/subtitles/ --verbose --acl-public -c ./.s3cfg static/ s3://republik-staging/cf_gui/static/",
     "upload-subtitles": "s3cmd sync --no-mime-magic -m text/vtt --verbose --acl-public -c ./.s3cfg static/subtitles/ s3://republik-staging/cf_gui/static/subtitles/",
     "upload-assets-production": "s3cmd sync --exclude=static/subtitles/ --verbose --acl-public -c ./.s3cfg static/ s3://republik/cf_gui/static/",
-    "upload-subtitles-production": "s3cmd sync --no-mime-magic -m text/vtt --verbose --acl-public -c ./.s3cfg static/subtitles/ s3://republik/cf_gui/static/subtitles/"
+    "upload-subtitles-production": "s3cmd sync --no-mime-magic -m text/vtt --verbose --acl-public -c ./.s3cfg static/subtitles/ s3://republik/cf_gui/static/subtitles/",
+    "analyze": "cross-env ANALYZE=1 next build"
   },
   "lint-staged": {
     "*.js": [
@@ -83,6 +84,7 @@
     "wdio-jasmine-framework": "^0.3.0",
     "wdio-sauce-service": "^0.3.1",
     "wdio-spec-reporter": "^0.1.0",
-    "webdriverio": "^4.6.2"
+    "webdriverio": "^4.6.2",
+    "webpack-bundle-analyzer": "^2.9.0"
   }
 }
