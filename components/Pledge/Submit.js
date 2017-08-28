@@ -514,6 +514,7 @@ class Submit extends Component {
                 name='paymentMethod'
                 disabled={pm.disabled}
                 onChange={(event) => {
+                  event.preventDefault()
                   const value = event.target.value
                   this.setState((state) => {
                     const next = {
@@ -527,7 +528,8 @@ class Submit extends Component {
                     return next
                   })
                 }}
-                value={pm.key} />
+                value={pm.key}
+                checked={paymentMethod === pm.key} />
               {pm.Icon ? <pm.Icon state={this.state} /> : null}
               <span {...(pm.Icon
                 ? styles.paymentMethodTextWithIcon
@@ -540,7 +542,7 @@ class Submit extends Component {
         </P>
 
         {(paymentMethod === 'PAYMENTSLIP') && (
-          <div style={{marginTop: 20}}>
+          <div>
             <Label>
               {t('pledge/submit/paymentslip/explanation')}
             </Label><br /><br />
