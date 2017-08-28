@@ -1,5 +1,5 @@
 {
-  "updated": "2017-08-28T16:21:55.320Z",
+  "updated": "2017-08-28T16:31:01.720Z",
   "title": "live",
   "data": [
     {
@@ -536,7 +536,7 @@
     },
     {
       "key": "pledge/submit/pay/method/PAYMENTSLIP",
-      "value": "Einzahlungsschein"
+      "value": "Banküberweisung"
     },
     {
       "key": "pledge/submit/pay/method/POSTFINANCECARD",
