@@ -37,7 +37,7 @@ import {
 
 import {
   Interaction, Button, Label, Checkbox,
-  colors, fontFamilies, Radio
+  colors, fontFamilies
 } from '@project-r/styleguide'
 
 const {H2, P} = Interaction
@@ -541,6 +541,9 @@ class Submit extends Component {
 
         {(paymentMethod === 'PAYMENTSLIP') && (
           <div style={{marginTop: 20}}>
+            <Label>
+              {t('pledge/submit/paymentslip/explanation')}
+            </Label><br /><br />
             <Label>{t('pledge/submit/paymentslip/title')}</Label>
             <AddressForm
               values={this.state.values}
@@ -550,7 +553,7 @@ class Submit extends Component {
                 this.setState(FieldSet.utils.mergeFields(fields))
               }} />
             <br />
-            <div style={{marginBottom: 5}}>
+            { /* <div style={{marginBottom: 5}}>
               <Radio
                 checked={!this.state.values.paperInvoice}
                 onChange={() => {
@@ -577,7 +580,7 @@ class Submit extends Component {
                 }}>
                 {t('pledge/submit/paymentslip/paperInvoice')}
               </Radio>
-            </div>
+            </div> */ }
             <br />
           </div>
         )}

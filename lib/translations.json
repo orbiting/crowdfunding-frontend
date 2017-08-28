@@ -1,5 +1,5 @@
 {
-  "updated": "2017-08-28T16:17:32.344Z",
+  "updated": "2017-08-28T16:21:55.320Z",
   "title": "live",
   "data": [
     {
@@ -244,7 +244,7 @@
     },
     {
       "key": "merci/payment/method/PAYMENTSLIP",
-      "value": "Einzahlungsschein"
+      "value": "Banküberweisung"
     },
     {
       "key": "merci/payment/status/generic/WAITING",
@@ -968,7 +968,11 @@
     },
     {
       "key": "pledge/submit/paymentslip/title",
-      "value": "Rechnungsadresse"
+      "value": "Ihre Adresse"
+    },
+    {
+      "key": "pledge/submit/paymentslip/explanation",
+      "value": "Wir verschicken keine Einzahlungsscheine per Post. Sie erhalten die Zahlungsanweisungen per E-Mail. Ihre Adresse brauchen wir aus administrativen Gründen."
     },
     {
       "key": "pledge/submit/paymentslip/emailInvoice",
