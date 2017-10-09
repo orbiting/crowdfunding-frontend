@@ -51,7 +51,7 @@ const VIDEOS = {
   },
   team: {
     hls: 'https://player.vimeo.com/external/213078685.m3u8?s=09907679a29279449533845fa451ef9a3754da02',
-    mp4: 'https://player.vimeo.com/external/213078685.hd.mp4?s=150318d6e82f1f342442340bade748be38280e61&profile_id=119',
+    mp4: 'https://player.vimeo.com/external/213078685.hd.mp4?s=150318d6e82f1f342442340bade748be38280e61&profile_id=175',
     subtitles: '/static/subtitles/team.vtt',
     poster: `${STATIC_BASE_URL}/static/video/team.jpg`
   }
