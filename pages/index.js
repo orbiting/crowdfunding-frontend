@@ -3,6 +3,7 @@ import {compose} from 'redux'
 import {timeMinute} from 'd3-time'
 import Link from 'next/link'
 import Router from 'next/router'
+import md from 'markdown-in-js'
 
 import withData from '../lib/withData'
 import withT from '../lib/withT'
@@ -14,6 +15,8 @@ import Newsletter from '../components/Frame/Newsletter'
 import Loader from '../components/Loader'
 
 import {countFormat} from '../lib/utils/formats'
+import mdComponents from '../lib/utils/mdComponents'
+import {ListWithQuery as TestimonialList} from '../components/Testimonial/List'
 
 import {
   STATIC_BASE_URL,
@@ -21,13 +24,12 @@ import {
 } from '../constants'
 
 import {
-  Quote,
   P, A, linkRule,
   Button,
   NarrowContainer
 } from '@project-r/styleguide'
 
-import {Page as CrowdfundingPage} from './crowdfunding'
+import {Page as CrowdfundingPage, VIDEOS} from './crowdfunding'
 
 class Index extends Component {
   tick (ms) {
@@ -81,65 +83,99 @@ class Index extends Component {
     if (!crowdfunding) {
       return <Loader loading />
     }
-    const {url, crowdfunding: {hasEnded, endVideo}} = this.props
+    const {url, crowdfunding: {hasEnded}} = this.props
     if (hasEnded) {
+      const joinLink = SALES_UP
+        ? (
+          <Link href='/pledge'>
+            <a {...linkRule}>Mitglied&nbsp;werden</a>
+          </Link>
+        )
+        : null
+
       return (
         <Frame url={url} meta={{
           pageTitle: 'Republik – das digitale Magazin von Project R',
           title: 'Republik – das digitale Magazin von Project R',
           description: 'Werden Sie jetzt Mitglied und Abonnentin.',
           image: `${STATIC_BASE_URL}/static/social-media/logo.png`
-        }} cover={!!endVideo && (
-          <VideoCover src={endVideo} endScroll={0.99} autoPlay={!!url.query.play} />
-        )}>
+        }} cover={
+          <VideoCover src={VIDEOS.main} endScroll={0.97} autoPlay={!!url.query.play} />
+        }>
           <NarrowContainer>
-            <P>Ladies and Gentlemen,</P>
-            <P>Thomas Jefferson, der Autor der amerikanischen Unabhängigkeitserklärung, schrieb einmal:</P>
-            <Quote>Ich bin sicher, eine kleine Rebellion dann und wann ist eine gute Sache; sie ist in der Politik so notwendig, um die Dinge zu klären, wie ein Sturm für das Wetter.</Quote>
+            {md(mdComponents)`
+Ladies and Gentlemen,
 
-            <P>Wie es aussieht, war es auch im Journalismus Zeit für eine kleine Rebellion. Im Crowdfunding haben Sie uns unterstützt – zusammen mit {countFormat(crowdfunding.status.people)} Verlegerinnen und Verlegern.</P>
+Die Republik ist eine kleine Rebellion. Für den Journalismus. Und gegen die Medienkonzerne. Denn die grossen Verlage verlassen die Publizistik: Sie bauen sich in hohem Tempo in Internet-Handelshäuser um. Das ist eine schlechte Nachricht für den Journalismus. Aber auch für die Demokratie. Denn ohne vernünftige Informationen fällt man schlechte Entscheidungen.
 
-            <P>Wir danken Ihnen allen für Ihre Neugier, Ihre Entschlusskraft, Ihr Vertrauen. Und für den Mut, in ein neues Modell für Journalismus zu investieren.</P>
+Eine funktionierende Demokratie braucht funktionierende Medien. Und dafür braucht es nicht nur Journalistinnen und Journalisten, sondern auch Sie. Als Leserinnen. Als Bürger. Als Menschen, die bereit sind, etwas Geld in unabhängigen Journalismus zu investieren.
+
+            `}
 
             {!!SALES_UP && (
-              <div>
-                <P>Nach einer kurzen Pause sind unsere Büros wieder geöffnet. Falls Sie ebenfalls Mitglied der Project&nbsp;R Genossenschaft und damit Verlegerin oder Verleger der Republik werden wollen – willkommen an Bord!</P>
+              <div style={{margin: '10px 0 40px'}}>
                 <Button primary onClick={() => {
                   Router.push('/pledge').then(() => window.scrollTo(0, 0))
                 }} style={{minWidth: 250}}>
-                  Mitglied werden
+                  Jetzt Mitglied werden
                 </Button>
               </div>
             )}
+            {md(mdComponents)`
+# Worum es geht
 
-            <P>In der Zwischenzeit arbeiten wir daran, die Republik zu bauen. Einerseits soll sie ein sturmfestes Unternehmen sein. Und andererseits ein Magazin, bei dem Sie stolz sein können, als Gründerin oder Gründer dabei gewesen zu sein.</P>
+Die Republik wird ein schlankes, schlagkräftiges Magazin im Netz. Mit dem Ziel, bei den grossen Themen, Fragen und Debatten Klarheit und Überblick zu bieten. Und das aufrichtig, ohne Schnörkel, mit grossem Herzen. Unser Ziel dabei ist, gemeinsam mit Ihnen ein neues Modell im Medienmarkt zu etablieren: kompromisslos in der Qualität, ohne Werbung, finanziert von den Leserinnen und Lesern. Es ist Zeit für Journalismus ohne Bullshit.
 
-            <P>Und im Januar 2018 geht es dann los: von der Werft auf hohe See.</P>
+Entscheiden Sie sich, mitzumachen, werden Sie Abonnentin. Sie erhalten ab Anfang 2018 ein Jahr lang die Republik. Plus vergünstigten Zugang zu allen Veranstaltungen. Ausserdem werden Sie automatisch ein Teil des Unternehmens – als Mitglied der Project R Genossenschaft. Kurz, Sie werden ein klein wenig Verleger der Republik. 
 
-            <P>Wir freuen uns auf die Arbeit und das Abenteuer!</P>
+Ihr Risiko beträgt dabei 240 Franken pro Jahr. Also der Preis, den man pro Jahr wöchentlich für einen Kaffee im Restaurant ausgibt. Mit diesem Betrag können Sie einen echten Unterschied machen. Denn es ist Zeit, dem Journalismus ein neues Fundament zu bauen. Und das schafft niemand allein. Sondern nur viele gemeinsam: wir mit Ihnen. Willkommen an Bord!
 
-            <P>Mit Dank und Hochachtung,</P>
+${joinLink}
 
-            <P>Ihre Crew von der Republik und von Project&nbsp;R</P>
+# Wer wir sind
 
-            {SALES_UP ? (
-              <P>
-                PS:{' '}
-                Ein weiteres Mal der Link, um noch an Bord zu kommen:{' '}
-                <Link href='/pledge'>
-                  <a {...linkRule}>Mitglied&nbsp;werden</a>
-                </Link>
-              </P>
-            ) : (
-              <div>
-                <P>PS: Für die ersten Umbauarbeiten schliessen wir die Anmeldung für neue Mitglieder vorerst. Falls Sie ebenfalls an Bord kommen wollen, tragen Sie hier Ihre Mail-Adresse ein:</P>
-                <Newsletter submitText='eintragen' />
-              </div>
-            )}
+Ihre Partnerin bei diesem Projekt ist die Aufbaucrew der Republik und von Project R. Wir sind seit drei Jahren an der Arbeit, zuerst lange in Nachtarbeit, seit Januar 2017 hauptberuflich. Die Kurzporträts der Crew finden Sie ${(<Link href='/crew'><a {...linkRule}>hier</a></Link>)}.
 
-            <P>PPS: Falls Sie über alle Aufbauarbeiten und Veranstaltungen auf dem Laufenden bleiben wollen, abonnieren Sie unseren Newsletter hier: <A href='https://project-r.construction/'>project-r.construction</A></P>
+# Community
+
+Die Republik kann nicht ein Projekt von wenigen sein. Ein neues Fundament für unabhängigen Journalismus bauen wir nur gemeinsam – oder gar nicht. Bereits sind fast ${countFormat(15000)} Verlegerinnen und Verleger an Bord. Sehen Sie hier, wer dabei ist:
+
+${(
+  <div>
+    <div style={{margin: '20px 0 0'}}>
+      <TestimonialList limit={10} onSelect={(id) => {
+        Router.push(`/community?id=${id}`).then(() => {
+          window.scrollTo(0, 0)
+        })
+        return false
+      }} />
+    </div>
+
+    <Link href='/community'>
+      <a {...linkRule}>Alle ansehen</a>
+    </Link>
+  </div>
+)}
+
+Im Januar 2018 geht es los: von der Werft auf hohe See.
+
+Wir freuen uns auf das Abenteuer!
+
+Mit Dank und Hochachtung,
+
+Ihre Crew von der Republik und von Project R
+
+            `}
+
+            {!SALES_UP &&
+              <P>Für die ersten Umbauarbeiten schliessen wir die Anmeldung für neue Mitglieder vorerst. Falls Sie ebenfalls an Bord kommen wollen, tragen Sie hier Ihre Mail-Adresse ein:</P>}
+            {!SALES_UP &&
+              <Newsletter submitText='eintragen' />
+            }
+
+            <P>PS: Falls Sie über alle Aufbauarbeiten und Veranstaltungen auf dem Laufenden bleiben wollen, abonnieren Sie unseren Newsletter hier: <A href='https://project-r.construction/'>project-r.construction</A></P>
             <P>
-              PPPS:{' '}
+              PPS:{' '}
               Und falls Sie alle Argumente und alle Nachrichten des aufregenden Frühlings nachlesen wollen, finden Sie das alles in
               {' '}
               <Link href='/crowdfunding'>

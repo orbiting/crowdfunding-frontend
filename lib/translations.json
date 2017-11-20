@@ -1,5 +1,5 @@
 {
-  "updated": "2017-08-28T16:31:01.720Z",
+  "updated": "2017-11-20T18:48:07.908Z",
   "title": "live",
   "data": [
     {
@@ -153,6 +153,14 @@
     {
       "key": "option/NOTEBOOK/label/1",
       "value": "Notizbuch"
+    },
+    {
+      "key": "option/TOADBAG/label/other",
+      "value": "Taschen"
+    },
+    {
+      "key": "option/TOADBAG/label/1",
+      "value": "Tasche"
     },
     {
       "key": "package/choose",
