@@ -27,7 +27,7 @@ Here a rough checklist of tasks:
     + write your own `crowdfunding.js`, add your own video and project description
     + write your own `index.js`, this is the page shown after the end
     + adapt or remove the following
-        - `legal/*`, `updates/*` (see `components/Stats/Story.js`), `crew.js` (see `lib/team.js`), `en.js`, `manifest.js`, `media.js`, `vote.js`
+        - `legal/*`, `updates/*` (see `components/Stats/Story.js`), `crew.js` (see `lib/team.js`), `en.js`, `manifest.js`, `media.js`, `vote.js`, `aktionariat.js`
 - Adapt the header and footer in `components/Frame` for your pages. `menuItems` in `Header.js`, the whole component in `Footer.js` and `PureFooter.js` and `Meta.js` for meta tags including the page title
 - Adapt `server/newsletter.js` for the countdown sign up or post crowdfunding waiting list
 - Write your own structure texts in `lib/translations.json`, can be done comfortably by forking this [gsheets](https://docs.google.com/spreadsheets/d/1OHoiENwJH-tqf9yXfXHOevAn17daO_CvB21Rym-oiqk) and adapting the `translations` task in `package.json`

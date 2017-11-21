@@ -156,6 +156,9 @@ class Footer extends Component {
               <Link href='/legal/statute'>
                 <a>{t('footer/legal/statute')}</a>
               </Link><br />
+              <Link href='/aktionariat'>
+                <a>{t('footer/legal/shareholder')}</a>
+              </Link><br />
               <Link href='/legal/imprint'>
                 <a>{t('footer/legal/imprint')}</a>
               </Link>

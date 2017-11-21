@@ -1,5 +1,5 @@
 {
-  "updated": "2017-11-21T18:37:35.642Z",
+  "updated": "2017-11-21T19:52:24.864Z",
   "title": "live",
   "data": [
     {
@@ -921,6 +921,10 @@
     {
       "key": "footer/legal/statute",
       "value": "Statuten"
+    },
+    {
+      "key": "footer/legal/shareholder",
+      "value": "Aktionariat"
     },
     {
       "key": "footer/legal/imprint",
