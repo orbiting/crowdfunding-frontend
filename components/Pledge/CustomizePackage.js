@@ -136,6 +136,7 @@ class CustomizePackage extends Component {
   render () {
     const {
       t, pkg, userPrice,
+      crowdfundingName,
       values, errors, dirty,
       onChange
     } = this.props
@@ -148,8 +149,11 @@ class CustomizePackage extends Component {
 
     const minPrice = calculateMinPrice(pkg, values, userPrice)
 
-    const hasNotebook = pkg.options.find(option => (
+    const hasNotebook = !!pkg.options.find(option => (
       option.reward && option.reward.name === 'NOTEBOOK'
+    ))
+    const hasToadbag = !!pkg.options.find(option => (
+      option.reward && option.reward.name === 'TOADBAG'
     ))
 
     const onPriceChange = (_, value, shouldValidate) => {
@@ -189,11 +193,20 @@ class CustomizePackage extends Component {
           </A>
         </div>
         <P style={{marginBottom: 10}}>
-          {hasNotebook && (
+          {hasNotebook && hasToadbag && (
+            <img {...styles.packageImage}
+              src={`${STATIC_BASE_URL}/static/packages/moleskine_totebag.jpg`} />
+          )}
+          {hasNotebook && !hasToadbag && (
             <img {...styles.packageImage}
               src={`${STATIC_BASE_URL}/static/packages/moleskine.jpg`} />
           )}
-          {t(`package/${pkg.name}/description`)}
+          {t.first(
+            [
+              `package/${crowdfundingName}/${pkg.name}/description`,
+              `package/${pkg.name}/description`
+            ]
+          )}
         </P>
         <div {...styles.grid}>
           {
@@ -253,7 +266,8 @@ class CustomizePackage extends Component {
 
               return (
                 <div key={option.id} {...styles.span} style={{
-                  width: configurableOptions.length === 1 ? '100%' : '50%'
+                  width: configurableOptions.length === 1 || (configurableOptions.length === 3 && i === 0)
+                    ? '100%' : '50%'
                 }}>
                   <div style={{marginBottom: 20}}>
                     <Field

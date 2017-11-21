@@ -1,5 +1,5 @@
 {
-  "updated": "2017-11-20T18:48:07.908Z",
+  "updated": "2017-11-21T18:37:35.642Z",
   "title": "live",
   "data": [
     {
@@ -49,6 +49,10 @@
     {
       "key": "menu/join",
       "value": "Mitglied werden"
+    },
+    {
+      "key": "menu/aktionariat",
+      "value": "Aktionariat"
     },
     {
       "key": "header/button",
@@ -1941,7 +1945,7 @@
     },
     {
       "key": "package/PRESALE/ABO_GIVE/description",
-      "value": "Sie wollen Ihren Freunden oder Feinden das heisseste Magazin für ein Jahr schenken."
+      "value": "Sie wollen Ihren Freunden oder Feinden das Republik-Magazin für eine Jahr schenken. Und, wenn Sie wollen, ein Notizbuch dazu schenken: Damit diese nicht nur Vernünftiges lesen, sondern auch schreiben können. Oder eine Republik-Tasche, um Einkäufe und Schicksal mit Würde zu tragen."
     },
     {
       "key": "package/PRESALE/BENEFACTOR/title",

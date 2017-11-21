@@ -184,6 +184,7 @@ class Pledge extends Component {
             <div style={{marginBottom: 40}}>
               {pkg ? (
                 <CustomizePackage
+                  crowdfundingName={crowdfundingName}
                   values={values}
                   errors={errors}
                   dirty={dirty}
