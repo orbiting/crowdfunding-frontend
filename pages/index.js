@@ -100,7 +100,7 @@ class Index extends Component {
           description: 'Werden Sie jetzt Mitglied und Abonnentin.',
           image: `${STATIC_BASE_URL}/static/social-media/logo.png`
         }} cover={
-          <VideoCover src={VIDEOS.main} endScroll={0.97} autoPlay={!!url.query.play} />
+          <VideoCover src={VIDEOS.main} cursor endScroll={0.97} autoPlay={!!url.query.play} />
         }>
           <NarrowContainer>
             {md(mdComponents)`
@@ -140,22 +140,22 @@ Ihre Partnerin bei diesem Projekt ist die Aufbaucrew der Republik und von Projec
 
 Die Republik kann nicht ein Projekt von wenigen sein. Ein neues Fundament für unabhängigen Journalismus bauen wir nur gemeinsam – oder gar nicht. Bereits sind fast ${countFormat(15000)} Verlegerinnen und Verleger an Bord. Sehen Sie hier, wer dabei ist:
 
-${(
-  <div>
-    <div style={{margin: '20px 0 0'}}>
-      <TestimonialList limit={10} onSelect={(id) => {
-        Router.push(`/community?id=${id}`).then(() => {
-          window.scrollTo(0, 0)
-        })
-        return false
-      }} />
-    </div>
+            `}
+            <div style={{margin: '20px 0 0'}}>
+              <TestimonialList limit={10} onSelect={(id) => {
+                Router.push(`/community?id=${id}`).then(() => {
+                  window.scrollTo(0, 0)
+                })
+                return false
+              }} />
+            </div>
 
-    <Link href='/community'>
-      <a {...linkRule}>Alle ansehen</a>
-    </Link>
-  </div>
-)}
+            <P>
+              <Link href='/community'>
+                <a {...linkRule}>Alle ansehen</a>
+              </Link>
+            </P>
+            {md(mdComponents)`
 
 Im Januar 2018 geht es los: von der Werft auf hohe See.
 

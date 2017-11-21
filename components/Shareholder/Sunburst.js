@@ -99,7 +99,7 @@ export default () => (
       })}
       <g transform={`translate(-65, -45)`}>
         {legend.map((group, i) => (
-          <g transform={`translate(0, ${i * 20})`}>
+          <g key={`legend${i}`} transform={`translate(0, ${i * 20})`}>
             <rect width={15} height={15} fill={colors[group.data.Kategorie]} />
             <text x={20} dy='.8em' fill={colors[group.data.Kategorie]} style={{fontWeight: 'bold'}}>
               {group.data.Kategorie}
