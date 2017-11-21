@@ -82,6 +82,9 @@ app.prepare()
 
   server.use(newsletter)
 
+  server.get('/verschenken', (req, res) => {
+    res.redirect(301, '/pledge?package=ABO_GIVE')
+  })
   server.get('/events/:slug', (req, res) => {
     return app.render(req, res, '/events', {
       slug: req.params.slug
