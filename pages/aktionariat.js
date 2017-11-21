@@ -9,10 +9,15 @@ import {
 import Table from '../components/Shareholder/Table'
 import Sunburst, {radius} from '../components/Shareholder/Sunburst'
 
+import {
+  STATIC_BASE_URL
+} from '../constants'
+
 export default withData(({url}) => {
   const meta = {
     title: 'Aktionariat',
-    description: ''
+    description: '',
+    image: `${STATIC_BASE_URL}/static/social-media/aktionariat.png`
   }
 
   return (
