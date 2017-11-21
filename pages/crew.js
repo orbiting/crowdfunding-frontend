@@ -10,7 +10,7 @@ import {
   Lead
 } from '@project-r/styleguide'
 
-import team, {admin} from '../lib/team'
+import team from '../lib/team'
 
 import {
   PUBLIC_BASE_URL, STATIC_BASE_URL
@@ -33,9 +33,7 @@ export default withData(withT(({url, t}) => {
       }} />
     )}>
       <Lead>{t('crew/lead')}</Lead>
-      {team.map((person, i) => <Portrait key={i} {...person} odd={!(i % 2)} />)}
-
-      {admin.map((person, i) => <Portrait key={i} {...person} odd={!(i % 2)} />)}
+      {team.map((person, i) => <Portrait key={`${i}-${person.name}`} {...person} odd={!(i % 2)} />)}
     </Frame>
   )
 }))
