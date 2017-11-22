@@ -8,6 +8,10 @@ import {ascending, descending} from 'd3-array'
 
 import {groupped, total, colors} from './data'
 
+import {
+  fontFamilies
+} from '@project-r/styleguide'
+
 const nbspNumbers = formatLocale({
   decimal: ',',
   thousands: '\u00a0',
@@ -24,6 +28,7 @@ const styles = {
     paddingBottom: '100%'
   }),
   svg: css({
+    fontFamily: fontFamilies.sansSerifRegular,
     position: 'absolute',
     height: '100%',
     width: '100%',
@@ -101,7 +106,7 @@ export default () => (
         {legend.map((group, i) => (
           <g key={`legend${i}`} transform={`translate(0, ${i * 20})`}>
             <rect width={15} height={15} fill={colors[group.data.Kategorie]} />
-            <text x={20} dy='.8em' fill={colors[group.data.Kategorie]} style={{fontWeight: 'bold'}}>
+            <text x={20} dy='.8em' fill={colors[group.data.Kategorie]} style={{fontFamilty: fontFamilies.sansSerifMedium}}>
               {group.data.Kategorie}
             </text>
           </g>

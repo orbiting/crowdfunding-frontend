@@ -24,7 +24,7 @@ const styles = {
   }),
   highlight: css({
     fontFamily: fontFamilies.sansSerifMedium,
-    fontWeight: 'normla'
+    fontWeight: 'normal'
   })
 }
 

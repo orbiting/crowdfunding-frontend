@@ -1,8 +1,12 @@
 import React from 'react'
-import {css} from 'glamor'
+import {css, merge} from 'glamor'
 import {formatLocale} from 'd3-format'
 
 import {groupped, total, totalChf, colors} from './data'
+
+import {
+  fontFamilies
+} from '@project-r/styleguide'
 
 const nbspNumbers = formatLocale({
   decimal: ',',
@@ -13,43 +17,56 @@ const nbspNumbers = formatLocale({
 const countFormat = nbspNumbers.format(',.0f')
 const percentFormat = nbspNumbers.format(' 05.1%')
 
+const PADDING = 15
+
+const td = css({
+  textAlign: 'left',
+  verticalAlign: 'top',
+  paddingTop: 3,
+  paddingBottom: 3
+})
+
+const num = merge(td, {
+  textAlign: 'right',
+  fontFeatureSettings: '"tnum" 1, "kern" 1'
+})
+
+const groupTd = css({
+  paddingTop: 10,
+  borderBottom: '1px solid #000',
+  verticalAlign: 'bottom',
+  'tr:first-child > &': {
+    paddingTop: 3
+  },
+  'tr:last-child > &': {
+    borderBottom: 'none'
+  }
+})
+
 const styles = {
-  num: css({
-    textAlign: 'right !important',
-    fontFeatureSettings: '"tnum" 1, "kern" 1'
-  }),
-  groupTr: css({
-    '& td, & th': {
-      paddingTop: '10px !important',
-      borderBottom: '1px solid #000',
-      verticalAlign: 'bottom'
-    },
-    '&:first-child td, &:first-child th': {
-      paddingTop: '0 !important'
-    }
-  }),
   table: css({
-    borderSpacing: '20px 0',
+    fontFamily: fontFamilies.sansSerifRegular,
+    borderSpacing: '10px 0',
+    paddingLeft: 5,
+    paddingRight: 5,
     minWidth: '100%',
     '@media (max-width: 600px)': {
       fontSize: 14
     },
-    '@media (min-width: 321px) and (max-width: 600px)': {
-      borderSpacing: '10px 0'
-    },
-    '& th, & td': {
-      textAlign: 'left',
-      verticalAlign: 'top',
-      paddingTop: 3,
-      paddingBottom: 3
-    },
-    '& tr:last-child th, & tr:last-child td': {
-      borderBottom: 'none'
+    '& th': {
+      fontFamily: fontFamilies.sansSerifMedium,
+      fontWeight: 'normal'
     }
+  }),
+  td,
+  num,
+  groupTd: merge(td, groupTd),
+  groupTdNum: merge(num, groupTd),
+  highlight: css({
+    fontFamily: fontFamilies.sansSerifMedium,
+    fontWeight: 'normal'
   })
 }
-
-const PADDING = 20
 
 const Table = ({children}) => (
   <div style={{overflowX: 'auto', overflowY: 'hidden', marginLeft: -PADDING, marginRight: -PADDING}}>
@@ -63,7 +80,7 @@ export default () => (
   <Table>
     <thead>
       <tr>
-        <th>Aktionärin</th>
+        <th {...styles.td}>Aktionärin</th>
         <th {...styles.num}>Anzahl</th>
         <th {...styles.num}>Stimmen</th>
         <th {...styles.num}>Kaptial</th>
@@ -72,19 +89,19 @@ export default () => (
     <tbody>
       {groupped.children.map((group, i) => {
         const elements = [
-          <tr key={i} {...styles.groupTr}>
-            <td style={{lineHeight: '1.3em'}}>
-              <strong style={{color: colors[group.data.Kategorie]}}>
+          <tr key={i}>
+            <td {...styles.groupTd} style={{lineHeight: '1.3em'}}>
+              <span {...styles.highlight} style={{color: colors[group.data.Kategorie]}}>
                 {group.data.Kategorie.replace(/ /g, '\u00a0')}
-              </strong>
+              </span>
               <br />
               <span style={{fontSize: 12}}>
                 Typ&nbsp;{group.data.Typ}, CHF&nbsp;{group.data['Nominal CHF']}
               </span>
             </td>
-            <th {...styles.num}>{countFormat(group.value)}</th>
-            <th {...styles.num}>{percentFormat(group.value / total)}</th>
-            <th {...styles.num}>{percentFormat(group.value * group.data['Nominal CHF'] / totalChf)}</th>
+            <th {...styles.groupTdNum}>{countFormat(group.value)}</th>
+            <th {...styles.groupTdNum}>{percentFormat(group.value / total)}</th>
+            <th {...styles.groupTdNum}>{percentFormat(group.value * group.data['Nominal CHF'] / totalChf)}</th>
           </tr>
         ]
 
@@ -92,7 +109,7 @@ export default () => (
           group.children.forEach((entity, i) => {
             elements.push(
               <tr key={`entity${i}`}>
-                <td>{entity.data.Aktionärin}</td>
+                <td {...styles.td}>{entity.data.Aktionärin}</td>
                 <td {...styles.num}>{countFormat(entity.value)}</td>
                 <td {...styles.num}>{percentFormat(entity.value / total)}</td>
                 <td {...styles.num}>{percentFormat(entity.value * entity.data['Nominal CHF'] / totalChf)}</td>
@@ -103,11 +120,11 @@ export default () => (
 
         return elements
       })}
-      <tr {...styles.groupTr}>
-        <th>Total</th>
-        <th {...styles.num}>{countFormat(total)}</th>
-        <th {...styles.num}>100,0%</th>
-        <th {...styles.num}>100,0%</th>
+      <tr>
+        <th {...styles.groupTd}>Total</th>
+        <th {...styles.groupTdNum}>{countFormat(total)}</th>
+        <th {...styles.groupTdNum}>100,0%</th>
+        <th {...styles.groupTdNum}>100,0%</th>
       </tr>
     </tbody>
   </Table>
