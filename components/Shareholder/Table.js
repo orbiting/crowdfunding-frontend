@@ -83,7 +83,7 @@ export default () => (
         <th {...styles.td}>Aktionärin</th>
         <th {...styles.num}>Anzahl</th>
         <th {...styles.num}>Stimmen</th>
-        <th {...styles.num}>Kaptial</th>
+        <th {...styles.num}>Kapital</th>
       </tr>
     </thead>
     <tbody>
