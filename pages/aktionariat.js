@@ -16,7 +16,7 @@ import {
 export default withData(({url}) => {
   const meta = {
     title: 'Aktionariat',
-    description: '',
+    description: 'Aufteilung der Stimmen in der Republik AG',
     image: `${STATIC_BASE_URL}/static/social-media/aktionariat.png`
   }
 
@@ -26,7 +26,7 @@ export default withData(({url}) => {
         Aktionariat
       </H1>
       <H2>
-        Aktionariat Republik&nbsp;AG nach Anzahl Stimmen
+        Aufteilung der Stimmen in der Republik AG
       </H2>
 
       <div style={{maxWidth: radius * 2, margin: '20px 0'}}>
