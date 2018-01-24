@@ -1,13 +1,13 @@
 const express = require('express')
 const next = require('next')
 const basicAuth = require('express-basic-auth')
-const newsletter = require('./server/newsletter')
 
 const DEV = process.env.NODE_ENV && process.env.NODE_ENV !== 'production'
 if (DEV || process.env.DOTENV) {
   require('dotenv').config()
 }
 
+const newsletter = require('./server/newsletter')
 const COUNTDOWN_DATE = require('./constants').COUNTDOWN_DATE
 
 const PORT = process.env.PORT || 3000
